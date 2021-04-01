@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import TransitionAnimate from '../../components/Animation/transition';
 import "./SignIn.css";
 
 export default function SignIn() {
+
+
+    useEffect(() => {
+
+        
+    }, []);
+
+
+
     return (
         <div>
-            <p>this is sign in UI</p>
+            <TransitionAnimate renderPart={<p>this is sign in UI</p>} />
         </div>
     )
 }
