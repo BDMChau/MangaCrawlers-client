@@ -2,18 +2,28 @@ import { Button, Modal, Form, Input, Checkbox } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
+import { useDispatch, useSelector } from 'react-redux';
+import { RESET } from '../../store/slices/stuffsSlice';
+import { useHistory } from 'react-router';
+
 
 export default function SignInUI({ handleSubmit }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
 
+    const stuffsState = useSelector(state => state.stuffsSlice);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+
+
     useEffect(() => {
-        const isCloseSignUp = JSON.parse(sessionStorage.getItem("closeSignUp"));
-        if (isCloseSignUp) {
+        if (stuffsState[0] === "closeSignUp") {
             setIsModalVisibleSignUp(false)
-            sessionStorage.clear();
+            dispatch(RESET())
         }
-    })
+    }, [stuffsState])
+
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -25,6 +35,7 @@ export default function SignInUI({ handleSubmit }) {
 
     const handleCancel = () => {
         setIsModalVisible(false);
+        history.push("/");
     };
 
 

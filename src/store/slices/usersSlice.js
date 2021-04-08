@@ -2,7 +2,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 
 const userSlice = createSlice({
-    name: "users",
+    name: "usersSlice",
     initialState: [],
     reducers:{
         LOGIN: (state, action) => {

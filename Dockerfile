@@ -1,6 +1,6 @@
 FROM  mhart/alpine-node:14
 
-WORKDIR /client
+WORKDIR /client-mangaclawers
 
 COPY package*.json ./
 
