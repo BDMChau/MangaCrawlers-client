@@ -30,3 +30,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.signin-to-signup {
+  right: 0px;
+  position: relative;
+  margin: 10px 0 -20px 0;
+}

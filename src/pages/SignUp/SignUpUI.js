@@ -6,7 +6,13 @@ import { CLOSE_SIGN_UP_FORM } from '../../store/slices/stuffsSlice';
 import { useHistory } from 'react-router';
 
 
-export default function SignUpUI() {
+export default function SignUpUI({ handleSignUp }) {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordRepeat, setPasswordRepeat] = useState("");
+    const [isMatchPass, setIsMatchPass] = useState("");
+
     const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -29,6 +35,17 @@ export default function SignUpUI() {
         history.push("/signin")
     };
 
+    const handleSubmit = () => {
+        if (password !== passwordRepeat) {
+            setIsMatchPass("Password is not match!")
+            return;
+        } else {
+            handleSignUp(name, email, password)
+            setIsMatchPass("")
+            return;
+        }
+
+    }
 
 
 
@@ -49,7 +66,18 @@ export default function SignUpUI() {
                         initialValues={{
                             remember: true,
                         }}
+                        onKeyPress={(e) => e.key === "Enter" ? showModal() : ""}
                     >
+                        <Form.Item
+                            name="name"
+                            rules={[{
+                                required: true,
+                                message: 'Please fill in your nickname!',
+                            }]}
+                        >
+                            <Input placeholder="Choose your nickname!" onChange={(e) => setName(e.target.value)} />
+                        </Form.Item>
+
                         <Form.Item
                             name="email"
                             rules={[{
@@ -57,7 +85,7 @@ export default function SignUpUI() {
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Email" />
+                            <Input placeholder="Please fill in your email!" onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item
@@ -67,7 +95,7 @@ export default function SignUpUI() {
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Password" />
+                            <Input.Password placeholder="Please fill in your password!" onChange={(e) => setPassword(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item
@@ -77,21 +105,28 @@ export default function SignUpUI() {
                                 message: 'Please fill in this field!',
                             }]}
                         >
-                            <Input.Password placeholder="Repeat Password" />
+                            <Input.Password placeholder="Please fill in your repeat password" onChange={(e) => setPasswordRepeat(e.target.value)} />
                         </Form.Item>
-
+                        {isMatchPass ?
+                            <p style={{ color: "#FF4D4F" }} >{isMatchPass}</p>
+                            : ""
+                        }
                         <Form.Item name="remember" valuePropName="checked">
                             <Checkbox>Remember me</Checkbox>
                         </Form.Item>
 
                         <Form.Item className="form-signup-footer">
-                            <Button className="btn-cancle-signup" type="danger" htmlType="submit" onClick={handleCancel}>
+                            <Button className="btn-cancle-signup" type="danger" htmlType="submit"
+                                onClick={handleCancel}
+                            >
                                 Cancel
-                    </Button>
+                            </Button>
 
-                            <Button className="btn-submit-signup" type="primary" htmlType="submit">
+                            <Button className="btn-submit-signup" type="primary" htmlType="submit"
+                                onClick={() => handleSubmit()}
+                            >
                                 Sign up
-                    </Button>
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>

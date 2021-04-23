@@ -1,0 +1,32 @@
+import axios from 'axios';
+import queryString from 'query-string';
+import endPoint from '../config/endPoint';
+import { errResCheking } from '../helpers/ErrResCheking';
+
+const axiosClient = axios.create({
+    baseURL: endPoint,
+    headers: {
+        'Content-type': 'application/json',
+    },
+    paramsSerializer: params => queryString.stringify(params)
+});
+
+axiosClient.interceptors.request.use((config) => {
+    return config
+})
+
+axiosClient.interceptors.response.use((res) => {
+    if (res && res.data) {
+        return res.data
+    }
+
+    return res;
+}, (error) => {
+    console.log(error.response)
+    if (error.response || error.response.status) {
+        errResCheking(error.response);
+    }
+    return;
+})
+
+export default axiosClient;

@@ -96,9 +96,6 @@ export default function SignInUI({ handleSubmit }) {
                         </Form.Item>
 
                         <Form.Item className="form-signin-footer">
-                            <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
-                                Create an account?
-                            </div>
                             <Button
                                 className="btn-cancle-signin"
                                 type="danger"
@@ -116,6 +113,9 @@ export default function SignInUI({ handleSubmit }) {
                             >
                                 Sign in
                             </Button>
+                            <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
+                                Create an account?
+                            </div>
                         </Form.Item>
                     </Form>
                 </div>
