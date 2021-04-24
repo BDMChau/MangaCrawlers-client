@@ -116,16 +116,16 @@ export default function SignUpUI({ handleSignUp }) {
                         </Form.Item>
 
                         <Form.Item className="form-signup-footer">
-                            <Button className="btn-cancle-signup" type="danger" htmlType="submit"
-                                onClick={handleCancel}
-                            >
-                                Cancel
-                            </Button>
-
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={() => handleSubmit()}
                             >
                                 Sign up
+                            </Button>
+
+                            <Button className="btn-cancle-signup" type="danger" htmlType="submit"
+                                onClick={handleCancel}
+                            >
+                                Cancel
                             </Button>
                         </Form.Item>
                     </Form>

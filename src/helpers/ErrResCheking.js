@@ -1,6 +1,6 @@
 import { toast_error } from "../notifications/toast";
 
-export const errResCheking = (errorResponse) => {
+export const errCodeResCheking = (errorResponse) => {
     switch (errorResponse.status) {
         case 400:
             console.log(errorResponse)
@@ -32,6 +32,6 @@ export const errResCheking = (errorResponse) => {
 
 
 
-export const errMsgChecking = (errMsg) => {
+export const errMsgResNotification = (errMsg) => {
     toast_error(errMsg);
 }

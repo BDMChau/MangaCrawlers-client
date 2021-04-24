@@ -3,7 +3,7 @@ import SignUpUI from './SignUpUI'
 import authApi from '../../api/apis/authApi'
 import { toast_success } from '../../notifications/toast';
 import { useHistory } from 'react-router';
-import { errMsgChecking } from '../../helpers/ErrResCheking';
+import { errMsgResNotification } from '../../helpers/ErrResCheking';
 
 export default function SignUpService() {
     const [signupStt, setSignupStt] = useState("");
@@ -17,17 +17,17 @@ export default function SignUpService() {
                 "user_password": password
             }
             const response = await authApi.postDataSignUp(data);
-            console.log(response)
+           
             if (response.content.err) {
-                errMsgChecking(response.content.err);
+                errMsgResNotification(response.content.err);
                 return;
             }
 
-            console.log(response)
+           
             setSignupStt(response.content.msg);
             toast_success(signupStt);
             history.push("/signin");
-
+            return;
         } catch (error) {
             console.log(error);
         }

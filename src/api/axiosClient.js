@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
 import endPoint from '../config/endPoint';
-import { errResCheking } from '../helpers/ErrResCheking';
+import { errCodeResCheking } from '../helpers/ErrResCheking';
 
 const axiosClient = axios.create({
     baseURL: endPoint,
@@ -24,7 +24,7 @@ axiosClient.interceptors.response.use((res) => {
 }, (error) => {
     console.log(error.response)
     if (error.response || error.response.status) {
-        errResCheking(error.response);
+        errCodeResCheking(error.response);
     }
     return;
 })
