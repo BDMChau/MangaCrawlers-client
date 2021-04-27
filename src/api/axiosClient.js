@@ -4,7 +4,7 @@ import endPoint from '../config/endPoint';
 import { errCodeResCheking } from '../helpers/ErrResCheking';
 
 const axiosClient = axios.create({
-    baseURL: endPoint,
+    baseURL: endPoint.local,
     headers: {
         'Content-type': 'application/json',
     },
