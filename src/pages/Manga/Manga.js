@@ -3,168 +3,100 @@ import "./Manga.css"
 import starblank from "../../assets/img/starblank.svg"
 import starfilled from "../../assets/img/starfilled.svg"
 import { NavLink } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import { Image } from 'antd';
+import { Col, Row } from 'antd';
+import ListManga from '../../components/ListManga/ListManga';
+import ListChapters from '../../components/ListManga/ListChapters';
 
 
 export default function Manga() {
+    const [listChapters, setListChapter] = useState([
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+    ])
 
     return (
-        <>
-            <div className="manga-bg">
+        <Row justify={'center'} className="manga">
+            <Col span={24} className="manga-bg">
                 <div className="manga-bg-img"
-                    style={{ backgroundImage: `url(http://st.nhattruyen.com/data/comics/171/thien-than-ngay-tan-the.jpg)` }}
+                    style={{ backgroundImage: `url(https://static.zerochan.net/YoRHa.No.2.Type.B.full.2067762.jpg)` }}
                 >
                 </div>
-            </div>
-            <Container className="manga-body">
-                <div className="top">
-                    <Image
-                        className="manga-thumb"
-                        width={260}
-                        height={320}
-                        src="http://st.nhattruyen.com/data/comics/171/thien-than-ngay-tan-the.jpg"
-                        title="Owari No Seraph"
-                    >
-                    </Image>
-                    <div className="manga-info">
-                        <div className="manga-details">
-                            <span className="name">
-                                Owari No Seraph
-                        </span>
-                            <span className="status">
-                                Ongoing
-                        </span>
-                            <span className="author">
-                                Author:
+            </Col>
+            <Col xl={16} lg={20} sm={22} xs={24} className="manga-body">
+                <div className="header">
+                    <div className="thumbnail">
+                        <div className="thumbnail-img"
+                            style={{ backgroundImage: `url(https://static.zerochan.net/YoRHa.No.2.Type.B.full.2067762.jpg)` }}
+                        >
+                        </div>
+                    </div>
+                    <div className="title">
+                        <div className="name">
+                            <h3>Nier: Automata</h3>
+                        </div>
+                        <div className="author">
+                            Author:
                             <NavLink to="/author/id" className="link">
-                                    AuthorName
+                                AuthorName
                             </NavLink>
-                            </span>
-                            <span className="genres">
-                                <NavLink to="/search/genre/id" className="link" style={{ marginLeft: 0 }}>
-                                    Genre
-                            </NavLink>
-                                <NavLink to="/search/genre/id" className="link">
-                                    Genre
-                            </NavLink>
-                                <NavLink to="/search/genre/id" className="link">
-                                    Genre
-                            </NavLink>
-                            </span>
-                            <span className="desc">
-                                lorLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        </span>
-                            <span className="interact">
-                                <NavLink
-                                    className="link-to-read"
-                                    to="/chapters/1"
-                                >Read Now
-                            </NavLink>
-
-                                <NavLink
-                                    className="link-add-lib"
-                                    to="/chapters/1"
-                                >Add to Library
-                            </NavLink>
-                            </span>
                         </div>
-                        <span className="manga-evaluate" style={{ display: "flex" }}>
-                            <img src={starfilled} className="star" alt="" />
-                            <img src={starfilled} className="star" alt="" />
-                            <img src={starfilled} className="star" alt="" />
-                            <img src={starblank} className="star" alt="" />
-                            <img src={starblank} className="star" alt="" />
-                        </span>
+                        <div className="genre">
+                            <NavLink to="/author/id" className="link">
+                                Genre
+                        </NavLink>
+                            <NavLink to="/author/id" className="link">
+                                Genre
+                        </NavLink>
+                        </div>
+                        <div className="desc">
+                            <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make  </p>
+                        </div>
+                        <div className="evalute">
+                            <img className="evalute-img" src={starfilled} alt="" />
+                            <img className="evalute-img" src={starfilled} alt="" />
+                            <img className="evalute-img" src={starfilled} alt="" />
+                            <img className="evalute-img" src={starfilled} alt="" />
+                            <img className="evalute-img" src={starblank} alt="" />
+                        </div>
+                        <div className="interact">
+                            <NavLink to="/author/id" className="link" style={{ marginLeft: 0 }}>
+                                Read Now
+                        </NavLink>
+                            <NavLink to="/author/id" className="link">
+                                Add to Library
+                        </NavLink>
+                        </div>
                     </div>
                 </div>
+
                 <div className="middle">
-                    <div className="fields">
-                        <div className="manga-chapter-field">
-                            <p>CHAPTER</p>
-                            <div className="line">
-                            </div>
+                    <div className="chapter-list">
+                        <h3>Chapters</h3>
+                        <div className="line"></div>
 
-                            <ul className="list">
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
-                                <li className="list-item">
-                                    <NavLink className="link" to="/chapter/1">
-                                        Chapter 1: lorLorem Ipsum is simply dummy text of the printing and typesetting industry
-                                   </NavLink>
-                                </li>
+                        <ListChapters listData={listChapters} height={"500px"} />
+                    </div>
 
-                            </ul>
+                    <div className="rank-list">
+                        <div className="top-week-rank">
+                            <h3>Weekly Manga Ranking</h3>
+
+                            <ListManga listData={listChapters} height={"100%"} />
+
                         </div>
-                        <div className="manga-rank-field">
-                            <p>Latest Updates</p>
+                        <div className="favorite-suggest">
+                            <h3>You may also like</h3>
+
+                            <ListManga listData={listChapters} height={"100%"} />
+
                         </div>
                     </div>
                 </div>
-            </Container>
-        </>
+            </Col>
+        </Row>
     )
 }

@@ -1,11 +1,8 @@
 body,
 html {
   overflow: hidden;
-}
-
-.container {
-  width: 1200px;
-  margin: auto;
+  height: 100vh;
+  --antd-wave-shadow-color: red;
 }
 
 .side_bar_app {

@@ -5,6 +5,7 @@ import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
 import { RESET } from '../../store/slices/stuffsSlice';
 import { useHistory } from 'react-router';
+import { LoginOutlined,CloseCircleOutlined } from '@ant-design/icons';
 
 
 export default function SignInUI({ handleSubmit }) {
@@ -102,7 +103,7 @@ export default function SignInUI({ handleSubmit }) {
                                 htmlType="submit"
                                 onClick={() => handleSubmitUI()}
                             >
-                                Sign in
+                                <LoginOutlined /> Sign In
                             </Button>
 
                             <Button
@@ -111,7 +112,7 @@ export default function SignInUI({ handleSubmit }) {
                                 htmlType="submit"
                                 onClick={handleCancel}
                             >
-                                Cancel
+                                <CloseCircleOutlined /> Cancel
                             </Button>
 
                             <div className="signin-to-signup" onClick={() => redirectToSignUp()}>

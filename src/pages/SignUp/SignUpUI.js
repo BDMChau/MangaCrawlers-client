@@ -4,6 +4,7 @@ import "./SignUp.css";
 import { useDispatch } from 'react-redux';
 import { CLOSE_SIGN_UP_FORM } from '../../store/slices/stuffsSlice';
 import { useHistory } from 'react-router';
+import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 
 export default function SignUpUI({ handleSignUp }) {
@@ -119,13 +120,13 @@ export default function SignUpUI({ handleSignUp }) {
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={() => handleSubmit()}
                             >
-                                Sign up
+                               <CheckCircleOutlined />  Sign up
                             </Button>
 
                             <Button className="btn-cancle-signup" type="danger" htmlType="submit"
                                 onClick={handleCancel}
                             >
-                                Cancel
+                                <CloseCircleOutlined/> Cancel
                             </Button>
                         </Form.Item>
                     </Form>
