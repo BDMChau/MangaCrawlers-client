@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react'
+import "./App.css"
 import 'antd/dist/antd.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
@@ -9,6 +10,7 @@ import SignUpService from './pages/SignUp/SignUpService'
 import HomeService from './pages/Home/HomeService'
 import NotFound404 from './pages/NotFound404/NotFound404'
 import routes from './components/routes/routes'
+import NarbarService from './components/Navbar/NarbarService';
 
 const Routing = () => {
   return (
@@ -31,9 +33,10 @@ export default function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
-          <>
+          <div className="side_bar_app">
+            <NarbarService />
             {Routing()}
-          </>
+          </div>
         </Suspense >
       </BrowserRouter>
     </Provider>

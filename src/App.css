@@ -1,0 +1,36 @@
+body,
+html {
+  overflow: hidden;
+}
+
+.container {
+  width: 1200px;
+  margin: auto;
+}
+
+.side_bar_app {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.side_bar_app::-webkit-scrollbar {
+  width: 5px;
+}
+
+.side_bar_app::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.side_bar_app::-webkit-scrollbar-thumb {
+  background: #009eb3;
+  border-radius: 10px;
+}
+
+/* Handle hover */
+.side_bar_app::-webkit-scrollbar-thumb:hover {
+  background: #009eb3;
+}
