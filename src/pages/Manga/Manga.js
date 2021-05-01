@@ -35,10 +35,10 @@ export default function Manga() {
                 >
                 </div>
             </Col>
-            <Row justify={"center"}>
-                <Col md={18} lg={23} sm={22} xs={18} xl={22} className="manga-body">
+            <Row justify={"center"} className="manga-body-row">
+                <Col md={18} lg={23} sm={22} xs={18} xl={24} className="manga-body">
                     <Row justify={"center"} className="header">
-                        <Col md={7} lg={6} sm={4} xs={14} xl={4} className="thumbnail">
+                        <Col md={4} sm={3} lg={4} xl={3} className="thumbnail">
                             <img className="thumbnail-img" src="https://static.zerochan.net/YoRHa.No.2.Type.B.full.2067762.jpg" alt="" />
                         </Col>
                         <Col md={13} lg={12} sm={4} xs={20} xl={18} className="title">

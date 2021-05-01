@@ -11,6 +11,7 @@ import HomeService from './pages/Home/HomeService'
 import NotFound404 from './pages/NotFound404/NotFound404'
 import routes from './components/routes/routes'
 import NarbarService from './components/Navbar/NarbarService';
+import Navbar from './components/Navbar/Navbar';
 
 const Routing = () => {
   return (
@@ -34,6 +35,7 @@ export default function App() {
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <>
+            <Navbar />
             {Routing()}
           </>
         </Suspense >

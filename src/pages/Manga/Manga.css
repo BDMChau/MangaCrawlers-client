@@ -48,12 +48,6 @@
   border-radius: 5px;
 }
 
-.manga .title {
-}
-
-.title .author {
-}
-
 .title .desc {
   text-align: justify;
 }
@@ -80,7 +74,6 @@
 
 .manga .middle {
   background: blue;
-
   margin-top: 50px;
   padding: 30px;
   /* display: flex; */
@@ -107,9 +100,23 @@
 }
 
 /* /////////////////////////// */
+@media only screen and (min-width: 1800px) {
+  .manga .title {
+    margin-left: 0px !important;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
-  .ant-col-xl-7{
+  .ant-col-xl-7 {
     max-width: 100%;
+  }
+
+  .ant-col-xl-24 {
+    min-width: 100%;
+  }
+
+  .manga-body-row {
+    width: 90%;
   }
 
   .manga .middle .rank-list {
@@ -119,7 +126,7 @@
   }
 
   .manga .title {
-    margin-left: 30px;
+    margin-left: 55px;
   }
 
   .title .desc {
@@ -129,11 +136,9 @@
   .manga .middle {
     justify-content: left !important;
   }
-
-
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1100px) {
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
   .ant-col-lg-6 {
     max-width: 100%;
   }
@@ -146,11 +151,15 @@
     margin-left: 18px;
     width: 41%;
   }
+
+  .manga .title {
+    margin-left: 40px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .manga .title {
-    margin-left: 40px;
+    margin-left: 85px;
   }
 
   .title .desc {
@@ -172,6 +181,7 @@
   .ant-col-xs-20 {
     max-width: 90%;
   }
+
   .ant-col-xs-14 {
     max-width: 100%;
   }

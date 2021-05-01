@@ -1,4 +1,6 @@
-
+.menu-container {
+  height: 50px;
+}
 
 .ant-input-search-button:hover,
 .ant-input-search-button:focus,
