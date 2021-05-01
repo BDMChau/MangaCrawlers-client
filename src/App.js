@@ -5,13 +5,11 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import SignInService from './pages/SignIn/SignInService'
-import SignUpService from './pages/SignUp/SignUpService'
-import HomeService from './pages/Home/HomeService'
-import NotFound404 from './pages/NotFound404/NotFound404'
 import routes from './components/routes/routes'
-import NarbarService from './components/Navbar/NarbarService';
-import Navbar from './components/Navbar/Navbar';
+import SideNav from './components/Navbar/SideNav';
+import TopNav from './components/Navbar/TopNav';
+import { Layout } from 'antd';
+
 
 const Routing = () => {
   return (
@@ -34,10 +32,14 @@ export default function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
-          <>
-            <Navbar />
-            {Routing()}
-          </>
+
+          <Layout theme="light" style={{ minHeight: '100vh' }}>
+            <TopNav />
+            <Layout className="site-layout">
+              {Routing()}
+            </Layout>
+          </Layout>
+          
         </Suspense >
       </BrowserRouter>
     </Provider>

@@ -1,6 +1,8 @@
 @import "~antd/dist/antd.css";
 
-.menu-container {
+.header-nav {
+  background: white;
+  padding: 0;
 }
 
 .menuBar {
@@ -16,19 +18,29 @@
 } */
 
 .logo {
-  width: 100px;
-  height: 80px;
+  width: 70px;
   float: left;
   transform: scale(3);
-  padding: 5px;
-  margin-left: 15px;
+  padding: 0px;
+  margin: 12px 0px 0px 40px;
   /* background-image: url("../../assets/logo/logo2.svg"); */
   /* background-position: center;
   background-repeat: no-repeat;
   background-size: cover; */
 }
 
-.ant-menu-horizontal{
+.drawer{
+  text-align: center;
+}
+
+.drawer .logo-drawer{
+  width: 70px;
+  transform: scale(3.5);
+  padding: 0px;
+  margin-top: 10px;
+}
+
+.ant-menu-horizontal {
   line-height: 70px;
 }
 
@@ -52,6 +64,7 @@
 
 .menuCon .ant-menu-horizontal {
   border-bottom: none;
+  margin-left: 35px;
 }
 
 .menuCon .leftMenu {
@@ -101,12 +114,12 @@
   padding: 0;
 }
 
-.barsMenu>span {
+.barsMenu > span {
   display: block;
 }
 
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-item,
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-submenu {
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
   display: inline-block;
   width: 100%;
 }
@@ -115,7 +128,7 @@
   border-bottom: none;
 }
 
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-item:hover {
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
   border-bottom-color: transparent;
 }
 
