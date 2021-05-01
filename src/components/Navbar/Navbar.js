@@ -19,7 +19,8 @@ export default function Navbar() {
     }
 
     return (
-        
-           
+        <div className="menu-container" style={{ width: '100%', outline: 'none', boxShadow: 'none', border: 'none' }}>
+            
+        </div>
     )
 }

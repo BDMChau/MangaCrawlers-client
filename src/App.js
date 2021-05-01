@@ -33,10 +33,9 @@ export default function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
-          <div className="side_bar_app">
-            <NarbarService />
+          <>
             {Routing()}
-          </div>
+          </>
         </Suspense >
       </BrowserRouter>
     </Provider>
