@@ -1,31 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+
+
 import "./Navbar.css"
 import logoText from "../../assets/logo/logoText.svg"
 import logo from "../../assets/logo/logo2.svg"
+import { useDispatch, useSelector } from 'react-redux';
+import { RESET } from '../../store/slices/stuffsSlice';
 
 import { Layout, Menu, Button, Drawer } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import SignUpService from '../../pages/SignUp/SignUpService';
+import SignInService from '../../pages/SignIn/SignInService';
 
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Header } = Layout;
 const MenuItemGroup = Menu.ItemGroup;
 
 
 export default function TopNav() {
-    const [state, setState] = useState({
-        current: 'mail',
-        visible: false
-    })
+    const stuffsState = useSelector(state => state.stuffsSlice);
+    const dispatch = useDispatch();
+    const [state, setState] = useState(false)
+    const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
+    const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
+
+
+    useEffect(() => {
+        if (stuffsState[0] === "closeSignUp") {
+            setIsModalVisibleSignUp(false)
+            dispatch(RESET())
+        } else if (stuffsState[0] === "closeSignIn") {
+            setIsModalVisibleSignIn(false)
+            dispatch(RESET())
+        }
+    }, [stuffsState])
+
 
 
     const showDrawer = () => {
-        setState({ ...state, visible: true })
+        setState(true)
     };
-    const onClose = () => {
-        setState({ ...state, visible: false })
 
+    const onClose = () => {
+        setState(false)
     };
+
+    const openSignUpModal = () => {
+        setIsModalVisibleSignUp(true);
+    }
+
+    const openSignInModal = () => {
+        setIsModalVisibleSignIn(true);
+    }
+
 
     const renderLeft = () => {
         return (
@@ -53,11 +81,11 @@ export default function TopNav() {
     const renderRight = () => {
         return (
             <Menu mode="horizontal">
-                <Menu.Item key="mail">
-                    <NavLink to="">Signin</NavLink>
+                <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
+                    Signin
                 </Menu.Item>
-                <Menu.Item key="app">
-                    <NavLink to="">Signup</NavLink>
+                <Menu.Item key="openSignUp" onClick={() => openSignUpModal()}>
+                    Signup
                 </Menu.Item>
             </Menu>
         )
@@ -84,7 +112,7 @@ export default function TopNav() {
                         placement="right"
                         closable={true}
                         onClose={onClose}
-                        visible={state.visible}
+                        visible={state}
                     >
                         {renderLeft()}
                         {renderRight()}
@@ -98,6 +126,14 @@ export default function TopNav() {
     return (
         <Header className="header-nav">
             {renderMenu()}
+            {isModalVisibleSignUp
+                ? <SignUpService />
+                : ""
+            }
+            {isModalVisibleSignIn
+                ? <SignInService />
+                : ""
+            }
         </Header>
     )
 }

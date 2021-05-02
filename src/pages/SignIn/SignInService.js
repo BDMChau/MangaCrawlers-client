@@ -5,7 +5,7 @@ export default function SignInService() {
 
 
 
-    const handleSubmit = () => {
+    const handleSignIn = () => {
         console.log("ok submit")
     }
 
@@ -15,7 +15,7 @@ export default function SignInService() {
         <div>
             <p>This is sign in service</p>
             <SignInUI
-                handleSubmit={handleSubmit}
+                handleSignIn={handleSignIn}
             />
         </div>
     )

@@ -9,12 +9,15 @@ const stuffsSlice = createSlice({
         CLOSE_SIGN_UP_FORM: (state, action) => {
             state.push(action.payload);
         },
+        CLOSE_SIGN_IN_FORM: (state, action) => {
+            state.push(action.payload);
+        },
         RESET: (state) => {
-            state = [];
+            state.length = 0;
         }
     }
 })
 
 const { actions, reducer } = stuffsSlice;
-export const { CLOSE_SIGN_UP_FORM, RESET } = actions;
+export const { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM, RESET } = actions;
 export default reducer;

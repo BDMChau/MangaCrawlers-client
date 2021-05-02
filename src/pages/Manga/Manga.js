@@ -88,7 +88,7 @@ export default function Manga() {
                     </Row>
 
                     <Row className="middle">
-                        <Col md={16} lg={12} sm={4} xs={20} xl={15} className="chapter-list">
+                        <Col className="chapter-list">
                             <h3>Chapters</h3>
                             <div className="line"></div>
 

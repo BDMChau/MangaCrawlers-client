@@ -132,6 +132,14 @@
   border-bottom-color: transparent;
 }
 
+/* style when click Menu.Item */
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-selected a{
+  color: black;
+  border-bottom: 2px solid transparent;
+}
+
+
 @media (max-width: 767px) {
   .barsMenu {
     display: inline-block;

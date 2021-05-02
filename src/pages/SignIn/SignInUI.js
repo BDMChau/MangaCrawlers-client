@@ -4,19 +4,21 @@ import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
 import { RESET } from '../../store/slices/stuffsSlice';
-import { useHistory } from 'react-router';
-import { LoginOutlined,CloseCircleOutlined } from '@ant-design/icons';
+import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { CLOSE_SIGN_IN_FORM } from '../../store/slices/stuffsSlice';
 
 
-export default function SignInUI({ handleSubmit }) {
+export default function SignInUI({ handleSignIn }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
 
     const stuffsState = useSelector(state => state.stuffsSlice);
     const dispatch = useDispatch();
-    const history = useHistory();
 
 
+    useEffect(() => {
+        showModal()
+    }, [])
 
     useEffect(() => {
         if (stuffsState[0] === "closeSignUp") {
@@ -30,37 +32,33 @@ export default function SignInUI({ handleSubmit }) {
         setIsModalVisible(true);
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
     const handleCancel = () => {
         setIsModalVisible(false);
-        history.push("/");
+
+        setTimeout(() => {
+            dispatch(CLOSE_SIGN_IN_FORM("closeSignIn"))
+        }, 300);
     };
 
 
     const redirectToSignUp = () => {
         setIsModalVisible(false);
         setIsModalVisibleSignUp(true);
-
     }
 
-    const handleSubmitUI = () => {
-        handleSubmit()
+    const handleSubmit = () => {
+        handleSignIn()
     }
 
 
     return (
         <div>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-            </Button>
             <Modal
                 className="modal-signin"
                 visible={isModalVisible}
                 footer={null}
-                closable={false}
+                closable={true}
+                onCancel={() => handleCancel()}
             >
                 <div>
                     <div className="modal-title-signin">
@@ -101,7 +99,7 @@ export default function SignInUI({ handleSubmit }) {
                                 className="btn-submit-signin"
                                 type="primary"
                                 htmlType="submit"
-                                onClick={() => handleSubmitUI()}
+                                onClick={() => handleSubmit()}
                             >
                                 <LoginOutlined /> Sign In
                             </Button>

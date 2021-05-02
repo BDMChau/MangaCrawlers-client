@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import { useDispatch } from 'react-redux';
 import { CLOSE_SIGN_UP_FORM } from '../../store/slices/stuffsSlice';
-import { useHistory } from 'react-router';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 
@@ -16,7 +15,8 @@ export default function SignUpUI({ handleSignUp }) {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch();
-    const history = useHistory();
+
+
 
     useEffect(() => {
         showModal()
@@ -26,26 +26,27 @@ export default function SignUpUI({ handleSignUp }) {
         setIsModalVisible(true);
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
     const handleCancel = () => {
         setIsModalVisible(false);
-        dispatch(CLOSE_SIGN_UP_FORM("closeSignUp"))
-        history.push("/signin")
+
+        setTimeout(() => {
+            dispatch(CLOSE_SIGN_UP_FORM("closeSignUp"))
+        }, 300);
     };
 
     const handleSubmit = () => {
-        if (password !== passwordRepeat) {
-            setIsMatchPass("Password is not match!")
+        if (!name || !email || !password || !passwordRepeat) {
+            return
+        }
+        else if (password !== passwordRepeat) {
+            setIsMatchPass("Passwords didn't match!")
             return;
+
         } else {
             handleSignUp(name, email, password)
             setIsMatchPass("")
             return;
         }
-
     }
 
 
@@ -56,7 +57,8 @@ export default function SignUpUI({ handleSignUp }) {
                 className="modal-signup"
                 visible={isModalVisible}
                 footer={null}
-                closable={false}
+                closable={true}
+                onCancel={() => handleCancel()}
             >
                 <div>
                     <div className="modal-title-signup">
@@ -76,7 +78,7 @@ export default function SignUpUI({ handleSignUp }) {
                                 message: 'Please fill in your nickname!',
                             }]}
                         >
-                            <Input placeholder="Choose your nickname!" onChange={(e) => setName(e.target.value)} />
+                            <Input placeholder="Choose your nickname" onChange={(e) => setName(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item
@@ -86,7 +88,7 @@ export default function SignUpUI({ handleSignUp }) {
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Please fill in your email!" onChange={(e) => setEmail(e.target.value)} />
+                            <Input placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item
@@ -96,17 +98,17 @@ export default function SignUpUI({ handleSignUp }) {
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Please fill in your password!" onChange={(e) => setPassword(e.target.value)} />
+                            <Input.Password placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item
-                            name="repeat password"
+                            name="Confirm password"
                             rules={[{
                                 required: true,
-                                message: 'Please fill in this field!',
+                                message: 'Confirm your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Please fill in your repeat password" onChange={(e) => setPasswordRepeat(e.target.value)} />
+                            <Input.Password placeholder="Confirm your password" onChange={(e) => setPasswordRepeat(e.target.value)} />
                         </Form.Item>
                         {isMatchPass ?
                             <p style={{ color: "#FF4D4F" }} >{isMatchPass}</p>
@@ -120,13 +122,13 @@ export default function SignUpUI({ handleSignUp }) {
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={() => handleSubmit()}
                             >
-                               <CheckCircleOutlined />  Sign up
+                                <CheckCircleOutlined />  Sign up
                             </Button>
 
                             <Button className="btn-cancle-signup" type="danger" htmlType="submit"
                                 onClick={handleCancel}
                             >
-                                <CloseCircleOutlined/> Cancel
+                                <CloseCircleOutlined /> Cancel
                             </Button>
                         </Form.Item>
                     </Form>
