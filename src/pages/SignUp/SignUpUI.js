@@ -2,7 +2,7 @@ import { Button, Modal, Form, Input, Checkbox } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import { useDispatch } from 'react-redux';
-import { CLOSE_SIGN_UP_FORM } from '../../store/slices/stuffsSlice';
+import { CLOSE_SIGN_UP_FORM } from '../../store/slices/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 

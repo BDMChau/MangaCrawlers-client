@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
-import { RESET } from '../../store/slices/stuffsSlice';
+import { RESET } from '../../store/slices/AuthSlice';
 import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { CLOSE_SIGN_IN_FORM } from '../../store/slices/stuffsSlice';
+import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 
 
 export default function SignInUI({ handleSignIn }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
 
-    const stuffsState = useSelector(state => state.stuffsSlice);
+    const authState = useSelector(state => state.authState);
     const dispatch = useDispatch();
 
 
@@ -21,11 +21,11 @@ export default function SignInUI({ handleSignIn }) {
     }, [])
 
     useEffect(() => {
-        if (stuffsState[0] === "closeSignUp") {
+        if (authState[0] === "closeSignUp") {
             setIsModalVisibleSignUp(false)
             dispatch(RESET())
         }
-    }, [stuffsState])
+    }, [authState])
 
 
     const showModal = () => {

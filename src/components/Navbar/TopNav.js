@@ -5,7 +5,7 @@ import "./Navbar.css"
 import logoText from "../../assets/logo/logoText.svg"
 import logo from "../../assets/logo/logo2.svg"
 import { useDispatch, useSelector } from 'react-redux';
-import { RESET } from '../../store/slices/stuffsSlice';
+import { RESET } from '../../store/slices/AuthSlice';
 
 import { Layout, Menu, Button, Drawer } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
@@ -19,7 +19,7 @@ const MenuItemGroup = Menu.ItemGroup;
 
 
 export default function TopNav() {
-    const stuffsState = useSelector(state => state.stuffsSlice);
+    const authState = useSelector(state => state.authState);
     const dispatch = useDispatch();
     const [state, setState] = useState(false)
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
@@ -27,14 +27,14 @@ export default function TopNav() {
 
 
     useEffect(() => {
-        if (stuffsState[0] === "closeSignUp") {
+        if (authState[0] === "closeSignUp") {
             setIsModalVisibleSignUp(false)
             dispatch(RESET())
-        } else if (stuffsState[0] === "closeSignIn") {
+        } else if (authState[0] === "closeSignIn") {
             setIsModalVisibleSignIn(false)
             dispatch(RESET())
         }
-    }, [stuffsState])
+    }, [authState])
 
 
 
