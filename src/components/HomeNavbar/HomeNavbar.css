@@ -1,0 +1,10 @@
+.home-menu{
+    position: relative;
+    top: -40px;
+    height: 65px;
+}
+
+.home-menu .menu{
+    text-align: center;
+    background: white;
+}

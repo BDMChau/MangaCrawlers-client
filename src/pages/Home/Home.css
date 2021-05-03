@@ -1,0 +1,62 @@
+
+.home{
+    max-height: 100vh;
+    height: 100%;
+}
+
+.home-bg{
+    max-width: 100%;
+}
+
+.home-bg .home-bg-img{
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-attachment: unset;
+    width: 100%;
+    height: 400px;
+}
+
+.home-middle-header .recommended{
+    background: hotpink;
+}
+
+.home-middle .lastest{
+    background: royalblue;
+}
+
+.home-middle .popular{
+    background: rgb(99, 99, 24);
+}
+
+
+
+.latest-cards{
+    display: flex;
+    width: 100%;
+}
+
+.latest-cards .card{
+    width: 148px;
+    height: 250px;
+    margin: 5px 5px;
+}
+
+.latest-cards .card .ant-card-cover{
+    height: 75%;
+}
+
+.latest-cards .card .ant-card-cover img{
+    height: 100%;
+}
+
+.latest-cards .card .ant-card-body{
+    padding: 0 5px;
+    margin-top: 8px;
+}
+
+.latest-cards .card .desc{
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+}
