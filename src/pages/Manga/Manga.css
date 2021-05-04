@@ -5,7 +5,7 @@
 .manga-bg {
   width: 100%;
   height: 400px;
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .manga-bg-img {
@@ -143,6 +143,10 @@
     max-width: 100%;
   }
 
+  .ant-col-lg-5{
+    max-width: 33%;
+  }
+
   .manga .middle {
     justify-content: left !important;
   }
@@ -187,7 +191,7 @@
   }
 
   .manga .middle .chapter-list {
-    width: 100%;
+    width: 90%;
     margin-right: 0;
   }
 

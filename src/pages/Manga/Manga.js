@@ -88,7 +88,7 @@ export default function Manga() {
                     </Row>
 
                     <Row className="middle">
-                        <Col className="chapter-list">
+                        <Col md={15} lg={15} xl={15} className="chapter-list">
                             <h3>Chapters</h3>
                             <div className="line"></div>
 
@@ -102,7 +102,7 @@ export default function Manga() {
                         </Col>
 
 
-                        <Col md={6} lg={6} sm={4} xs={14} xl={7} className="rank-list">
+                        <Col md={8} lg={5} sm={4} xs={14} xl={7} className="rank-list">
                             <div className="top-week-rank">
                                 <h3>Weekly Manga Ranking</h3>
 
