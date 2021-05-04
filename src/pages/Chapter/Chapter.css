@@ -1,0 +1,20 @@
+.chapter{
+    margin: auto;
+}
+
+.chapter .chapter-pages .page{
+    text-align: center;
+}
+
+.chapter .chapter-pages img.img{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+}
+
+.chapter .chapter-pages .ant-image-mask:hover{
+    opacity: 0;
+    cursor: default;
+}

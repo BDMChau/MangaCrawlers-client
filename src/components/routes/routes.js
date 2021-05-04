@@ -22,6 +22,11 @@ const routes = [
         exact: false
     },
     {
+        path: "/chapter/:id",
+        component: React.lazy(() => import('../../pages/Chapter/ChapterService')),
+        exact: false
+    },
+    {
         path: "",
         component: React.lazy(() => import('../../pages/NotFound404/NotFound404')),
         exact: false
