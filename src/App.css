@@ -1,9 +1,0 @@
-body,
-html {
-  min-height: 100vh;
-  height: 100vh;
-  --antd-wave-shadow-color: red;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-

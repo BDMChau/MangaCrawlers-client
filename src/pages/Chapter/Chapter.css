@@ -1,5 +1,5 @@
 .chapter{
-    margin: auto;
+    margin: auto; 
 }
 
 .chapter .chapter-pages .page{
@@ -8,12 +8,14 @@
 
 .chapter .chapter-pages img.img{
     width: auto;
-    height: 200px;
+    height: auto;
     max-width: 100%;
-    position: relative;
+    position: relative;    
+
 }
 
 .chapter .chapter-pages .ant-image-mask:hover{
     opacity: 0;
-    cursor: default;
+    cursor: default;    
+
 }

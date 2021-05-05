@@ -1,6 +1,10 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI' !important
+  font-family: 'Segoe UI' !important;
+  min-height: 100vh;
+  height: 100vh;
+  --antd-wave-shadow-color: red;
+  overflow-x: hidden;
 }
 
 code {

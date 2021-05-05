@@ -4,9 +4,9 @@ import "./Home.css"
 import HomeNavbar from '../../components/HomeNavbar/HomeNavbar'
 import ListSide from '../../components/List/ListSide/ListSide'
 import FooterContainer from '../../components/Footer/Footer'
-import CarouselHorizontal from '../../components/Sliders/Horizontal/CarouselHorizontal'
+import CarouselHorizontal from '../../components//Carousels/Horizontal/CarouselHorizontal'
 import { Col, Row, Card } from 'antd'
-import CarouselVertical from '../../components/Sliders/Vertical/CarouselVertical'
+import CarouselVertical from '../../components/Carousels/Vertical/CarouselVertical'
 
 const { Meta } = Card;
 

@@ -1,31 +1,13 @@
 import { Button, Col, Dropdown, Image, Menu, Row } from 'antd'
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazyload';
+import { NavLink } from 'react-router-dom';
 import "./Chapter.css"
 
 export default function Chapter() {
     const [data, setData] = useState([
         "https://cm.blazefast.co/aa/c2/aac2a2b3db4c8f033f830730eff89c58.jpg",
-        "https://cm.blazefast.co/7f/9a/7f9aec32c3273dcc2430a2d1bbea478c.jpg",
-        "https://cm.blazefast.co/b9/fb/b9fbb989c7be8fb6f5f901bc78733b21.jpg",
-        "https://cm.blazefast.co/f5/53/f5539dc4d7fb0387eeb68e0b6487fb70.jpg",
-        "https://cm.blazefast.co/23/e0/23e0ae8d7dd414c7a6ac83df18cd153a.jpg",
-        "https://cm.blazefast.co/35/27/352797530402300c71cd413beeab92c6.jpg",
-        "https://cm.blazefast.co/8a/fa/8afabb35e76b0e3917cdf0e0ca29ae1c.jpg",
-        "https://cm.blazefast.co/b0/ba/b0ba715f7094045acab90043222ff9cb.jpg",
-        "https://cm.blazefast.co/99/58/99587bda891d96b43888420b0f2d3421.jpg",
-        "https://cm.blazefast.co/e1/5b/e15b70dc1ca1a85ac540fc0fbca0d854.jpg",
-        "https://cm.blazefast.co/a0/d7/a0d7c6fc410c2d32e22729474b17d896.jpg",
-        "https://cm.blazefast.co/b9/c8/b9c83e985ca093c6ee38e16499f062a4.jpg",
-        "https://cm.blazefast.co/f6/30/f630b3f0908f7b99be4b0eac8f9f44d7.jpg",
-        "https://cm.blazefast.co/ec/d5/ecd54f1a4660abf779dbb20fd86385c3.jpg",
-        "https://cm.blazefast.co/36/7f/367f895fdc3455724b491a9feeb21a7d.jpg",
-        "https://cm.blazefast.co/37/37/37372045b39d64cf15c34896f4f14c9f.jpg",
-        "https://cm.blazefast.co/97/3c/973c70543582aad3a31a8cb95789675e.jpg",
-        "https://cm.blazefast.co/49/85/49857201484441f50d9f3cc77681f23a.jpg",
-        "https://cm.blazefast.co/a9/f7/a9f7bfb3e1a0bf4334d95a9eb85e1095.jpg",
-        "https://cm.blazefast.co/ce/39/ce394e6485630cb102f82527152c5fc8.jpg",
-        "https://cm.blazefast.co/cd/3d/cd3dda38b170f31db283f1bc364aa7b0.jpg",
+        
         "https://cm.blazefast.co/2c/84/2c84a7e63dc73df3f2866a08d53bb786.jpg",
         "https://cm.blazefast.co/72/48/7248e7e1672016f52b33d30a2b1448b1.jpg",
         "https://cm.blazefast.co/67/8b/678b2ae7a2d12b247cab4f8f6ab19a7c.jpg",
@@ -84,23 +66,44 @@ export default function Chapter() {
         </div>
     );
 
+    const dropDownItems = (
+        <Menu>
+            <Menu.Item key="0">
+                <NavLink to="https://www.antgroup.com">1st menu item</NavLink>
+            </Menu.Item>
+            <Menu.Item key="1">
+                <NavLink to="https://www.aliyun.com">2nd menu item</NavLink>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item key="3">3rd menu item</Menu.Item>
+        </Menu>
+    );
+
+
     return (
         <Row justify={"center"} className="chapter">
+            <Col span={23} xxl={18} >
+                <Dropdown className="dropdown" overlay={dropDownItems} trigger={['click']}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        Click me
+                    </a>
+                </Dropdown>
+            </Col>
 
             <Col span={23} xxl={14} className="chapter-pages">
                 {data.map((item, id) => (
-                    <div className="page" id={`page_${id}`}>
-                        <LazyLoad
-                            key={id}
-                            height={100}
-                            placeholder={<Spinner />}
-                        >
+                    <LazyLoad
+                        key={id}
+                        placeholder={<Spinner />}
+                        height={100}
+                    >
+                        <div className="page" id={`page_${id}`}>
                             <Image className="img" id={id} src={item} alt="" />
-                        </LazyLoad>
+                        </div>
 
-                    </div>
+                    </LazyLoad>
                 ))}
             </Col>
-        </Row>
+        </Row >
     )
 }
