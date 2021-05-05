@@ -93,7 +93,6 @@ export default function Chapter() {
                         <LazyLoad
                             key={id}
                             height={100}
-                            offset={[-100, 100]}
                             placeholder={<Spinner />}
                         >
                             <Image className="img" id={id} src={item} alt="" />

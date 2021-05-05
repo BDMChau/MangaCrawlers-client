@@ -4,9 +4,9 @@ import "./Home.css"
 import HomeNavbar from '../../components/HomeNavbar/HomeNavbar'
 import ListSide from '../../components/List/ListSide/ListSide'
 import FooterContainer from '../../components/Footer/Footer'
-import SliderHorizontal from '../../components/Sliders/Horizontal/SliderHorizontal'
+import CarouselHorizontal from '../../components/Sliders/Horizontal/CarouselHorizontal'
 import { Col, Row, Card } from 'antd'
-import SliderVertical from '../../components/Sliders/Vertical/SliderVertical'
+import CarouselVertical from '../../components/Sliders/Vertical/CarouselVertical'
 
 const { Meta } = Card;
 
@@ -51,7 +51,7 @@ export default function Home() {
                 <HomeNavbar />
                 <Col span={23} md={20} xl={15} className="recommended">
                     <h2>Recommended Manga</h2>
-                    <SliderHorizontal />
+                    <CarouselHorizontal />
                 </Col>
 
                 <Row justify={"center"} className="home-middle">
@@ -162,7 +162,7 @@ export default function Home() {
 
                     <Col span={23} md={20} xl={15} className="trending">
                         <h2>Trending Manga</h2>
-                        <SliderVertical />
+                        <CarouselVertical />
                     </Col>
 
                     <FooterContainer />

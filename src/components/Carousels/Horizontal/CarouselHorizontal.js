@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import "./SliderHorizontal.css";
+import React from "react";
+import "./CarouselHorizontal.css";
 import Slider from "react-slick";
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function SliderHorizontal() {
+export default function CarouselHorizontal() {
 
     // 10 is data.length when we have real data
     const randomInitSlide = Math.floor((Math.random() * 10) + 1);

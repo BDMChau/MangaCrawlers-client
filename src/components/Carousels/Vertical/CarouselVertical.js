@@ -1,11 +1,11 @@
 import React from 'react'
 import Slider from 'react-slick';
-import "./SliderVertical.css"
+import "./CarouselVertical.css"
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export default function SliderVertical() {
+export default function CarouselVertical() {
 
     // 10 is data.length when we have real data
     const randomInitSlide = Math.floor((Math.random() * 10) + 1);
