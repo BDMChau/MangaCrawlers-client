@@ -6,7 +6,7 @@ import { CLOSE_SIGN_UP_FORM } from '../../store/slices/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 
-export default function SignUpUI({ handleSignUp }) {
+export default function SignUp({ handleSignUp }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

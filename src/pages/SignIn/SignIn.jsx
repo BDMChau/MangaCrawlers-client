@@ -8,7 +8,7 @@ import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 
 
-export default function SignInUI({ handleSignIn }) {
+export default function SignIn({ handleSignIn }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
 

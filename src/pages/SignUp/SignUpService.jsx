@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import SignUpUI from './SignUpUI'
+import SignUp from './SignUp'
 import authApi from '../../api/apis/authApi'
 import { notification_success } from '../../notifications/notification';
 import { useHistory } from 'react-router';
