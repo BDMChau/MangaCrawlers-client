@@ -2,7 +2,7 @@ import { Button, Modal, Form, Input, Checkbox } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import { useDispatch } from 'react-redux';
-import { CLOSE_SIGN_UP_FORM } from '../../store/slices/AuthSlice';
+import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 
 
@@ -31,6 +31,7 @@ export default function SignUp({ handleSignUp }) {
 
         setTimeout(() => {
             dispatch(CLOSE_SIGN_UP_FORM("closeSignUp"))
+            dispatch(CLOSE_SIGN_IN_FORM("closeSignIn"))
         }, 300);
     };
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import SignIn from './SignInUI'
+import SignIn from './SignIn'
 
 export default function SignInService() {
 
@@ -14,7 +14,7 @@ export default function SignInService() {
     return (
         <div>
             <p>This is sign in service</p>
-            <SignInUI
+            <SignIn
                 handleSignIn={handleSignIn}
             />
         </div>

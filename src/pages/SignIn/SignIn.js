@@ -23,10 +23,8 @@ export default function SignIn({ handleSignIn }) {
     useEffect(() => {
         if (authState[0] === "closeSignUp") {
             setIsModalVisibleSignUp(false)
-            dispatch(RESET())
         }
     }, [authState])
-
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -42,8 +40,10 @@ export default function SignIn({ handleSignIn }) {
 
 
     const redirectToSignUp = () => {
-        handleCancel()
+        setIsModalVisible(false);
         setIsModalVisibleSignUp(true);
+        dispatch(CLOSE_SIGN_IN_FORM("closeSignInAndRedirectToSignUp"))
+
     }
 
     const handleSubmit = () => {

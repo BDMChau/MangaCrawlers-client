@@ -1,59 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import "./Navbar.css";
+import logoText from "../../assets/logo/logoText.svg";
+import logo from "../../assets/logo/logo2.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
 
-
-import "./Navbar.css"
-import logoText from "../../assets/logo/logoText.svg"
-import logo from "../../assets/logo/logo2.svg"
-import { useDispatch, useSelector } from 'react-redux';
-import { RESET } from '../../store/slices/AuthSlice';
-
-import { Layout, Menu, Button, Drawer } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
-import SignUpService from '../../pages/SignUp/SignUpService';
-import SignInService from '../../pages/SignIn/SignInService';
+import { Layout, Menu, Button, Drawer } from "antd";
+import { NavLink } from "react-router-dom";
+import SignUpService from "../../pages/SignUp/SignUpService";
+import SignInService from "../../pages/SignIn/SignInService";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
 const MenuItemGroup = Menu.ItemGroup;
 
 
+
+
+
 export default function TopNav() {
-    const authState = useSelector(state => state.authState);
+    const authState = useSelector((state) => state.authState);
     const dispatch = useDispatch();
-    const [state, setState] = useState(false)
+    const [state, setState] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
 
-
     useEffect(() => {
         if (authState[0] === "closeSignUp") {
-            setIsModalVisibleSignUp(false)
-            dispatch(RESET())
+            setIsModalVisibleSignUp(false);
+            dispatch(RESET());
+            return;
         } else if (authState[0] === "closeSignIn") {
-            setIsModalVisibleSignIn(false)
-            dispatch(RESET())
+            setIsModalVisibleSignIn(false);
+            dispatch(RESET());
+            return;
+        } else if (authState[0] === "openSignUpFromSignIn") {
+            setIsModalVisibleSignUp(true);
+
+            setTimeout(() => {
+                dispatch(CLOSE_SIGN_IN_FORM("closeSignIn"));
+            }, 300);
+        } else if (authState[0] === "closeSignInAndRedirectToSignUp") {
+            if (authState.includes("closeSignIn")) {
+                dispatch(RESET());
+                setIsModalVisibleSignIn(false);
+            }
         }
-    }, [authState])
 
+        switch (authState[0]) {
+            case "closeSignUp":
+                setIsModalVisibleSignUp(false);
+                dispatch(RESET());
+                break;
 
+            case "closeSignIn":
+                setIsModalVisibleSignIn(false);
+                dispatch(RESET());
+                break;
+
+            case "openSignUpFromSignIn":
+                setIsModalVisibleSignUp(true);
+
+                setTimeout(() => {
+                    dispatch(CLOSE_SIGN_IN_FORM("closeSignIn"));
+                }, 300);
+                break;
+
+            case "closeSignInAndRedirectToSignUp":
+                if (authState.includes("closeSignIn")) {
+                    dispatch(RESET());
+                    setIsModalVisibleSignIn(false);
+                }
+                break;
+
+            default:
+                break;
+        }
+    }, [authState]);
 
     const showDrawer = () => {
-        setState(true)
+        setState(true);
     };
 
     const onClose = () => {
-        setState(false)
+        setState(false);
     };
 
     const openSignUpModal = () => {
         setIsModalVisibleSignUp(true);
-    }
+    };
 
     const openSignInModal = () => {
         setIsModalVisibleSignIn(true);
-    }
-
+    };
 
     const renderLeft = () => {
         return (
@@ -76,33 +115,28 @@ export default function TopNav() {
                 </Menu.Item>
             </Menu>
         );
-    }
+    };
 
     const renderRight = () => {
         return (
             <Menu mode="horizontal">
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
-                </Menu.Item>
+        </Menu.Item>
                 <Menu.Item key="openSignUp" onClick={() => openSignUpModal()}>
                     Signup
-                </Menu.Item>
+        </Menu.Item>
             </Menu>
-        )
-    }
-
+        );
+    };
 
     const renderMenu = () => {
         return (
             <nav className="menuBar">
                 <img className="logo" src={logoText} alt="" />
                 <div className="menuCon">
-                    <div className="leftMenu">
-                        {renderLeft()}
-                    </div>
-                    <div className="rightMenu">
-                        {renderRight()}
-                    </div>
+                    <div className="leftMenu">{renderLeft()}</div>
+                    <div className="rightMenu">{renderRight()}</div>
                     <Button className="barsMenu" onClick={showDrawer}>
                         <span className="barsBtn"></span>
                     </Button>
@@ -116,24 +150,17 @@ export default function TopNav() {
                     >
                         {renderLeft()}
                         {renderRight()}
-
                     </Drawer>
                 </div>
             </nav>
-        )
-    }
+        );
+    };
 
     return (
         <Header className="header-nav">
             {renderMenu()}
-            {isModalVisibleSignUp
-                ? <SignUpService />
-                : ""
-            }
-            {isModalVisibleSignIn
-                ? <SignInService />
-                : ""
-            }
+            {isModalVisibleSignUp ? <SignUpService /> : ""}
+            {isModalVisibleSignIn ? <SignInService /> : ""}
         </Header>
-    )
+    );
 }

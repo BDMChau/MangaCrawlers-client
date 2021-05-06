@@ -11,6 +11,9 @@ const AuthSlice = createSlice({
         CLOSE_SIGN_IN_FORM: (state, action) => {
             state.push(action.payload);
         },
+        OPEN_SIGN_UP_FORM_FROMSIGN_IN: (state, action) => {
+            state.push(action.payload);
+        },
         RESET: (state) => {
             state.length = 0;
         }

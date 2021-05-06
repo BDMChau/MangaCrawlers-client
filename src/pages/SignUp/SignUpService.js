@@ -37,7 +37,7 @@ export default function SignUpService() {
 
     return (
         <div>
-            <SignUpUI
+            <SignUp
                 handleSignUp={handleSignUp}
 
             />
