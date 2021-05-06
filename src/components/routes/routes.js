@@ -6,16 +6,16 @@ const routes = [
         component: React.lazy(() => import('../../pages/Home/HomeService')),
         exact: true
     },
-    {
-        path: "/signin",
-        component: React.lazy(() => import('../../pages/SignIn/SignInService')),
-        exact: false
-    },
-    {
-        path: "/signup",
-        component: React.lazy(() => import('../../pages/SignUp/SignUpService')),
-        exact: false
-    },
+    // {
+    //     path: "/signin",
+    //     component: React.lazy(() => import('../../pages/SignIn/SignInService')),
+    //     exact: false
+    // },
+    // {
+    //     path: "/signup",
+    //     component: React.lazy(() => import('../../pages/SignUp/SignUpService')),
+    //     exact: false
+    // },
     {
         path: "/manga/:id",
         component: React.lazy(() => import('../../pages/Manga/MangaService')),

@@ -2,6 +2,11 @@
     margin: auto; 
 }
 
+.chapter .chapter-pages{
+    text-align: center;
+    margin: 15px 0;
+}
+
 .chapter .chapter-pages .page{
     text-align: center;
 }

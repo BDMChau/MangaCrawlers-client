@@ -1,12 +1,37 @@
 import React from 'react'
-import notFoundIcon from '../../assets/img/404NotFound.svg'
+import { NavLink } from 'react-router-dom'
+import imageNotFound from '../../assets/img/page404_2.png'
+import { Typography } from 'antd';
+
+const { Title, Text } = Typography;
 
 export default function NotFound404() {
     return (
         <div style={{ textAlign: "center", margin: "180px 0 0 0" }} >
-            <img src={notFoundIcon} alt="" style={{ width: "200px", marginBottom: "20px" }} />
+            <img src={imageNotFound} alt=""
+                style={{
+                    width: "300px",
+                    marginBottom: "40px",
+                    transform: "scale(1.2)"
+                }}
+            />
 
-            <h1>404 Not Found :(</h1>
+            <Title level={3}>Look like something wrong!</Title>
+            <Title style={{ marginTop: 0 }} level={4}>The page you were looking for is not here</Title>
+
+            <Text style={{ color: "#909090" }}>
+                Go back to
+                <NavLink
+                    style={{
+                        color: "#909090",
+                        textDecoration: "underline",
+                        marginLeft: "4px"
+                    }}
+                    to="/"
+                >
+                    Home
+                </NavLink>
+            </Text>
         </div>
     )
 }

@@ -42,7 +42,7 @@ export default function SignInUI({ handleSignIn }) {
 
 
     const redirectToSignUp = () => {
-        setIsModalVisible(false);
+        handleCancel()
         setIsModalVisibleSignUp(true);
     }
 

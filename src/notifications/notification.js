@@ -1,13 +1,13 @@
 import { notification } from 'antd';
 
-const toast_success = (value) => {
+const notification_success = (value) => {
     notification['success']({
         message: value,
         duration: 3
     });
 }
 
-const toast_error = (value) => {
+const notification_error = (value) => {
     notification['error']({
         message: value,
         duration: 3
@@ -15,6 +15,6 @@ const toast_error = (value) => {
 }
 
 export {
-    toast_success,
-    toast_error
+    notification_success,
+    notification_error
 }

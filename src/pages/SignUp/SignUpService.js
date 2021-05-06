@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SignUpUI from './SignUpUI'
 import authApi from '../../api/apis/authApi'
-import { toast_success } from '../../notifications/toast';
+import { notification_success } from '../../notifications/notification';
 import { useHistory } from 'react-router';
 import { errMsgResNotification } from '../../helpers/ErrResCheking';
 
@@ -25,7 +25,7 @@ export default function SignUpService() {
 
            
             setSignupStt(response.content.msg);
-            toast_success(signupStt);
+            notification_success(signupStt);
             history.push("/signin");
             return;
         } catch (error) {

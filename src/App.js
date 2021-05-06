@@ -31,16 +31,16 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Suspense fallback={<div>Loading...</div>}>
-
-          <Layout theme="light" style={{ minHeight: '100vh' }}>
+        <Layout theme="light" style={{ minHeight: '100vh' }}>
+          <Layout className="site-layout">
             <TopNav />
-            <Layout className="site-layout">
+
+            <Suspense fallback={<div>Loading...</div>}>
               {Routing()}
-            </Layout>
+            </Suspense >
+
           </Layout>
-          
-        </Suspense >
+        </Layout>
       </BrowserRouter>
     </Provider>
   )

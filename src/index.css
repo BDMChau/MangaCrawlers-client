@@ -1,13 +1,18 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI' !important;
+body,
+html {
+  font-family: "Segoe UI" !important;
   min-height: 100vh;
   height: 100vh;
   --antd-wave-shadow-color: red;
   overflow-x: hidden;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

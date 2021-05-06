@@ -1,4 +1,5 @@
-import { toast_error } from "../notifications/toast";
+import { notification_error } from "../notifications/notification";
+import { message_error } from "../notifications/message";
 
 export const errCodeResCheking = (errorResponse) => {
     switch (errorResponse.status) {
@@ -6,7 +7,7 @@ export const errCodeResCheking = (errorResponse) => {
             console.log(errorResponse)
             switch (errorResponse.data.content.err) {
                 case "Invalid email!":
-                    toast_error(errorResponse.data.content.err)
+                    message_error(errorResponse.data.content.err)
                     break;
 
                 default:
@@ -33,5 +34,5 @@ export const errCodeResCheking = (errorResponse) => {
 
 
 export const errMsgResNotification = (errMsg) => {
-    toast_error(errMsg);
+    message_error(errMsg,5);
 }

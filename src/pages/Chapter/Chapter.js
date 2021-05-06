@@ -82,8 +82,8 @@ export default function Chapter() {
 
     return (
         <Row justify={"center"} className="chapter">
-            <Col span={23} xxl={18} >
-                <Dropdown className="dropdown" overlay={dropDownItems} trigger={['click']}>
+            <Col span={23} xxl={18} className="dropdown">
+                <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']}>
                     <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         Click me
                     </a>

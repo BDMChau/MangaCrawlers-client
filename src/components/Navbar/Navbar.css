@@ -50,6 +50,10 @@
 }
 
 .menuCon .ant-menu-item {
+  margin-top: -3px !important;
+}
+
+.menuCon .ant-menu-item {
   padding: 0px 5px;
 }
 
