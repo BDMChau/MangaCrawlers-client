@@ -9,6 +9,7 @@ import { Layout, Menu, Button, Drawer } from "antd";
 import { NavLink } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
+import UserProfile from "../../pages/Profile/UserProfile/UserProfile";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -24,6 +25,7 @@ export default function TopNav() {
     const [state, setState] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
+    const [isVisibleProfileDrawer, setIsVisibleProfileDrawer] = useState(false);
 
     // handle open close modal SignIn SignUp
     useEffect(() => {
@@ -74,6 +76,14 @@ export default function TopNav() {
         setIsModalVisibleSignIn(true);
     };
 
+    const openProfileDrawer = () => {
+        setIsVisibleProfileDrawer(true);
+    }
+
+    const closeProfileDrawer = (state) => {
+        setIsVisibleProfileDrawer(state);
+    }
+
     const renderLeft = () => {
         return (
             <Menu mode="horizontal" theme="light">
@@ -90,8 +100,8 @@ export default function TopNav() {
                         <Menu.Item key="setting:4">Option 4</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
-                <Menu.Item key="alipay">
-                    <NavLink to="">Contact Us</NavLink>
+                <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
+                    Profile
                 </Menu.Item>
             </Menu>
         );
@@ -141,6 +151,7 @@ export default function TopNav() {
             {renderMenu()}
             {isModalVisibleSignUp ? <SignUpService /> : ""}
             {isModalVisibleSignIn ? <SignInService /> : ""}
+            {isVisibleProfileDrawer ? <UserProfile visible={isVisibleProfileDrawer} closeProfileDrawer={(state) => closeProfileDrawer(state)} /> : ""}
         </Header>
     );
 }

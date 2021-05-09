@@ -8,4 +8,5 @@
     text-align: center;
     background: white;
     border-radius: 3px;
+    box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.192);
 }
