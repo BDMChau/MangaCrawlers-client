@@ -9,6 +9,8 @@ import routes from './components/routes/routes'
 import SideNav from './components/Navbar/SideNav';
 import TopNav from './components/Navbar/TopNav';
 import { Layout } from 'antd';
+import BoucingLoaded from './components/Loading/BoucingLoaded/BoucingLoaded';
+import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 
 
 const Routing = () => {
@@ -35,10 +37,9 @@ export default function App() {
           <Layout className="site-layout">
             <TopNav />
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<LoadingPage />}>
               {Routing()}
             </Suspense >
-
           </Layout>
         </Layout>
       </BrowserRouter>

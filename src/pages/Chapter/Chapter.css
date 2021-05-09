@@ -1,26 +1,25 @@
-.chapter{
-    margin: auto; 
+.chapter {
+  margin: auto;
 }
 
-.chapter .chapter-pages{
-    text-align: center;
-    margin: 15px 0;
+
+.chapter .chapter-pages {
+  text-align: center;
+  margin: 15px 0;
 }
 
-.chapter .chapter-pages .page{
-    text-align: center;
+.chapter .chapter-pages .page {
+  max-width: 1000px;
+  height: auto;
+  margin: auto;
 }
 
-.chapter .chapter-pages img.img{
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    position: relative;    
-
+.chapter .chapter-pages img.img {
+  width: 100%;
+  height: 100%;
 }
 
-.chapter .chapter-pages .ant-image-mask:hover{
-    opacity: 0;
-    cursor: default;    
-
+.chapter .chapter-pages .ant-image-mask:hover {
+  opacity: 0;
+  cursor: default;
 }

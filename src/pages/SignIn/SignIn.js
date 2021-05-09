@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
-import { RESET } from '../../store/slices/AuthSlice';
 import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 
@@ -65,7 +64,7 @@ export default function SignIn({ handleSignIn }) {
                         <div className="logo-signin-signup"></div>
                     </div>
                     <Form
-                        name="basic"
+                        name="form-sign-in"
                         initialValues={{
                             remember: true,
                         }}

@@ -25,28 +25,8 @@ export default function TopNav() {
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
 
+    // handle open close modal SignIn SignUp
     useEffect(() => {
-        if (authState[0] === "closeSignUp") {
-            setIsModalVisibleSignUp(false);
-            dispatch(RESET());
-            return;
-        } else if (authState[0] === "closeSignIn") {
-            setIsModalVisibleSignIn(false);
-            dispatch(RESET());
-            return;
-        } else if (authState[0] === "openSignUpFromSignIn") {
-            setIsModalVisibleSignUp(true);
-
-            setTimeout(() => {
-                dispatch(CLOSE_SIGN_IN_FORM("closeSignIn"));
-            }, 300);
-        } else if (authState[0] === "closeSignInAndRedirectToSignUp") {
-            if (authState.includes("closeSignIn")) {
-                dispatch(RESET());
-                setIsModalVisibleSignIn(false);
-            }
-        }
-
         switch (authState[0]) {
             case "closeSignUp":
                 setIsModalVisibleSignUp(false);
@@ -96,7 +76,7 @@ export default function TopNav() {
 
     const renderLeft = () => {
         return (
-            <Menu mode="horizontal" defaultSelectedKeys={["1"]}>
+            <Menu mode="horizontal" theme="light">
                 <Menu.Item key="mail">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
@@ -119,13 +99,13 @@ export default function TopNav() {
 
     const renderRight = () => {
         return (
-            <Menu mode="horizontal">
+            <Menu mode="horizontal" theme="light">
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
-        </Menu.Item>
+                </Menu.Item>
                 <Menu.Item key="openSignUp" onClick={() => openSignUpModal()}>
                     Signup
-        </Menu.Item>
+                </Menu.Item>
             </Menu>
         );
     };

@@ -1,13 +1,13 @@
-import { Col, Menu } from 'antd'
 import React from 'react'
 import { NavLink } from 'react-router-dom';
+import { Col, Menu } from 'antd'
 import "./HomeNavbar.css"
 
 
 
 export default function HomeNavbar() {
     return (
-        <Col span={20} xl={15} className="home-menu">
+        <Col span={20} sm={20} xs={23} xxl={18} className="home-menu">
             <Menu className="menu" mode="horizontal" defaultSelectedKeys={["1"]}>
                 <Menu.Item key="action" className="menu-item">
                     <NavLink to="">Action</NavLink>

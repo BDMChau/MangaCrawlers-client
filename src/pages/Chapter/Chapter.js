@@ -1,13 +1,14 @@
 import { Button, Col, Dropdown, Image, Menu, Row } from 'antd'
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazyload';
+import LoadingPage from "../../components/Loading/LoadingPage/LoadingPage";
 import { NavLink } from 'react-router-dom';
 import "./Chapter.css"
 
 export default function Chapter() {
     const [data, setData] = useState([
         "https://cm.blazefast.co/aa/c2/aac2a2b3db4c8f033f830730eff89c58.jpg",
-        
+
         "https://cm.blazefast.co/2c/84/2c84a7e63dc73df3f2866a08d53bb786.jpg",
         "https://cm.blazefast.co/72/48/7248e7e1672016f52b33d30a2b1448b1.jpg",
         "https://cm.blazefast.co/67/8b/678b2ae7a2d12b247cab4f8f6ab19a7c.jpg",
@@ -34,7 +35,7 @@ export default function Chapter() {
     ])
 
     const Spinner = () => (
-        <div className="post loading">
+        <div className="spinner-lazyloading">
             <svg
                 width="80"
                 height="80"
@@ -45,15 +46,15 @@ export default function Chapter() {
                     cx="50"
                     cy="50"
                     fill="none"
-                    stroke="#49d1e0"
-                    strokeWidth="10"
+                    stroke="none"
+                    strokeWidth="0"
                     r="35"
                     strokeDasharray="164.93361431346415 56.97787143782138"
                     transform="rotate(275.845 50 50)"
                 >
                     <animateTransform
                         attributeName="transform"
-                        type="rotate"
+                        type=""
                         calcMode="linear"
                         values="0 50 50;360 50 50"
                         keyTimes="0;1"
@@ -95,7 +96,8 @@ export default function Chapter() {
                     <LazyLoad
                         key={id}
                         placeholder={<Spinner />}
-                        height={100}
+                        height={500}
+                        once
                     >
                         <div className="page" id={`page_${id}`}>
                             <Image className="img" id={id} src={item} alt="" />

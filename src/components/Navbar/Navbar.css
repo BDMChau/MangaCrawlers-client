@@ -20,25 +20,33 @@
 .logo {
   width: 70px;
   float: left;
-  transform: scale(3);
+  transform: scale(3.5);
   padding: 0px;
-  margin: 12px 0px 0px 40px;
+  margin: 10px 30px 0px 50px;
   /* background-image: url("../../assets/logo/logo2.svg"); */
   /* background-position: center;
   background-repeat: no-repeat;
   background-size: cover; */
 }
 
-.drawer{
+.drawer {
   text-align: center;
 }
 
-.drawer .logo-drawer{
+.drawer .logo-drawer {
   width: 70px;
   transform: scale(3.5);
   padding: 0px;
   margin-top: 10px;
 }
+
+/* style when click Menu.Item */
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-selected a{
+  color: black;
+  border-bottom: 2px solid transparent;
+}
+
 
 .ant-menu-horizontal {
   line-height: 70px;
@@ -49,8 +57,10 @@
   float: left;
 }
 
-.menuCon .ant-menu-item {
-  margin-top: -3px !important;
+.menuCon .ant-menu-item,
+.menuCon .ant-menu-submenu {
+  top: -1px !important;
+  background-color: transparent;
 }
 
 .menuCon .ant-menu-item {
@@ -83,8 +93,8 @@
   float: right;
   height: 32px;
   padding: 6px;
-  margin-top: 20px;
-  margin-right: -20px;
+  margin-top: 15px;
+  margin-right: 0px;
   display: none;
   background: none;
   border-color: #1890ff;
@@ -137,12 +147,11 @@
 }
 
 /* style when click Menu.Item */
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
-.ant-menu-horizontal > .ant-menu-item-selected a{
+/* .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-selected a {
   color: black;
   border-bottom: 2px solid transparent;
-}
-
+} */
 
 @media (max-width: 767px) {
   .barsMenu {

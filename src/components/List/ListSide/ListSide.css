@@ -10,8 +10,8 @@
   margin: 3px 0;
   list-style: none;
   padding: 2px 0px;
-  border-bottom: 1px dashed antiquewhite;
-  color: white;
+  border-bottom: 1px solid rgba(197, 197, 197, 0.616);
+  color: black;
   display: flex;
 }
 
@@ -26,7 +26,7 @@
 
 .list-side-item .link {
   margin-bottom: 35px;
-  color: white;
+  color: black;
 }
 
 .list-with-img .img {

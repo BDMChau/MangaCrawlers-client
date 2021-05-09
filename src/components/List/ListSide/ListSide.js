@@ -24,7 +24,6 @@ export default function ListSide({ listData, height }) {
                         </NavLink>
                         <p>400000 views</p>
                     </div>
-
                 </li>
             ))
             }

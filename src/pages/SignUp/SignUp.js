@@ -66,11 +66,10 @@ export default function SignUp({ handleSignUp }) {
                         <div className="logo-signin-signup"></div>
                     </div>
                     <Form
-                        name="basic"
+                        name="form-sign-up"
                         initialValues={{
                             remember: true,
                         }}
-                        onKeyPress={(e) => e.key === "Enter" ? showModal() : ""}
                     >
                         <Form.Item
                             name="name"

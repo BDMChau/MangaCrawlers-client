@@ -7,8 +7,11 @@ import FooterContainer from '../../components/Footer/Footer'
 import CarouselHorizontal from '../../components/Carousels/Horizontal/CarouselHorizontal'
 import { Col, Row, Card } from 'antd'
 import CarouselVertical from '../../components/Carousels/Vertical/CarouselVertical'
+import Spacing from '../../components/Spacing/Spacing'
+import ListHomePagination from '../../components/List/ListHomePagination/ListHomePagination'
 
 const { Meta } = Card;
+
 
 export default function Home() {
     const [listChapters, setListChapter] = useState([
@@ -39,6 +42,7 @@ export default function Home() {
         )
     }
 
+
     return (
         <div className="home">
             <div className="home-bg">
@@ -47,127 +51,52 @@ export default function Home() {
                 >
                 </div>
             </div>
-            <Row justify={"center"} className="home-middle-header">
-                <HomeNavbar />
-                <Col span={23} md={20} xl={15} className="recommended">
-                    <h2>Recommended Manga</h2>
-                    <CarouselHorizontal />
-                </Col>
-
-                <Row justify={"center"} className="home-middle">
-                    <Col span={23} md={12} xl={9} xxl={10} className="lastest">
-                        <h2>Lastest Manga</h2>
-                        <Row className="latest-cards">
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                            <Card
-                                className="card"
-                                hoverable
-                                cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                            >
-                                <Meta title="Manga 1" description={renderCardDesc()} />
-                            </Card>
-                        </Row>
-                    </Col>
-
-                    <Col span={23} md={8} xl={6} xxl={5} className="home-side">
-                        <div className="top-manga">
-                            <h2>Top Manga</h2>
-                            <ListSide listData={listChapters} height={"100%"} />
-                        </div>
-
-                    </Col>
-
-                    <Col span={23} md={20} xl={15} className="trending">
+            <div className="home-middle-wrap">
+                <Row justify={"center"} className="home-middle-header">
+                    <HomeNavbar />
+                    <Col span={23} md={17} xl={17} xxl={19} className="trending">
                         <h2>Trending Manga</h2>
-                        <CarouselVertical />
+                        <CarouselHorizontal />
                     </Col>
 
-                    <FooterContainer />
+                    <Col span={23} md={17} xl={17} xxl={19} className="home-spacing-top">
+                        <Spacing />
+                    </Col>
+
+                    <Row justify={"center"} className="home-middle">
+                        <Col span={23} md={10} xl={10} xxl={13} className="lastest">
+                            <h2>Lastest Manga</h2>
+
+                                <ListHomePagination/>
+                        </Col>
+
+                        <Col span={23} md={7} xl={7} xxl={6} className="home-side">
+                            <div className="top-manga">
+                                <h2>Top Manga</h2>
+                                <ListSide listData={listChapters} height={"100%"} />
+                            </div>
+                            <div className="top-manga">
+                                <h2>Top Manga</h2>
+                                <ListSide listData={listChapters} height={"100%"} />
+                            </div>
+                        </Col>
+
+                        <Col span={23} md={17} xl={17} xxl={19} className="home-spacing-bottom">
+                            <Spacing />
+                        </Col>
+
+                        <Col span={23} md={17} xl={17} xxl={19} className="recommended">
+                            <h2>Recommended Manga</h2>
+                            <CarouselVertical />
+                        </Col>
+
+                        <Col span={23} md={17} xl={17} xxl={19} className="home-footer">
+                            <FooterContainer />
+                        </Col>
+
+                    </Row>
                 </Row>
-            </Row>
+            </div>
         </div>
     )
 }

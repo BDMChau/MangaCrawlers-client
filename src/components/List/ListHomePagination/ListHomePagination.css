@@ -1,0 +1,34 @@
+.list-home-pagination .ant-list-pagination {
+  width: 85%;
+  text-align: left;
+}
+
+.list-home-pagination ul.ant-list-items {
+  display: flex;
+}
+
+.latest-cards .card {
+  width: 200px;
+  height: 250px;
+  margin: 5px 15px 5px 0px;
+  border-radius: 3px;
+}
+
+.latest-cards .card .ant-card-cover {
+  height: 75%;
+}
+
+.latest-cards .card .ant-card-cover img {
+  height: 100%;
+}
+
+.latest-cards .card .ant-card-body {
+  padding: 0 5px;
+  margin-top: 8px;
+}
+
+.latest-cards .card .desc {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}

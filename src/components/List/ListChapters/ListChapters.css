@@ -4,6 +4,7 @@
   /* height: 100%; */
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: 0 0 5px 0 black;
 }
 
 .list-chapter-item {
@@ -14,10 +15,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: white;
+  color: black;
 }
 
 .list-chapter-item .link {
   margin-bottom: 35px;
-  color: white;
+  color: black;
 }

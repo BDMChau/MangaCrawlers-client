@@ -1,11 +1,11 @@
 .manga {
-  height: 100%;
+  background: white;
+  overflow: hidden;
 }
 
 .manga-bg {
   width: 100%;
   height: 400px;
-  overflow: hidden;
 }
 
 .manga-bg-img {
@@ -18,16 +18,15 @@
 }
 
 .manga-body {
-  background: grey;
+  background: #f0f2f5;;
   width: 100%;
   top: -150px;
   border-radius: 5px;
-  height: 100vh;
-  max-height: 100vh;
 }
 
 .manga-body .header {
-  background: yellowgreen;
+  background: #f0f2f5;
+;
 
   display: flex;
   /* margin: 10px 30px; */
@@ -68,12 +67,14 @@
 
 .title .interact .link {
   padding: 15px 20px;
-  background-color: aqua;
+  background: #f0f2f5;
+;
   margin-left: 15px;
 }
 
 .manga .middle {
-  background: blue;
+  background: #f0f2f5;
+;
   margin-top: 50px;
   padding: 30px;
   /* display: flex; */
@@ -87,7 +88,6 @@
 .manga .middle .line {
   width: 100%;
   height: 1px;
-  background-color: red;
   margin-bottom: 10px;
 }
 
