@@ -105,10 +105,10 @@
 }
 
 /* /////////////////////////// */
-@media only screen and (min-width: 1800px) {
-}
-
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .manga .title {
+    padding-left: 75px;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -168,6 +168,10 @@
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .manga .title {
     margin: 20px;
+  }
+
+  .manga .title .interact {
+    margin-top: 40px;
   }
 
   .chapter-comments {
