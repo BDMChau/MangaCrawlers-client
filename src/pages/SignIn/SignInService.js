@@ -13,7 +13,6 @@ export default function SignInService() {
 
     return (
         <div>
-            <p>This is sign in service</p>
             <SignIn
                 handleSignIn={handleSignIn}
             />
