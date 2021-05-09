@@ -18,16 +18,13 @@
 }
 
 .manga-body {
-  background: #f0f2f5;;
+  background: #f0f2f5;
   width: 100%;
-  top: -150px;
   border-radius: 5px;
 }
 
 .manga-body .header {
   background: #f0f2f5;
-;
-
   display: flex;
   /* margin: 10px 30px; */
 }
@@ -47,42 +44,38 @@
   border-radius: 5px;
 }
 
-.title .desc {
-  text-align: justify;
+.manga .title {
+  word-wrap: break-word;
 }
 
-.title .evalute {
-  width: 15px;
-  height: 15px;
-  display: flex;
-}
-.title .evalute .evalute-img {
-  height: 100%;
-  width: 100%;
+.manga .title .author {
+  margin-top: 5px;
 }
 
-.title .interact {
+.manga .title .genre {
+  margin: 5px 0px;
+}
+
+.manga .title .interact {
   margin-top: 40px;
 }
 
-.title .interact .link {
+.manga .title .interact .link {
   padding: 15px 20px;
-  background: #f0f2f5;
-;
+  background: black;
   margin-left: 15px;
+  border-radius: 3px;
 }
 
 .manga .middle {
   background: #f0f2f5;
-;
   margin-top: 50px;
-  padding: 30px;
   /* display: flex; */
 }
 
 .manga .middle .chapter-list {
-  width: 70%;
-  margin-right: 15px;
+  width: 100%;
+  margin-right: 0px;
 }
 
 .manga .middle .line {
@@ -91,7 +84,19 @@
   margin-bottom: 10px;
 }
 
-.comments {
+.desc-wrapper {
+  margin-top: 30px;
+}
+
+.desc-wrapper .desc {
+  text-align: justify;
+}
+
+.chapter-comments {
+  padding-right: 80px;
+}
+
+.chapter-comments .comments {
   height: 800px;
   margin-top: 60px;
   padding: 5px;
@@ -101,128 +106,69 @@
 
 /* /////////////////////////// */
 @media only screen and (min-width: 1800px) {
-  .manga .title {
-    margin-left: 0px !important;
-  }
 }
 
 @media only screen and (min-width: 1200px) {
-  .ant-col-xl-7 {
-    max-width: 100%;
-  }
-
-  .ant-col-xl-24 {
-    min-width: 100%;
-  }
-
-  .manga-body-row {
-    width: 90%;
-  }
-
-  .manga .middle .rank-list {
-    margin-top: 20px;
-    width: 35%;
-    margin-left: 1px;
-  }
-
-  .manga .title {
-    margin-left: 55px;
-  }
-
-  .title .desc {
-    width: 80%;
-  }
-
-  .manga .middle {
-    justify-content: left !important;
-  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .ant-col-lg-6 {
-    max-width: 100%;
+  .thumbnail {
+    height: 280px;
+    margin-top: -45px;
   }
 
-  .ant-col-lg-5{
-    max-width: 33%;
-  }
-
-  .manga .middle {
-    justify-content: left !important;
-  }
-
-  .manga .middle .rank-list {
-    margin-left: 18px;
-    width: 41%;
+  .manga .title .interact {
+    margin-top: 30px;
   }
 
   .manga .title {
-    margin-left: 40px;
+    font-size: 16px;
+    margin-top: 5px;
+    padding-left: 75px;
+  }
+
+  .manga .title .interact .link {
+    padding: 10px 10px;
+    margin-left: 10px;
+  }
+
+  .chapter-comments {
+    padding-right: 0px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  .thumbnail {
+    height: 220px;
+    margin-top: -45px;
+  }
+
+  .manga .title .interact {
+    margin-top: 28px;
+  }
+
   .manga .title {
-    margin-left: 85px;
+    font-size: 13px;
+    margin-top: 5px;
+    padding-left: 70px;
   }
 
-  .title .desc {
-    width: 100%;
+  .manga .title .interact .link {
+    padding: 10px 10px;
+    margin-left: 10px;
   }
 
-  .ant-col-md-18,
-  .ant-col-md-16,
-  .ant-col-md-6 {
-    min-width: 100%;
-  }
-
-  .manga .middle {
-    justify-content: center;
+  .chapter-comments {
+    padding-right: 0px;
   }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .ant-col-xs-20 {
-    max-width: 90%;
-  }
-
-  .ant-col-xs-14 {
-    max-width: 100%;
-  }
-
-  .manga .middle .chapter-list {
-    width: 90%;
-    margin-right: 0;
-  }
-
-  .manga .middle .rank-list {
-    margin-top: 20px;
-    width: 90%;
-  }
-
-  .thumbnail {
-    margin-bottom: 10px;
-    text-align: center;
-  }
   .manga .title {
-    margin-left: 40px;
+    margin: 20px;
   }
 
-  .title .desc {
-    width: 90%;
-  }
-
-  .manga .middle {
-    justify-content: center;
-  }
-}
-
-@media only screen and (min-width: 414px) {
-  .ant-col-xs-20 {
-    max-width: 100%;
-  }
-
-  .manga .middle {
-    justify-content: center;
+  .chapter-comments {
+    padding-right: 0px;
   }
 }
