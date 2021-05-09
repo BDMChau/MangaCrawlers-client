@@ -10,8 +10,6 @@ import CarouselVertical from '../../components/Carousels/Vertical/CarouselVertic
 import Spacing from '../../components/Spacing/Spacing'
 import ListHomePagination from '../../components/List/ListHomePagination/ListHomePagination'
 
-const { Meta } = Card;
-
 
 export default function Home() {
     const [listChapters, setListChapter] = useState([
