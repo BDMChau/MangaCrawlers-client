@@ -47,7 +47,7 @@ export default function Home() {
         <div className="home">
             <div className="home-bg">
                 <div className="home-bg-img"
-                    style={{ backgroundImage: `url(https://cdnb.artstation.com/p/users/covers/000/055/173/default/7bd1ec476c0745b4abb2134af68db53c.jpg?1524656521)` }}
+                    style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }}
                 >
                 </div>
             </div>
