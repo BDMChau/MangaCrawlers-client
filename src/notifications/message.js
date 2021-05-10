@@ -1,21 +1,21 @@
-import { message, Button, Space } from 'antd';
+import { message } from 'antd';
 
 message.config({
     top: 30,
     maxCount: 3,
 });
 
-const message_success = (text, durationMSEC) => {
+const message_success = (text, durationSEC) => {
     message.success({
         content: text,
-        duration: durationMSEC,
+        duration: durationSEC,
     });
 };
 
-const message_error = (text, durationMSEC) => {
+const message_error = (text, durationSEC) => {
     message.error({
         content: text,
-        duration: durationMSEC
+        duration: durationSEC
     });
 };
 

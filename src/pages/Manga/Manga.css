@@ -21,6 +21,7 @@
   background: #f0f2f5;
   width: 100%;
   border-radius: 5px;
+  box-shadow: 0 0 5px 0px var(--color-box-shadow);
 }
 
 .manga-body .header {
@@ -102,6 +103,14 @@
   padding: 5px;
   width: 100%;
   background: rgb(125, 125, 230);
+}
+
+.top-week-rank{
+  margin-top: 30px;
+}
+
+.favorite-suggest{
+  margin-top: 30px;
 }
 
 /* /////////////////////////// */

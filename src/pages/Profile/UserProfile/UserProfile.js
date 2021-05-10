@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./UserProfile.css"
 import { Button, Drawer, Input } from 'antd';
-import { UserOutlined, HistoryOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
+import { message_success } from '../../../notifications/message';
 
 export default function UserProfile({ visible, closeProfileDrawer }) {
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
+    const [adminEmail, setAdminEmail] = useState("bdmchau10005@gmail.com");
 
     useEffect(() => {
         if (visible === true) {
@@ -22,6 +24,13 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
             closeProfileDrawer(false);
         }, 300)
     };
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(adminEmail)
+        message_success("Copied!", 2);
+        return;
+    }
+
 
     const renderTitle = () => (
         <div className="title">
@@ -52,11 +61,11 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                 </div>
 
                 <div className="email">
-                    <Input addonBefore="Email" defaultValue="haphuong1234@gmail.com" disabled />
+                    <Input addonBefore={"Email"} defaultValue="haphuong1234@gmail.com" readOnly />
                 </div>
 
                 <div className="is-admin">
-                    <Input addonBefore="Role" defaultValue="Trong Nhan's ex" disabled />
+                    <Input addonBefore="Role" defaultValue="Trong Nhan's ex" readOnly />
                 </div>
 
                 <div className="interact">
@@ -75,6 +84,23 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                         <UnorderedListOutlined style={{ fontSize: "18px" }} />
                         Following Manga
                         </Button>
+                </div>
+
+                <div className="contact-admin">
+                    <p>Contact me via email if you have any questions ^^</p>
+                    <Input
+                        addonBefore={<CopyOutlined
+                            style={{ fontSize: "18px", marginTop: "5px", cursor: "pointer" }}
+                            onClick={() => copyToClipboard()}
+                            title="Copy to clipboard"
+
+                        />}
+                        defaultValue={adminEmail}
+                        onClick={() => copyToClipboard()}
+                        title="Copy to clipboard"
+                        readOnly
+                    />
+
                 </div>
 
             </div>

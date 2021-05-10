@@ -26,6 +26,21 @@
   margin: 30px 0 0 0;
 }
 
+.user-drawer .user .contact-admin input.ant-input {
+  cursor: pointer;
+}
+
+.user-drawer .user .contact-admin {
+  text-align: left;
+  margin: 50px 0 0 0;
+}
+
+.user-drawer .user .contact-admin p {
+  margin: 0px 0 0 2px;
+}
+
+
+
 .user-drawer .user button {
   padding: 20px;
   align-items: center;
@@ -36,12 +51,19 @@
   margin-right: 10px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 1199px) {
+  .user-drawer .user .contact-admin span.ant-input-group {
+    width: 320px;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .user-drawer .ant-drawer-content-wrapper {
     width: 400px !important;
+  }
+
+  .user-drawer .user .contact-admin span.ant-input-group {
+    width: 320px;
   }
 }
 

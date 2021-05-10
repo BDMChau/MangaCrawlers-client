@@ -27,6 +27,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  box-shadow: 0px 0px 50px 0 var(--color-box-shadow);
 }
 
 .home-middle-header .trending {

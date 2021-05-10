@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./ScrollTop.css"
 import { Button } from 'antd'
 import { UpOutlined } from '@ant-design/icons';
 
-export default function ScrollTopBtn() {
+export default function ScrollTopBtn({ currentPositionScroll }) {
+    const [scrollHeight, setScrollHeight] = useState("")
 
+    useEffect(() => {
+        console.log(currentPositionScroll)
+    })
 
     const scrollToTop = () => {
         window.scrollTo({

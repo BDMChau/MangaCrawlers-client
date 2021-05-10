@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
 
@@ -24,6 +24,21 @@ export default function ListHomePagination() {
         "Chapter145: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
     ])
 
+    const [pageSize, setPageSize] = useState(9)
+
+
+    useEffect(() => {
+        if (window.innerWidth <= 414) {
+            setPageSize(4)
+        } else if (window.innerWidth <= 768) {
+            setPageSize(8)
+        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1600) {
+            setPageSize(8)
+        } else {
+            setPageSize(9)
+        }
+    }, [window.innerWidth])
+
 
     const renderCardDesc = () => {
         return (
@@ -43,7 +58,7 @@ export default function ListHomePagination() {
                     onChange: () => {
                         console.log("page");
                     },
-                    pageSize: 9,
+                    pageSize: pageSize,
                     defaultCurrent: 1,
                     total: listChapters.length,
                     // total: listChapters.length,

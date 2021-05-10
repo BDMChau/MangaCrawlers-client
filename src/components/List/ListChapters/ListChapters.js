@@ -8,9 +8,7 @@ export default function ListChapters({ listData, height }) {
         <ul className="list-chapter" style={{ height: height }}>
             {listData.map((val, i) => (
                 <li className="list-chapter-item" id={i}>
-                    <NavLink to="/manga/id" className="link">
                         {val}
-                    </NavLink>
                 </li>
             ))}
         </ul>

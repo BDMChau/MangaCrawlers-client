@@ -6,10 +6,8 @@ import { store } from './store/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from './components/routes/routes'
-import SideNav from './components/Navbar/SideNav';
 import TopNav from './components/Navbar/TopNav';
-import { Button, Layout } from 'antd';
-import BoucingLoaded from './components/Loading/BoucingLoaded/BoucingLoaded';
+import { Layout } from 'antd';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
 
@@ -31,6 +29,9 @@ const Routing = () => {
 
 
 export default function App() {
+
+
+
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -42,7 +43,7 @@ export default function App() {
               {Routing()}
               <ScrollTopBtn />
             </Suspense >
-            
+
           </Layout>
         </Layout>
       </BrowserRouter>
