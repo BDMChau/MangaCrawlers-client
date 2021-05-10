@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
 
-
 const { Meta } = Card;
-
 
 export default function ListHomePagination() {
     const [listChapters, setListChapter] = useState([
@@ -31,7 +29,7 @@ export default function ListHomePagination() {
         if (window.innerWidth <= 414) {
             setPageSize(4)
         } else if (window.innerWidth <= 768) {
-            setPageSize(8)
+            setPageSize(10)
         } else if (window.innerWidth >= 1024 && window.innerWidth <= 1600) {
             setPageSize(8)
         } else {
@@ -66,14 +64,16 @@ export default function ListHomePagination() {
                 dataSource={listChapters}
                 footer={false}
                 renderItem={item => (
-                    <Card
-                        id={item}
-                        className="card"
-                        hoverable
-                        cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                    >
-                        <Meta title="Manga 22351" description={renderCardDesc()} />
-                    </Card>
+                    <div>
+                        <Card
+                            id={item}
+                            className="card"
+                            hoverable
+                            cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
+                        >
+                            <Meta title="Manga 22351" description={renderCardDesc()} />
+                        </Card>
+                    </div>
                 )}
             />
         )

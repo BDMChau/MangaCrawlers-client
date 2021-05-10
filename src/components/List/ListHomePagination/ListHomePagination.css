@@ -7,13 +7,13 @@
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  height: 800;
+  height: 850px;
 }
 
 .latest-cards .card {
   width: 210px;
   height: 270px;
-  margin: 5px 15px 5px 0px;
+  margin: 5px 15px 10px 0px;
   border-radius: 3px;
   box-shadow: 0 0 10px 0px var(--color-box-shadow);
 }
@@ -29,15 +29,14 @@
 
 .latest-cards .card .ant-card-body {
   padding: 0 5px;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .latest-cards .card .desc {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 12px;
 }
-
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .latest-cards .card {
@@ -47,22 +46,71 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
+  .list-home-pagination ul.ant-list-items {
+    justify-content: center;
+    margin-left: 14px;
+    padding: 0;
+  }
+
   .latest-cards .card {
-    width: 140px;
-    height: 180px;
+    width: 162px;
+    height: 231px;
+  }
+
+  .latest-cards .card .ant-card-meta-title{
+    font-size: 15px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+
+  .list-home-pagination .ant-list-pagination {
+    margin-left: 14.5px;
+  }
+
+  .list-home-pagination ul.ant-list-items {
+    height: 480px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .latest-cards .card {
-    width: 150px;
-    height: 190px;
+    width: 160px;
+    height: 210px;
+  }
+
+  .latest-cards .card .ant-card-meta-title{
+    font-size: 14px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 11px;
+    margin-top: -6px;
+  }
+
+  .list-home-pagination ul.ant-list-items {
+    height: 890px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .latest-cards .card {
-    width: 110px;
-    height: 150px;
+    width: 120px;
+    height: 160px;
+  }
+
+  .latest-cards .card .ant-card-meta-title{
+    font-size: 12px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 9px;
+    margin-top: -6px;
+  }
+
+  .list-home-pagination ul.ant-list-items {
+    height: 860px;
   }
 }

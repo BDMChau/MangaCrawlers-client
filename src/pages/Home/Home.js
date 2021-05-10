@@ -8,8 +8,8 @@ import CarouselHorizontal from '../../components/Carousels/Horizontal/CarouselHo
 import { Col, Row } from 'antd'
 import CarouselVertical from '../../components/Carousels/Vertical/CarouselVertical'
 import Spacing from '../../components/Spacing/Spacing'
-import ListHomePagination from '../../components/List/ListHomePagination/ListHomePagination'
 
+const ListHomePagination = React.lazy(() => import('../../components/List/ListHomePagination/ListHomePagination'))
 
 export default function Home() {
     const [listChapters, setListChapter] = useState([
@@ -53,23 +53,23 @@ export default function Home() {
             <div className="home-middle-wrap">
                 <Row justify={"center"} className="home-middle-header">
                     <HomeNavbar />
-                    <Col span={23} md={17} xl={17} xxl={21} className="trending">
+                    <Col span={23} md={21} xl={17} xxl={21} className="trending">
                         <h2>Trending Manga</h2>
                         <CarouselHorizontal />
                     </Col>
 
-                    <Col span={23} md={17} xl={17} xxl={21} className="home-spacing-top">
+                    <Col span={23} md={20} xl={17} xxl={21} className="home-spacing-top">
                         <Spacing />
                     </Col>
 
                     <Row justify={"center"} className="home-middle">
-                        <Col span={20} md={10} xl={10} xxl={14} className="lastest">
+                        <Col span={16} md={11} xl={10} xxl={14} className="lastest">
                             <h2>Lastest Manga</h2>
 
                             <ListHomePagination />
                         </Col>
 
-                        <Col span={20} md={7} xl={7} xxl={7} className="home-side">
+                        <Col span={16} md={8} xl={7} xxl={7} className="home-side">
                             <div className="top-manga">
                                 <h2>Top Manga</h2>
                                 <ListSide listData={listChapters} height={"100%"} />
@@ -80,16 +80,16 @@ export default function Home() {
                             </div>
                         </Col>
 
-                        <Col span={20} md={17} xl={17} xxl={21} className="home-spacing-bottom">
+                        <Col span={16} md={21} xl={17} xxl={21} className="home-spacing-bottom">
                             <Spacing />
                         </Col>
 
-                        <Col span={20} md={17} xl={17} xxl={21} className="recommended">
+                        <Col span={16} md={21} xl={17} xxl={21} className="recommended">
                             <h2>Recommended Manga</h2>
                             <CarouselVertical />
                         </Col>
 
-                        <Col span={20} md={17} xl={17} xxl={21} className="home-footer">
+                        <Col span={16} md={21} xl={17} xxl={21} className="home-footer">
                             <FooterContainer />
                         </Col>
 

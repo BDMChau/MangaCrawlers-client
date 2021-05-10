@@ -34,10 +34,9 @@
   margin-bottom: 50px;
 }
 
-.home-middle .lastest {
-}
 
-.home-middle .home-side {
+.home-middle .home-side .top-manga {
+  margin-top: 30px;
 }
 
 /* .latest-cards {
@@ -97,5 +96,13 @@
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .home-middle-wrap {
     margin: 0 50px;
+  }
+  
+  .ant-col-md-8{
+    max-width: 40%;
+  }
+
+  .home-spacing-top{
+    margin-left: -13px;
   }
 }
