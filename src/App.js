@@ -8,9 +8,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import routes from './components/routes/routes'
 import SideNav from './components/Navbar/SideNav';
 import TopNav from './components/Navbar/TopNav';
-import { Layout } from 'antd';
+import { Button, Layout } from 'antd';
 import BoucingLoaded from './components/Loading/BoucingLoaded/BoucingLoaded';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
+import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
 
 
 const Routing = () => {
@@ -39,7 +40,9 @@ export default function App() {
 
             <Suspense fallback={<LoadingPage />}>
               {Routing()}
+              <ScrollTopBtn />
             </Suspense >
+            
           </Layout>
         </Layout>
       </BrowserRouter>

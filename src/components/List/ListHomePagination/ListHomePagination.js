@@ -12,7 +12,7 @@ export default function ListHomePagination() {
         "Chapter2: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter3: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter4: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
+        "Chapter88: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter6: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter15: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter13: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
@@ -43,7 +43,7 @@ export default function ListHomePagination() {
                     onChange: () => {
                         console.log("page");
                     },
-                    pageSize: 3,
+                    pageSize: 9,
                     defaultCurrent: 1,
                     total: listChapters.length,
                     // total: listChapters.length,
@@ -51,16 +51,14 @@ export default function ListHomePagination() {
                 dataSource={listChapters}
                 footer={false}
                 renderItem={item => (
-                    <Row className="latest-cards">
-                        <Card
-                            id={item}
-                            className="card"
-                            hoverable
-                            cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                        >
-                            <Meta title="Manga 22351" description={renderCardDesc()} />
-                        </Card>
-                    </Row>
+                    <Card
+                        id={item}
+                        className="card"
+                        hoverable
+                        cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
+                    >
+                        <Meta title="Manga 22351" description={renderCardDesc()} />
+                    </Card>
                 )}
             />
         )
@@ -68,7 +66,11 @@ export default function ListHomePagination() {
 
     return (
         <div className="list-home-pagination">
-            {renderLatestManga()}
+
+            <Row className="latest-cards">
+                {renderLatestManga()}
+            </Row>
+
         </div>
     )
 }

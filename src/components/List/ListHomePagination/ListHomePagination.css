@@ -5,6 +5,9 @@
 
 .list-home-pagination ul.ant-list-items {
   display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: 770px;
 }
 
 .latest-cards .card {
