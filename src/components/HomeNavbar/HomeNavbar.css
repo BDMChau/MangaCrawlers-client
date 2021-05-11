@@ -1,12 +1,23 @@
-.home-menu{
-    position: relative;
-    top: -40px;
-    height: 65px;
+.home-menu {
+  position: relative;
+  top: -40px;
+  height: 65px;
+  transition: 0.3s;
 }
 
-.home-menu .menu{
-    text-align: center;
-    background: white;
-    border-radius: 3px;
-    box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
+.home-menu-scroll {
+  position: fixed;
+  top: 0px;
+  height: 65px;
+  z-index: 99999;
+  transition: 0.3s;
+
+}
+
+.home-menu .menu,
+.home-menu-scroll .menu {
+  text-align: center;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
 }

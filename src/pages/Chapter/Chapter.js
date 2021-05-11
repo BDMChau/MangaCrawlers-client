@@ -4,6 +4,8 @@ import LazyLoad from 'react-lazyload';
 import LoadingPage from "../../components/Loading/LoadingPage/LoadingPage";
 import { NavLink } from 'react-router-dom';
 import "./Chapter.css"
+import CommentForm from '../../components/CommentForm/CommentForm';
+import FooterContainter from '../../components/Footer/Footer';
 
 export default function Chapter() {
     const [data, setData] = useState([
@@ -93,18 +95,25 @@ export default function Chapter() {
 
             <Col span={23} xxl={14} className="chapter-pages">
                 {data.map((item, id) => (
-                    <LazyLoad
-                        key={id}
-                        placeholder={<Spinner />}
-                        height={500}
-                        once
-                    >
+                    // <LazyLoad
+                    //     key={id}
+                    //     placeholder={<Spinner />}
+                    //     height={500}
+                    //     once
+                    // >
                         <div className="page" id={`page_${id}`}>
                             <Image className="img" id={id} src={item} alt="" />
                         </div>
 
-                    </LazyLoad>
+                    // </LazyLoad>
                 ))}
+            </Col>
+            <Col span={23} xxl={14} className="chapter-comment">
+                <CommentForm/>
+            </Col>
+
+            <Col span={23} xxl={14} className="chapter-footer">
+                <FooterContainter/>
             </Col>
         </Row >
     )

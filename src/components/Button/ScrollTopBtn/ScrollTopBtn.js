@@ -3,19 +3,12 @@ import "./ScrollTop.css"
 import { Button } from 'antd'
 import { UpOutlined } from '@ant-design/icons';
 
-export default function ScrollTopBtn({ currentScrollY }) {
-    const [isScroll, setIsScroll] = useState(Boolean)
+export default function ScrollTopBtn({ isVisibleProps }) {
 
-    useEffect(() => {
-        if (currentScrollY === 0) {
-            setIsScroll(false)
-        } else {
-            setIsScroll(true)
-        }
-    }, [currentScrollY])
 
     const scrollToTop = () => {
-        window.scrollTo({
+        const app = document.getElementById('app');
+        app.scrollTo({
             top: 0,
             behavior: "smooth"
         });
@@ -23,7 +16,7 @@ export default function ScrollTopBtn({ currentScrollY }) {
 
     return (
         <Button
-            className="scroll-top-btn" style={{ opacity: isScroll ? 1 : 0, visibility: isScroll ? 'visible' : 'hidden' }}
+            className="scroll-top-btn" style={{ opacity: isVisibleProps ? 1 : 0, visibility: isVisibleProps ? 'visible' : 'hidden' }}
             onClick={() => scrollToTop()}>
             <UpOutlined style={{ fontSize: "17px", fontWeight: "800" }} />
         </Button>

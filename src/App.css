@@ -2,3 +2,9 @@
   --color-box-shadow: rgba(0, 0, 0, 0.192);
   --color-one: #4498e7;
 }
+
+.app{
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

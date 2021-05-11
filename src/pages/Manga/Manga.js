@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./Manga.css"
-import starblank from "../../assets/img/starblank.svg"
-import starfilled from "../../assets/img/starfilled.svg"
 import { NavLink } from 'react-router-dom';
-import { Col, Input, Row } from 'antd';
+import { Col, Input, Row, Comment, Avatar, Form, Button } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
 import FooterContainer from '../../components/Footer/Footer';
+import CommentForm from '../../components/CommentForm/CommentForm';
+import { unset } from 'lodash';
 
-const { TextArea } = Input;
 
 export default function Manga() {
     const [listChapters, setListChapter] = useState([
@@ -33,8 +32,12 @@ export default function Manga() {
         "Chapter1: ",
         "Chapter1: ",
         "Chapter1: ",
-  
+
     ])
+
+
+
+
 
     return (
         <div className="manga">
@@ -78,13 +81,15 @@ export default function Manga() {
                             </div>
 
                             <div className="interact">
-                                <NavLink to="/author/id" className="link" style={{ marginLeft: 0 }}>
-                                    Read Now
+                                <Button className="btn-read-now">
+                                    <NavLink to="/author/id" style={{ marginLeft: 0 }}>
+                                        Read Now
                                 </NavLink>
+                                </Button>
 
-                                <NavLink to="/author/id" className="link">
-                                    Add to Library
-                                </NavLink>
+                                <Button type="primary" className="btn-add-favorite">
+                                    Add to Favorite
+                                </Button>
                             </div>
                         </Col>
 
@@ -105,12 +110,13 @@ export default function Manga() {
                             <ListChapters listData={listChapters} height={"400px"} />
                         </Col>
 
-                        <Col span={24} md={22} lg={23} xxl={16} className="chapter-comments">
-
+                        <Col span={24} md={22} lg={23} xxl={16} className="manga-comments">
                             <div className="comments">
                                 <h2>Manga Clawers</h2>
-                                <div className="text"> </div>
-                                <TextArea className="input" placeholder="Write a comment..." />
+                                <div className="comments-body">
+                                    <CommentForm />
+                                </div>
+
                             </div>
                         </Col>
 

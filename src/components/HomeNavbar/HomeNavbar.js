@@ -5,9 +5,9 @@ import "./HomeNavbar.css"
 
 
 
-export default function HomeNavbar() {
+export default function HomeNavbar({isScroll}) {
     return (
-        <Col span={20} sm={20} xs={23} xxl={18} className="home-menu">
+        <Col span={20} sm={20} xs={23} xxl={18} className={isScroll ? "home-menu-scroll" : "home-menu"}>
             <Menu className="menu" mode="horizontal" defaultSelectedKeys={["1"]}>
                 <Menu.Item key="action" className="menu-item">
                     <NavLink to="">Action</NavLink>

@@ -4,7 +4,7 @@
 
 .chapter .chapter-pages {
   text-align: center;
-  margin: 15px 0;
+  margin: 100px 0;
 }
 
 .chapter .chapter-pages .page {
@@ -21,4 +21,8 @@
 .chapter .chapter-pages .ant-image-mask:hover {
   opacity: 0;
   cursor: default;
+}
+
+.chapter .chapter-footer {
+  margin-top: 50px;
 }

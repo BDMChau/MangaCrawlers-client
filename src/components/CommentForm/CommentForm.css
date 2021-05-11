@@ -1,0 +1,38 @@
+.comment-form .form-input .input {
+  height: 70px;
+}
+
+.comment-form .text {
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.comment-form .ant-comment-inner {
+  padding: 10px 0;
+}
+
+/* //////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .comment-form .text {
+    height: 350px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .comment-form .text {
+    height: 450px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .comment-form .text {
+    height: 450px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .comment-form .text {
+    height: 450px;
+  }
+}

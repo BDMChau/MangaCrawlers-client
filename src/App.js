@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Suspense } from "react";
+import React, { useRef, Suspense, useState } from "react";
 import "./App.css"
 import 'antd/dist/antd.css';
 import { Provider } from 'react-redux';
@@ -7,10 +7,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from './components/routes/routes'
 import TopNav from './components/Navbar/TopNav';
-import { Layout } from 'antd';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
-import { debounce } from 'lodash';
 
 
 const Routing = () => {
@@ -30,35 +28,33 @@ const Routing = () => {
 
 
 export default function App() {
-  const [currentScrollY, setCurrentScrollY] = useState(0)
-
-  useEffect(() => {
-    const debounceScroll = debounce(handleScroll, 500);
-    window.addEventListener("scroll", debounceScroll, { passive: true });
-    return () => window.removeEventListener("scroll", debounceScroll);
-  }, []);
-
-  const handleScroll = () => {
-    setCurrentScrollY(window.scrollY);
-  };
+  const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState()
 
 
-
+  const handleScroll = (e) => {
+    if (e.target.scrollTop === 0) {
+      setIsVisibleScrollTopBtn(false)
+    } else {
+      setIsVisibleScrollTopBtn(true)
+    }
+  }
 
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Layout theme="light" style={{ minHeight: '100vh' }}>
-          <Layout className="site-layout">
-            <TopNav />
+        {/* <Layout theme="light" style={{ minHeight: '100vh' }}>
+          <Layout className="site-layout"> */}
+        <div id="app" className="app" onScroll={(e) => handleScroll(e)}>
+          <TopNav />
 
-            <Suspense fallback={<LoadingPage />}>
-              {Routing()}
-              <ScrollTopBtn currentScrollY={currentScrollY} />
-            </Suspense >
+          <Suspense fallback={<LoadingPage />}>
+            {Routing()}
+            <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+          </Suspense >
+        </div>
 
-          </Layout>
-        </Layout>
+        {/* </Layout>
+        </Layout> */}
       </BrowserRouter>
     </Provider>
   )

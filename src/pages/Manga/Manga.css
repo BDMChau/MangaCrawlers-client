@@ -58,14 +58,22 @@
 }
 
 .manga .title .interact {
-  margin-top: 110px;
+  margin-top: 90px;
 }
 
-.manga .title .interact .link {
+/* .manga .title .interact .link {
   padding: 15px 20px;
-  background: black;
+  background: #c5c5c5;
   margin-left: 15px;
   border-radius: 3px;
+  color: black;
+} */
+
+.manga .title .interact .btn-add-favorite,
+.manga .title .interact .btn-read-now {
+  margin-right: 15px;
+  border-radius: 3px;
+  height: 48px;
 }
 
 .manga .middle {
@@ -93,23 +101,39 @@
   text-align: justify;
 }
 
-.chapter-comments {
+.manga-comments {
   padding-right: 80px;
 }
 
-.chapter-comments .comments {
-  height: 800px;
+.manga-comments .comments {
+  height: 100%;
   margin-top: 60px;
   padding: 5px;
   width: 100%;
-  background: rgb(125, 125, 230);
+  background: transparent;
 }
 
-.top-week-rank{
+.manga-comments .comments-body {
+  height: 600px;
+  width: 90%;
+}
+
+.cmt-avatar,
+.cmt-avatar img {
+  height: 40px;
+  width: 40px;
+}
+
+.comment-items a {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.top-week-rank {
   margin-top: 30px;
 }
 
-.favorite-suggest{
+.favorite-suggest {
   margin-top: 30px;
 }
 
@@ -117,6 +141,14 @@
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .manga .title {
     padding-left: 75px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    height: 500px;
   }
 }
 
@@ -142,8 +174,16 @@
     margin-left: 10px;
   }
 
-  .chapter-comments {
+  .manga-comments {
     padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    height: 600px;
   }
 }
 
@@ -164,13 +204,22 @@
     padding-left: 70px;
   }
 
-  .manga .title .interact .link {
-    padding: 10px 10px;
-    margin-left: 10px;
+  .manga .title .interact .btn-add-favorite,
+  .manga .title .interact .btn-read-now {
+    padding: 0 7px;
+    height: 38px;
   }
 
-  .chapter-comments {
+  .manga-comments {
     padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    height: 600px;
   }
 }
 
@@ -183,7 +232,15 @@
     margin-top: 40px;
   }
 
-  .chapter-comments {
+  .manga-comments {
     padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    height: 600px;
   }
 }
