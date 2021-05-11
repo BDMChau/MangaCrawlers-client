@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./ScrollTop.css"
 import { Button } from 'antd'
 import { UpOutlined } from '@ant-design/icons';
 
-export default function ScrollTopBtn({ currentPositionScroll }) {
-    const [scrollHeight, setScrollHeight] = useState("")
+export default function ScrollTopBtn({ currentScrollY }) {
+    const [isScroll, setIsScroll] = useState(Boolean)
 
     useEffect(() => {
-        console.log(currentPositionScroll)
-    })
+        if (currentScrollY === 0) {
+            setIsScroll(false)
+        } else {
+            setIsScroll(true)
+        }
+    }, [currentScrollY])
 
     const scrollToTop = () => {
         window.scrollTo({
@@ -19,7 +23,7 @@ export default function ScrollTopBtn({ currentPositionScroll }) {
 
     return (
         <Button
-            className="scroll-top-btn"
+            className="scroll-top-btn" style={{ opacity: isScroll ? 1 : 0, visibility: isScroll ? 'visible' : 'hidden' }}
             onClick={() => scrollToTop()}>
             <UpOutlined style={{ fontSize: "17px", fontWeight: "800" }} />
         </Button>

@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import "./App.css"
 import 'antd/dist/antd.css';
 import { Provider } from 'react-redux';
@@ -10,6 +10,7 @@ import TopNav from './components/Navbar/TopNav';
 import { Layout } from 'antd';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
+import { debounce } from 'lodash';
 
 
 const Routing = () => {
@@ -29,6 +30,18 @@ const Routing = () => {
 
 
 export default function App() {
+  const [currentScrollY, setCurrentScrollY] = useState(0)
+
+  useEffect(() => {
+    const debounceScroll = debounce(handleScroll, 500);
+    window.addEventListener("scroll", debounceScroll, { passive: true });
+    return () => window.removeEventListener("scroll", debounceScroll);
+  }, []);
+
+  const handleScroll = () => {
+    setCurrentScrollY(window.scrollY);
+  };
+
 
 
 
@@ -41,7 +54,7 @@ export default function App() {
 
             <Suspense fallback={<LoadingPage />}>
               {Routing()}
-              <ScrollTopBtn />
+              <ScrollTopBtn currentScrollY={currentScrollY} />
             </Suspense >
 
           </Layout>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Home.css"
 
 import HomeNavbar from '../../components/HomeNavbar/HomeNavbar'
@@ -28,22 +28,18 @@ export default function Home() {
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
     ])
+    const [currentScrollY, setCurrentScrollY] = useState(0)
+    const [isScroll, setIsScroll] = useState(Boolean)
+    const prevScrollYRef = useRef(0);
+  
+  
+    useEffect(() => {
+      console.log(window.scrollY)
+    });
 
-    const renderCardDesc = () => {
-        return (
-            <div className="desc">
-                <span className="desc-1" >Chapter 100</span>
-                <span className="desc-2" >10 hours ago</span>
-            </div>
-        )
-    }
-
-    const handleScrollGetMoreMessage = (e) => {
-        console.log(e.target.scrollTop)
-    }
 
     return (
-        <div className="home" onScroll={(e) => handleScrollGetMoreMessage(e)}>
+        <div className="home">
             <div className="home-bg">
                 <div className="home-bg-img"
                     style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }}

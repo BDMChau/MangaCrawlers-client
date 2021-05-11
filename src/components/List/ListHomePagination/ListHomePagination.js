@@ -35,7 +35,7 @@ export default function ListHomePagination() {
         } else {
             setPageSize(9)
         }
-    }, [window.innerWidth])
+    })
 
 
     const renderCardDesc = () => {

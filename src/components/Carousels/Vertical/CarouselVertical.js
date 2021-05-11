@@ -13,21 +13,18 @@ export default function CarouselVertical() {
     const arrResponsive = [{
         breakpoint: 1400,
         settings: {
-            slidesToShow: 4,
             slidesToScroll: 1,
         }
     },
     {
         breakpoint: 768,
         settings: {
-            slidesToShow: 3,
             slidesToScroll: 1,
         }
     },
     {
         breakpoint: 480,
         settings: {
-            slidesToShow: 1,
             slidesToScroll: 1,
         }
     }];
