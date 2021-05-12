@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
+import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 
 const { Meta } = Card;
 
@@ -21,7 +22,7 @@ export default function ListHomePagination() {
         "Chapter135647: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter145: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
     ])
-
+    const [isLoading, setIsLoading] = useState(false)
     const [pageSize, setPageSize] = useState(9)
 
 
@@ -84,7 +85,10 @@ export default function ListHomePagination() {
         <div className="list-home-pagination">
 
             <Row className="latest-cards">
-                {renderLatestManga()}
+                {isLoading
+                    ? <LoadingCircle width={"90%"} height="60%" fontSizeIcon={"70px"} fontSizeText={"17px"} />
+                    : renderLatestManga()
+                }
             </Row>
 
         </div>

@@ -60,11 +60,11 @@ export default function Home() {
                         <Col span={16} md={8} xl={7} xxl={7} className="home-side">
                             <div className="top-manga">
                                 <h2>Top Manga</h2>
-                                <ListSide listData={listChapters} height={"100%"} />
+                                <ListSide listData={listChapters} height={"415px"} />
                             </div>
                             <div className="top-manga">
                                 <h2>Top Manga</h2>
-                                <ListSide listData={listChapters} height={"100%"} />
+                                <ListSide listData={listChapters} height={"415px"} />
                             </div>
                         </Col>
 

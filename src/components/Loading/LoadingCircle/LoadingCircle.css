@@ -1,0 +1,10 @@
+.loading-circle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-circle .circle {
+  color: #52606fc7;
+}

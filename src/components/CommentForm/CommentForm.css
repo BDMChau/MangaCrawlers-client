@@ -12,6 +12,10 @@
   padding: 10px 0;
 }
 
+.comment-form .loading-more {
+  text-align: center;
+}
+
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .comment-form .text {

@@ -124,13 +124,13 @@ export default function Manga() {
                             <div className="top-week-rank">
                                 <h3>Weekly Manga Ranking</h3>
 
-                                <ListSide listData={listChapters} height={"100%"} />
+                                <ListSide listData={listChapters} height={"415px"} />
 
                             </div>
                             <div className="favorite-suggest">
                                 <h3>You may also like</h3>
 
-                                <ListSide listData={listChapters} height={"100%"} />
+                                <ListSide listData={listChapters} height={"415px"} />
                             </div>
                         </Col>
 

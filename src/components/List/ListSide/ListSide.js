@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import "./ListSide.css";
+import { Skeleton } from "antd";
 import { NavLink, useHistory } from 'react-router-dom';
+import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
+import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 
 export default function ListSide({ listData, height }) {
     const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
     const history = useHistory();
 
     useEffect(() => {
@@ -20,20 +24,29 @@ export default function ListSide({ listData, height }) {
 
 
     return (
-        <ul className="list-side list-with-img" style={{ height: height }}>
-            {listData.map((val, i) => (
-                <li className="list-side-item" id={i} onClick={() => handleClick()}>
-                    <div className="item-img">
-                        <div className="img" style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }} ></div>
-                    </div>
-                    <div className="item-title">
-                        <a className="link">
-                            {val}
-                        </a>
-                        <p>400000 views</p>
-                    </div>
-                </li>
-            ))
+        <ul className="list-side list-with-img" style={{ height: isLoading ? "415px" : height }}>
+            {isLoading
+                ? <div style={{ marginTop: "20px" }}>
+                    <SkeletonCustom paragraphRows={1} />
+                    <SkeletonCustom paragraphRows={1} />
+                    <SkeletonCustom paragraphRows={1} />
+                    <SkeletonCustom paragraphRows={1} />
+                    <SkeletonCustom paragraphRows={1} />
+                </div>
+                : listData.map((val, i) => (
+                    <li className="list-side-item" id={i} onClick={() => handleClick()}>
+                        <div className="item-img">
+                            <div className="img" style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }} ></div>
+                        </div>
+                        <div className="item-title">
+                            <a className="link">
+                                {val}
+                            </a>
+                            <p>400000 views</p>
+                        </div>
+                    </li>
+                ))
+
             }
         </ul >
     )
