@@ -5,6 +5,7 @@ import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
+import { NavLink } from 'react-router-dom';
 
 
 export default function SignIn({ handleSignIn }) {
@@ -112,8 +113,13 @@ export default function SignIn({ handleSignIn }) {
                                 <CloseCircleOutlined /> Cancel
                             </Button>
 
-                            <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
-                                Create an account?
+                            <div className="footer-form" >
+                                <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
+                                    <a>Create an account?</a>
+                                </div>
+                                <div className="signin-to-forgotpass">
+                                    <NavLink to="/auth/forgotpassword">Forgot the password?</NavLink>
+                                </div>
                             </div>
                         </Form.Item>
                     </Form>

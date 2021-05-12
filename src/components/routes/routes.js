@@ -27,6 +27,16 @@ const routes = [
         exact: false
     },
     {
+        path: "/auth/forgotpassword",
+        component: React.lazy(() => import('../../pages/ForgotPassword/ForgotPassword')),
+        exact: false
+    },
+    {
+        path: "/auth/changepassword",
+        component: React.lazy(() => import('../../pages/ChangePassword/ChangePassword')),
+        exact: false
+    },
+    {
         path: "",
         component: React.lazy(() => import('../../pages/NotFound404/NotFound404')),
         exact: false

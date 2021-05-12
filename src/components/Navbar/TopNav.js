@@ -86,7 +86,7 @@ export default function TopNav() {
 
     const renderLeft = () => {
         return (
-            <Menu mode="horizontal" theme="light">
+            <Menu mode="horizontal" theme="light" style={{background:"transparent"}}>
                 <Menu.Item key="mail">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
@@ -109,7 +109,7 @@ export default function TopNav() {
 
     const renderRight = () => {
         return (
-            <Menu mode="horizontal" theme="light">
+            <Menu mode="horizontal" theme="light" style={{background:"transparent"}}>
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
                 </Menu.Item>

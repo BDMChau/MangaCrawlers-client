@@ -31,8 +31,11 @@
   background-size: cover;
 }
 
-.signin-to-signup {
-  right: 0px;
-  position: relative;
-  margin: 10px 0 -20px 0;
+.footer-form {
+  margin-top: 15px;
+  margin-bottom: -20px;
+}
+
+.footer-form .signin-to-signup {
+  margin-bottom: 5px;
 }
