@@ -8,10 +8,8 @@
 .home-menu-scroll {
   position: fixed;
   top: 0px;
-  height: 65px;
   z-index: 99999;
   transition: 0.3s;
-
 }
 
 .home-menu .menu,
@@ -20,4 +18,72 @@
   background: white;
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
+}
+
+.home-menu .menu .item-search,
+.home-menu .menu .item {
+  line-height: 65px;
+}
+
+.home-menu .menu .item-search .search-box {
+  margin-top: 14px;
+}
+
+.home-menu .item-search {
+  border-bottom: none !important;
+  cursor: default;
+}
+
+.home-menu .item-search input {
+  font-size: 20px;
+  border: none;
+  width: 300px;
+}
+
+.home-menu .item-search input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.home-menu .item-search button {
+  padding-left: 9px;
+  height: 41px;
+  width: 52px;
+  border: none;
+  left: 4px;
+  top: -1px;
+  border-radius: 3px !important;
+}
+
+.home-menu .item-search span.anticon.anticon-search {
+  font-size: 22px;
+  margin-top: 5px;
+}
+
+/* I dont know exactly what this is */
+.ant-input-group-addon {
+  background: transparent;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .home-menu .menu .item-search .search-box {
+    margin-top: 15px;
+  }
+
+  .home-menu .item-search input {
+    font-size: 16px;
+    border: none;
+    width: 200px;
+  }
+
+  .home-menu .item-search button {
+    height: 36px;
+    width: 50px;
+  }
 }

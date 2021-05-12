@@ -86,11 +86,11 @@ export default function TopNav() {
 
     const renderLeft = () => {
         return (
-            <Menu mode="horizontal" theme="light" style={{background:"transparent"}}>
+            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="mail">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
-                <SubMenu title="Blogs">
+                <SubMenu title="Blogs" >
                     <MenuItemGroup title="Item 1">
                         <Menu.Item key="setting:1">Option 1</Menu.Item>
                         <Menu.Item key="setting:2">Option 2</Menu.Item>
@@ -109,7 +109,7 @@ export default function TopNav() {
 
     const renderRight = () => {
         return (
-            <Menu mode="horizontal" theme="light" style={{background:"transparent"}}>
+            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
                 </Menu.Item>
