@@ -95,17 +95,17 @@ export default function Chapter() {
 
             <Col span={23} xxl={14} className="chapter-pages">
                 {data.map((item, id) => (
-                    // <LazyLoad
-                    //     key={id}
-                    //     placeholder={<Spinner />}
-                    //     height={500}
-                    //     once
-                    // >
+                    <LazyLoad
+                        key={id}
+                        placeholder={<Spinner />}
+                        height={500}
+                        once
+                    >
                         <div className="page" id={`page_${id}`}>
                             <Image className="img" id={id} src={item} alt="" />
                         </div>
 
-                    // </LazyLoad>
+                    </LazyLoad>
                 ))}
             </Col>
             <Col span={23} xxl={14} className="chapter-comment">

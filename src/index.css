@@ -5,7 +5,7 @@ html {
   height: 100vh;
   --antd-wave-shadow-color: rgb(64, 52, 238);
   background: #f0f2f5;
-  overflow: auto;
+  
 }
 
 * {
