@@ -7,7 +7,7 @@ import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 
 export default function ListSide({ listData, height }) {
     const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
 
     useEffect(() => {

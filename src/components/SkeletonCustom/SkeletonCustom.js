@@ -5,7 +5,7 @@ export default function SkeletonCustom({ paragraphRows }) {
     return (
         <Skeleton
             active
-            avatar
+            avatar={{ shape: "square" }}
             title
             paragraph={{ rows: paragraphRows }}
         />

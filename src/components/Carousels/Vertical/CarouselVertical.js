@@ -4,6 +4,7 @@ import "./CarouselVertical.css"
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Image } from 'antd';
 
 export default function CarouselVertical() {
 
@@ -54,53 +55,33 @@ export default function CarouselVertical() {
         <div className="slider-vertical">
             <Slider {...settings}>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://news.gearvn.com/wp-content/uploads/2020/06/Gearvn_-Nier-Automata_-7-1024x567.jpg)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://imgix.kotaku.com.au/content/uploads/sites/3/2021/04/23/ihueqnelaahslncmwjpp.jpg?ar=16%3A9&auto=format&fit=crop&q=65&w=1280)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://2.bp.blogspot.com/-cvHyJJCS_II/WpB-AgiI1mI/AAAAAAAAMLI/f9pJOO0nEho7LA-7dKa0rHmXY9R8WdHQgCLcBGAs/s1600/thumb-1920-819005.jpg)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://static.fandomspot.com/images/09/8881/00-featured-nier-fantasy-reshade-preview-screenshot.jpg)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://media-assets-ggwp.s3.ap-southeast-1.amazonaws.com/2021/01/nierautomata-1280-1-1488398963732-640x360.jpg)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://static.fandomspot.com/images/09/8881/00-featured-nier-fantasy-reshade-preview-screenshot.jpg)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
                 <div className="slider-item">
-                    <div className="item"
-                        style={{ backgroundImage: `url(https://www.gamerevolution.com/assets/uploads/2021/04/Nier-Replicant-Sequel-Nier-Automata.png)` }}
-                    >
-                    </div>
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
                 </div>
+                <div className="slider-item">
+                    <Image src="https://steamuserimages-a.akamaihd.net/ugc/170415012791203577/5777EB01F742E9BFE19B56AA3EAFA9C8F3085335/" class="item" alt="" />
+                </div>
+               
             </Slider>
         </div>
     )

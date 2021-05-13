@@ -1,9 +1,9 @@
-.expand-btn {
+.fading-text .expand-btn {
   width: 100%;
   background-color: red;
 }
 
-.btn {
+.fading-text .btn {
   cursor: pointer;
   width: 65px;
   display: block;
@@ -15,22 +15,22 @@
   border: none;
 }
 
-.text,
-.text.text.expanded {
+.fading-text .text,
+.fading-text .text.text.expanded {
 }
 
-.text {
+.fading-text .text {
   position: relative;
   max-height: 100px;
   overflow: hidden;
   transition: max-height 0.5s;
 }
 
-.text.expanded {
+.fading-text .text.expanded {
   max-height: 100vh;
 }
 
-.text:not(.expanded)::after {
+.fading-text .text:not(.expanded)::after {
   content: "";
   position: absolute;
   top: 0;

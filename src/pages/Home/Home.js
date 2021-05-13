@@ -59,11 +59,11 @@ export default function Home() {
 
                         <Col span={16} md={8} xl={7} xxl={7} className="home-side">
                             <div className="top-manga">
-                                <h2>Top Manga</h2>
+                                <h2>Top Manga Ranking</h2>
                                 <ListSide listData={listChapters} height={"415px"} />
                             </div>
-                            <div className="top-manga">
-                                <h2>Top Manga</h2>
+                            <div className="weekly-manga">
+                                <h2>Weekly Manga Ranking</h2>
                                 <ListSide listData={listChapters} height={"415px"} />
                             </div>
                         </Col>
@@ -73,7 +73,7 @@ export default function Home() {
                         </Col>
 
                         <Col span={16} md={21} xl={17} xxl={21} className="recommended">
-                            <h2>Recommended Manga</h2>
+                            <h2>Wallpaper</h2>
                             <CarouselVertical />
                         </Col>
 

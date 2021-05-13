@@ -32,6 +32,7 @@ export default function App() {
 
 
   const handleScroll = (e) => {
+    console.log(e.target.scrollTop)
     if (e.target.scrollTop === 0) {
       setIsVisibleScrollTopBtn(false)
     } else {

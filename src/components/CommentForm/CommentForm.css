@@ -1,5 +1,6 @@
 .comment-form .form-input .input {
   height: 70px;
+  resize: none;
 }
 
 .comment-form .text {
