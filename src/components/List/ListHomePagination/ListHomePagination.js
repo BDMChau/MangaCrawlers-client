@@ -27,7 +27,6 @@ export default function ListHomePagination() {
 
 
     useEffect(() => {
-        console.log(window.innerWidth)
         if (window.innerWidth >= 375 && window.innerWidth <= 768) {
             setPageSize(4)
         } else if (window.innerWidth >= 768 && window.innerWidth <= 768) {

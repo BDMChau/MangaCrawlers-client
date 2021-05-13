@@ -7,8 +7,7 @@ export default function ScrollTopBtn({ isVisibleProps }) {
 
 
     const scrollToTop = () => {
-        const app = document.getElementById('app');
-        app.scrollTo({
+        window.scrollTo({
             top: 0,
             behavior: "smooth"
         });

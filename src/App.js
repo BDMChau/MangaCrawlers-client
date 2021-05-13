@@ -1,4 +1,4 @@
-import React, { useRef, Suspense, useState } from "react";
+import React, { useEffect, Suspense, useState } from "react";
 import "./App.css"
 import 'antd/dist/antd.css';
 import { Provider } from 'react-redux';
@@ -30,10 +30,13 @@ const Routing = () => {
 export default function App() {
   const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState()
 
+  useEffect(() => {    
+    window.addEventListener("scroll", (e) => handleScroll(e));
+    return () => window.removeEventListener("scroll", (e) => handleScroll(e))
+    },[])
 
   const handleScroll = (e) => {
-    console.log(e.target.scrollTop)
-    if (e.target.scrollTop === 0) {
+    if (window.scrollY === 0) {
       setIsVisibleScrollTopBtn(false)
     } else {
       setIsVisibleScrollTopBtn(true)
