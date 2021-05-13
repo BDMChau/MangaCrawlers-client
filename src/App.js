@@ -30,12 +30,13 @@ const Routing = () => {
 export default function App() {
   const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState()
 
-  useEffect(() => {    
+  useEffect(() => {
     window.addEventListener("scroll", (e) => handleScroll(e));
     return () => window.removeEventListener("scroll", (e) => handleScroll(e))
-    },[])
+  }, [])
 
   const handleScroll = (e) => {
+    console.log(window.scrollY)
     if (window.scrollY === 0) {
       setIsVisibleScrollTopBtn(false)
     } else {
@@ -48,14 +49,12 @@ export default function App() {
       <BrowserRouter>
         {/* <Layout theme="light" style={{ minHeight: '100vh' }}>
           <Layout className="site-layout"> */}
-        <div id="app" className="app" onScroll={(e) => handleScroll(e)}>
-          <TopNav />
+        <TopNav />
 
-          <Suspense fallback={<LoadingPage />}>
-            {Routing()}
-            <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-          </Suspense >
-        </div>
+        <Suspense fallback={<LoadingPage />}>
+          {Routing()}
+          <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+        </Suspense >
 
         {/* </Layout>
         </Layout> */}

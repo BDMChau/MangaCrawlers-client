@@ -117,7 +117,7 @@ export default function SignIn({ handleSignIn }) {
                                 <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
                                     <a>Create an account?</a>
                                 </div>
-                                <div className="signin-to-forgotpass">
+                                <div className="signin-to-forgotpass" onClick={handleCancel}>
                                     <NavLink to="/auth/forgotpassword">Forgot the password?</NavLink>
                                 </div>
                             </div>

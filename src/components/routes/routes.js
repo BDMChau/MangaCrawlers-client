@@ -24,7 +24,7 @@ const routes = [
     {
         path: "/chapter/:id",
         component: React.lazy(() => import('../../pages/Chapter/ChapterService')),
-        exact: false
+        exact: true
     },
     {
         path: "/manga/genre",

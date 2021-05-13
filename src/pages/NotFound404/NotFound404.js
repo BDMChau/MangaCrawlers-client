@@ -1,4 +1,5 @@
 import React from 'react'
+import "./NotFound404.css"
 import { NavLink } from 'react-router-dom'
 import imageNotFound from '../../assets/img/page404_2.png'
 import { Typography } from 'antd';
@@ -7,7 +8,7 @@ const { Title, Text } = Typography;
 
 export default function NotFound404() {
     return (
-        <div style={{ textAlign: "center", margin: "180px 0 0 0" }} >
+        <div className="page-404" >
             <img src={imageNotFound} alt=""
                 style={{
                     width: "300px",

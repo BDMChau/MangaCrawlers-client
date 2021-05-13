@@ -1,0 +1,10 @@
+.page-404 {
+  text-align: center;
+  margin: 180px 0 0 0;
+}
+/* ////////////////// */
+@media only screen and (min-width: 375px) and (max-width: 376px) {
+  .page-404 {
+    margin: 120px 0 0 0;
+  }
+}

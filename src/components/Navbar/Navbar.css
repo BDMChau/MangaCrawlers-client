@@ -45,7 +45,7 @@
 /* style when click Menu.Item */
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-item-selected a {
-  color: none;
+  color: unset;
   border-bottom: 2px solid transparent;
 }
 
