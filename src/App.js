@@ -9,6 +9,7 @@ import routes from './components/routes/routes'
 import TopNav from './components/Navbar/TopNav';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
+import FooterContainer from "./components/Footer/Footer";
 
 
 const Routing = () => {
@@ -36,7 +37,7 @@ export default function App() {
   }, [])
 
   const handleScroll = (e) => {
-    console.log(window.scrollY)
+    // console.log(window.scrollY)
     if (window.scrollY === 0) {
       setIsVisibleScrollTopBtn(false)
     } else {
@@ -53,6 +54,7 @@ export default function App() {
 
         <Suspense fallback={<LoadingPage />}>
           {Routing()}
+          <FooterContainer />
           <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
         </Suspense >
 

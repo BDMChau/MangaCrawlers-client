@@ -9,18 +9,14 @@ export default function MangaGenre() {
 
 
     return (
-        <div className="manga-genre" >
-            <Row justify={"center"} className="manga-genre-row" >
+            <Row justify={"center"} className="manga-genre" >
                 <Col sm={24} md={21} xl={17} xxl={21} className="manga-list" >
                     <div className="title">
                         <Typography.Title level={3} >Genre: Action</Typography.Title>
                     </div>
                     <ListGenrePagination />
-                </Col>
-                <Col span={24} md={21} xl={17} xxl={21} className="manga-genre-footer">
-                    <FooterContainer />
+                    
                 </Col>
             </Row>
-        </div>
     )
 }

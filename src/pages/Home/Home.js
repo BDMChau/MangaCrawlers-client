@@ -77,9 +77,9 @@ export default function Home() {
                             <CarouselVertical />
                         </Col>
 
-                        <Col span={16} md={21} xl={17} xxl={21} className="home-footer">
+                        {/* <Col span={16} md={21} xl={17} xxl={21} className="home-footer">
                             <FooterContainer />
-                        </Col>
+                        </Col> */}
 
                     </Row>
                 </Row>

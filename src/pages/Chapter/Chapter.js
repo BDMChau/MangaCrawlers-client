@@ -112,9 +112,9 @@ export default function Chapter() {
                 <CommentForm/>
             </Col>
 
-            <Col span={23} xxl={14} className="chapter-footer">
+            {/* <Col span={23} xxl={14} className="chapter-footer">
                 <FooterContainter/>
-            </Col>
+            </Col> */}
         </Row >
     )
 }

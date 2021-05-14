@@ -83,8 +83,8 @@ export default function CommentForm() {
                 <CommentItem />
                 {isScrollBottom
                     ? <div className="loading-more" >
-                       <SkeletonCustom paragraphRows={2} />
-                       <SkeletonCustom paragraphRows={2} />
+                       <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
+                       <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
                     </div>
                     : ""
                 }

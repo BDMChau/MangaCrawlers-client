@@ -29,6 +29,12 @@
   margin-top: 14px;
 }
 
+.home-menu .menu .item-search .search-box span.ant-input-affix-wrapper {
+  border: none;
+  box-shadow: none !important;
+  padding: 3px 0;
+}
+
 .home-menu .item-search {
   border-bottom: none !important;
   cursor: default;

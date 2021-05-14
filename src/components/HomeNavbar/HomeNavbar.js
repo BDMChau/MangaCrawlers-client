@@ -16,6 +16,7 @@ export default function HomeNavbar({ isScroll }) {
                         placeholder="Search your manga..."
                         size={'medium'}
                         loading={isLoading}
+                        allowClear
                         // onSearch={} 
                     />
 

@@ -135,9 +135,9 @@ export default function Manga() {
                             </div>
                         </Col>
 
-                        <Col span={24} md={17} xl={17} xxl={22} className="home-footer">
+                        {/* <Col span={24} md={17} xl={17} xxl={22} className="home-footer">
                             <FooterContainer />
-                        </Col>
+                        </Col> */}
 
                     </Row>
                 </Col>
