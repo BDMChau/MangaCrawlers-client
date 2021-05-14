@@ -1,574 +1,41 @@
-import React, { useState } from 'react'
-import { Col, Row, Select, Popover, Tag, Typography } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Col, Row, Select, Popover, Tag, Typography, Button } from 'antd'
+import { SearchOutlined } from '@ant-design/icons'
 import "./SearchingPage.css"
+import GenresList from "../../helpers/GenresList"
 
-const { Option } = Select;
 
 export default function SearchingPage() {
-    const [genres, setGenres] = useState([
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-
-    ])
-    const [genresChildren, setGenresChildren] = useState([]);
-    const [data, setData] = useState([]);
+    const genres = GenresList;
+    const [data, setData] = useState(genres);
+    const [dataName, setDataName] = useState([]);
 
 
+    useEffect(() => {
+        console.log(dataName)
+    }, [dataName])
 
-    const onChange = (value) => {
-        const arr = [];
-        arr.push(value)
-        console.log(arr)
-        // let removeDuplicatedItems = 
-        setData([...data, value])
+    const handleClickTag = (item, index) => {
+        if (data[index].isSelected === false) {
+            data[index].isSelected = true
+
+            setData(data)
+            setDataName((prevData) => [...prevData, item.name])
+            return;
+
+        } else {
+            data[index].isSelected = false
+
+            setData(data)
+            setDataName(dataName.filter(name => name !== item.name))
+            return;
+        }
     }
 
 
+
     const handleSearch = () => {
-        console.log('search:');
+        console.log(dataName);
     }
 
     return (
@@ -580,19 +47,30 @@ export default function SearchingPage() {
                     placeholder="Add tags which you want to search..."
                     mode="tags"
                     onKeyUp={(e) => e.key === "Enter" ? handleSearch() : ""}
-                    onChange={onChange}
-                    value={data}
+                    value={dataName}
                     disabled={true}
-                > 
+                >
                 </Select>
-               
-                <div className="tags-wraper">
+
+                <Button className="search-btn" onClick={() => handleSearch()}>
+                    Search
+                </Button>
+
+                <div className="tags-wrapper">
+                    <div className="tags-tips">
+                        <Typography.Text style={{ color: "##afafaf" }} >Click on tag to add or remove!</Typography.Text>
+                    </div>
                     {
-                        genres.map((item) => {
+                        data.map((item, index) => {
                             if (item !== null) {
                                 return (
-                                        <Popover content={item.desc} className="item-tag">
-                                        <Tag color={item.color} onClick={() => onChange(item.name)}>{item.name}</Tag>
+                                    <Popover content={item.desc} key={index} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
+                                        <Tag
+                                            color={item.isSelected ? "" : item.color}
+                                            onClick={() => handleClickTag(item, index)}
+                                        >
+                                            {item.name}
+                                        </Tag>
                                     </Popover>
                                 )
                             }

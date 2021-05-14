@@ -17,18 +17,35 @@
   height: 50px;
 }
 
-.searching-page .tags-wraper {
+.searching-page .tags-wrapper {
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 60px;
   background: #f0f2f5;
   width: 80%;
   cursor: default;
 }
 
-.searching-page .tags-wraper .item-tag {
+.searching-page .tags-wrapper .item-tag {
   margin: 10px 10px 10px 10px;
   padding: 5px 10px;
   width: auto;
+}
+
+.searching-page .tags-wrapper .item-tag-disable {
+  margin: 10px 10px 10px 10px;
+  padding: 5px 10px;
+  width: auto;
+  background: rgb(230, 230, 230);
+  color: rgba(128, 128, 128, 0.815);
+  border-color: rgb(230, 230, 230);
+}
+
+.searching-page .search-btn {
+  top: 0px;
+  background: whitesmoke;
+  width: 80px;
+  border-radius: 2px;
+  margin-left: 3px;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
