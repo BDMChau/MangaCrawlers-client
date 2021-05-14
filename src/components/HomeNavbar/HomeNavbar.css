@@ -3,9 +3,10 @@
   top: -40px;
   height: 65px;
   transition: 0.3s;
+  z-index: 99999;
 }
 
-.home-menu-scroll {
+.home-menu.scroll {
   position: fixed;
   top: 0px;
   z-index: 99999;
@@ -13,11 +14,15 @@
 }
 
 .home-menu .menu,
-.home-menu-scroll .menu {
+.home-menu.scroll .menu {
   text-align: center;
   background: white;
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
+}
+
+.home-menu .menu .item-search {
+  width: 80%;
 }
 
 .home-menu .menu .item-search,
@@ -25,11 +30,11 @@
   line-height: 65px;
 }
 
-.home-menu .menu .item-search .search-box {
+.home-menu .menu .item-search .searching-box {
   margin-top: 14px;
 }
 
-.home-menu .menu .item-search .search-box span.ant-input-affix-wrapper {
+.home-menu .menu .item-search .searching-box span.ant-input-affix-wrapper {
   border: none;
   box-shadow: none !important;
   padding: 3px 0;
@@ -43,7 +48,11 @@
 .home-menu .item-search input {
   font-size: 20px;
   border: none;
-  width: 300px;
+  /* width: 300px; */
+}
+
+.home-menu .item-search span.ant-input-wrapper.ant-input-group {
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .home-menu .item-search input:focus {
@@ -71,6 +80,54 @@
   background: transparent;
 }
 
+.home-menu ul.searching-list {
+  position: absolute;
+  background: white;
+  width: 100%;
+  animation: fadedCustom 0.3s ease-in-out;
+  border: 1px solid #dbd9d9;
+  border-radius: 3px;
+}
+
+@keyframes fadedCustom {
+  0% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.home-menu .searching-list li.searching-item {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.home-menu .searching-item img.img {
+  width: 45px;
+  height: 52px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.home-menu .searching-item .text {
+  font-size: 16px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-menu .searching-item .author {
+  font-size: 14px;
+  color: #bfbfbf;
+}
+
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 }
 
@@ -78,12 +135,12 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .home-menu .menu .item-search .search-box {
+  .home-menu .menu .item-search .searching-box {
     margin-top: 15px;
   }
 
   .home-menu .item-search input {
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     width: 200px;
   }

@@ -3,9 +3,8 @@ import "./Home.css"
 
 import HomeNavbar from '../../components/HomeNavbar/HomeNavbar'
 import ListSide from '../../components/List/ListSide/ListSide'
-import FooterContainer from '../../components/Footer/Footer'
 import CarouselHorizontal from '../../components/Carousels/Horizontal/CarouselHorizontal'
-import { Col, Row } from 'antd'
+import { Col, Divider, Row } from 'antd'
 import CarouselVertical from '../../components/Carousels/Vertical/CarouselVertical'
 import Spacing from '../../components/Spacing/Spacing'
 
@@ -42,7 +41,7 @@ export default function Home() {
                 <Row justify={"center"} className="home-middle-header">
                     <HomeNavbar />
                     <Col span={23} md={21} xl={17} xxl={21} className="trending">
-                        <h2>Trending Manga</h2>
+                    <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}><h2>Trending Manga</h2></Divider>
                         <CarouselHorizontal />
                     </Col>
 

@@ -6,6 +6,7 @@
   background-size: cover;
   background-attachment: fixed;
   overflow: hidden;
+  border-radius: 3px;
 }
 
 .home-bg {

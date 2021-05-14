@@ -1,0 +1,45 @@
+.searching-page {
+  background-color: white;
+  overflow: hidden;
+  height: 100vh;
+  border-radius: 3px;
+}
+
+.searching-page .add-panel {
+  padding-top: 50px;
+  width: 100%;
+  text-align: center;
+  background: #f0f2f5;
+}
+
+.searching-page .add-panel .selected-tags {
+  width: 60%;
+  height: 50px;
+}
+
+.searching-page .tags-wraper {
+  margin: 0 auto;
+  margin-top: 100px;
+  background: #f0f2f5;
+  width: 80%;
+  cursor: default;
+}
+
+.searching-page .tags-wraper .item-tag {
+  margin: 10px 10px 10px 10px;
+  padding: 5px 10px;
+  width: auto;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .searching-page {
+    height: unset;
+    margin-bottom: 50px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 376px) {
+  .searching-page .tags-wraper {
+    width: 90%;
+  }
+}

@@ -9,6 +9,7 @@ import FooterContainer from '../../components/Footer/Footer';
 import CommentForm from '../../components/CommentForm/CommentForm';
 import { unset } from 'lodash';
 import FadingText from '../../components/FadingText/FadingText';
+import Spacing from '../../components/Spacing/Spacing'
 
 
 export default function Manga() {
@@ -111,9 +112,12 @@ export default function Manga() {
                             <ListChapters listData={listChapters} height={"400px"} />
                         </Col>
 
+
+
                         <Col span={24} md={22} lg={23} xxl={16} className="manga-comments">
+                            <Spacing />
                             <div className="comments">
-                                <h2>Manga Clawers</h2>
+                                <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
                                     <CommentForm />
                                 </div>

@@ -6,6 +6,11 @@ const routes = [
         component: React.lazy(() => import('../../pages/Home/HomeService')),
         exact: true
     },
+    {
+        path: "/search",
+        component: React.lazy(() => import('../../pages/SearchingPage/SearchingPageService')),
+        exact: true
+    },
     // {
     //     path: "/signin",
     //     component: React.lazy(() => import('../../pages/SignIn/SignInService')),
