@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import "./ListGenrePagination.css";
 import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 
 const { Meta } = Card;
 
-export default function ListGenrePagination() {
+function ListGenrePagination() {
     const [listChapters, setListChapter] = useState([
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter2: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
@@ -105,3 +105,6 @@ export default function ListGenrePagination() {
         </div>
     )
 }
+
+
+export default memo(ListGenrePagination)

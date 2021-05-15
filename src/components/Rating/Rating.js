@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Rate } from 'antd';
 import "./Rating.css";
 
-export default function Rating() {
+function Rating() {
 
     
     return (
@@ -16,3 +16,5 @@ export default function Rating() {
         />
     )
 }
+
+export default Rating

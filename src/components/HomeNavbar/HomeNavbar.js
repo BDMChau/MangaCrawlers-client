@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { memo, useState } from 'react'
 import { Col, Menu, Input } from 'antd'
 import "./HomeNavbar.css"
-import { List, Typography, Divider } from 'antd';
+import { List, Typography } from 'antd';
 
 
-export default function HomeNavbar({ isScroll }) {
+function HomeNavbar({ isScroll }) {
     const [isLoading, setIsLoading] = useState(false)
     const [dataSearch, setDataSearch] = useState([])
     const [searchingText, setSearchingText] = useState("")
@@ -51,3 +50,5 @@ export default function HomeNavbar({ isScroll }) {
         </Col>
     )
 }
+
+export default HomeNavbar

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import "./FadingText.css"
 import { RightOutlined } from "@ant-design/icons"
 import { Button } from 'antd'
 import { NavLink } from 'react-router-dom'
 
-export default function FadingText({ content }) {
+function FadingText({ content }) {
     const [isExpand, setIsExpand] = useState(false)
 
     return (
@@ -18,3 +18,5 @@ export default function FadingText({ content }) {
         </section>
     )
 }
+
+export default FadingText

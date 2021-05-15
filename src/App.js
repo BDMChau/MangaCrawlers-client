@@ -6,10 +6,10 @@ import { store } from './store/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from './components/routes/routes'
-import TopNav from './components/Navbar/TopNav';
 import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
 import FooterContainer from "./components/Footer/Footer";
+import NavbarService from "./components/Navbar/NavbarService";
 
 
 const Routing = () => {
@@ -50,7 +50,7 @@ export default function App() {
       <BrowserRouter>
         {/* <Layout theme="light" style={{ minHeight: '100vh' }}>
           <Layout className="site-layout"> */}
-        <TopNav />
+        <NavbarService />
 
         <Suspense fallback={<LoadingPage />}>
           {Routing()}

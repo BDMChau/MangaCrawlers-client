@@ -1,5 +1,5 @@
-import { notification_error } from "../notifications/notification";
-import { message_error } from "../notifications/message";
+import { notification_error } from "../components/notifications/notification";
+import { message_error } from "../components/notifications/message";
 
 export const errCodeResCheking = (errorResponse) => {
     switch (errorResponse.status) {

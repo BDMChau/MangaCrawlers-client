@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import "./ListSide.css";
 import { Skeleton } from "antd";
 import { NavLink, useHistory } from 'react-router-dom';
@@ -6,7 +6,7 @@ import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import { round } from 'lodash';
 
-export default function ListSide({ listData, height }) {
+function ListSide({ listData, height }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
     const history = useHistory();
@@ -52,3 +52,5 @@ export default function ListSide({ listData, height }) {
         </ul >
     )
 }
+
+export default memo(ListSide)

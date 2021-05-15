@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Slider from 'react-slick';
 import "./CarouselVertical.css"
 
@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Image } from 'antd';
 
-export default function CarouselVertical() {
+function CarouselVertical() {
 
     // 10 is data.length when we have real data
     const randomInitSlide = Math.floor((Math.random() * 10) + 1);
@@ -86,3 +86,5 @@ export default function CarouselVertical() {
         </div>
     )
 }
+
+export default memo(CarouselVertical) 

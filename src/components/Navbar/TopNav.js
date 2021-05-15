@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import "./Navbar.css";
 import logoText from "../../assets/logo/logoText.svg";
 import logo from "../../assets/logo/logo2.svg";
@@ -19,7 +19,7 @@ const MenuItemGroup = Menu.ItemGroup;
 
 
 
-export default function TopNav() {
+function TopNav() {
     const authState = useSelector((state) => state.authState);
     const dispatch = useDispatch();
     const [state, setState] = useState(false);
@@ -155,3 +155,5 @@ export default function TopNav() {
         </Header>
     );
 }
+
+export default memo(TopNav)

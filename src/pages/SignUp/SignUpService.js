@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import SignUp from './SignUp'
 import authApi from '../../api/apis/authApi'
-import { notification_success } from '../../notifications/notification';
+import { notification_success } from '../../components/notifications/notification';
 import { useHistory } from 'react-router';
 import { errMsgResNotification } from '../../helpers/ErrResCheking';
 
 export default function SignUpService() {
-    const [signupStt, setSignupStt] = useState("");
     const history = useHistory();
 
     const handleSignUp = async (name, email, password) => {
@@ -17,15 +16,14 @@ export default function SignUpService() {
                 "user_password": password
             }
             const response = await authApi.postDataSignUp(data);
-           
+
             if (response.content.err) {
                 errMsgResNotification(response.content.err);
                 return;
             }
 
-           
-            setSignupStt(response.content.msg);
-            notification_success(signupStt);
+
+            notification_success(response.content.msg);
             history.push("/signin");
             return;
         } catch (error) {
@@ -38,8 +36,7 @@ export default function SignUpService() {
     return (
         <div>
             <SignUp
-                handleSignUp={handleSignUp}
-
+                handleSignUp={(name, email, password) => handleSignUp(name, email, password)}
             />
         </div>
     )

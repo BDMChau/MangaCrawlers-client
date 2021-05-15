@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 
-export default function ListChapters({ listData, height }) {
+function ListChapters({ listData, height }) {
     const [isLoading, setIsLoading] = useState(false)
 
     return (
@@ -22,3 +22,5 @@ export default function ListChapters({ listData, height }) {
         </ul>
     )
 }
+
+export default memo(ListChapters)
