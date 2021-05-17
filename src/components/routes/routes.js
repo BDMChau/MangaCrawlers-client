@@ -27,12 +27,17 @@ const routes = [
         exact: true
     },
     {
-        path: "/chapter/:id",
+        path: "/chapter/:id", 
         component: React.lazy(() => import('../../pages/Chapter/ChapterService')),
         exact: true
     },
     {
-        path: "/manga/genre",
+        path: "/manga/genres", // use qeury param
+        component: React.lazy(() => import('../../pages/MangaGenres/MangaGenresService')),
+        exact: false
+    },
+    {
+        path: "/manga/genre", // use qeury param
         component: React.lazy(() => import('../../pages/MangaGenre/MangaGenreService')),
         exact: false
     },

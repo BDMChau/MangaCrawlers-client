@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { createElement, useState } from 'react'
 import "./CommentForm.css"
 import { Col, Input, Row, Comment, Avatar, Form, Button, Skeleton } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
+import { LikeOutlined, LikeFilled } from '@ant-design/icons';
+import { Tooltip } from 'antd';
 
 
 const { TextArea } = Input;
@@ -9,6 +11,19 @@ const { Item } = Form;
 
 export default function CommentForm() {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
+    const [likes, setLikes] = useState(0);
+    const [action, setAction] = useState("");
+
+    const handleLikeCmt = () => {
+        if (action === 'liked') {
+            setLikes(likes - 1);
+            setAction('dislike');
+        } else {
+            setLikes(likes + 1);
+            setAction('liked');
+        }
+    };
+
 
     const handleScroll = (e) => {
         const scrollTop = e.target.scrollTop;
@@ -20,12 +35,24 @@ export default function CommentForm() {
         }
     }
 
+    const actions = [
+        <Tooltip key="btn-like" title={action === 'liked' ? "Dislike" : "Like"}>
+            <span
+                onClick={() => handleLikeCmt()}
+            >
+                {action === 'liked' ? <LikeFilled style={{ fontSize: "14px", color: "#1890FF" }} /> : <LikeOutlined style={{ fontSize: "14px" }} />}
+                <span className="comment-likes">{likes}</span>
+            </span>
+        </Tooltip>,
+        // <span key="comment-basic-reply-to">Reply to</span>,
+    ];
+
 
     const CommentItem = ({ children }) => {
         return (
             <Comment
                 className="comment-item"
-                actions={[<span className="btn-reply" >Reply</span>]}
+                actions={actions}
                 author={<a>Ha Phuong</a>}
                 avatar={
                     <Avatar
@@ -83,8 +110,8 @@ export default function CommentForm() {
                 <CommentItem />
                 {isScrollBottom
                     ? <div className="loading-more" >
-                       <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
-                       <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
+                        <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
+                        <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
                     </div>
                     : ""
                 }

@@ -6,10 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
 
 import { Layout, Menu, Button, Drawer } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
+import SignUpTransGroupService from "../../pages/SignUpTransGroup/SignUpTransGroupService";
+
 import UserProfile from "../../pages/Profile/UserProfile/UserProfile";
+import GenresList from "../../helpers/GenresList";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -26,6 +29,7 @@ function TopNav() {
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
     const [isVisibleProfileDrawer, setIsVisibleProfileDrawer] = useState(false);
+    const history = useHistory(false);
 
     // handle open close modal SignIn SignUp
     useEffect(() => {
@@ -84,22 +88,36 @@ function TopNav() {
         setIsVisibleProfileDrawer(state);
     }
 
+
+    const renderGenresDropDown = () => (
+        GenresList
+            ? GenresList.map((item) => (
+                <Menu.Item
+                    key={item.name}
+                    title={item.name}
+                    style={{
+                        color: item.color,
+                        width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
+                        borderRadius: "3px"
+                    }} >
+                    {item.name}</Menu.Item>
+            ))
+            : ""
+    )
+
     const renderLeft = () => {
         return (
             <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="mail">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
-                <SubMenu title="Blogs" >
-                    <MenuItemGroup title="Item 1">
-                        <Menu.Item key="setting:1">Option 1</Menu.Item>
-                        <Menu.Item key="setting:2">Option 2</Menu.Item>
-                    </MenuItemGroup>
-                    <MenuItemGroup title="Item 2">
-                        <Menu.Item key="setting:3">Option 3</Menu.Item>
-                        <Menu.Item key="setting:4">Option 4</Menu.Item>
-                    </MenuItemGroup>
-                </SubMenu>
+                <SubMenu
+                    title="Genres"
+                    popupClassName="list-genres-dropdown"
+                    children={renderGenresDropDown()}
+                />
+
+
                 <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
                     Profile
                 </Menu.Item>
@@ -123,7 +141,7 @@ function TopNav() {
     const renderMenu = () => {
         return (
             <nav className="menuBar">
-                <img className="logo" src={logoText} alt="" />
+                <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} />
                 <div className="menuCon">
                     <div className="leftMenu">{renderLeft()}</div>
                     <div className="rightMenu">{renderRight()}</div>
@@ -149,7 +167,7 @@ function TopNav() {
     return (
         <Header className="header-nav">
             {renderMenu()}
-            {isModalVisibleSignUp ? <SignUpService /> : ""}
+            {isModalVisibleSignUp ? <SignUpTransGroupService /> : ""}
             {isModalVisibleSignIn ? <SignInService /> : ""}
             {isVisibleProfileDrawer ? <UserProfile visible={isVisibleProfileDrawer} closeProfileDrawer={(state) => closeProfileDrawer(state)} /> : ""}
         </Header>

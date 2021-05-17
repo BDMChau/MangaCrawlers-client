@@ -1,5 +1,5 @@
 .list-home-pagination .ant-list-pagination {
-  width: 85%;
+  width: 100%;
   text-align: left;
 }
 
@@ -22,11 +22,6 @@
   height: 75%;
 }
 
-.latest-cards .card .ant-card-cover img {
-  height: 100%;
-  border-radius: 3px;
-}
-
 .latest-cards .card .ant-card-body {
   padding: 0 5px;
   margin-top: 5px;
@@ -36,6 +31,14 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
+}
+
+.latest-cards .manga-img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  border-radius: 3px;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {

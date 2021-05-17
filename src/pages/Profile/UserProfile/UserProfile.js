@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import "./UserProfile.css"
 import { Button, Drawer, Input } from 'antd';
-import { UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined } from '@ant-design/icons';
+import { UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { message_success } from '../../../notifications/message';
+import { message_success } from '../../../components/notifications/message';
 
 export default function UserProfile({ visible, closeProfileDrawer }) {
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
@@ -83,9 +83,28 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                     >
                         <UnorderedListOutlined style={{ fontSize: "18px" }} />
                         Following Manga
-                        </Button>
-                </div>
+                    </Button>
 
+                    <Button
+                        className="trans-group-btn"
+                        type="primary"
+                    >
+                        <TeamOutlined style={{ fontSize: "19px" }} />
+                        My Translation Team
+                    </Button>
+
+                    <Button
+                        className="admin-btn"
+                        type="primary"
+                    >
+                        <ProfileOutlined style={{ fontSize: "19px" }} />
+                        Admin Page
+                    </Button>
+                </div>
+                <div className="create-trans-group">
+                    <p>Create your own translation group?</p>
+                </div>
+                
                 <div className="contact-admin">
                     <p>Contact me via email if you have any questions ^^</p>
                     <Input

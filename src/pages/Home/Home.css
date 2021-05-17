@@ -35,8 +35,12 @@
 }
 
 
-.home-middle .home-side .weekly-manga {
+.home-middle .home-side .top-manga {
   margin-top: 30px;
+}
+
+.home-middle .home-side .weekly-manga {
+  margin-top: 0px;
 }
 
 /* .latest-cards {

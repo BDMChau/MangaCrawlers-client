@@ -1,7 +1,8 @@
 import React, { memo, useState } from 'react'
-import { Col, Menu, Input } from 'antd'
+import { Col, Menu, Input, Empty } from 'antd'
 import "./HomeNavbar.css"
 import { List, Typography } from 'antd';
+import TransitionAnimate from '../Animation/transition';
 
 
 function HomeNavbar({ isScroll }) {
@@ -16,8 +17,8 @@ function HomeNavbar({ isScroll }) {
 
     return (
         <Col span={20} sm={20} xs={23} xxl={18} className={isScroll ? "home-menu scroll" : "home-menu"}>
-            <Menu className="menu" mode="horizontal" defaultSelectedKeys={["1"]}>
-                <Menu.Item key="action" className="item-search">
+            <Menu className="menu" mode="horizontal" defaultSelectedKeys={["1"]}  >
+                <Menu.Item key="action" className="menu-search">
                     <Input.Search
                         className="searching-box"
                         placeholder="Search your manga..."
@@ -27,9 +28,16 @@ function HomeNavbar({ isScroll }) {
                         onChange={(e) => setSearchingText(e.target.value)}
                         onSearch={onSearch}
                     />
-                    {searchingText
-                        ? dataSearch
-                            ? <List
+
+                </Menu.Item>
+            </Menu>
+
+
+            <div className="result-box" style={{ height: searchingText && dataSearch.length ? "350px" : "unset" }} >
+                {searchingText
+                    ? dataSearch.length
+                        ? <TransitionAnimate renderPart={
+                            <List
                                 className="searching-list"
                                 dataSource={dataSearch}
                                 renderItem={item => (
@@ -40,13 +48,23 @@ function HomeNavbar({ isScroll }) {
                                             <Typography.Text className="author">Author</Typography.Text>
                                         </div>
                                     </List.Item>
-                                )}
-                            />
-                            : ""
-                        : ""
-                    }
-                </Menu.Item>
-            </Menu>
+                                )} />
+                        } />
+                        : <TransitionAnimate renderPart={
+                            <div style={{ height: "160px" }} >
+                                <Empty
+                                    style={{ marginTop: "20px", color: "#8a8d92" }}
+                                    description="Seem nothing like you're looking for :("
+                                />
+                            </div>
+                        } />
+                    : ""
+                }
+            </div>
+
+
+
+
         </Col>
     )
 }

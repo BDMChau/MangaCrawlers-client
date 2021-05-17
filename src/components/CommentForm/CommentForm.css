@@ -17,6 +17,15 @@
   text-align: center;
 }
 
+.comment-form .ant-comment-actions {
+  padding: 0;
+  margin-top: 5px;
+}
+
+.comment-form .comment-likes {
+  padding: 0px 5px;
+}
+
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .comment-form .text {

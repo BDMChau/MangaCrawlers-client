@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Row, Select, Popover, Tag, Typography, Button } from 'antd'
+import { Col, Row, Select, Popover, Tag, Typography, Button, Tooltip } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import "./SearchingPage.css"
 import GenresList from "../../helpers/GenresList"
@@ -41,7 +41,7 @@ export default function SearchingPage() {
     return (
         <Row justify={"center"} className="searching-page">
             <Col sm={24} md={21} xl={17} xxl={21} className="add-panel">
-                <Typography.Title level={4}> Search your favorite manga with genres combination</Typography.Title>
+                <Typography.Title level={4} style={{ margin: "8px 8px" }}> Search your favorite manga with genre combinations</Typography.Title>
                 <Select
                     className="selected-tags"
                     placeholder="Add tags which you want to search..."
@@ -64,14 +64,14 @@ export default function SearchingPage() {
                         data.map((item, index) => {
                             if (item !== null) {
                                 return (
-                                    <Popover content={item.desc} key={index} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
+                                    <Tooltip title={item.desc} key={index} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
                                         <Tag
                                             color={item.isSelected ? "" : item.color}
                                             onClick={() => handleClickTag(item, index)}
                                         >
                                             {item.name}
                                         </Tag>
-                                    </Popover>
+                                    </Tooltip>
                                 )
                             }
                         })

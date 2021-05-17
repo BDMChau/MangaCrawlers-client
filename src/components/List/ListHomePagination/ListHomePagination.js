@@ -2,29 +2,29 @@ import React, { useState, useEffect, memo } from 'react';
 import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
+import { useHistory } from 'react-router';
+import ArrayMethods from '../../../helpers/ArrayMethods';
 
 const { Meta } = Card;
 
-function ListHomePagination() {
-    const [listChapters, setListChapter] = useState([
-        "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter2: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter3: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter4: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter88: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter6: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter15: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter13: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter143534: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter1344: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter12: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter111: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter135647: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-        "Chapter145: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
-    ])
-    const [isLoading, setIsLoading] = useState(false)
+function ListHomePagination({ allMangas }) {
+    const [listChapters, setListChapter] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const [pageSize, setPageSize] = useState(9)
+    const history = useHistory()
 
+
+
+    useEffect(() => {
+        if (!allMangas.length) {
+            setIsLoading(true)
+        } else {
+            setIsLoading(false)
+            
+            const shuffledList = ArrayMethods.shuffle(allMangas);
+            setListChapter(shuffledList)
+        }
+    }, [allMangas])
 
     useEffect(() => {
         if (window.innerWidth >= 375 && window.innerWidth <= 768) {
@@ -50,33 +50,36 @@ function ListHomePagination() {
 
     const renderLatestManga = () => {
         return (
-            <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                    onChange: () => {
-                        console.log("page");
-                    },
-                    pageSize: pageSize,
-                    defaultCurrent: 1,
-                    total: listChapters.length,
-                    // total: listChapters.length,
-                }}
-                dataSource={listChapters}
-                footer={false}
-                renderItem={item => (
-                    <div>
-                        <Card
-                            id={item}
-                            className="card"
-                            hoverable
-                            cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
-                        >
-                            <Meta title="Manga 22351" description={renderCardDesc()} />
-                        </Card>
-                    </div>
-                )}
-            />
+            isLoading
+                ? <LoadingCircle width={"90%"} height="60%" fontSizeIcon={"70px"} fontSizeText={"17px"} />
+                : <List
+                    itemLayout="vertical"
+                    size="large"
+                    pagination={{
+                        onChange: () => {
+                            console.log("page");
+                        },
+                        pageSize: pageSize,
+                        defaultCurrent: 1,
+                        total: listChapters.length,
+                    }}
+                    dataSource={listChapters}
+                    footer={false}
+                    renderItem={item => (
+                        <div>
+                            <Card
+                                id={item.manga_id}
+                                onClick={() => history.push(`/manga/${item.manga_id}`)}
+                                className="card"
+                                hoverable
+                                cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${item.thumbnail})` }} />}
+                            >
+                                <Meta title={item.manga_name} description={renderCardDesc()} />
+                            </Card>
+                        </div>
+                    )}
+                />
+
         )
     }
 
@@ -84,10 +87,9 @@ function ListHomePagination() {
         <div className="list-home-pagination">
 
             <Row className="latest-cards">
-                {isLoading
-                    ? <LoadingCircle width={"90%"} height="60%" fontSizeIcon={"70px"} fontSizeText={"17px"} />
-                    : renderLatestManga()
-                }
+
+                {renderLatestManga()}
+
             </Row>
 
         </div>

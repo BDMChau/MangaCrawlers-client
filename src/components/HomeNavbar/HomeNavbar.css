@@ -3,13 +3,13 @@
   top: -40px;
   height: 65px;
   transition: 0.3s;
-  z-index: 99999;
+  z-index: 99;
 }
 
 .home-menu.scroll {
   position: fixed;
   top: 0px;
-  z-index: 99999;
+  z-index: 99;
   transition: 0.3s;
 }
 
@@ -19,48 +19,55 @@
   background: white;
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
+  animation: fadedAnimate 0.3s ease-in-out;
 }
 
-.home-menu .menu .item-search {
+.home-menu .menu .menu-search {
   width: 80%;
 }
 
-.home-menu .menu .item-search,
+.home-menu .result-box {
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.home-menu .menu .menu-search,
 .home-menu .menu .item {
   line-height: 65px;
 }
 
-.home-menu .menu .item-search .searching-box {
+.home-menu .menu .menu-search .searching-box {
   margin-top: 14px;
 }
 
-.home-menu .menu .item-search .searching-box span.ant-input-affix-wrapper {
+.home-menu .menu .menu-search .searching-box span.ant-input-affix-wrapper {
   border: none;
   box-shadow: none !important;
   padding: 3px 0;
 }
 
-.home-menu .item-search {
+.home-menu .menu-search {
   border-bottom: none !important;
   cursor: default;
 }
 
-.home-menu .item-search input {
+.home-menu .menu-search input {
   font-size: 20px;
   border: none;
   /* width: 300px; */
 }
 
-.home-menu .item-search span.ant-input-wrapper.ant-input-group {
+.home-menu .menu-search span.ant-input-wrapper.ant-input-group {
   border-bottom: 1px solid #f0f0f0;
 }
 
-.home-menu .item-search input:focus {
+.home-menu .menu-search input:focus {
   border: none;
   box-shadow: none;
 }
 
-.home-menu .item-search button {
+.home-menu .menu-search button {
   padding-left: 9px;
   height: 41px;
   width: 52px;
@@ -70,7 +77,7 @@
   border-radius: 3px !important;
 }
 
-.home-menu .item-search span.anticon.anticon-search {
+.home-menu .menu-search span.anticon.anticon-search {
   font-size: 22px;
   margin-top: 5px;
 }
@@ -84,14 +91,13 @@
   position: absolute;
   background: white;
   width: 100%;
-  animation: fadedCustom 0.3s ease-in-out;
   border: 1px solid #dbd9d9;
   border-radius: 3px;
 }
 
-@keyframes fadedCustom {
+@keyframes fadedAnimate {
   0% {
-    opacity: 0.6;
+    opacity: 0;
   }
 
   100% {
@@ -135,17 +141,17 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .home-menu .menu .item-search .searching-box {
+  .home-menu .menu .menu-search .searching-box {
     margin-top: 15px;
   }
 
-  .home-menu .item-search input {
+  .home-menu .menu-search input {
     font-size: 18px;
     border: none;
     width: 200px;
   }
 
-  .home-menu .item-search button {
+  .home-menu .menu-search button {
     height: 36px;
     width: 50px;
   }

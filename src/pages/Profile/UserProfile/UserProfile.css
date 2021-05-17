@@ -24,6 +24,16 @@
 .user-drawer .user .interact {
   display: flex;
   margin: 30px 0 0 0;
+  flex-wrap: wrap;
+}
+
+.user-drawer .user .interact .trans-group-btn,
+.user-drawer .user .interact .admin-btn{
+  margin: 10px 0 0 0;
+}
+
+.user-drawer .user .interact .trans-group-btn{
+  margin-right: 10px;
 }
 
 .user-drawer .user .contact-admin input.ant-input {
@@ -39,7 +49,16 @@
   margin: 0px 0 0 2px;
 }
 
+.user-drawer .user .create-trans-group {
+  text-align: left;
+  margin: 15px 0 0 0;
+}
 
+.user-drawer .user .create-trans-group p:hover {
+  transition: 0.3s;
+  color: #1890ff;
+  cursor: pointer;
+}
 
 .user-drawer .user button {
   padding: 20px;

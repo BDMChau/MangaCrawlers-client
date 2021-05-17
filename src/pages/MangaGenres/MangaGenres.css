@@ -1,45 +1,37 @@
-.manga-genre {
+.manga-genres {
   background-color: white;
   overflow-x: hidden;
   border-radius: 3px;
 }
 
-.manga-genre .title {
+.manga-genres .title {
+  text-align: center;
   margin-top: 5px;
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
 }
 
-.manga-genre .title .title-h5 {
+.manga-genres .title .title-h5 {
   display: flex;
 }
 
-.manga-genre .title .title-h5 .item-tag {
+.manga-genres .title .title-h5 .item-tag {
   margin: 0 5px 5px 5px;
   width: auto;
 }
 
-.manga-genre .manga-list {
+.manga-genres .manga-list {
   background-color: #f0f2f5;
   padding-bottom: 50px;
 }
 
-.manga-genre .genre-desc {
-  font-size: 16px;
-  margin-left: 26px;
-  text-align: justify;
-  width: 600px;
-  padding-right: 16px;
-}
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .manga-genre .genre-desc {
-    width: 340px;
+  .manga-genres .title .title-h5 {
   }
+  
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {

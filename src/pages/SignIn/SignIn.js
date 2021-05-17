@@ -9,6 +9,8 @@ import { NavLink } from 'react-router-dom';
 
 
 export default function SignIn({ handleSignIn }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
 
@@ -46,7 +48,9 @@ export default function SignIn({ handleSignIn }) {
 
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        // e.preventDefault()
+
         handleSignIn()
     }
 
@@ -77,7 +81,7 @@ export default function SignIn({ handleSignIn }) {
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Email" />
+                            <Input placeholder="Email" onChange={(e) => setEmail(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -87,19 +91,17 @@ export default function SignIn({ handleSignIn }) {
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Password" />
+                            <Input.Password placeholder="Password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
-                        <Form.Item name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
+                  
 
                         <Form.Item className="form-signin-footer">
                             <Button
                                 className="btn-submit-signin"
                                 type="primary"
                                 htmlType="submit"
-                                onClick={() => handleSubmit()}
+                                onClick={(e) => handleSubmit(e)}
                             >
                                 <LoginOutlined /> Sign In
                             </Button>

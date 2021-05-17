@@ -63,6 +63,43 @@
   }
 }
 
+@media only screen and (min-width: 414px) and (max-width: 600px) {
+  .list-genre-pagination{
+    height: unset;
+  }
+
+  .manga-genre-cards .card {
+    width: 160px;
+    height: 225px;
+  }
+
+  .manga-genre-cards .card .ant-card-meta-title {
+    font-size: 15px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+
+  .list-genre-pagination .ant-list-pagination {
+    margin-left: 13.5px;
+    margin-bottom: 50px;
+  }
+
+  .list-genre-pagination ul.ant-list-items {
+    margin-left: 19px;
+    width: 100%;
+    padding: 0;
+    height: 720px;
+  }
+
+  .list-genre-pagination ul.ant-pagination {
+    margin-left: 5px;
+    display: flex;
+  }
+}
+
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .list-genre-pagination{
     height: unset;
@@ -97,6 +134,31 @@
   .list-genre-pagination ul.ant-pagination {
     margin-left: 5px;
     display: flex;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .manga-genre-cards .card {
+    width: 160px;
+    height: 210px;
+  }
+
+  .manga-genre-cards .card .ant-card-meta-title {
+    font-size: 14px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 11px;
+    margin-top: -6px;
+  }
+
+  .list-genre-pagination ul.ant-list-items {
+    margin-left: 103px;
+    height: 680px;
+  }
+
+  .list-genre-pagination ul.ant-pagination {
+    margin-left: 103px;
   }
 }
 

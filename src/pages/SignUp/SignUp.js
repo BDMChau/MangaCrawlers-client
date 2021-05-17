@@ -1,9 +1,9 @@
-import { Button, Modal, Form, Input, Checkbox } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import { useDispatch } from 'react-redux';
 import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { Button, Modal, Form, Input, Checkbox } from 'antd';
 
 
 export default function SignUp({ handleSignUp }) {
@@ -35,7 +35,9 @@ export default function SignUp({ handleSignUp }) {
         }, 300);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        // e.preventDefault()
+
         if (!name || !email || !password || !passwordRepeat) {
             return
         }
@@ -78,7 +80,7 @@ export default function SignUp({ handleSignUp }) {
                                 message: 'Please fill in your nickname!',
                             }]}
                         >
-                            <Input placeholder="Choose your nickname" onChange={(e) => setName(e.target.value)} />
+                            <Input placeholder="Choose your nickname" onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -88,7 +90,7 @@ export default function SignUp({ handleSignUp }) {
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value)} />
+                            <Input placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -98,7 +100,7 @@ export default function SignUp({ handleSignUp }) {
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value)} />
+                            <Input.Password placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -114,13 +116,11 @@ export default function SignUp({ handleSignUp }) {
                             <p style={{ color: "#FF4D4F" }} >{isMatchPass}</p>
                             : ""
                         }
-                        <Form.Item name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
-                        </Form.Item>
+                      
 
                         <Form.Item className="form-signup-footer">
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
-                                onClick={() => handleSubmit()}
+                                onClick={(e) => handleSubmit(e)}
                             >
                                 <CheckCircleOutlined />  Sign up
                             </Button>

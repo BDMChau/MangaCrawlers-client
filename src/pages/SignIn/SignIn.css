@@ -1,3 +1,7 @@
+.ant-modal-mask{
+  z-index: 100;
+}
+
 .form-signin-footer {
   text-align: end;
 }

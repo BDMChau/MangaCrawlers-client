@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import "./ScrollTop.css"
 import { Button } from 'antd'
 import { UpOutlined } from '@ant-design/icons';
+import smoothscroll from 'smoothscroll-polyfill';
 
 export default function ScrollTopBtn({ isVisibleProps }) {
 
 
     const scrollToTop = () => {
-        window.scrollTo({
+        smoothscroll.polyfill();
+        window.scroll({
             top: 0,
             behavior: "smooth"
         });

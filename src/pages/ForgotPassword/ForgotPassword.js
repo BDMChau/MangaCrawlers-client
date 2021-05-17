@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Typography, Form, message } from 'antd'
 import React, { useState } from 'react'
-import { message_success } from '../../notifications/message';
+import { message_success } from '../../components/notifications/message';
 import "./ForgotPassword.css"
 const { Title, Text } = Typography;
 

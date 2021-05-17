@@ -8,7 +8,7 @@ import { round } from 'lodash';
 
 function ListSide({ listData, height }) {
     const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
 
     useEffect(() => {

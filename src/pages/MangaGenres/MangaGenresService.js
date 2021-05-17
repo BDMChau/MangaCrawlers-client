@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router';
-import MangaGenre from './MangaGenre'
+import MangaGenres from './MangaGenres'
+import { useLocation } from 'react-router'
 
-export default function MangaGenreService() {
 
+export default function MangaGenresService() {
     const query = new URLSearchParams(useLocation().search);
 
 
@@ -13,7 +13,7 @@ export default function MangaGenreService() {
 
     return (
         <div>
-            <MangaGenre/>
+            <MangaGenres />
         </div>
     )
 }

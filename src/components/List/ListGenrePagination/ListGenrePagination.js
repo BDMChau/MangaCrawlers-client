@@ -38,13 +38,16 @@ function ListGenrePagination() {
     const [pageSize, setPageSize] = useState(9)
 
 
+    // responsive items quantity
     useEffect(() => {
         if (window.innerWidth >= 375 && window.innerWidth < 768) {
             setPageSize(6)
         } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
             setPageSize(12)
-        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1600) {
+        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1200) {
             setPageSize(12)
+        } else if (window.innerWidth >= 1200 && window.innerWidth <= 1600) {
+            setPageSize(9)
         } else {
             setPageSize(10)
         }

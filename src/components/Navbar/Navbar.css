@@ -6,14 +6,16 @@
   box-shadow: 0px 0px 50px 0 var(--color-box-shadow);
   z-index: 999;
   height: 70px;
+  animation: fadedAnimate2 0.3s;
 }
 
-.menuBar {
+.header-nav .menuBar {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
   overflow: hidden;
   height: 70px;
 }
+
 
 /* .ant-menu-submenu-title{
   background-color: red;
@@ -63,6 +65,7 @@
 .menuCon .ant-menu-submenu {
   top: 2px !important;
   background-color: transparent;
+  font-size: 16px;
 }
 
 .menuCon .ant-menu-item {
@@ -99,14 +102,14 @@
   margin-right: 0px;
   display: none;
   background: none;
-  border-color: #1890ff;
+  border: 1px solid #4b9eeb;
 }
 
 .barsBtn {
   display: block;
   width: 20px;
   height: 2px;
-  background: #1890ff;
+  background: #4b9eeb;
   position: relative;
 }
 
@@ -118,8 +121,11 @@
   top: -6px;
   left: 0;
   height: 2px;
-  background: #1890ff;
+  background: #4b9eeb
 }
+
+
+
 
 .barsBtn:after {
   top: auto;
@@ -188,4 +194,30 @@
 
 .ant-click-animating-node {
   display: none;
+}
+
+/* custom dropdown genres */
+.list-genres-dropdown ul#item_1\$Menu{
+  display: flex;
+  flex-wrap: wrap;
+  width: 550px;
+}
+
+/* animation */
+@keyframes fadedAnimate2 {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .list-genres-dropdown ul#item_1\$Menu{
+    display: flex;
+    width: 250px;
+  }
 }
