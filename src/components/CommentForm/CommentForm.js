@@ -4,6 +4,7 @@ import { Col, Input, Row, Comment, Avatar, Form, Button, Skeleton } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import ButtonLike from './ButtonLike';
 
 
 const { TextArea } = Input;
@@ -35,24 +36,12 @@ export default function CommentForm() {
         }
     }
 
-    const actions = [
-        <Tooltip key="btn-like" title={action === 'liked' ? "Dislike" : "Like"}>
-            <span
-                onClick={() => handleLikeCmt()}
-            >
-                {action === 'liked' ? <LikeFilled style={{ fontSize: "14px", color: "#1890FF" }} /> : <LikeOutlined style={{ fontSize: "14px" }} />}
-                <span className="comment-likes">{likes}</span>
-            </span>
-        </Tooltip>,
-        // <span key="comment-basic-reply-to">Reply to</span>,
-    ];
 
 
     const CommentItem = ({ children }) => {
         return (
             <Comment
                 className="comment-item"
-                actions={actions}
                 author={<a>Ha Phuong</a>}
                 avatar={
                     <Avatar
@@ -62,10 +51,13 @@ export default function CommentForm() {
                     />
                 }
                 content={
-                    <p>
-                        We supply a series of design principles, practical patterns and high quality design
-                        resources (Sketch and Axure).
-                    </p>
+                    <div className="comment" >
+                        <p>
+                            We supply a series of design principles, practical patterns and high quality design
+                            resources (Sketch and Axure).
+                        </p>
+                        <ButtonLike />
+                    </div>
                 }
             >
                 {children}

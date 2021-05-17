@@ -23,8 +23,12 @@
 }
 
 .comment-form .comment-likes {
+  cursor: pointer;
   padding: 0px 5px;
+  font-size: 14px;
+  color: #C1C1C1;
 }
+
 
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
