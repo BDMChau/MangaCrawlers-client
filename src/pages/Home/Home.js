@@ -10,7 +10,7 @@ import Spacing from '../../components/Spacing/Spacing'
 
 const ListHomePagination = React.lazy(() => import('../../components/List/ListHomePagination/ListHomePagination'))
 
-export default function Home({allMangas}) {
+export default function Home({latestMangas, topMangas}) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
@@ -53,7 +53,7 @@ export default function Home({allMangas}) {
                         <Col span={16} md={11} xl={10} xxl={14} className="lastest">
                             <h2>Lastest Manga</h2>
 
-                            <ListHomePagination allMangas={allMangas} />
+                            <ListHomePagination mangas={latestMangas} />
                         </Col>
 
                         <Col span={16} md={8} xl={7} xxl={7} className="home-side">
@@ -63,7 +63,7 @@ export default function Home({allMangas}) {
                             </div>
                             <div className="top-manga">
                                 <h2>Top Manga Ranking</h2>
-                                <ListSide listData={listChapters} height={"415px"} />
+                                <ListSide mangas={topMangas} height={"415px"} />
                             </div>
                         </Col>
 

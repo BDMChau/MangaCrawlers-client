@@ -1,8 +1,9 @@
-.ant-modal-mask{
+.ant-modal-mask {
   z-index: 100;
 }
 
-.form-signin-footer {
+.form-signin-button {
+  margin-bottom: 10px;
   text-align: end;
 }
 
@@ -36,8 +37,9 @@
 }
 
 .footer-form {
-  margin-top: 15px;
   margin-bottom: -20px;
+  float: right;
+  text-align: right;
 }
 
 .footer-form .signin-to-signup {

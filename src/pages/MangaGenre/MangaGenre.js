@@ -21,7 +21,7 @@ export default function MangaGenres() {
                 <div className="title">
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
                         <Typography.Title level={5} className="title-h5">
-                            Genre(s):
+                            Genre:
                              <div>
                                 <Tooltip title={genre.desc} className="item-tag">
                                     <Tag color={genre.color}>{genre.name}</Tag>

@@ -5,25 +5,28 @@ import logo from "../../assets/logo/logo2.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
 
-import { Layout, Menu, Button, Drawer } from "antd";
+import { Layout, Menu, Button, Drawer, Dropdown } from "antd";
 import { NavLink, useHistory } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
-import SignUpTransGroupService from "../../pages/SignUpTransGroup/SignUpTransGroupService";
 
 import UserProfile from "../../pages/Profile/UserProfile/UserProfile";
 import GenresList from "../../helpers/GenresList";
+import Cookies from 'universal-cookie';
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
-const MenuItemGroup = Menu.ItemGroup;
 
 
 
+const cookies = new Cookies()
 
 
-function TopNav() {
+function TopNav({ handleLogOut }) {
     const authState = useSelector((state) => state.authState);
+    const userState = useSelector((state) => state.userState);
+    const [isUserSignIn, setIsUserSignIn] = useState(false);
+
     const dispatch = useDispatch();
     const [state, setState] = useState(false);
     const [isModalVisibleSignUp, setIsModalVisibleSignUp] = useState(false);
@@ -58,11 +61,26 @@ function TopNav() {
                     setIsModalVisibleSignIn(false);
                 }
                 break;
+            case "closeSignUpAndRedirectToSignIn":
+                if (authState.includes("closeSignIn")) {
+                    dispatch(RESET());
+                    setIsModalVisibleSignUp(false);
+                }
+                break;
 
             default:
                 break;
         }
     }, [authState]);
+
+    useEffect(() => {
+        console.log(userState)
+        if (userState[0]) {
+            setIsUserSignIn(true);
+        } else {
+            setIsUserSignIn(false);
+        }
+    }, [userState])
 
     const showDrawer = () => {
         setState(true);
@@ -100,7 +118,8 @@ function TopNav() {
                         width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
                         borderRadius: "3px"
                     }} >
-                    {item.name}</Menu.Item>
+                    {item.name}
+                </Menu.Item>
             ))
             : ""
     )
@@ -116,27 +135,44 @@ function TopNav() {
                     popupClassName="list-genres-dropdown"
                     children={renderGenresDropDown()}
                 />
-
-
-                <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
-                    Profile
-                </Menu.Item>
             </Menu>
         );
     };
 
-    const renderRight = () => {
-        return (
+
+    const renderAccountDropDown = () => (
+        <>
+            <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
+                Profile
+            </Menu.Item>
+            <Menu.Item key="openSignIn" onClick={() => handleLogOut()}>
+                Log out
+            </Menu.Item>
+        </>
+
+    )
+
+    const renderRight = () => (
+        isUserSignIn
+            ?
+            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+                <SubMenu
+                    title="Account"
+                    popupClassName="list-cccount-dropdown"
+                    children={renderAccountDropDown()}
+                />
+            </Menu>
+
+            :
             <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
                 </Menu.Item>
                 <Menu.Item key="openSignUp" onClick={() => openSignUpModal()}>
-                    Signup
+                    Register
                 </Menu.Item>
             </Menu>
-        );
-    };
+    );
 
     const renderMenu = () => {
         return (
@@ -167,7 +203,7 @@ function TopNav() {
     return (
         <Header className="header-nav">
             {renderMenu()}
-            {isModalVisibleSignUp ? <SignUpTransGroupService /> : ""}
+            {isModalVisibleSignUp ? <SignUpService /> : ""}
             {isModalVisibleSignIn ? <SignInService /> : ""}
             {isVisibleProfileDrawer ? <UserProfile visible={isVisibleProfileDrawer} closeProfileDrawer={(state) => closeProfileDrawer(state)} /> : ""}
         </Header>

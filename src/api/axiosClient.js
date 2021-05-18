@@ -1,7 +1,7 @@
 import axios from 'axios';
 import queryString from 'query-string';
 import endPoint from '../config/endPoint';
-import { errCodeResCheking } from '../helpers/ErrResCheking';
+import { errCodeResCheking, code2xxCheking } from './security/ErrResCheking';
 
 const axiosClient = axios.create({
     baseURL: endPoint.local,
@@ -17,6 +17,7 @@ axiosClient.interceptors.request.use((config) => {
 
 axiosClient.interceptors.response.use((res) => {
     if (res && res.data) {
+        code2xxCheking(res.data.http_code, res.data.content.msg)
         return res.data
     }
 

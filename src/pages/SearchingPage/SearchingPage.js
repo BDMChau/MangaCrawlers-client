@@ -44,6 +44,7 @@ export default function SearchingPage() {
                 <Typography.Title level={4} style={{ margin: "8px 8px" }}> Search your favorite manga with genre combinations</Typography.Title>
                 <Select
                     className="selected-tags"
+                    title="Tags Selected"
                     placeholder="Add tags which you want to search..."
                     mode="tags"
                     onKeyUp={(e) => e.key === "Enter" ? handleSearch() : ""}

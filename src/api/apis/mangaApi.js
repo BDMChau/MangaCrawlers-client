@@ -2,8 +2,12 @@ import axiosClient from '../axiosClient';
  
 
 const mangaApi = {
-    getAll: () => {
-        const url = '/api/manga/getall'
+    getLatest: () => {
+        const url = '/api/manga/getlastest'
+        return axiosClient.get(url)
+    },
+    getTop: () => {
+        const url = '/api/manga/gettop'
         return axiosClient.get(url)
     },
 

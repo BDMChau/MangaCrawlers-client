@@ -2,25 +2,50 @@ import React, { useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/mangaApi"
 import { message_error } from '../../components/notifications/message'
 import Home from './Home'
+import dayjs from 'dayjs'
 
-function HomeService(props) {
-    const [allMangas, setAllMangas] = useState([])
+function HomeService() {
+    const [latestMangas, setLatestMangas] = useState([])
+    const [topMangas, setTopMangas] = useState([])
 
 
     useEffect(() => {
-        getAllManga();
+        getLatestMangas();
+        getTopFiveMangas()
     }, [])
 
-    const getAllManga = async () => {
+    const getLatestMangas = async () => {
         try {
-            const response = await mangaApi.getAll();
-            console.log(response)
+            const response = await mangaApi.getLatest();
             if (response.content.err) {
-                message_error(response.content.err);
                 return;
             }
-            setAllMangas(response.content.data)
 
+            response.content.data.forEach(manga => {
+                const chapterName = manga.chapter_name;
+                const createdAtChapterFormated = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond
+
+                manga.createdAt = createdAtChapterFormated;
+                manga.chapter_name = chapterName.split(":")[0];
+            });
+
+
+            setLatestMangas(response.content.data)
+
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getTopFiveMangas = async () => {
+        try {
+            const response = await mangaApi.getTop();
+            if (response.content.err) {
+                return;
+            }
+
+            setTopMangas(response.content.data)
             return;
         } catch (error) {
             console.log(error);
@@ -30,7 +55,10 @@ function HomeService(props) {
 
     return (
         <div>
-            <Home allMangas={allMangas} />
+            <Home 
+            latestMangas={latestMangas}
+            topMangas={topMangas}
+             />
         </div>
     )
 }

@@ -3,10 +3,11 @@ import "./SignUp.css";
 import { useDispatch } from 'react-redux';
 import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import { Button, Modal, Form, Input, Checkbox } from 'antd';
+import { Button, Modal, Form, Input } from 'antd';
+import SignInService from '../SignIn/SignInService';
 
 
-export default function SignUp({ handleSignUp }) {
+export default function SignUp({ handleSignUp, isCloseModal }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -14,6 +15,7 @@ export default function SignUp({ handleSignUp }) {
     const [isMatchPass, setIsMatchPass] = useState("");
 
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalSignInVisible, setIsModalSignInVisible] = useState(false);
     const dispatch = useDispatch();
 
 
@@ -21,6 +23,15 @@ export default function SignUp({ handleSignUp }) {
     useEffect(() => {
         showModal()
     }, [])
+
+    useEffect(() => {
+        if (isCloseModal === true) {
+            setIsModalVisible(false);
+            setIsModalSignInVisible(true);
+
+            dispatch(CLOSE_SIGN_UP_FORM("closeSignUpAndRedirectToSignIn"))
+        }
+    }, [isCloseModal])
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -116,13 +127,13 @@ export default function SignUp({ handleSignUp }) {
                             <p style={{ color: "#FF4D4F" }} >{isMatchPass}</p>
                             : ""
                         }
-                      
+
 
                         <Form.Item className="form-signup-footer">
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
                             >
-                                <CheckCircleOutlined />  Sign up
+                                <CheckCircleOutlined />  Register
                             </Button>
 
                             <Button className="btn-cancle-signup" type="danger" htmlType="submit"
@@ -134,6 +145,11 @@ export default function SignUp({ handleSignUp }) {
                     </Form>
                 </div>
             </Modal>
+            {
+                isModalSignInVisible
+                    ? <SignInService isOpenModal={isModalSignInVisible} />
+                    : ""
+            }
         </div>
     )
 }

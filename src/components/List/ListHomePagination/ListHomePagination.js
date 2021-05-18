@@ -3,12 +3,12 @@ import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { useHistory } from 'react-router';
-import ArrayMethods from '../../../helpers/ArrayMethods';
+import ArrayMethods from '../../../helpers/arrayMethods';
 
 const { Meta } = Card;
 
-function ListHomePagination({ allMangas }) {
-    const [listChapters, setListChapter] = useState([])
+function ListHomePagination({ mangas }) {
+    const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [pageSize, setPageSize] = useState(9)
     const history = useHistory()
@@ -16,15 +16,15 @@ function ListHomePagination({ allMangas }) {
 
 
     useEffect(() => {
-        if (!allMangas.length) {
+        if (!mangas.length) {
             setIsLoading(true)
         } else {
             setIsLoading(false)
             
-            const shuffledList = ArrayMethods.shuffle(allMangas);
-            setListChapter(shuffledList)
+            const shuffledList = ArrayMethods.shuffle(mangas);
+            setData(shuffledList)
         }
-    }, [allMangas])
+    }, [mangas])
 
     useEffect(() => {
         if (window.innerWidth >= 375 && window.innerWidth <= 768) {
@@ -39,11 +39,11 @@ function ListHomePagination({ allMangas }) {
     })
 
 
-    const renderCardDesc = () => {
+    const renderCardDesc = (name, time) => {
         return (
             <div className="desc">
-                <span className="desc-1" >Chapter 100</span>
-                <span className="desc-2" >10 hours ago</span>
+                <span className="desc-1" >{name}</span>
+                <span className="desc-2" >{time}</span>
             </div>
         )
     }
@@ -61,20 +61,20 @@ function ListHomePagination({ allMangas }) {
                         },
                         pageSize: pageSize,
                         defaultCurrent: 1,
-                        total: listChapters.length,
+                        total: data.length,
                     }}
-                    dataSource={listChapters}
+                    dataSource={data}
                     footer={false}
-                    renderItem={item => (
-                        <div>
+                    renderItem={manga => (
+                        <div id={manga.manga_id}>
                             <Card
-                                id={item.manga_id}
-                                onClick={() => history.push(`/manga/${item.manga_id}`)}
+                                id={manga.manga_id}
+                                onClick={() => history.push(`/manga/${manga.manga_id}`)}
                                 className="card"
                                 hoverable
-                                cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${item.thumbnail})` }} />}
+                                cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${manga.thumbnail})` }} />}
                             >
-                                <Meta title={item.manga_name} description={renderCardDesc()} />
+                                <Meta title={manga.manga_name} description={renderCardDesc(manga.chapter_name, manga.createdAt)} />
                             </Card>
                         </div>
                     )}

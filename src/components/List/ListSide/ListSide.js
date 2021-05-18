@@ -1,49 +1,47 @@
 import React, { memo, useEffect, useState } from 'react';
 import "./ListSide.css";
-import { Skeleton } from "antd";
-import { NavLink, useHistory } from 'react-router-dom';
-import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import { round } from 'lodash';
+import arrayMethods from '../../../helpers/arrayMethods';
+import { useHistory } from 'react-router';
+import { Typography } from 'antd';
 
-function ListSide({ listData, height }) {
+function ListSide({ mangas, height }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory();
 
     useEffect(() => {
-        if (listData) {
-            listData.length = 5;
-            setData(listData)
+        if (mangas) {
+            const shuffledList = arrayMethods.shuffle(mangas);
+            setData(shuffledList)
         }
-    }, [listData || height])
+    }, [mangas || height])
 
 
-    const handleClick = () => {
-        history.push("/manga/1")
+    const handleClick = (id) => {
+        history.push(`/manga/${id}`)
     }
 
 
     return (
         <ul className="list-side list-with-img" style={{ height: isLoading ? "415px" : height }}>
-            {isLoading
-                ? <div style={{ marginTop: "20px" }}>
+            {data.length === 0
+                ? <div key="1" style={{ marginTop: "20px"}}>
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                   
+                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                 </div>
-                : listData.map((val, i) => (
-                    <li className="list-side-item" id={i} onClick={() => handleClick()}>
+
+                : data.map((manga, i) => (
+                    <li className="list-side-item" id={i} onClick={() => handleClick(manga.manga_id)} >
                         <div className="item-img">
-                            <div className="img" style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }} ></div>
+                            <div className="img" style={{ backgroundImage: `url(${manga.thumbnail})` }} ></div>
                         </div>
                         <div className="item-title">
-                            <a className="link">
-                                {val}
-                            </a>
-                            <p>400000 views</p>
+                            <Typography.Text>{manga.manga_name}</Typography.Text>
+                            <Typography.Text>{manga.views} views</Typography.Text>
                         </div>
                     </li>
                 ))

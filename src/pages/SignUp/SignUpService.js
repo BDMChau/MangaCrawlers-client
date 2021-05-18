@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import SignUp from './SignUp'
+
 import authApi from '../../api/apis/authApi'
-import { notification_success } from '../../components/notifications/notification';
-import { useHistory } from 'react-router';
-import { errMsgResNotification } from '../../helpers/ErrResCheking';
+import { errMsgResNotification } from '../../api/security/ErrResCheking';
+
+import { message_success } from '../../components/notifications/message';
 
 export default function SignUpService() {
-    const history = useHistory();
+    const [isCloseModal, setIsCloseModal] = useState(false)
 
     const handleSignUp = async (name, email, password) => {
         try {
@@ -22,9 +23,10 @@ export default function SignUpService() {
                 return;
             }
 
-
-            notification_success(response.content.msg);
-            history.push("/signin");
+            console.log(response);
+            message_success(response.content.msg);
+            message_success("Now you can sign in and enjoy ^^!");
+            setIsCloseModal(true);
             return;
         } catch (error) {
             console.log(error);
@@ -37,6 +39,7 @@ export default function SignUpService() {
         <div>
             <SignUp
                 handleSignUp={(name, email, password) => handleSignUp(name, email, password)}
+                isCloseModal={isCloseModal}
             />
         </div>
     )

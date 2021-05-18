@@ -1,4 +1,4 @@
-const ArrayMethods = {
+const arrayMethods = {
     shuffle: (array) => {
         let currentIndex = array.length, tempVal, randomIndex;
 
@@ -19,4 +19,4 @@ const ArrayMethods = {
     }
 }
 
-export default ArrayMethods;
+export default arrayMethods;

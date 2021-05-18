@@ -1,4 +1,4 @@
-import { Button, Modal, Form, Input, Checkbox } from 'antd';
+import { Button, Modal, Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
@@ -8,7 +8,7 @@ import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { NavLink } from 'react-router-dom';
 
 
-export default function SignIn({ handleSignIn }) {
+export default function SignIn({ handleSignIn, isCloseModal }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -21,6 +21,12 @@ export default function SignIn({ handleSignIn }) {
     useEffect(() => {
         showModal()
     }, [])
+    
+    useEffect(() => {
+        if(isCloseModal === true){
+            handleCancel()
+        }
+    }, [isCloseModal])
 
     useEffect(() => {
         if (authState[0] === "closeSignUp") {
@@ -45,13 +51,12 @@ export default function SignIn({ handleSignIn }) {
         setIsModalVisible(false);
         setIsModalVisibleSignUp(true);
         dispatch(CLOSE_SIGN_IN_FORM("closeSignInAndRedirectToSignUp"))
-
     }
 
     const handleSubmit = (e) => {
         // e.preventDefault()
 
-        handleSignIn()
+        handleSignIn(email, password)
     }
 
 
@@ -94,9 +99,9 @@ export default function SignIn({ handleSignIn }) {
                             <Input.Password placeholder="Password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
-                  
 
-                        <Form.Item className="form-signin-footer">
+
+                        <Form.Item className="form-signin-button">
                             <Button
                                 className="btn-submit-signin"
                                 type="primary"
@@ -114,7 +119,9 @@ export default function SignIn({ handleSignIn }) {
                             >
                                 <CloseCircleOutlined /> Cancel
                             </Button>
+                        </Form.Item>
 
+                        <Form.Item>
                             <div className="footer-form" >
                                 <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
                                     <a>Create an account?</a>

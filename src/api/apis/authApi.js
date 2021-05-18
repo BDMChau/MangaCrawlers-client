@@ -2,7 +2,7 @@ import axiosClient from '../axiosClient';
  
 
 const authApi = {
-    postDataLogin: (data) => {
+    postDataSignIn: (data) => {
         const url = '/api/auth/signin'
         return axiosClient.post(url, data)
     },

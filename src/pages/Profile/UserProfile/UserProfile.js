@@ -4,10 +4,16 @@ import { Button, Drawer, Input } from 'antd';
 import { UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 import { message_success } from '../../../components/notifications/message';
+import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
+import { useSelector } from 'react-redux';
 
 export default function UserProfile({ visible, closeProfileDrawer }) {
+    const userState = useSelector((state) => state.userState);
+
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
-    const [adminEmail, setAdminEmail] = useState("bdmchau10005@gmail.com");
+    const [adminEmail] = useState("bdmchau10005@gmail.com");
+    const [profile, setProfile] = useState({});
+    const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
 
     useEffect(() => {
         if (visible === true) {
@@ -15,7 +21,18 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
         }
     }, [visible])
 
+    useEffect(() => {
+        if (userState) {
+            console.log(userState[0])
+            setProfile(userState[0])
+        }
+    }, [userState])
 
+
+
+    const handleOpenFormSignUpTransTeam = () => {
+        setOpenFormSignUpTransTeam(!openFormSignUpTransTeam)
+    }
 
     const onClose = () => {
         setIsVisibleDrawer(false);
@@ -51,21 +68,22 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
             <div className="user">
                 <div className="avatar">
                     <Avatar
+                        title="Avatar"
                         size={{ xs: 80, md: 140, lg: 150, xl: 150, xxl: 150 }}
-                        src="https://scontent.xx.fbcdn.net/v/t1.15752-9/181828860_190655002882277_7218559945996826011_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=58c789&_nc_ohc=L2ZLwEfnu3wAX_9_JdK&_nc_ht=scontent.xx&oh=dd3fa26784cd6f7e44141d03fd9be798&oe=60B90FFE"
+                        src={profile.user_avatar ? profile.user_avatar : ""}
                     />,
                 </div>
 
                 <div className="name">
-                    <Input addonBefore="Nick Name" defaultValue="Ha Phuong" />
+                    <Input addonBefore="Nick Name" title="Nick Name" defaultValue={profile.user_name ? profile.user_name : "Anonymous"} />
                 </div>
 
                 <div className="email">
-                    <Input addonBefore={"Email"} defaultValue="haphuong1234@gmail.com" readOnly />
+                    <Input addonBefore={"Email"} title="Email" defaultValue={profile.user_email ? profile.user_email : ""} readOnly />
                 </div>
 
                 <div className="is-admin">
-                    <Input addonBefore="Role" defaultValue="Trong Nhan's ex" readOnly />
+                    <Input addonBefore="Role" title="Role" defaultValue={profile.user_isAdmin ? "Admin" : "Regular User"} readOnly />
                 </div>
 
                 <div className="interact">
@@ -101,10 +119,10 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                         Admin Page
                     </Button>
                 </div>
-                <div className="create-trans-group">
+                <div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
                     <p>Create your own translation group?</p>
                 </div>
-                
+
                 <div className="contact-admin">
                     <p>Contact me via email if you have any questions ^^</p>
                     <Input
@@ -123,6 +141,11 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                 </div>
 
             </div>
+            {openFormSignUpTransTeam
+                ? <SignUpTransGroupService />
+                : ""
+            }
         </Drawer>
+
     )
 }
