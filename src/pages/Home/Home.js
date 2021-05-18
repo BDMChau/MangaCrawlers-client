@@ -33,7 +33,7 @@ export default function Home({latestMangas, topMangas}) {
         <div className="home">
             <div className="home-bg">
                 <div className="home-bg-img"
-                    // style={{ backgroundImage: `url(https://images.hdqwalls.com/download/anime-scenery-field-4k-9j-1920x1080.jpg)` }}
+                    //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
                 >
                 </div>
             </div>
