@@ -2,24 +2,40 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Manga from './Manga'
 import mangaApi from "../../api/apis/mangaApi"
+import dayjs from 'dayjs';
 
 function MangaService() {
     const [manga, setManga] = useState({});
+    const [genres, setGenres] = useState([]);
+    const [chapters, setChapters] = useState([]);
     const [weeklyMangas, setWeeklyMangas] = useState([]);
+    const { id } = useParams()
 
     useEffect(() => {
         getWeeklyTopMangas()
         getMangaData();
+
     }, [])
 
     const getMangaData = async () => {
         try {
-            const response = await mangaApi.getWeekly();
+            const data = {
+                manga_id: id
+            }
+            const response = await mangaApi.getManga(data);
+            console.log(response)
             if (response.content.err) {
                 return;
             }
+            const chapters = response.content.chapters;
+            chapters.forEach(chapter => {
+                chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+            });
 
-            setWeeklyMangas(response.content.data)
+
+            setManga(response.content.manga)
+            setGenres(response.content.genres)
+            setChapters(response.content.chapters)
             return;
         } catch (error) {
             console.log(error);
@@ -44,6 +60,9 @@ function MangaService() {
         <div>
             <Manga
                 weeklyMangas={weeklyMangas}
+                manga={manga}
+                genres={genres}
+                chapters={chapters}
             />
         </div>
     )

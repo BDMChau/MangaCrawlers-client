@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Manga.css"
-import { NavLink } from 'react-router-dom';
-import { Col, Input, Row, Comment, Avatar, Form, Button } from 'antd';
+import { NavLink, useHistory } from 'react-router-dom';
+import { Col, Input, Row, Comment, Avatar, Form, Button, Typography } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
@@ -12,7 +12,7 @@ import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
 
 
-export default function Manga({weeklyMangas}) {
+export default function Manga({ weeklyMangas, manga, genres, chapters }) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
         "Chapter1: ",
@@ -36,17 +36,22 @@ export default function Manga({weeklyMangas}) {
         "Chapter1: ",
 
     ])
+    const history = useHistory();
 
+
+    const goToSearchMangeWithGenrePage = (id) => {
+        history.push(`/manga/genre/tag?v=${id}`);
+    }
 
 
 
 
     return (
-        <div className="manga">
+        <div className="manga" key={manga.manga_id}>
             <Row justify={'center'}>
                 <div className="manga-bg">
                     <div className="manga-bg-img"
-                        style={{ backgroundImage: `url(https://static.zerochan.net/YoRHa.No.2.Type.B.full.2067762.jpg)` }}
+                        style={{ backgroundImage: `url(${manga.thumbnail})` }}
                     >
                     </div>
                 </div>
@@ -55,11 +60,11 @@ export default function Manga({weeklyMangas}) {
                 <Col span={23} md={17} xxl={19} className="manga-body">
                     <Row justify={"center"} className="header">
                         <Col md={4} sm={3} lg={4} xxl={4} className="thumbnail">
-                            <img className="thumbnail-img" src="https://static.zerochan.net/YoRHa.No.2.Type.B.full.2067762.jpg" alt="" />
+                            <img className="thumbnail-img" src={manga.thumbnail} alt="" />
                         </Col>
                         <Col md={13} lg={12} sm={4} xs={20} xxl={15} className="title">
                             <div className="name">
-                                <h3>Nier: Automata</h3>
+                                <h3>{manga.manga_name}</h3>
                             </div>
 
                             <div className="author">
@@ -70,12 +75,20 @@ export default function Manga({weeklyMangas}) {
                             </div>
 
                             <div className="genre">
-                                <NavLink to="/author/id" className="link">
-                                    Genre
-                                </NavLink>
-                                <NavLink to="/author/id" className="link">
-                                    Genre
-                                </NavLink>
+                                {genres
+                                    ? genres.map(genre => (
+                                        <Typography.Text className="link" onClick={() => goToSearchMangeWithGenrePage(genre.genre_id)}>
+                                            {genre.genre_name}
+                                        </Typography.Text>
+                                    ))
+                                    : ""
+                                }
+
+                            </div>
+                            <div className="status">
+                                <Typography.Text style={{ color: manga.status === "Completed" ? "#52c41a" : "#189cfc" }}>
+                                    {manga.status}
+                                </Typography.Text>
                             </div>
 
                             <div className="manga-rating">
@@ -102,14 +115,14 @@ export default function Manga({weeklyMangas}) {
                         <Col span={24} md={22} lg={23} xxl={22} className="desc-wrapper">
                             <div className="desc">
                                 <h2>Description</h2>
-                                <FadingText content={"Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."} />
+                                <FadingText content={manga.description} />
                             </div>
                         </Col>
                         <Col span={24} md={22} lg={23} xxl={22} className="chapter-list">
                             <h3>Chapters</h3>
                             <div className="line"></div>
 
-                            <ListChapters listData={listChapters} height={"400px"} />
+                            <ListChapters chapters={chapters} height={"400px"} />
                         </Col>
 
 

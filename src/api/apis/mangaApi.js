@@ -1,5 +1,5 @@
 import axiosClient from '../axiosClient';
- 
+
 
 const mangaApi = {
     getLatest: () => {
@@ -13,6 +13,10 @@ const mangaApi = {
     getWeekly: () => {
         const url = '/api/manga/getweekly'
         return axiosClient.get(url)
+    },
+    getManga: (data) => {
+        const url = '/api/manga/getmangapage'
+        return axiosClient.post(url, data)
     },
 
 }
