@@ -113,6 +113,7 @@ function TopNav({ handleLogOut, genres }) {
                 <Menu.Item
                     key={genre.genre_id}
                     title={genre.genre_name}
+                    onClick={() => history.push(`/manga/genre/tag?v=${genre.genre_id}`)}
                     style={{
                         color: genre.genre_color,
                         width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
@@ -145,7 +146,7 @@ function TopNav({ handleLogOut, genres }) {
             <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
                 Profile
             </Menu.Item>
-            <Menu.Item key="openSignIn" onClick={() => handleLogOut()}>
+            <Menu.Item key="logOut" onClick={() => handleLogOut()}>
                 Log out
             </Menu.Item>
         </>

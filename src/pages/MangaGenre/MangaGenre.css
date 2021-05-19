@@ -26,10 +26,10 @@
 }
 
 .manga-genre .genre-desc {
-  font-size: 16px;
-  margin-left: 26px;
+  font-size: 20px;
+  margin-left: 50px;
   text-align: justify;
-  width: 600px;
+  width: 800px;
   padding-right: 16px;
 }
 
@@ -38,7 +38,9 @@
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .manga-genre .genre-desc {
+    margin-left: 20px;
     width: 340px;
+    font-size: 16px;
   }
 }
 
@@ -46,4 +48,9 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  .manga-genre .genre-desc {
+    margin-left: 40px;
+    font-size: 18px;
+    width: 590px;
+  }
 }

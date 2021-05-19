@@ -17,14 +17,17 @@ axiosClient.interceptors.request.use((config) => {
 })
 
 axiosClient.interceptors.response.use((res) => {
-    if (res && res.data) {
-        code2xxCheking(res.data.http_code, res.data.content.msg)
+    if (res || res.data) {
+        if(res.data.http_code){
+            code2xxCheking(res.data.http_code, res.data.content.msg)
+        } else if(res.status){
+            code2xxCheking(res.status)
+        }
         return res.data
     }
 
     return res;
 }, (error) => {
-    console.log(error.response)
     if (error.response || error.response.status) {
         errCodeResCheking(error.response);
     }

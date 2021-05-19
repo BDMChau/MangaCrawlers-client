@@ -2,10 +2,11 @@ import React, { useState, useEffect, memo } from 'react';
 import "./ListGenrePagination.css";
 import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
+import { useHistory } from 'react-router';
 
 const { Meta } = Card;
 
-function ListGenrePagination() {
+function ListGenrePagination({mangas}) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
         "Chapter2: fgbnfnhfgnmghfmghjmgmfghnfghbfgmnghmghjm,hhhhhhhhhhhh",
@@ -36,7 +37,7 @@ function ListGenrePagination() {
     ])
     const [isLoading, setIsLoading] = useState(false)
     const [pageSize, setPageSize] = useState(9)
-
+    const history = useHistory();
 
     // responsive items quantity
     useEffect(() => {
@@ -74,20 +75,21 @@ function ListGenrePagination() {
                     },
                     pageSize: pageSize,
                     defaultCurrent: 1,
-                    total: listChapters.length,
+                    total: mangas.length,
                     // total: listChapters.length,
                 }}
-                dataSource={listChapters}
+                dataSource={mangas}
                 footer={false}
-                renderItem={item => (
+                renderItem={manga => (
                     <div>
                         <Card
-                            id={item}
+                            id={manga.manga_id}
+                            onClick={() => history.push(`/manga/${manga.manga_id}`)}
                             className="card"
                             hoverable
-                            cover={<img alt="example" src="https://www.teahub.io/photos/full/76-761792_nier-automata-music-concert.jpg" />}
+                            cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${manga.thumbnail})`}} />}
                         >
-                            <Meta title="Manga 22351" description={renderCardDesc()} />
+                            <Meta title={manga.manga_name} description={renderCardDesc()} />
                         </Card>
                     </div>
                 )}

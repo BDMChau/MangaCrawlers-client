@@ -62,7 +62,7 @@ export const code2xxCheking = (code, msg) => {
             // console.log(msg)
             break;
         case 204:
-            // console.log("No Content")
+            message_error("No Content!", 4);
             // console.log(msg)
             break;
 

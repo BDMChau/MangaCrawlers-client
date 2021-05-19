@@ -27,6 +27,14 @@
   width: 100%;
 }
 
+.manga-genre-cards .manga-img {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: unset;
+}
+
 .manga-genre-cards .card {
   width: 210px;
   height: 270px;
