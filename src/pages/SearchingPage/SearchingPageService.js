@@ -17,7 +17,7 @@ export default function SearchingPageService() {
     }, [])
 
 
-    const getAllGenres = async () => {
+    const getAllGenres = async() => {
         try {
             const response = await genreApi.getAll();
             if (response.content.err) {
@@ -55,13 +55,15 @@ export default function SearchingPageService() {
         }
     }
 
-    return (
-        <div>
-            <SearchingPage
-                data={data}
-                dataName={dataName}
-                handleClickTag={(genre) => handleClickTag(genre)}
-            />
-        </div>
+    return ( <
+        div >
+        <
+        SearchingPage data = { data }
+        dataName = { dataName }
+        handleClickTag = {
+            (genre) => handleClickTag(genre)
+        }
+        /> < /
+        div >
     )
 }
