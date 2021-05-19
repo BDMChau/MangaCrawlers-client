@@ -4,8 +4,8 @@ import { Col, Row, Typography, Divider, Tag, Tooltip } from 'antd'
 import ListGenrePagination from '../../components/List/ListGenrePagination/ListGenrePagination'
 
 
-export default function MangaGenres() {
-    const [genre, setGenre] = useState({
+export default function MangaGenres({ genre, mangas }) {
+    const [genreas, setGenreasc] = useState({
         name: "Action",
         desc: "ascccccc cccccccc cccccccccg fbfsdfvdhjkfbd vindilbnrdi obrnbfdl kbnfl;g",
         color: "red"
@@ -23,16 +23,16 @@ export default function MangaGenres() {
                         <Typography.Title level={5} className="title-h5">
                             Genre:
                              <div>
-                                <Tooltip title={genre.desc} className="item-tag">
-                                    <Tag color={genre.color}>{genre.name}</Tag>
+                                <Tooltip title={genre.genre_desc} className="item-tag">
+                                    <Tag color={genre.genre_color}>{genre.genre_name}</Tag>
                                 </Tooltip>
                             </div>
                         </Typography.Title>
                     </Divider>
-                    <Typography.Text className="genre-desc">Story genre inspired by historical events or storylines tied to historical events with the timeline playing an important role.</Typography.Text>
+                    <Typography.Text className="genre-desc">{genre.genre_desc}</Typography.Text>
                 </div>
 
-                <ListGenrePagination />
+                <ListGenrePagination mangas={mangas} />
 
             </Col>
         </Row>

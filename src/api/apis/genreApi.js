@@ -5,7 +5,7 @@ const genreApi = {
     getAll: () => {
         const url = '/api/genre/getallgenres'
         return axiosClient.get(url)
-    },
+    }
 
 }
 

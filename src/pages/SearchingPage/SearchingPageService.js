@@ -34,7 +34,9 @@ export default function SearchingPageService() {
         } catch (error) {
             console.log(error);
         }
+
     }
+   
 
     const handleClickTag = (genre) => {
         if (genre.isSelected === false) {
