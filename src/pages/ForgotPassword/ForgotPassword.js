@@ -1,15 +1,37 @@
 import { Button, Col, Input, Row, Typography, Form, message } from 'antd'
 import React, { useState } from 'react'
-import { message_success } from '../../components/notifications/message';
+import authApi from '../../api/apis/authApi';
+import { message_error, message_success } from '../../components/notifications/message';
 import "./ForgotPassword.css"
 const { Title, Text } = Typography;
 
 export default function ForgotPassword() {
-    const [state, setstate] = useState("")
+    const [email, setEmail] = useState("")
 
 
-    const handleSendEmail = () => {
-        message_success("We just sent you a mail, please check it!", 900)
+    const handleSendEmail = async (e) => {
+        e.preventDefault();
+
+        try {
+            if (email) {
+                const data = {
+                    user_email: email
+                }
+
+                const response = await authApi.requestchangepassword(data);
+                
+                if (response.content.err) {
+                    message_error("Missing or your email is not exist!")
+                    return;
+                }
+
+                message_success(response.content.msg, 10);
+                return;
+
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -25,7 +47,7 @@ export default function ForgotPassword() {
                             name="email"
                             rules={[{ required: true, message: 'Please fill in your email!' }]}
                         >
-                            <Input placeholder="Type your email here!" />
+                            <Input placeholder="Type your email here!" onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item >
@@ -33,7 +55,7 @@ export default function ForgotPassword() {
                                 type="primary"
                                 htmlType="submit"
                                 style={{ width: "100%" }}
-                                onClick={() => handleSendEmail()}
+                                onClick={(e) => handleSendEmail(e)}
                             >
                                 Submit
                             </Button>

@@ -127,7 +127,7 @@ export default function SignIn({ handleSignIn, isCloseModal }) {
                                     <a>Create an account?</a>
                                 </div>
                                 <div className="signin-to-forgotpass" onClick={handleCancel}>
-                                    <NavLink to="/auth/forgotpassword">Forgot the password?</NavLink>
+                                    <NavLink to="/auth/forgotpassword">Forgot password?</NavLink>
                                 </div>
                             </div>
                         </Form.Item>

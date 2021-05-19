@@ -17,13 +17,13 @@ const authApi = {
         return axiosClient.post(url, data)
     },
 
-    resetPassword: (data) => {
-        const url = '/api/auth/resetpass'
-        return axiosClient.post(url, data)
+    changePassword: (data) => {
+        const url = '/api/auth/changepass'
+        return axiosClient.put(url, data)
     },
 
-    sendEmail: (data) => {
-        const url = '/api/auth/sendemail'
+    requestchangepassword: (data) => {
+        const url = '/api/auth/requestchangepass'
         return axiosClient.post(url, data)
     }
 }

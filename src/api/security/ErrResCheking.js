@@ -7,6 +7,18 @@ export const errCodeResCheking = (errorResponse) => {
                 case "Missing credentials!":
                     message_error("Missing credentials!")
                     break;
+                case "Token verification is failed!":
+                    message_error("Verification is failed!")
+                    break;
+                case "Token has expired!":
+                    message_error("Your request has expired, try another request!")
+                    break;
+                case "Body request wrong! please try again!":
+                    message_error("Having a problem with your credentials, password is missing or not strong enough!")
+                    break;
+                case "Body request wrong!":
+                    message_error("Having a problem with your credentials, password is missing or not strong enough!")
+                    break;
 
                 default:
                     break;
@@ -23,7 +35,7 @@ export const errCodeResCheking = (errorResponse) => {
             break;
 
         case 403:
-            message_error("Fobbiden! 403")
+            message_error("Don't have permission! 403")
             break;
 
         default:
@@ -36,7 +48,7 @@ export const errCodeResCheking = (errorResponse) => {
 
 
 export const errMsgResNotification = (errMsg) => {
-    message_error(errMsg,5);
+    message_error(errMsg, 5);
 }
 
 export const code2xxCheking = (code, msg) => {

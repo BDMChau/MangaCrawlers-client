@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/mangaApi"
-import { message_error } from '../../components/notifications/message'
 import Home from './Home'
 import dayjs from 'dayjs'
-import { SET_ARRAY_WEEKLY_MANGA } from "../../store/slices/ApiSlice"
 import { useDispatch } from 'react-redux'
 
 function HomeService() {

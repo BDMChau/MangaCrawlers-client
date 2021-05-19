@@ -1,20 +1,36 @@
 import { Button, Col, Input, Row, Typography, Form, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
-import { message_success } from '../../components/notifications/message';
+import authApi from '../../api/apis/authApi';
+import { message_error, message_success } from '../../components/notifications/message';
 import "./ChangePassword.css"
 const { Title, Text } = Typography;
 
 export default function ChangePassword() {
-    const [state, setstate] = useState("")
+    const [password, setPassword] = useState("")
     const { token } = useParams();
 
-    useEffect(() => {
-        console.log(token)
-    }, [])
+    const handleSendNewPass = async (e) => {
+        e.preventDefault();
 
-    const handleSendNewPass = () => {
-        message_success("Password changed successfully!", 3)
+        try {
+            if (password) {
+                const data = {
+                    user_password: password,
+                    user_change_pass_token: token
+                }
+                const response = await authApi.changePassword(data);
+                console.log(response)
+                if (response.content.err) {
+                    return;
+                }
+                setPassword("");
+                message_success(response.content.msg, 10);
+                return;
+            }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -30,7 +46,7 @@ export default function ChangePassword() {
                             name="password"
                             rules={[{ required: true, message: 'Please fill in your new password!' }]}
                         >
-                            <Input placeholder="Type your new password here!" />
+                            <Input.Password placeholder="Type your new password!" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item >
@@ -38,7 +54,7 @@ export default function ChangePassword() {
                                 type="primary"
                                 htmlType="submit"
                                 style={{ width: "100%" }}
-                                onClick={() => handleSendNewPass()}
+                                onClick={(e) => handleSendNewPass(e)}
                             >
                                 Confirm your new password
                             </Button>
