@@ -8,6 +8,7 @@ import { Image } from 'antd';
 
 function CarouselVertical() {
     const [data, setData] = useState([
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1620740882/Mangaback/1124786.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626554/manga_wallpaper/Sousei_no_onmyoji.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626543/manga_wallpaper/Tensei_shitara_Slime.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626535/manga_wallpaper/Solo_leveling.png",
@@ -17,7 +18,6 @@ function CarouselVertical() {
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626524/manga_wallpaper/Kimetsu_no_yaiba.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626519/manga_wallpaper/Mushoku_Tensei.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626512/manga_wallpaper/Jujutsu.jpg",
-        "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626488/manga_wallpaper/Hige_wo_suru.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626486/manga_wallpaper/Black_clover.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626463/manga_wallpaper/Absolute_dou.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626463/manga_wallpaper/Akatsuki_no_yona.jpg"
@@ -48,12 +48,12 @@ function CarouselVertical() {
     const settings = {
         className: "slider",
         slidesToShow: 1,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         initialSlide: randomInitSlide,
         vertical: true,
         dots: true,
         draggable: true,
-        fade: true,
+        fade: false,
         infinite: true,
         speed: 500,
         autoplay: true,

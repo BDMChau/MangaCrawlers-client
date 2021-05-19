@@ -10,6 +10,10 @@ const mangaApi = {
         const url = '/api/manga/gettop'
         return axiosClient.get(url)
     },
+    getWeekly: () => {
+        const url = '/api/manga/getweekly'
+        return axiosClient.get(url)
+    },
 
 }
 

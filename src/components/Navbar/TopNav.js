@@ -22,7 +22,7 @@ const { Header } = Layout;
 const cookies = new Cookies()
 
 
-function TopNav({ handleLogOut }) {
+function TopNav({ handleLogOut, genres }) {
     const authState = useSelector((state) => state.authState);
     const userState = useSelector((state) => state.userState);
     const [isUserSignIn, setIsUserSignIn] = useState(false);
@@ -108,17 +108,17 @@ function TopNav({ handleLogOut }) {
 
 
     const renderGenresDropDown = () => (
-        GenresList
-            ? GenresList.map((item) => (
+        genres
+            ? genres.map((genre) => (
                 <Menu.Item
-                    key={item.name}
-                    title={item.name}
+                    key={genre.genre_id}
+                    title={genre.genre_name}
                     style={{
-                        color: item.color,
+                        color: genre.genre_color,
                         width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
                         borderRadius: "3px"
                     }} >
-                    {item.name}
+                    {genre.genre_name}
                 </Menu.Item>
             ))
             : ""

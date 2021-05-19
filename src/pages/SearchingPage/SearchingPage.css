@@ -14,7 +14,6 @@
 
 .searching-page .add-panel .selected-tags {
   width: 60%;
-  height: 50px;
 }
 
 .searching-page .tags-wrapper {
@@ -23,6 +22,7 @@
   background: #f0f2f5;
   width: 80%;
   cursor: default;
+  height: 600px;
 }
 
 .searching-page .tags-wrapper .item-tag {

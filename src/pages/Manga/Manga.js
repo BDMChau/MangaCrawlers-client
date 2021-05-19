@@ -12,7 +12,7 @@ import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
 
 
-export default function Manga() {
+export default function Manga({weeklyMangas}) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
         "Chapter1: ",
@@ -129,7 +129,7 @@ export default function Manga() {
                             <div className="top-week-rank">
                                 <h3>Weekly Manga Ranking</h3>
 
-                                <ListSide listData={listChapters} height={"415px"} />
+                                <ListSide mangas={weeklyMangas} height={"415px"} />
 
                             </div>
                             <div className="favorite-suggest">

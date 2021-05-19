@@ -1,12 +1,17 @@
 import { Button, Col, Input, Row, Typography, Form, message } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router';
 import { message_success } from '../../components/notifications/message';
 import "./ChangePassword.css"
 const { Title, Text } = Typography;
 
 export default function ChangePassword() {
     const [state, setstate] = useState("")
+    const { token } = useParams();
 
+    useEffect(() => {
+        console.log(token)
+    }, [])
 
     const handleSendNewPass = () => {
         message_success("Password changed successfully!", 3)

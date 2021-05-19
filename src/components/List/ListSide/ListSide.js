@@ -11,8 +11,13 @@ function ListSide({ mangas, height }) {
     const history = useHistory();
 
     useEffect(() => {
+        console.log(mangas)
         if (mangas) {
-            const shuffledList = arrayMethods.shuffle(mangas);
+            const shuffledList = arrayMethods.shuffle(mangas);    
+            if (shuffledList.length > 5) {
+                shuffledList.length = 5
+            }
+
             setData(shuffledList)
         }
     }, [mangas || height])
@@ -26,7 +31,7 @@ function ListSide({ mangas, height }) {
     return (
         <ul className="list-side list-with-img" style={{ height: isLoading ? "415px" : height }}>
             {data.length === 0
-                ? <div key="1" style={{ marginTop: "20px"}}>
+                ? <div key="1" style={{ marginTop: "20px" }}>
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
                     <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
@@ -41,7 +46,7 @@ function ListSide({ mangas, height }) {
                         </div>
                         <div className="item-title">
                             <Typography.Text>{manga.manga_name}</Typography.Text>
-                            <Typography.Text>{manga.views} views</Typography.Text>
+                            <Typography.Text>{manga.views ? manga.views : 0} views</Typography.Text>
                         </div>
                     </li>
                 ))

@@ -1,37 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row, Select, Popover, Tag, Typography, Button, Tooltip } from 'antd'
-import { SearchOutlined } from '@ant-design/icons'
 import "./SearchingPage.css"
-import GenresList from "../../helpers/GenresList"
 
 
-export default function SearchingPage() {
-    const genres = GenresList;
-    const [data, setData] = useState(genres);
-    const [dataName, setDataName] = useState([]);
+export default function SearchingPage({ data, dataName, handleClickTag }) {
 
 
-    useEffect(() => {
-        console.log(dataName)
-    }, [dataName])
-
-    const handleClickTag = (item, index) => {
-        if (data[index].isSelected === false) {
-            data[index].isSelected = true
-
-            setData(data)
-            setDataName((prevData) => [...prevData, item.name])
-            return;
-
-        } else {
-            data[index].isSelected = false
-
-            setData(data)
-            setDataName(dataName.filter(name => name !== item.name))
-            return;
-        }
+    const handleClick = (genre) => {
+        handleClickTag(genre)
     }
-
 
 
     const handleSearch = () => {
@@ -61,21 +38,23 @@ export default function SearchingPage() {
                     <div className="tags-tips">
                         <Typography.Text style={{ color: "##afafaf" }} >Click on tag to add or remove!</Typography.Text>
                     </div>
-                    {
-                        data.map((item, index) => {
+                    {data.length
+                        ? data.map((item) => {
                             if (item !== null) {
                                 return (
-                                    <Tooltip title={item.desc} key={index} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
+                                    <Tooltip title={item.genre_description} key={item.genre_id} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
                                         <Tag
-                                            color={item.isSelected ? "" : item.color}
-                                            onClick={() => handleClickTag(item, index)}
+                                            color={item.isSelected ? "" : item.genre_color}
+                                            onClick={() => handleClick(item)}
                                         >
-                                            {item.name}
+                                            {item.genre_name}
                                         </Tag>
                                     </Tooltip>
                                 )
                             }
                         })
+                        : ""
+
                     }
                 </div>
             </Col>

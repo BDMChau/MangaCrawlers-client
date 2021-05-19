@@ -3,15 +3,20 @@ import mangaApi from "../../api/apis/mangaApi"
 import { message_error } from '../../components/notifications/message'
 import Home from './Home'
 import dayjs from 'dayjs'
+import { SET_ARRAY_WEEKLY_MANGA } from "../../store/slices/ApiSlice"
+import { useDispatch } from 'react-redux'
 
 function HomeService() {
+    const dispatch = useDispatch();
     const [latestMangas, setLatestMangas] = useState([])
     const [topMangas, setTopMangas] = useState([])
+    const [weeklyMangas, setWeeklyMangas] = useState([])
 
 
     useEffect(() => {
         getLatestMangas();
-        getTopFiveMangas()
+        getTopFiveMangas();
+        getWeeklyTopMangas();
     }, [])
 
     const getLatestMangas = async () => {
@@ -52,12 +57,27 @@ function HomeService() {
         }
     }
 
+    const getWeeklyTopMangas = async () => {
+        try {
+            const response = await mangaApi.getWeekly();
+            if (response.content.err) {
+                return;
+            }
+
+            setWeeklyMangas(response.content.data)
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     return (
         <div>
             <Home 
             latestMangas={latestMangas}
             topMangas={topMangas}
+            weeklyMangas={weeklyMangas}
              />
         </div>
     )

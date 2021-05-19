@@ -47,7 +47,7 @@ const routes = [
         exact: false
     },
     {
-        path: "/auth/changepassword",
+        path: "/auth/changepassword/:token",
         component: React.lazy(() => import('../../pages/ChangePassword/ChangePassword')),
         exact: false
     },
