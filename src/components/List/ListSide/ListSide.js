@@ -13,7 +13,7 @@ function ListSide({ mangas, height }) {
     useEffect(() => {
         console.log(mangas)
         if (mangas) {
-            const shuffledList = arrayMethods.shuffle(mangas);    
+            const shuffledList = arrayMethods.shuffle(mangas);
             if (shuffledList.length > 5) {
                 shuffledList.length = 5
             }
@@ -28,31 +28,56 @@ function ListSide({ mangas, height }) {
     }
 
 
-    return (
-        <ul className="list-side list-with-img" style={{ height: isLoading ? "415px" : height }}>
-            {data.length === 0
-                ? <div key="1" style={{ marginTop: "20px" }}>
-                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                    <SkeletonCustom paragraphRows={1} avatarShape={"square"} />
-                </div>
+    return ( <
+        ul className = "list-side list-with-img"
+        style = {
+            { height: isLoading ? "415px" : height } } > {
+            data.length === 0 ?
+            < div key = "1"
+            style = {
+                { marginTop: "20px" } } >
+            <
+            SkeletonCustom paragraphRows = { 1 }
+            avatarShape = { "square" }
+            /> <
+            SkeletonCustom paragraphRows = { 1 }
+            avatarShape = { "square" }
+            /> <
+            SkeletonCustom paragraphRows = { 1 }
+            avatarShape = { "square" }
+            /> <
+            SkeletonCustom paragraphRows = { 1 }
+            avatarShape = { "square" }
+            /> <
+            SkeletonCustom paragraphRows = { 1 }
+            avatarShape = { "square" }
+            /> <
+            /div>
 
-                : data.map((manga, i) => (
-                    <li className="list-side-item" id={i} onClick={() => handleClick(manga.manga_id)} >
-                        <div className="item-img">
-                            <div className="img" style={{ backgroundImage: `url(${manga.thumbnail})` }} ></div>
-                        </div>
-                        <div className="item-title">
-                            <Typography.Text>{manga.manga_name}</Typography.Text>
-                            <Typography.Text>{manga.views ? manga.views : 0} views</Typography.Text>
-                        </div>
-                    </li>
-                ))
+            :
+                data.map((manga, i) => ( <
+                li className = "list-side-item"
+                id = { i }
+                onClick = {
+                    () => handleClick(manga.manga_id) } >
+                <
+                div className = "item-img" >
+                <
+                div className = "img"
+                style = {
+                    { backgroundImage: `url(${manga.thumbnail})` } } > < /div> <
+                /div> <
+                div className = "item-title" >
+                <
+                Typography.Text > { manga.manga_name } < /Typography.Text> <
+                Typography.Text > { manga.views ? manga.views : 0 }
+                views < /Typography.Text> <
+                /div> <
+                /li>
+            ))
 
-            }
-        </ul >
+        } <
+        /ul >
     )
 }
 
