@@ -74,7 +74,6 @@ function TopNav({ handleLogOut, genres }) {
     }, [authState]);
 
     useEffect(() => {
-        console.log(userState)
         if (userState[0]) {
             setIsUserSignIn(true);
         } else {

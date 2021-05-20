@@ -21,7 +21,7 @@ axiosClient.interceptors.response.use((res) => {
         if(res.data.http_code){
             code2xxCheking(res.data.http_code, res.data.content.msg)
         } else if(res.status){
-            code2xxCheking(res.status)
+            code2xxCheking(res.status, res.config.url)
         }
         return res.data
     }
@@ -30,6 +30,7 @@ axiosClient.interceptors.response.use((res) => {
 }, (error) => {
     if (error.response || error.response.status) {
         errCodeResCheking(error.response);
+        return;
     }
     return;
 })

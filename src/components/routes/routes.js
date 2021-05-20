@@ -27,7 +27,7 @@ const routes = [
         exact: true
     },
     {
-        path: "/chapter/:id",
+        path: "/chapter/:mangaid/:chapterid",
         component: React.lazy(() => import('../../pages/Chapter/ChapterService')),
         exact: true
     },

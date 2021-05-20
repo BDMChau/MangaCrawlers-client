@@ -3,8 +3,13 @@
 }
 
 .slider-horizontal .slider .slider-item {
-  height: 235px;
-  padding: 0px 4px;
+  height: 300px;
+  padding: 0 5px;
+}
+
+.slider-horizontal .slider .slider-item.item2 {
+  height: 300px;
+  padding: 0px 0px;
 }
 
 .slider-horizontal .slider .slider-item .item {

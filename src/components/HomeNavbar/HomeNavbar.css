@@ -112,6 +112,10 @@
   align-items: center;
 }
 
+.home-menu .searching-list li.searching-item:hover {
+  background: red;
+}
+
 .home-menu .searching-item img.img {
   width: 45px;
   height: 52px;
@@ -127,6 +131,7 @@
   text-overflow: ellipsis;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .home-menu .searching-item .author {

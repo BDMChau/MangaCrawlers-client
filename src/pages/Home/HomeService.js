@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/mangaApi"
 import Home from './Home'
 import dayjs from 'dayjs'
-import { useDispatch } from 'react-redux'
+import { debounce, throttle } from 'lodash'
 
 function HomeService() {
-    const dispatch = useDispatch();
+    const [isLoadingSearch, setIsLoadingSearch] = useState(false)
     const [latestMangas, setLatestMangas] = useState([])
     const [topMangas, setTopMangas] = useState([])
     const [weeklyMangas, setWeeklyMangas] = useState([])
+    const [searchResults, setSearchResults] = useState([])
+    const typingRef = useRef(null);
 
 
     useEffect(() => {
@@ -69,14 +71,47 @@ function HomeService() {
         }
     }
 
+    const debouceCallApiToSearch = debounce(async (val) => {
+        try {
+            setIsLoadingSearch(true);
+            const data = {
+                "manga_name": val
+            }
+            const response = await mangaApi.search(data);
+
+            if (response) {
+                if (response.content.err) {
+                    setSearchResults([])
+                    return;
+                }
+
+                const mangas = response.content.data;
+                setSearchResults(mangas)
+                setIsLoadingSearch(false);
+                return;
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }, 200)
+
+    const onSearch = (val) => {
+        if (val) {
+            typingRef.current = debouceCallApiToSearch(val);
+        }
+    }
+
 
     return (
         <div>
-            <Home 
-            latestMangas={latestMangas}
-            topMangas={topMangas}
-            weeklyMangas={weeklyMangas}
-             />
+            <Home
+                latestMangas={latestMangas}
+                topMangas={topMangas}
+                weeklyMangas={weeklyMangas}
+                searchResults={searchResults}
+                onSearch={(val) => onSearch(val)}
+                isLoadingSearch={isLoadingSearch}
+            />
         </div>
     )
 }

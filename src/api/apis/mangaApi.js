@@ -22,6 +22,10 @@ const mangaApi = {
         const url = '/api/manga/findmangafromgenre'
         return axiosClient.post(url, data)
     },
+    search: (data) => {
+        const url = '/api/manga/searchmangas'
+        return axiosClient.post(url, data)
+    },
 
 }
 

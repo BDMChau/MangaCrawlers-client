@@ -24,8 +24,28 @@
   text-overflow: ellipsis;
 }
 
+.dropdown-item-chapter-page .dropdown-item-title .title-name {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+  width: 100%;
+}
+
+.dropdown-item-chapter-page .dropdown-item-title .title-time {
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40%;
+  width: 100%;
+}
+
 .chapter .dropdown-chapter .btn-prev,
-.chapter .dropdown-chapter .btn-next {
+.chapter .dropdown-chapter .btn-next,
+.chapter .dropdown-chapter .btn-home,
+.chapter .dropdown-chapter .btn-add-favor {
   background-color: #e3e5e8;
   border: none;
   height: auto;
@@ -78,7 +98,9 @@
   }
 
   .chapter .dropdown-chapter .btn-prev,
-  .chapter .dropdown-chapter .btn-next {
+  .chapter .dropdown-chapter .btn-next,
+  .chapter .dropdown-chapter .btn-home,
+  .chapter .dropdown-chapter .btn-add-favor {
     background-color: #e3e5e8;
     border: none;
     height: auto;
@@ -86,7 +108,7 @@
     margin: 0 5px;
     padding: 0 10px;
   }
-  
+
   .dropdown-item-chapter-page .dropdown-item-title {
     font-size: 12px;
   }
@@ -98,7 +120,7 @@
     width: 200px;
   }
 
-  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
     width: 350px;
     text-align: center;
     margin-left: 12.5px;
@@ -109,9 +131,11 @@
   .chapter .dropdown-chapter .dropdown-items {
     font-size: 16px;
   }
-
+  
   .chapter .dropdown-chapter .btn-prev,
-  .chapter .dropdown-chapter .btn-next {
+  .chapter .dropdown-chapter .btn-next,
+  .chapter .dropdown-chapter .btn-home,
+  .chapter .dropdown-chapter .btn-add-favor {
     background-color: #e3e5e8;
     border: none;
     height: auto;
@@ -119,7 +143,7 @@
     margin: 0 5px;
     padding: 0 10px;
   }
-  
+
   .dropdown-item-chapter-page .dropdown-item-title {
     font-size: 12px;
   }
@@ -131,11 +155,9 @@
     width: 200px;
   }
 
-  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
     width: 350px;
     text-align: center;
     margin-left: 33px;
   }
 }
-
-

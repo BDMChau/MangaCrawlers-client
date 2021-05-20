@@ -51,7 +51,7 @@ export const errMsgResNotification = (errMsg) => {
     message_error(errMsg, 5);
 }
 
-export const code2xxCheking = (code, msg) => {
+export const code2xxCheking = (code, url) => {
     switch (code) {
         case 200:
             // console.log("Success")
@@ -62,7 +62,11 @@ export const code2xxCheking = (code, msg) => {
             // console.log(msg)
             break;
         case 204:
-            message_error("No Content!", 4);
+            if(url.indexOf("searchmangas") !== -1){
+                return;
+            } else{
+                message_error("No Content!", 4);
+            }
             // console.log(msg)
             break;
 

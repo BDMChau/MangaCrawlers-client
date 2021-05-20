@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
 import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Tooltip } from 'antd';
@@ -12,7 +12,7 @@ import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
 
 
-export default function Manga({ weeklyMangas, manga, genres, chapters }) {
+function Manga({ weeklyMangas, manga, genres, chapters }) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
         "Chapter1: ",
@@ -37,13 +37,18 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
 
     ])
     const history = useHistory();
+    const [chapterId01, setChapterId01] = useState("");
 
 
     const goToSearchMangeWithGenrePage = (id) => {
         history.push(`/manga/genre/tag?v=${id}`);
     }
 
-
+    useEffect(() => {
+        if (chapters[0]) {
+            setChapterId01(chapters[0].chapter_id)
+        }
+    }, [chapters])
 
 
     return (
@@ -69,7 +74,7 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
 
                             <div className="author">
                                 Author:
-                            <NavLink to="/author/id" className="link" key={manga.author_id}>
+                            <NavLink to="" className="link" key={manga.author_id}>
                                     {manga.author_name}
                                 </NavLink>
                             </div>
@@ -106,13 +111,13 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
                             </div>
 
                             <div className="interact">
-                                <Button className="btn-read-now">
-                                    <NavLink to="/author/id" style={{ marginLeft: 0 }}>
+                                <Button className="btn-read-now" title="Read Now">
+                                    <NavLink to={`/chapter/${manga.manga_id}/${chapterId01}`} style={{ marginLeft: 0 }}>
                                         Read Now
                                 </NavLink>
                                 </Button>
 
-                                <Button type="primary" className="btn-add-favorite">
+                                <Button type="primary" className="btn-add-favorite" title="Add to Favorite">
                                     Add to Favorite
                                 </Button>
                             </div>
@@ -132,7 +137,7 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
                             <h3>Chapters</h3>
                             <div className="line"></div>
 
-                            <ListChapters chapters={chapters} height={"400px"} />
+                            <ListChapters chapters={chapters} mangaId={manga.manga_id} height={"400px"} />
                         </Col>
 
 
@@ -173,3 +178,5 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
         </div>
     )
 }
+
+export default Manga;

@@ -4,6 +4,7 @@ import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { useHistory } from 'react-router';
 import arrayMethods from '../../../helpers/arrayMethods';
+import { NavLink } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -40,79 +41,71 @@ function ListHomePagination({ mangas }) {
 
 
     const renderCardDesc = (name, time) => {
-        return ( <
-            div className = "desc" >
-            <
-            span className = "desc-1" > { name } < /span> <
-            span className = "desc-2" > { time } < /span> < /
-            div >
+        return (<div className="desc" >
+            <span className="desc-1" > {name} </span>
+            <span className="desc-2" > {time} </span>
+        </div >
         )
     }
 
     const renderLatestManga = () => {
         return (
             isLoading ?
-            <
-            LoadingCircle width = { "90%" }
-            height = "60%"
-            fontSizeIcon = { "70px" }
-            fontSizeText = { "17px" }
-            /> : <
-            List itemLayout = "vertical"
-            size = "large"
-            pagination = {
-                {
-                    onChange: () => {
-                        console.log("page");
-                    },
-                    pageSize: pageSize,
-                    defaultCurrent: 1,
-                    total: data.length,
-                }
-            }
-            dataSource = { data }
-            footer = { false }
-            renderItem = {
-                manga => ( <
-                    div id = { manga.manga_id } >
-                    <
-                    Card id = { manga.manga_id }
-                    onClick = {
-                        () => history.push(`/manga/${manga.manga_id}`)
-                    }
-                    className = "card"
-                    hoverable cover = { < div className = "manga-img"
-                        alt = "example"
-                        style = {
-                            { backgroundImage: `url(${manga.thumbnail})` }
+                <
+                    LoadingCircle width={"90%"}
+                    height="60%"
+                    fontSizeIcon={"70px"}
+                    fontSizeText={"17px"}
+                /> : <
+                    List itemLayout="vertical"
+                    size="large"
+                    pagination={
+                        {
+                            onChange: () => {
+                                console.log("page");
+                            },
+                            pageSize: pageSize,
+                            defaultCurrent: 1,
+                            total: data.length,
                         }
-                        />} > <
-                        Meta title = { manga.manga_name }
-                        description = { renderCardDesc(manga.chapter_name, manga.createdAt) }
-                        /> < /
-                        Card > <
-                        /div>
-                    )
-                }
+                    }
+                    dataSource={data}
+                    footer={false}
+                    renderItem={
+                        manga => (<div id={manga.manga_id} >
+                           <NavLink to={`/manga/${manga.manga_id}`}>
+                           <Card id={manga.manga_id}
+                                className="card"
+                                hoverable cover={< div className="manga-img"
+                                    alt="example"
+                                    style={
+                                        { backgroundImage: `url(${manga.thumbnail})` }
+                                    }
+                                />} > <Meta
+                                    title={manga.manga_name}
+                                    description={renderCardDesc(manga.chapter_name, manga.createdAt)}
+                                />
+                            </Card>
+                           </NavLink>
+                        </div>
+                        )
+                    }
                 />
 
-            )
-        }
-
-        return ( <
-            div className = "list-home-pagination" >
-
-            <
-            Row className = "latest-cards" >
-
-            { renderLatestManga() }
-
-            <
-            /Row>
-
-            <
-            /div>
         )
     }
 
-    export default memo(ListHomePagination)
+    return (
+        <div className="list-home-pagination" >
+
+            <Row className="latest-cards" >
+
+                {renderLatestManga()}
+
+            </Row>
+
+        </div>
+    )
+}
+
+export default memo(ListHomePagination);
