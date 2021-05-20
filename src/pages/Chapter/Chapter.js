@@ -1,11 +1,9 @@
-import { Button, Col, Dropdown, Image, Menu, Row } from 'antd'
+import { Button, Col, Dropdown, Image, Menu, Row, Typography } from 'antd'
 import React, { useState } from 'react'
 import LazyLoad from 'react-lazyload';
-import LoadingPage from "../../components/Loading/LoadingPage/LoadingPage";
-import { NavLink } from 'react-router-dom';
 import "./Chapter.css"
 import CommentForm from '../../components/CommentForm/CommentForm';
-import FooterContainter from '../../components/Footer/Footer';
+import { LeftOutlined, RightOutlined} from "@ant-design/icons";
 
 export default function Chapter() {
     const [data, setData] = useState([
@@ -35,6 +33,60 @@ export default function Chapter() {
         "https://cm.blazefast.co/2c/f3/2cf343c19187a25ac7e27467ff3040d7.jpg",
         "https://cm.blazefast.co/39/a9/39a92ab691401397d52da0b5a301c07d.jpg",
     ])
+    const [chapters] = useState([
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+        {
+            name: "chapter 1: this is chapter acbdsf 1dgfbl",
+            time: "20-5-2020"
+        },
+
+    ])
+    const [chapterName, setChapterName] = useState("");
+
+
 
     const Spinner = () => (
         <div className="spinner-lazyloading">
@@ -71,29 +123,41 @@ export default function Chapter() {
 
     const dropDownItems = (
         <Menu>
-            <Menu.Item key="0">
-                <NavLink to="https://www.antgroup.com">1st menu item</NavLink>
-            </Menu.Item>
-            <Menu.Item key="1">
-                <NavLink to="https://www.aliyun.com">2nd menu item</NavLink>
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item key="3">3rd menu item</Menu.Item>
+            {
+                chapters
+                    ? chapters.map(chapter => (
+                        <Menu.Item key="0" className="dropdown-item-chapter-page">
+                            <div className="dropdown-item-title" onClick={() => setChapterName(chapter.name)}>
+                                <Typography.Text className="title-name">{chapter.name}</Typography.Text>
+                                <Typography.Text>{chapter.time}</Typography.Text>
+                            </div>
+                        </Menu.Item>
+                    ))
+                    : ""
+            }
         </Menu>
     );
 
 
     return (
         <Row justify={"center"} className="chapter">
-            <Col span={23} xxl={18} className="dropdown">
+            <Col span={23} xxl={10} className="dropdown-chapter">
+                <Button className="btn-next">
+                    <LeftOutlined style={{fontSize:"22px"}} />
+                </Button>
+
                 <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']}>
-                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                        Click me
+                    <a title={chapterName ? chapterName : "Chapter 01"} onClick={e => e.preventDefault()}>
+                        {chapterName ? chapterName : "Chapter 01"}
                     </a>
                 </Dropdown>
+
+                <Button className="btn-prev">
+                    <RightOutlined style={{fontSize:"22px"}} />
+                    </Button>
             </Col>
 
-            <Col span={23} xxl={14} className="chapter-pages">
+            <Col span={23} xxl={15} className="chapter-pages">
                 {data.map((item, id) => (
                     <LazyLoad
                         key={id}
@@ -109,7 +173,7 @@ export default function Chapter() {
                 ))}
             </Col>
             <Col span={23} xxl={14} className="chapter-comment">
-                <CommentForm/>
+                <CommentForm />
             </Col>
 
             {/* <Col span={23} xxl={14} className="chapter-footer">

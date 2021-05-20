@@ -1,0 +1,16 @@
+.admin-page {
+  margin-bottom: 100px;
+  background: #f0f2f5;
+}
+
+.admin-page .admin-title {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.admin-page .admin-row1 {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}

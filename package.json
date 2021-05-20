@@ -6,6 +6,7 @@
   },
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^1.1.4",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.5",
@@ -24,6 +25,7 @@
     "react-slick": "^0.28.1",
     "slick-carousel": "^1.8.1",
     "smoothscroll-polyfill": "^0.4.4",
+    "tslib": "^2.2.0",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.1"
   },

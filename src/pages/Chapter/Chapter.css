@@ -1,16 +1,59 @@
 .chapter {
   margin: auto;
-  background: #F0F2F5;
+  background: #f0f2f5;
   border-radius: 3px;
+}
+
+.chapter .dropdown-chapter {
+  margin: 20px auto;
+  position: relative;
+  display: flex;
+}
+
+.chapter .dropdown-chapter .dropdown-items {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  background-color: #e3e5e8;
+  padding: 5px 6px;
+  cursor: pointer;
+  font-size: 22px;
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chapter .dropdown-chapter .btn-prev,
+.chapter .dropdown-chapter .btn-next {
+  background-color: #e3e5e8;
+  border: none;
+  height: auto;
+  box-shadow: none !important;
+  margin: 0 5px;
+  padding: 0 18px;
+}
+
+.dropdown-item-chapter-page {
+  text-align: center;
+  padding: 8px 0;
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.dropdown-item-chapter-page .dropdown-item-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 12px;
 }
 
 .chapter .chapter-pages {
   text-align: center;
-  margin: 100px 0;
+  margin: 70px 0;
 }
 
 .chapter .chapter-pages .page {
-  max-width: 1000px;
+  max-width: 1100px;
   height: auto;
   margin: auto;
 }
@@ -28,3 +71,71 @@
 .chapter .chapter-footer {
   margin-top: 50px;
 }
+
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .chapter .dropdown-chapter .dropdown-items {
+    font-size: 16px;
+  }
+
+  .chapter .dropdown-chapter .btn-prev,
+  .chapter .dropdown-chapter .btn-next {
+    background-color: #e3e5e8;
+    border: none;
+    height: auto;
+    box-shadow: none !important;
+    margin: 0 5px;
+    padding: 0 10px;
+  }
+  
+  .dropdown-item-chapter-page .dropdown-item-title {
+    font-size: 12px;
+  }
+
+  .dropdown-item-chapter-page .dropdown-item-title .title-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+    width: 350px;
+    text-align: center;
+    margin-left: 12.5px;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 415px) {
+  .chapter .dropdown-chapter .dropdown-items {
+    font-size: 16px;
+  }
+
+  .chapter .dropdown-chapter .btn-prev,
+  .chapter .dropdown-chapter .btn-next {
+    background-color: #e3e5e8;
+    border: none;
+    height: auto;
+    box-shadow: none !important;
+    margin: 0 5px;
+    padding: 0 10px;
+  }
+  
+  .dropdown-item-chapter-page .dropdown-item-title {
+    font-size: 12px;
+  }
+
+  .dropdown-item-chapter-page .dropdown-item-title .title-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+  }
+
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+    width: 350px;
+    text-align: center;
+    margin-left: 33px;
+  }
+}
+
+

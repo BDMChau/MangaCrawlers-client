@@ -6,6 +6,7 @@ import Avatar from 'antd/lib/avatar/avatar';
 import { message_success } from '../../../components/notifications/message';
 import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 export default function UserProfile({ visible, closeProfileDrawer }) {
     const userState = useSelector((state) => state.userState);
@@ -14,6 +15,8 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
     const [adminEmail] = useState("bdmchau10005@gmail.com");
     const [profile, setProfile] = useState({});
     const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
+    const history = useHistory();
+
 
     useEffect(() => {
         if (visible === true) {
@@ -114,6 +117,7 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                     <Button
                         className="admin-btn"
                         type="primary"
+                        onClick={() => history.push("/admin")}
                     >
                         <ProfileOutlined style={{ fontSize: "19px" }} />
                         Admin Page

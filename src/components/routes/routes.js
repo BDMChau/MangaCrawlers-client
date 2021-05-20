@@ -27,7 +27,7 @@ const routes = [
         exact: true
     },
     {
-        path: "/chapter/:id", 
+        path: "/chapter/:id",
         component: React.lazy(() => import('../../pages/Chapter/ChapterService')),
         exact: true
     },
@@ -50,6 +50,11 @@ const routes = [
         path: "/auth/changepassword/:token",
         component: React.lazy(() => import('../../pages/ChangePassword/ChangePassword')),
         exact: false
+    },
+    {
+        path: "/admin",
+        component: React.lazy(() => import('../../pages/Profile/Admin/AdminService')),
+        exact: true
     },
     {
         path: "",
