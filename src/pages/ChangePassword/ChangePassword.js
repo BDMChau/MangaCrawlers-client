@@ -46,7 +46,12 @@ export default function ChangePassword() {
                             name="password"
                             rules={[{ required: true, message: 'Please fill in your new password!' }]}
                         >
-                            <Input.Password placeholder="Type your new password!" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Input.Password
+                                style={{ borderRadius: "3px" }}
+                                placeholder="Type your new password!"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
                         </Form.Item>
 
                         <Form.Item >

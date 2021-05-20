@@ -47,7 +47,7 @@ export default function ForgotPassword() {
                             name="email"
                             rules={[{ required: true, message: 'Please fill in your email!' }]}
                         >
-                            <Input placeholder="Type your email here!" onChange={(e) => setEmail(e.target.value)} />
+                            <Input style={{ borderRadius: "3px" }} placeholder="Type your email here!" onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item >

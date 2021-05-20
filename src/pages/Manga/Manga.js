@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
-import { Col, Input, Row, Comment, Avatar, Form, Button, Typography } from 'antd';
+import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Tooltip } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
@@ -69,17 +69,23 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
 
                             <div className="author">
                                 Author:
-                            <NavLink to="/author/id" className="link">
-                                    AuthorName
-                            </NavLink>
+                            <NavLink to="/author/id" className="link" key={manga.author_id}>
+                                    {manga.author_name}
+                                </NavLink>
                             </div>
 
                             <div className="genre">
                                 {genres
                                     ? genres.map(genre => (
-                                        <Typography.Text className="link" onClick={() => goToSearchMangeWithGenrePage(genre.genre_id)}>
-                                            {genre.genre_name}
-                                        </Typography.Text>
+                                        <Tooltip title={genre.genre_description} className="item-tag">
+                                            <Tag
+                                                className="link"
+                                                color={genre.color}
+                                                onClick={() => goToSearchMangeWithGenrePage(genre.genre_id)}
+                                            >
+                                                {genre.genre_name}
+                                            </Tag>
+                                        </Tooltip>
                                     ))
                                     : ""
                                 }
@@ -92,7 +98,11 @@ export default function Manga({ weeklyMangas, manga, genres, chapters }) {
                             </div>
 
                             <div className="manga-rating">
-                                <Rating />
+                                <Rating stars={manga.stars} />
+                            </div>
+
+                            <div className="manga-views">
+                                <Typography.Text>{manga.views} views </Typography.Text>
                             </div>
 
                             <div className="interact">

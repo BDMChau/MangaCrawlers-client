@@ -32,7 +32,7 @@ function MangaService() {
                 chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
             });
 
-
+            console.log(response.content)
             setManga(response.content.manga)
             setGenres(response.content.genres)
             setChapters(response.content.chapters)
