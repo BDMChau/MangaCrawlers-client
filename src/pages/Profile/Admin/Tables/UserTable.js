@@ -258,7 +258,7 @@ export default function TableUser() {
     ];
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
-            <Typography.Title level={3}>Users</Typography.Title>
+            <Typography.Title level={3}>User</Typography.Title>
             <Table
                 className="user-table"
                 columns={columns}

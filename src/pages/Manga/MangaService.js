@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import Manga from './Manga'
 import mangaApi from "../../api/apis/mangaApi"
 import dayjs from 'dayjs';
+import smoothscroll from 'smoothscroll-polyfill';
 
 function MangaService() {
     const [manga, setManga] = useState({});
@@ -15,7 +16,12 @@ function MangaService() {
         getWeeklyTopMangas()
         getMangaData();
 
-    }, [])
+        smoothscroll.polyfill();
+        window.scroll({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [id])
 
     const getMangaData = async () => {
         try {

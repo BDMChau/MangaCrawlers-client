@@ -6,7 +6,7 @@ import { Table, Tag, Space, Col, Row, Typography } from 'antd';
 import { Avatar } from 'antd';
 
 
-export default function TablesAdmin() {
+export default function AdminTable() {
     const [admins, setAdmins] = useState([
         {
             name: "Chau",

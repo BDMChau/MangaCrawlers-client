@@ -24,3 +24,59 @@
     height: 40px;
     border-radius: 3px;
 }
+
+/*  */
+.manga-chart{
+    margin: 0 auto;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    background-color: white;
+    border: 1px solid #e8e8e8;
+    padding: 0;
+    width: 100%;
+}
+
+.manga-chart button{
+    margin-bottom: 15px;
+    margin-right: 24px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+.manga-chart .chart{
+    margin-bottom: 10px;
+    margin-right: 24px;
+    margin-left: 10px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+/*  */
+.trans-gr-chart{
+    margin: 0 auto;
+    margin-bottom: 100px;
+    margin-top: 100px;
+    background-color: white;
+    border: 1px solid #e8e8e8;
+    padding: 0;
+    width: 100%;
+}
+
+.trans-gr-chart button{
+    margin-bottom: 15px;
+    margin-right: 24px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+.trans-gr-chart .chart{
+    margin-bottom: 10px;
+    margin-right: 24px;
+    margin-left: 10px;
+    height: 40px;
+    border-radius: 3px;
+}

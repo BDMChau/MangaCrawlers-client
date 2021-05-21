@@ -4,10 +4,14 @@ import "./Tables/Tables.css"
 import "./Charts/Chart.css"
 import { Table, Tag, Space, Col, Row, Typography } from 'antd';
 import { Avatar } from 'antd';
-import TableUser from './Tables/TableUser';
-import TablesAdmin from './Tables/TablesAdmin';
+import UserTable from './Tables/UserTable';
+import AdminTable from './Tables/AdminTable';
 import UserChart from './Charts/UserChart';
 import { Tabs, Radio } from 'antd';
+import MangaTable from './Tables/MangaTable';
+import MangaChart from './Charts/MangaChart';
+import TransGrTable from './Tables/TransGrTable';
+import TransGrChart from './Charts/TransGrChart';
 
 const { TabPane } = Tabs;
 
@@ -16,8 +20,22 @@ export default function Admin() {
 
     const renderUserStatistic = () => (
         <div>
-            <TableUser />
+            <UserTable />
             <UserChart />
+        </div>
+    )
+
+    const renderMangaStatistic = () => (
+        <div>
+            <MangaTable />
+            <MangaChart />
+        </div>
+    )
+
+    const renderTransGrStatistic = () => (
+        <div>
+            <TransGrTable />
+            <TransGrChart />
         </div>
     )
 
@@ -32,14 +50,14 @@ export default function Admin() {
                         {renderUserStatistic()}
                     </TabPane>
                     <TabPane tab="Manga Statistics" key="2">
-                        <h1>acasc</h1>
+                        {renderMangaStatistic()}
                     </TabPane>
                     <TabPane tab="Translation Group Statistics" key="3">
-                        {renderUserStatistic()}
+                        {renderTransGrStatistic()}
                     </TabPane>
                 </Tabs>
 
-                <TablesAdmin />
+                <AdminTable />
             </Row>
         </div>
     )

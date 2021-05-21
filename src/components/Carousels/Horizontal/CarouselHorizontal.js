@@ -67,31 +67,31 @@ function CarouselHorizontal({ itemsShow, isCenter, arrows, autoplaySpeed, isPadd
                 </div>
                 <div className={isPadding ? "slider-item" : "slider-item item2"} >
                     <div className="item"
-                        style={{ backgroundImage: `url(https://news.gearvn.com/wp-content/uploads/2020/06/Gearvn_-Nier-Automata_-7-1024x567.jpg)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/mangacrawlers/image/upload/v1621594630/Mangaback/839279_free-download-sword-art-online-sao-computer-wallpapers_3840x2160_h.jpg)` }}
                     >
                     </div>
                 </div>
                 <div className={isPadding ? "slider-item" : "slider-item item2"} >
                     <div className="item"
-                        style={{ backgroundImage: `url(https://imgix.kotaku.com.au/content/uploads/sites/3/2021/04/23/ihueqnelaahslncmwjpp.jpg?ar=16%3A9&auto=format&fit=crop&q=65&w=1280)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/mangacrawlers/image/upload/v1620740786/Mangaback/714324.png)` }}
                     >
                     </div>
                 </div>
                 <div className={isPadding ? "slider-item" : "slider-item item2"} >
                     <div className="item"
-                        style={{ backgroundImage: `url(https://2.bp.blogspot.com/-cvHyJJCS_II/WpB-AgiI1mI/AAAAAAAAMLI/f9pJOO0nEho7LA-7dKa0rHmXY9R8WdHQgCLcBGAs/s1600/thumb-1920-819005.jpg)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/mangacrawlers/image/upload/v1621594453/Mangaback/Free-download-Naruto-vs-Bleach-by-getsuga-rasengan-900x432-.jpg)` }}
                     >
                     </div>
                 </div>
                 <div className={isPadding ? "slider-item" : "slider-item item2"} >
                     <div className="item"
-                        style={{ backgroundImage: `url(https://static.fandomspot.com/images/09/8881/00-featured-nier-fantasy-reshade-preview-screenshot.jpg)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/mangacrawlers/image/upload/v1621594815/Mangaback/shinobu-kochou-demon-slayer-wallpaper-1920x540_70.jpg)` }}
                     >
                     </div>
                 </div>
                 <div className={isPadding ? "slider-item" : "slider-item item2"} >
                     <div className="item"
-                        style={{ backgroundImage: `url(https://media-assets-ggwp.s3.ap-southeast-1.amazonaws.com/2021/01/nierautomata-1280-1-1488398963732-640x360.jpg)` }}
+                        style={{ backgroundImage: `url(https://res.cloudinary.com/mangacrawlers/image/upload/v1621594870/Mangaback/ed004b904fad8a61094f993eab787e05.jpg)` }}
                     >
                     </div>
                 </div>
