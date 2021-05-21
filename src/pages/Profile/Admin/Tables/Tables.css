@@ -1,27 +1,78 @@
 .admin-row1 .table-user {
-    margin-bottom: 50px;
-    max-height: 500px;
-    width: 100%;
-    border: 1px solid #e8e8e8;
-    overflow: auto;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  max-height: 500px;
+  width: 100%;
+}
+
+.admin-row1 .table-user h3.ant-typography {
+  background: transparent;
+}
+
+.admin-row1 .table-user .user-table td.ant-table-cell,
+.admin-row1 .table-user .user-table th.ant-table-cell {
+  padding: 10px 15px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-row1 .table-user .user-table {
+  max-height: 500px;
+  height: 500px;
+  overflow: auto;
+}
+
+.admin-row1 .table-admin {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  max-height: 500px;
+  width: 100%;
+}
+
+.admin-row1 .table-admin .admin-table td.ant-table-cell,
+.admin-row1 .table-admin .admin-table th.ant-table-cell {
+  padding: 10px 15px;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-row1 .table-admin .admin-table {
+  max-height: 350px;
+  overflow: auto;
+  background: white;
+}
+
+td.name-col,
+td.role-col {
+  padding-top: 15px !important;
+  padding-bottom: 0 !important;
+}
+
+/* /////////////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .admin-row1 .table-user .user-table td.ant-table-cell,
+  .admin-row1 .table-user .user-table th.ant-table-cell {
+    padding: 5px 10px;
+    font-size: 12px;
   }
-  
-  .admin-row1 .table-user .user-item td.ant-table-cell,
-  .admin-row1 .table-user .user-item th.ant-table-cell {
-    padding: 10px 15px;
-    margin: 0;
+
+  .admin-row1 .table-admin .admin-table td.ant-table-cell,
+  .admin-row1 .table-admin .admin-table th.ant-table-cell {
+    padding: 5px 10px;
+    font-size: 12px;
   }
-  
-  .admin-row1 .table-admin {
-    margin-bottom: 50px;
-    max-height: 500px;
-    border: 1px solid #e8e8e8;
-    overflow: auto;
-    justify-content: flex-end;
-  }
-  
-  .admin-row1 .table-admin .admin-table-item td.ant-table-cell,
-  .admin-row1 .table-admin .admin-table-item th.ant-table-cell {
-    padding: 10px 15px;
-    margin: 0;
-  }
+}

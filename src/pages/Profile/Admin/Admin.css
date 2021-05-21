@@ -9,8 +9,18 @@
 }
 
 .admin-page .admin-row1 {
-  margin-top: 120px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  align-content: center;
+}
+
+.admin-page .admin-tabs .ant-tabs-nav{
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.admin-page .admin-tabs .ant-tabs-nav .ant-tabs-tab{
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 16px;
 }

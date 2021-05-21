@@ -71,6 +71,139 @@ export default function TableUser() {
             Role: "Regular User",
             isVerified: "Verified",
         },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
+        {
+            name: "Chau",
+            email: "bdmchau105@gamil.com",
+            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
+            Role: "Regular User",
+            isVerified: "Verified",
+        },
     ])
 
     const columns = [
@@ -84,6 +217,7 @@ export default function TableUser() {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
@@ -95,6 +229,7 @@ export default function TableUser() {
             title: 'Role',
             key: 'role',
             dataIndex: 'Role',
+            className: "name-col",
             render: text => <p>{text}</p>
         },
         {
@@ -109,11 +244,11 @@ export default function TableUser() {
             render: (text, record) => (
                 <Space size="middle">
                     <Popconfirm
-                    title="Are you sure to delete this user?"
-                    onConfirm={"confirm"}
-                    onCancel={"cancel"}
-                    okText="Yes"
-                    cancelText="No"
+                        title="Are you sure to delete this user?"
+                        onConfirm={"confirm"}
+                        onCancel={"cancel"}
+                        okText="Yes"
+                        cancelText="No"
                     >
                         <a>Remove</a>
                     </Popconfirm>
@@ -122,9 +257,10 @@ export default function TableUser() {
         },
     ];
     return (
-        <Col xxl={14} xs={24} sm={20} className="table-user">
+        <Col xxl={14} xs={23} sm={20} className="table-user">
+            <Typography.Title level={3}>Users</Typography.Title>
             <Table
-                className="user-item"
+                className="user-table"
                 columns={columns}
                 dataSource={users}
                 pagination={false}

@@ -3,10 +3,11 @@ import "../Tables/Tables.css"
 import "./Chart.css"
 import "../Admin.css"
 import { Line } from '@ant-design/charts';
-import { Button } from 'antd';
+import { Button, Col, Dropdown, Menu } from 'antd';
 
 
 export default function UserChart() {
+    const chartRef = useRef();
     const data = [
         {
             month: '01',
@@ -57,20 +58,45 @@ export default function UserChart() {
             },
         },
     };
-    const ref = useRef();
 
     // export image
     const downloadImage = () => {
-        ref.current?.downloadImage();
+        chartRef.current?.downloadImage();
     };
 
+    const menuDropDown = (
+        <Menu>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                    2019
+            </a>
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                    2020
+            </a>
+            </Menu.Item>
+            <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                    2021
+            </a>
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
-        <div>
+        <Col xxl={14} xs={23} sm={20} className="user-chart">
             <Button type="button" onClick={downloadImage} style={{ marginRight: 24 }}>
                 Export image
             </Button>
-            <Line {...config} chartRef={ref} />
-        </div>
+            <Line className="chart" {...config} chartRef={chartRef} />
+
+            <Dropdown overlay={menuDropDown} trigger={['click']}>
+                <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    2021
+                </Button>
+            </Dropdown>
+        </Col>
     );
 
 }

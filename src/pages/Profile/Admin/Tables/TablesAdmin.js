@@ -36,6 +36,7 @@ export default function TablesAdmin() {
             title: 'Name',
             dataIndex: 'name',
             key: 'name',
+            className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
@@ -46,12 +47,13 @@ export default function TablesAdmin() {
     ];
 
     return (
-        <Col xxl={6} xs={24} sm={11} xl={9} className="table-admin">
-            <Table 
-            className="admin-table-item"
-            columns={columns} 
-            dataSource={admins} 
-            pagination={false} 
+        <Col  xxl={14} xs={23} sm={20} className="table-admin">
+            <Typography.Title level={3}>Administrators</Typography.Title>
+            <Table
+                className="admin-table"
+                columns={columns}
+                dataSource={admins}
+                pagination={false}
             />
         </Col>
 
