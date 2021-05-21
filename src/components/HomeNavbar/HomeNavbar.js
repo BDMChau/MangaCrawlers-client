@@ -7,20 +7,6 @@ import TransitionAnimate from '../Animation/transition';
 
 function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
     const [searchValue, setSearchValue] = useState("")
-    const [results, setResults] = useState([])
-
-
-    useEffect(() => {
-        if (searchResults) {
-            setResults(searchResults)
-        }
-    }, [searchResults])
-
-    useEffect(() => {
-        if (searchValue === "") {
-            setResults([])
-        }
-    }, [searchValue])
 
 
     return (
@@ -41,13 +27,13 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
             </Menu>
 
 
-            <div className="result-box" style={{ height: searchValue ? results.length ? "350px" : "200px" : "unset" }} >
+            <div className="result-box" style={{ height: searchValue ? searchResults.length ? "350px" : "200px" : "unset" }} >
                 {searchValue
-                    ? results.length
+                    ? searchResults.length
                         ? <TransitionAnimate renderPart={
                             <List
                                 className="searching-list"
-                                dataSource={results}
+                                dataSource={searchResults}
                                 renderItem={manga => (
                                     <List.Item className="searching-item" id={manga.id}>
                                         <img className="img" src={manga.thumbnail} alt="" />

@@ -82,6 +82,7 @@ function HomeService() {
             if (response) {
                 if (response.content.err) {
                     setSearchResults([])
+                    setIsLoadingSearch(false);
                     return;
                 }
 
