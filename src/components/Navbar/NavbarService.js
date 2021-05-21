@@ -4,7 +4,6 @@ import TopNav from './TopNav'
 import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/slices/UserSlice";
 import genreApi from '../../api/apis/genreApi';
-import { notification_success } from '../notifications/notification';
 import { message_success } from '../notifications/message';
 
 const cookies = new Cookies()

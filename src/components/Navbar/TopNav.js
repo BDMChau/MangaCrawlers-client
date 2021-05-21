@@ -5,21 +5,16 @@ import logo from "../../assets/logo/logo2.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
 
-import { Layout, Menu, Button, Drawer, Dropdown } from "antd";
+import { Layout, Menu, Button, Drawer } from "antd";
 import { NavLink, useHistory } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
 
 import UserProfile from "../../pages/Profile/UserProfile/UserProfile";
-import GenresList from "../../helpers/GenresList";
-import Cookies from 'universal-cookie';
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
 
-
-
-const cookies = new Cookies()
 
 
 function TopNav({ handleLogOut, genres }) {

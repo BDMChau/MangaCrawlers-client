@@ -11,6 +11,7 @@ import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
 import FooterContainer from "./components/Footer/Footer";
 import NavbarService from "./components/Navbar/NavbarService";
 import CheckingScrollEvent from "./components/Checking/CheckingScrollEvent";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
 const Routing = () => {
@@ -65,6 +66,11 @@ export default function App() {
 
           <CheckingScrollEvent scrollYPosition={scrollYPosition} />
           <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+          <MessengerCustomerChat
+            pageId="101341455476510"
+            appId="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"
+            htmlRef="<REF_STRING>"
+          />,
         </Suspense >
 
         {/* </Layout>
