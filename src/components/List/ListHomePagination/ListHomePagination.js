@@ -3,7 +3,7 @@ import "./ListHomePagination.css";
 import { Col, Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { useHistory } from 'react-router';
-import arrayMethods from '../../../helpers/arrayMethods';
+// import arrayMethods from '../../../helpers/arrayMethods';
 import { NavLink } from 'react-router-dom';
 
 const { Meta } = Card;
@@ -22,8 +22,8 @@ function ListHomePagination({ mangas }) {
         } else {
             setIsLoading(false)
 
-            const shuffledList = arrayMethods.shuffle(mangas);
-            setData(shuffledList)
+            // const shuffledList = arrayMethods.shuffle(mangas);
+            setData(mangas)
         }
     }, [mangas])
 

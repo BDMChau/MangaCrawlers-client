@@ -68,7 +68,7 @@ export default function App() {
           <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
           <MessengerCustomerChat
             pageId="101341455476510"
-            appId=""
+            appId="496491375126587"
             htmlRef="<REF_STRING>"
           />,
         </Suspense >
