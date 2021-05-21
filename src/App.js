@@ -69,7 +69,6 @@ export default function App() {
           <MessengerCustomerChat
             pageId="101341455476510"
             appId="496491375126587"
-            htmlRef="<REF_STRING>"
           />,
         </Suspense >
 
