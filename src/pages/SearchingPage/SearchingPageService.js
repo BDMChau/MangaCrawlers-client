@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import genreApi from '../../api/apis/genreApi';
 import SearchingPage from './SearchingPage';
-import arrayMethods from "../../helpers/arrayMethods";
 
 export default function SearchingPageService() {
     const query = new URLSearchParams(useLocation().search);
@@ -27,8 +26,8 @@ export default function SearchingPageService() {
             genres.forEach(genre => {
                 genre.isSelected = false;
             });
-            const shuffledGenres = arrayMethods.shuffle(genres);
-            setData(shuffledGenres);
+            // const shuffledGenres = arrayMethods.shuffle(genres);
+            setData(genres);
 
             return;
         } catch (error) {

@@ -68,8 +68,6 @@ export default function App() {
           <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
           <MessengerCustomerChat
             pageId="101341455476510"
-            appId="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"
-            htmlRef="<REF_STRING>"
           />,
         </Suspense >
 
