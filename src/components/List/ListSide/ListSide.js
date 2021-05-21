@@ -14,9 +14,9 @@ function ListSide({ mangas, height }) {
     useEffect(() => {
         if (mangas) {
             // const shuffledList = arrayMethods.shuffle(mangas);
-            if (shuffledList.length > 5) {
-                shuffledList.length = 5
-            }
+            // if (shuffledList.length > 5) {
+            //     shuffledList.length = 5
+            // }
 
             setData(mangas)
         }
