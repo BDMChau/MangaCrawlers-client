@@ -9,10 +9,10 @@ import { useDispatch } from "react-redux";
 export default function ChapterService() {
     const dispatch = useDispatch();
     const { mangaid, chapterid } = useParams();
-    const [id, setId] = useState(chapterid);
     const [imgs, setImgs] = useState([]);
     const [chapters, setChapters] = useState([]);
     const [chapterInfo, setChapterInfo] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getDataChapter();
@@ -21,10 +21,21 @@ export default function ChapterService() {
     }, [])
 
     useEffect(() => {
+        setImgs([]);
+        setChapters([]);
+        setChapterInfo({
+            chapter_id: "",
+            chapter_number: "",
+            chapter_name: "",
+            views: "",
+            createdAt: ""
+        })
+
         getDataChapter();
     }, [chapterid])
 
     const getDataChapter = async () => {
+        setIsLoading(true);
         const data = {
             manga_id: mangaid,
             chapter_id: chapterid,
@@ -43,6 +54,7 @@ export default function ChapterService() {
                     views: "",
                     createdAt: ""
                 })
+                setIsLoading(false)
                 return;
             }
 
@@ -58,6 +70,7 @@ export default function ChapterService() {
             setChapters(chapters)
             setImgs(response.content.listImg)
             setChapterInfo(response.content.chapterInfo)
+            setIsLoading(false)
         } catch (err) {
             console.log(err)
         }
@@ -69,6 +82,7 @@ export default function ChapterService() {
                 imgs={imgs}
                 chapters={chapters}
                 chapterInfo={chapterInfo}
+                isLoading={isLoading}
             />
         </div>
     )

@@ -10,6 +10,7 @@ import LoadingPage from './components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from './components/Button/ScrollTopBtn/ScrollTopBtn';
 import FooterContainer from "./components/Footer/Footer";
 import NavbarService from "./components/Navbar/NavbarService";
+import CheckingScrollEvent from "./components/Checking/CheckingScrollEvent";
 
 
 const Routing = () => {
@@ -30,6 +31,7 @@ const Routing = () => {
 
 export default function App() {
   const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState()
+  const [scrollYPosition, setScrollYPosition] = useState()
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => handleScroll(e));
@@ -37,11 +39,16 @@ export default function App() {
   }, [])
 
   const handleScroll = (e) => {
-    // console.log(window.scrollY)
     if (window.scrollY === 0) {
-      setIsVisibleScrollTopBtn(false)
+      setIsVisibleScrollTopBtn(false);
     } else {
-      setIsVisibleScrollTopBtn(true)
+      setIsVisibleScrollTopBtn(true);
+    }
+
+    if (window.scrollY >= 86) {
+      setScrollYPosition(true);
+    } else {
+      setScrollYPosition(false)
     }
   }
 
@@ -55,6 +62,8 @@ export default function App() {
         <Suspense fallback={<LoadingPage />}>
           {Routing()}
           <FooterContainer />
+
+          <CheckingScrollEvent scrollYPosition={scrollYPosition} />
           <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
         </Suspense >
 

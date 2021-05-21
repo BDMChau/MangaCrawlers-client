@@ -5,11 +5,11 @@
   align-items: center;
 }
 
-.loading-circle .circle{
+.loading-circle .circle {
   color: #52606fc7;
 }
 
-.loading-circle .circle svg{
+.loading-circle .circle svg {
   color: transparent;
   border-radius: 50px;
   border: 3px solid #75808d;

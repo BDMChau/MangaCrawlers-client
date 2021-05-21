@@ -11,13 +11,13 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
 
 
     useEffect(() => {
-        if(searchResults){
+        if (searchResults) {
             setResults(searchResults)
         }
     }, [searchResults])
 
     useEffect(() => {
-        if(searchValue === ""){
+        if (searchValue === "") {
             setResults([])
         }
     }, [searchValue])
@@ -30,7 +30,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
                     <Input.Search
                         className="searching-box"
                         placeholder="Search your manga..."
-                        size={'medium'}
+                        size={'large'}
                         loading={isLoadingSearch}
                         value={searchValue}
                         allowClear
@@ -42,7 +42,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
 
 
             <div className="result-box" style={{ height: searchValue ? results.length ? "350px" : "200px" : "unset" }} >
-                {searchValue 
+                {searchValue
                     ? results.length
                         ? <TransitionAnimate renderPart={
                             <List

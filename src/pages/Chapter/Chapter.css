@@ -5,9 +5,10 @@
 }
 
 .chapter .dropdown-chapter {
-  margin: 20px auto;
-  position: relative;
   display: flex;
+  width: 100%;
+  z-index: 999;
+  transition: 0.5s;
 }
 
 .chapter .dropdown-chapter .dropdown-items {
@@ -17,7 +18,6 @@
   background-color: #e3e5e8;
   padding: 5px 6px;
   cursor: pointer;
-  font-size: 22px;
   color: black;
   white-space: nowrap;
   overflow: hidden;
@@ -31,6 +31,7 @@
   text-overflow: ellipsis;
   max-width: 60%;
   width: 100%;
+  padding: 6px 0px;
 }
 
 .dropdown-item-chapter-page .dropdown-item-title .title-time {
@@ -56,8 +57,8 @@
 
 .dropdown-item-chapter-page {
   text-align: center;
-  padding: 8px 0;
-  margin: 5px 0;
+  padding: 0;
+  margin: 0;
   font-size: 20px;
 }
 
@@ -69,7 +70,6 @@
 
 .chapter .chapter-pages {
   text-align: center;
-  margin: 70px 0;
 }
 
 .chapter .chapter-pages .page {
@@ -90,6 +90,14 @@
 
 .chapter .chapter-footer {
   margin-top: 50px;
+}
+
+.chapter-pages .skeleton-img h3.ant-skeleton-title {
+  margin: auto;
+  max-height: 500px;
+  max-width: 90vw;
+  width: 90% !important;
+  height: 500px;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 413px) {
@@ -121,6 +129,7 @@
   }
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
+    max-width: 350px;
     width: 350px;
     text-align: center;
     margin-left: 12.5px;
@@ -131,7 +140,7 @@
   .chapter .dropdown-chapter .dropdown-items {
     font-size: 16px;
   }
-  
+
   .chapter .dropdown-chapter .btn-prev,
   .chapter .dropdown-chapter .btn-next,
   .chapter .dropdown-chapter .btn-home,
@@ -156,8 +165,35 @@
   }
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
+    max-width: 350px;
     width: 350px;
     text-align: center;
-    margin-left: 33px;
+    margin-left: 30px;
+  }
+}
+
+/* ///////////////////////// */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
+    max-width: 581px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .ant-dropdown.ant-dropdown-placement-bottomLeft {
+    left: 653px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
+    max-width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
+    max-width: 450px;
+    left: -42px;
   }
 }

@@ -3,50 +3,29 @@ import React, { useState, useEffect } from 'react'
 import "./Chapter.css"
 import CommentForm from '../../components/CommentForm/CommentForm';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined } from "@ant-design/icons";
-import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 
 
-export default function Chapter({ imgs, chapters, chapterInfo }) {
+export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
     const mangaState = useSelector(state => state.mangaState);
+    const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
+    const [isFixedMenu, setIsFixedMenu] = useState(false);
+    const styledFixed = {
+        margin: "0 auto",
+        position: "fixed",
+        top: "3px"
+    }
+    const styledRelative = {
+        margin: "20px auto",
+        position: "relative",
+        top: "0"
+    }
 
-    const Spinner = () => (
-        <div className="spinner-lazyloading">
-            <svg
-                width="80"
-                height="80"
-                viewBox="0 0 100 100"
-                preserveAspectRatio="xMidYMid"
-            >
-                <circle
-                    cx="50"
-                    cy="50"
-                    fill="none"
-                    stroke="none"
-                    strokeWidth="0"
-                    r="35"
-                    strokeDasharray="164.93361431346415 56.97787143782138"
-                    transform="rotate(275.845 50 50)"
-                >
-                    <animateTransform
-                        attributeName="transform"
-                        type=""
-                        calcMode="linear"
-                        values="0 50 50;360 50 50"
-                        keyTimes="0;1"
-                        dur="1s"
-                        begin="0s"
-                        repeatCount="indefinite"
-                    />
-                </circle>
-            </svg>
-        </div>
-    );
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -54,8 +33,14 @@ export default function Chapter({ imgs, chapters, chapterInfo }) {
             top: 0,
             behavior: "smooth"
         });
-    }, [])
+    }, [imgs])
 
+
+    useEffect(() => {
+        if (stuffsState[0] === "isFixedTrue") {
+
+        }
+    })
 
 
 
@@ -79,24 +64,24 @@ export default function Chapter({ imgs, chapters, chapterInfo }) {
 
     return (
         <Row justify={"center"} className="chapter">
-            <Col span={23} sm={13} md={20} xxl={10} className="dropdown-chapter">
+            <Col span={23} sm={13} md={20} xxl={10} className="dropdown-chapter" style={stuffsState[0] === "true" ? styledFixed : styledRelative}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
                         <NavLink to={`/manga/${mangaId}`}>
-                            <HomeOutlined style={{ fontSize: "22px" }} />
+                            <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>
                 </Tooltip>
 
                 <Tooltip title="Previous Chap">
                     <Button className="btn-next">
-                        <LeftOutlined style={{ fontSize: "22px" }} />
+                        <LeftOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
-                <Tooltip title="Chapters">
-                    <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']}>
-                        <a title="" onClick={e => e.preventDefault()}>
+                <Tooltip title={chapterName ? chapterName : chapterInfo.chapter_name}>
+                    <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']} >
+                        <a title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }}>
                             {chapterName ? chapterName : chapterInfo.chapter_name}
                         </a>
                     </Dropdown>
@@ -104,18 +89,19 @@ export default function Chapter({ imgs, chapters, chapterInfo }) {
 
                 <Tooltip title="Next Chap">
                     <Button className="btn-prev">
-                        <RightOutlined style={{ fontSize: "22px" }} />
+                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
                 <Tooltip title="Add to Favorite">
                     <Button className="btn-add-favor">
-                        <AppstoreAddOutlined style={{ fontSize: "22px" }} />
+                        <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
             </Col>
 
-            <ImgsChapter imgs={imgs} />
+            <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
+            
 
             <Col span={23} xxl={14} className="chapter-comment">
                 <CommentForm />
