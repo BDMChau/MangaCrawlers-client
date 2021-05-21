@@ -9,7 +9,9 @@ const axiosClient = axios.create({
     headers: {
         'Content-type': 'application/json',
     },
-    paramsSerializer: params => queryString.stringify(params)
+    paramsSerializer: params => {
+        queryString.stringify(params)
+    }
 });
 
 axiosClient.interceptors.request.use((config) => {
@@ -18,9 +20,9 @@ axiosClient.interceptors.request.use((config) => {
 
 axiosClient.interceptors.response.use((res) => {
     if (res || res.data) {
-        if(res.data.http_code){
+        if (res.data.http_code) {
             code2xxCheking(res.data.http_code, res.data.content.msg)
-        } else if(res.status){
+        } else if (res.status) {
             code2xxCheking(res.status, res.config.url)
         }
         return res.data

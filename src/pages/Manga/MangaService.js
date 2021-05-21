@@ -19,10 +19,10 @@ function MangaService() {
 
     const getMangaData = async () => {
         try {
-            const data = {
-                manga_id: id
+            const params = {
+                manga_id: id,
             }
-            const response = await mangaApi.getManga(data);
+            const response = await mangaApi.getManga(params);
             console.log(response)
             if (response.content.err) {
                 return;
