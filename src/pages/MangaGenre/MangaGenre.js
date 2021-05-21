@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./MangaGenre.css"
 import { Col, Row, Typography, Divider, Tag, Tooltip, Button } from 'antd'
 import ListGenrePagination from '../../components/List/ListGenrePagination/ListGenrePagination'
