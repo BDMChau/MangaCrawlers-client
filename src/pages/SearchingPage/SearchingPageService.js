@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import genreApi from '../../api/apis/genreApi';
 import SearchingPage from './SearchingPage';
-import arrayMethod from "../../helpers/arrayMethods";
+import arrayMethods from "../../helpers/arrayMethods";
 
 export default function SearchingPageService() {
     const query = new URLSearchParams(useLocation().search);
@@ -27,7 +27,7 @@ export default function SearchingPageService() {
             genres.forEach(genre => {
                 genre.isSelected = false;
             });
-            const shuffledGenres = arrayMethod.shuffle(genres);
+            const shuffledGenres = arrayMethods.shuffle(genres);
             setData(shuffledGenres);
 
             return;
@@ -57,15 +57,14 @@ export default function SearchingPageService() {
         }
     }
 
-    return ( <
-        div >
-        <
-        SearchingPage data = { data }
+    return ( 
+    <div>
+        <SearchingPage data = { data }
         dataName = { dataName }
         handleClickTag = {
             (genre) => handleClickTag(genre)
         }
-        /> < /
-        div >
+        /> 
+        </div>
     )
 }
