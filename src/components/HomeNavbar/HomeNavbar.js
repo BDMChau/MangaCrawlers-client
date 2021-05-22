@@ -3,6 +3,7 @@ import { Col, Menu, Input, Empty } from 'antd'
 import "./HomeNavbar.css"
 import { List, Typography } from 'antd';
 import TransitionAnimate from '../Animation/transition';
+import { NavLink } from 'react-router-dom';
 
 
 function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
@@ -35,19 +36,22 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
                                 className="searching-list"
                                 dataSource={searchResults}
                                 renderItem={manga => (
-                                    <List.Item className="searching-item" id={manga.id}>
-                                        <img className="img" src={manga.thumbnail} alt="" />
-                                        <div className="text">
-                                            <Typography.Text className="manga">{manga.manga_name}</Typography.Text>
-                                            <Typography.Text className="author">{manga.views ? manga.views : "0"} views</Typography.Text>
-                                        </div>
+                                    <List.Item id={manga.manga_id}>
+                                        <NavLink to={`/manga/${manga.manga_id}`} className="searching-item">
+                                            <img className="img" src={manga.thumbnail} alt="" />
+                                            <div className="text">
+                                                <Typography.Text className="manga-name">{manga.manga_name}</Typography.Text>
+                                                <Typography.Text className="view">{manga.views ? manga.views : "0"} views</Typography.Text>
+                                            </div>
+                                        </NavLink>
                                     </List.Item>
                                 )} />
                         } transitionTime={0.3} />
                         : <TransitionAnimate renderPart={
                             <div style={{ height: "unset" }} >
                                 <Empty
-                                    style={{ marginTop: "20px", color: "#8a8d92" }}
+                                    style={{ marginTop: "40px", color: "#8a8d92" }}
+                                    image={Empty.PRESENTED_IMAGE_SIMPLE}
                                     description="Seem nothing like you're looking for :("
                                 />
                             </div>

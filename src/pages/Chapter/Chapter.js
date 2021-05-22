@@ -58,8 +58,9 @@ export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
 
     return (
         <Row justify={"center"} className="chapter">
+            <Typography.Title level={2} className="title">Manga Name</Typography.Title>
             {stuffsState[0] === "true"
-                ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "40px", marginTop:"10px" }}></Col>
+                ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "44px", marginTop: "10px" }}></Col>
                 : ""
             }
             <Col span={23} sm={13} md={20} xxl={10} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>

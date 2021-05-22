@@ -98,7 +98,6 @@
 
 .home-menu ul.searching-list {
   position: absolute;
-  background: white;
   width: 100%;
   border: 1px solid #dbd9d9;
   border-radius: 3px;
@@ -114,15 +113,23 @@
   }
 }
 
-.home-menu .searching-list li.searching-item {
-  padding: 10px 10px;
+.home-menu .searching-list li {
+  padding: 5px 2px;
+}
+
+.home-menu .searching-list a.searching-item {
+  padding: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  border-radius: 3px;
+  transition: 0.3s;
 }
 
-.home-menu .searching-list li.searching-item:hover {
-  background: red;
+.home-menu .searching-list a.searching-item:hover {
+  background: #f1f1f1;
+  
 }
 
 .home-menu .searching-item img.img {

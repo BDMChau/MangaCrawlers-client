@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
-import { Typography } from 'antd';
+import { Empty, Typography } from 'antd';
 import { useHistory } from 'react-router';
 import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
 import { useDispatch } from "react-redux";
@@ -26,12 +26,18 @@ function ListChapters({ chapters, mangaId, height }) {
         >
             {isLoading
                 ? <LoadingCircle />
-                : chapters.map((chapter, i) => (
-                    <NavLink className="list-chapter-item" id={chapter.chapter_id} to={`/chapter/${mangaId}/${chapter.chapter_id}`} onClick={() => goToChapterPage(chapter.chapter_id)} >
-                        <Typography.Text>{chapter.chapter_name}</Typography.Text>
-                        <Typography.Text>{chapter.createdAt}</Typography.Text>
-                    </NavLink>
-                ))
+                : chapters.length
+                    ? chapters.map((chapter, i) => (
+                        <NavLink className="list-chapter-item" id={chapter.chapter_id} to={`/chapter/${mangaId}/${chapter.chapter_id}`} onClick={() => goToChapterPage(chapter.chapter_id)} >
+                            <Typography.Text>{chapter.chapter_name}</Typography.Text>
+                            <Typography.Text>{chapter.createdAt}</Typography.Text>
+                        </NavLink>
+                    ))
+                    : <Empty 
+                    style={{ marginTop: "120px", color: "#8a8d92" }}
+                    image={Empty.PRESENTED_IMAGE_SIMPLE} 
+                    description="No Chapters :(" 
+                    />
             }
         </ul>
     )

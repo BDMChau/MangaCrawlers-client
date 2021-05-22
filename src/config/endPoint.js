@@ -1,6 +1,6 @@
 const endPoint = {
     local: "http://localhost:4000/",
-    product: ""
+    product: "https://mangaclawers-server.herokuapp.com/"
 }
 
 
