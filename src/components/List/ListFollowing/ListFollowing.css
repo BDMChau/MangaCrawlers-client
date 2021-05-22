@@ -1,0 +1,118 @@
+.list-following {
+  justify-content: center;
+  background: #fff;
+}
+
+.list-following .ant-spin-nested-loading {
+  height: fit-content;
+}
+
+.list-following ul.ant-list-items {
+  display: flex;
+  padding: 5px 0px;
+  flex-wrap: wrap;
+}
+
+.list-following ul.ant-list-items .item {
+  padding: 10px 10px;
+  margin: 0 10px;
+  display: flex;
+  /* box-shadow: 0 0 5px 0 #00000026;
+  margin-bottom: 20px;
+  border-radius: 3px; */
+}
+
+.list-following .ant-list-pagination {
+  float: left;
+  margin-left: 20px;
+  margin-top: 50px;
+  height: 60px;
+}
+
+.list-following .item .item-img {
+  width: 120px;
+  cursor: pointer;
+}
+
+.list-following .item .item-img .img {
+  height: 100%;
+}
+
+.list-following .item .item-title {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 135px;
+}
+
+.list-following .item .item-title .item-manga {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.list-following .item .item-title .item-manga .manga-name,
+.list-following .item .item-title .item-manga .author-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-following .item .item-title .item-chapter {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  width: 140px;
+}
+
+.list-following .item .item-title .item-chapter .chapter-name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-following .item .item-chapter .created-at{
+  color: grey;
+  font-size: 11px;
+}
+
+/* /////////////// */
+/* @media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 414px) and (max-width: 600px) {
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .list-following .ant-spin-nested-loading {
+    height: 1200px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .list-following .ant-spin-nested-loading {
+    height: 750px;
+  }
+  .list-following .ant-list-pagination {
+    float: left;
+    margin-left: 20px;
+    margin-top: 50px;
+    height: 400px;
+  }
+
+  .list-following .item .item-img {
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .list-following .ant-spin-nested-loading {
+    height: 950px;
+  }
+} */

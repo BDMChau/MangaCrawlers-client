@@ -12,8 +12,6 @@ export default function MangaGenresService() {
     }, [])
 
     return (
-        <div>
             <MangaGenres />
-        </div>
     )
 }

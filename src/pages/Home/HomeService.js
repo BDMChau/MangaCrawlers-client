@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/mangaApi"
 import Home from './Home'
 import dayjs from 'dayjs'
-import { debounce, throttle } from 'lodash'
+import { debounce } from 'lodash'
 
 function HomeService() {
     const [isLoadingSearch, setIsLoadingSearch] = useState(false)

@@ -34,7 +34,6 @@
   margin-bottom: 50px;
 }
 
-
 .home-middle .home-side .top-manga {
   margin-top: 30px;
 }
@@ -85,6 +84,11 @@
   margin-top: 40px;
 }
 
+.home .wallpaper {
+  height: 550px;
+  margin-bottom: 40px;
+}
+
 @media only screen and (min-width: 1200px) {
   .home-middle-wrap {
     margin: 0 250px;
@@ -101,12 +105,12 @@
   .home-middle-wrap {
     margin: 0 50px;
   }
-  
-  .ant-col-md-8{
+
+  .ant-col-md-8 {
     max-width: 40%;
   }
 
-  .home-spacing-top{
+  .home-spacing-top {
     margin-left: -13px;
   }
 }

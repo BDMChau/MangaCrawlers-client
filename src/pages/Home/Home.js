@@ -77,7 +77,7 @@ export default function Home({latestMangas, topMangas, weeklyMangas, searchResul
                             <Spacing />
                         </Col>
 
-                        <Col span={16} md={21} xl={17} xxl={21} className="recommended">
+                        <Col span={16} md={21} xl={17} xxl={21} className="wallpaper">
                             <h2>Wallpaper</h2>
                             <CarouselVertical />
                         </Col>

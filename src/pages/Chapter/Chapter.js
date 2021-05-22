@@ -18,7 +18,8 @@ export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
     const styledFixed = {
         margin: "0 auto",
         position: "fixed",
-        top: "3px"
+        top: "3px",
+        animation: "moveDown 0.5s ease-in-out"
     }
     const styledRelative = {
         margin: "20px auto",
@@ -34,13 +35,6 @@ export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
             behavior: "smooth"
         });
     }, [imgs])
-
-
-    useEffect(() => {
-        if (stuffsState[0] === "isFixedTrue") {
-
-        }
-    })
 
 
 
@@ -64,24 +58,28 @@ export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
 
     return (
         <Row justify={"center"} className="chapter">
-            <Col span={23} sm={13} md={20} xxl={10} className="dropdown-chapter" style={stuffsState[0] === "true" ? styledFixed : styledRelative}>
+            {stuffsState[0] === "true"
+                ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "40px", marginTop:"10px" }}></Col>
+                : ""
+            }
+            <Col span={23} sm={13} md={20} xxl={10} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
                         <NavLink to={`/manga/${mangaId}`}>
-                            <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
+                            <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>
                 </Tooltip>
 
                 <Tooltip title="Previous Chap">
                     <Button className="btn-next">
-                        <LeftOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
+                        <LeftOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
                 <Tooltip title={chapterName ? chapterName : chapterInfo.chapter_name}>
                     <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']} >
-                        <a title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }}>
+                        <a title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }}>
                             {chapterName ? chapterName : chapterInfo.chapter_name}
                         </a>
                     </Dropdown>
@@ -89,19 +87,19 @@ export default function Chapter({ imgs, chapters, chapterInfo, isLoading }) {
 
                 <Tooltip title="Next Chap">
                     <Button className="btn-prev">
-                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
+                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
                 <Tooltip title="Add to Favorite">
                     <Button className="btn-add-favor">
-                        <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "16px" : "22px", transition: "0.5s" }} />
+                        <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
             </Col>
 
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
-            
+
 
             <Col span={23} xxl={14} className="chapter-comment">
                 <CommentForm />

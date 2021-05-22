@@ -101,6 +101,7 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                     <Button
                         className="following-btn"
                         type="primary"
+                        onClick={() => history.push("/user")}
                     >
                         <UnorderedListOutlined style={{ fontSize: "18px" }} />
                         Following Manga

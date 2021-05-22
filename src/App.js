@@ -12,6 +12,7 @@ import FooterContainer from "./components/Footer/Footer";
 import NavbarService from "./components/Navbar/NavbarService";
 import CheckingScrollEvent from "./components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+import Layout, { Content, Footer, Header } from "antd/lib/layout/layout";
 
 
 const Routing = () => {
@@ -46,35 +47,39 @@ export default function App() {
       setIsVisibleScrollTopBtn(true);
     }
 
-    if (window.scrollY >= 86) {
-      setScrollYPosition(true);
+    if (window.scrollY <= 100) {
+      setScrollYPosition(false);
     } else {
-      setScrollYPosition(false)
+      setScrollYPosition(true)
     }
   }
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        {/* <Layout theme="light" style={{ minHeight: '100vh' }}>
-          <Layout className="site-layout"> */}
-        <NavbarService />
+      <Suspense fallback={<LoadingPage />}>
 
-        <Suspense fallback={<LoadingPage />}>
-          {Routing()}
-          <FooterContainer />
+        <BrowserRouter>
 
-          <CheckingScrollEvent scrollYPosition={scrollYPosition} />
-          <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-          <MessengerCustomerChat
-            pageId="101341455476510"
-            appId="496491375126587"
-          />,
-        </Suspense >
+          <Layout>
+            <NavbarService />
 
-        {/* </Layout>
-        </Layout> */}
-      </BrowserRouter>
+            <Content style={{ minHeight: "100vh", background: "#fff" }}>
+              {Routing()}
+            </Content>
+
+            <CheckingScrollEvent scrollYPosition={scrollYPosition} />
+            <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+            <MessengerCustomerChat
+              pageId="101341455476510"
+              appId="496491375126587"
+            />
+
+            <FooterContainer />
+          </Layout>
+
+        </BrowserRouter>
+      </Suspense >
+
     </Provider>
   )
 }

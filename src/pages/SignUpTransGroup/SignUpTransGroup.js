@@ -106,10 +106,10 @@ export default function SignUpTransGroup() {
                             }]}
                         >
                             <Checkbox className="checkbox-accept-terms" onChange={(e) => setIsCheckedRules(e.target.checked)} >
-                                <Typography.Text style={{ marginRight: "2.5px" }} >I understand and agree to</Typography.Text>
+                                <Typography.Text style={{ marginRight: "2.5px" }} >I understand and accept the</Typography.Text>
 
                                 <Popover className="popover-checkbox" content={renderRules} trigger="click" overlayStyle={{ width: "75vw", maxHeight: "500px", overflowY: "auto" }} >
-                                    Terms of Service and Private Policy
+                                    MangaCrawlers Terms
                                 </Popover>
                             </Checkbox>
 

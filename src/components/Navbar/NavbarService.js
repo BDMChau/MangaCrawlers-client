@@ -5,6 +5,7 @@ import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/slices/UserSlice";
 import genreApi from '../../api/apis/genreApi';
 import { message_success } from '../notifications/message';
+import { Header } from 'antd/lib/layout/layout';
 
 const cookies = new Cookies()
 
@@ -38,12 +39,10 @@ function NavbarService() {
     }
 
     return (
-        <div>
             <TopNav
                 handleLogOut={handleLogOut}
                 genres={genres}
             />
-        </div>
     )
 }
 

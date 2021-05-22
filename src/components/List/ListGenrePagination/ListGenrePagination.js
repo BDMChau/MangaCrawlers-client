@@ -73,9 +73,9 @@ function ListGenrePagination({mangas}) {
                     onChange: () => {
                         console.log("page");
                     },
-                    pageSize: pageSize,
+                    pageSize: 12,
                     defaultCurrent: 1,
-                    total: mangas.length,
+                    total: 10,
                     // total: listChapters.length,
                 }}
                 dataSource={mangas}

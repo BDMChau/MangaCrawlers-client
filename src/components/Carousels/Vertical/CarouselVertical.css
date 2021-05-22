@@ -1,12 +1,10 @@
-.slider-vertical{
-  margin-bottom: 10px;
+.slider-vertical {
 }
 
 .slider-vertical .slider {
-  width: 100%;
-  height: auto;
   overflow-y: hidden;
   overflow-x: hidden;
+  height: 500px;
 }
 
 .slider-vertical .slider .slick-dots {
@@ -21,7 +19,6 @@
 
 .slider-vertical .slider .slider-item {
   width: 100%;
-  height: 25px;
   padding: 0px 4px;
 }
 

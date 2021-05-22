@@ -1,3 +1,4 @@
+import { Content } from 'antd/lib/layout/layout';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router';
 import mangaApi from '../../api/apis/mangaApi';
@@ -55,11 +56,9 @@ export default function MangaGenreService() {
 
 
     return (
-        <div>
             <MangaGenre
                 genre={genre}
                 mangas={mangas}
             />
-        </div>
     )
 }

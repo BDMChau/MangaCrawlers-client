@@ -10,7 +10,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
 
-import UserProfile from "../../pages/Profile/UserProfile/UserProfile";
+import UserProfile from "../../pages/User/UserProfile/UserProfile";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;

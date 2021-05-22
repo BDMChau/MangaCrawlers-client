@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import "./Admin.css"
 import "./Tables/Tables.css"
 import "./Charts/Chart.css"
-import { Table, Tag, Space, Col, Row, Typography } from 'antd';
+import { Table, Tag, Space, Col, Row, Typography, Tabs, Radio } from 'antd';
 import { Avatar } from 'antd';
 import UserTable from './Tables/UserTable';
 import AdminTable from './Tables/AdminTable';
 import UserChart from './Charts/UserChart';
-import { Tabs, Radio } from 'antd';
 import MangaTable from './Tables/MangaTable';
 import MangaChart from './Charts/MangaChart';
 import TransGrTable from './Tables/TransGrTable';
