@@ -1,7 +1,6 @@
 .searching-page {
   background-color: white;
   overflow: hidden;
-  height: 100vh;
   border-radius: 3px;
 }
 
@@ -10,6 +9,7 @@
   width: 100%;
   text-align: center;
   background: #f0f2f5;
+  min-height: 100vh;
 }
 
 .searching-page .add-panel .selected-tags {
@@ -19,10 +19,10 @@
 .searching-page .tags-wrapper {
   margin: 0 auto;
   margin-top: 60px;
-  background: #f0f2f5;
+  margin-bottom: 50px;
   width: 80%;
   cursor: default;
-  height: 600px;
+  /* height: 600px; */
 }
 
 .searching-page .tags-wrapper .item-tag {
@@ -49,10 +49,6 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .searching-page {
-    height: unset;
-    margin-bottom: 50px;
-  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 376px) {

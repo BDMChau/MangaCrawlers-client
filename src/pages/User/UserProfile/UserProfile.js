@@ -7,6 +7,7 @@ import { message_success } from '../../../components/notifications/message';
 import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 export default function UserProfile({ visible, closeProfileDrawer }) {
     const userState = useSelector((state) => state.userState);
@@ -91,37 +92,44 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
 
                 <div className="interact">
                     <Button
-                        className="history-btn"
                         type="primary"
+
                     >
-                        <HistoryOutlined style={{ fontSize: "18px" }} />
-                        Your History
+                        <NavLink className="history-btn" to="/user?v=history">
+                            <HistoryOutlined style={{ fontSize: "18px" }} />
+                            &#160;
+                            Your History
+                       </NavLink>
                     </Button>
 
                     <Button
-                        className="following-btn"
                         type="primary"
-                        onClick={() => history.push("/user")}
                     >
-                        <UnorderedListOutlined style={{ fontSize: "18px" }} />
-                        Following Manga
+                        <NavLink className="following-btn" to="/user?v=following">
+                            <UnorderedListOutlined style={{ fontSize: "18px" }} />
+                            &#160;
+                            Following Manga
+                        </NavLink>
                     </Button>
 
                     <Button
-                        className="trans-group-btn"
                         type="primary"
                     >
-                        <TeamOutlined style={{ fontSize: "19px" }} />
-                        My Translation Team
+                        <NavLink className="trans-group-btn" to="">
+                            <TeamOutlined style={{ fontSize: "19px" }} />
+                            &#160;
+                            My Translation Team
+                        </NavLink>
                     </Button>
 
                     <Button
-                        className="admin-btn"
                         type="primary"
-                        onClick={() => history.push("/admin")}
                     >
-                        <ProfileOutlined style={{ fontSize: "19px" }} />
-                        Admin Page
+                        <NavLink className="admin-btn" to="/admin">
+                            <ProfileOutlined style={{ fontSize: "19px" }} />
+                            &#160;
+                            Admin Page
+                        </NavLink>
                     </Button>
                 </div>
                 <div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>

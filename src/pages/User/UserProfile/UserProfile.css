@@ -27,15 +27,6 @@
   flex-wrap: wrap;
 }
 
-.user-drawer .user .interact .trans-group-btn,
-.user-drawer .user .interact .admin-btn{
-  margin: 10px 0 0 0;
-}
-
-.user-drawer .user .interact .trans-group-btn{
-  margin-right: 10px;
-}
-
 .user-drawer .user .contact-admin input.ant-input {
   cursor: pointer;
 }
@@ -62,12 +53,14 @@
 
 .user-drawer .user button {
   padding: 20px;
+  margin-right: 10px;
+  margin-top: 10px;
   align-items: center;
   display: flex;
 }
 
-.user-drawer .user button.history-btn {
-  margin-right: 10px;
+.user-drawer .user a {
+  padding: 20px;
 }
 
 @media only screen and (min-width: 1199px) {

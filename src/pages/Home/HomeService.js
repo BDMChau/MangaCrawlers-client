@@ -104,16 +104,14 @@ function HomeService() {
 
 
     return (
-        <div>
-            <Home
-                latestMangas={latestMangas}
-                topMangas={topMangas}
-                weeklyMangas={weeklyMangas}
-                searchResults={searchResults}
-                onSearch={(val) => onSearch(val)}
-                isLoadingSearch={isLoadingSearch}
-            />
-        </div>
+        <Home
+            latestMangas={latestMangas}
+            topMangas={topMangas}
+            weeklyMangas={weeklyMangas}
+            searchResults={searchResults}
+            onSearch={(val) => onSearch(val)}
+            isLoadingSearch={isLoadingSearch}
+        />
     )
 }
 
