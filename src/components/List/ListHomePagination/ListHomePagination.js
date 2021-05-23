@@ -28,7 +28,7 @@ function ListHomePagination({ mangas }) {
     }, [mangas])
 
     useEffect(() => {
-        if (window.innerWidth >= 375 && window.innerWidth <= 768) {
+        if (window.innerWidth >= 375 && window.innerWidth < 768) {
             setPageSize(4)
         } else if (window.innerWidth >= 768 && window.innerWidth <= 768) {
             setPageSize(10)
@@ -51,20 +51,20 @@ function ListHomePagination({ mangas }) {
     const renderLatestManga = () => {
         return (
             isLoading ?
-                <
-                    LoadingCircle width={"90%"}
+                <LoadingCircle width={"90%"}
                     height="60%"
                     fontSizeIcon={"70px"}
                     fontSizeText={"17px"}
-                /> : <
-                    List itemLayout="vertical"
+                />
+                : <List 
+                    itemLayout="vertical"
                     size="large"
                     pagination={
                         {
                             onChange: () => {
                                 console.log("page");
                             },
-                            pageSize: pageSize,
+                            pageSize: 12,
                             defaultCurrent: 1,
                             total: data.length,
                         }
@@ -73,20 +73,20 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                           <NavLink to={`/manga/${manga.manga_id}`}>
-                           <Card id={manga.manga_id}
-                                className="card"
-                                hoverable cover={< div className="manga-img"
-                                    alt="example"
-                                    style={
-                                        { backgroundImage: `url(${manga.thumbnail})` }
-                                    }
-                                />} > <Meta
-                                    title={manga.manga_name}
-                                    description={renderCardDesc(manga.chapter_name, manga.createdAt)}
-                                />
-                            </Card>
-                           </NavLink>
+                            <NavLink to={`/manga/${manga.manga_id}`}>
+                                <Card id={manga.manga_id}
+                                    className="card"
+                                    hoverable cover={< div className="manga-img"
+                                        alt="example"
+                                        style={
+                                            { backgroundImage: `url(${manga.thumbnail})` }
+                                        }
+                                    />} > <Meta
+                                        title={manga.manga_name}
+                                        description={renderCardDesc(manga.chapter_name, manga.createdAt)}
+                                    />
+                                </Card>
+                            </NavLink>
                         </div>
                         )
                     }
