@@ -27,7 +27,6 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
 
     useEffect(() => {
         if (userState) {
-            console.log(userState[0])
             setProfile(userState[0])
         }
     }, [userState])
