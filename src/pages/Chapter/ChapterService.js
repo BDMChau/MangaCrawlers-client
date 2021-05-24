@@ -4,7 +4,7 @@ import Chapter from './Chapter'
 import chapterApi from "../../api/apis/chapterApi"
 import dayjs from 'dayjs';
 import { SET_MANGA_ID } from "../../store/slices/MangaSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message';
 import mangaApi from '../../api/apis/mangaApi';
@@ -12,6 +12,7 @@ import mangaApi from '../../api/apis/mangaApi';
 
 export default function ChapterService() {
     const dispatch = useDispatch();
+    const userState = useSelector((state) => state.userState);
     const { mangaid, chapterid } = useParams();
     const [imgs, setImgs] = useState([]);
     const [chapters, setChapters] = useState([]);
@@ -76,18 +77,21 @@ export default function ChapterService() {
 
             const chapters = response.content.listChapter;
             chapters.forEach(chapter => {
-                chapter.chapter_createdAT = dayjs(chapter.chapter_createdAT).format("DD-MM-YYYY");
+                chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+                console.log(chapter.createdAt)
             })
 
             setChapters(chapters)
             setImgs(imgs)
 
-            const followingMangas = await getFollowingMangas();
-            followingMangas.forEach(folllowingManga => {
-                if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
-                    setIsFollowed(true);
-                }
-            })
+            if (userState[0]) {
+                const followingMangas = await getFollowingMangas();
+                followingMangas.forEach(folllowingManga => {
+                    if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
+                        setIsFollowed(true);
+                    }
+                })
+            }
 
             setChapterInfo(chapterInfo)
             setIsLoading(false)

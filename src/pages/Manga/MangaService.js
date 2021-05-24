@@ -6,8 +6,10 @@ import dayjs from 'dayjs';
 import smoothscroll from 'smoothscroll-polyfill';
 import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message';
+import { useSelector } from 'react-redux';
 
 function MangaService() {
+    const userState = useSelector((state) => state.userState);
     const [manga, setManga] = useState({});
     const [genres, setGenres] = useState([]);
     const [chapters, setChapters] = useState([]);
@@ -47,12 +49,14 @@ function MangaService() {
 
             const mangaObj = response.content.manga;
 
-            const followingMangas = await getFollowingMangas();
-            followingMangas.forEach(folllowingManga => {
-                if (folllowingManga.manga_id === mangaObj.manga_id) {
-                    setIsFollowed(true);
-                }
-            })
+            if (userState[0]) {
+                const followingMangas = await getFollowingMangas();
+                followingMangas.forEach(folllowingManga => {
+                    if (folllowingManga.manga_id === mangaObj.manga_id) {
+                        setIsFollowed(true);
+                    }
+                })
+            }
 
             setManga(mangaObj)
             setGenres(response.content.genres)

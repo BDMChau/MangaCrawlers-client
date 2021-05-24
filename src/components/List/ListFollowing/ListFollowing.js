@@ -52,15 +52,18 @@ export default function ListFollowing({ mangas }) {
                             <div className="item-manga">
                                 <Typography.Title className="manga-name" level={5} style={{ cursor: "pointer" }} title={manga.manga_name} >{manga.manga_name}</Typography.Title>
                                 <Typography.Text className="author-name" title={manga.author}>{manga.author}</Typography.Text>
-                                <Typography.Text title="views">{manga.view ? manga.view : 0} view(s)</Typography.Text>
+                                <Typography.Text title="views">{manga.views ? manga.views : 0} view(s)</Typography.Text>
+                                <Typography.Text title="status" style={{ color: manga.status === "Completed" ? "#52c41a" : "#189cfc" }}>
+                                    {manga.status ? manga.status : ""}
+                                </Typography.Text>
                                 <div style={{ pointerEvents: "none" }} >
                                     <Rating stars={manga.rating} />
                                 </div>
                             </div>
 
                             <div className="item-chapter">
-                                <Typography.Text className="chapter-name">chapter 14</Typography.Text>
-                                <Typography.Text className="created-at" >17-05-2021</Typography.Text>
+                                <Typography.Text className="chapter-name">{manga.chapter_name ? manga.chapter_name : ""}</Typography.Text>
+                                <Typography.Text className="created-at" >{manga.createdAt ? manga.createdAt : ""}</Typography.Text>
                             </div>
                         </div>
                     </NavLink>

@@ -24,7 +24,7 @@ export default function SignInService() {
                     "user_password": password
                 }
                 const response = await authApi.postDataSignIn(data);
-
+                console.log(response)
                 if (response.content.err) {
                     if (response.content.err === "Check email to verify the account!") {
                         setErrorMsg("Your account isn't verified, check your email to confirm first!")

@@ -15,7 +15,7 @@
 .chapter .dropdown-chapter {
   display: flex;
   width: 100%;
-  z-index: 999;
+  z-index: 9;
   position: relative;
   margin-top: 10px;
   height: 44px;
@@ -136,6 +136,23 @@
   height: 500px;
 }
 
+/* dropdown menu */
+/* dropdown menu */
+.ant-dropdown.ant-dropdown-placement-bottomLeft {
+  width: 100%;
+  z-index: 999;
+  margin-top: 10px;
+  background: transparent;
+}
+
+ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+  width: 40%;
+  margin: 0 auto;
+  background: white;
+}
+
+
+/* ///////////// */
 @media only screen and (min-width: 375px) and (max-width: 413px) {
   .chapter .dropdown-chapter .dropdown-items {
     font-size: 16px;
@@ -165,14 +182,11 @@
   }
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-    max-width: 350px;
-    width: 350px;
-    text-align: center;
-    margin-left: 12.5px;
+    width: 90%;
   }
 }
 
-@media only screen and (min-width: 414px) and (max-width: 415px) {
+@media only screen and (min-width: 414px) and (max-width: 767px) {
   .chapter .dropdown-chapter .dropdown-items {
     font-size: 16px;
   }
@@ -190,7 +204,7 @@
   }
 
   .dropdown-item-chapter-page .dropdown-item-title {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .dropdown-item-chapter-page .dropdown-item-title .title-name {
@@ -201,23 +215,14 @@
   }
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-    max-width: 350px;
-    width: 350px;
-    text-align: center;
-    margin-left: 30px;
+  width: 90%;
   }
 }
 
-/* ///////////////////////// */
+
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-    max-width: 581px;
-  }
-}
-
-@media only screen and (min-width: 1600px) {
-  .ant-dropdown.ant-dropdown-placement-bottomLeft {
-    left: 653px !important;
+    width: 70%;
   }
 }
 
@@ -228,8 +233,7 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-    max-width: 450px;
-    left: -42px;
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+    width: 70%;
   }
 }

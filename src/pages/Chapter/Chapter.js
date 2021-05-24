@@ -55,7 +55,7 @@ export default function Chapter({
                         <Menu.Item key={id} className="dropdown-item-chapter-page">
                             <NavLink title={chapter.chapter_name} className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`} onClick={() => setChapterName(chapter.chapter_name)}>
                                 <Typography.Text className="title-name">{chapter.chapter_name}</Typography.Text>
-                                <Typography.Text className="title-time">{chapter.chapter_createdAT}</Typography.Text>
+                                <Typography.Text className="title-time">{chapter.createdAt}</Typography.Text>
                             </NavLink>
                         </Menu.Item>
                     ))
@@ -72,7 +72,7 @@ export default function Chapter({
                 ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "44px", marginTop: "10px" }}></Col>
                 : ""
             }
-            <Col span={23} sm={13} md={20} xxl={10} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
+            <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
                         <NavLink to={`/manga/${mangaId}`}>
@@ -101,26 +101,17 @@ export default function Chapter({
                     </Button>
                 </Tooltip>
 
-                {chapterInfo.manga
-                    ? <Tooltip title={isFollowed ? "Remove from Library" : "Add to Library"}>
-                        <Button
-                            loading={isLoadingAddFollow}
-                            className="btn-add-favor"
-                            onClick={() => addToFollowingManga()}>
-                            {isFollowed
-                                ? <MinusSquareOutlined style={{ fontSize: stuffsState[0] === "true" ? "20px" : "20px", transition: "0.5s", marginTop: "3px" }} />
-                                : <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />}
-                        </Button>
-                    </Tooltip>
-                    : <Tooltip title={isFollowed ? "Remove from Library" : "Add to Library"}>
-                        <Button
-                            className="btn-add-favor"
-                        >
-                            <MinusSquareOutlined style={{ fontSize: stuffsState[0] === "true" ? "20px" : "20px", visibility: "hidden", opacity: "0" }} />
-                        </Button>
-                    </Tooltip>
+                <Tooltip title={isFollowed ? "Remove from Library" : "Add to Library"}>
+                    <Button
+                        loading={isLoadingAddFollow}
+                        className="btn-add-favor"
+                        onClick={() => addToFollowingManga()}>
+                        {isFollowed
+                            ? <MinusSquareOutlined style={{ fontSize: stuffsState[0] === "true" ? "20px" : "20px", transition: "0.5s", marginTop: "3px" }} />
+                            : <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />}
+                    </Button>
+                </Tooltip>
 
-                }
             </Col>
 
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />

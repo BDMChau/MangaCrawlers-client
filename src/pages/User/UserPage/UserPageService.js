@@ -3,6 +3,7 @@ import { useLocation } from 'react-router';
 import UserPage from './UserPage'
 import Cookies from 'universal-cookie';
 import mangaApi from '../../../api/apis/mangaApi';
+import dayjs from 'dayjs';
 
 export default function UserPageService() {
     const query = new URLSearchParams(useLocation().search);
@@ -22,22 +23,38 @@ export default function UserPageService() {
             if (value === "history" || value === null) {
                 const responseHistory = await mangaApi.getHistoryManga(token)
                 if (responseHistory) {
+                    responseHistory.content.mangas.forEach(manga => {
+                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                    })
+
                     setHistoryMangas(responseHistory.content.mangas)
                 }
 
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
+                    responseFollowing.content.mangas.forEach(manga => {
+                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                    })
+
                     setFollowingMangas(responseFollowing.content.mangas)
                 }
 
             } else if (value === "following") {
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
+                    responseFollowing.content.mangas.forEach(manga => {
+                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                    })
+
                     setFollowingMangas(responseFollowing.content.mangas)
                 }
 
                 const responseHistory = await mangaApi.getHistoryManga(token)
                 if (responseHistory) {
+                    responseHistory.content.mangas.forEach(manga => {
+                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                    })
+
                     setHistoryMangas(responseHistory.content.mangas)
                 }
             }

@@ -4,7 +4,7 @@
 .slider-vertical .slider {
   overflow-y: hidden;
   overflow-x: hidden;
-  height: 500px;
+  height: auto;
 }
 
 .slider-vertical .slider .slick-dots {

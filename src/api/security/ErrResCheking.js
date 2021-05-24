@@ -27,7 +27,7 @@ export const errCodeResCheking = (errorResponse) => {
             break;
 
         case 401:
-            message_error("Unauthorization! 401")
+            message_error("You are not allowed to access this page! 401")
             break;
 
         case 404:
@@ -62,11 +62,11 @@ export const code2xxCheking = (code, url) => {
             // console.log(msg)
             break;
         case 204:
-            if (url.indexOf("searchmangas") !== -1) {
-                return;
-            } else {
-                message_error("No Content!", 4);
-            }
+            // if (url.indexOf("searchmangas") !== -1) {
+            //     return;
+            // } else {
+            //     message_error("No Content!", 4);
+            // }
             // console.log(msg)
             break;
 

@@ -5,14 +5,11 @@ import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/slices/UserSlice";
 import genreApi from '../../api/apis/genreApi';
 import { message_success } from '../notifications/message';
-import { Header } from 'antd/lib/layout/layout';
-
-const cookies = new Cookies()
 
 function NavbarService() {
     const dispatch = useDispatch();
     const [genres, setGenres] = useState([])
-
+    const cookies = new Cookies()
 
     useEffect(() => {
         getAllGenres();
@@ -21,8 +18,11 @@ function NavbarService() {
     const handleLogOut = () => {
         cookies.remove("user");
         cookies.remove("token");
-        dispatch(LOGOUT())
-        message_success("Logged Out!")
+        setTimeout(() => {
+            dispatch(LOGOUT())
+            message_success("Logged Out!", 3)
+        }, 500)
+        return;
     }
 
     const getAllGenres = async () => {
@@ -32,7 +32,7 @@ function NavbarService() {
                 return;
             }
 
-            setGenres(response.content.genres);   
+            setGenres(response.content.genres);
             return;
         } catch (error) {
             console.log(error);
@@ -40,10 +40,10 @@ function NavbarService() {
     }
 
     return (
-            <TopNav
-                handleLogOut={handleLogOut}
-                genres={genres}
-            />
+        <TopNav
+            handleLogOut={handleLogOut}
+            genres={genres}
+        />
     )
 }
 
