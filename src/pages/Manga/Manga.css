@@ -37,12 +37,17 @@
   margin-right: -10px;
 }
 
+/* .loading-image .ant-spin-dot{
+  font-size: 40px;
+} */
+
 .thumbnail .thumbnail-img {
   /* background-position: center;
   background-size: cover;
   background-repeat: no-repeat; */
   height: 100%;
   border-radius: 5px;
+  background-color: red;
 }
 
 .manga .title {

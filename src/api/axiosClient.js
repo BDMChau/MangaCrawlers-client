@@ -29,6 +29,7 @@ axiosClient.interceptors.response.use((res) => {
 
     return res;
 }, (error) => {
+    console.log(error)
     if (error.response || error.response.status) {
         errCodeResCheking(error.response);
         return;

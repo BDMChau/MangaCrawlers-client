@@ -20,6 +20,7 @@ function NavbarService() {
 
     const handleLogOut = () => {
         cookies.remove("user");
+        cookies.remove("token");
         dispatch(LOGOUT())
         message_success("Logged Out!")
     }

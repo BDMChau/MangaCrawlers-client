@@ -11,35 +11,47 @@ import Cookies from 'universal-cookie';
 
 export default function SignInService() {
     const [isCloseModal, setIsCloseModal] = useState(false)
+    const [errorMsg, setErrorMsg] = useState("")
+    const [isErr, setIsErr] = useState(false)
 
     const dispatch = useDispatch();
 
     const handleSignIn = async (email, password) => {
-        try {
-            const data = {
-                "user_email": email,
-                "user_password": password
-            }
-            const response = await authApi.postDataSignIn(data);
+        if (email && password) {
+            try {
+                const data = {
+                    "user_email": email,
+                    "user_password": password
+                }
+                const response = await authApi.postDataSignIn(data);
 
-            if (response.content.err) {
-                errMsgResNotification(response.content.err);
+                if (response.content.err) {
+                    if (response.content.err === "Check email to verify the account!") {
+                        setErrorMsg("Your account isn't verified, check your email to confirm first!")
+                        setIsErr(false)
+
+                    } else if (response.content.err === "Password does not match!") {
+                        setErrorMsg("Wrong password!")
+                        setIsErr(true)
+                    }
+
+                    return;
+                }
+
+                const user = response.content.user;
+                const token = response.content.token;
+
+                const cookies = new Cookies();
+                cookies.set("user", user);
+                cookies.set("token", token)
+                dispatch(SIGNIN(user));
+
+                message_success(response.content.msg);
+                setIsCloseModal(true);
                 return;
+            } catch (error) {
+                console.log(error);
             }
-
-            const user = response.content.user;
-            const token = response.content.token;
-
-            const cookies = new Cookies();
-            cookies.set("user", user);
-            cookies.set("token", token)
-            dispatch(SIGNIN(user));
-
-            message_success(response.content.msg);
-            setIsCloseModal(true);
-            return;
-        } catch (error) {
-            console.log(error);
         }
     }
 
@@ -50,6 +62,8 @@ export default function SignInService() {
             <SignIn
                 handleSignIn={(email, password) => handleSignIn(email, password)}
                 isCloseModal={isCloseModal}
+                errorMsg={errorMsg}
+                isErr={isErr}
             />
         </div>
     )

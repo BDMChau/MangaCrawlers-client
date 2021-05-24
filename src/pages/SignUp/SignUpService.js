@@ -1,10 +1,10 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import SignUp from './SignUp'
 
 import authApi from '../../api/apis/authApi'
 import { errMsgResNotification } from '../../api/security/ErrResCheking';
 
-import { message_success } from '../../components/notifications/message';
+import { message_success, message_warning } from '../../components/notifications/message';
 
 export default function SignUpService() {
     const [isCloseModal, setIsCloseModal] = useState(false)
@@ -24,8 +24,8 @@ export default function SignUpService() {
             }
 
             console.log(response);
-            message_success(response.content.msg);
-            message_success("Now you can sign in and enjoy ^^!");
+            message_success("Sign up successfully!", 3);
+            message_warning("Please check your email to confirm the account before sign in ^^", 10);
             setIsCloseModal(true);
             return;
         } catch (error) {

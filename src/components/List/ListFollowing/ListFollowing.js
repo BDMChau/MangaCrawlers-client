@@ -2,6 +2,7 @@ import { Col, Empty, Image, List, Typography } from 'antd'
 import React, { useEffect, useState } from 'react'
 import "./ListFollowing.css"
 import Rating from "../../Rating/Rating"
+import { NavLink } from 'react-router-dom'
 
 export default function ListFollowing({ mangas }) {
     // const [pageSize, setPageSize] = useState(9)
@@ -38,21 +39,23 @@ export default function ListFollowing({ mangas }) {
                 dataSource={mangas}
                 footer={false}
                 renderItem={manga => (
-                    <div className="item">
+                    <NavLink to={`/manga/${manga.manga_id}`} className="item">
                         <div className="item-img">
                             <Image
                                 className="img"
-                                src={manga.url}
+                                src={manga.thumbnail}
                                 alt=""
                                 preview={false}
                             />
                         </div>
                         <div className="item-title">
                             <div className="item-manga">
-                                <Typography.Title className="manga-name" level={5} style={{ cursor: "pointer" }} title="manga name" >{manga.name}</Typography.Title>
-                                <Typography.Text className="author-name">{manga.author}</Typography.Text>
-                                <Typography.Text>{manga.view} view(s)</Typography.Text>
-                                <Rating stars={manga.rating} />
+                                <Typography.Title className="manga-name" level={5} style={{ cursor: "pointer" }} title={manga.manga_name} >{manga.manga_name}</Typography.Title>
+                                <Typography.Text className="author-name" title={manga.author}>{manga.author}</Typography.Text>
+                                <Typography.Text title="views">{manga.view ? manga.view : 0} view(s)</Typography.Text>
+                                <div style={{ pointerEvents: "none" }} >
+                                    <Rating stars={manga.rating} />
+                                </div>
                             </div>
 
                             <div className="item-chapter">
@@ -60,7 +63,7 @@ export default function ListFollowing({ mangas }) {
                                 <Typography.Text className="created-at" >17-05-2021</Typography.Text>
                             </div>
                         </div>
-                    </div>
+                    </NavLink>
                 )}
             />
             : <Empty

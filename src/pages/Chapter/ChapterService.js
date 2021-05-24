@@ -5,6 +5,10 @@ import chapterApi from "../../api/apis/chapterApi"
 import dayjs from 'dayjs';
 import { SET_MANGA_ID } from "../../store/slices/MangaSlice";
 import { useDispatch } from "react-redux";
+import Cookies from 'universal-cookie';
+import { message_success } from '../../components/notifications/message';
+import mangaApi from '../../api/apis/mangaApi';
+
 
 export default function ChapterService() {
     const dispatch = useDispatch();
@@ -13,6 +17,12 @@ export default function ChapterService() {
     const [chapters, setChapters] = useState([]);
     const [chapterInfo, setChapterInfo] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoadingAddFollow, setIsLoadingAddFollow] = useState(false);
+    const [isFollowed, setIsFollowed] = useState(false);
+
+    const cookies = new Cookies();
+    const token = cookies.get("token")
+
 
     useEffect(() => {
         getDataChapter();
@@ -61,6 +71,8 @@ export default function ChapterService() {
             if (response.content.err) {
                 return;
             }
+            const chapterInfo = response.content.chapterInfo;
+            const imgs = response.content.listImg;
 
             const chapters = response.content.listChapter;
             chapters.forEach(chapter => {
@@ -68,13 +80,66 @@ export default function ChapterService() {
             })
 
             setChapters(chapters)
-            setImgs(response.content.listImg)
-            setChapterInfo(response.content.chapterInfo)
+            setImgs(imgs)
+
+            const followingMangas = await getFollowingMangas();
+            followingMangas.forEach(folllowingManga => {
+                if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
+                    setIsFollowed(true);
+                }
+            })
+
+            setChapterInfo(chapterInfo)
             setIsLoading(false)
+            return;
         } catch (err) {
             console.log(err)
         }
     }
+
+    const addToFollowingManga = async () => {
+        setIsLoadingAddFollow(true)
+        const data = {
+            manga_id: mangaid
+        }
+        try {
+            const response = await mangaApi.addToFollowing(data, token);
+
+            if (JSON.parse(localStorage.getItem("code_400"))) {
+                setIsLoadingAddFollow(false);
+                localStorage.removeItem("code_400")
+                return;
+            } else if (response.content.err) {
+                setIsLoadingAddFollow(false);
+                localStorage.removeItem("code_400")
+                return;
+            }
+
+            message_success("Added to your library", 4)
+            setIsFollowed(true);
+            setIsLoadingAddFollow(false);
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getFollowingMangas = async () => {
+        let followingMangas = [];
+        try {
+            const responseFollowing = await mangaApi.getFollowingManga(token)
+
+            if (responseFollowing) {
+                followingMangas = responseFollowing.content.mangas;
+            }
+
+        } catch (ex) {
+            console.log(ex)
+        }
+        return followingMangas;
+    }
+
+
 
     return (
         <div>
@@ -83,6 +148,9 @@ export default function ChapterService() {
                 chapters={chapters}
                 chapterInfo={chapterInfo}
                 isLoading={isLoading}
+                addToFollowingManga={() => addToFollowingManga()}
+                isLoadingAddFollow={isLoadingAddFollow}
+                isFollowed={isFollowed}
             />
         </div>
     )

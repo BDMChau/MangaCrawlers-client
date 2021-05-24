@@ -12,6 +12,13 @@ const message_success = (text, durationSEC) => {
     });
 };
 
+const message_warning = (text, durationSEC) => {
+    message.warning({
+        content: text,
+        duration: durationSEC,
+    });
+};
+
 const message_error = (text, durationSEC) => {
     message.error({
         content: text,
@@ -21,5 +28,6 @@ const message_error = (text, durationSEC) => {
 
 export {
     message_success,
-    message_error
+    message_error,
+    message_warning
 }

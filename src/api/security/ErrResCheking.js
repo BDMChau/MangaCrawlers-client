@@ -23,7 +23,7 @@ export const errCodeResCheking = (errorResponse) => {
                 default:
                     break;
             }
-
+            localStorage.setItem("code_400", JSON.stringify("BadRequest 400"))
             break;
 
         case 401:
@@ -62,9 +62,9 @@ export const code2xxCheking = (code, url) => {
             // console.log(msg)
             break;
         case 204:
-            if(url.indexOf("searchmangas") !== -1){
+            if (url.indexOf("searchmangas") !== -1) {
                 return;
-            } else{
+            } else {
                 message_error("No Content!", 4);
             }
             // console.log(msg)

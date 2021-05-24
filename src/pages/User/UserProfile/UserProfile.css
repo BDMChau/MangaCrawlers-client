@@ -71,7 +71,7 @@
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .user-drawer .ant-drawer-content-wrapper {
-    width: 400px !important;
+    width: 380px !important;
   }
 
   .user-drawer .user .contact-admin span.ant-input-group {

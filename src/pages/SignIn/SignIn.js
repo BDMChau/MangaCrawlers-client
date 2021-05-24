@@ -1,4 +1,4 @@
-import { Button, Modal, Form, Input } from 'antd';
+import { Button, Modal, Form, Input, Alert } from 'antd';
 import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
@@ -8,7 +8,7 @@ import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { NavLink } from 'react-router-dom';
 
 
-export default function SignIn({ handleSignIn, isCloseModal }) {
+export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -21,9 +21,9 @@ export default function SignIn({ handleSignIn, isCloseModal }) {
     useEffect(() => {
         showModal()
     }, [])
-    
+
     useEffect(() => {
-        if(isCloseModal === true){
+        if (isCloseModal === true) {
             handleCancel()
         }
     }, [isCloseModal])
@@ -73,6 +73,19 @@ export default function SignIn({ handleSignIn, isCloseModal }) {
                     <div className="modal-title-signin">
                         <div className="logo-signin-signup"></div>
                     </div>
+
+                    {
+                        errorMsg !== ""
+                            ? <div div style={{ marginBottom: "10px" }} >
+                                {
+                                    isErr
+                                        ? <Alert message={errorMsg} type="error" showIcon />
+                                        : <Alert message={errorMsg} type="warning" showIcon />
+                                }
+                            </div>
+                            : ""
+                    }
+
                     <Form
                         name="form-sign-in"
                         initialValues={{
@@ -135,9 +148,10 @@ export default function SignIn({ handleSignIn, isCloseModal }) {
                 </div>
             </Modal>
 
-            {isModalVisibleSignUp
-                ? <SignUpService />
-                : ""
+            {
+                isModalVisibleSignUp
+                    ? <SignUpService />
+                    : ""
             }
         </div >
     )

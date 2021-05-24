@@ -7,7 +7,7 @@ import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 
-function ListChapters({ chapters, mangaId, height }) {
+function ListChapters({ chapters, mangaId, height, addReadingHistory }) {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false)
     const history = useHistory()
@@ -15,6 +15,9 @@ function ListChapters({ chapters, mangaId, height }) {
     const goToChapterPage = (chapterId) => {
         localStorage.setItem("mangaid", JSON.stringify(mangaId))
         dispatch(SET_MANGA_ID(mangaId))
+
+        addReadingHistory(mangaId, chapterId);
+        return;
     }
 
 
@@ -28,15 +31,18 @@ function ListChapters({ chapters, mangaId, height }) {
                 ? <LoadingCircle />
                 : chapters.length
                     ? chapters.map((chapter, i) => (
-                        <NavLink className="list-chapter-item" id={chapter.chapter_id} to={`/chapter/${mangaId}/${chapter.chapter_id}`} onClick={() => goToChapterPage(chapter.chapter_id)} >
+                        <NavLink
+                            className="list-chapter-item" id={chapter.chapter_id}
+                            to={`/chapter/${mangaId}/${chapter.chapter_id}`}
+                            onClick={() => goToChapterPage(chapter.chapter_id)} >
                             <Typography.Text>{chapter.chapter_name}</Typography.Text>
                             <Typography.Text>{chapter.createdAt}</Typography.Text>
                         </NavLink>
                     ))
-                    : <Empty 
-                    style={{ marginTop: "120px", color: "#8a8d92" }}
-                    image={Empty.PRESENTED_IMAGE_SIMPLE} 
-                    description="No Chapters :(" 
+                    : <Empty
+                        style={{ marginTop: "120px", color: "#8a8d92" }}
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        description="No Chapters :("
                     />
             }
         </ul>

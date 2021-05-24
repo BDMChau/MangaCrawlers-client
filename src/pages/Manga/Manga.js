@@ -1,18 +1,26 @@
 import React, { memo, useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
-import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Tooltip } from 'antd';
+import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Tooltip, Skeleton } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
-import FooterContainer from '../../components/Footer/Footer';
 import CommentForm from '../../components/CommentForm/CommentForm';
-import { unset } from 'lodash';
 import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
+import LoadingCircle from '../../components/Loading/LoadingCircle/LoadingCircle';
 
 
-function Manga({ weeklyMangas, manga, genres, chapters }) {
+function Manga({
+    weeklyMangas,
+    manga,
+    genres,
+    chapters,
+    addToFollowingManga,
+    isLoading,
+    isFollowed,
+    addReadingHistory
+}) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
         "Chapter1: ",
@@ -66,6 +74,7 @@ function Manga({ weeklyMangas, manga, genres, chapters }) {
                     <Row justify={"center"} className="header">
                         <Col md={4} sm={3} lg={4} xxl={4} className="thumbnail">
                             <img className="thumbnail-img" src={manga.thumbnail} alt="" />
+
                         </Col>
                         <Col md={13} lg={12} sm={4} xs={20} xxl={15} className="title">
                             <div className="name">
@@ -117,8 +126,14 @@ function Manga({ weeklyMangas, manga, genres, chapters }) {
                                 </NavLink>
                                 </Button>
 
-                                <Button type="primary" className="btn-add-favorite" title="Add to Favorite">
-                                    Add to Favorite
+                                <Button
+                                    type="primary"
+                                    className="btn-add-favorite"
+                                    title="Add to Favorite"
+                                    loading={isLoading}
+                                    onClick={() => addToFollowingManga(manga.manga_id)}
+                                >
+                                    {isFollowed ? " Remove from Library" : "Add to Library"}
                                 </Button>
                             </div>
                         </Col>
@@ -137,7 +152,12 @@ function Manga({ weeklyMangas, manga, genres, chapters }) {
                             <h3>Chapters</h3>
                             <div className="line"></div>
 
-                            <ListChapters chapters={chapters} mangaId={manga.manga_id} height={"400px"} />
+                            <ListChapters
+                                chapters={chapters}
+                                mangaId={manga.manga_id}
+                                height={"400px"}
+                                addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
+                            />
                         </Col>
 
 

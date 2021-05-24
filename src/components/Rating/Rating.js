@@ -1,5 +1,5 @@
 import React from 'react'
-import { Rate } from 'antd';
+import { Rate, Tooltip } from 'antd';
 import "./Rating.css";
 
 function Rating({ stars }) {

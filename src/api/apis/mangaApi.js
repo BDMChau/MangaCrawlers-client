@@ -26,7 +26,7 @@ const mangaApi = {
         const url = '/api/manga/searchmangas'
         return axiosClient.post(url, data)
     },
-    
+
     ///////////// user part
     getHistoryManga: (token) => {
         const url = '/api/user/gethistorymanga'
@@ -39,6 +39,22 @@ const mangaApi = {
     getFollowingManga: (token) => {
         const url = '/api/user/getfollowingmangas'
         return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    addToFollowing: (data, token) => {
+        const url = '/api/user/addfollowingmanga'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    updateReadingHistory: (data, token) => {
+        const url = '/api/user/updatereadinghistory'
+        return axiosClient.put(url, data, {
             headers: {
                 Authorization: token
             }

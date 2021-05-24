@@ -11,10 +11,10 @@ export default function UserPageService() {
     const [followingMangas, setFollowingMangas] = useState([])
 
     useEffect(() => {
-        getHistoryManga();
+        getUserMangas();
     }, [])
 
-    const getHistoryManga = async () => {
+    const getUserMangas = async () => {
         const cookies = new Cookies();
         const token = cookies.get("token")
 
