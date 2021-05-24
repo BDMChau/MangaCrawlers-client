@@ -45,7 +45,7 @@ const mangaApi = {
         })
     },
     addToFollowing: (data, token) => {
-        const url = '/api/user/addfollowingmanga'
+        const url = '/api/user/addfollowingmangas'
         return axiosClient.post(url, data, {
             headers: {
                 Authorization: token
