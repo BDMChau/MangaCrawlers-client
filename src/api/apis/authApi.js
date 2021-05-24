@@ -26,6 +26,11 @@ const authApi = {
         const url = '/api/auth/requestchangepass'
         return axiosClient.post(url, data)
     }
+    ,
+    verifyAccount: (data) => {
+        const url = '/api/auth/confirmverification'
+        return axiosClient.post(url, data)
+    }
 }
 
 export default authApi;

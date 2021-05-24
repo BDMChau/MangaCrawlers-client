@@ -57,6 +57,11 @@ const routes = [
         exact: false
     },
     {
+        path: "/auth/verify/:token",
+        component: React.lazy(() => import('../../pages/VerifyAccount/VerifyAccount')),
+        exact: false
+    },
+    {
         path: "/admin",
         component: React.lazy(() => import('../../pages/Admin/AdminService')),
         exact: true
