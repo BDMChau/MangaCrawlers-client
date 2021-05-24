@@ -33,6 +33,9 @@ export default function SignInService() {
                     } else if (response.content.err === "Password does not match!") {
                         setErrorMsg("Wrong password!")
                         setIsErr(true)
+                    } else {
+                        setErrorMsg(response.content.err)
+                        setIsErr(true)
                     }
 
                     return;
