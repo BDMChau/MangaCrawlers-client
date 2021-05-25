@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { SET_MANGA_ID } from "../../store/slices/MangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
-import { message_success } from '../../components/notifications/message';
+import { message_error, message_success, message_warning } from '../../components/notifications/message';
 import mangaApi from '../../api/apis/mangaApi';
 
 
@@ -26,7 +26,6 @@ export default function ChapterService() {
 
 
     useEffect(() => {
-        getDataChapter();
         localStorage.setItem("mangaid", JSON.stringify(mangaid));
         dispatch(SET_MANGA_ID(mangaid))
     }, [])
@@ -55,7 +54,7 @@ export default function ChapterService() {
         try {
             const response = await chapterApi.getChapterImgs(data)
             console.log(response)
-            if (!response.content.chapterInfo) {
+            if (!response.content.chapterInfo || response.content.err) {
                 setImgs([]);
                 setChapters([]);
                 setChapterInfo({
@@ -65,6 +64,8 @@ export default function ChapterService() {
                     views: "",
                     createdAt: ""
                 })
+
+                message_warning("No chapter to present!", 5)
                 setIsLoading(false)
                 return;
             }
