@@ -59,10 +59,9 @@ export default function AdminService() {
             }
 
             const allUsers = response.content.users;
-            const sortedUsers = allUsers.sort(arrayMethods.dynamicSort("user_id"))
 
             setUsers([]);
-            sortedUsers.forEach(user => {
+            allUsers.forEach(user => {
                 if (user.user_isAdmin === false) {
                     setUsers(prevUser => [...prevUser, user]);
                 }
@@ -93,10 +92,9 @@ export default function AdminService() {
             }
 
             const allUsers = response.content.users;
-            const sortedUsers = allUsers.sort(arrayMethods.dynamicSort("user_id"))
 
             setUsers([]);
-            sortedUsers.forEach(user => {
+            allUsers.forEach(user => {
                 if (user.user_isAdmin === false) {
                     setUsers(prevUser => [...prevUser, user]);
                 }
