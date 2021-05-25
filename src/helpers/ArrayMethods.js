@@ -15,6 +15,18 @@ const arrayMethods = {
         }
 
         return array;
+    },
+    dynamicSort: (field) => {
+        let sortOrder = 1;
+        if (field[0] === "-") {
+            sortOrder = -1;
+            field = field.substr(1);
+        }
+        return (a, b) => {
+            let result = (a[field] < b[field]) ? -1 : (a[field] > b[field]) ? 1 : 0;
+            return result * sortOrder;
+        }
+
     }
 }
 

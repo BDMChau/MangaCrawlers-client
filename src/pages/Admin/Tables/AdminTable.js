@@ -6,43 +6,33 @@ import { Table, Tag, Space, Col, Row, Typography } from 'antd';
 import { Avatar } from 'antd';
 
 
-export default function AdminTable() {
-    const [admins, setAdmins] = useState([
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-        },
-    ])
+export default function AdminTable({admins}) {
 
     const columns = [
         {
             title: 'Avatar',
-            dataIndex: 'avatar',
-            key: 'avatar',
-            render: text => <Avatar size={22} src={text} />,
+            dataIndex: 'user_avatar',
+            key: 'user_avatar',
+            render: src => <Avatar size={30} src={src} />,
         },
         {
             title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'user_name',
+            key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
             title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
+            dataIndex: 'user_email',
+            key: 'user_email',
+            className: "email-col"
+        },
+        {
+            title: 'Role',
+            dataIndex: 'user_isAdmin',
+            key: 'user_isAdmin',
+            render: () => <p>Admin</p>
         },
     ];
 

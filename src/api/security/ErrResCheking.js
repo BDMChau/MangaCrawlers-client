@@ -27,15 +27,15 @@ export const errCodeResCheking = (errorResponse) => {
             break;
 
         case 401:
-            message_error("You are not allowed to access this page! 401")
+            console.error("Unauthorized! 401")
             break;
 
         case 404:
-            console.log("Not found resource! 404")
+            console.error("Not found resource! 404")
             break;
 
         case 403:
-            message_error("Don't have permission! 403")
+            console.error("You are not allowed to access this resource! 403")
             break;
 
         default:

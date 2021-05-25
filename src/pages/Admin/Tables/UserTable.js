@@ -3,262 +3,80 @@ import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Tag, Space, Col, Row, Typography, Popconfirm } from 'antd';
+import { Table, Tag, Space, Col, Row, Typography, Popconfirm, Button } from 'antd';
 import { Avatar } from 'antd';
 
-export default function TableUser() {
-    const [users, setusers] = useState([
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-        {
-            name: "Chau",
-            email: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            Role: "Regular User",
-            isVerified: "Verified",
-        },
-    ])
+export default function TableUser({ users, handleDeprecateUser, handleRemoveUser, isLoading }) {
+
 
     const columns = [
         {
             title: 'Avatar',
-            dataIndex: 'avatar',
-            key: 'avatar',
-            render: text => <Avatar size={24} src={text} />,
+            dataIndex: 'user_avatar',
+            key: 'user_avatar',
+            render: src => <Avatar size={30} src={src} />,
         },
         {
             title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'user_name',
+            key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
             title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
+            dataIndex: 'user_email',
+            key: 'user_email',
+            className: "email-col"
         },
         {
-            title: 'Role',
-            key: 'role',
-            dataIndex: 'Role',
-            className: "name-col",
-            render: text => <p>{text}</p>
-        },
-        {
-            title: 'Verrify',
-            key: 'isVerified',
-            dataIndex: 'isVerified',
-            render: text => <a>{text}</a>
+            title: 'Verification',
+            dataIndex: 'user_isVerified',
+            key: 'user_isVerified',
+            render: isVerified => isVerified ? <p>Verified</p> : <p>Unverified</p>
         },
         {
             title: 'Action',
             key: 'action',
-            render: (text, record) => (
-                <Space size="middle">
-                    <Popconfirm
-                        title="Are you sure to delete this user?"
-                        onConfirm={"confirm"}
-                        onCancel={"cancel"}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <a>Remove</a>
-                    </Popconfirm>
-                </Space>
+            render: (user, record) => (
+                <div style={{ display: 'flex' }}>
+                    <Space size="middle">
+                        <Popconfirm
+                            title="Are you sure to deprecated this account?"
+                            onConfirm={() => handleDeprecateUser(user.user_id)}
+                            onCancel={"cancel"}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <a>Unapprove</a>
+                        </Popconfirm>
+                    </Space>
+                    <p style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</p>
+                    <Space size="middle">
+                        <Popconfirm
+                            title="Are you sure to delete this account?"
+                            onConfirm={() => handleRemoveUser(user.user_id)}
+                            onCancel={"cancel"}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <a>Remove</a>
+                        </Popconfirm>
+                    </Space>
+                </div>
             ),
         },
     ];
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
-            <Typography.Title level={3}>User</Typography.Title>
+            <div style={{display:"flex"}}>
+                <Typography.Title level={3}>User</Typography.Title>
+                {
+                    isLoading
+                        ? <Button className="table-btn-loading" loading={isLoading}></Button>
+                        : ""
+                }
+            </div>
             <Table
                 className="user-table"
                 columns={columns}

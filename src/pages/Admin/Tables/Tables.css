@@ -23,6 +23,7 @@
   max-height: 500px;
   height: 500px;
   overflow: auto;
+  background: white;
 }
 
 /*  */
@@ -84,7 +85,7 @@
 /*  */
 .admin-row1 .table-admin {
   margin: 0 auto;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
   max-height: 500px;
   width: 100%;
 }
@@ -103,6 +104,22 @@
   overflow: auto;
   background: white;
 }
+
+.table-btn-loading,
+.table-btn-loading:before{
+  margin-left: 5px;
+  margin-top: -3px;
+  color:grey;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.table-btn-loading span.ant-btn-loading-icon{
+  font-size: 22px;
+}
+
+
 
 /*  */
 td.name-col,

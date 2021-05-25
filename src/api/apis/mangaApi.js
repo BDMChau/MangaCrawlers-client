@@ -45,11 +45,20 @@ const mangaApi = {
         })
     },
     addToFollowing: (data, token) => {
-        const url = '/api/user/addfollowingmangas'
+        const url = '/api/user/addfollowingmanga'
         return axiosClient.post(url, data, {
             headers: {
                 Authorization: token
             }
+        })
+    },
+    removeFollowing: (data, token) => {
+        const url = '/api/user/deletefollowingmanga'
+        return axiosClient.delete(url, {
+            headers: {
+                Authorization: token
+            },
+            data
         })
     },
     updateReadingHistory: (data, token) => {

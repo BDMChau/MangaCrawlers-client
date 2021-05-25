@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./Admin.css"
 import "./Tables/Tables.css"
 import "./Charts/Chart.css"
-import { Table, Tag, Space, Col, Row, Typography, Tabs, Radio } from 'antd';
-import { Avatar } from 'antd';
+import { Row, Typography, Tabs } from 'antd';
 import UserTable from './Tables/UserTable';
 import AdminTable from './Tables/AdminTable';
 import UserChart from './Charts/UserChart';
@@ -14,12 +13,23 @@ import TransGrChart from './Charts/TransGrChart';
 
 const { TabPane } = Tabs;
 
-export default function Admin() {
+export default function Admin({
+    users,
+    admins,
+    handleDeprecateUser,
+    handleRemoveUser,
+    isLoading
+}) {
 
 
     const renderUserStatistic = () => (
         <div>
-            <UserTable />
+            <UserTable
+                users={users}
+                handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
+                handleRemoveUser={(userId) => handleRemoveUser(userId)}
+                isLoading={isLoading}
+            />
             <UserChart />
         </div>
     )
@@ -56,7 +66,7 @@ export default function Admin() {
                     </TabPane>
                 </Tabs>
 
-                <AdminTable />
+                <AdminTable admins={admins} />
             </Row>
         </div>
     )

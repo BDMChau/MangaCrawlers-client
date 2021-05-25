@@ -8,7 +8,6 @@ import Rating from '../../components/Rating/Rating';
 import CommentForm from '../../components/CommentForm/CommentForm';
 import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
-import LoadingCircle from '../../components/Loading/LoadingCircle/LoadingCircle';
 
 
 function Manga({
@@ -17,9 +16,10 @@ function Manga({
     genres,
     chapters,
     addToFollowingManga,
+    removeFollowingManga,
     isLoading,
     isFollowed,
-    addReadingHistory
+    addReadingHistory,
 }) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
@@ -131,9 +131,10 @@ function Manga({
                                     className="btn-add-favorite"
                                     title="Add to Favorite"
                                     loading={isLoading}
-                                    onClick={() => addToFollowingManga(manga.manga_id)}
+                                    onClick={() => isFollowed ? removeFollowingManga(manga.manga_id) : addToFollowingManga(manga.manga_id)}
+
                                 >
-                                    {isFollowed ? " Remove from Library" : "Add to Library"}
+                                    {isFollowed ? "Remove from Library" : "Add to Library"}
                                 </Button>
                             </div>
                         </Col>

@@ -1,5 +1,5 @@
 .admin-page {
-  margin-bottom: 100px;
+  padding-bottom: 20px;
   background: #f0f2f5;
 }
 
@@ -9,7 +9,6 @@
 }
 
 .admin-page .admin-row1 {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
 }

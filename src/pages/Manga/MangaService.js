@@ -5,7 +5,7 @@ import mangaApi from "../../api/apis/mangaApi"
 import dayjs from 'dayjs';
 import smoothscroll from 'smoothscroll-polyfill';
 import Cookies from 'universal-cookie';
-import { message_success } from '../../components/notifications/message';
+import { message_error, message_success } from '../../components/notifications/message';
 import { useSelector } from 'react-redux';
 
 function MangaService() {
@@ -22,8 +22,8 @@ function MangaService() {
 
 
     useEffect(() => {
-        getWeeklyTopMangas()
         getMangaData();
+        getWeeklyTopMangas();
 
         smoothscroll.polyfill();
         window.scroll({
@@ -56,6 +56,7 @@ function MangaService() {
                         setIsFollowed(true);
                     }
                 })
+
             }
 
             setManga(mangaObj)
@@ -114,6 +115,7 @@ function MangaService() {
             const responseFollowing = await mangaApi.getFollowingManga(token)
 
             if (responseFollowing) {
+                console.log(responseFollowing)
                 followingMangas = responseFollowing.content.mangas;
             }
 
@@ -124,7 +126,6 @@ function MangaService() {
     }
 
     const addReadingHistory = async (mangaId, chapterId) => {
-        console.log("okkookokkoko")
         const data = {
             manga_id: mangaId,
             chapter_id: chapterId
@@ -138,6 +139,28 @@ function MangaService() {
         }
     }
 
+    const removeFollowingManga = async (mangaId) => {
+        setIsLoading(true)
+        const data = {
+            manga_id: mangaId,
+        }
+        try {
+            const response = await mangaApi.removeFollowing(data, token)
+            if (response.content.err) {
+                setIsLoading(false);
+                message_error("Something wrong, try again!")
+                return
+            }
+
+            message_success("Removed from your library!", 3)
+            setIsFollowed(false);
+            setIsLoading(false);
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
     return (
         <div>
             <Manga
@@ -146,6 +169,7 @@ function MangaService() {
                 genres={genres}
                 chapters={chapters}
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
+                removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}
                 isFollowed={isFollowed}
                 addReadingHistory={(managId, chapterId) => addReadingHistory(managId, chapterId)}

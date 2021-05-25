@@ -16,12 +16,12 @@ function NavbarService() {
     }, [])
 
     const handleLogOut = () => {
-        cookies.remove("user");
-        cookies.remove("token");
+        cookies.remove("user", { path: '/' });
+        cookies.remove("token", { path: '/' });
         setTimeout(() => {
             dispatch(LOGOUT())
             message_success("Logged Out!", 3)
-        }, 500)
+        }, 300)
         return;
     }
 

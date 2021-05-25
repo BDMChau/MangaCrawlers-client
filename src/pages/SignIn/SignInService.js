@@ -27,7 +27,7 @@ export default function SignInService() {
                 console.log(response)
                 if (response.content.err) {
                     if (response.content.err === "Check email to verify the account!") {
-                        setErrorMsg("Your account isn't verified, check your email to confirm first!")
+                        setErrorMsg("Your account isn't verified or approved, check your email to confirm first!")
                         setIsErr(false)
 
                     } else if (response.content.err === "Password does not match!") {
@@ -45,8 +45,8 @@ export default function SignInService() {
                 const token = response.content.token;
 
                 const cookies = new Cookies();
-                cookies.set("user", user);
-                cookies.set("token", token)
+                cookies.set("user", user, { path: '/' });
+                cookies.set("token", token, { path: '/' })
                 dispatch(SIGNIN(user));
 
                 message_success(response.content.msg);
