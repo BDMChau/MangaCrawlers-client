@@ -78,7 +78,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
 
 
     const dropdownSettingsAva = (
-        <Menu>
+        <Menu style={{width:"100%"}}>
             <Menu.Item>
                 <Upload {...propsUpload} className="btn-upload-avatar">
                     Change Avatar
