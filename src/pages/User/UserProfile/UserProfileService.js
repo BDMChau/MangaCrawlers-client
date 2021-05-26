@@ -31,7 +31,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
             cookies.set("user", { ...user, user_avatar: avatarUrl }, { path: '/' });
             dispatch(UPDATE_AVATAR(avatarUrl))
 
-            message_success("Your avatar is removed!", 3)
+            message_success("Your avatar has been removed!", 3)
             setIsLoading(false);
             return;
         } catch (ex) {
@@ -59,7 +59,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
                 cookies.set("user", { ...user, user_avatar: avatarUrl }, { path: '/' });
                 dispatch(UPDATE_AVATAR(avatarUrl))
     
-                message_success("Your avatar is changed!", 3)
+                message_success("Your avatar has been updated!", 3)
                 setIsLoading(false)
                 return;
             } catch (ex) {
