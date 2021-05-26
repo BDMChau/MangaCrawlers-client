@@ -18,7 +18,28 @@
 }
 
 .user-drawer .user .avatar {
-  margin: 10px 0;
+  margin: 10px auto;
+}
+
+.user-drawer .user .avatar .btn-settings-avatar {
+  margin: 0px auto 30px auto;
+  box-shadow: none;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  border-radius: 50px;
+  padding: 11px;
+  width: 45px;
+  height: 45px;
+}
+
+.btn-upload-avatar .ant-upload-list.ant-upload-list-text{
+  display: none !important;
+}
+
+
+.user-drawer .user .avatar .btn-settings-avatar:before {
+  box-shadow: none;
 }
 
 .user-drawer .user .interact {

@@ -13,11 +13,14 @@ const UserSlice = createSlice({
         },
         LOGOUT: (state) => {
             state.length = [];
+        },
+        UPDATE_AVATAR: (state, action) => {
+            state[0].user_avatar = action.payload;
         }
     }
 })
 
 const { actions, reducer } = UserSlice;
-export const { SIGNIN, LOGOUT } = actions;
+export const { SIGNIN, LOGOUT, UPDATE_AVATAR } = actions;
 
 export default reducer;

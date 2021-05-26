@@ -6,7 +6,6 @@ import { errCodeResCheking, code2xxCheking } from './security/ErrResCheking';
 const axiosClient = axios.create({
     baseURL: endPoint.local,
     headers: {
-        'Content-type': 'application/json',
     },
     paramsSerializer: params => {
         queryString.stringify(params)

@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import "./UserProfile.css"
-import { Button, Drawer, Input } from 'antd';
-import { UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
+import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload } from 'antd';
+import { SettingOutlined, UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { message_success } from '../../../components/notifications/message';
+import { message_error, message_success } from '../../../components/notifications/message';
 import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
-export default function UserProfile({ visible, closeProfileDrawer }) {
+export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar }) {
     const userState = useSelector((state) => state.userState);
-
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
     const [adminEmail] = useState("bdmchau10005@gmail.com");
     const [profile, setProfile] = useState({});
+    const [file, setFile] = useState(null);
     const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
-    const history = useHistory();
 
+    const allowFiles = ["image/png", "image/jpg", "image/jpeg"]
 
     useEffect(() => {
         if (visible === true) {
@@ -25,12 +24,20 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
         }
     }, [visible])
 
+    
     useEffect(() => {
         if (userState) {
             setProfile(userState[0])
         }
     }, [userState])
 
+
+    useEffect(() => {
+        if(file){
+            updateAvatar(file)
+            setFile(null)
+        }
+     }, [file])
 
 
     const handleOpenFormSignUpTransTeam = () => {
@@ -59,6 +66,34 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
         </div>
     )
 
+
+    const propsUpload = {
+        name: 'file',
+        headers: {
+            authorization: 'authorization-text',
+        }, 
+        beforeUpload: (file) => false,
+        onChange: (info) => setFile(info.file)
+    };
+
+
+    const dropdownSettingsAva = (
+        <Menu>
+            <Menu.Item>
+                <Upload {...propsUpload} className="btn-upload-avatar">
+                    Change Avatar
+                   
+                </Upload>
+            </Menu.Item>
+
+            <Menu.Item onClick={removeAvatar}>
+                <Typography.Text >
+                    Remove Avatar
+            </Typography.Text>
+            </Menu.Item>
+        </Menu>
+    );
+
     return (
         <Drawer
             className="user-drawer"
@@ -74,7 +109,13 @@ export default function UserProfile({ visible, closeProfileDrawer }) {
                         title="Avatar"
                         size={{ xs: 80, md: 140, lg: 150, xl: 150, xxl: 150 }}
                         src={profile.user_avatar ? profile.user_avatar : ""}
-                    />,
+                    />
+
+                    <Button className="btn-settings-avatar">
+                        <Dropdown overlay={dropdownSettingsAva} trigger={['click']} placement="bottomCenter" >
+                            <SettingOutlined style={{ fontSize: "22px" }} />
+                        </Dropdown>
+                    </Button>
                 </div>
 
                 <div className="name">

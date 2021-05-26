@@ -53,7 +53,6 @@ export default function ChapterService() {
 
         try {
             const response = await chapterApi.getChapterImgs(data)
-            console.log(response)
             if (!response.content.chapterInfo || response.content.err) {
                 setImgs([]);
                 setChapters([]);
@@ -79,7 +78,6 @@ export default function ChapterService() {
             const chapters = response.content.listChapter;
             chapters.forEach(chapter => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
-                console.log(chapter.createdAt)
             })
 
             setChapters(chapters)

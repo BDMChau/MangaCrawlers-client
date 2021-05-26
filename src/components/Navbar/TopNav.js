@@ -11,6 +11,7 @@ import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
 
 import UserProfile from "../../pages/User/UserProfile/UserProfile";
+import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -200,7 +201,7 @@ function TopNav({ handleLogOut, genres }) {
             {renderMenu()}
             {isModalVisibleSignUp ? <SignUpService /> : ""}
             {isModalVisibleSignIn ? <SignInService /> : ""}
-            {isVisibleProfileDrawer ? <UserProfile visible={isVisibleProfileDrawer} closeProfileDrawer={(state) => closeProfileDrawer(state)} /> : ""}
+            {isVisibleProfileDrawer ? <UserProfileService visible={isVisibleProfileDrawer} closeProfileDrawer={(state) => closeProfileDrawer(state)} /> : ""}
         </Header>
     );
 }

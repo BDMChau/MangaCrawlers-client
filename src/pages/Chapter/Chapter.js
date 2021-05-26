@@ -22,19 +22,7 @@ export default function Chapter({
     const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
-    const [isFixedMenu, setIsFixedMenu] = useState(false);
-    const styledFixed = {
-        margin: "0 auto",
-        position: "fixed",
-        top: "3px",
-        animation: "moveDown 0.5s ease-in-out"
-    }
-    const styledRelative = {
-        margin: "20px auto",
-        position: "relative",
-        top: "0"
-    }
-
+    
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -46,14 +34,13 @@ export default function Chapter({
     }, [imgs])
 
 
-
     const dropDownItems = (
         <Menu>
             {
                 chapters
                     ? chapters.map((chapter, id) => (
                         <Menu.Item key={id} className="dropdown-item-chapter-page">
-                            <NavLink title={chapter.chapter_name} className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`} onClick={() => setChapterName(chapter.chapter_name)}>
+                            <NavLink title={chapter.chapter_name} className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`} onChange={() => setChapterName(chapter.chapter_name)}>
                                 <Typography.Text className="title-name">{chapter.chapter_name}</Typography.Text>
                                 <Typography.Text className="title-time">{chapter.createdAt}</Typography.Text>
                             </NavLink>

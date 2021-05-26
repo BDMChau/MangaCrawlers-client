@@ -48,10 +48,10 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
             <CheckingScrollEvent scrollYPosition={scrollYPosition} />
             <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-            {/* <MessengerCustomerChat
+            <MessengerCustomerChat
               pageId="101341455476510"
               appId="496491375126587"
-            /> */}
+            />
 
             <FooterContainer />
           </Layout>
