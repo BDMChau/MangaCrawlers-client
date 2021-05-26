@@ -37,6 +37,10 @@
   display: none !important;
 }
 
+.btn-settings-avatar .ant-btn-loading-icon{
+  font-size: 24px;
+}
+
 
 .user-drawer .user .avatar .btn-settings-avatar:before {
   box-shadow: none;

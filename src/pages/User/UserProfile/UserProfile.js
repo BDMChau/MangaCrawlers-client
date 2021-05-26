@@ -8,7 +8,7 @@ import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar }) {
+export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar, isLoading }) {
     const userState = useSelector((state) => state.userState);
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
     const [adminEmail] = useState("bdmchau10005@gmail.com");
@@ -111,11 +111,9 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         src={profile.user_avatar ? profile.user_avatar : ""}
                     />
 
-                    <Button className="btn-settings-avatar">
                         <Dropdown overlay={dropdownSettingsAva} trigger={['click']} placement="bottomCenter" >
-                            <SettingOutlined style={{ fontSize: "22px" }} />
+                            <Button className="btn-settings-avatar" loading={isLoading} icon={<SettingOutlined style={{ fontSize: "24px" }} />} />
                         </Dropdown>
-                    </Button>
                 </div>
 
                 <div className="name">

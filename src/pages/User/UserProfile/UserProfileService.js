@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UserProfile from './UserProfile'
 import Cookies from 'universal-cookie';
 import userApi from '../../../api/apis/userApi';
@@ -8,6 +8,7 @@ import { UPDATE_AVATAR } from "../../../store/slices/UserSlice";
 
 
 export default function UserProfileService({ visible, closeProfileDrawer }) {
+    const [isLoading, setIsLoading] = useState(false)
     const dispatch = useDispatch()
     const cookies = new Cookies();
     const token = cookies.get("token");
@@ -15,10 +16,13 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
 
     const removeAvatar = async () => {
         try {
+            setIsLoading(true);
+
             const response = await userApi.removeAvatar(token);
             console.log(response)
             if (response.content.err) {
                 console.warn("removeAvatar error or Avatar has already default")
+                setIsLoading(false);
                 return;
             }
             const avatarUrl = response.content.avatar_url;
@@ -28,15 +32,17 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
             dispatch(UPDATE_AVATAR(avatarUrl))
 
             message_success("Your avatar is removed!", 3)
+            setIsLoading(false);
             return;
         } catch (ex) {
             console.log(ex)
         }
     }
 
-    const updateAvatar = async (file) => {
+    const updateAvatar = async (file) => {        
         // max is 10mb
         if (file.size <= 10000000) {
+            setIsLoading(true);
             let formData = new FormData();
             formData.append("file", file)
 
@@ -44,6 +50,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
                 const response = await userApi.updateAvatar(token, formData);
                 if(response.content.err){
                     console.error("updateAvatar error")
+                    setIsLoading(false)
                     return;
                 }
                 const avatarUrl = response.content.avatar_url;
@@ -53,6 +60,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
                 dispatch(UPDATE_AVATAR(avatarUrl))
     
                 message_success("Your avatar is changed!", 3)
+                setIsLoading(false)
                 return;
             } catch (ex) {
                 console.log(ex)
@@ -69,6 +77,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
             closeProfileDrawer={(state) => closeProfileDrawer(state)}
             removeAvatar={() => removeAvatar()}
             updateAvatar={file => updateAvatar(file)}
+            isLoading={isLoading}
         />
     )
 }
