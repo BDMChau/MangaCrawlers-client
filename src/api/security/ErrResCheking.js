@@ -8,7 +8,7 @@ export const errCodeResCheking = (errorResponse) => {
                     message_error("Missing credentials!")
                     break;
                 case "Token verification is failed!":
-                    message_error("Verification is failed!")
+                    message_error("Your request was wrong, try another request!")
                     break;
                 case "Token has expired!":
                     message_error("Your request has expired, try another request!")
