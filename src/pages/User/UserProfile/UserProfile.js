@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar, isLoading }) {
     const userState = useSelector((state) => state.userState);
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
-    const [adminEmail] = useState("bdmchau10005@gmail.com");
+    const [adminEmail] = useState("mangacrawlers123@gmail.com");
     const [profile, setProfile] = useState({});
     const [file, setFile] = useState(null);
     const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
