@@ -57,7 +57,7 @@ const routes = [
         exact: false
     },
     {
-        path: "/auth/verify/:token",
+        path: "/auth/verification/:token",
         component: React.lazy(() => import('../../pages/VerifyAccount/VerifyAccount')),
         exact: false
     },
