@@ -2,8 +2,7 @@ import React from 'react'
 import "./UserPage.css"
 import FollowingManga from './FollowingManga/FollowingManga'
 import HistoryRead from './HistoryRead/HistoryRead'
-import { Table, Tag, Space, Col, Row, Typography, Tabs, Radio } from 'antd';
-import { Avatar } from 'antd';
+import {  Row, Typography, Tabs } from 'antd';
 
 const { TabPane } = Tabs;
 

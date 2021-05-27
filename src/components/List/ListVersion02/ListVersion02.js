@@ -1,10 +1,10 @@
 import { Col, Empty, Image, List, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
-import "./ListFollowing.css"
+import React from 'react'
+import "./ListVersion02.css"
 import Rating from "../../Rating/Rating"
 import { NavLink } from 'react-router-dom'
 
-export default function ListFollowing({ mangas }) {
+export default function ListVersion02({ mangas }) {
     // const [pageSize, setPageSize] = useState(9)
 
     // useEffect(() => {
@@ -34,12 +34,11 @@ export default function ListFollowing({ mangas }) {
                     pageSize: 10,
                     defaultCurrent: 1,
                     total: mangas.length,
-                    // total: listChapters.length,
                 }}
                 dataSource={mangas}
                 footer={false}
                 renderItem={manga => (
-                    <NavLink to={`/manga/${manga.manga_id}`} className="item">
+                    <NavLink to={manga.isProject ?`/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item">
                         <div className="item-img">
                             <Image
                                 className="img"

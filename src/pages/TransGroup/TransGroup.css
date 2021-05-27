@@ -1,0 +1,36 @@
+.transgrouppage-row1{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.transgrouppage-row1 .transgrouppage-tabs{
+    margin-bottom: 30px;
+}
+
+.transgrouppage-row1 .transgrouppage-title{
+    text-align: center;
+}
+
+.transgrouppage-row1 .transgrouppage-tabs .projects{
+    margin-top: 30px;
+}
+
+.transgrouppage-row1 .transgrouppage-tabs .ant-tabs-nav-wrap{
+    justify-content: center;
+    border: none;
+}
+
+.transgrouppage-row1 .transgrouppage-tabs .ant-tabs-nav-wrap .ant-tabs-tab{
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before{
+    border-bottom: none;
+}

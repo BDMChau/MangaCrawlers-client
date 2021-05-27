@@ -22,6 +22,7 @@ export default function UserPageService() {
         try {
             if (value === "history" || value === null) {
                 const responseHistory = await mangaApi.getHistoryManga(token)
+                console.log(responseHistory)
                 if (responseHistory) {
                     responseHistory.content.mangas.forEach(manga => {
                         manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;

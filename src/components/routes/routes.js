@@ -67,6 +67,16 @@ const routes = [
         exact: true
     },
     {
+        path: "/user/projects",
+        component: React.lazy(() => import('../../pages/TransGroup/TransGroupService')),
+        exact: true
+    },
+    {
+        path: "/user/projects/upload",
+        component: React.lazy(() => import('../../pages/UploadManga/UploadMangaService')),
+        exact: true
+    },
+    {
         path: "",
         component: React.lazy(() => import('../../pages/NotFound404/NotFound404')),
         exact: false

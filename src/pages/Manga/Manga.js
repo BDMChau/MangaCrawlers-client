@@ -5,7 +5,7 @@ import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Toolti
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
-import CommentForm from '../../components/CommentForm/CommentForm';
+import CommentForm from '../../components/Form/CommentForm/CommentForm';
 import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
 

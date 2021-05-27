@@ -1,7 +1,7 @@
 import { Button, Col, Dropdown, Image, Input, Menu, Row, Tooltip, Typography } from 'antd'
 import React, { useState, useEffect } from 'react'
 import "./Chapter.css"
-import CommentForm from '../../components/CommentForm/CommentForm';
+import CommentForm from '../../components/Form/CommentForm/CommentForm';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined, MinusSquareOutlined } from "@ant-design/icons";
 import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';

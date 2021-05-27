@@ -1,0 +1,67 @@
+.form-create-project {
+  display: flex;
+  width: 70%;
+  margin-top: 50px;
+  justify-content: space-between;
+}
+
+.form-create-project .form-new-project {
+  width: 70%;
+}
+
+.form-create-project .upload-thumbnail {
+  width: 20%;
+  text-align: right;
+}
+
+.form-create-project .upload-thumbnail button.btn-clear-img {
+  position: absolute;
+  z-index: 9;
+  background: #00000038;
+  border-radius: 50%;
+  color: white;
+  border: none;
+  box-shadow: 0 0 5px 0 white;
+  margin-left: 113px;
+  margin-top: 3px;
+  width: 30px;
+  height: 30px;
+}
+
+.form-create-project .upload-thumbnail button.btn-clear-img:before {
+  box-shadow: none;
+}
+
+.form-create-project
+  .upload-thumbnail
+  .ant-upload.ant-upload-select-picture-card {
+  height: 200px;
+  width: 150px;
+}
+
+.form-create-project .form-new-project .item-submit {
+  float: left;
+}
+
+.form-create-project .form-new-project .item-submit button {
+  width: auto;
+  height: 40px;
+}
+
+/* //////////// */
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .form-create-project {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-create-project .form-new-project {
+    width: 100%;
+  }
+
+  .form-create-project .upload-thumbnail {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

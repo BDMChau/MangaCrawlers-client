@@ -1,7 +1,7 @@
 import React, { createElement, useState } from 'react'
 import "./CommentForm.css"
 import { Col, Input, Row, Comment, Avatar, Form, Button, Skeleton } from 'antd';
-import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
+import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import ButtonLike from './ButtonLike';

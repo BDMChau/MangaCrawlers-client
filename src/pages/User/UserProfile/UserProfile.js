@@ -153,7 +153,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                     <Button
                         type="primary"
                     >
-                        <NavLink className="trans-group-btn" to="">
+                        <NavLink className="trans-group-btn" to="/user/projects">
                             <TeamOutlined style={{ fontSize: "19px" }} />
                             &#160;
                             My Translation Team
