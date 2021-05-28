@@ -87,9 +87,10 @@
   border: none;
   height: auto;
   box-shadow: none !important;
-  margin: 0 5px;
-  padding: 0 18px;
+  margin: 0 3px 0 3px;
+  padding: 3px 14px 0 14px;
 }
+
 
 .dropdown-item-chapter-page {
   text-align: center;

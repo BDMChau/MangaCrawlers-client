@@ -19,14 +19,16 @@ export default function Chapter({
     removeFollowingManga,
     isLoadingAddFollow,
     isFollowed,
-    addReadingHistory
+    addReadingHistory,
+
+    handleNextChapter,
+    handlePrevChapter
 }) {
     const userState = useSelector((state) => state.userState);
     const mangaState = useSelector(state => state.mangaState);
     const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
-
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -42,13 +44,13 @@ export default function Chapter({
         <Menu>
             {
                 chapters
-                    ? chapters.map((chapter, id) => (
-                        <Menu.Item key={id} className="dropdown-item-chapter-page">
+                    ? chapters.map((chapter, i) => (
+                        <Menu.Item key={i} className="dropdown-item-chapter-page">
                             <NavLink
                                 title={chapter.chapter_name}
                                 className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`}
                                 onChange={() => setChapterName(chapter.chapter_name)}
-                                onClick={() => addReadingHistory(chapterInfo.manga.manga_id,chapter.chapter_id)}
+                                onClick={() => addReadingHistory(chapterInfo.manga.manga_id, chapter.chapter_id)}
                             >
                                 <Typography.Text className="title-name">{chapter.chapter_name}</Typography.Text>
                                 <Typography.Text className="title-time">{chapter.createdAt}</Typography.Text>
@@ -63,7 +65,11 @@ export default function Chapter({
 
     return (
         <Row justify={"center"} className="chapter">
-            <Typography.Title level={2} className="title">{chapterInfo.manga ? chapterInfo.manga.manga_name : ""}</Typography.Title>
+            {chapterInfo.manga
+                ? <Typography.Title level={2} className="title">{chapterInfo.manga ? chapterInfo.manga.manga_name : ""}</Typography.Title>
+                : <Typography.Title level={2} className="title" style={{color:"transparent"}}>.</Typography.Title>
+
+            }
             {stuffsState[0] === "true"
                 ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "44px", marginTop: "10px" }}></Col>
                 : ""
@@ -78,7 +84,7 @@ export default function Chapter({
                 </Tooltip>
 
                 <Tooltip title="Previous Chap">
-                    <Button className="btn-next">
+                    <Button className="btn-prev" onClick={() => handlePrevChapter()}>
                         <LeftOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
@@ -92,8 +98,8 @@ export default function Chapter({
                 </Tooltip>
 
                 <Tooltip title="Next Chap">
-                    <Button className="btn-prev">
-                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />
+                    <Button className="btn-next" onClick={() => handleNextChapter()}>
+                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 

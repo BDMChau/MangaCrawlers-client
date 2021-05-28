@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import Chapter from './Chapter'
 import chapterApi from "../../api/apis/chapterApi"
 import dayjs from 'dayjs';
@@ -13,6 +13,7 @@ import mangaApi from '../../api/apis/mangaApi';
 export default function ChapterService() {
     const dispatch = useDispatch();
     const userState = useSelector((state) => state.userState);
+    const history = useHistory();
     const { mangaid, chapterid } = useParams();
     const [imgs, setImgs] = useState([]);
     const [chapters, setChapters] = useState([]);
@@ -20,6 +21,7 @@ export default function ChapterService() {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingAddFollow, setIsLoadingAddFollow] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
+    const [curChapter, setCurChapter] = useState(0);
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -54,6 +56,7 @@ export default function ChapterService() {
 
         try {
             const response = await chapterApi.getChapterImgs(data)
+
             if (!response.content.chapterInfo || response.content.err) {
                 setImgs([]);
                 setChapters([]);
@@ -77,8 +80,12 @@ export default function ChapterService() {
             const imgs = response.content.listImg;
 
             const chapters = response.content.listChapter;
-            chapters.forEach(chapter => {
+            chapters.forEach((chapter, i) => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+
+                if (chapter.chapter_id == chapterid) {
+                    setCurChapter(i)
+                }
             })
 
             setChapters(chapters)
@@ -88,7 +95,6 @@ export default function ChapterService() {
                 const followingMangas = await getFollowingMangas();
                 followingMangas.forEach(folllowingManga => {
                     if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
-                        console.log('??')
                         setIsFollowed(true);
                     }
                 })
@@ -101,6 +107,24 @@ export default function ChapterService() {
             console.log(err)
         }
     }
+
+    useEffect(() => {
+        chapters.forEach((chapter, i) => {
+            if (curChapter === i) {
+                history.push(`/chapter/${mangaid}/${chapter.chapter_id}`)
+            }
+        })
+    }, [curChapter])
+
+    const handleNextChapter = () => {
+        setCurChapter(curChapter + 1);
+    }
+
+    const handlePrevChapter = () => {
+        setCurChapter(curChapter - 1);
+    }
+
+
 
     const addToFollowingManga = async (mangaId) => {
         setIsLoadingAddFollow(true)
@@ -193,6 +217,9 @@ export default function ChapterService() {
                 isLoadingAddFollow={isLoadingAddFollow}
                 isFollowed={isFollowed}
                 addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
+
+                handleNextChapter={() => handleNextChapter()}
+                handlePrevChapter={() => handlePrevChapter()}
             />
         </div>
     )
