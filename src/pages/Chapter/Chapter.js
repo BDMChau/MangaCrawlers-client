@@ -18,7 +18,8 @@ export default function Chapter({
     addToFollowingManga,
     removeFollowingManga,
     isLoadingAddFollow,
-    isFollowed
+    isFollowed,
+    addReadingHistory
 }) {
     const userState = useSelector((state) => state.userState);
     const mangaState = useSelector(state => state.mangaState);
@@ -43,7 +44,12 @@ export default function Chapter({
                 chapters
                     ? chapters.map((chapter, id) => (
                         <Menu.Item key={id} className="dropdown-item-chapter-page">
-                            <NavLink title={chapter.chapter_name} className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`} onChange={() => setChapterName(chapter.chapter_name)}>
+                            <NavLink
+                                title={chapter.chapter_name}
+                                className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`}
+                                onChange={() => setChapterName(chapter.chapter_name)}
+                                onClick={() => addReadingHistory(chapterInfo.manga.manga_id,chapter.chapter_id)}
+                            >
                                 <Typography.Text className="title-name">{chapter.chapter_name}</Typography.Text>
                                 <Typography.Text className="title-time">{chapter.createdAt}</Typography.Text>
                             </NavLink>
@@ -98,8 +104,8 @@ export default function Chapter({
                         onClick={() =>
                             userState[0]
                                 ? isFollowed
-                                    ? removeFollowingManga()
-                                    : addToFollowingManga()
+                                    ? removeFollowingManga(chapterInfo.manga.manga_id)
+                                    : addToFollowingManga(chapterInfo.manga.manga_id)
                                 : message_error("You have to login first!")
                         }
                     >

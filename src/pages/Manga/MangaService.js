@@ -39,6 +39,7 @@ function MangaService() {
                 manga_id: id,
             }
             const response = await mangaApi.getManga(params);
+            console.log(response.content.chapters)
             if (response.content.err) {
                 return;
             }

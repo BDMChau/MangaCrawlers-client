@@ -42,7 +42,8 @@ export default function ChapterService() {
         })
 
         getDataChapter();
-    }, [chapterid])
+        addReadingHistory(mangaid, chapterid);
+    }, [chapterid || mangaid])
 
     const getDataChapter = async () => {
         setIsLoading(true);
@@ -87,6 +88,7 @@ export default function ChapterService() {
                 const followingMangas = await getFollowingMangas();
                 followingMangas.forEach(folllowingManga => {
                     if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
+                        console.log('??')
                         setIsFollowed(true);
                     }
                 })
@@ -100,10 +102,10 @@ export default function ChapterService() {
         }
     }
 
-    const addToFollowingManga = async () => {
+    const addToFollowingManga = async (mangaId) => {
         setIsLoadingAddFollow(true)
         const data = {
-            manga_id: mangaid
+            manga_id: mangaId
         }
         try {
             const response = await mangaApi.addToFollowing(data, token);
@@ -127,10 +129,10 @@ export default function ChapterService() {
         }
     }
 
-    const removeFollowingManga = async () => {
+    const removeFollowingManga = async (mangaId) => {
         setIsLoadingAddFollow(true)
         const data = {
-            manga_id: mangaid,
+            manga_id: mangaId,
         }
         try {
             const response = await mangaApi.removeFollowing(data, token)
@@ -164,6 +166,19 @@ export default function ChapterService() {
         return followingMangas;
     }
 
+    const addReadingHistory = async (mangaId, chapterId) => {
+        const data = {
+            manga_id: mangaId,
+            chapter_id: chapterId
+        }
+        try {
+            const response = await mangaApi.updateReadingHistory(data, token)
+
+            console.log("History:", response)
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
 
 
     return (
@@ -173,10 +188,11 @@ export default function ChapterService() {
                 chapters={chapters}
                 chapterInfo={chapterInfo}
                 isLoading={isLoading}
-                addToFollowingManga={() => addToFollowingManga()}
-                removeFollowingManga={() => removeFollowingManga()}
+                addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
+                removeFollowingManga={(mangaId) => removeFollowingManga(mangaId)}
                 isLoadingAddFollow={isLoadingAddFollow}
                 isFollowed={isFollowed}
+                addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
             />
         </div>
     )
