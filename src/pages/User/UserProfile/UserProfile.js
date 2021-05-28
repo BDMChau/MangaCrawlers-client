@@ -150,25 +150,33 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         </NavLink>
                     </Button>
 
-                    <Button
+                    {!userState[0].user_transgroup_id 
+                    ? <Button
                         type="primary"
-                    >
+                     >
                         <NavLink className="trans-group-btn" to="/user/projects">
                             <TeamOutlined style={{ fontSize: "19px" }} />
                             &#160;
                             My Translation Team
                         </NavLink>
                     </Button>
+                    : ""
 
-                    <Button
+                    }
+
+                    {userState[0].user_isAdmin === true
+                    ? <Button
                         type="primary"
                     >
-                        <NavLink className="admin-btn" to="/admin">
-                            <ProfileOutlined style={{ fontSize: "19px" }} />
-                            &#160;
-                            Admin Page
-                        </NavLink>
-                    </Button>
+                            <NavLink className="admin-btn" to="/admin">
+                                <ProfileOutlined style={{ fontSize: "19px" }} />
+                                &#160;
+                                Admin Page
+                            </NavLink>
+                        </Button>
+                    :""
+                       
+                    }
                 </div>
                 <div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
                     <p>Create your own translation group?</p>

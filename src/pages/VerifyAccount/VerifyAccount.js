@@ -24,7 +24,7 @@ export default function VerifyAccount() {
             user_verify_token: token
         }
         try {
-            const reponse = await authApi.verifyAccount(data);
+            await authApi.verifyAccount(data);
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
                 setIsVerified(false)

@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
+import { message_error } from '../../components/notifications/message';
 
 
 export default function Chapter({
@@ -15,14 +16,16 @@ export default function Chapter({
     chapterInfo,
     isLoading,
     addToFollowingManga,
+    removeFollowingManga,
     isLoadingAddFollow,
     isFollowed
 }) {
+    const userState = useSelector((state) => state.userState);
     const mangaState = useSelector(state => state.mangaState);
     const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
-    
+
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -92,7 +95,14 @@ export default function Chapter({
                     <Button
                         loading={isLoadingAddFollow}
                         className="btn-add-favor"
-                        onClick={() => addToFollowingManga()}>
+                        onClick={() =>
+                            userState[0]
+                                ? isFollowed
+                                    ? removeFollowingManga()
+                                    : addToFollowingManga()
+                                : message_error("You have to login first!")
+                        }
+                    >
                         {isFollowed
                             ? <MinusSquareOutlined style={{ fontSize: stuffsState[0] === "true" ? "20px" : "20px", transition: "0.5s", marginTop: "3px" }} />
                             : <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />}

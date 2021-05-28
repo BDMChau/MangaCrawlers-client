@@ -1,13 +1,15 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
-import { Col, Input, Row, Comment, Avatar, Form, Button, Typography, Tag, Tooltip, Skeleton } from 'antd';
+import { Col, Row, Button, Typography, Tag, Tooltip } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
 import CommentForm from '../../components/Form/CommentForm/CommentForm';
 import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
+import { useSelector } from 'react-redux';
+import { message_error } from '../../components/notifications/message';
 
 
 function Manga({
@@ -44,6 +46,7 @@ function Manga({
         "Chapter1: ",
 
     ])
+    const userState = useSelector((state) => state.userState);
     const history = useHistory();
     const [chapterId01, setChapterId01] = useState("");
 
@@ -83,7 +86,7 @@ function Manga({
 
                             <div className="author">
                                 Author:
-                            <NavLink to="" className="link" key={manga.author_id}>
+                            <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
                                     {manga.author_name}
                                 </NavLink>
                             </div>
@@ -129,9 +132,15 @@ function Manga({
                                 <Button
                                     type="primary"
                                     className="btn-add-favorite"
-                                    title="Add to Favorite"
+                                    title="Add to Library"
                                     loading={isLoading}
-                                    onClick={() => isFollowed ? removeFollowingManga(manga.manga_id) : addToFollowingManga(manga.manga_id)}
+                                    onClick={() =>
+                                        userState[0]
+                                            ? isFollowed
+                                                ? removeFollowingManga(manga.manga_id)
+                                                : addToFollowingManga(manga.manga_id)
+                                            : message_error("You have to login first!")
+                                    }
 
                                 >
                                     {isFollowed ? "Remove from Library" : "Add to Library"}

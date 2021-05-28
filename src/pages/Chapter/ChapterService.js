@@ -127,6 +127,28 @@ export default function ChapterService() {
         }
     }
 
+    const removeFollowingManga = async () => {
+        setIsLoadingAddFollow(true)
+        const data = {
+            manga_id: mangaid,
+        }
+        try {
+            const response = await mangaApi.removeFollowing(data, token)
+            if (response.content.err) {
+                setIsLoadingAddFollow(false);
+                message_error("Something wrong, try again!")
+                return
+            }
+
+            message_success("Removed from your library!", 3)
+            setIsFollowed(false);
+            setIsLoadingAddFollow(false);
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
     const getFollowingMangas = async () => {
         let followingMangas = [];
         try {
@@ -152,6 +174,7 @@ export default function ChapterService() {
                 chapterInfo={chapterInfo}
                 isLoading={isLoading}
                 addToFollowingManga={() => addToFollowingManga()}
+                removeFollowingManga={() => removeFollowingManga()}
                 isLoadingAddFollow={isLoadingAddFollow}
                 isFollowed={isFollowed}
             />

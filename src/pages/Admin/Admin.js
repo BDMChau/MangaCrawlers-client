@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Admin.css"
 import "./Tables/Tables.css"
 import "./Charts/Chart.css"
@@ -10,6 +10,9 @@ import MangaTable from './Tables/MangaTable';
 import MangaChart from './Charts/MangaChart';
 import TransGrTable from './Tables/TransGrTable';
 import TransGrChart from './Charts/TransGrChart';
+import { useHistory } from 'react-router';
+import { message_error } from "../../components/notifications/message";
+import { useSelector } from 'react-redux';
 
 const { TabPane } = Tabs;
 
@@ -20,6 +23,20 @@ export default function Admin({
     handleRemoveUser,
     isLoading
 }) {
+    const userState = useSelector((state) => state.userState);
+    const history = useHistory();
+
+    useEffect(() => {
+        if (userState[0]) {
+            if (!userState[0].user_isAdmin) {
+                history.push("/");
+                message_error("You aren't allowed to access this resource!")
+                return
+            }
+        } else {
+            history.push("/");
+        }
+    }, [userState[0]])
 
 
     const renderUserStatistic = () => (

@@ -15,6 +15,17 @@ function NavbarService() {
         getAllGenres();
     }, [])
 
+    // auto logout when user has not been verified
+    // useEffect(() => {
+    //     if (userState[0]) {
+    //         if (!userState[0].user_isVerified) {
+    //             handleLogOut();
+    //             return;
+    //         }
+    //     }
+    // }, [userState[0]])
+
+
     const handleLogOut = () => {
         cookies.remove("user", { path: '/' });
         cookies.remove("token", { path: '/' });
