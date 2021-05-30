@@ -69,6 +69,14 @@ const mangaApi = {
             }
         })
     },
+    ratingManga: (data, token) => {
+        const url = '/api/user/ratingmanga'
+        return axiosClient.put(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 
 }
 

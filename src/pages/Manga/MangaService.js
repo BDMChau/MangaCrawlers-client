@@ -16,6 +16,7 @@ function MangaService() {
     const [weeklyMangas, setWeeklyMangas] = useState([]);
     const [isFollowed, setIsFollowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [mangaStars, setMangaStars] = useState(0);
     const { id } = useParams()
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -58,7 +59,8 @@ function MangaService() {
                 })
 
             }
-
+console.log(mangaObj)
+            setMangaStars(mangaObj.stars)
             setManga(mangaObj)
             setGenres(response.content.genres)
             setChapters(response.content.chapters)
@@ -161,6 +163,26 @@ function MangaService() {
         }
     }
 
+
+    const handleRatingManga = async (value) => {
+        message_success("Thank you for rating ^^", 3);
+        const data = {
+            manga_id: id,
+            value: value
+        }
+        try {
+            const response = await mangaApi.ratingManga(data, token);
+
+            const newRating = response.content.manga.stars
+            console.log(newRating)
+            setMangaStars(newRating)
+
+        } catch (ex) {
+            console.log(ex)
+        }
+
+    }
+
     return (
         <div>
             <Manga
@@ -173,6 +195,8 @@ function MangaService() {
                 isLoading={isLoading}
                 isFollowed={isFollowed}
                 addReadingHistory={(managId, chapterId) => addReadingHistory(managId, chapterId)}
+                handleRatingManga={(value) => handleRatingManga(value)}
+                mangaStars={mangaStars}
             />
         </div>
     )

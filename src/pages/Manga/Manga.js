@@ -5,7 +5,7 @@ import { Col, Row, Button, Typography, Tag, Tooltip } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
-import CommentForm from '../../components/Form/CommentForm/CommentForm';
+import CommentItems from '../../components/CommentItems/CommentItems';
 import FadingText from '../../components/FadingText/FadingText';
 import Spacing from '../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
@@ -22,6 +22,9 @@ function Manga({
     isLoading,
     isFollowed,
     addReadingHistory,
+
+    mangaStars,
+    handleRatingManga
 }) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
@@ -115,7 +118,7 @@ function Manga({
                             </div>
 
                             <div className="manga-rating">
-                                <Rating stars={manga.stars} />
+                                <Rating stars={mangaStars} handleRatingManga={(value) => handleRatingManga(value)} />
                             </div>
 
                             <div className="manga-views">
@@ -177,7 +180,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentForm comments={[]} />
+                                    <CommentItems comments={[]} />
                                 </div>
 
                             </div>

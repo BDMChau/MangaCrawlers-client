@@ -1,7 +1,7 @@
 import { Button, Col, Dropdown, Image, Input, Menu, Row, Tooltip, Typography, Form } from 'antd'
 import React, { useState, useEffect, memo } from 'react'
 import "./Chapter.css"
-import CommentForm from '../../components/Form/CommentForm/CommentForm';
+import CommentItems from '../../components/CommentItems/CommentItems';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined, MinusSquareOutlined } from "@ant-design/icons";
 import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -167,7 +167,7 @@ function Chapter({
                     </Form.Item>
                 </Form>
 
-                <CommentForm
+                <CommentItems
                     comments={comments}
                     getCmtsChapter={() => getCmtsChapter()}
                     isEndCmts={isEndCmts}

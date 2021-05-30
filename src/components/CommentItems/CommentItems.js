@@ -1,14 +1,13 @@
 import React, { useEffect, memo, useState } from 'react'
-import "./CommentForm.css"
+import "./CommentItems.css"
 import { Comment, Avatar, Empty, Typography } from 'antd';
-import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import TransitionAnimate from '../../Animation/transition';
-import { unset } from 'lodash';
+import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
+import TransitionAnimate from '../Animation/transition';
 
 
 
 
-function CommentForm({ comments, getCmtsChapter, isEndCmts }) {
+function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
@@ -35,7 +34,7 @@ function CommentForm({ comments, getCmtsChapter, isEndCmts }) {
 
 
 
-    const CommentItems = ({ children }) => {
+    const Items = ({ children }) => {
         return (
             comments
                 ? comments.map((comment, i) => (
@@ -86,7 +85,7 @@ function CommentForm({ comments, getCmtsChapter, isEndCmts }) {
 
     return (
         <div className="text" onScroll={(e) => handleScroll(e)} >
-            <CommentItems />
+            <Items />
 
             {isScrollBottom
                 ? <div className="loading-more" >
@@ -98,4 +97,4 @@ function CommentForm({ comments, getCmtsChapter, isEndCmts }) {
     )
 }
 
-export default memo(CommentForm)
+export default memo(CommentItems)
