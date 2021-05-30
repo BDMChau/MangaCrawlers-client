@@ -12,7 +12,7 @@ import FooterContainer from "../components/Footer/Footer";
 import NavbarService from "../components/Navbar/NavbarService";
 import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import Layout, { Content} from "antd/lib/layout/layout";
+import Layout, { Content } from "antd/lib/layout/layout";
 
 
 const Routing = () => {

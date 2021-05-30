@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { message_error, message_success, message_warning } from '../../components/notifications/message';
 import mangaApi from '../../api/apis/mangaApi';
+import userApi from '../../api/apis/userApi';
 
 
 export default function ChapterService() {
@@ -23,6 +24,16 @@ export default function ChapterService() {
     const [isFollowed, setIsFollowed] = useState(false);
     const [curChapter, setCurChapter] = useState(0);
 
+    const [isAddedCmt, setIsAddedCmt] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [fromRow, setFromRow] = useState(0);
+    const [amountRows] = useState(10);
+    const [isEndCmts, setIsEndCmts] = useState(false);
+    const [isErrorCmt, setIsErrorCmt] = useState(false);
+    const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
+
+
     const cookies = new Cookies();
     const token = cookies.get("token")
 
@@ -30,6 +41,7 @@ export default function ChapterService() {
     useEffect(() => {
         localStorage.setItem("mangaid", JSON.stringify(mangaid));
         dispatch(SET_MANGA_ID(mangaid))
+
     }, [])
 
     useEffect(() => {
@@ -45,7 +57,22 @@ export default function ChapterService() {
 
         getDataChapter();
         addReadingHistory(mangaid, chapterid);
+        getCmtsChapter();
     }, [chapterid || mangaid])
+
+    useEffect(() => {
+      console.log()
+    })
+
+
+    useEffect(() => {
+        chapters.forEach((chapter, i) => {
+            if (curChapter === i) {
+                history.push(`/chapter/${mangaid}/${chapter.chapter_id}`)
+            }
+        })
+    }, [curChapter])
+
 
     const getDataChapter = async () => {
         setIsLoading(true);
@@ -108,13 +135,6 @@ export default function ChapterService() {
         }
     }
 
-    useEffect(() => {
-        chapters.forEach((chapter, i) => {
-            if (curChapter === i) {
-                history.push(`/chapter/${mangaid}/${chapter.chapter_id}`)
-            }
-        })
-    }, [curChapter])
 
     const handleNextChapter = () => {
         setCurChapter(curChapter + 1);
@@ -191,19 +211,115 @@ export default function ChapterService() {
     }
 
     const addReadingHistory = async (mangaId, chapterId) => {
-        const data = {
-            manga_id: mangaId,
-            chapter_id: chapterId
-        }
-        try {
-            const response = await mangaApi.updateReadingHistory(data, token)
+        if (userState[0]) {
+            const data = {
+                manga_id: mangaId,
+                chapter_id: chapterId
+            }
+            try {
+                const response = await mangaApi.updateReadingHistory(data, token)
 
-            console.log("History:", response)
-        } catch (ex) {
-            console.log(ex)
+                console.log("History:", response)
+            } catch (ex) {
+                console.log(ex)
+            }
         }
     }
 
+
+    // Check error when add a cmt
+    useEffect(() => {
+        if (isErrorCmt === true) {
+            for (const comment of comments) {
+                if (comment.chaptercmt_time === timeWhenAddedCmt) {
+                    comment.is_error = true;
+                    break;
+                }
+            }
+
+            setComments(comments);
+        }
+    }, [isErrorCmt])
+
+    const addCmtChapter = async (cmtContent) => {
+        if (userState[0]) {
+            if (cmtContent) {
+                setIsAdding(true);
+
+                const newObjComment = {
+                    "chapter_id": chapterid,
+                    "chaptercmt_content": cmtContent,
+                    "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
+                    "user_avatar": userState[0].user_avatar,
+                    "user_email": userState[0].user_email,
+                    "user_id": userState[0].user_id,
+                    "user_name": userState[0].user_name,
+                    "is_error": false
+                }
+
+                setTimeWhenAddedCmt(dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"));
+                setComments(prevCmts => [newObjComment, ...prevCmts])
+                setIsAdding(false);
+                setIsAddedCmt(true)
+
+
+                const data = {
+                    chapter_id: chapterid,
+                    chaptercmt_content: cmtContent.trim()
+                }
+
+                try {
+                    const response = await userApi.addCmtChapter(token, data);
+                    if (response.content.comment_info) {
+                        // added
+                        return;
+                    } else {
+                        setIsErrorCmt(true);
+                        return;
+                    }
+                } catch (ex) {
+                    console.log(ex)
+                }
+            }
+        } else {
+            message_error("You have to login first!");
+            return;
+        }
+    }
+
+    const getCmtsChapter = async () => {
+        const data = {
+            manga_id: mangaid,
+            chapter_id: chapterid,
+            from: fromRow,
+            amount: amountRows
+        }
+
+        try {
+            const response = await chapterApi.getComments(data);
+
+            if (response.content.msg === "No comments found!") {
+                setIsEndCmts(true);
+                return;
+            }
+
+            if (response.content.comments) {
+                const comments = response.content.comments;
+                comments.forEach(comment => {
+                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
+                });
+
+                setComments(prevCmts => [...prevCmts, ...comments])
+                setFromRow(fromRow + 11)
+            }
+
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+
+
+    }
 
     return (
         <div>
@@ -220,6 +336,15 @@ export default function ChapterService() {
 
                 handleNextChapter={() => handleNextChapter()}
                 handlePrevChapter={() => handlePrevChapter()}
+
+                addCmtChapter={(cmtContent) => addCmtChapter(cmtContent)}
+                isAddedCmt={isAddedCmt}
+                setIsAddedCmt={setIsAddedCmt}
+                isAdding={isAdding}
+                comments={comments}
+                getCmtsChapter={() => getCmtsChapter()}
+                isEndCmts={isEndCmts}
+
             />
         </div>
     )

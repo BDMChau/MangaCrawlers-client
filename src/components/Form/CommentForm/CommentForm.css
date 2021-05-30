@@ -1,28 +1,32 @@
-.comment-form .form-input .input {
+.comments-form {
+  margin-bottom: 50px;
+}
+
+.comments-form .form-input .input {
   height: 70px;
   resize: none;
 }
 
-.comment-form .text {
+.comments-form .text {
   height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
-.comment-form .ant-comment-inner {
+.comments-form .ant-comments-inner {
   padding: 10px 0;
 }
 
-.comment-form .loading-more {
+.comments-form .loading-more {
   text-align: center;
 }
 
-.comment-form .ant-comment-actions {
+.comments-form .ant-comments-actions {
   padding: 0;
   margin-top: 5px;
 }
 
-.comment-form .comment-likes {
+.comments-form .comments-likes {
   cursor: pointer;
   padding: 0px 5px;
   font-size: 14px;
@@ -32,25 +36,25 @@
 
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
-  .comment-form .text {
+  .comments-form .text {
     height: 350px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .comment-form .text {
+  .comments-form .text {
     height: 450px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-  .comment-form .text {
+  .comments-form .text {
     height: 450px;
   }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .comment-form .text {
+  .comments-form .text {
     height: 450px;
   }
 }

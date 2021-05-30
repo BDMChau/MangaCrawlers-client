@@ -177,7 +177,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentForm />
+                                    <CommentForm comments={[]} />
                                 </div>
 
                             </div>

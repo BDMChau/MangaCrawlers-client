@@ -153,6 +153,10 @@ ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown
 }
 
 
+.chapter .chapter-comment{
+  margin-bottom: 50px;
+}
+
 /* ///////////// */
 @media only screen and (min-width: 375px) and (max-width: 413px) {
   .chapter .dropdown-chapter .dropdown-items {

@@ -10,7 +10,6 @@ export default function AppService() {
         return () => window.removeEventListener("scroll", (e) => handleScroll(e))
     }, [])
 
-
     const handleScroll = () => {
         if (window.scrollY === 0) {
             setIsVisibleScrollTopBtn(false);

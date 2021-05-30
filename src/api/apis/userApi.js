@@ -19,6 +19,14 @@ const userApi = {
             }
         })
     },
+    addCmtChapter: (token, data) => {
+        const url = '/api/user/addcommentchapter'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default userApi;

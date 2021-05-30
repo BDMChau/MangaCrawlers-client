@@ -1,5 +1,5 @@
-import { Button, Col, Dropdown, Image, Input, Menu, Row, Tooltip, Typography } from 'antd'
-import React, { useState, useEffect } from 'react'
+import { Button, Col, Dropdown, Image, Input, Menu, Row, Tooltip, Typography, Form } from 'antd'
+import React, { useState, useEffect, memo } from 'react'
 import "./Chapter.css"
 import CommentForm from '../../components/Form/CommentForm/CommentForm';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined, MinusSquareOutlined } from "@ant-design/icons";
@@ -9,8 +9,11 @@ import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../components/notifications/message';
 
+const { TextArea } = Input;
 
-export default function Chapter({
+
+
+function Chapter({
     imgs,
     chapters,
     chapterInfo,
@@ -22,13 +25,25 @@ export default function Chapter({
     addReadingHistory,
 
     handleNextChapter,
-    handlePrevChapter
+    handlePrevChapter,
+
+    addCmtChapter,
+    isAddedCmt,
+    setIsAddedCmt,
+    isAdding,
+    comments,
+    getCmtsChapter,
+    isEndCmts
+
 }) {
     const userState = useSelector((state) => state.userState);
     const mangaState = useSelector(state => state.mangaState);
     const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
+    const [cmtContent, setCmtContent] = useState("");
+   
+
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -39,6 +54,14 @@ export default function Chapter({
 
     }, [imgs])
 
+
+
+    useEffect(() => {
+        if (isAddedCmt === true) {
+            setCmtContent("");
+            setIsAddedCmt(false)
+        }
+    }, [isAddedCmt])
 
     const dropDownItems = (
         <Menu>
@@ -67,7 +90,7 @@ export default function Chapter({
         <Row justify={"center"} className="chapter">
             {chapterInfo.manga
                 ? <Typography.Title level={2} className="title">{chapterInfo.manga ? chapterInfo.manga.manga_name : ""}</Typography.Title>
-                : <Typography.Title level={2} className="title" style={{color:"transparent"}}>.</Typography.Title>
+                : <Typography.Title level={2} className="title" style={{ color: "transparent" }}>.</Typography.Title>
 
             }
             {stuffsState[0] === "true"
@@ -125,13 +148,34 @@ export default function Chapter({
 
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
 
+            {/* css in  <CommentForm/> */}
+            <Col span={22} xxl={14} className="comments-form">
+                <Form className="form-input">
+                    <Form.Item>
+                        <TextArea
+                            className="input"
+                            type="text"
+                            placeholder="Write a comment..."
+                            value={cmtContent}
+                            onChange={(e) => setCmtContent(e.target.value)}
+                        />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button className="btn-submit" type="primary" loading={isAdding} onClick={() => addCmtChapter(cmtContent)}>
+                            Add Comment
+                    </Button>
+                    </Form.Item>
+                </Form>
 
-            <Col span={23} xxl={14} className="chapter-comment">
-                <CommentForm />
+                <CommentForm
+                    comments={comments}
+                    getCmtsChapter={() => getCmtsChapter()}
+                    isEndCmts={isEndCmts}
+                />
             </Col>
-            {/* <Col span={23} xxl={14} className="chapter-footer">
-                <FooterContainter/>
-            </Col> */}
+
         </Row >
     )
 }
+
+export default Chapter;

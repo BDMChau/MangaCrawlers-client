@@ -1,114 +1,101 @@
-import React, { createElement, useState } from 'react'
+import React, { useEffect, memo, useState } from 'react'
 import "./CommentForm.css"
-import { Col, Input, Row, Comment, Avatar, Form, Button, Skeleton } from 'antd';
+import { Comment, Avatar, Empty, Typography } from 'antd';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import { LikeOutlined, LikeFilled } from '@ant-design/icons';
-import { Tooltip } from 'antd';
-import ButtonLike from './ButtonLike';
+import TransitionAnimate from '../../Animation/transition';
+import { unset } from 'lodash';
 
 
-const { TextArea } = Input;
-const { Item } = Form;
 
-export default function CommentForm() {
+
+function CommentForm({ comments, getCmtsChapter, isEndCmts }) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
-    const [likes, setLikes] = useState(0);
-    const [action, setAction] = useState("");
 
-    const handleLikeCmt = () => {
-        if (action === 'liked') {
-            setLikes(likes - 1);
-            setAction('dislike');
-        } else {
-            setLikes(likes + 1);
-            setAction('liked');
+
+    useEffect(() => {
+        if (isScrollBottom === true) {
+            getCmtsChapter()
+
+            const timer = setTimeout(() => setIsScrollBottom(false), 700)
+            return () => clearTimeout(timer);
         }
-    };
-
+    }, [isScrollBottom])
 
     const handleScroll = (e) => {
         const scrollTop = e.target.scrollTop;
         const clientHeight = e.target.clientHeight;
         const scrollHeight = e.target.scrollHeight;
 
-        if (scrollHeight - (scrollTop + clientHeight) <= 50) {
-            setIsScrollBottom(true);
+        if (isEndCmts === false) {
+            if (scrollHeight - (scrollTop + clientHeight) <= 50) {
+                setIsScrollBottom(true);
+            }
         }
     }
 
 
 
-    const CommentItem = ({ children }) => {
+    const CommentItems = ({ children }) => {
         return (
-            <Comment
-                className="comment-item"
-                author={<a>Ha Phuong</a>}
-                avatar={
-                    <Avatar
-                        className="cmt-avatar"
-                        src="https://scontent.xx.fbcdn.net/v/t1.15752-9/181828860_190655002882277_7218559945996826011_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=58c789&_nc_ohc=L2ZLwEfnu3wAX_9_JdK&_nc_ht=scontent.xx&oh=dd3fa26784cd6f7e44141d03fd9be798&oe=60B90FFE"
-                        alt="Han Solo"
-                    />
-                }
-                content={
-                    <div className="comment" >
-                        <p>
-                            We supply a series of design principles, practical patterns and high quality design
-                            resources (Sketch and Axure).
-                        </p>
-                        <ButtonLike />
+            comments
+                ? comments.map((comment, i) => (
+                    <Comment
+                        className="comment-item"
+                        key={i}
+                        author={<a style={{ cursor: "default" }}>{comment.user_name}</a>}
+                        avatar={
+                            <Avatar
+                                className="cmt-avatar"
+                                style={{ cursor: "default" }}
+                                src={comment.user_avatar}
+                                alt="Avatar"
+                            />
+                        }
+                        content={
+                            <div className="comment" key={i}>
+                                <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
+                                    {comment.chaptercmt_content}
+                                </Typography.Text>
+
+                                <div>
+                                    <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
+                                        {comment.chaptercmt_time}
+                                    </Typography.Text>
+                                    <Typography.Text style={{ color: "#FF4D4F", marginLeft: "5px" }}>
+                                        {comment.is_error ? "Error, cannot add this comment!" : ""}
+                                    </Typography.Text>
+                                </div>
+                            </div>
+                        }
+                    >
+                        {children}
+                    </Comment>
+                ))
+
+                : <TransitionAnimate renderPart={
+                    <div style={{ height: "unset" }} >
+                        <Empty
+                            style={{ marginTop: "40px", color: "#8a8d92" }}
+                            image={Empty.PRESENTED_IMAGE_SIMPLE}
+                            description="No comments to present :("
+                        />
                     </div>
-                }
-            >
-                {children}
-            </Comment>
+                } transitionTime={0.3} />
         )
     }
 
     return (
-        <div className="comment-form">
-            <Form className="form-input">
-                <Form.Item>
-                    <TextArea className="input" placeholder="Write a comment..." />
-                </Form.Item>
-                <Form.Item>
-                    <Button className="btn-submit" htmlType="submit" type="primary">
-                        Add Comment
-                    </Button>
-                </Form.Item>
-            </Form>
-            <div className="text" onScroll={(e) => handleScroll(e)} >
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                <CommentItem />
-                {isScrollBottom
-                    ? <div className="loading-more" >
-                        <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
-                        <SkeletonCustom paragraphRows={2} avatarShape={"circle"} />
-                    </div>
-                    : ""
-                }
-            </div>
+        <div className="text" onScroll={(e) => handleScroll(e)} >
+            <CommentItems />
 
+            {isScrollBottom
+                ? <div className="loading-more" >
+                    <SkeletonCustom paragraphRows={3} avatarShape={"circle"} />
+                </div>
+                : ""
+            }
         </div>
     )
 }
+
+export default memo(CommentForm)
