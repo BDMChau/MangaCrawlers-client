@@ -27,6 +27,14 @@ const userApi = {
             }
         })
     },
+    registerTranslationGroup: (token, data) => {
+        const url = '/api/user/signuptransgroup'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default userApi;

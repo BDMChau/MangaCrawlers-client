@@ -7,16 +7,20 @@ import { Button, Modal, Form, Input, Checkbox, Popover, Tabs, Typography } from 
 import TextArea from 'antd/lib/input/TextArea';
 import rules from "../../helpers/Rules";
 import { CheckOutlined } from "@ant-design/icons";
+import userApi from '../../api/apis/userApi';
+import { message_success } from '../../components/notifications/message';
+import Cookies from 'universal-cookie';
+
 
 export default function SignUpTransGroup() {
-    const [nameTransTeam, setNameTransTeam] = useState("");
+    const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
-
     const [isCheckedRules, setIsCheckedRules] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const dispatch = useDispatch();
-
+    const cookies = new Cookies();
+    const token = cookies.get("token")
 
 
     useEffect(() => {
@@ -39,12 +43,30 @@ export default function SignUpTransGroup() {
     const handleSubmit = (e) => {
         // e.preventDefault()
 
-        if (!nameTransTeam || !desc || !isCheckedRules) {
+        if (!name || !desc || !isCheckedRules) {
             return
         } else {
-            // handleSignUp(name, email, password)
-
+            registerTransGroup();
             return;
+        }
+    }
+
+    const registerTransGroup = async () => {
+        const data = {
+            group_name: name,
+            group_desc: desc
+        }
+
+        try {
+            const response = await userApi.registerTranslationGroup(token, data);
+
+            if (response.content.msg) {
+                message_success(response.content.msg);
+            }
+
+            console.log(response)
+        } catch (ex) {
+            console.log(ex)
         }
     }
 
@@ -85,7 +107,7 @@ export default function SignUpTransGroup() {
                                 message: 'Please fill in your translation team name!',
                             }]}
                         >
-                            <Input placeholder="Choose your translation team name" onChange={(e) => setNameTransTeam(e.target.value)} />
+                            <Input placeholder="Choose your translation team name" onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -95,7 +117,7 @@ export default function SignUpTransGroup() {
                                 message: 'Tell us something about your team!',
                             }]}
                         >
-                            <TextArea placeholder="Description about your team" onChange={(e) => setDesc(e.target.value)} style={{ resize: "none", height: "150px" }} />
+                            <TextArea placeholder="Description about your team" onChange={(e) => setDesc(e.target.value.trim())} style={{ resize: "none", height: "150px" }} />
                         </Form.Item>
 
                         <Form.Item
@@ -109,7 +131,7 @@ export default function SignUpTransGroup() {
                                 <Typography.Text style={{ marginRight: "2.5px" }} >I understand and accept the</Typography.Text>
 
                                 <Popover className="popover-checkbox" content={renderRules} trigger="click" overlayStyle={{ width: "75vw", maxHeight: "500px", overflowY: "auto" }} >
-                                    MangaCrawlers Terms
+                                    MangaCrawlers terms
                                 </Popover>
                             </Checkbox>
 
@@ -117,7 +139,7 @@ export default function SignUpTransGroup() {
 
 
 
-                        <Form.Item className="form-signup-footer">
+                        <Form.Item className="form-signup-footer" style={{ marginTop: "10px" }} >
                             <Button className="btn-submit-signup-trans-group" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
                             >

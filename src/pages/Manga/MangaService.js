@@ -18,8 +18,6 @@ function MangaService() {
     const [isLoading, setIsLoading] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
 
-    const [isAddedCmt, setIsAddedCmt] = useState(false);
-    const [isAdding, setIsAdding] = useState(false);
     const [comments, setComments] = useState([]);
     const [fromRow, setFromRow] = useState(0);
     const [amountRows] = useState(10);
