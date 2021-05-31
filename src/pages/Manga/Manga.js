@@ -24,7 +24,9 @@ function Manga({
     addReadingHistory,
 
     mangaStars,
-    handleRatingManga
+    handleRatingManga,
+
+    comments
 }) {
     const [listChapters, setListChapter] = useState([
         "Chapter1: ",
@@ -180,7 +182,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentItems comments={[]} />
+                                    <CommentItems comments={comments} />
                                 </div>
 
                             </div>

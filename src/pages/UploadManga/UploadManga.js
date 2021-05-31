@@ -31,6 +31,7 @@ export default function UploadManga() {
         listType: "picture",
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         onChange(info) {
+            console.log(info)
             const { status } = info.file;
             if (status !== 'uploading') {
                 console.log(info.file, info.fileList);

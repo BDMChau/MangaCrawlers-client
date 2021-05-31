@@ -30,9 +30,18 @@
   cursor: pointer;
   padding: 0px 5px;
   font-size: 14px;
-  color: #C1C1C1;
+  color: #c1c1c1;
 }
 
+.comment .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
@@ -53,8 +62,18 @@
   }
 }
 
+@media only screen and (min-width: 415px) and (max-width: 550px) {
+  .comment .cmt-bottom .chapter-name {
+    width: 100px;
+  }
+}
+
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .comments-form .text {
     height: 450px;
+  }
+
+  .comment .cmt-bottom .chapter-name {
+    width: 100px;
   }
 }

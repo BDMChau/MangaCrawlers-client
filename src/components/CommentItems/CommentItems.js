@@ -1,6 +1,6 @@
 import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
-import { Comment, Avatar, Empty, Typography } from 'antd';
+import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
 import TransitionAnimate from '../Animation/transition';
 
@@ -36,7 +36,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
 
     const Items = ({ children }) => {
         return (
-            comments
+            comments.length
                 ? comments.map((comment, i) => (
                     <Comment
                         className="comment-item"
@@ -56,14 +56,26 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
                                     {comment.chaptercmt_content}
                                 </Typography.Text>
 
-                                <div>
+                                <div className="cmt-bottom">
                                     <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
                                         {comment.chaptercmt_time}
                                     </Typography.Text>
-                                    <Typography.Text style={{ color: "#FF4D4F", marginLeft: "5px" }}>
-                                        {comment.is_error ? "Error, cannot add this comment!" : ""}
-                                    </Typography.Text>
+
+                                    <Tooltip title={comment.chapter_name}>
+                                        <Typography.Text
+                                            className="chapter-name"
+                                            style={{
+                                                color: comment.is_error ? "#D7D8DB" : "#848587",
+                                            }}
+                                        >
+                                            {comment.chapter_name}
+                                        </Typography.Text>
+                                    </Tooltip>
                                 </div>
+
+                                <Typography.Text style={{ color: "#FF4D4F" }}>
+                                    {comment.is_error ? "Error, cannot add this comment!" : ""}
+                                </Typography.Text>
                             </div>
                         }
                     >

@@ -26,6 +26,10 @@ const mangaApi = {
         const url = '/api/manga/searchmangas'
         return axiosClient.post(url, data)
     },
+    getComments: (data) => {
+        const url = '/api/manga/getcommentsmanga'
+        return axiosClient.post(url, data)
+    },
 
     ///////////// user part
     getHistoryManga: (token) => {

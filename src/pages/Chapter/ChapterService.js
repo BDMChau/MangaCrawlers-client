@@ -57,6 +57,9 @@ export default function ChapterService() {
 
         getDataChapter();
         addReadingHistory(mangaid, chapterid);
+
+        setFromRow(0);
+        setComments([]);
         getCmtsChapter();
     }, [chapterid || mangaid])
 
@@ -250,6 +253,8 @@ export default function ChapterService() {
                     "chapter_id": chapterid,
                     "chaptercmt_content": cmtContent,
                     "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
+                    "chapter_id": chapterid,
+                    "chapter_name": chapterInfo.chapter_name,
                     "user_avatar": userState[0].user_avatar,
                     "user_email": userState[0].user_email,
                     "user_id": userState[0].user_id,
@@ -288,6 +293,7 @@ export default function ChapterService() {
     }
 
     const getCmtsChapter = async () => {
+        console.log(fromRow)
         const data = {
             manga_id: mangaid,
             chapter_id: chapterid,
@@ -311,6 +317,7 @@ export default function ChapterService() {
 
                 setComments(prevCmts => [...prevCmts, ...comments])
                 setFromRow(fromRow + 11)
+                return
             }
 
             return;

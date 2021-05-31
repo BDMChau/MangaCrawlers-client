@@ -17,6 +17,14 @@ function MangaService() {
     const [isFollowed, setIsFollowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
+
+    const [isAddedCmt, setIsAddedCmt] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [fromRow, setFromRow] = useState(0);
+    const [amountRows] = useState(10);
+    const [isEndCmts, setIsEndCmts] = useState(false);
+
     const { id } = useParams()
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -25,6 +33,10 @@ function MangaService() {
     useEffect(() => {
         getMangaData();
         getWeeklyTopMangas();
+
+        setFromRow(0);
+        setComments([]);
+        getCmtsManga();
 
         smoothscroll.polyfill();
         window.scroll({
@@ -59,7 +71,7 @@ function MangaService() {
                 })
 
             }
-console.log(mangaObj)
+
             setMangaStars(mangaObj.stars)
             setManga(mangaObj)
             setGenres(response.content.genres)
@@ -165,22 +177,62 @@ console.log(mangaObj)
 
 
     const handleRatingManga = async (value) => {
-        message_success("Thank you for rating ^^", 3);
+        if (userState[0]) {
+            message_success("Thank you for rating ^^", 3);
+            const data = {
+                manga_id: id,
+                value: value
+            }
+            try {
+                const response = await mangaApi.ratingManga(data, token);
+
+                const newRating = response.content.manga.stars
+                console.log(newRating)
+                setMangaStars(newRating)
+
+            } catch (ex) {
+                console.log(ex)
+            }
+        } else {
+            message_error("You have to login first!")
+        }
+
+    }
+
+    const getCmtsManga = async () => {
         const data = {
             manga_id: id,
-            value: value
+            from: fromRow,
+            amount: amountRows
         }
+
         try {
-            const response = await mangaApi.ratingManga(data, token);
+            const response = await mangaApi.getComments(data);
+            console.log(response)
+            if (JSON.parse(localStorage.getItem("code_400"))) {
+                message_error("No manga to present!")
+                return;
+            }
+            else if (response.content.msg === "No comments found!") {
+                setIsEndCmts(true);
+                return;
+            }
 
-            const newRating = response.content.manga.stars
-            console.log(newRating)
-            setMangaStars(newRating)
 
+            if (response.content.comments) {
+                const comments = response.content.comments;
+                comments.forEach(comment => {
+                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
+                });
+
+                setComments(prevCmts => [...prevCmts, ...comments])
+                setFromRow(fromRow + 11)
+            }
+
+            return;
         } catch (ex) {
             console.log(ex)
         }
-
     }
 
     return (
@@ -197,6 +249,7 @@ console.log(mangaObj)
                 addReadingHistory={(managId, chapterId) => addReadingHistory(managId, chapterId)}
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
+                comments={comments}
             />
         </div>
     )
