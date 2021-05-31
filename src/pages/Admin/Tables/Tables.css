@@ -2,7 +2,7 @@
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 50px;
-  max-height: 500px;
+  max-height: 670px;
   width: 100%;
 }
 
@@ -20,10 +20,14 @@
 }
 
 .admin-row1 .table-user .user-table {
-  max-height: 500px;
-  height: 500px;
+  max-height: 670px;
+  height: fit-content;
   overflow: auto;
   background: white;
+}
+
+.admin-row1 .table-user .user-table .ant-table-pagination.ant-pagination{
+  margin: 15px 10px 5px 0;
 }
 
 /*  */
@@ -31,7 +35,7 @@
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 50px;
-  max-height: 500px;
+  max-height: 650px;
   width: 100%;
 }
 
@@ -40,9 +44,14 @@
 }
 
 .admin-row1 .table-manga .manga-table {
-  max-height: 500px;
-  height: 500px;
+  max-height: 650px;
+  height: fit-content;
   overflow: auto;
+  background-color: white;
+}
+
+.admin-row1 .table-manga .manga-table .ant-table-pagination.ant-pagination{
+  margin: 15px 10px 5px 0;
 }
 
 .admin-row1 .table-manga .manga-table td.ant-table-cell,

@@ -3,7 +3,7 @@ import "../Tables/Tables.css"
 import "./Chart.css"
 import "../Admin.css"
 import { Line } from '@ant-design/charts';
-import { Button, Col, Dropdown, Menu } from 'antd';
+import { Button, Col, Dropdown, Menu, Typography } from 'antd';
 
 
 export default function UserChart() {
@@ -67,19 +67,9 @@ export default function UserChart() {
     const menuDropDown = (
         <Menu>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    2019
-            </a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    2020
-            </a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <Typography.Text target="_blank" rel="noopener noreferrer">
                     2021
-            </a>
+                </Typography.Text>
             </Menu.Item>
         </Menu>
     );

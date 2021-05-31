@@ -8,7 +8,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import rules from "../../helpers/Rules";
 import { CheckOutlined } from "@ant-design/icons";
 import userApi from '../../api/apis/userApi';
-import { message_success } from '../../components/notifications/message';
+import { message_error, message_success } from '../../components/notifications/message';
 import Cookies from 'universal-cookie';
 
 
@@ -60,11 +60,13 @@ export default function SignUpTransGroup() {
         try {
             const response = await userApi.registerTranslationGroup(token, data);
 
-            if (response.content.msg) {
+            if (response.content.err) {
+                message_error(response.content.err);
+            } else if (response.content.msg) {
                 message_success(response.content.msg);
             }
 
-            console.log(response)
+            return;
         } catch (ex) {
             console.log(ex)
         }

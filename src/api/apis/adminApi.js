@@ -10,6 +10,14 @@ const adminApi = {
             }
         })
     },
+    getAllMangas: (token) => {
+        const url = '/api/user/getallmangas'
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     deprecateUser: (token, data) => {
         const url = '/api/user/deprecateuser'
         return axiosClient.put(url, data, {

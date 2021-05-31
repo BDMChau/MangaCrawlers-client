@@ -21,7 +21,8 @@ export default function Admin({
     admins,
     handleDeprecateUser,
     handleRemoveUser,
-    isLoading
+    isLoading,
+    mangas
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -53,7 +54,10 @@ export default function Admin({
 
     const renderMangaStatistic = () => (
         <div>
-            <MangaTable />
+            <MangaTable
+                mangas={mangas}
+            />
+
             <MangaChart />
         </div>
     )

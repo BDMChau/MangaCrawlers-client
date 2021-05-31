@@ -5,109 +5,29 @@ import "../Charts/Chart.css"
 
 import { Table, Tag, Space, Col, Row, Typography, Popconfirm } from 'antd';
 import { Avatar } from 'antd';
+import { NavLink } from 'react-router-dom';
 
-export default function MangaTable() {
-    const [users, setusers] = useState([
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-        {
-            name: "Black Clover",
-            author: "bdmchau105@gamil.com",
-            avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png",
-            views: 1100,
-            chapters: 10,
-            rating: 3,
-        },
-    ])
+export default function MangaTable({ mangas }) {
+
 
     const columns = [
         {
-            title: 'Avatar',
-            dataIndex: 'avatar',
-            key: 'avatar',
-            render: text => <Avatar size={24} src={text} />,
+            title: 'Thumbnail',
+            dataIndex: 'thumbnail',
+            key: 'thumbnail',
+            render: text => <Avatar size={24} src={text} />
         },
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Manga',
+            dataIndex: 'manga_name',
+            key: 'manga_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
             title: 'Author',
-            dataIndex: 'author',
-            key: 'email',
+            dataIndex: 'author_name',
+            key: 'author_name',
         },
         {
             title: 'Views',
@@ -118,43 +38,49 @@ export default function MangaTable() {
         },
         {
             title: 'Chapters',
-            key: 'chapters',
-            dataIndex: 'chapters',
+            key: 'chapters_length',
+            dataIndex: 'chapters_length',
             render: text => <a>{text} chapter(s)</a>
         },
         {
             title: 'Rating',
-            key: 'rating',
-            dataIndex: 'rating',
+            key: 'stars',
+            dataIndex: 'stars',
             render: text => <a>{text}/5</a>
         },
         {
             title: 'Action',
             key: 'action',
-            render: (text, record) => (
-                <Space size="middle">
-                    <Popconfirm
-                        title="Are you sure to delete this user?"
-                        onConfirm={"confirm"}
-                        onCancel={"cancel"}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <a>Remove</a>
-                    </Popconfirm>
-                </Space>
+            render: (manga) => (
+                <div style={{ display: 'flex' }}>
+                    <Space size="middle">
+                        <NavLink to={`/manga/${manga.manga_id}`} >Preview</NavLink>
+                    </Space>
+                    <p style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</p>
+                    <Space size="middle">
+                        <Popconfirm
+                            title="Are you sure to delete this account?"
+                            // onConfirm={() => handleRemoveManaga(manga.manga_id)}
+                            onCancel={"cancel"}
+                            okText="Yes"
+                            cancelText="No"
+                        >
+                            <a>Remove</a>
+                        </Popconfirm>
+                    </Space>
+                </div>
             ),
         },
     ];
 
     return (
-        <Col xxl={14} xs={23} sm={20} className="table-manga">
+        <Col xxl={16} xs={23} sm={20} className="table-manga">
             <Typography.Title level={3}>Manga</Typography.Title>
             <Table
                 className="manga-table"
                 columns={columns}
-                dataSource={users}
-                pagination={false}
+                dataSource={mangas}
+                pagination={true}
             />
         </Col>
     )

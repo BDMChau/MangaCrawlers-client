@@ -69,7 +69,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
     ];
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
-            <div style={{display:"flex"}}>
+            <div style={{ display: "flex" }}>
                 <Typography.Title level={3}>User</Typography.Title>
                 {
                     isLoading
@@ -81,7 +81,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
                 className="user-table"
                 columns={columns}
                 dataSource={users}
-                pagination={false}
+                pagination={true}
             />
         </Col>
     )

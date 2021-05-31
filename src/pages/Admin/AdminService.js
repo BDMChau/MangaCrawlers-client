@@ -8,13 +8,16 @@ import arrayMethods from '../../helpers/arrayMethods';
 export default function AdminService() {
     const [users, setUsers] = useState([])
     const [admins, setAdmins] = useState([])
+    const [mangas, setMangas] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const cookies = new Cookies();
     const token = cookies.get("token")
 
     useEffect(() => {
         getAllUsers();
+        getAllMangas();
     }, [])
+
 
     const getAllUsers = async () => {
         try {
@@ -35,6 +38,30 @@ export default function AdminService() {
                 } else {
                     setUsers(prevUser => [...prevUser, user]);
                 }
+            });
+
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    const getAllMangas = async () => {
+        try {
+            const response = await adminApi.getAllMangas(token);
+            if (response.content.err) {
+                console.error("getAllMangas error!")
+                return;
+            }
+
+            console.log(response)
+            console.log(response.content.msg)
+
+            const allMangas = response.content.mangas;
+            const sortedMangas = allMangas.sort(arrayMethods.dynamicSort("manga_id"))
+
+            sortedMangas.forEach(manga => {
+                setMangas(prev => [...prev, manga]);
             });
 
             return;
@@ -114,6 +141,7 @@ export default function AdminService() {
             <Admin
                 users={users}
                 admins={admins}
+                mangas={mangas}
                 handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}
                 isLoading={isLoading}
