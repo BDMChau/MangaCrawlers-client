@@ -8,7 +8,8 @@
 }
 
 .comments-form .text {
-  height: 600px;
+  max-height: 600px;
+  height: fit-content;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -46,19 +47,19 @@
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .comments-form .text {
-    height: 350px;
+    max-height: 350px;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .comments-form .text {
-    height: 450px;
+    max-height: 450px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .comments-form .text {
-    height: 450px;
+    max-height: 450px;
   }
 }
 
@@ -70,7 +71,7 @@
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .comments-form .text {
-    height: 450px;
+    max-height: 450px;
   }
 
   .comment .cmt-bottom .chapter-name {

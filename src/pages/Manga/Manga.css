@@ -45,7 +45,7 @@
   /* background-position: center;
   background-size: cover;
   background-repeat: no-repeat; */
-  height: 100%;
+  width: fit-content;
   border-radius: 5px;
   background-color: red;
 }
@@ -135,7 +135,7 @@
 }
 
 .manga-comments .comments-body {
-  height: 600px;
+  max-height: 600px;
   width: 90%;
 }
 
@@ -169,7 +169,7 @@
   }
 
   .manga-comments .comments-body {
-    height: 500px;
+    max-height: 500px;
   }
 }
 
@@ -204,7 +204,7 @@
   }
 
   .manga-comments .comments-body {
-    height: 600px;
+    max-height: 600px;
   }
 }
 
@@ -240,7 +240,7 @@
   }
 
   .manga-comments .comments-body {
-    height: 600px;
+    max-height: 600px;
   }
 }
 
@@ -262,6 +262,6 @@
   }
 
   .manga-comments .comments-body {
-    height: 600px;
+    max-height: 600px;
   }
 }
