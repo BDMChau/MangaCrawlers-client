@@ -83,15 +83,13 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
                     </Comment>
                 ))
 
-                : <TransitionAnimate renderPart={
-                    <div style={{ height: "unset" }} >
-                        <Empty
-                            style={{ marginTop: "40px", color: "#8a8d92" }}
-                            image={Empty.PRESENTED_IMAGE_SIMPLE}
-                            description="No comments to present :("
-                        />
-                    </div>
-                } transitionTime={0.3} />
+                : <div style={{ height: "unset" }} >
+                    <Empty
+                        style={{ marginTop: "40px", color: "#8a8d92" }}
+                        image={Empty.PRESENTED_IMAGE_SIMPLE}
+                        description="No comments to present :("
+                    />
+                </div>
         )
     }
 

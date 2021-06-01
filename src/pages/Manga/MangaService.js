@@ -173,7 +173,6 @@ function MangaService() {
         }
     }
 
-
     const handleRatingManga = async (value) => {
         if (userState[0]) {
             message_success("Thank you for rating ^^", 3);
@@ -206,7 +205,8 @@ function MangaService() {
 
         try {
             const response = await mangaApi.getComments(data);
-            console.log(response)
+            console.log("cmts manga: ", response)
+
             if (JSON.parse(localStorage.getItem("code_400"))) {
                 message_error("No manga to present!")
                 return;
