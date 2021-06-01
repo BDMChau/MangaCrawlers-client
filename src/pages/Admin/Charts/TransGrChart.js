@@ -3,7 +3,8 @@ import "../Tables/Tables.css"
 import "./Chart.css"
 import "../Admin.css"
 import { Line } from '@ant-design/charts';
-import { Button, Col, Dropdown, Menu } from 'antd';
+import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
+import { TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
 export default function TransGrChart() {
@@ -67,35 +68,39 @@ export default function TransGrChart() {
     const menuDropDown = (
         <Menu>
             <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    2019
-            </a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                    2020
-            </a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <Typography.Text>
                     2021
-            </a>
+                </Typography.Text>
             </Menu.Item>
         </Menu>
     );
 
     return (
         <Col xxl={14} xs={23} sm={20} className="trans-gr-chart">
-            <Button type="button" onClick={downloadImage} style={{ marginRight: 24 }}>
+            <Button type="button" onClick={downloadImage} style={{ marginRight: 24, marginBottom: 30 }}>
                 Export image
-            </Button>
+        </Button>
+
+            <div className="text01">
+                <Tooltip title="Registed Translation Team">
+                    <TeamOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
+                </Tooltip>
+            </div>
             <Line className="chart" {...config} chartRef={chartRef} />
 
-            <Dropdown overlay={menuDropDown} trigger={['click']}>
-                <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    2021
+
+            <div className="chart-action">
+                <div className="text02">
+                    <Tooltip title="Month">
+                        <CalendarOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
+                    </Tooltip>
+                </div>
+                <Dropdown overlay={menuDropDown} trigger={['click']}>
+                    <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        2021
                 </Button>
-            </Dropdown>
+                </Dropdown>
+            </div>
         </Col>
     );
 

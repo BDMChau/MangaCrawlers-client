@@ -5,25 +5,7 @@ import ListGenrePagination from '../../components/List/ListGenrePagination/ListG
 import { LeftOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 
-export default function MangaGenres() {
-    const [genres, setGenres] = useState([
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-        {
-            name: "Action",
-            desc: "ascccccccccccccccccccccccgfbfsdfvdhjkfbdvindilbnrdiobrnbfdlkbnfl;g",
-            color: "red"
-        },
-
-    ])
+export default function MangaGenres({ mangas, genres }) {
     const [isFlexWrap, setIsFlexWrap] = useState(false)
     const history = useHistory()
 
@@ -47,21 +29,23 @@ export default function MangaGenres() {
                         <Typography.Title level={5} className="title-h5" style={{ flexWrap: isFlexWrap ? "wrap" : "unset" }}>
                             Genre(s):
                             {
-                                genres.map((item) => {
-                                    if (item !== null) {
-                                        return (
-                                            <Tooltip title={item.desc} className="item-tag">
-                                                <Tag color={item.color}>{item.name}</Tag>
-                                            </Tooltip>
-                                        )
-                                    }
-                                })
+                                genres.length
+                                    ? genres.map((item, i) => {
+                                        if (item !== null) {
+                                            return (
+                                                <Tooltip title={item.genre_desc} className="item-tag">
+                                                    <Tag key={i} color={item.genre_color}>{item.genre_name}</Tag>
+                                                </Tooltip>
+                                            )
+                                        }
+                                    })
+                                    : ""
                             }
                         </Typography.Title>
                     </Divider>
                 </div>
 
-                <ListGenrePagination />
+                <ListGenrePagination mangas={mangas} />
 
             </Col>
         </Row>

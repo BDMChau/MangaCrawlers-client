@@ -3,7 +3,8 @@ import "../Tables/Tables.css"
 import "./Chart.css"
 import "../Admin.css"
 import { Line } from '@ant-design/charts';
-import { Button, Col, Dropdown, Menu, Typography } from 'antd';
+import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
+import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
 export default function UserChart() {
@@ -49,12 +50,12 @@ export default function UserChart() {
         xField: 'month',
         yField: 'value',
         point: {
-            size: 5,
-            shape: 'diamond',
+            size: 4,
+            shape: 'circle',
             style: {
                 fill: 'white',
                 stroke: '#2593fc',
-                lineWidth: 2,
+                lineWidth: 1,
             },
         },
     };
@@ -67,7 +68,7 @@ export default function UserChart() {
     const menuDropDown = (
         <Menu>
             <Menu.Item>
-                <Typography.Text target="_blank" rel="noopener noreferrer">
+                <Typography.Text>
                     2021
                 </Typography.Text>
             </Menu.Item>
@@ -76,16 +77,30 @@ export default function UserChart() {
 
     return (
         <Col xxl={14} xs={23} sm={20} className="user-chart">
-            <Button type="button" onClick={downloadImage} style={{ marginRight: 24 }}>
+            <Button type="button" onClick={downloadImage} style={{ marginRight: 24, marginBottom: 30 }}>
                 Export image
             </Button>
+
+            <div className="text01">
+                <Tooltip title="Registed Users">
+                    <UserOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
+                </Tooltip>
+            </div>
             <Line className="chart" {...config} chartRef={chartRef} />
 
-            <Dropdown overlay={menuDropDown} trigger={['click']}>
-                <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    2021
-                </Button>
-            </Dropdown>
+
+            <div className="chart-action">
+                <div className="text02">
+                    <Tooltip title="Month">
+                        <CalendarOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
+                    </Tooltip>
+                </div>
+                <Dropdown overlay={menuDropDown} trigger={['click']}>
+                    <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                        2021
+                    </Button>
+                </Dropdown>
+            </div>
         </Col>
     );
 

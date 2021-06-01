@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Row, Select, Popover, Tag, Typography, Button, Tooltip } from 'antd'
+import React from 'react'
+import { Col, Row, Select, Tag, Typography, Button, Tooltip } from 'antd'
 import "./SearchingPage.css"
 
 
-export default function SearchingPage({ data, dataName, handleClickTag }) {
+export default function SearchingPage({ data, dataName, handleClickTag, handleGetMangasAndRedirectToResultPage }) {
 
 
-    const handleClick = (genre) => {
-        handleClickTag(genre)
-    }
 
-
-    const handleSearch = () => {
-        console.log(dataName);
-    }
 
     return (
         <Row justify={"center"} className="searching-page">
@@ -24,13 +17,13 @@ export default function SearchingPage({ data, dataName, handleClickTag }) {
                     title="Tags Selected"
                     placeholder="Add tags which you want to search..."
                     mode="tags"
-                    onKeyUp={(e) => e.key === "Enter" ? handleSearch() : ""}
+                    // onKeyUp={(e) => e.key === "Enter" ? handleGetMangasAndRedirectToResultPage() : ""}
                     value={dataName}
                     disabled={true}
                 >
                 </Select>
 
-                <Button className="search-btn" onClick={() => handleSearch()}>
+                <Button className="search-btn" onClick={() => handleGetMangasAndRedirectToResultPage()}>
                     Search
                 </Button>
 
@@ -45,7 +38,7 @@ export default function SearchingPage({ data, dataName, handleClickTag }) {
                                     <Tooltip title={item.genre_description} key={item.genre_id} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
                                         <Tag
                                             color={item.isSelected ? "" : item.genre_color}
-                                            onClick={() => handleClick(item)}
+                                            onClick={() => handleClickTag(item)}
                                         >
                                             {item.genre_name}
                                         </Tag>
