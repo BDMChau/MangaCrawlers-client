@@ -35,6 +35,22 @@ const userApi = {
             }
         })
     },
+    getTransGroupInfo: (token, data) => {
+        const url = '/api/user/gettransgroupinfo'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    AddNewProject: (token, data) => {
+        const url = '/api/user/addnewprojectmanga'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default userApi;

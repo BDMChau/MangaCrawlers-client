@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, Radio } from 'antd';
+import { Select, Radio, Typography } from 'antd';
 
 const { Option } = Select;
 
@@ -10,7 +10,7 @@ for (let i = 10; i < 36; i++) {
 
 
 export const GenresTag = ({ genres, handleChange }) => {
-  
+
 
 
   return (
@@ -24,8 +24,20 @@ export const GenresTag = ({ genres, handleChange }) => {
         onChange={(arrValue) => handleChange(arrValue)}
         style={{ width: '100%' }}
       >
-        {children}
-      </Select>
+        {
+          genres.length
+            ? genres.map((genre, i) => (
+              <Select.Option key={i}>
+                <Typography.Text style={{ color: genre.genre_color }}>
+
+                {genre.genre_name}
+
+                </Typography.Text>
+              </Select.Option>
+            ))
+            : " "
+        }
+    </Select>
     </>
   );
 };

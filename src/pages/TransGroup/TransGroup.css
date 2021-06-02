@@ -17,7 +17,7 @@
 }
 
 .transgrouppage-row1 .transgrouppage-tabs .ant-tabs-nav-wrap{
-    justify-content: center;
+    justify-content: left;
     border: none;
 }
 
@@ -33,4 +33,13 @@
 
 .ant-tabs-top > .ant-tabs-nav::before{
     border-bottom: none;
+}
+
+
+.trans-group-title{
+    padding-top: 15px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
 }

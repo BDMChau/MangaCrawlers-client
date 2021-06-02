@@ -7,116 +7,22 @@ import ListVersion02 from '../../components/List/ListVersion02/ListVersion02';
 
 const { TabPane } = Tabs;
 
-export default function TransGroup() {
-    const [state, setState] = useState([
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-        {
-            chapter_id: 43,
-            chapter_name: "Chapter 2",
-            createdAt: "08-05-2021",
-            date_publications: 2008,
-            manga_id: 36,
-            manga_name: "Tensei Shitara Slime Datta Ken",
-            readingHistory_id: 32,
-            reading_History_time: 1622025566195,
-            stars: 4,
-            status: "Ongoing",
-            thumbnail: "https://res.cloudinary.com/mangacrawlers/image/upload/v1619097768/manga_thumbnails/Slime.jpg",
-            user_id: 28,
-            views: 1200,
-            isProject: true
-        },
-       
-    ])
-
+export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject }) {
 
     const renderProjects = () => (
         <Row justify={"center"} className="projects">
-            <ListVersion02 mangas={state} />
+            <ListVersion02 mangas={mangas} />
         </Row>
     )
 
     return (
         <Row justify={"center"} className="transgrouppage-row1">
+            <div key={transGrInfo.transgroup_id} className="trans-group-title">
+                <Typography.Title style={{ marginBottom: "0" }} level={4} >{transGrInfo.transgroup_name}</Typography.Title>
+                <Typography.Text >{transGrInfo.transgroup_email}</Typography.Text>
+                <Typography.Text >{transGrInfo.transgroup_desc}Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu</Typography.Text>
+            </div>
+
             <Tabs defaultActiveKey="projects" className="transgrouppage-tabs">
                 <TabPane tab="Your Projects" key="projects">
                     {renderProjects()}
@@ -124,7 +30,7 @@ export default function TransGroup() {
 
                 <TabPane tab="New Project" key="newproject">
                     <Row justify={"center"}>
-                        <FormCreateProject />
+                        <FormCreateProject genres={genres} handleCreateNewProject={(fieldsData) => handleCreateNewProject(fieldsData)} />
                     </Row>
                 </TabPane>
             </Tabs>

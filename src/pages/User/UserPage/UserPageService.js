@@ -10,15 +10,15 @@ export default function UserPageService() {
     const value = query.get("v");
     const [historyMangas, setHistoryMangas] = useState([])
     const [followingMangas, setFollowingMangas] = useState([])
+    const cookies = new Cookies();
+    const token = cookies.get("token")
+
 
     useEffect(() => {
         getUserMangas();
     }, [])
 
     const getUserMangas = async () => {
-        const cookies = new Cookies();
-        const token = cookies.get("token")
-
         try {
             if (value === "history" || value === null) {
                 const responseHistory = await mangaApi.getHistoryManga(token)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./FormCreateProject.css"
-import { Form, Input, Button, Select, Popconfirm, Upload, Image } from 'antd';
+import { Form, Input, Button, Select, Popconfirm, Upload, Image, Typography } from 'antd';
 import { GenresTag } from './GenresTag';
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
 import TextArea from 'antd/lib/input/TextArea';
@@ -20,8 +20,9 @@ const uploadButton = (
     </div>
 );
 
-export default function FormCreateProject() {
+export default function FormCreateProject({ genres, handleCreateNewProject }) {
     const [imgUrl, setImgUrl] = useState("")
+    const [isRequired, setIsRequired] = useState(false)
     const [fieldsData, setFieldsData] = useState({
         rating: 0,
         views: 0,
@@ -37,9 +38,18 @@ export default function FormCreateProject() {
     }
 
     const handleSubmit = () => {
-        console.log(fieldsData)
-        console.log(imgUrl)
+        const { mangaName, author, genres, status, publicationYear, description } = fieldsData;
+        if (!imgUrl || !mangaName || !author || !genres.length || !publicationYear || !description) {
+            setIsRequired(true)
+            return;
+        }
+
+        handleCreateNewProject(fieldsData);
+        setIsRequired(false)
+        return;
     }
+
+
 
     return (
         <div className="form-create-project">
@@ -85,6 +95,7 @@ export default function FormCreateProject() {
                     rules={[{ required: true, message: 'Please fill genres field!' }]}
                 >
                     <GenresTag
+                        genres={genres}
                         handleChange={(arrValue) => setFieldsData({ ...fieldsData, genres: arrValue })}
                     />
                 </Form.Item>
@@ -134,11 +145,20 @@ export default function FormCreateProject() {
                     <Input placeholder="Views default is 0" disabled={true} />
                 </Form.Item>
 
+                {isRequired
+                    ? <Form.Item
+                        name="required warning"
+                        style={{margin:"0"}}
+                    >
+                        <Typography.Text style={{color:"red"}} >All fields are required!</Typography.Text>
+                    </Form.Item>
+                    : ""
+                }
 
                 <Form.Item className="item-submit">
                     <Popconfirm
                         title="Add this project?"
-                        onConfirm={() => handleSubmit()}
+                        onConfirm={() => handleSubmit(fieldsData)}
                         onCancel={"cancel"}
                         okText="Create"
                         cancelText="Cancle"
