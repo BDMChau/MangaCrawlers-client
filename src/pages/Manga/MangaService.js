@@ -208,7 +208,7 @@ function MangaService() {
             console.log("cmts manga: ", response)
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
-                message_error("No manga to present!")
+                // message_error("No manga to present!")
                 return;
             }
             else if (response.content.msg === "No comments found!") {
