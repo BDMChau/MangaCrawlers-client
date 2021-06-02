@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import "../Tables/Tables.css"
 import "./Chart.css"
 import "../Admin.css"
@@ -7,48 +7,15 @@ import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
-export default function UserChart() {
+export default function UserChart({ reportUsers }) {
     const chartRef = useRef();
-    const data = [
-        {
-            month: '01',
-            value: 3,
-        },
-        {
-            month: '02',
-            value: 4,
-        },
-        {
-            month: '03',
-            value: 3.5,
-        },
-        {
-            month: '04',
-            value: 5,
-        },
-        {
-            month: '05',
-            value: 4.,
-        },
-        {
-            month: '6',
-            value: 4.9,
-        },
-        {
-            month: '7',
-            value: 3,
-        },
-        {
-            month: '8',
-            value: 4.5,
-        },
-    ];
+
 
     const config = {
-        data,
+        data: reportUsers,
         height: 300,
-        xField: 'month',
-        yField: 'value',
+        xField: 'month', // must be string
+        yField: 'users',
         point: {
             size: 4,
             shape: 'circle',

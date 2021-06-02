@@ -19,10 +19,12 @@ const { TabPane } = Tabs;
 export default function Admin({
     users,
     admins,
+    mangas,
+    reportUsers,
     handleDeprecateUser,
     handleRemoveUser,
     isLoading,
-    mangas
+
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -48,7 +50,7 @@ export default function Admin({
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}
                 isLoading={isLoading}
             />
-            <UserChart />
+            <UserChart reportUsers={reportUsers} />
         </div>
     )
 

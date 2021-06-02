@@ -9,6 +9,7 @@ export default function AdminService() {
     const [users, setUsers] = useState([])
     const [admins, setAdmins] = useState([])
     const [mangas, setMangas] = useState([])
+    const [reportUsers, setReportUsers] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -16,6 +17,7 @@ export default function AdminService() {
     useEffect(() => {
         getAllUsers();
         getAllMangas();
+        getReportUser();
     }, [])
 
 
@@ -136,12 +138,41 @@ export default function AdminService() {
         }
     }
 
+    const getReportUser = async () => {
+        try {
+            const response = await adminApi.getReportUser(token);
+            if (response.content.err) {
+                console.error("getReportUser error!")
+                return;
+            }
+
+            const reports = response.content.users_report;
+            reports.forEach(report =>{
+                if(report.month <= 9){
+                    report.month = "0" + report.month.toString();
+                }else{
+                    report.month = report.month.toString();
+                }
+            })
+            console.log(reports)
+            setReportUsers(reports)
+            
+            console.log("Get report user OK!");
+            console.log(response)
+            return;
+
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
     return (
         <div>
             <Admin
                 users={users}
                 admins={admins}
                 mangas={mangas}
+                reportUsers={reportUsers}
                 handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}
                 isLoading={isLoading}

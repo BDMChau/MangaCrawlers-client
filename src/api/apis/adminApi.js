@@ -35,6 +35,14 @@ const adminApi = {
             data
         })
     },
+    getReportUser: (token) => {
+        const url = '/api/admin/reportuser'
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default adminApi;
