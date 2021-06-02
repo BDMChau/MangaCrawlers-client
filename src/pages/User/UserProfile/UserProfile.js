@@ -150,7 +150,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         </NavLink>
                     </Button>
 
-                    {!userState[0].user_transgroup_id 
+                    {userState[0].user_transgroup_id 
                     ? <Button
                         type="primary"
                      >

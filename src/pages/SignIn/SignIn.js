@@ -120,8 +120,9 @@ export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) 
                                 type="primary"
                                 htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
+                                icon={<LoginOutlined />}
                             >
-                                <LoginOutlined /> Sign In
+                                Sign In
                             </Button>
 
                             <Button
@@ -129,8 +130,9 @@ export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) 
                                 type="danger"
                                 htmlType="submit"
                                 onClick={handleCancel}
+                                icon={<CloseCircleOutlined />}
                             >
-                                <CloseCircleOutlined /> Cancel
+                                Cancel
                             </Button>
                         </Form.Item>
 

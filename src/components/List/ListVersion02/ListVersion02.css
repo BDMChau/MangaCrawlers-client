@@ -14,8 +14,8 @@
 }
 
 .list-following ul.ant-list-items .item {
-  padding: 10px 10px;
-  margin: 0 10px;
+  padding: 10px 0;
+  margin: 0 20px;
   display: flex;
   /* box-shadow: 0 0 5px 0 #00000026;
   margin-bottom: 20px;
@@ -43,7 +43,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: fit-content;
-  width: 135px;
+  width: 145px;
 }
 
 .list-following .item .item-title .item-manga {

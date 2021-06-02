@@ -144,14 +144,16 @@ export default function SignUpTransGroup() {
                         <Form.Item className="form-signup-footer" style={{ marginTop: "10px" }} >
                             <Button className="btn-submit-signup-trans-group" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
+                                icon={<CheckCircleOutlined />}
                             >
-                                <CheckCircleOutlined />  Create
+                                Create
                             </Button>
 
                             <Button className="btn-cancle-signup-trans-group" type="danger" htmlType="submit"
                                 onClick={handleCancel}
+                                icon={<CloseCircleOutlined />}
                             >
-                                <CloseCircleOutlined /> Cancel
+                                Cancel
                             </Button>
                         </Form.Item>
                     </Form>

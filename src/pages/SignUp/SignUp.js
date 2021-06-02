@@ -132,14 +132,16 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                         <Form.Item className="form-signup-footer">
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
+                                icon={<CheckCircleOutlined />}
                             >
-                                <CheckCircleOutlined />  Register
+                                Register
                             </Button>
 
                             <Button className="btn-cancle-signup" type="danger" htmlType="submit"
                                 onClick={handleCancel}
+                                icon={<CloseCircleOutlined />}
                             >
-                                <CloseCircleOutlined /> Cancel
+                                Cancel
                             </Button>
                         </Form.Item>
                     </Form>
