@@ -3,7 +3,7 @@ import axiosClient from '../axiosClient';
 
 const adminApi = {
     getAllUsers: (token) => {
-        const url = '/api/user/getallusers'
+        const url = '/api/admin/getallusers'
         return axiosClient.get(url, {
             headers: {
                 Authorization: token
@@ -11,7 +11,7 @@ const adminApi = {
         })
     },
     getAllMangas: (token) => {
-        const url = '/api/user/getallmangas'
+        const url = '/api/admin/getallmangas'
         return axiosClient.get(url, {
             headers: {
                 Authorization: token
@@ -19,7 +19,7 @@ const adminApi = {
         })
     },
     deprecateUser: (token, data) => {
-        const url = '/api/user/deprecateuser'
+        const url = '/api/admin/deprecateuser'
         return axiosClient.put(url, data, {
             headers: {
                 Authorization: token
@@ -27,7 +27,7 @@ const adminApi = {
         })
     },
     removeUser: (token, data) => {
-        const url = '/api/user/deleteuser'
+        const url = '/api/admin/deleteuser'
         return axiosClient.delete(url, {
             headers: {
                 Authorization: token

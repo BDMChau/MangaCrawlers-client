@@ -75,7 +75,7 @@ export default function MangaChart() {
     );
 
     return (
-        <Col xxl={14} xs={23} sm={20} className="user-chart">
+        <Col xxl={16} xs={23} sm={20} className="user-chart">
             <Button type="button" onClick={downloadImage} style={{ marginRight: 24, marginBottom: 30 }}>
                 Export image
             </Button>
