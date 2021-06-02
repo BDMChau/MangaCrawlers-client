@@ -3,8 +3,7 @@ import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Tag, Space, Col, Row, Typography, Popconfirm } from 'antd';
-import { Avatar } from 'antd';
+import { Table, Space, Col, Typography, Popconfirm, Image } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 export default function MangaTable({ mangas }) {
@@ -15,7 +14,12 @@ export default function MangaTable({ mangas }) {
             title: 'Thumbnail',
             dataIndex: 'thumbnail',
             key: 'thumbnail',
-            render: text => <Avatar size={24} src={text} />
+            render: text => <Image
+            className="image-thumb-admin"
+                style={{ width: "30px", borderRadius: "2px" }}
+                src={text}
+                alt={text}
+            />
         },
         {
             title: 'Manga',

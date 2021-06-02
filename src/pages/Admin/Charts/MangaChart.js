@@ -81,7 +81,7 @@ export default function MangaChart() {
             </Button>
 
             <div className="text01">
-                <Tooltip title="Number of Manga Series">
+                <Tooltip title="Manga Series">
                     <PicLeftOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>

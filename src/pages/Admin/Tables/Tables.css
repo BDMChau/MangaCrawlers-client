@@ -26,7 +26,7 @@
   background: white;
 }
 
-.admin-row1 .table-user .user-table .ant-table-pagination.ant-pagination{
+.admin-row1 .table-user .user-table .ant-table-pagination.ant-pagination {
   margin: 15px 10px 5px 0;
 }
 
@@ -50,7 +50,7 @@
   background-color: white;
 }
 
-.admin-row1 .table-manga .manga-table .ant-table-pagination.ant-pagination{
+.admin-row1 .table-manga .manga-table .ant-table-pagination.ant-pagination {
   margin: 15px 10px 5px 0;
 }
 
@@ -61,6 +61,14 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.ant-image-mask {
+  color: transparent;
+}
+
+.ant-image-mask:hover {
+  opacity: 0.5;
 }
 
 /*  */
@@ -115,20 +123,18 @@
 }
 
 .table-btn-loading,
-.table-btn-loading:before{
+.table-btn-loading:before {
   margin-left: 5px;
   margin-top: -3px;
-  color:grey;
+  color: grey;
   border: none;
   box-shadow: none;
   background: transparent;
 }
 
-.table-btn-loading span.ant-btn-loading-icon{
+.table-btn-loading span.ant-btn-loading-icon {
   font-size: 22px;
 }
-
-
 
 /*  */
 td.name-col,
