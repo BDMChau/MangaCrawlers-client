@@ -3,7 +3,7 @@ import "./UserProfile.css"
 import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload } from 'antd';
 import { SettingOutlined, UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { message_error, message_success } from '../../../components/notifications/message';
+import { message_success } from '../../../components/notifications/message';
 import SignUpTransGroupService from "../../SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -153,12 +153,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                     ? <Button
                         type="primary"
                      >
-                        <NavLink className="trans-group-btn"
-                         to={{
-                             pathname:"/user/projects",
-                             state: { transGrId: userState[0].user_transgroup_id }
-                         }}
-                         >
+                        <NavLink className="trans-group-btn" to="/user/projects">
                             <TeamOutlined style={{ fontSize: "19px" }} />
                             &#160;
                             My Translation Team

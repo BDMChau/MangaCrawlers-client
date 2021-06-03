@@ -1,30 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router';
 import userApi from '../../api/apis/userApi';
 import TransGroup from './TransGroup'
 import Cookies from 'universal-cookie';
 import genreApi from '../../api/apis/genreApi';
 import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { message_warning } from '../../components/notifications/message';
 
 export default function TransGroupService() {
+    const userState = useSelector((state) => state.userState);
     const [transGrInfo, setTransGrInfo] = useState({})
     const [mangas, setMangas] = useState([])
     const [genres, setGenres] = useState([]);
+    const history = useHistory();
 
 
-    const location = useLocation();
     const cookies = new Cookies();
     const token = cookies.get("token");
 
     useEffect(() => {
-        getTransGroupInfo();
+        if(!userState[0]){
+            history.push("/");
+            message_warning("Please login first!")
+            return;
+        } else{
+            getTransGroupInfo();
         getAllGenres();
+        }
     }, [])
 
     const getTransGroupInfo = async () => {
-        console.log(location.state.transGrId)
         const data = {
-            transgroup_id: location.state.transGrId
+            transgroup_id: userState[0].user_transgroup_id
         }
 
         try {
