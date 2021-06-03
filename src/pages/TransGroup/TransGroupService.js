@@ -6,7 +6,7 @@ import genreApi from '../../api/apis/genreApi';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { message_warning } from '../../components/notifications/message';
+import { message_error, message_warning } from '../../components/notifications/message';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
@@ -20,13 +20,13 @@ export default function TransGroupService() {
     const token = cookies.get("token");
 
     useEffect(() => {
-        if(!userState[0]){
+        if (!userState[0]) {
             history.push("/");
             message_warning("Please login first!")
             return;
-        } else{
+        } else {
             getTransGroupInfo();
-        getAllGenres();
+            getAllGenres();
         }
     }, [])
 
@@ -76,23 +76,27 @@ export default function TransGroupService() {
     }
 
     const handleCreateNewProject = async (fieldsData, img) => {
-       
+
 
         const data = {
             ...fieldsData
         }
 
         try {
-            const response = await userApi.AddNewProjectFields(token, data);
+            const response = await userApi.addNewProjectFields(token, data);
 
-            if(response){
+            if (response.content.msg) {
                 let formData = new FormData();
                 formData.append("file", img)
                 formData.append("manga_id", response.content.manga_id);
-                const response02 = await userApi.AddNewProjectThumbnail(token, formData);
+                const response02 = await userApi.addNewProjectThumbnail(token, formData);
                 console.log(response02)
+                return;
+            } else {
+                message_error("Have an error, please try again!");
+                return;
             }
-            console.log(response)
+
         } catch (ex) {
             console.log(ex)
         }

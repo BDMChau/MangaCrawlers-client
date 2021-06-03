@@ -1,15 +1,17 @@
-import { Button, Col, Divider, Image, Row, Typography } from 'antd'
-import React from 'react'
+import { Button, Col, Divider, Image, message, Row, Typography } from 'antd'
+import React, { useState } from 'react'
 import "./UploadManga.css"
 import { LeftOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined, CloudUploadOutlined } from '@ant-design/icons';
-import { Upload, message } from 'antd';
+import { Upload } from 'antd';
+import { message_error } from '../../components/notifications/message';
 
 const { Dragger } = Upload;
 
-export default function UploadManga() {
+export default function UploadManga({ handleUploadImgs }) {
+    const [listFileToUpload, setListFileToUpload] = useState([]);
     const history = useHistory();
 
     const dropDownChapters = (
@@ -25,27 +27,28 @@ export default function UploadManga() {
         </Menu>
     );
 
+    const handleSubmit = () => {
+        if (!listFileToUpload.length) {
+            message_error("Nothing to upload!", 3);
+            return;
+        }
+
+        handleUploadImgs(listFileToUpload);
+        return;
+    }
+
+
+
     const propsUploader = {
         name: 'file',
         multiple: true,
         listType: "picture",
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        beforeUpload: () => false,
         onChange(info) {
-            console.log(info)
-            const { status } = info.file;
-            if (status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully.`);
-            } else if (status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-        onDrop(e) {
-            console.log('Dropped files', e.dataTransfer.files);
-        },
+            setListFileToUpload(info.fileList);
+        }
     };
+
 
     return (
         <Row justify={"center"}>
@@ -81,14 +84,13 @@ export default function UploadManga() {
                         <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text>
                         <div className="note-example">
                             <Typography.Text>Example:</Typography.Text>
-                            <Typography.Text>01: Chapter 01: this is chapter01</Typography.Text>
-                            <Typography.Text>02: Chapter 02: this is chapter02</Typography.Text>
+                            <Typography.Text>01: MangaName_Chapter 01: this is chapter01</Typography.Text>
+                            <Typography.Text>02: MangaName_Chapter 02: this is chapter02</Typography.Text>
+                            <Typography.Text>*01, 02 is serial number of each image</Typography.Text>
                         </div>
                     </div>
                 </div>
                 <div className="uploader">
-
-
                     <Dragger {...propsUploader}>
                         <div className="upload-drag-icon">
                             <CloudUploadOutlined style={{ fontSize: "32px" }} />
@@ -98,6 +100,10 @@ export default function UploadManga() {
                             Support for a single or bulk upload.
                         </Typography.Text>
                     </Dragger>
+
+                    <div className="uploader-submit">
+                        <Button onClick={() => handleSubmit()} >Submit Upload</Button>
+                    </div>
                 </div>
             </Col>
 

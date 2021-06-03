@@ -59,7 +59,6 @@
   flex-wrap: wrap;
   justify-content: left;
   margin-top: 20px;
-  margin-bottom: 40px;
   margin-left: 6px;
   max-height: 350px;
   overflow-y: auto;
@@ -96,7 +95,8 @@
 
 /* uploader item */
 .upload-form .ant-upload-list-picture-container {
-  padding: 0;
+  width: 220px;
+  padding:  0px 2px 8px 4px;
 }
 .upload-form
   .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
@@ -132,6 +132,19 @@
   margin-top: 5px;
   display: flex;
   flex-direction: column;
+}
+
+.uploader .uploader-submit{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.uploader .uploader-submit button{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 40px;
+  margin-top: 10px;
 }
 
 /* //////// */
@@ -172,10 +185,16 @@
   .uploader .ant-upload.ant-upload-drag {
     width: 100%;
   }
+  .uploader .uploader-submit{
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
   .uploader .ant-upload.ant-upload-drag {
+    width: 70%;
+  }
+  .uploader .uploader-submit{
     width: 70%;
   }
 }

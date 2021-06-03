@@ -43,7 +43,7 @@ const userApi = {
             }
         })
     },
-    AddNewProjectFields: (token, data) => {
+    addNewProjectFields: (token, data) => {
         const url = '/api/user/addnewprojectmangafields'
         return axiosClient.post(url, data, {
             headers: {
@@ -51,8 +51,17 @@ const userApi = {
             }
         })
     },
-    AddNewProjectThumbnail: (token, formData) => {
+    addNewProjectThumbnail: (token, formData) => {
         const url = '/api/user/addnewprojectmangathumbnail'
+        return axiosClient.post(url, formData, {
+            headers: {
+                "Content-Type": 'multipart/form-data',
+                Authorization: token
+            }
+        })
+    },
+    uploadImagesChapter: (token, formData) => {
+        const url = '/api/user/uploadchapterimgs'
         return axiosClient.post(url, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
