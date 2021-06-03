@@ -16,7 +16,6 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
     const [file, setFile] = useState(null);
     const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
 
-    const allowFiles = ["image/png", "image/jpg", "image/jpeg"]
 
     useEffect(() => {
         if (visible === true) {
@@ -183,9 +182,16 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                        
                     }
                 </div>
-                <div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
-                    <p>Create your own translation group?</p>
-                </div>
+                
+                {userState[0].user_transgroup_id
+                    ?<div style={{pointerEvents:"none", opacity:"0.5"}} className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
+                        <p>Create your own translation group?</p>
+                    </div>
+                    
+                    :<div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
+                        <p>Create your own translation group?</p>
+                    </div>
+                }
 
                 <div className="contact-admin">
                     <p>Contact me via email if you have any questions ^^</p>

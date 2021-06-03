@@ -80,9 +80,8 @@ function Manga({
             <Row justify={"center"} className="manga-body-row">
                 <Col span={23} md={17} xxl={19} className="manga-body">
                     <Row justify={"center"} className="header">
-                        <Col md={4} sm={3} lg={4} xxl={4} className="thumbnail">
+                        <Col className="thumbnail">
                             <img className="thumbnail-img" src={manga.thumbnail} alt="" />
-
                         </Col>
                         <Col md={13} lg={12} sm={4} xs={20} xxl={15} className="title">
                             <div className="name">

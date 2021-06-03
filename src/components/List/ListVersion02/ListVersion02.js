@@ -38,7 +38,7 @@ export default function ListVersion02({ mangas }) {
                 dataSource={mangas}
                 footer={false}
                 renderItem={manga => (
-                    <NavLink to={manga.isProject ?`/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item">
+                    <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item">
                         <div className="item-img">
                             <Image
                                 className="img"
@@ -62,14 +62,14 @@ export default function ListVersion02({ mangas }) {
 
                             <div className="item-chapter">
                                 <Typography.Text className="chapter-name">{manga.chapter_name ? manga.chapter_name : ""}</Typography.Text>
-                                <Typography.Text className="created-at" >{manga.createdAt ? manga.createdAt : ""}</Typography.Text>
+                                <Typography.Text style={{ fontStyle: "italic" }} className="created-at" >{manga.createdAt ? manga.createdAt : ""}</Typography.Text>
                             </div>
                         </div>
                     </NavLink>
                 )}
             />
             : <Empty
-                description="You haven't read anything yet"
+                description="You haven't do anything yet"
                 style={{ marginTop: "40px", color: "#8a8d92", fontSize: "18px" }}
             />
 

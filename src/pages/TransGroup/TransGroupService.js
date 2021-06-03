@@ -4,6 +4,7 @@ import userApi from '../../api/apis/userApi';
 import TransGroup from './TransGroup'
 import Cookies from 'universal-cookie';
 import genreApi from '../../api/apis/genreApi';
+import dayjs from 'dayjs';
 
 export default function TransGroupService() {
     const [transGrInfo, setTransGrInfo] = useState({})
@@ -34,9 +35,16 @@ export default function TransGroupService() {
                 return;
             }
 
+            const mangas = response.content.list_manga;
+            mangas.forEach(manga => {
+                manga.isProject = true;
+                manga.createdAt = dayjs(manga.createdAt).format("HH:MM DD-MM-YYYY"); //createdAt is milisecond;
+            })
+
+
             console.log(response.content.msg)
             setTransGrInfo(response.content.trans_group)
-            setMangas([])
+            setMangas(response.content.list_manga)
             return;
         } catch (ex) {
             console.log(ex)
@@ -59,14 +67,23 @@ export default function TransGroupService() {
 
     }
 
-    const handleCreateNewProject = async (fieldsData) => {
+    const handleCreateNewProject = async (fieldsData, img) => {
+       
+
         const data = {
-            fields: fieldsData
+            ...fieldsData
         }
 
         try {
-            const response = await userApi.AddNewProject(token, data);
+            const response = await userApi.AddNewProjectFields(token, data);
 
+            if(response){
+                let formData = new FormData();
+                formData.append("file", img)
+                formData.append("manga_id", response.content.manga_id);
+                const response02 = await userApi.AddNewProjectThumbnail(token, formData);
+                console.log(response02)
+            }
             console.log(response)
         } catch (ex) {
             console.log(ex)
@@ -80,7 +97,7 @@ export default function TransGroupService() {
             mangas={mangas}
             genres={genres}
 
-            handleCreateNewProject={(fieldsData) => handleCreateNewProject(fieldsData)}
+            handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
         />
     )
 }

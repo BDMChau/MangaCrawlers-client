@@ -66,27 +66,32 @@
   box-shadow: 0 0 3px 0 #616060d6;
 }
 
+.uploader .ant-upload.ant-upload-drag {
+  width: 50%;
+  margin: 0 auto;
+}
+
+
 .upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar {
-      width: 5px;
-  }
+  width: 5px;
+}
 
-  /* Track */
-  .upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 1px 0 grey; 
-  }
+/* Track */
+.upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 1px 0 grey;
+}
 
-  /* Handle */
-  .upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb {
-      background: #a7a6a6a2; 
-      border-radius: 10px;
-  }
+/* Handle */
+.upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb {
+  background: #a7a6a6a2;
+  border-radius: 10px;
+}
 
-  /* Handle on hover */
-  .upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb:hover {
-      background: #777777a9; 
-  }
-
-
+/* Handle on hover */
+.upload-form
+  .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb:hover {
+  background: #777777a9;
+}
 
 
 /* uploader item */
@@ -111,6 +116,22 @@
 
 .upload-form .chapter-dropdown button {
   width: 100%;
+}
+
+.uploader-note {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3px;
+}
+
+.uploader-note .ant-typography {
+  margin: 0 ;
+}
+
+.uploader-note .note-example {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* //////// */
@@ -144,5 +165,17 @@
   .upload-form
     .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
     width: 296px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .uploader .ant-upload.ant-upload-drag {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1600px) {
+  .uploader .ant-upload.ant-upload-drag {
+    width: 70%;
   }
 }

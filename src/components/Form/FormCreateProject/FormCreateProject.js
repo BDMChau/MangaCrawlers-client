@@ -21,7 +21,8 @@ const uploadButton = (
 );
 
 export default function FormCreateProject({ genres, handleCreateNewProject }) {
-    const [imgUrl, setImgUrl] = useState("")
+    const [img, setImg] = useState("")
+    const [imgDemo, setImgDemo] = useState("")
     const [isRequired, setIsRequired] = useState(false)
     const [fieldsData, setFieldsData] = useState({
         rating: 0,
@@ -29,27 +30,36 @@ export default function FormCreateProject({ genres, handleCreateNewProject }) {
     })
 
     const onChange = (info) => {
-        console.log(info)
-        getBase64Img(info.file.originFileObj, (url) => {
-            console.log(url)
-            setImgUrl(url)
+        console.log("file to upload: ", info)
+        setImg(info.file)
+
+        getBase64Img(info.file, (file) => {
+            setImgDemo(file)
         });
 
     }
 
     const handleSubmit = () => {
         const { mangaName, author, genres, status, publicationYear, description } = fieldsData;
-        if (!imgUrl || !mangaName || !author || !genres.length || !publicationYear || !description) {
+        if (!img || !mangaName || !author || !genres.length || !publicationYear || !description ||!status) {
             setIsRequired(true)
             return;
         }
 
-        handleCreateNewProject(fieldsData);
+        handleCreateNewProject(fieldsData, img);
         setIsRequired(false)
         return;
     }
 
 
+    const propsUpload = {
+        name: 'file',
+        headers: {
+            authorization: 'authorization-text',
+        }, 
+        beforeUpload: (file) => false,
+        onChange: (info) => onChange(info)
+    };
 
     return (
         <div className="form-create-project">
@@ -57,13 +67,13 @@ export default function FormCreateProject({ genres, handleCreateNewProject }) {
                 <Upload
                     showUploadList={false}
                     listType="picture-card"
-                    onChange={(info) => onChange(info)}
-                    disabled={imgUrl ? true : false}
+                   {...propsUpload}
+                    disabled={img ? true : false}
                 >
-                    {imgUrl
+                    {img
                         ? <div>
-                            <Button title="clear" className="btn-clear-img" icon={<CloseOutlined style={{ fontSize: "16px" }} />} onClick={() => setImgUrl("")} />
-                            <Image src={imgUrl} alt="manga-thumnails" style={{ height: '100%' }} />
+                            <Button title="clear" className="btn-clear-img" icon={<CloseOutlined style={{ fontSize: "16px" }} />} onClick={() => setImg("")} />
+                            <Image src={imgDemo} alt="manga-thumnails" style={{ height: '100%' }} />
                         </div>
                         : uploadButton
                     }

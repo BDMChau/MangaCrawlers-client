@@ -30,7 +30,7 @@ export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNe
 
                 <TabPane tab="New Project" key="newproject">
                     <Row justify={"center"}>
-                        <FormCreateProject genres={genres} handleCreateNewProject={(fieldsData) => handleCreateNewProject(fieldsData)} />
+                        <FormCreateProject genres={genres} handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)} />
                     </Row>
                 </TabPane>
             </Tabs>

@@ -76,8 +76,19 @@ export default function UploadManga() {
                             Chapters Uploaded <DownOutlined />
                         </Button>
                     </Dropdown>
+                    <div className="uploader-note">
+                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Note: Format the name of file(s) before upload!</Typography.Title>
+                        <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text>
+                        <div className="note-example">
+                            <Typography.Text>Example:</Typography.Text>
+                            <Typography.Text>01: Chapter 01: this is chapter01</Typography.Text>
+                            <Typography.Text>02: Chapter 02: this is chapter02</Typography.Text>
+                        </div>
+                    </div>
                 </div>
                 <div className="uploader">
+
+
                     <Dragger {...propsUploader}>
                         <div className="upload-drag-icon">
                             <CloudUploadOutlined style={{ fontSize: "32px" }} />
