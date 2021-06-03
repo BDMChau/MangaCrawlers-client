@@ -20,7 +20,7 @@ const uploadButton = (
     </div>
 );
 
-export default function FormCreateProject({ genres, handleCreateNewProject }) {
+export default function FormCreateProject({ genres, handleCreateNewProject, isLoading }) {
     const [img, setImg] = useState("")
     const [imgDemo, setImgDemo] = useState("")
     const [isRequired, setIsRequired] = useState(false)
@@ -173,7 +173,7 @@ export default function FormCreateProject({ genres, handleCreateNewProject }) {
                         okText="Create"
                         cancelText="Cancle"
                     >
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" loading={isLoading}>
                             Create New Project
                         </Button>
                     </Popconfirm>

@@ -6,13 +6,15 @@ import genreApi from '../../api/apis/genreApi';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { message_error, message_warning } from '../../components/notifications/message';
+import { message_error, message_success, message_warning } from '../../components/notifications/message';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
     const [transGrInfo, setTransGrInfo] = useState({})
     const [mangas, setMangas] = useState([])
     const [genres, setGenres] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
     const history = useHistory();
 
 
@@ -76,8 +78,7 @@ export default function TransGroupService() {
     }
 
     const handleCreateNewProject = async (fieldsData, img) => {
-
-
+        setIsLoading(true);
         const data = {
             ...fieldsData
         }
@@ -91,12 +92,12 @@ export default function TransGroupService() {
                 formData.append("manga_id", response.content.manga_id);
                 const response02 = await userApi.addNewProjectThumbnail(token, formData);
                 console.log(response02)
-                return;
+                message_success("Upload new manga successfully!")
             } else {
-                message_error("Have an error, please try again!");
-                return;
+                message_error(response.content.err);
             }
 
+            setIsLoading(false);
         } catch (ex) {
             console.log(ex)
         }
@@ -110,6 +111,7 @@ export default function TransGroupService() {
             genres={genres}
 
             handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
+            isLoading={isLoading}
         />
     )
 }

@@ -10,9 +10,11 @@ import { CheckOutlined } from "@ant-design/icons";
 import userApi from '../../api/apis/userApi';
 import { message_error, message_success } from '../../components/notifications/message';
 import Cookies from 'universal-cookie';
+import { SET_TRANSGROUP_ID } from '../../store/slices/UserSlice';
 
 
 export default function SignUpTransGroup() {
+    const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [isCheckedRules, setIsCheckedRules] = useState(false);
@@ -52,6 +54,7 @@ export default function SignUpTransGroup() {
     }
 
     const registerTransGroup = async () => {
+        setIsLoading(true);
         const data = {
             group_name: name,
             group_desc: desc
@@ -61,9 +64,18 @@ export default function SignUpTransGroup() {
             const response = await userApi.registerTranslationGroup(token, data);
 
             if (response.content.err) {
-                message_error(response.content.err);
+                message_error("response.content.err");
+                setIsLoading(false)
             } else if (response.content.msg) {
-                message_success(response.content.msg);
+                const transGroupId = response.content.transgroup_id;
+                
+                const user = cookies.get("user");
+                user.user_transgroup_id = transGroupId;
+                cookies.set("user", user, { path: '/' });
+                dispatch(SET_TRANSGROUP_ID(transGroupId))
+                message_success("Created your team", 3);
+                message_success("Log in again to use all features!", 5);
+                setIsLoading(false);
             }
 
             return;
@@ -144,6 +156,7 @@ export default function SignUpTransGroup() {
                         <Form.Item className="form-signup-footer" style={{ marginTop: "10px" }} >
                             <Button className="btn-submit-signup-trans-group" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
+                                loading={isLoading}
                                 icon={<CheckCircleOutlined />}
                             >
                                 Create

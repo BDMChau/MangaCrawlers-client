@@ -16,11 +16,14 @@ const UserSlice = createSlice({
         },
         UPDATE_AVATAR: (state, action) => {
             state[0].user_avatar = action.payload;
+        },
+        SET_TRANSGROUP_ID: (state, action) => {
+            state[0].user_transgroup_id = action.payload;
         }
     }
 })
 
 const { actions, reducer } = UserSlice;
-export const { SIGNIN, LOGOUT, UPDATE_AVATAR } = actions;
+export const { SIGNIN, LOGOUT, UPDATE_AVATAR, SET_TRANSGROUP_ID } = actions;
 
 export default reducer;

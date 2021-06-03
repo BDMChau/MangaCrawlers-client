@@ -7,7 +7,7 @@ import ListVersion02 from '../../components/List/ListVersion02/ListVersion02';
 
 const { TabPane } = Tabs;
 
-export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject }) {
+export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject, isLoading }) {
 
     const renderProjects = () => (
         <Row justify={"center"} className="projects">
@@ -30,7 +30,7 @@ export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNe
 
                 <TabPane tab="New Project" key="newproject">
                     <Row justify={"center"}>
-                        <FormCreateProject genres={genres} handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)} />
+                        <FormCreateProject genres={genres} handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)} isLoading={isLoading} />
                     </Row>
                 </TabPane>
             </Tabs>

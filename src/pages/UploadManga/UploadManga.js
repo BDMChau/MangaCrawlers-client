@@ -10,7 +10,7 @@ import { message_error } from '../../components/notifications/message';
 
 const { Dragger } = Upload;
 
-export default function UploadManga({ handleUploadImgs }) {
+export default function UploadManga({ handleUploadImgs, isLoading }) {
     const [listFileToUpload, setListFileToUpload] = useState([]);
     const history = useHistory();
 
@@ -102,7 +102,7 @@ export default function UploadManga({ handleUploadImgs }) {
                     </Dragger>
 
                     <div className="uploader-submit">
-                        <Button onClick={() => handleSubmit()} >Submit Upload</Button>
+                        <Button onClick={() => handleSubmit()} loading={isLoading} >Submit Upload</Button>
                     </div>
                 </div>
             </Col>
