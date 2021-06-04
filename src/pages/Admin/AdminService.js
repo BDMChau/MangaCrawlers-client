@@ -9,7 +9,12 @@ export default function AdminService() {
     const [users, setUsers] = useState([])
     const [admins, setAdmins] = useState([])
     const [mangas, setMangas] = useState([])
+    const [transGrs, setTransGrs] = useState([])
+
     const [reportUsers, setReportUsers] = useState([])
+    const [reportManga, setReportManga] = useState([])
+    const [reportTransGr, setReportTransGr] = useState([])
+
     const [isLoading, setIsLoading] = useState(false)
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -17,7 +22,11 @@ export default function AdminService() {
     useEffect(() => {
         getAllUsers();
         getAllMangas();
+        getAllTransGroups();
+
         getReportUser();
+        getReportManga();
+        getReportTransGr();
     }, [])
 
 
@@ -64,6 +73,30 @@ export default function AdminService() {
 
             sortedMangas.forEach(manga => {
                 setMangas(prev => [...prev, manga]);
+            });
+
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    const getAllTransGroups = async () => {
+        try {
+            const response = await adminApi.getAllTransGroups(token);
+            if (response.content.err) {
+                console.error("getAllTransGroups error!")
+                return;
+            }
+
+            console.log(response)
+            console.log(response.content.msg)
+
+            const allTransGroups = response.content.list_transgroup;
+            const sortedTransGroups = allTransGroups.sort(arrayMethods.dynamicSort("transgroup_id"))
+
+            sortedTransGroups.forEach(transGr => {
+                setTransGrs(prev => [...prev, transGr]);
             });
 
             return;
@@ -147,17 +180,88 @@ export default function AdminService() {
             }
 
             const reports = response.content.users_report;
-            reports.forEach(report =>{
-                if(report.month <= 9){
+            reports.forEach(report => {
+                if (report.hasOwnProperty("values")) {
+                    report.Users = report.values;
+                    delete report.values;
+                }
+
+                if (report.month <= 9) {
                     report.month = "0" + report.month.toString();
-                }else{
+                } else {
                     report.month = report.month.toString();
                 }
             })
             console.log(reports)
             setReportUsers(reports)
-            
+
             console.log("Get report user OK!");
+            console.log(response)
+            return;
+
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    const getReportManga = async () => {
+        try {
+            const response = await adminApi.getReportManga(token);
+            if (response.content.err) {
+                console.error("getReportmanga error!")
+                return;
+            }
+
+            const reports = response.content.mangas_report;
+            reports.forEach(report => {
+                if (report.hasOwnProperty("values")) {
+                    report.Quantity = report.values;
+                    delete report.values;
+                }
+
+                if (report.month <= 9) {
+                    report.month = "0" + report.month.toString();
+                } else {
+                    report.month = report.month.toString();
+                }
+            })
+            console.log(reports)
+            setReportManga(reports)
+
+            console.log("Get report manga OK!");
+            console.log(response)
+            return;
+
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+    const getReportTransGr = async () => {
+        try {
+            const response = await adminApi.getReportTransGr(token);
+            if (response.content.err) {
+                console.error("getReportTransGroup error!")
+                return;
+            }
+
+            const reports = response.content.trans_group_report;
+            reports.forEach(report => {
+                if (report.hasOwnProperty("values")) {
+                    report.Quantity = report.values;
+                    delete report.values;
+                }
+
+                if (report.month <= 9) {
+                    report.month = "0" + report.month.toString();
+                } else {
+                    report.month = report.month.toString();
+                }
+            })
+            console.log(reports)
+            setReportTransGr(reports)
+
+            console.log("Get report trans group OK!");
             console.log(response)
             return;
 
@@ -172,7 +276,12 @@ export default function AdminService() {
                 users={users}
                 admins={admins}
                 mangas={mangas}
+                transGrs={transGrs}
+
                 reportUsers={reportUsers}
+                reportManga={reportManga}
+                reportTransGr={reportTransGr}
+
                 handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}
                 isLoading={isLoading}

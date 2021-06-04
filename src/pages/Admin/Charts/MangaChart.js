@@ -6,48 +6,15 @@ import { Line } from '@ant-design/charts';
 import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { PicLeftOutlined, CalendarOutlined } from '@ant-design/icons';
 
-export default function MangaChart() {
+export default function MangaChart({ reportManga }) {
     const chartRef = useRef();
-    const data = [
-        {
-            month: '01',
-            value: 3,
-        },
-        {
-            month: '02',
-            value: 4,
-        },
-        {
-            month: '03',
-            value: 3.5,
-        },
-        {
-            month: '04',
-            value: 5,
-        },
-        {
-            month: '05',
-            value: 4.,
-        },
-        {
-            month: '6',
-            value: 4.9,
-        },
-        {
-            month: '7',
-            value: 3,
-        },
-        {
-            month: '8',
-            value: 4.5,
-        },
-    ];
+
 
     const config = {
-        data,
+        data: reportManga,
         height: 300,
         xField: 'month',
-        yField: 'value',
+        yField: 'Quantity',
         point: {
             size: 5,
             shape: 'diamond',
@@ -67,7 +34,7 @@ export default function MangaChart() {
     const menuDropDown = (
         <Menu>
             <Menu.Item>
-            <Typography.Text>
+                <Typography.Text>
                     2021
             </Typography.Text>
             </Menu.Item>

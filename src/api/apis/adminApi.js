@@ -18,6 +18,14 @@ const adminApi = {
             }
         })
     },
+    getAllTransGroups: (token) => {
+        const url = '/api/admin/getalltransgroup'
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     deprecateUser: (token, data) => {
         const url = '/api/admin/deprecateuser'
         return axiosClient.put(url, data, {
@@ -42,7 +50,24 @@ const adminApi = {
                 Authorization: token
             }
         })
+    }, 
+    getReportManga: (token) => {
+        const url = '/api/admin/reportmanga'
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    getReportTransGr: (token) => {
+        const url = '/api/admin/reporttransgroup'
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: token
+            }
+        })
     },
 }
+
 
 export default adminApi;

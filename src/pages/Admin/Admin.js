@@ -20,7 +20,12 @@ export default function Admin({
     users,
     admins,
     mangas,
+    transGrs,
+
     reportUsers,
+    reportManga,
+    reportTransGr,
+
     handleDeprecateUser,
     handleRemoveUser,
     isLoading,
@@ -60,14 +65,14 @@ export default function Admin({
                 mangas={mangas}
             />
 
-            <MangaChart />
+            <MangaChart reportManga={reportManga} />
         </div>
     )
 
     const renderTransGrStatistic = () => (
         <div>
-            <TransGrTable />
-            <TransGrChart />
+            <TransGrTable transGrs={transGrs} />
+            <TransGrChart reportTransGr={reportTransGr} />
         </div>
     )
 

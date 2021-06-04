@@ -7,48 +7,15 @@ import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
-export default function TransGrChart() {
+export default function TransGrChart({ reportTransGr }) {
     const chartRef = useRef();
-    const data = [
-        {
-            month: '01',
-            value: 3,
-        },
-        {
-            month: '02',
-            value: 4,
-        },
-        {
-            month: '03',
-            value: 3.5,
-        },
-        {
-            month: '04',
-            value: 5,
-        },
-        {
-            month: '05',
-            value: 4.,
-        },
-        {
-            month: '6',
-            value: 4.9,
-        },
-        {
-            month: '7',
-            value: 3,
-        },
-        {
-            month: '8',
-            value: 4.5,
-        },
-    ];
+
 
     const config = {
-        data,
+        data: reportTransGr,
         height: 300,
         xField: 'month',
-        yField: 'value',
+        yField: 'Quantity',
         point: {
             size: 5,
             shape: 'diamond',

@@ -15,7 +15,7 @@ export default function UserChart({ reportUsers }) {
         data: reportUsers,
         height: 300,
         xField: 'month', // must be string
-        yField: 'users',
+        yField: 'Users',
         point: {
             size: 4,
             shape: 'circle',

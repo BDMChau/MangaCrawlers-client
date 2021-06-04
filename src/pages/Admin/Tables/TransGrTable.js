@@ -3,53 +3,36 @@ import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Tag, Space, Col, Row, Typography, Popconfirm } from 'antd';
-import { Avatar } from 'antd';
+import { Table, Space, Col, Typography, Popconfirm } from 'antd';
 
-export default function TransGrTable() {
-    const [users, setusers] = useState([
-        {
-            name: "Black Clover",
-            email: "bdmchau105@gamil.com",
-            projects: 2,
-            members: 10,
-        },
-    ])
-
+export default function TransGrTable({transGrs}) {
     const columns = [
         {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            title: 'Team Name',
+            dataIndex: 'transgroup_name',
+            key: 'transgroup_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            key: 'email',
+            title: 'Team Email',
+            dataIndex: 'transgroup_email',
+            key: 'transgroup_email',
             render: text => <p>{text}</p>,
         },
-        {
-            title: 'Projects',
-            key: 'projects',
-            dataIndex: 'projects',
-            className: "projects-col",
-            render: text => <p>{text} project(s)</p>
-        },
-        {
-            title: 'Members',
-            key: 'members',
-            dataIndex: 'members',
-            render: text => <a>{text} member(s)</a>
-        },
+        // {
+        //     title: 'Members',
+        //     key: 'members',
+        //     dataIndex: 'members',
+        //     render: text => <a>{text} member(s)</a>
+        // },
         {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
                     <Popconfirm
-                        title="Are you sure to delete this user?"
+                        title="Are you sure to delete this team?"
                         onConfirm={"confirm"}
                         onCancel={"cancel"}
                         okText="Yes"
@@ -66,10 +49,10 @@ export default function TransGrTable() {
         <Col xxl={14} xs={23} sm={20} className="table-trans-gr">
             <Typography.Title level={3}>Translation Team</Typography.Title>
             <Table
-                className="manga-table"
+                className="trans-gr-table"
                 columns={columns}
-                dataSource={users}
-                pagination={false}
+                dataSource={transGrs}
+                pagination={true}
             />
         </Col>
     )

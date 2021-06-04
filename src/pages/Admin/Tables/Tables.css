@@ -76,7 +76,7 @@
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 50px;
-  max-height: 500px;
+  max-height: 650px;
   width: 100%;
 }
 
@@ -85,9 +85,13 @@
 }
 
 .admin-row1 .table-trans-gr .trans-gr-table {
-  max-height: 500px;
-  height: 500px;
+  max-height: 650px;
   overflow: auto;
+  background: white;
+}
+
+.admin-row1 .table-trans-gr .trans-gr-table .ant-table-pagination.ant-pagination {
+  margin: 12px 10px 8px 0;
 }
 
 .admin-row1 .table-trans-gr .trans-gr-table td.ant-table-cell,
