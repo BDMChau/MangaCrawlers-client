@@ -1,4 +1,4 @@
-import { Button, Col, Divider, Empty, Image, message, Row, Skeleton, Typography } from 'antd'
+import { Button, Col, Divider, Empty, Image, Input, message, Row, Skeleton, Tooltip, Typography } from 'antd'
 import React, { useState } from 'react'
 import "./UploadManga.css"
 import { LeftOutlined } from "@ant-design/icons"
@@ -13,6 +13,7 @@ const { Dragger } = Upload;
 
 export default function UploadManga({ handleUploadImgs, isLoading, manga, chapters }) {
     const [listFileToUpload, setListFileToUpload] = useState([]);
+    const [chapterName, setChapterName] = useState("");
     const history = useHistory();
 
     const dropDownChapters = (
@@ -35,12 +36,12 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
     );
 
     const handleSubmit = () => {
-        if (!listFileToUpload.length) {
+        if (!listFileToUpload.length || !chapterName) {
             message_error("Nothing to upload!", 3);
             return;
         }
 
-        handleUploadImgs(listFileToUpload);
+        handleUploadImgs(listFileToUpload, chapterName);
         return;
     }
 
@@ -71,6 +72,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                 <div className="thumb-img">
                     <Image className="img" src={manga ? manga.thumbnail : ""} alt="" ></Image>
                 </div>
+
                 <div className="text">
                     <Typography.Title level={3} >{manga ? manga.manga_name : ""}</Typography.Title>
                     <Typography.Text >Author: {manga ? manga.manga_authorName : ""}</Typography.Text>
@@ -89,18 +91,29 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                             Chapters Uploaded <DownOutlined />
                         </Button>
                     </Dropdown>
+
                     <div className="uploader-note">
                         <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Note: Sort the file(s) in ascending order before upload!</Typography.Title>
                         {/* <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text> */}
                         <div className="note-example">
                             <Typography.Text>Example:</Typography.Text>
-                            <Typography.Text>01: MangaName_Chapter 01: this is chapter01</Typography.Text>
-                            <Typography.Text>02: MangaName_Chapter 02: this is chapter02</Typography.Text>
+                            <Typography.Text>01: MangaName_Chapter 01: This is chapter01</Typography.Text>
+                            <Typography.Text>02: MangaName_Chapter 01: This is chapter01</Typography.Text>
                             <Typography.Text>*01, 02 is serial number of each image</Typography.Text>
                         </div>
                     </div>
                 </div>
                 <div className="uploader">
+                    <div className="input-chapter-name">
+                        <Tooltip title="Chapter's name" >
+                            <Input
+                                type="text"
+                                placeholder="Chapter's name"
+                                onChange={(e) => setChapterName(e.target.value)}
+                            />
+                        </Tooltip>
+                    </div>
+
                     <Dragger {...propsUploader}>
                         <div className="upload-drag-icon">
                             <CloudUploadOutlined style={{ fontSize: "32px" }} />

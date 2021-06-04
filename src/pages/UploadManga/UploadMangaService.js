@@ -28,12 +28,14 @@ export default function UploadMangaService() {
         getMangaInfo();
     }, [])
 
-    const handleUploadImgs = async (listFile) => {
+    const handleUploadImgs = async (listFile, chapterName) => {
         setIsLoading(true);
         console.log(listFile)
+        console.log("chapterName: " + chapterName);
 
         let formData = new FormData();
         formData.append("manga_id", query.get("v"));
+        formData.append("chapter_name", chapterName);
         listFile.forEach(file => {
             formData.append("files", file.originFileObj)
         })
@@ -73,7 +75,7 @@ export default function UploadMangaService() {
 
     return (
         <UploadManga
-            handleUploadImgs={(listFile) => handleUploadImgs(listFile)}
+            handleUploadImgs={(listFile, chapterName) => handleUploadImgs(listFile, chapterName)}
             isLoading={isLoading}
             manga={manga}
             chapters={chapters}

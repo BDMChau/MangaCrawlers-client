@@ -147,6 +147,17 @@
   margin-top: 10px;
 }
 
+.uploader .input-chapter-name{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.uploader .input-chapter-name input{
+  width: 100%;
+  height: 30px;
+}
+
 /* //////// */
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .title-upload-page .text {
@@ -188,13 +199,22 @@
   .uploader .uploader-submit{
     width: 100%;
   }
+
+  .uploader .input-chapter-name{
+    width: 100%;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
   .uploader .ant-upload.ant-upload-drag {
     width: 70%;
   }
+
   .uploader .uploader-submit{
+    width: 70%;
+  }
+
+  .uploader .input-chapter-name{
     width: 70%;
   }
 }

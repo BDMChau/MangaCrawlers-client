@@ -1,24 +1,16 @@
 import React, { memo, useEffect, useState } from 'react';
 import "./ListSide.css";
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import arrayMethods from '../../../helpers/arrayMethods';
-import { useHistory } from 'react-router';
 import { Typography } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 function ListSide({ mangas, height }) {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
-    const history = useHistory();
 
     useEffect(() => {
         if (mangas) {
-            const shuffledList = arrayMethods.shuffle(mangas);
-            if (shuffledList.length > 5) {
-                shuffledList.length = 5
-            }
-
-            setData(shuffledList)
+            setData(mangas)
         }
     }, [mangas || height])
 
