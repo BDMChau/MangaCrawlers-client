@@ -7,16 +7,14 @@ import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 
-function ListChapters({ chapters, mangaId, height, addReadingHistory }) {
+function ListChapters({ chapters, mangaId, height }) {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false)
-    const history = useHistory()
 
     const goToChapterPage = (chapterId) => {
         localStorage.setItem("mangaid", JSON.stringify(mangaId))
         dispatch(SET_MANGA_ID(mangaId))
 
-        addReadingHistory(mangaId, chapterId);
         return;
     }
 

@@ -137,19 +137,20 @@ function MangaService() {
         return followingMangas;
     }
 
-    const addReadingHistory = async (mangaId, chapterId) => {
-        const data = {
-            manga_id: mangaId,
-            chapter_id: chapterId
-        }
-        try {
-            const response = await mangaApi.updateReadingHistory(data, token)
+    // const addReadingHistory = async (mangaId, chapterId) => {
+    //     const data = {
+    //         manga_id: mangaId,
+    //         chapter_id: chapterId
+    //     }
+    //     try {
+    //         console.log("update history")
+    //         const response = await mangaApi.updateReadingHistory(data, token)
 
-            console.log("History:", response)
-        } catch (ex) {
-            console.log(ex)
-        }
-    }
+    //         console.log("History:", response)
+    //     } catch (ex) {
+    //         console.log(ex)
+    //     }
+    // }
 
     const removeFollowingManga = async (mangaId) => {
         setIsLoading(true)
@@ -244,7 +245,7 @@ function MangaService() {
                 removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}
                 isFollowed={isFollowed}
-                addReadingHistory={(managId, chapterId) => addReadingHistory(managId, chapterId)}
+                // addReadingHistory={(managId, chapterId) => addReadingHistory(managId, chapterId)}
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
                 comments={comments}

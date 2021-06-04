@@ -21,7 +21,7 @@ function Manga({
     removeFollowingManga,
     isLoading,
     isFollowed,
-    addReadingHistory,
+    // addReadingHistory,
 
     mangaStars,
     handleRatingManga,
@@ -170,7 +170,7 @@ function Manga({
                                 chapters={chapters}
                                 mangaId={manga.manga_id}
                                 height={"400px"}
-                                addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
+                                // addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
                             />
                         </Col>
 

@@ -63,9 +63,6 @@ export default function ChapterService() {
         getCmtsChapter();
     }, [chapterid || mangaid])
 
-    useEffect(() => {
-      console.log()
-    })
 
 
     useEffect(() => {
