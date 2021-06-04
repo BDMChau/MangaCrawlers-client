@@ -2,15 +2,13 @@ import React, { useState, useEffect, memo } from 'react';
 import "./ListGenrePagination.css";
 import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
-import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
 const { Meta } = Card;
 
 function ListGenrePagination({ mangas }) {
-    const [isLoading, setIsLoading] = useState(false)
-    const [pageSize, setPageSize] = useState(9)
-    const history = useHistory();
+    const [isLoading] = useState(false)
+    const [, setPageSize] = useState(9)
 
     // responsive items quantity
     useEffect(() => {
@@ -56,34 +54,34 @@ function ListGenrePagination({ mangas }) {
                 renderItem={manga => (
                     <div>
                         <NavLink to={`/manga/${manga.manga_id}`}>
-                        <Card
-                            id={manga.manga_id}
-                            className="card"
-                            hoverable
-                            cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${manga.thumbnail})` }} />}
-                        >
-                            <Meta title={manga.manga_name} description={renderCardDesc()} />
-                        </Card>
+                            <Card
+                                id={manga.manga_id}
+                                className="card"
+                                hoverable
+                                cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${manga.thumbnail})` }} />}
+                            >
+                                <Meta title={manga.manga_name} description={renderCardDesc()} />
+                            </Card>
                         </NavLink>
                     </div >
                 )
-}
-/>
+                }
+            />
         )
     }
 
-return (
-    <div className="list-genre-pagination">
+    return (
+        <div className="list-genre-pagination">
 
-        <Row justify={"center"} className="manga-genre-cards">
-            {isLoading
-                ? <LoadingCircle width={"90%"} height="60%" fontSizeIcon={"70px"} fontSizeText={"17px"} />
-                : renderMangas()
-            }
-        </Row>
+            <Row justify={"center"} className="manga-genre-cards">
+                {isLoading
+                    ? <LoadingCircle width={"90%"} height="60%" fontSizeIcon={"70px"} fontSizeText={"17px"} />
+                    : renderMangas()
+                }
+            </Row>
 
-    </div>
-)
+        </div>
+    )
 }
 
 

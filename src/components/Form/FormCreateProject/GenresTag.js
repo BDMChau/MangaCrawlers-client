@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, Radio, Typography } from 'antd';
+import { Select, Typography } from 'antd';
 
 const { Option } = Select;
 

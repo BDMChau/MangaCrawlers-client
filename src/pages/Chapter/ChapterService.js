@@ -110,7 +110,7 @@ export default function ChapterService() {
             chapters.forEach((chapter, i) => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
 
-                if (chapter.chapter_id == chapterid) {
+                if (chapter.chapter_id === chapterid) {
                     setCurChapter(i)
                 }
             })
@@ -250,7 +250,6 @@ export default function ChapterService() {
                     "chapter_id": chapterid,
                     "chaptercmt_content": cmtContent,
                     "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
-                    "chapter_id": chapterid,
                     "chapter_name": chapterInfo.chapter_name,
                     "user_avatar": userState[0].user_avatar,
                     "user_email": userState[0].user_email,

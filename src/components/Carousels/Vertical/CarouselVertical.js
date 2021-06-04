@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Image } from 'antd';
 
 function CarouselVertical() {
-    const [data, setData] = useState([
+    const [data] = useState([
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620740882/Mangaback/1124786.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626554/manga_wallpaper/Sousei_no_onmyoji.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620626543/manga_wallpaper/Tensei_shitara_Slime.jpg",
@@ -68,9 +68,9 @@ function CarouselVertical() {
     return (
         <div className="slider-vertical">
             <Slider {...settings}>
-                {data.map((img) => (
-                    <div className="slider-item">
-                        <Image src={img} class="item" alt="" />
+                {data.map((img, i) => (
+                    <div key={i} className="slider-item">
+                        <Image src={img} className="item" alt="" />
                     </div>
                 ))}
 

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Tag, Space, Col, Row, Typography, Popconfirm, Button } from 'antd';
+import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
 import { Avatar } from 'antd';
 
 export default function TableUser({ users, handleDeprecateUser, handleRemoveUser, isLoading }) {
@@ -48,7 +48,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
                             okText="Yes"
                             cancelText="No"
                         >
-                            <a>Unapprove</a>
+                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Unapprove</Typography.Text>
                         </Popconfirm>
                     </Space>
                     <p style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</p>
@@ -60,7 +60,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
                             okText="Yes"
                             cancelText="No"
                         >
-                            <a>Remove</a>
+                             <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
                         </Popconfirm>
                     </Space>
                 </div>

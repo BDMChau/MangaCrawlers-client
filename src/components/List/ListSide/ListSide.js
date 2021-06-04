@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 function ListSide({ mangas, height }) {
     const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading] = useState(false)
 
     useEffect(() => {
         if (mangas) {
@@ -48,7 +48,7 @@ function ListSide({ mangas, height }) {
                         <NavLink
                             to={`/manga/${manga.manga_id}`}
                             className="list-side-item"
-                            id={i}
+                            key={i}
                         >
                             <div className="item-img" >
                                 <div className="img"

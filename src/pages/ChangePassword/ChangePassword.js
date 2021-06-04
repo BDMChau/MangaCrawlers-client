@@ -1,9 +1,12 @@
-import { Button, Col, Input, Row, Typography, Form, message } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import "./ChangePassword.css"
+
 import { useParams } from 'react-router';
 import authApi from '../../api/apis/authApi';
-import { message_error, message_success } from '../../components/notifications/message';
-import "./ChangePassword.css"
+import { message_success } from '../../components/notifications/message';
+import { Button, Col, Input, Row, Typography, Form } from 'antd'
+
+
 const { Title, Text } = Typography;
 
 export default function ChangePassword() {

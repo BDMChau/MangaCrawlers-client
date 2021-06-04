@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./MangaGenre.css"
 import { Col, Row, Typography, Divider, Tag, Tooltip, Button } from 'antd'
 import ListGenrePagination from '../../components/List/ListGenrePagination/ListGenrePagination'
@@ -7,15 +7,7 @@ import { useHistory } from 'react-router'
 
 
 export default function MangaGenres({ genre, mangas }) {
-    const [genreas, setGenreasc] = useState({
-        name: "Action",
-        desc: "ascccccc cccccccc cccccccccg fbfsdfvdhjkfbd vindilbnrdi obrnbfdl kbnfl;g",
-        color: "red"
-    })
-    const history = useHistory()
-
-
-
+    const history = useHistory();
 
     return (
         <Row justify={"center"} className="manga-genre" >

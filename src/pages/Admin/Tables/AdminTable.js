@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
-import { Table, Tag, Space, Col, Row, Typography } from 'antd';
+import { Table, Col, Typography } from 'antd';
 import { Avatar } from 'antd';
 
 

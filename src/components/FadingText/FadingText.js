@@ -1,7 +1,6 @@
-import React, { memo, useState } from 'react'
+import React, { useState } from 'react'
 import "./FadingText.css"
 import { RightOutlined } from "@ant-design/icons"
-import { Button } from 'antd'
 import { NavLink } from 'react-router-dom'
 
 function FadingText({ content }) {

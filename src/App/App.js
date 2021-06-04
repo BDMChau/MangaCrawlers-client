@@ -18,9 +18,9 @@ import Layout, { Content } from "antd/lib/layout/layout";
 const Routing = () => {
   return (
     <Switch>
-      {routes.map((route) => (
+      {routes.map((route, i) => (
         <Route
-          key={route.path}
+          key={i}
           path={route.path}
           exact={route.exact}
           component={route.component}

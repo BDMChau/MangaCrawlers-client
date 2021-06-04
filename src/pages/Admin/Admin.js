@@ -44,7 +44,7 @@ export default function Admin({
         } else {
             history.push("/");
         }
-    }, [userState[0]])
+    }, [userState[0].user_id])
 
 
     const renderUserStatistic = () => (

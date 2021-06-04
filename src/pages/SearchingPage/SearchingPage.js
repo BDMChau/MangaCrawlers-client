@@ -32,11 +32,12 @@ export default function SearchingPage({ data, dataName, handleClickTag, handleGe
                         <Typography.Text style={{ color: "##afafaf" }} >Click on tag to add or remove!</Typography.Text>
                     </div>
                     {data.length
-                        ? data.map((item) => {
+                        ? data.map((item, i) => {
                             if (item !== null) {
                                 return (
                                     <Tooltip title={item.genre_description} key={item.genre_id} className={item.isSelected ? "item-tag-disable" : "item-tag"}>
                                         <Tag
+                                            key={i}
                                             color={item.isSelected ? "" : item.genre_color}
                                             onClick={() => handleClickTag(item)}
                                         >

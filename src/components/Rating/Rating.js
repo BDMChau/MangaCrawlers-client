@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Popover, Rate, Tooltip, Typography } from 'antd';
+import { Rate, Typography } from 'antd';
 import "./Rating.css";
 
 function Rating({ stars, handleRatingManga }) {

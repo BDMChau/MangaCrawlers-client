@@ -1,5 +1,4 @@
-import { Button, Col, Dropdown, Image, Input, Menu, Row, Tooltip, Typography, Form } from 'antd'
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Chapter.css"
 import CommentItems from '../../components/CommentItems/CommentItems';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined, MinusSquareOutlined } from "@ant-design/icons";
@@ -8,9 +7,9 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../components/notifications/message';
+import { Button, Col, Dropdown, Input, Menu, Row, Tooltip, Typography, Form } from 'antd'
 
 const { TextArea } = Input;
-
 
 
 function Chapter({
@@ -114,9 +113,9 @@ function Chapter({
 
                 <Tooltip title={chapterName ? chapterName : chapterInfo.chapter_name}>
                     <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']} >
-                        <a title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }}>
+                        <Typography.Text title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }}>
                             {chapterName ? chapterName : chapterInfo.chapter_name}
-                        </a>
+                        </Typography.Text>
                     </Dropdown>
                 </Tooltip>
 

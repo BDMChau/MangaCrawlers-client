@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import "./Chapter.css"
-import LazyLoad from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
 import { Col, Image, Skeleton } from 'antd';
 
 function ImgsChapter({ imgs, isFixedMenu, isLoading }) {

@@ -1,4 +1,3 @@
-import { Content } from 'antd/lib/layout/layout';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router';
 import mangaApi from '../../api/apis/mangaApi';
@@ -6,7 +5,6 @@ import arrayMethods from '../../helpers/arrayMethods';
 import MangaGenre from './MangaGenre'
 
 export default function MangaGenreService() {
-    const [id, setId] = useState({});
     const [genre, setGenre] = useState({});
     const [mangas, setMangas] = useState([]);
     const query = new URLSearchParams(useLocation().search);

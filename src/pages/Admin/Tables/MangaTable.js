@@ -15,7 +15,7 @@ export default function MangaTable({ mangas }) {
             dataIndex: 'thumbnail',
             key: 'thumbnail',
             render: text => <Image
-            className="image-thumb-admin"
+                className="image-thumb-admin"
                 style={{ width: "30px", borderRadius: "2px" }}
                 src={text}
                 alt={text}
@@ -44,13 +44,13 @@ export default function MangaTable({ mangas }) {
             title: 'Chapters',
             key: 'chapters_length',
             dataIndex: 'chapters_length',
-            render: text => <a>{text} chapter(s)</a>
+            render: text => <Typography.Text>{text} chapter(s)</Typography.Text>
         },
         {
             title: 'Rating',
             key: 'stars',
             dataIndex: 'stars',
-            render: text => <a>{text}/5</a>
+            render: text => <Typography.Text>{text}/5</Typography.Text>
         },
         {
             title: 'Action',
@@ -60,7 +60,7 @@ export default function MangaTable({ mangas }) {
                     <Space size="middle">
                         <NavLink to={`/manga/${manga.manga_id}`} >Preview</NavLink>
                     </Space>
-                    <p style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</p>
+                    <Typography.Text style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</Typography.Text>
                     <Space size="middle">
                         <Popconfirm
                             title="Are you sure to delete this account?"
@@ -69,7 +69,7 @@ export default function MangaTable({ mangas }) {
                             okText="Yes"
                             cancelText="No"
                         >
-                            <a>Remove</a>
+                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
                         </Popconfirm>
                     </Space>
                 </div>

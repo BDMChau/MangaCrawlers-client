@@ -1,17 +1,16 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { Empty, Typography } from 'antd';
-import { useHistory } from 'react-router';
 import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 
 function ListChapters({ chapters, mangaId, height }) {
     const dispatch = useDispatch();
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading] = useState(false)
 
-    const goToChapterPage = (chapterId) => {
+    const goToChapterPage = () => {
         localStorage.setItem("mangaid", JSON.stringify(mangaId))
         dispatch(SET_MANGA_ID(mangaId))
 
@@ -30,6 +29,7 @@ function ListChapters({ chapters, mangaId, height }) {
                 : chapters.length
                     ? chapters.map((chapter, i) => (
                         <NavLink
+                            key={i}
                             className="list-chapter-item" id={chapter.chapter_id}
                             to={`/chapter/${mangaId}/${chapter.chapter_id}`}
                             onClick={() => goToChapterPage(chapter.chapter_id)} >

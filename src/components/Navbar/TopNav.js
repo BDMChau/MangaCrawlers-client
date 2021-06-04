@@ -10,7 +10,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import SignUpService from "../../pages/SignUp/SignUpService";
 import SignInService from "../../pages/SignIn/SignInService";
 
-import UserProfile from "../../pages/User/UserProfile/UserProfile";
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 
 const { SubMenu } = Menu;
@@ -104,9 +103,9 @@ function TopNav({ handleLogOut, genres }) {
 
     const renderGenresDropDown = () => (
         genres
-            ? genres.map((genre) => (
+            ? genres.map((genre, i) => (
                 <Menu.Item
-                    key={genre.genre_id}
+                    key={i}
                     title={genre.genre_name}
                     onClick={() => history.push(`/manga/genre/tag?v=${genre.genre_id}`)}
                     style={{

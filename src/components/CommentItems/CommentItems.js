@@ -2,9 +2,6 @@ import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
 import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
-import TransitionAnimate from '../Animation/transition';
-
-
 
 
 function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
@@ -41,7 +38,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
                     <Comment
                         className="comment-item"
                         key={i}
-                        author={<a style={{ cursor: "default" }}>{comment.user_name}</a>}
+                        author={<Typography.Text style={{ cursor: "default" }}>{comment.user_name}</Typography.Text>}
                         avatar={
                             <Avatar
                                 className="cmt-avatar"

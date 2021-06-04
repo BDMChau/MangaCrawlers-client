@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Col, Row, Typography } from 'antd'
 import { Footer } from 'antd/lib/layout/layout'
 import "./Footer.css"
-import dayjs from "dayjs";
 
 
 export default function FooterContainer() {
-    const [time, setTime] = useState(dayjs().millisecond())
 
     useEffect(() => {
 

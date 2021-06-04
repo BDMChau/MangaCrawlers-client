@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Admin from './Admin'
 import Cookies from 'universal-cookie';
 import adminApi from '../../api/apis/adminApi';
-import { message_error, message_success } from '../../components/notifications/message';
+import { message_success } from '../../components/notifications/message';
 import arrayMethods from '../../helpers/arrayMethods';
 
 export default function AdminService() {

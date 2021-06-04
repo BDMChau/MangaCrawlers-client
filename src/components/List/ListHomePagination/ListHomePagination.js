@@ -1,8 +1,7 @@
 import React, { useState, useEffect, memo } from 'react';
 import "./ListHomePagination.css";
-import { Col, Row, Card, List } from 'antd';
+import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
-import { useHistory } from 'react-router';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { NavLink } from 'react-router-dom';
 
@@ -11,8 +10,7 @@ const { Meta } = Card;
 function ListHomePagination({ mangas }) {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [pageSize, setPageSize] = useState(9)
-    const history = useHistory()
+    // const [pageSize, setPageSize] = useState(9)
 
 
 
@@ -27,17 +25,17 @@ function ListHomePagination({ mangas }) {
         }
     }, [mangas])
 
-    useEffect(() => {
-        if (window.innerWidth >= 375 && window.innerWidth < 768) {
-            setPageSize(4)
-        } else if (window.innerWidth >= 768 && window.innerWidth <= 768) {
-            setPageSize(10)
-        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1600) {
-            setPageSize(8)
-        } else {
-            setPageSize(9)
-        }
-    })
+    // useEffect(() => {
+    //     if (window.innerWidth >= 375 && window.innerWidth < 768) {
+    //         setPageSize(4)
+    //     } else if (window.innerWidth >= 768 && window.innerWidth <= 768) {
+    //         setPageSize(10)
+    //     } else if (window.innerWidth >= 1024 && window.innerWidth <= 1600) {
+    //         setPageSize(8)
+    //     } else {
+    //         setPageSize(9)
+    //     }
+    // })
 
 
     const renderCardDesc = (name, time) => {

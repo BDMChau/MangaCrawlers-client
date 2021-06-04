@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm } from 'antd';
 
-export default function TransGrTable({transGrs}) {
+export default function TransGrTable({ transGrs }) {
     const columns = [
         {
             title: 'Team Name',
@@ -38,7 +38,7 @@ export default function TransGrTable({transGrs}) {
                         okText="Yes"
                         cancelText="No"
                     >
-                        <a>Remove</a>
+                         <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
                     </Popconfirm>
                 </Space>
             ),
