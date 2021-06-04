@@ -1,5 +1,103 @@
+.ant-layout-footer {
+  padding: 0 0;
+}
+
 .footer {
   width: 100%;
-  height: 120px;
-  background: aqua;
+  height: fit-content;
+  background: none;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 12px 0 var(--color-box-shadow);
+}
+
+.footer .footer-bg {
+  background-image: url(https://static.gamehub.vn/img/files/2020/12/25/gamehubvn-game-nier-mobile-an-dinh-ngay-ra-mat.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  height: 100%;
+  height: 135px;
+  z-index: 9;
+  width: 100%;
+}
+
+.footer .footer-row{
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .footer-row .col01{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .footer-logo {
+  max-width: 270px;
+  width: 100%;
+  height: 70px;
+  background-image: url("../../assets/logo/logo2.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.3);
+  margin-top: 20px;
+}
+
+.footer .footer-text {
+  text-align: center;
+  max-width: 800px;
+  margin-top: 7px;
+  margin-bottom: 5px;
+}
+
+.footer .footer-text .ant-typography {
+  color: #fff;
+}
+
+
+/* /////////////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+
+}
+
+@media only screen and (min-width: 415px) and (max-width: 600px) {
+  .footer .col01{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer .footer-bg {
+    height: 212px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .footer .col01{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer .footer-bg {
+    height: 235px;
+  }
 }
