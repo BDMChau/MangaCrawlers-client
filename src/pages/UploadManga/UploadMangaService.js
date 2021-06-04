@@ -9,7 +9,8 @@ import Cookies from 'universal-cookie';
 
 export default function UploadMangaService() {
     const userState = useSelector((state) => state.userState);
-
+    const [manga, setManga] = useState({})
+    const [chapters, setChapters] = useState({})
     const [isLoading, setIsLoading] = useState(false);
 
     const history = useHistory();
@@ -23,6 +24,8 @@ export default function UploadMangaService() {
             message_warning("Please login first!")
             return;
         }
+
+        getMangaInfo();
     }, [])
 
     const handleUploadImgs = async (listFile) => {
@@ -49,11 +52,31 @@ export default function UploadMangaService() {
         }
     }
 
+    const getMangaInfo = async () => {
+        const data = {
+            manga_id: query.get("v")
+        }
+
+        try{
+            const response = await userApi.getMangaInfo(token, data);
+            console.log(response)
+
+            if(response.content.msg){
+                setManga({...response.content.manga, manga_authorName: response.content.author_name})
+                setChapters(response.content.chapters)
+            }
+
+        }catch(ex){
+            console.log(ex)
+        }
+    }
 
     return (
         <UploadManga
             handleUploadImgs={(listFile) => handleUploadImgs(listFile)}
             isLoading={isLoading}
+            manga={manga}
+            chapters={chapters}
         />
     )
 }

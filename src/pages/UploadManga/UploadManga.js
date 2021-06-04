@@ -1,4 +1,4 @@
-import { Button, Col, Divider, Image, message, Row, Typography } from 'antd'
+import { Button, Col, Divider, Empty, Image, message, Row, Skeleton, Typography } from 'antd'
 import React, { useState } from 'react'
 import "./UploadManga.css"
 import { LeftOutlined } from "@ant-design/icons"
@@ -7,24 +7,31 @@ import { Menu, Dropdown } from 'antd';
 import { DownOutlined, CloudUploadOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import { message_error } from '../../components/notifications/message';
+import Rating from '../../components/Rating/Rating';
 
 const { Dragger } = Upload;
 
-export default function UploadManga({ handleUploadImgs, isLoading }) {
+export default function UploadManga({ handleUploadImgs, isLoading, manga, chapters }) {
     const [listFileToUpload, setListFileToUpload] = useState([]);
     const history = useHistory();
 
     const dropDownChapters = (
-        <Menu>
-            <Menu.Item key="0">
-                <a href="https://www.antgroup.com">1st menu item</a>
-            </Menu.Item>
-            <Menu.Item key="1">
-                <a href="https://www.aliyun.com">2nd menu item</a>
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Item key="3">3rd menu item</Menu.Item>
-        </Menu>
+        chapters.length
+            ? <Menu>
+                {
+                    chapters.map((chapter, i) => (
+                        <Menu.Item key={i}>
+                            <Typography.Text>{chapter.chapter_name}</Typography.Text>
+                        </Menu.Item>
+                    ))
+                }
+            </Menu>
+            : <Empty
+                description=""
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                style={{ padding: "20px 0", textAlign: "center" }}
+            />
+
     );
 
     const handleSubmit = () => {
@@ -62,13 +69,16 @@ export default function UploadManga({ handleUploadImgs, isLoading }) {
 
             <Col sm={23} md={21} xl={21} xxl={21} className="title-upload-page" >
                 <div className="thumb-img">
-                    <Image className="img" src="https://images-na.ssl-images-amazon.com/images/I/81-PkJoiu7L.jpg" alt="" ></Image>
+                    <Image className="img" src={manga ? manga.thumbnail : ""} alt="" ></Image>
                 </div>
                 <div className="text">
-                    <Typography.Title level={3} >Manga Namedbnfdfgnfjghmghgfmfu,h,</Typography.Title>
-                    <Typography.Text >Author: bla bla</Typography.Text>
-                    <Typography.Text>Ongoing</Typography.Text>
-                    <Typography.Text>100 view(s)</Typography.Text>
+                    <Typography.Title level={3} >{manga ? manga.manga_name : ""}</Typography.Title>
+                    <Typography.Text >Author: {manga ? manga.manga_authorName : ""}</Typography.Text>
+                    <Typography.Text>{manga ? manga.status : ""}</Typography.Text>
+                    <Typography.Text>{manga ? manga.views : ""} view(s)</Typography.Text>
+                    <div style={{ pointerEvents: "none" }} >
+                        <Rating stars={manga ? manga.stars : ""} />
+                    </div>
                 </div>
             </Col>
 
@@ -80,8 +90,8 @@ export default function UploadManga({ handleUploadImgs, isLoading }) {
                         </Button>
                     </Dropdown>
                     <div className="uploader-note">
-                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Note: Format the name of file(s) before upload!</Typography.Title>
-                        <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text>
+                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Note: Sort the file(s) in ascending order before upload!</Typography.Title>
+                        {/* <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text> */}
                         <div className="note-example">
                             <Typography.Text>Example:</Typography.Text>
                             <Typography.Text>01: MangaName_Chapter 01: this is chapter01</Typography.Text>

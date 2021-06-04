@@ -69,6 +69,14 @@ const userApi = {
             }
         })
     },
+    getMangaInfo: (token, data) => {
+        const url = '/api/user/getmangainfo'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default userApi;
