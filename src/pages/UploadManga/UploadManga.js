@@ -16,6 +16,8 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
     const [chapterName, setChapterName] = useState("");
     const history = useHistory();
 
+    const listFileTypesAllowed = ["image/png", "image/jpeg"]
+
     const dropDownChapters = (
         chapters.length
             ? <Menu>
@@ -37,8 +39,11 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
     );
 
     const handleSubmit = () => {
-        if (!listFileToUpload.length || !chapterName) {
+        if (!listFileToUpload.length) {
             message_error("Nothing to upload!", 3);
+            return;
+        } else if (!chapterName) {
+            message_error("Chapter's name is missing!", 3);
             return;
         }
 
@@ -52,7 +57,13 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
         name: 'file',
         multiple: true,
         listType: "picture",
-        beforeUpload: () => false,
+        beforeUpload: (file) => {
+            if (!listFileTypesAllowed.includes(file.type)) {
+                message_error("Please select jpeg, png files!")
+            }
+
+            return listFileTypesAllowed.includes(file.type) ? false : Upload.LIST_IGNORE
+        },
         onChange(info) {
             setListFileToUpload(info.fileList);
         }
@@ -94,14 +105,14 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                     </Dropdown>
 
                     <div className="uploader-note">
-                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Note: Sort the file(s) in ascending order before upload!</Typography.Title>
+                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Notice*: Sort the file(s) in your folder in ascending order before upload!</Typography.Title>
                         {/* <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text> */}
-                        <div className="note-example">
+                        {/* <div className="note-example">
                             <Typography.Text>Example:</Typography.Text>
                             <Typography.Text>01: MangaName_Chapter 01: This is chapter01</Typography.Text>
                             <Typography.Text>02: MangaName_Chapter 01: This is chapter01</Typography.Text>
                             <Typography.Text>*01, 02 is serial number of each image</Typography.Text>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="uploader">
