@@ -7,19 +7,9 @@ import { NavLink } from 'react-router-dom'
 export default function ListVersion02({ mangas }) {
     // const [pageSize, setPageSize] = useState(9)
 
-    // useEffect(() => {
-    //     if (window.innerWidth >= 375 && window.innerWidth < 768) {
-    //         setPageSize(5)
-    //     } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-    //         setPageSize(8)
-    //     } else if (window.innerWidth >= 1024 && window.innerWidth <= 1200) {
-    //         setPageSize(12)
-    //     } else if (window.innerWidth >= 1200 && window.innerWidth <= 1600) {
-    //         setPageSize(9)
-    //     } else {
-    //         setPageSize(10)
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        console.log(mangas)
+    }, [mangas.length])
 
     const renderMangas = () => (
         mangas.length
@@ -56,7 +46,7 @@ export default function ListVersion02({ mangas }) {
                                     {manga.status ? manga.status : ""}
                                 </Typography.Text>
                                 <div style={{ pointerEvents: "none" }} >
-                                    <Rating stars={manga.rating} />
+                                    <Rating stars={manga.stars} hideText={true} />
                                 </div>
                             </div>
 

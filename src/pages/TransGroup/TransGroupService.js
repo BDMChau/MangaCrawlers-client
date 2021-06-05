@@ -14,6 +14,7 @@ export default function TransGroupService() {
     const [mangas, setMangas] = useState([])
     const [genres, setGenres] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isLogin, setIsLogin] = useState(false);
 
     const history = useHistory();
 
@@ -42,19 +43,26 @@ export default function TransGroupService() {
             console.log(response)
 
             if (response.content.err) {
+                setIsLogin(true);
                 return;
             }
 
             const mangas = response.content.list_manga;
             mangas.forEach(manga => {
                 manga.isProject = true;
-                manga.createdAt = dayjs(manga.createdAt).format("HH:MM DD-MM-YYYY"); //createdAt is milisecond;
+
+                if (manga.createdAt === null) {
+                    manga.createdAt = "";
+                } else {
+                    manga.createdAt = dayjs(manga.createdAt).format("HH:MM DD-MM-YYYY"); //createdAt is milisecond;
+                }
             })
 
 
             console.log(response.content.msg)
             setTransGrInfo(response.content.trans_group)
             setMangas(response.content.list_manga)
+            setIsLogin(false);
             return;
         } catch (ex) {
             console.log(ex)
@@ -112,6 +120,7 @@ export default function TransGroupService() {
 
             handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
             isLoading={isLoading}
+            isLogin={isLogin}
         />
     )
 }

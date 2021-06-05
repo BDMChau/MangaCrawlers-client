@@ -7,7 +7,7 @@ import ListVersion02 from '../../components/List/ListVersion02/ListVersion02';
 
 const { TabPane } = Tabs;
 
-export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject, isLoading }) {
+export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject, isLoading, isLogin }) {
 
     const renderProjects = () => (
         <Row justify={"center"} className="projects">
@@ -18,9 +18,17 @@ export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNe
     return (
         <Row justify={"center"} className="transgrouppage-row1">
             <div key={transGrInfo.transgroup_id} className="trans-group-title">
+                {
+                    isLogin
+                        ? <div style={{ display: "flex", flexDirection: "column", marginLeft: "15px" }} >
+                            <Typography.Text style={{ color: "#FF4D4F", }} >Maybe you haven't created your own team</Typography.Text>
+                            <Typography.Text style={{ color: "#FF4D4F" }} >Or if you already have a team, please login again before visit this page!</Typography.Text>
+                        </div>
+                        : ""
+                }
                 <Typography.Title style={{ marginBottom: "0" }} level={4} >{transGrInfo.transgroup_name}</Typography.Title>
                 <Typography.Text >{transGrInfo.transgroup_email}</Typography.Text>
-                <Typography.Text >{transGrInfo.transgroup_desc}Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsu</Typography.Text>
+                <Typography.Text >{transGrInfo.transgroup_desc}</Typography.Text>
             </div>
 
             <Tabs defaultActiveKey="projects" className="transgrouppage-tabs">

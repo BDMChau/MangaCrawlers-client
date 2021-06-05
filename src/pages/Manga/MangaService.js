@@ -37,7 +37,6 @@ function MangaService() {
         setFromRow(0);
         setComments([]);
         getCmtsManga();
-        getCmtsManga();
 
         smoothscroll.polyfill();
         window.scroll({
@@ -246,7 +245,7 @@ function MangaService() {
                     comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
                 });
 
-                setComments(prevCmts => [...prevCmts, ...comments])
+                setComments(comments)
                 setFromRow(fromRow + 11)
             }
 

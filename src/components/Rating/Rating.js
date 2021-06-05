@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Rate, Typography } from 'antd';
 import "./Rating.css";
 
-function Rating({ stars, handleRatingManga }) {
+function Rating({ stars, handleRatingManga, hideText }) {
     const [hoverVal, setHoverVal] = useState(undefined);
     const [customText, setCustomText] = useState({
         text: "",
@@ -58,7 +58,11 @@ function Rating({ stars, handleRatingManga }) {
                     color: customText.color,
                 }}
             >
-                {customText.text}
+                {
+                    hideText
+                        ? ""
+                        : customText.text
+                }
             </Typography.Text>
         </div>
     )

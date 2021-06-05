@@ -34,7 +34,13 @@
   cursor: pointer;
 }
 
+.list-following .item .item-img .ant-image.ant-image-error {
+  width: 100%;
+  height: 180px;
+}
+
 .list-following .item .item-img .img {
+  width: 100%;
   height: 180px;
 }
 
