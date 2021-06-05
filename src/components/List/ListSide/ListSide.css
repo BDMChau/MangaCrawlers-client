@@ -8,6 +8,20 @@
   border-radius: 3px;
 }
 
+.list-side::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list-side::-webkit-scrollbar-track {
+  background:blue;
+}
+
+.list-side::-webkit-scrollbar-thumb {
+  border-radius: 50%;
+  background:red;
+}
+
+
 .list-side-item {
   list-style: none;
   margin: 5px 0px;
