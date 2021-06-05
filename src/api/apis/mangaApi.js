@@ -22,9 +22,13 @@ const mangaApi = {
         const url = '/api/manga/findmangafromgenre' // fix this to get method
         return axiosClient.post(url, data)
     },
-    setTreding: (data) => {
-        const url = '/api/manga/findmangafromgenre'
-        return axiosClient.post(url, data)
+    getTredingDaily: () => {
+        const url = '/api/manga/getdaily'
+        return axiosClient.get(url)
+    },
+    getSuggestionList: () => {
+        const url = '/api/manga/getsuggestion'
+        return axiosClient.get(url)
     },
     search: (data) => {
         const url = '/api/manga/searchmangas'
@@ -33,7 +37,7 @@ const mangaApi = {
     getComments: (data) => {
         const url = '/api/manga/getcommentsmanga'
         return axiosClient.post(url, data)
-    }, 
+    },
     searchMangasByGenres: (data) => {
         const url = '/api/manga/advancedsearch'
         return axiosClient.post(url, data)

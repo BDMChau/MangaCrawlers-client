@@ -17,6 +17,7 @@ function Manga({
     manga,
     genres,
     chapters,
+    suggestionList,
     addToFollowingManga,
     removeFollowingManga,
     isLoading,
@@ -198,7 +199,7 @@ function Manga({
                             <div className="favorite-suggest">
                                 <h3>You may also like</h3>
 
-                                <ListSide listData={listChapters} height={"415px"} />
+                                <ListSide mangas={suggestionList} height={"415px"} />
                             </div>
                         </Col>
 

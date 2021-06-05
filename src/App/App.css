@@ -3,6 +3,9 @@
   --color-one: #c9cacc;
 }
 
+.ant-layout{
+  background: none !important;
+}
 
 /* .app{
   height: 100%;

@@ -19,6 +19,7 @@
 
 .manga-body {
   background: #f0f2f5;
+  padding-bottom: 40px;
   width: 100%;
   box-shadow: 0 0 5px 0px var(--color-box-shadow);
 }

@@ -5,7 +5,14 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-function CarouselHorizontal({ itemsShow, isCenter, arrows, autoplaySpeed, isPadding}) {
+function CarouselHorizontal({
+    data,
+    itemsShow,
+    isCenter,
+    arrows,
+    autoplaySpeed,
+    isPadding
+}) {
 
     // 10 is data.length when we have real data
     const randomInitSlide = Math.floor((Math.random() * 10) + 1);

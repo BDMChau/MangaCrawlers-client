@@ -14,6 +14,8 @@ function MangaService() {
     const [genres, setGenres] = useState([]);
     const [chapters, setChapters] = useState([]);
     const [weeklyMangas, setWeeklyMangas] = useState([]);
+    const [suggestionList, setSuggestionList] = useState([]);
+    
     const [isFollowed, setIsFollowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
@@ -30,10 +32,11 @@ function MangaService() {
 
     useEffect(() => {
         getMangaData();
-        getWeeklyTopMangas();
+        getSuggestionList();
 
         setFromRow(0);
         setComments([]);
+        getCmtsManga();
         getCmtsManga();
 
         smoothscroll.polyfill();
@@ -42,6 +45,10 @@ function MangaService() {
             behavior: "smooth"
         });
     }, [id])
+
+    useEffect(() => {
+        getWeeklyTopMangas();
+    }, [])
 
 
     const getMangaData = async () => {
@@ -87,7 +94,22 @@ function MangaService() {
                 return;
             }
 
-            setWeeklyMangas(response.content.data)
+            setWeeklyMangas(response.content.list_weekly)
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getSuggestionList = async () => {
+        try {
+            const response = await mangaApi.getSuggestionList();
+            if (response.content.err) {
+                return;
+            }
+
+            setSuggestionList(response.content.suggestion_list)
+            console.log(response.content.suggestion_list)
             return;
         } catch (error) {
             console.log(error);
@@ -241,6 +263,7 @@ function MangaService() {
                 manga={manga}
                 genres={genres}
                 chapters={chapters}
+                suggestionList={suggestionList}
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}

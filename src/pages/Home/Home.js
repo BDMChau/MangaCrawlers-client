@@ -10,28 +10,42 @@ import Spacing from '../../components/Spacing/Spacing'
 
 const ListHomePagination = React.lazy(() => import('../../components/List/ListHomePagination/ListHomePagination'))
 
-export default function Home({latestMangas, topMangas, weeklyMangas, searchResults, onSearch, isLoadingSearch}) {
+export default function Home({
+    latestMangas,
+    topMangas,
+    weeklyMangas,
+    dailyMangas,
+    searchResults,
+    onSearch,
+    isLoadingSearch,
+}) {
 
     return (
         <div className="home">
             <div className="home-bg">
                 <div className="home-bg-img"
-                    //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
+                //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
                 >
-                <CarouselHorizontal itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
+                    <CarouselHorizontal itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
                 </div>
             </div>
             <div className="home-middle-wrap">
                 <Row justify={"center"} className="home-middle-header">
-                    <HomeNavbar 
-                        searchResults={searchResults} 
-                        onSearch={(val) => onSearch(val)} 
+                    <HomeNavbar
+                        searchResults={searchResults}
+                        onSearch={(val) => onSearch(val)}
                         isLoadingSearch={isLoadingSearch}
                     />
 
                     <Col span={23} md={21} xl={17} xxl={21} className="trending">
-                    <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}><h2>Trending Manga</h2></Divider>
-                        <CarouselHorizontal isCenter={false} arrows={true} autoplaySpeed={6000} isPadding={true} />
+                        <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}><h2>Trending Manga</h2></Divider>
+                        <CarouselHorizontal
+                            data={dailyMangas}
+                            isCenter={false}
+                            arrows={true}
+                            autoplaySpeed={6000}
+                            isPadding={true}
+                        />
                     </Col>
 
                     <Col span={23} md={20} xl={17} xxl={21} className="home-spacing-top">
