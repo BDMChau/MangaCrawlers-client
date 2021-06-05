@@ -16,7 +16,7 @@
   height: 270px;
   margin: 5px 15px 10px 0px;
   border-radius: 3px;
-  box-shadow: 0 0 10px 0px var(--color-box-shadow);
+  box-shadow: 1px 1px 10px 0px var(--color-box-shadow);
 }
 
 .latest-cards .card .ant-card-cover {

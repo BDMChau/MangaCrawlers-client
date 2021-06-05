@@ -1,18 +1,19 @@
 .loading-circle {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-circle .circle {
-  color: #52606fc7;
-}
-
-.loading-circle .circle svg {
-  color: transparent;
-  border-radius: 50px;
-  border: 3px solid #75808d;
-  border-bottom: none;
-  border-top: none;
-}
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading-circle .circle {
+    color: #52606fc7;
+  }
+  
+  .loading-circle .circle svg {
+    color: transparent;
+    border-radius: 50px;
+    border: 3px solid #75808d;
+    border-bottom: none;
+    border-top: none;
+  }
+  

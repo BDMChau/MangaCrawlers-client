@@ -10,6 +10,8 @@ function HomeService() {
     const [topMangas, setTopMangas] = useState([])
     const [weeklyMangas, setWeeklyMangas] = useState([])
     const [dailyMangas, setDailyMangas] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+
     const [searchResults, setSearchResults] = useState([])
     const typingRef = useRef(null);
 
@@ -74,13 +76,16 @@ function HomeService() {
     }
 
     const getTredingDailyManga = async () => {
+        setIsLoading(true);
         try {
             const response = await mangaApi.getTredingDaily();
             if (response.content.err) {
+                setIsLoading(false)
                 return;
             }
 
             setDailyMangas(response.content.list_daily)
+            setIsLoading(false)
             return;
         } catch (error) {
             console.log(error);
@@ -126,6 +131,7 @@ function HomeService() {
             topMangas={topMangas}
             weeklyMangas={weeklyMangas}
             dailyMangas={dailyMangas}
+            isLoading={isLoading}
             
             searchResults={searchResults}
             onSearch={(val) => onSearch(val)}

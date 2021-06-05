@@ -15,6 +15,8 @@ export default function Home({
     topMangas,
     weeklyMangas,
     dailyMangas,
+    isLoading,
+
     searchResults,
     onSearch,
     isLoadingSearch,
@@ -26,7 +28,7 @@ export default function Home({
                 <div className="home-bg-img"
                 //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
                 >
-                    <CarouselHorizontal itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
+                    <CarouselHorizontal data={[]} itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
                 </div>
             </div>
             <div className="home-middle-wrap">
@@ -41,6 +43,7 @@ export default function Home({
                         <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}><h2>Trending Manga</h2></Divider>
                         <CarouselHorizontal
                             data={dailyMangas}
+                            isLoading={isLoading}
                             isCenter={false}
                             arrows={true}
                             autoplaySpeed={6000}
