@@ -21,8 +21,9 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
             ? <Menu>
                 {
                     chapters.map((chapter, i) => (
-                        <Menu.Item key={i}>
-                            <Typography.Text>{chapter.chapter_name}</Typography.Text>
+                        <Menu.Item key={i} className="chapter-item-upload-page">
+                            <Typography.Text className="name">{chapter.chapter_name}</Typography.Text>
+                            <Typography.Text className="time">{chapter.createdAt}</Typography.Text>
                         </Menu.Item>
                     ))
                 }

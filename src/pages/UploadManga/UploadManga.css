@@ -158,6 +158,21 @@
   height: 30px;
 }
 
+
+.chapter-item-upload-page{
+  display: flex;
+  justify-content: space-between;
+}
+
+.chapter-item-upload-page .name{
+  max-width: 450px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
 /* //////// */
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .title-upload-page .text {
@@ -176,6 +191,17 @@
     margin: 0 auto;
   }
 
+  .uploader .ant-upload.ant-upload-drag {
+    width: 100%;
+  }
+  .uploader .uploader-submit{
+    width: 100%;
+  }
+
+  .uploader .input-chapter-name{
+    width: 100%;
+  }
+
   .upload-form .chapter-dropdown {
     width: 250px;
   }
@@ -183,29 +209,24 @@
   .upload-form .uploader {
     width: 250px;
   }
+
+  .chapter-item-upload-page .name{
+    max-width: 135px;
+  }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1400px) {
   .upload-form
     .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
     width: 296px;
   }
-}
 
-@media only screen and (min-width: 375px) and (max-width: 414px) {
-  .uploader .ant-upload.ant-upload-drag {
-    width: 100%;
-  }
-  .uploader .uploader-submit{
-    width: 100%;
-  }
-
-  .uploader .input-chapter-name{
-    width: 100%;
+  .chapter-item-upload-page .name{
+    max-width: 250px;
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1600px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
   .uploader .ant-upload.ant-upload-drag {
     width: 70%;
   }
@@ -216,5 +237,9 @@
 
   .uploader .input-chapter-name{
     width: 70%;
+  }
+
+  .chapter-item-upload-page .name{
+    max-width: 200px;
   }
 }
