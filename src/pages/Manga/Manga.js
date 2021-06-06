@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
-import { Col, Row, Button, Typography, Tag, Tooltip } from 'antd';
+import { Col, Row, Button, Typography, Tag, Tooltip, Image } from 'antd';
 import ListSide from '../../components/List/ListSide/ListSide';
 import ListChapters from '../../components/List/ListChapters/ListChapters';
 import Rating from '../../components/Rating/Rating';
@@ -72,17 +72,18 @@ function Manga({
         <div className="manga" key={manga.manga_id}>
             <Row justify={'center'}>
                 <div className="manga-bg">
-                    <div className="manga-bg-img"
-                        style={{ backgroundImage: `url(${manga.thumbnail})` }}
-                    >
+                    <div
+                        className="manga-bg-img"
+                        style={{ backgroundImage: `url(${manga.thumbnail})` }}>
                     </div>
                 </div>
             </Row>
+
             <Row justify={"center"} className="manga-body-row">
                 <Col span={23} md={17} xxl={19} className="manga-body">
                     <Row justify={"center"} className="header">
                         <Col className="thumbnail">
-                            <img className="thumbnail-img" src={manga.thumbnail} alt="" />
+                            <Image preview={false} className="thumbnail-img" src={manga.thumbnail} alt="" />
                         </Col>
                         <Col md={13} lg={12} sm={4} xs={20} xxl={15} className="title">
                             <div className="name">
@@ -172,7 +173,7 @@ function Manga({
                                 chapters={chapters}
                                 mangaId={manga.manga_id}
                                 height={"400px"}
-                                // addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
+                            // addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
                             />
                         </Col>
 

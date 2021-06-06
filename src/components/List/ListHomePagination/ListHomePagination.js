@@ -74,7 +74,8 @@ function ListHomePagination({ mangas }) {
                             <NavLink to={`/manga/${manga.manga_id}`}>
                                 <Card id={manga.manga_id}
                                     className="card"
-                                    hoverable cover={< div className="manga-img"
+                                    hoverable
+                                     cover={< div className="manga-img"
                                         alt="example"
                                         style={
                                             { backgroundImage: `url(${manga.thumbnail})` }

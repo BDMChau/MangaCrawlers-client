@@ -49,8 +49,7 @@ function ListSide({ mangas, height }) {
                         >
                             <div className="item-img" >
                                 <div className="img"
-                                    style={
-                                        { backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
+                                    style={{ backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
                             <div className="item-title" >
                                 <Typography.Text > {manga.manga_name} </Typography.Text>
                                 <Typography.Text > {manga.views ? manga.views : 0} views </Typography.Text>

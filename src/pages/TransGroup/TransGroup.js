@@ -34,6 +34,9 @@ export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNe
             <Tabs defaultActiveKey="projects" className="transgrouppage-tabs">
                 <TabPane tab="Your Projects" key="projects">
                     {renderProjects()}
+                    <div className="table-members">
+                        
+                    </div>
                 </TabPane>
 
                 <TabPane tab="New Project" key="newproject">
