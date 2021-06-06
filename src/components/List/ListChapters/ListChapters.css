@@ -19,11 +19,11 @@
 
 .list-chapter::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  background: RGB(150, 150, 150);
+  background: RGB(200, 200, 200);
 }
 
 .list-chapter::-webkit-scrollbar-thumb:hover {
-  background: RGB(140, 140, 140);
+  background: RGB(190, 190, 190);
 }
 
 
