@@ -40,12 +40,13 @@
   border-color: rgb(230, 230, 230);
 }
 
-.searching-page .search-btn {
+.searching-page button.search-btn {
   top: 0px;
   background: whitesmoke;
   width: 80px;
   border-radius: 2px;
   margin-left: 3px;
+  padding: 0;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {

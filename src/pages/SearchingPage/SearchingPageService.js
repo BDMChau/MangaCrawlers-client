@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import genreApi from '../../api/apis/genreApi';
 import mangaApi from '../../api/apis/mangaApi';
 import { message_error } from '../../components/notifications/message';
 import SearchingPage from './SearchingPage';
+import { SET_MANGA_SEARCHED_BY_GENRES } from "../../store/slices/MangaSlice";
 
 export default function SearchingPageService() {
+    const dispatch = useDispatch()
+
     const [data, setData] = useState([]);
     const [dataName, setDataName] = useState([]);
     const [dataIds, setDataIds] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
 
@@ -58,7 +63,8 @@ export default function SearchingPageService() {
     }
 
     const handleGetMangasAndRedirectToResultPage = async () => {
-        if (dataIds) {
+        if (dataIds.length) {
+            setIsLoading(true)
             const data = {
                 genres_id: dataIds
             }
@@ -67,24 +73,35 @@ export default function SearchingPageService() {
                 const response = await mangaApi.searchMangasByGenres(data);
                 console.log("mangasGenres: ", response)
 
-                if (response.content.msg === "Manga not found!last") {
+                if (response.content.err === "Manga not found") {
                     message_error("No manga with these genres :(", 4)
                 } else {
+                    const arrData = [];
+                    arrData.push(response.content.mangas)
+                    arrData.push(response.content.genres)
+
+                    dispatch(SET_MANGA_SEARCHED_BY_GENRES(arrData))
                     history.push(`/manga/genres/tag?v=${dataIds}`)
                 }
 
+                setIsLoading(false)
                 return;
             } catch (ex) {
                 console.log(ex)
             }
+        } else {
+            message_error("Nothing to search!", 3);
+            setIsLoading(false)
         }
     }
 
 
     return (
         <div>
-            <SearchingPage data={data}
+            <SearchingPage
+                data={data}
                 dataName={dataName}
+                isLoading={isLoading}
                 handleClickTag={(genre) => handleClickTag(genre)}
                 handleGetMangasAndRedirectToResultPage={() => handleGetMangasAndRedirectToResultPage()}
             />

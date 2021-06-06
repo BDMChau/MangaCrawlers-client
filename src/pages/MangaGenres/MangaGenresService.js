@@ -3,16 +3,27 @@ import MangaGenres from './MangaGenres'
 import { useLocation } from 'react-router'
 import mangaApi from '../../api/apis/mangaApi';
 import { message_error } from '../../components/notifications/message';
+import { useSelector } from 'react-redux';
 
 
 export default function MangaGenresService() {
+    const mangaState = useSelector((state) => state.mangaState)
     const [mangas, setMangas] = useState([]);
     const [genres, setGenres] = useState([]);
     const query = new URLSearchParams(useLocation().search);
 
     useEffect(() => {
-        console.log(query.get("v"))
-        handleGetMangas();
+        // if dont have data from search page >> user can enter url directly to visit this page, so we will call api when user do that
+        if (!mangaState[1]) {
+            handleGetMangas();
+        } else {
+            const mangas = mangaState[1][0];
+            const genres = mangaState[1][1];
+
+            setMangas(mangas)
+            setGenres(genres)
+        }
+        return;
     }, [])
 
 
@@ -34,7 +45,6 @@ export default function MangaGenresService() {
 
             setMangas(response.content.mangas)
             setGenres(response.content.genres)
-
         } catch (ex) {
             console.log(ex)
         }

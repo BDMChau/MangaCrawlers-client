@@ -3,21 +3,23 @@
   --color-one: #c9cacc;
 }
 
-.ant-layout{
+.ant-layout {
   background: none !important;
 }
 
-
 :root::-webkit-scrollbar {
-  width: 12px;
+  width: 15px;
 }
 
 :root::-webkit-scrollbar-track {
-  background:blue;
+  background: RGB(241, 241, 241);
 }
 
 :root::-webkit-scrollbar-thumb {
-  border-radius: 50%;
-  background:red;
+  border-radius: 50px;
+  background: RGB(168, 168, 168);
 }
 
+:root::-webkit-scrollbar-thumb:hover {
+  background: RGB(130, 130, 130);
+}

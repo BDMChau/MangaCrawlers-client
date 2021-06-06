@@ -10,17 +10,22 @@
 }
 
 .list-chapter::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 .list-chapter::-webkit-scrollbar-track {
-  background:blue;
+  background: rgb(240,242,245);
 }
 
 .list-chapter::-webkit-scrollbar-thumb {
-  border-radius: 50%;
-  background:red;
+  border-radius: 50px;
+  background: RGB(150, 150, 150);
 }
+
+.list-chapter::-webkit-scrollbar-thumb:hover {
+  background: RGB(140, 140, 140);
+}
+
 
 .list-chapter-item {
   list-style: none;

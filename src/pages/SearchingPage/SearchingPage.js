@@ -1,9 +1,9 @@
 import React from 'react'
 import { Col, Row, Select, Tag, Typography, Button, Tooltip } from 'antd'
 import "./SearchingPage.css"
+import { SearchOutlined } from "@ant-design/icons"
 
-
-export default function SearchingPage({ data, dataName, handleClickTag, handleGetMangasAndRedirectToResultPage }) {
+export default function SearchingPage({ data, dataName, isLoading, handleClickTag, handleGetMangasAndRedirectToResultPage }) {
 
 
 
@@ -23,7 +23,12 @@ export default function SearchingPage({ data, dataName, handleClickTag, handleGe
                 >
                 </Select>
 
-                <Button className="search-btn" onClick={() => handleGetMangasAndRedirectToResultPage()}>
+                <Button
+                    className="search-btn"
+                    onClick={() => handleGetMangasAndRedirectToResultPage()}
+                    loading={isLoading}
+                    icon={<SearchOutlined />}
+                >
                     Search
                 </Button>
 
