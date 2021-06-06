@@ -60,7 +60,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
                             okText="Yes"
                             cancelText="No"
                         >
-                             <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
+                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
                         </Popconfirm>
                     </Space>
                 </div>

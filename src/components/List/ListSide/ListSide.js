@@ -23,9 +23,7 @@ function ListSide({ mangas, height }) {
             style={
                 { height: isLoading ? "415px" : height }} > {
                 data.length === 0 ?
-                    < div key="1"
-                        style={
-                            { marginTop: "20px" }} >
+                    <div key="1" style={{ marginTop: "20px" }}>
                         <SkeletonCustom paragraphRows={1}
                             avatarShape={"square"}
                         />
@@ -42,13 +40,12 @@ function ListSide({ mangas, height }) {
                             avatarShape={"square"}
                         />
                     </div>
-
                     :
                     data.map((manga, i) => (
                         <NavLink
+                            key={i}
                             to={`/manga/${manga.manga_id}`}
                             className="list-side-item"
-                            key={i}
                         >
                             <div className="item-img" >
                                 <div className="img"

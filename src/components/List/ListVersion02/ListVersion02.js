@@ -1,8 +1,9 @@
-import { Col, Empty, Image, List, Typography } from 'antd'
+import { Button, Col, Empty, Image, List, Popconfirm, Typography } from 'antd'
 import React from 'react'
 import "./ListVersion02.css"
 import Rating from "../../Rating/Rating"
 import { NavLink } from 'react-router-dom'
+import { DeleteOutlined } from "@ant-design/icons"
 
 export default function ListVersion02({ mangas }) {
     // const [pageSize, setPageSize] = useState(9)
@@ -28,18 +29,18 @@ export default function ListVersion02({ mangas }) {
                 dataSource={mangas}
                 footer={false}
                 renderItem={manga => (
-                    <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item">
-                        <div className="item-img">
+                    <div className="item">
+                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item-img">
                             <Image
                                 className="img"
                                 src={manga.thumbnail}
                                 alt=""
                                 preview={false}
                             />
-                        </div>
+                        </NavLink>
                         <div className="item-title">
                             <div className="item-manga">
-                                <Typography.Title className="manga-name" level={5} style={{ cursor: "pointer" }} title={manga.manga_name} >{manga.manga_name}</Typography.Title>
+                                <Typography.Title className="manga-name" level={5} title={manga.manga_name} >{manga.manga_name}</Typography.Title>
                                 <Typography.Text className="author-name" title={manga.author}>{manga.author}</Typography.Text>
                                 <Typography.Text title="views">{manga.views ? manga.views : 0} view(s)</Typography.Text>
                                 <Typography.Text title="status" style={{ color: manga.status === "Completed" ? "#52c41a" : "#189cfc" }}>
@@ -48,6 +49,18 @@ export default function ListVersion02({ mangas }) {
                                 <div style={{ pointerEvents: "none" }} >
                                     <Rating stars={manga.stars} hideText={true} />
                                 </div>
+
+                                <div className="item-action" style={{ marginTop: "10px" }}>
+                                    <Popconfirm
+                                        title="Are you sure to remove this manga?"
+                                        // onConfirm={confirm}
+                                        onCancel={"cancel"}
+                                        okText="Remove"
+                                        cancelText="Cancle"
+                                    >
+                                        <Button type="default" icon={<DeleteOutlined />} style={{ borderRadius: "50%" }} ></Button>
+                                    </Popconfirm>
+                                </div>
                             </div>
 
                             <div className="item-chapter">
@@ -55,7 +68,7 @@ export default function ListVersion02({ mangas }) {
                                 <Typography.Text style={{ fontStyle: "italic" }} className="created-at" >{manga.createdAt ? manga.createdAt : ""}</Typography.Text>
                             </div>
                         </div>
-                    </NavLink>
+                    </div>
                 )}
             />
             : <Empty
