@@ -27,26 +27,26 @@
   box-shadow: none;
 }
 
-
 /* /////////////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
- 
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .scroll-top-btn {
-    width: 55px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     position: fixed;
     top: 88%;
     right: 10%;
+  }
+
+  .scroll-top-btn span.anticon.anticon-up {
+    margin-left: -3px;
   }
 }

@@ -12,6 +12,7 @@ export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
     const [transGrInfo, setTransGrInfo] = useState({})
     const [mangas, setMangas] = useState([])
+    const [users, setUsers] = useState([])
     const [genres, setGenres] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
@@ -62,6 +63,7 @@ export default function TransGroupService() {
             console.log(response.content.msg)
             setTransGrInfo(response.content.trans_group)
             setMangas(response.content.list_manga)
+            setUsers(response.content.list_user)
             setIsLogin(false);
             return;
         } catch (ex) {
@@ -116,6 +118,7 @@ export default function TransGroupService() {
         <TransGroup
             transGrInfo={transGrInfo}
             mangas={mangas}
+            users={users}
             genres={genres}
 
             handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}

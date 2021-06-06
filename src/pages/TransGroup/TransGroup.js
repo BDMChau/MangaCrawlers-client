@@ -1,13 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./TransGroup.css"
-import { Row, Typography, Tabs } from 'antd';
+import { Row, Typography, Tabs, Table, Col } from 'antd';
 import FormCreateProject from '../../components/Form/FormCreateProject/FormCreateProject';
 import ListVersion02 from '../../components/List/ListVersion02/ListVersion02';
+import columns from './ColumnsTableMembers';
 
 
 const { TabPane } = Tabs;
 
-export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNewProject, isLoading, isLogin }) {
+export default function TransGroup({
+    transGrInfo,
+    mangas,
+    users,
+    genres,
+    handleCreateNewProject,
+    isLoading,
+    isLogin
+}) {
 
     const renderProjects = () => (
         <Row justify={"center"} className="projects">
@@ -34,9 +43,15 @@ export default function TransGroup({ transGrInfo, mangas, genres, handleCreateNe
             <Tabs defaultActiveKey="projects" className="transgrouppage-tabs">
                 <TabPane tab="Your Projects" key="projects">
                     {renderProjects()}
-                    <div className="table-members">
-                        
-                    </div>
+                    <Col xs={24} sm={20} md={20} xxl={14} className="table-members">
+                        <Typography.Title level={4} >Members</Typography.Title>
+                        <Table
+                            className="members-table"
+                            columns={columns}
+                            dataSource={users}
+                            pagination={true}
+                        />
+                    </Col>
                 </TabPane>
 
                 <TabPane tab="New Project" key="newproject">

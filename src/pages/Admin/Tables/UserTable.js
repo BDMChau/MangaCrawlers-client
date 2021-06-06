@@ -67,6 +67,8 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             ),
         },
     ];
+
+    
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
             <div style={{ display: "flex" }}>
