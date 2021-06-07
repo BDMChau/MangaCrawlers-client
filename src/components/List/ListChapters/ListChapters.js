@@ -30,6 +30,7 @@ function ListChapters({ chapters, mangaId, height }) {
                     ? chapters.map((chapter, i) => (
                         <NavLink
                             key={i}
+                            title={chapter.chapter_name}
                             className="list-chapter-item" id={chapter.chapter_id}
                             to={`/chapter/${mangaId}/${chapter.chapter_id}`}
                             onClick={() => goToChapterPage(chapter.chapter_id)} >

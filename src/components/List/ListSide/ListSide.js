@@ -42,19 +42,20 @@ function ListSide({ mangas, height }) {
                     </div>
                     :
                     data.map((manga, i) => (
-                        <NavLink
-                            key={i}
-                            to={`/manga/${manga.manga_id}`}
-                            className="list-side-item"
-                        >
-                            <div className="item-img" >
-                                <div className="img"
-                                    style={{ backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
-                            <div className="item-title" >
-                                <Typography.Text > {manga.manga_name} </Typography.Text>
-                                <Typography.Text > {manga.views ? manga.views : 0} views </Typography.Text>
-                            </div>
-                        </NavLink>
+                            <NavLink
+                                key={i}
+                                title={manga.manga_name}
+                                to={`/manga/${manga.manga_id}`}
+                                className="list-side-item"
+                            >
+                                <div className="item-img" >
+                                    <div className="img"
+                                        style={{ backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
+                                <div className="item-title" >
+                                    <Typography.Text > {manga.manga_name} </Typography.Text>
+                                    <Typography.Text > {manga.views ? manga.views : 0} views </Typography.Text>
+                                </div>
+                            </NavLink>
                     ))
 
             } </ul >

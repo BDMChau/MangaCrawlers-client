@@ -36,7 +36,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
                                 className="searching-list"
                                 dataSource={searchResults}
                                 renderItem={manga => (
-                                    <List.Item id={manga.manga_id}>
+                                    <List.Item id={manga.manga_id} title={manga.manga_name}>
                                         <NavLink to={`/manga/${manga.manga_id}`} className="searching-item">
                                             <img className="img" src={manga.thumbnail} alt="" />
                                             <div className="text">

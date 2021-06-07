@@ -4,12 +4,12 @@
   overflow-y: auto;
   overflow-x: hidden;
   box-shadow: 0 0 2px 0px rgba(145, 145, 145, 0.616);
-  padding: 0 8px;
+  padding: 0 6px;
   border-radius: 3px;
 }
 
 .list-side::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 
 .list-side::-webkit-scrollbar-track {
@@ -18,13 +18,12 @@
 
 .list-side::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  background: RGB(168, 168, 168);
+  background: RGB(175, 175, 175);
 }
 
 .list-side::-webkit-scrollbar-thumb:hover {
-  background: RGB(130, 130, 130);
+  background: RGB(150, 150, 150);
 }
-
 
 .list-side-item {
   list-style: none;
@@ -46,12 +45,12 @@
   margin: 0px 0;
   list-style: none;
   padding: 0px 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .list-side-item .link {

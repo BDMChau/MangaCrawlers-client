@@ -54,7 +54,7 @@ function ListHomePagination({ mangas }) {
                     fontSizeIcon={"70px"}
                     fontSizeText={"17px"}
                 />
-                : <List 
+                : <List
                     itemLayout="vertical"
                     size="large"
                     pagination={
@@ -71,16 +71,20 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                            <NavLink to={`/manga/${manga.manga_id}`}>
+                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_id}`}>
                                 <Card id={manga.manga_id}
                                     className="card"
                                     hoverable
-                                     cover={< div className="manga-img"
-                                        alt="example"
-                                        style={
-                                            { backgroundImage: `url(${manga.thumbnail})` }
-                                        }
-                                    />} > <Meta
+                                    cover={
+                                        <div className="manga-img"
+                                            alt="example"
+                                            style={
+                                                { backgroundImage: `url(${manga.thumbnail})` }
+                                            }
+                                        />
+                                    }
+                                >
+                                    <Meta
                                         title={manga.manga_name}
                                         description={renderCardDesc(manga.chapter_name, manga.createdAt)}
                                     />

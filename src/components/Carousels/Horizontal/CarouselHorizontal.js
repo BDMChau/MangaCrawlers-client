@@ -17,7 +17,7 @@ function CarouselHorizontal({
     autoplaySpeed,
     isPadding
 }) {
-    
+
     const staticImgs = [
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594870/Mangaback/ed004b904fad8a61094f993eab787e05.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594492/Mangaback/93cc7694e5f3feb317d892a4c331c976.jpg",
@@ -86,7 +86,12 @@ function CarouselHorizontal({
                 : <Slider {...settings}>
                     {data.length
                         ? data.map((item, i) => (
-                            <NavLink to={`/manga/${item.manga_id}`} key={i} className={isPadding ? "slider-item" : "slider-item item2"} >
+                            <NavLink
+                                title={item.manga_name}
+                                to={`/manga/${item.manga_id}`}
+                                key={i}
+                                className={isPadding ? "slider-item" : "slider-item item2"}
+                            >
                                 <div className="item" style={{ backgroundImage: `url(${item.thumbnail})` }}>
                                 </div>
                             </NavLink>
