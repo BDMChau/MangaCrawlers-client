@@ -5,7 +5,7 @@ import Rating from "../../Rating/Rating"
 import { NavLink } from 'react-router-dom'
 import { DeleteOutlined } from "@ant-design/icons"
 
-export default function ListVersion02({ mangas }) {
+export default function ListVersion02({ mangas, disableActions }) {
     // const [pageSize, setPageSize] = useState(9)
 
     React.useEffect(() => {
@@ -50,17 +50,20 @@ export default function ListVersion02({ mangas }) {
                                     <Rating stars={manga.stars} hideText={true} />
                                 </div>
 
-                                <div className="item-action" style={{ marginTop: "10px" }}>
-                                    <Popconfirm
-                                        title="Are you sure to remove this manga?"
-                                        // onConfirm={confirm}
-                                        onCancel={"cancel"}
-                                        okText="Remove"
-                                        cancelText="Cancle"
-                                    >
-                                        <Button type="default" icon={<DeleteOutlined />} style={{ borderRadius: "50%" }} ></Button>
-                                    </Popconfirm>
-                                </div>
+                                {disableActions
+                                    ? ""
+                                    : <div className="item-action" style={{ marginTop: "10px" }}>
+                                        <Popconfirm
+                                            title="Are you sure to remove this manga?"
+                                            // onConfirm={confirm}
+                                            onCancel={"cancel"}
+                                            okText="Remove"
+                                            cancelText="Cancle"
+                                        >
+                                            <Button type="default" icon={<DeleteOutlined />} style={{ borderRadius: "50%" }} ></Button>
+                                        </Popconfirm>
+                                    </div>
+                                }
                             </div>
 
                             <div className="item-chapter">

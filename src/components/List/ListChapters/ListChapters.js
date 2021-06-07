@@ -13,7 +13,7 @@ function ListChapters({ chapters, mangaId, height }) {
     const goToChapterPage = () => {
         localStorage.setItem("mangaid", JSON.stringify(mangaId))
         dispatch(SET_MANGA_ID(mangaId))
-
+        
         return;
     }
 
