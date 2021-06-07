@@ -31,6 +31,11 @@
   font-weight: 500;
 }
 
+
+.transgrouppage-row1 .ant-tabs-content-holder{
+  overflow-x: hidden;
+}
+
 .ant-tabs-top > .ant-tabs-nav::before {
   border-bottom: none;
 }
