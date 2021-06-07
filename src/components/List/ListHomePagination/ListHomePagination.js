@@ -49,11 +49,13 @@ function ListHomePagination({ mangas }) {
     const renderLatestManga = () => {
         return (
             isLoading ?
-                <LoadingCircle width={"90%"}
-                    height="60%"
-                    fontSizeIcon={"70px"}
-                    fontSizeText={"17px"}
-                />
+                <div style={{ height: "300px" }} >
+                    <LoadingCircle width={"90%"}
+                        height="60%"
+                        fontSizeIcon={"70px"}
+                        fontSizeText={"17px"}
+                    />
+                </div>
                 : <List
                     itemLayout="vertical"
                     size="large"
