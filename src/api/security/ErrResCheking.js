@@ -21,9 +21,11 @@ export const errCodeResCheking = (errorResponse) => {
                     break;
 
                 default:
+                    message_error("Having a problem, please try again or contact administrator!")
                     break;
             }
             localStorage.setItem("code_400", JSON.stringify("BadRequest 400"))
+            console.error("BadRequest! 400")
             break;
 
         case 401:
@@ -35,7 +37,7 @@ export const errCodeResCheking = (errorResponse) => {
             break;
 
         case 403:
-            console.error("You are not allowed to access this resource! 403")
+            message_error("You are not allowed to do this action!", 3)
             break;
 
         default:

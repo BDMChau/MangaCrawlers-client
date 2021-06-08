@@ -15,6 +15,7 @@ export default function TransGroupService() {
     const [users, setUsers] = useState([])
     const [genres, setGenres] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [IsLoadingDelete, setIsLoadingDelete] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
 
     const history = useHistory();
@@ -22,6 +23,11 @@ export default function TransGroupService() {
 
     const cookies = new Cookies();
     const token = cookies.get("token");
+
+    // if (transGrInfo.transgroup_email === userState[0].user_email) {
+    //     message_error("You cannot delete yourself ~.~");
+    //     return;
+    // }
 
     useEffect(() => {
         if (!userState[0]) {
@@ -100,16 +106,51 @@ export default function TransGroupService() {
                 let formData = new FormData();
                 formData.append("file", img)
                 formData.append("manga_id", response.content.manga_id);
+
                 const response02 = await userApi.addNewProjectThumbnail(token, formData);
-                console.log(response02)
-                message_success("Upload new manga successfully!")
+
+                if(response02.content.msg){
+                    const newManga = response02.content.manga;
+                    newManga.createdAt =  dayjs(newManga.createdAt).format("DD-MM-YYYY");
+                    setMangas([...mangas, newManga]);
+                    
+                    message_success("Upload new manga successfully!")
+                }
+
             } else {
-                message_error(response.content.err);
+                message_error("Login again before visit this page, thank you ^^!");
             }
 
             setIsLoading(false);
+            return;
         } catch (ex) {
             console.log(ex)
+        }
+    }
+
+    const handleDeleteManga = async (mangaId) => {
+        if (transGrInfo) {
+            setIsLoadingDelete(true);
+            const data = {
+                manga_id: mangaId,
+                transgroup_id: transGrInfo.transgroup_id
+            }
+
+            try {
+                const response = await userApi.removeManga(token, data);
+
+                if(response.content.msg){
+                    const mangaIdRemoved = response.content.manga_id
+
+                    setMangas(mangas.filter(manga => manga.manga_id !== mangaIdRemoved));
+                    message_success("Removed this manga!");
+                }
+
+                setIsLoadingDelete(false);
+            } catch (ex) {
+                console.log(ex)
+            }
+
         }
     }
 
@@ -124,6 +165,9 @@ export default function TransGroupService() {
             handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
             isLoading={isLoading}
             isLogin={isLogin}
+
+            handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)}
+            IsLoadingDelete={IsLoadingDelete}
         />
     )
 }

@@ -26,8 +26,16 @@ const message_error = (text, durationSEC) => {
     });
 };
 
+const message_loading = (text, durationSEC) => {
+    message.loading({
+        content: text,
+        duration: durationSEC
+    });
+};
+
 export {
     message_success,
     message_error,
-    message_warning
+    message_warning,
+    message_loading
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./TransGroup.css"
-import { Row, Typography, Tabs, Table, Col } from 'antd';
+import { Row, Typography, Tabs, Table, Col, Spin } from 'antd';
 import FormCreateProject from '../../components/Form/FormCreateProject/FormCreateProject';
 import ListVersion02 from '../../components/List/ListVersion02/ListVersion02';
 import columns from './ColumnsTableMembers';
@@ -13,14 +13,18 @@ export default function TransGroup({
     mangas,
     users,
     genres,
+
     handleCreateNewProject,
     isLoading,
-    isLogin
+    isLogin,
+
+    handleDeleteManga,
+    IsLoadingDelete
 }) {
 
     const renderProjects = () => (
         <Row justify={"center"} className="projects">
-            <ListVersion02 mangas={mangas} />
+            <ListVersion02 mangas={mangas} handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)} IsLoadingDelete={IsLoadingDelete} />
         </Row>
     )
 
@@ -30,8 +34,8 @@ export default function TransGroup({
                 {
                     isLogin
                         ? <div style={{ display: "flex", flexDirection: "column", marginLeft: "15px" }} >
-                            <Typography.Text style={{ color: "#FF4D4F", }} >Maybe you haven't created your own team</Typography.Text>
-                            <Typography.Text style={{ color: "#FF4D4F" }} >Or if you already have a team, please login again before visit this page!</Typography.Text>
+                            <Typography.Text style={{ color: "#FF4D4F", }} >Did you just created this team, right?</Typography.Text>
+                            <Typography.Text style={{ color: "#FF4D4F" }} >Please login again before visit this page in the first time!</Typography.Text>
                         </div>
                         : ""
                 }
@@ -42,6 +46,13 @@ export default function TransGroup({
 
             <Tabs defaultActiveKey="projects" className="transgrouppage-tabs">
                 <TabPane tab="Your Projects" key="projects">
+                    <div style={{ textAlign: "center", marginTop: "3px", height: "40px" }}>
+                        {IsLoadingDelete
+                            ? <Spin size="large" />
+                            : ""
+                        }
+                    </div>
+
                     {renderProjects()}
                     <Col xs={24} sm={20} md={20} xxl={14} className="table-members">
                         <Typography.Title level={4} >Members</Typography.Title>

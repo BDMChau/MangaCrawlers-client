@@ -1,16 +1,17 @@
 import { Button, Col, Empty, Image, List, Popconfirm, Typography } from 'antd'
-import React from 'react'
+import React, {useEffect} from 'react'
 import "./ListVersion02.css"
 import Rating from "../../Rating/Rating"
 import { NavLink } from 'react-router-dom'
 import { DeleteOutlined } from "@ant-design/icons"
 
-export default function ListVersion02({ mangas, disableActions }) {
+export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDelete, disableActions }) {
     // const [pageSize, setPageSize] = useState(9)
 
-    React.useEffect(() => {
+    useEffect(() => {
         console.log(mangas)
     }, [mangas.length])
+    
 
     const renderMangas = () => (
         mangas.length
@@ -55,7 +56,7 @@ export default function ListVersion02({ mangas, disableActions }) {
                                     : <div className="item-action" style={{ marginTop: "10px" }}>
                                         <Popconfirm
                                             title="Are you sure to remove this manga?"
-                                            // onConfirm={confirm}
+                                            onConfirm={() => handleDeleteManga(manga.manga_id)}
                                             onCancel={"cancel"}
                                             okText="Remove"
                                             cancelText="Cancle"

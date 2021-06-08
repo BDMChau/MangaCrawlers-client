@@ -27,6 +27,7 @@ const userApi = {
             }
         })
     },
+    ////////////////// translation group
     registerTranslationGroup: (token, data) => {
         const url = '/api/user/signuptransgroup'
         return axiosClient.post(url, data, {
@@ -75,6 +76,23 @@ const userApi = {
             headers: {
                 Authorization: token
             }
+        })
+    },
+    getMangaInfo: (token, data) => {
+        const url = '/api/user/getmangainfo'
+        return axiosClient.post(url, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    removeManga: (token, data) => {
+        const url = '/api/user/deletemanga'
+        return axiosClient.delete(url, {
+            headers: {
+                Authorization: token
+            },
+            data
         })
     },
 }

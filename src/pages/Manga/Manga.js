@@ -29,29 +29,6 @@ function Manga({
 
     comments
 }) {
-    const [listChapters, setListChapter] = useState([
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-        "Chapter1: ",
-
-    ])
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
     const [chapterId01, setChapterId01] = useState("");
@@ -93,7 +70,13 @@ function Manga({
                             <div className="author">
                                 Author:
                             <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
-                                    {manga.author_name}
+                                    {manga.author_name ? manga.author_name : " Unknown"}
+                                </NavLink>
+                            </div>
+                            <div className="trans_group">
+                                Translated by:
+                            <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
+                                    {manga.transgroup_name ? manga.transgroup_name : " Unknown"}
                                 </NavLink>
                             </div>
 
