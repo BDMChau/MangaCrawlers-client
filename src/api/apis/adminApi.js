@@ -43,6 +43,24 @@ const adminApi = {
             data
         })
     },
+    removeManga: (token, data) => {
+        const url = '/api/admin/deletemanga'
+        return axiosClient.delete(url, {
+            headers: {
+                Authorization: token
+            },
+            data
+        })
+    },
+    removeTransGroup: (token, data) => {
+        const url = '/api/admin/deletetransgroup'
+        return axiosClient.delete(url, {
+            headers: {
+                Authorization: token
+            },
+            data
+        })
+    },
     getReportUser: (token) => {
         const url = '/api/admin/reportuser'
         return axiosClient.get(url, {

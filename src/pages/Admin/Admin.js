@@ -28,6 +28,8 @@ export default function Admin({
 
     handleDeprecateUser,
     handleRemoveUser,
+    handleRemoveManga,
+    handleRemoveTransGroup,
     isLoading,
 
 }) {
@@ -44,7 +46,7 @@ export default function Admin({
         } else {
             history.push("/");
         }
-    }, [userState[0].user_id])
+    }, [userState[0]])
 
 
     const renderUserStatistic = () => (
@@ -59,10 +61,13 @@ export default function Admin({
         </div>
     )
 
+
     const renderMangaStatistic = () => (
         <div>
             <MangaTable
                 mangas={mangas}
+                handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+                isLoading={isLoading}
             />
 
             <MangaChart reportManga={reportManga} />
@@ -71,7 +76,12 @@ export default function Admin({
 
     const renderTransGrStatistic = () => (
         <div>
-            <TransGrTable transGrs={transGrs} />
+            <TransGrTable
+                transGrs={transGrs}
+                handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
+                isLoading={isLoading}
+            />
+
             <TransGrChart reportTransGr={reportTransGr} />
         </div>
     )
@@ -81,7 +91,7 @@ export default function Admin({
         <div className="admin-page">
             <Row justify={"center"} className="admin-row1">
                 <Typography.Title level={3} className="admin-title">Administrator Page</Typography.Title>
-                
+
                 <Tabs defaultActiveKey="1" className="admin-tabs">
                     <TabPane tab="User Statistics" key="1">
                         {renderUserStatistic()}

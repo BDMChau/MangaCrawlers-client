@@ -3,10 +3,10 @@ import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Space, Col, Typography, Popconfirm, Image } from 'antd';
+import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 
-export default function MangaTable({ mangas }) {
+export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
 
 
     const columns = [
@@ -64,7 +64,7 @@ export default function MangaTable({ mangas }) {
                     <Space size="middle">
                         <Popconfirm
                             title="Are you sure to delete this account?"
-                            // onConfirm={() => handleRemoveManaga(manga.manga_id)}
+                            onConfirm={() => handleRemoveManga(manga.manga_id)}
                             onCancel={"cancel"}
                             okText="Yes"
                             cancelText="No"
@@ -79,7 +79,15 @@ export default function MangaTable({ mangas }) {
 
     return (
         <Col xxl={16} xs={23} sm={20} className="table-manga">
-            <Typography.Title level={3}>Manga</Typography.Title>
+            <div style={{ display: "flex" }}>
+                <Typography.Title level={3}>Manga</Typography.Title>
+                {
+                    isLoading
+                        ? <Button className="table-btn-loading" loading={isLoading}></Button>
+                        : ""
+                }
+            </div>
+
             <Table
                 className="manga-table"
                 columns={columns}

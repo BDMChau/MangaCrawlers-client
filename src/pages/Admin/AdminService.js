@@ -138,7 +138,6 @@ export default function AdminService() {
         }
     }
 
-
     const handleRemoveUser = async (userId) => {
         setIsLoading(true);
         const data = {
@@ -153,14 +152,9 @@ export default function AdminService() {
                 return;
             }
 
-            const allUsers = response.content.users;
+            const userIdRemoved = response.content.user_id;
+            setUsers(users.filter(user => user.user_id !== userIdRemoved));
 
-            setUsers([]);
-            allUsers.forEach(user => {
-                if (user.user_isAdmin === false) {
-                    setUsers(prevUser => [...prevUser, user]);
-                }
-            });
 
             message_success("Removed this account!", 3);
             setIsLoading(false);
@@ -170,6 +164,60 @@ export default function AdminService() {
             console.log(ex)
         }
     }
+
+    const handleRemoveManga = async (mangaId) => {
+        setIsLoading(true);
+        const data = {
+            manga_id: mangaId
+        }
+
+        try {
+            const response = await adminApi.removeManga(token, data);
+            console.log(response)
+            if (response.content.err) {
+                console.error("RemoveManga error!")
+                setIsLoading(false);
+                return;
+            }
+
+            const mangaIdRemoved = response.content.manga_id;
+            setMangas(mangas.filter(manga => manga.manga_id !== mangaIdRemoved));
+
+            message_success("Removed this manga!", 3);
+            setIsLoading(false);
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+
+    const handleRemoveTransGroup = async (transGrId) => {
+        setIsLoading(true);
+        const data = {
+            transgroup_id: transGrId
+        }
+
+        try {
+            const response = await adminApi.removeTransGroup(token, data);
+            console.log(response)
+            if (response.content.err) {
+                console.error("RemoveTransGroup error!")
+                setIsLoading(false);
+                return;
+            }
+
+            const transGrIdRemoved = response.content.transgroup_id;
+            setTransGrs(transGrs.filter(transGr => transGr.transgroup_id !== transGrIdRemoved));
+
+            message_success("Removed this translation Team!", 3);
+            setIsLoading(false);
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
 
     const getReportUser = async () => {
         try {
@@ -284,6 +332,8 @@ export default function AdminService() {
 
                 handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}
+                handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+                handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
                 isLoading={isLoading}
             />
         </div>

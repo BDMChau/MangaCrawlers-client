@@ -191,3 +191,29 @@ td.role-col {
     margin-left: 5px;
   }
 }
+
+.user-table::-webkit-scrollbar,
+.manga-table::-webkit-scrollbar,
+.trans-gr-table::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.user-table::-webkit-scrollbar-track,
+.manga-table::-webkit-scrollbar-track,
+.trans-gr-table::-webkit-scrollbar-track {
+  background: RGB(241, 241, 241);
+}
+
+.user-table::-webkit-scrollbar-thumb,
+.manga-table::-webkit-scrollbar-thumb,
+.trans-gr-table::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.user-table::-webkit-scrollbar-thumb:hover,
+.manga-table::-webkit-scrollbar-thumb:hover,
+.trans-gr-table::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}

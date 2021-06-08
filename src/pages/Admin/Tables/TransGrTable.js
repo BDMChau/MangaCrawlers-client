@@ -3,9 +3,9 @@ import "../Admin.css"
 import "./Tables.css"
 import "../Charts/Chart.css"
 
-import { Table, Space, Col, Typography, Popconfirm } from 'antd';
+import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
 
-export default function TransGrTable({ transGrs }) {
+export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {
     const columns = [
         {
             title: 'Team Name',
@@ -29,11 +29,11 @@ export default function TransGrTable({ transGrs }) {
         {
             title: 'Action',
             key: 'action',
-            render: (text, record) => (
+            render: (transgroup) => (
                 <Space size="middle">
                     <Popconfirm
                         title="Are you sure to delete this team?"
-                        onConfirm={"confirm"}
+                        onConfirm={() => handleRemoveTransGroup(transgroup.transgroup_id)}
                         onCancel={"cancel"}
                         okText="Yes"
                         cancelText="No"
@@ -47,7 +47,15 @@ export default function TransGrTable({ transGrs }) {
 
     return (
         <Col xxl={14} xs={23} sm={20} className="table-trans-gr">
-            <Typography.Title level={3}>Translation Team</Typography.Title>
+            <div style={{ display: "flex" }}>
+                <Typography.Title level={3}>Translation Team</Typography.Title>
+                {
+                    isLoading
+                        ? <Button className="table-btn-loading" loading={isLoading}></Button>
+                        : ""
+                }
+            </div>
+
             <Table
                 className="trans-gr-table"
                 columns={columns}
