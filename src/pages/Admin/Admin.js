@@ -80,8 +80,8 @@ export default function Admin({
     return (
         <div className="admin-page">
             <Row justify={"center"} className="admin-row1">
-
                 <Typography.Title level={3} className="admin-title">Administrator Page</Typography.Title>
+                
                 <Tabs defaultActiveKey="1" className="admin-tabs">
                     <TabPane tab="User Statistics" key="1">
                         {renderUserStatistic()}

@@ -23,3 +23,19 @@
   font-weight: 500;
   font-size: 16px;
 }
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .admin-page .admin-tabs{
+    max-width: 375px;
+  }
+
+  .admin-page .admin-tabs .ant-tabs-nav{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .admin-page .admin-tabs .ant-tabs-nav .ant-tabs-tab{
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+}

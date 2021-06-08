@@ -90,7 +90,10 @@
   background: white;
 }
 
-.admin-row1 .table-trans-gr .trans-gr-table .ant-table-pagination.ant-pagination {
+.admin-row1
+  .table-trans-gr
+  .trans-gr-table
+  .ant-table-pagination.ant-pagination {
   margin: 12px 10px 8px 0;
 }
 
@@ -175,5 +178,16 @@ td.role-col {
   .admin-row1 .table-manga .admin-manga th.ant-table-cell {
     padding: 5px 10px;
     font-size: 12px;
+  }
+
+  .admin-row1 .table-user .user-table,
+  .admin-row1 .table-admin .admin-table {
+    max-width: 374px;
+  }
+
+  .admin-row1 .table-admin,
+  .admin-row1 .table-user {
+    margin: 40px 0;
+    margin-left: 5px;
   }
 }
