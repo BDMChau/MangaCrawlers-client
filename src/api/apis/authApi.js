@@ -6,6 +6,10 @@ const authApi = {
         const url = '/api/auth/signin'
         return axiosClient.post(url, data)
     },
+    oauthGoogle: () => {
+        const url = '/api/auth/oauthgooglesignin'
+        return axiosClient.get(url)
+    },
 
     postDataSignUp: (data) => {
         const url = '/api/auth/signup'
@@ -25,8 +29,8 @@ const authApi = {
     requestchangepassword: (data) => {
         const url = '/api/auth/requestchangepass'
         return axiosClient.post(url, data)
-    }
-    ,
+    },
+
     verifyAccount: (data) => {
         const url = '/api/auth/confirmverification'
         return axiosClient.post(url, data)

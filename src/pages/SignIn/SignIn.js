@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
-import { LoginOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { LoginOutlined, CloseCircleOutlined, GoogleOutlined } from '@ant-design/icons';
 import { CLOSE_SIGN_IN_FORM } from '../../store/slices/AuthSlice';
 import { NavLink } from 'react-router-dom';
 
 
-export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) {
+export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseModal, errorMsg, isErr }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -135,7 +135,7 @@ export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) 
                                 Cancel
                             </Button>
                         </Form.Item>
-
+           
                         <Form.Item>
                             <div className="footer-form" >
                                 <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
@@ -145,6 +145,12 @@ export default function SignIn({ handleSignIn, isCloseModal, errorMsg, isErr }) 
                                     <NavLink to="/auth/forgotpassword">Forgot password?</NavLink>
                                 </div>
                             </div>
+
+                            <Button
+                                style={{ borderRadius: "3px", color: "#4a8fce", height:"42px", width:"42px", float:"right", marginRight:"40px" }}
+                                onClick={() => handleSignInWithGoogle()}
+                                icon={<GoogleOutlined style={{ fontSize: "24px", marginTop:"4px" }} />}
+                            />
                         </Form.Item>
                     </Form>
                 </div>

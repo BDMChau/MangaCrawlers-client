@@ -3,10 +3,11 @@ import SignIn from './SignIn'
 import authApi from '../../api/apis/authApi'
 import { errMsgResNotification } from '../../api/security/ErrResCheking';
 
-import { message_success } from '../../components/notifications/message';
+import { message_error, message_success } from '../../components/notifications/message';
 import { useDispatch } from 'react-redux';
 import { SIGNIN } from '../../store/slices/UserSlice';
 import Cookies from 'universal-cookie';
+import endPoint from '../../config/endPoint';
 
 
 export default function SignInService() {
@@ -59,11 +60,31 @@ export default function SignInService() {
     }
 
 
+    const handleSignInWithGoogle = async () => {
+        try {
+            const response = await authApi.oauthGoogle();
+            console.log(response)
+
+            if (response.content.msg) {
+                const url = endPoint.local + response.content.urls.Google
+                const win = window.open(url, "_blank");
+                win.focus();
+            } else{
+                message_error("Having a problem, please try another method to login!")
+            }
+            
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
 
     return (
         <div>
             <SignIn
                 handleSignIn={(email, password) => handleSignIn(email, password)}
+                handleSignInWithGoogle={() => handleSignInWithGoogle()}
                 isCloseModal={isCloseModal}
                 errorMsg={errorMsg}
                 isErr={isErr}
