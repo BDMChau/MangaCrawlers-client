@@ -46,7 +46,9 @@
 }
 
 
-.list-chapter-item:hover {
+.list-chapter-item:hover,
+.list-chapter-item:focus {
   background: #d5d6d777;
 }
+
 
