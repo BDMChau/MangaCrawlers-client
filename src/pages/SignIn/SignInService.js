@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { SIGNIN } from '../../store/slices/UserSlice';
 import Cookies from 'universal-cookie';
 import endPoint from '../../config/endPoint';
+import { NavLink } from 'react-router-dom';
 
 
 export default function SignInService() {
@@ -33,6 +34,10 @@ export default function SignInService() {
 
                     } else if (response.content.err === "Password does not match!") {
                         setErrorMsg("Wrong password!")
+                        setIsErr(true)
+                    } else if (response.content.err === "This user does not have password!") {
+                        setErrorMsg(`To create new password, click "Forgot password!" below!`)
+                        message_error("You account doesn't have password to login!", 4)
                         setIsErr(true)
                     } else {
                         setErrorMsg(response.content.err)
@@ -69,10 +74,10 @@ export default function SignInService() {
                 const url = endPoint.local + response.content.urls.Google
                 const win = window.open(url, "_blank");
                 win.focus();
-            } else{
+            } else {
                 message_error("Having a problem, please try another method to login!")
             }
-            
+
             return;
         } catch (ex) {
             console.log(ex)

@@ -7,7 +7,7 @@ const authApi = {
         return axiosClient.post(url, data)
     },
     oauthGoogle: () => {
-        const url = '/api/auth/oauthgooglesignin'
+        const url = '/api/auth/geturloauthgoogle'
         return axiosClient.get(url)
     },
 
