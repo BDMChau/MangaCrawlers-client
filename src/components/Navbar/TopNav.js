@@ -74,7 +74,7 @@ function TopNav({ handleLogOut, genres }) {
         } else {
             setIsUserSignIn(false);
         }
-    }, [userState])
+    }, [userState[0]])
 
     const showDrawer = () => {
         setState(true);

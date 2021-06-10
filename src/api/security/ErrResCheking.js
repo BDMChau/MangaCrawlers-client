@@ -22,6 +22,8 @@ export const errCodeResCheking = (errorResponse) => {
                 case "Request to login with Google is failed!":
                     message_error("Having a problem, please try another method to login!");
                     break;
+                case "Notthing from OAuth Google!":
+                    break;
 
                 default:
                     message_error("Having a problem, please try again or contact administrator!")

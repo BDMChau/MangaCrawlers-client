@@ -10,6 +10,10 @@ const authApi = {
         const url = '/api/auth/geturloauthgoogle'
         return axiosClient.get(url)
     },
+    getAAA: () => {
+        const url = '/api/auth/getdataoauthgoogle'
+        return axiosClient.get(url)
+    },
 
     postDataSignUp: (data) => {
         const url = '/api/auth/signup'

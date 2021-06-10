@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import SignIn from './SignIn'
 import authApi from '../../api/apis/authApi'
-import { errMsgResNotification } from '../../api/security/ErrResCheking';
 
 import { message_error, message_success } from '../../components/notifications/message';
 import { useDispatch } from 'react-redux';
 import { SIGNIN } from '../../store/slices/UserSlice';
 import Cookies from 'universal-cookie';
 import endPoint from '../../config/endPoint';
-import { NavLink } from 'react-router-dom';
 
 
 export default function SignInService() {
@@ -31,7 +29,6 @@ export default function SignInService() {
                     if (response.content.err === "Check email to verify the account!") {
                         setErrorMsg("Your account isn't verified or approved, check your email to confirm first!")
                         setIsErr(false)
-
                     } else if (response.content.err === "Password does not match!") {
                         setErrorMsg("Wrong password!")
                         setIsErr(true)
@@ -55,7 +52,7 @@ export default function SignInService() {
                 cookies.set("token", token, { path: '/' })
                 dispatch(SIGNIN(user));
 
-                message_success(response.content.msg);
+                message_success("Signed in!");
                 setIsCloseModal(true);
                 return;
             } catch (error) {

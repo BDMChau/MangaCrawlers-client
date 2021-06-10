@@ -3,8 +3,16 @@ import mangaApi from "../../api/apis/mangaApi"
 import Home from './Home'
 import dayjs from 'dayjs'
 import { debounce } from 'lodash'
+import authApi from '../../api/apis/authApi'
+import Cookies from 'universal-cookie';
+import { message_success } from '../../components/notifications/message'
+import { SIGNIN } from '../../store/slices/UserSlice';
+import { useDispatch, useSelector } from 'react-redux'
 
 function HomeService() {
+    const userState = useSelector((state) => state.userState);
+    const dispatch = useDispatch();
+
     const [isLoadingSearch, setIsLoadingSearch] = useState(false)
     const [latestMangas, setLatestMangas] = useState([])
     const [topMangas, setTopMangas] = useState([])
@@ -21,7 +29,12 @@ function HomeService() {
         getTopFiveMangas();
         getWeeklyTopMangas();
         getTredingDailyManga();
+
+        if(!userState[0]){
+            getUserDataOAuthGoogle();
+        }
     }, [])
+
 
     const getLatestMangas = async () => {
         try {
@@ -89,6 +102,27 @@ function HomeService() {
             return;
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    
+    const getUserDataOAuthGoogle = async () => {
+        try{
+            const response = await authApi.getAAA()
+            console.log(response)
+
+            const user = response.content.user;
+            const token = response.content.token;
+
+            const cookies = new Cookies();
+            cookies.set("user", user, { path: '/' });
+            cookies.set("token", token, { path: '/' })
+            dispatch(SIGNIN(user));
+
+            message_success("Signed in!");
+            return;
+        }catch(ex){
+            console.log(ex)
         }
     }
 
