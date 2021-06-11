@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router';
 import mangaApi from '../../api/apis/mangaApi';
-import arrayMethods from '../../helpers/arrayMethods';
 import MangaGenre from './MangaGenre'
+import arraysMethods from "../../helpers/arrayMethods"
 
 export default function MangaGenreService() {
     const [genre, setGenre] = useState({});
@@ -43,7 +43,7 @@ export default function MangaGenreService() {
             }
             setGenre(genre)
 
-            const shuffledManga = arrayMethods.shuffle(response.content.data);
+            const shuffledManga = arraysMethods.shuffle(response.content.data);
             setMangas(shuffledManga);
 
             return;
