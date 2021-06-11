@@ -1,0 +1,179 @@
+.home-menu {
+  position: relative;
+  top: -40px;
+  height: 65px;
+  transition: 0.3s;
+  z-index: 99;
+}
+
+.home-menu.scroll {
+  position: fixed;
+  top: 0px;
+  z-index: 99;
+  transition: 0.3s;
+}
+
+.home-menu .menu,
+.home-menu.scroll .menu {
+  text-align: center;
+  background: white;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 var(--color-box-shadow);
+  animation: fadedAnimate 0.3s ease-in-out;
+}
+
+.home-menu .menu .menu-search {
+  width: 80%;
+}
+
+.home-menu .result-box {
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.home-menu .menu .menu-search,
+.home-menu .menu .item {
+  line-height: 65px;
+}
+
+.home-menu .menu .menu-search .searching-box {
+  margin-top: 14px;
+}
+
+/* icon searching */
+.home-menu
+  .menu
+  .menu-search
+  .searching-box
+  span.anticon.anticon-loading.anticon-spin {
+  font-size: 32px;
+}
+
+.home-menu .menu .menu-search .searching-box span.ant-input-affix-wrapper {
+  border: none;
+  box-shadow: none !important;
+  padding: 3px 0;
+}
+
+.home-menu .menu-search {
+  border-bottom: none !important;
+  cursor: default;
+}
+
+.home-menu .menu-search input {
+  font-size: 20px;
+  border: none;
+  /* width: 300px; */
+}
+
+.home-menu .menu-search span.ant-input-wrapper.ant-input-group {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.home-menu .menu-search input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.home-menu .menu-search button {
+  padding-left: 9px;
+  height: 41px;
+  width: 52px;
+  border: none;
+  left: 4px;
+  top: -1px;
+  border-radius: 3px !important;
+}
+
+.home-menu .menu-search span.anticon.anticon-search {
+  font-size: 22px;
+  margin-top: 5px;
+}
+
+/* I dont know exactly what this is */
+.ant-input-group-addon {
+  background: transparent;
+}
+
+.home-menu ul.searching-list {
+  position: absolute;
+  width: 100%;
+  border: 1px solid #dbd9d9;
+  border-radius: 3px;
+}
+
+@keyframes fadedAnimate {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.home-menu .searching-list li {
+  padding: 5px 2px;
+}
+
+.home-menu .searching-list a.searching-item {
+  padding: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+.home-menu .searching-list a.searching-item:hover {
+  background: #f1f1f1;
+  
+}
+
+.home-menu .searching-item img.img {
+  width: 45px;
+  height: 52px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.home-menu .searching-item .text {
+  font-size: 16px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-menu .searching-item .author {
+  font-size: 14px;
+  color: #bfbfbf;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .home-menu .menu .menu-search .searching-box {
+    margin-top: 15px;
+  }
+
+  .home-menu .menu-search input {
+    font-size: 18px;
+    border: none;
+    width: 200px;
+  }
+
+  .home-menu .menu-search button {
+    height: 36px;
+    width: 50px;
+  }
+}

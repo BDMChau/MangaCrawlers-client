@@ -1,0 +1,26 @@
+:root {
+  --color-box-shadow: rgba(0, 0, 0, 0.192);
+  --color-one: #c9cacc;
+  /* overflow: overlay; */
+}
+
+.ant-layout {
+  background: none !important;
+}
+
+:root::-webkit-scrollbar {
+  width: 10px;
+}
+
+:root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:root::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+:root::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion";
 
-export default function TransitionAnimate({ renderPart }) {
+export default function TransitionAnimate({ renderPart, transitionTime }) {
     return (
         <motion.div
             className="block"
@@ -11,7 +11,7 @@ export default function TransitionAnimate({ renderPart }) {
             initial={{
                 opacity: 0,
             }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: transitionTime }}
         >
             {renderPart}
         </motion.div>

@@ -1,0 +1,41 @@
+.admin-page {
+  padding-bottom: 20px;
+  background: #f0f2f5;
+}
+
+.admin-page .admin-title {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.admin-page .admin-row1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-page .admin-tabs .ant-tabs-nav{
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.admin-page .admin-tabs .ant-tabs-nav .ant-tabs-tab{
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .admin-page .admin-tabs{
+    max-width: 375px;
+  }
+
+  .admin-page .admin-tabs .ant-tabs-nav{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .admin-page .admin-tabs .ant-tabs-nav .ant-tabs-tab{
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+}

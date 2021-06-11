@@ -1,0 +1,135 @@
+.list-home-pagination .ant-list-pagination {
+  width: 100%;
+  text-align: left;
+  margin: 30px 0 50px 0;
+}
+
+.list-home-pagination ul.ant-list-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  height: fit-content;
+}
+
+.latest-cards .card {
+  width: 210px;
+  height: 270px;
+  margin: 5px 15px 10px 0px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 10px 0px var(--color-box-shadow);
+}
+
+.latest-cards .card .ant-card-cover {
+  height: 75%;
+}
+
+.latest-cards .card .ant-card-body {
+  padding: 0 5px;
+  margin-top: 5px;
+}
+
+.latest-cards .card .desc {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: -3px;
+}
+
+.latest-cards .card .desc .desc-1,
+.latest-cards .card .desc .desc-2 {
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.latest-cards .card .desc .desc-1{
+  float: left;
+  width: 62%;
+  margin-right: 2px;
+}
+
+.latest-cards .card .desc .desc-2{
+  float: right;
+  width: 37%;
+}
+
+.latest-cards .manga-img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.latest-cards .manga-img .ant-image.ant-image-error{
+  height: 100%;
+  border-radius: 3px;
+}
+
+/* //////////////// */
+@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+  .latest-cards .card {
+    width: 160px;
+    height: 210px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .latest-cards .card {
+    padding: 0;
+    margin: 3px;
+    width: 135px;
+    height: 180px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 9px;
+    margin-top: -8px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .latest-cards .card {
+    width: 150px;
+    height: 190px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 12px;
+    margin-top: -8px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .latest-cards .card {
+    width: 130px;
+    height: 170px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 10px;
+    margin-top: -8px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 760px) {
+  .list-home-pagination ul.ant-list-items  {
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .latest-cards .card {
+    margin: 3px;
+    padding: 0;
+    width: 140px;
+    height: 200px;
+  }
+
+  .latest-cards .card .desc {
+    font-size: 11px;
+    margin-top: -4px;
+  }
+}
+

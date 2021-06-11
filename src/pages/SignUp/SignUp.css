@@ -1,0 +1,29 @@
+.form-signup-footer {
+  text-align: end;
+}
+
+.ant-modal-body {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
+
+.btn-submit-signup {
+  margin-right: 10px;
+}
+
+.modal-title-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-signup-text {
+  position: absolute;
+  margin: auto;
+}
+
+
+
+/* this rule is in SignIn.css */
+/* .logo-signup-signup {
+} */

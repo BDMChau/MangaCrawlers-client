@@ -1,0 +1,80 @@
+.comments-form {
+  margin-bottom: 50px;
+}
+
+.comments-form .form-input .input {
+  height: 70px;
+  resize: none;
+}
+
+.comments-form .text {
+  max-height: 600px;
+  height: fit-content;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.comments-form .ant-comments-inner {
+  padding: 10px 0;
+}
+
+.comments-form .loading-more {
+  text-align: center;
+}
+
+.comments-form .ant-comments-actions {
+  padding: 0;
+  margin-top: 5px;
+}
+
+.comments-form .comments-likes {
+  cursor: pointer;
+  padding: 0px 5px;
+  font-size: 14px;
+  color: #c1c1c1;
+}
+
+.comment .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* //////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .comments-form .text {
+    max-height: 350px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 550px) {
+  .comment .cmt-bottom .chapter-name {
+    width: 100px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+
+  .comment .cmt-bottom .chapter-name {
+    width: 100px;
+  }
+}

@@ -1,0 +1,47 @@
+.ant-modal-mask {
+  z-index: 100;
+}
+
+.form-signin-button {
+  margin-bottom: 10px;
+  text-align: end;
+}
+
+.ant-modal-body {
+  padding-top: 0px;
+  padding-bottom: 15px;
+}
+
+.btn-submit-signin {
+  margin-right: 10px;
+}
+
+.modal-title-signin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-signin-text {
+  position: absolute;
+  margin: auto;
+}
+
+.logo-signin-signup {
+  width: 260px;
+  height: 110px;
+  background-image: url("../../assets/logo/logo2.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.footer-form {
+  margin-bottom: -20px;
+  float: right;
+  text-align: right;
+}
+
+.footer-form .signin-to-signup {
+  margin-bottom: 5px;
+}

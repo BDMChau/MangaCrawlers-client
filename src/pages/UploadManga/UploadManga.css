@@ -1,0 +1,245 @@
+.divider-upload-page {
+  width: 100%;
+}
+
+.divider-upload-page .btn-back-to-projects {
+  margin: -5px 5px 0 4px;
+  background-color: transparent;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  box-shadow: none;
+}
+
+.divider-upload-page .ant-divider-inner-text {
+  padding: 0;
+}
+
+.title-upload-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.title-upload-page .thumb-img {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.title-upload-page .thumb-img img.img {
+  width: 100%;
+  height: 100%;
+}
+
+.title-upload-page .text {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+/* // */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 50px;
+  height: fit-content;
+}
+
+.upload-form .uploader {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+/* uploader container */
+.upload-form .ant-upload-list.ant-upload-list-picture {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-top: 20px;
+  margin-left: 6px;
+  max-height: 350px;
+  overflow-y: auto;
+  box-shadow: 0 0 3px 0 #616060d6;
+}
+
+.uploader .ant-upload.ant-upload-drag {
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+.upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 1px 0 grey;
+}
+
+/* Handle */
+.upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb {
+  background: #a7a6a6a2;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.upload-form
+  .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar-thumb:hover {
+  background: #777777a9;
+}
+
+
+/* uploader item */
+.upload-form .ant-upload-list-picture-container {
+  width: 220px;
+  padding:  0px 2px 8px 4px;
+}
+.upload-form
+  .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
+  padding: 0;
+  margin: 5px 3px;
+  width: 220px;
+}
+
+.upload-form .ant-upload-list-picture .ant-upload-list-item-info {
+  padding: 0 3px;
+}
+
+.upload-form .chapter-dropdown {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.upload-form .chapter-dropdown button {
+  width: 100%;
+}
+
+.uploader-note {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3px;
+}
+
+.uploader-note .ant-typography {
+  margin: 0 ;
+}
+
+.uploader-note .note-example {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.uploader .uploader-submit{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.uploader .uploader-submit button{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+.uploader .input-chapter-name{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.uploader .input-chapter-name input{
+  width: 100%;
+  height: 30px;
+}
+
+
+.chapter-item-upload-page{
+  display: flex;
+  justify-content: space-between;
+}
+
+.chapter-item-upload-page .name{
+  max-width: 450px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+/* //////// */
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .title-upload-page .text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+  .title-upload-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title-upload-page .thumb-img {
+    margin: 0 auto;
+  }
+
+  .uploader .ant-upload.ant-upload-drag {
+    width: 100%;
+  }
+  .uploader .uploader-submit{
+    width: 100%;
+  }
+
+  .uploader .input-chapter-name{
+    width: 100%;
+  }
+
+  .upload-form .chapter-dropdown {
+    width: 250px;
+  }
+
+  .upload-form .uploader {
+    width: 250px;
+  }
+
+  .chapter-item-upload-page .name{
+    max-width: 135px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1400px) {
+  .upload-form
+    .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
+    width: 296px;
+  }
+
+  .chapter-item-upload-page .name{
+    max-width: 250px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .uploader .ant-upload.ant-upload-drag {
+    width: 70%;
+  }
+
+  .uploader .uploader-submit{
+    width: 70%;
+  }
+
+  .uploader .input-chapter-name{
+    width: 70%;
+  }
+
+  .chapter-item-upload-page .name{
+    max-width: 200px;
+  }
+}

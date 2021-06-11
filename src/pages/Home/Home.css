@@ -1,0 +1,122 @@
+.home {
+  max-height: 100%;
+  background-image: url("../../assets/img/wallpaper.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: hidden;
+  border-radius: 3px;
+}
+
+.home-bg {
+  max-width: 100%;
+}
+
+.home-bg .home-bg-img {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  height: 300px;
+}
+
+.home-middle-wrap {
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 50px 0 var(--color-box-shadow);
+}
+
+.home-middle-header .trending {
+  margin-bottom: 50px;
+}
+
+.home-middle .home-side .top-manga {
+  margin-top: 30px;
+}
+
+.home-middle .home-side .weekly-manga {
+  margin-top: 0px;
+}
+
+/* .latest-cards {
+}
+
+
+.latest-cards .card {
+  width: 200px;
+  height: 250px;
+  margin: 5px 15px 5px 0px;
+  border-radius: 3px;
+}
+
+.latest-cards .card .ant-card-cover {
+  height: 75%;
+}
+
+.latest-cards .card .ant-card-cover img {
+  height: 100%;
+}
+
+.latest-cards .card .ant-card-body {
+  padding: 0 5px;
+  margin-top: 8px;
+}
+
+.latest-cards .card .desc {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+} */
+
+.home .home-spacing-top,
+.home .home-spacing-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.home .home-spacing-bottom {
+  margin-top: 40px;
+}
+
+.home .wallpaper {
+  height: auto;
+  margin-bottom: 40px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .home-middle-wrap {
+    margin: 0 250px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .home-middle-wrap {
+    margin: 0 70px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1800px) {
+  .home-bg .home-bg-img{
+    height: 250px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .home-middle-wrap {
+    margin: 0 50px;
+  }
+
+  .ant-col-md-8 {
+    max-width: 40%;
+  }
+
+  .home-spacing-top {
+    margin-left: -13px;
+  }
+}

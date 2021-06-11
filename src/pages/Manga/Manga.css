@@ -1,0 +1,256 @@
+.manga {
+  background: white;
+  overflow: hidden;
+}
+
+.manga-bg {
+  width: 100%;
+  height: 400px;
+}
+
+.manga-bg-img {
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  filter: blur(30px);
+}
+
+.manga-body {
+  background: #f0f2f5;
+  padding-bottom: 40px;
+  width: 100%;
+  box-shadow: 0 0 5px 0px var(--color-box-shadow);
+}
+
+.manga-body .header {
+  background: #f0f2f5;
+  display: flex;
+  border-radius: 3px;
+  /* margin: 10px 30px; */
+}
+
+.thumbnail {
+  max-width: 220px;
+  width: 220px;
+  height: 310px;
+  margin-top: -45px;
+  margin-right: 10px;
+}
+
+/* .loading-image .ant-spin-dot{
+  font-size: 40px;
+} */
+
+
+
+.thumbnail .ant-image.ant-image-error {
+  background-image: url("../../assets/img/no_image.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.manga .title {
+  word-wrap: break-word;
+}
+
+.manga .title .author {
+  margin-top: 5px;
+}
+
+.manga .title .author .link {
+  margin-left: 5px;
+}
+
+.manga .title .genre {
+  margin: 5px 0px;
+  word-wrap:break-word;
+}
+
+.manga .title .genre .link {
+  padding: 3px 5px;
+  margin: 2px 5px 2px 0px;
+  cursor: pointer;
+}
+
+.manga .title .interact {
+  margin-top: 35px;
+}
+
+/* .manga .title .interact .link {
+  padding: 15px 20px;
+  background: #c5c5c5;
+  margin-left: 15px;
+  border-radius: 3px;
+  color: black;
+} */
+
+.manga .title .interact .btn-add-favorite,
+.manga .title .interact .btn-read-now {
+  margin-right: 15px;
+  border-radius: 3px;
+  height: 48px;
+}
+
+.manga .middle {
+  background: #f0f2f5;
+  margin-top: 50px;
+  /* display: flex; */
+}
+
+.manga .manga-views{
+  margin-top: 10px;
+
+}
+
+.manga .middle .chapter-list {
+  width: 100%;
+  margin-right: 0px;
+}
+
+
+.manga .middle .line {
+  width: 100%;
+  height: 1px;
+  margin-bottom: 10px;
+}
+
+.desc-wrapper {
+  margin-top: 30px;
+}
+
+.desc-wrapper .desc {
+  text-align: justify;
+}
+
+.manga-comments {
+  padding-right: 80px;
+  margin-top: 60px;
+}
+
+.manga-comments .comments {
+  height: 100%;
+  padding: 0px;
+  width: 100%;
+  background: transparent;
+}
+
+.manga-comments .comments-body {
+  max-height: 600px;
+  width: 90%;
+}
+
+.cmt-avatar,
+.cmt-avatar img {
+  height: 40px;
+  width: 40px;
+}
+
+.comment-items a {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.top-week-rank {
+  margin-top: 30px;
+}
+
+.favorite-suggest {
+  margin-top: 30px;
+}
+
+/* /////////////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    max-height: 500px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .manga .title .interact {
+    margin-top: 30px;
+  }
+
+  .manga .title {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+
+  .manga .title .interact .link {
+    padding: 10px 10px;
+    margin-left: 10px;
+  }
+
+  .manga-comments {
+    padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    max-height: 600px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+
+  .manga .title .interact {
+    margin-top: 20px;
+  }
+
+  .manga .title {
+    font-size: 13px;
+    margin-top: 5px;
+  }
+
+  .manga .title .interact .btn-add-favorite,
+  .manga .title .interact .btn-read-now {
+    padding: 0 7px;
+    height: 38px;
+  }
+
+  .manga-comments {
+    padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    max-height: 600px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .manga .title {
+    margin: 20px;
+  }
+
+  .manga .title .interact {
+    margin-top: 40px;
+  }
+
+  .manga-comments {
+    padding-right: 0px;
+  }
+
+  .manga-comments .comments-body {
+    width: 100%;
+  }
+
+  .manga-comments .comments-body {
+    max-height: 600px;
+  }
+}

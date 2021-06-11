@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice  from "./slices/userSlice";
+import UserSlice  from "./slices/UserSlice";
+import AuthSlice  from "./slices/AuthSlice";
+import ApiSlice  from "./slices/ApiSlice";
+import MangaSlice  from "./slices/MangaSlice";
+import StuffsSlice  from "./slices/StuffsSlice";
 
-
-
-
-
-const store = configureStore({
+export const store = configureStore({
     reducer: {
-        users: userSlice
+        userState: UserSlice,
+        authState: AuthSlice,
+        apiState: ApiSlice,
+        mangaState: MangaSlice,
+        stuffsState: StuffsSlice
     }
 })
 
-export default store;

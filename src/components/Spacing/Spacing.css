@@ -1,0 +1,11 @@
+.spacing {
+  width: 300px;
+  height: 3px;
+  background: var(--color-one);
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .spacing {
+    width: 200px;
+  }
+}
