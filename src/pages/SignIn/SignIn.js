@@ -147,7 +147,7 @@ export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseMo
                             </div>
 
                             <Button
-                                style={{ borderRadius: "3px", color: "#4a8fce", height:"42px", width:"42px", float:"right", marginRight:"40px" }}
+                                style={{ borderRadius: "50px", color: "#4a8fce", height:"42px", width:"42px", float:"right", marginRight:"40px" }}
                                 onClick={() => handleSignInWithGoogle()}
                                 icon={<GoogleOutlined style={{ fontSize: "24px", marginTop:"4px" }} />}
                             />

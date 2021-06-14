@@ -13,6 +13,7 @@ import NavbarService from "../components/Navbar/NavbarService";
 import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Layout, { Content } from "antd/lib/layout/layout";
+import switchTheme from "./Themes";
 
 
 const Routing = () => {
@@ -33,6 +34,8 @@ const Routing = () => {
 
 export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
+
+  
   return (
     <Provider store={store}>
       <Suspense fallback={<LoadingPage />}>
@@ -52,7 +55,6 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
               pageId="101341455476510"
               appId="496491375126587"
             />
-
             <FooterContainer />
           </Layout>
 
