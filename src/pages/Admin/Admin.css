@@ -1,6 +1,6 @@
 .admin-page {
   padding-bottom: 20px;
-  background: #f0f2f5;
+  background: var(--color-theme);
 }
 
 .admin-page .admin-title {

@@ -22,7 +22,6 @@ export default function ChapterService() {
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingAddFollow, setIsLoadingAddFollow] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
-    const [curChapter, setCurChapter] = useState(0);
 
     const [isAddedCmt, setIsAddedCmt] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
@@ -32,6 +31,7 @@ export default function ChapterService() {
     const [isEndCmts, setIsEndCmts] = useState(false);
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
+    const [curChapter, setCurChapter] = useState(0);
 
 
     const cookies = new Cookies();
@@ -60,18 +60,20 @@ export default function ChapterService() {
 
         setFromRow(0);
         setComments([]);
+        setIsEndCmts(false);
         getCmtsChapter();
     }, [chapterid || mangaid])
 
 
-
     useEffect(() => {
-        chapters.forEach((chapter, i) => {
+        for (const [i, chapter] of chapters.entries()) {
             if (curChapter === i) {
                 history.push(`/chapter/${mangaid}/${chapter.chapter_id}`)
+                break;
             }
-        })
+        }
     }, [curChapter])
+
 
 
     const getDataChapter = async () => {
@@ -110,7 +112,7 @@ export default function ChapterService() {
             chapters.forEach((chapter, i) => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
 
-                if (chapter.chapter_id === chapterid) {
+                if (chapter.chapter_id == chapterid) {
                     setCurChapter(i)
                 }
             })
@@ -289,7 +291,6 @@ export default function ChapterService() {
     }
 
     const getCmtsChapter = async () => {
-        console.log(fromRow)
         const data = {
             manga_id: mangaid,
             chapter_id: chapterid,

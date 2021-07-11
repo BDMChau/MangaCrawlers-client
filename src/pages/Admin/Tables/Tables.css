@@ -23,7 +23,7 @@
   max-height: 670px;
   height: fit-content;
   overflow: auto;
-  background: white;
+  background: var(--color-theme-02);
 }
 
 .admin-row1 .table-user .user-table .ant-table-pagination.ant-pagination {
@@ -47,7 +47,7 @@
   max-height: 650px;
   height: fit-content;
   overflow: auto;
-  background-color: white;
+  background-color: var(--color-theme-02);
 }
 
 .admin-row1 .table-manga .manga-table .ant-table-pagination.ant-pagination {
@@ -87,7 +87,7 @@
 .admin-row1 .table-trans-gr .trans-gr-table {
   max-height: 650px;
   overflow: auto;
-  background: white;
+  background: var(--color-theme-02);
 }
 
 .admin-row1
@@ -126,7 +126,7 @@
 .admin-row1 .table-admin .admin-table {
   max-height: 350px;
   overflow: auto;
-  background: white;
+  background: var(--color-theme-02);
 }
 
 .table-btn-loading,

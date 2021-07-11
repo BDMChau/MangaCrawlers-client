@@ -68,7 +68,7 @@ export default function SignInService() {
             console.log(response)
 
             if (response.content.msg) {
-                const url = endPoint.local + response.content.urls.Google
+                const url = endPoint.product + response.content.urls.Google
                 const win = window.open(url, "_blank");
                 win.focus();
             } else {

@@ -33,6 +33,8 @@ const Routing = () => {
 
 export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
+
+  
   return (
     <Provider store={store}>
       <Suspense fallback={<LoadingPage />}>
@@ -52,7 +54,6 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
               pageId="101341455476510"
               appId="496491375126587"
             />
-
             <FooterContainer />
           </Layout>
 

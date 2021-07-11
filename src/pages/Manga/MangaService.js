@@ -21,7 +21,7 @@ function MangaService() {
     const [mangaStars, setMangaStars] = useState(0);
 
     const [comments, setComments] = useState([]);
-    const [fromRow, setFromRow] = useState(0);
+    const [fromRow, setFromRow] = useState(null);
     const [amountRows] = useState(10);
     const [isEndCmts, setIsEndCmts] = useState(false);
 
@@ -31,12 +31,13 @@ function MangaService() {
 
 
     useEffect(() => {
+        getWeeklyTopMangas();
+    }, [])
+
+
+    useEffect(() => {
         getMangaData();
         getSuggestionList();
-
-        setFromRow(0);
-        setComments([]);
-        getCmtsManga();
 
         smoothscroll.polyfill();
         window.scroll({
@@ -45,9 +46,23 @@ function MangaService() {
         });
     }, [id])
 
+    // get comments
     useEffect(() => {
-        getWeeklyTopMangas();
-    }, [])
+        setIsEndCmts(false);
+        setComments([]);
+        setFromRow(0);
+        
+        // if fromRow is 0, run getCmtsManga() below
+        if(fromRow === 0){
+            getCmtsManga();
+        }
+    }, [id])
+
+    useEffect(() => {
+        // if fromRow is 0, this effect won't be invoked
+        getCmtsManga()
+    }, [fromRow])
+
 
 
     const getMangaData = async () => {
@@ -231,6 +246,7 @@ function MangaService() {
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
                 // message_error("No manga to present!")
+                localStorage.removeItem("code_400")
                 return;
             }
             else if (response.content.msg === "No comments found!") {
@@ -239,12 +255,11 @@ function MangaService() {
             }
 
 
-            if (response.content.comments) {
+            if (response.content.comments.length) {
                 const comments = response.content.comments;
                 comments.forEach(comment => {
                     comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
                 });
-
                 setComments(comments)
                 setFromRow(fromRow + 11)
             }
@@ -271,6 +286,7 @@ function MangaService() {
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
                 comments={comments}
+                isEndCmts={isEndCmts}
             />
         </div>
     )

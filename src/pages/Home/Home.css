@@ -23,7 +23,8 @@
 }
 
 .home-middle-wrap {
-  background: #f0f2f5;
+  transition: 0.3s;
+  background: var(--color-theme);
   display: flex;
   justify-content: center;
   flex-direction: column;

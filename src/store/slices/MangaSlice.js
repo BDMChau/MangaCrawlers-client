@@ -17,6 +17,7 @@ const MangaSlice = createSlice({
             const genres = action.payload[1];
 
             state[1] = [mangas, genres];
+
         },
     }
 })

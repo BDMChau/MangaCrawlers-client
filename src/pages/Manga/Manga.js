@@ -26,7 +26,7 @@ function Manga({
 
     mangaStars,
     handleRatingManga,
-
+    isEndCmts,
     comments
 }) {
     const userState = useSelector((state) => state.userState);
@@ -167,7 +167,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentItems comments={comments} />
+                                    <CommentItems comments={comments} isEndCmts={isEndCmts} />
                                 </div>
 
                             </div>

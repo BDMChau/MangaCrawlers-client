@@ -1,7 +1,12 @@
 :root {
   --color-box-shadow: rgba(0, 0, 0, 0.192);
   --color-one: #c9cacc;
-  /* overflow: overlay; */
+
+
+  --color-theme:#F0F2F5;
+  --color-theme-02:white;
+
+  --color-text:#fff;
 }
 
 .ant-layout {
@@ -10,6 +15,7 @@
 
 :root::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 :root::-webkit-scrollbar-track {
