@@ -4,23 +4,34 @@ import UserPage from './UserPage'
 import Cookies from 'universal-cookie';
 import mangaApi from '../../../api/apis/mangaApi';
 import dayjs from 'dayjs';
+import { useHistory } from 'react-router-dom';
 
 export default function UserPageService() {
     const query = new URLSearchParams(useLocation().search);
-    const value = query.get("v");
+
+    const [tabSelected, setTabSelected] = useState(null)
     const [historyMangas, setHistoryMangas] = useState([])
     const [followingMangas, setFollowingMangas] = useState([])
+
     const cookies = new Cookies();
     const token = cookies.get("token")
-
+    const history = useHistory();
 
     useEffect(() => {
         getUserMangas();
     }, [])
 
+    useEffect(() => {
+        if (!query.get("v")) {
+            history.push(`/user?v=following`)
+        } else {
+            setTabSelected(query.get("v"))
+        }
+    }, [query.get("v")])
+
     const getUserMangas = async () => {
         try {
-            if (value === "history" || value === null) {
+            if (tabSelected === "history" || tabSelected === null) {
                 const responseHistory = await mangaApi.getHistoryManga(token)
                 console.log(responseHistory)
                 if (responseHistory) {
@@ -40,7 +51,7 @@ export default function UserPageService() {
                     setFollowingMangas(responseFollowing.content.mangas)
                 }
 
-            } else if (value === "following") {
+            } else if (tabSelected === "following") {
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
                     responseFollowing.content.mangas.forEach(manga => {
@@ -68,7 +79,8 @@ export default function UserPageService() {
     return (
         <div>
             <UserPage
-                query={value}
+                tabSelected={tabSelected}
+
                 historyMangas={historyMangas}
                 followingMangas={followingMangas}
             />

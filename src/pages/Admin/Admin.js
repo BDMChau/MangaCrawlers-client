@@ -94,7 +94,7 @@ export default function Admin({
             <Row justify={"center"} className="admin-row1">
                 <Typography.Title level={3} className="admin-title">Administrator Page</Typography.Title>
 
-                <Tabs defaultActiveKey={tabSelected} className="admin-tabs" onChange={(val) => history.push(`/admin?v=${val}`)}>
+                <Tabs activeKey={tabSelected} className="admin-tabs" onChange={(val) => history.push(`/admin?v=${val}`)}>
                     <TabPane tab="User Statistics" key="user">
                         {renderUserStatistic()}
                     </TabPane>

@@ -16,6 +16,7 @@ export default function AdminService() {
     const [reportManga, setReportManga] = useState([])
     const [reportTransGr, setReportTransGr] = useState([])
 
+    const [tabSelected, setTabSelected] = useState(null)
 
     const [isLoading, setIsLoading] = useState(false)
     const cookies = new Cookies();
@@ -23,10 +24,16 @@ export default function AdminService() {
 
     const history = useHistory();
     const query = new URLSearchParams(useLocation().search);
-    const value = query.get("v");
 
 
-    
+    useEffect(() => {
+        if (!query.get("v")) {
+            history.push(`/admin?v=user`)
+        } else {
+            setTabSelected(query.get("v"))
+        }
+
+    }, [query.get("v")])
 
 
     useEffect(() => {
@@ -37,10 +44,6 @@ export default function AdminService() {
         getReportUser();
         getReportManga();
         getReportTransGr();
-
-        if(!value){
-            history.push(`/admin?v=user`)
-        }
     }, [])
 
 
@@ -350,7 +353,7 @@ export default function AdminService() {
                 handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
                 isLoading={isLoading}
 
-                tabSelected={value}
+                tabSelected={tabSelected}
             />
         </div>
     )
