@@ -1,4 +1,5 @@
 :root {
+  overflow-x: hidden;
   --color-box-shadow: rgba(0, 0, 0, 0.192);
   --color-one: #c9cacc;
 

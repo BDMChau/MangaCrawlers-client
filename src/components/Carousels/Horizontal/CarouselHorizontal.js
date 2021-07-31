@@ -15,7 +15,9 @@ function CarouselHorizontal({
     isCenter,
     arrows,
     autoplaySpeed,
-    isPadding
+    isPadding,
+
+    minWidth
 }) {
 
     const staticImgs = [
@@ -78,7 +80,7 @@ function CarouselHorizontal({
 
 
     return (
-        <div className="slider-horizontal">
+        <div className="slider-horizontal" style={{minWidth: minWidth ? minWidth : "unset"}}>
             {isLoading
                 ? <div className="items-loading">
                     <LoadingDots />

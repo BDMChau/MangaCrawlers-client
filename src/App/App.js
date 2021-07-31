@@ -12,8 +12,18 @@ import FooterContainer from "../components/Footer/Footer";
 import NavbarService from "../components/Navbar/NavbarService";
 import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import Layout, { Content } from "antd/lib/layout/layout";
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import SideNav from "../components/Navbar/SideNav";
 
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 const Routing = () => {
   return (
@@ -32,34 +42,39 @@ const Routing = () => {
 
 
 export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
+  const [collapsed, setCollapsed] = React.useState(false)
 
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed)
+};
 
   
   return (
     <Provider store={store}>
       <Suspense fallback={<LoadingPage />}>
-
         <BrowserRouter>
 
-          <Layout>
-            <NavbarService />
 
-            <Content style={{ minHeight: "100vh", background: "#fff" }}>
-              {Routing()}
-            </Content>
 
-            <CheckingScrollEvent scrollYPosition={scrollYPosition} />
+
+        <Layout style={{ minHeight: '100vh' }}>
+        <SideNav/>
+         
+        <Layout className="site-layout">
+         
+          <Content style={{ margin: '0 0' }}>
+            {Routing()}
             <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-            <MessengerCustomerChat
-              pageId="101341455476510"
-              appId="496491375126587"
-            />
-            <FooterContainer />
-          </Layout>
+          </Content>
+         <FooterContainer/>
+        </Layout>
+      </Layout>
+
+
+
 
         </BrowserRouter>
       </Suspense >
-
     </Provider>
   )
 }

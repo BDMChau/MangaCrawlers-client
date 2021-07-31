@@ -26,7 +26,7 @@ export default function SideNav() {
 
     const renderMenu = () => {
         return (
-            <Sider theme="light" collapsible collapsed={collapsed} onCollapse={(val) => onCollapse(val)}>
+            <Sider theme="light" style={{position:"fixed"}} collapsible collapsed={collapsed} onCollapse={(val) => onCollapse(val)}>
                 <div className="logo" />
                 <Menu defaultSelectedKeys={['1']} mode="inline">
                     <Menu.Item key="1" icon={<PieChartOutlined />}>

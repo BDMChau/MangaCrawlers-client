@@ -28,7 +28,7 @@ export default function Home({
                 <div className="home-bg-img"
                 //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
                 >
-                    <CarouselHorizontal data={[]} itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
+                    <CarouselHorizontal data={[]} itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} minWidth={"100vw"} />
                 </div>
             </div>
             <div className="home-middle-wrap">
