@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import adminApi from '../../api/apis/adminApi';
 import { message_success } from '../../components/notifications/message';
 import arrayMethods from '../../helpers/arrayMethods';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function AdminService() {
     const [users, setUsers] = useState([])
@@ -15,9 +16,18 @@ export default function AdminService() {
     const [reportManga, setReportManga] = useState([])
     const [reportTransGr, setReportTransGr] = useState([])
 
+
     const [isLoading, setIsLoading] = useState(false)
     const cookies = new Cookies();
     const token = cookies.get("token")
+
+    const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    const value = query.get("v");
+
+
+    
+
 
     useEffect(() => {
         getAllUsers();
@@ -27,6 +37,10 @@ export default function AdminService() {
         getReportUser();
         getReportManga();
         getReportTransGr();
+
+        if(!value){
+            history.push(`/admin?v=user`)
+        }
     }, [])
 
 
@@ -335,6 +349,8 @@ export default function AdminService() {
                 handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
                 handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
                 isLoading={isLoading}
+
+                tabSelected={value}
             />
         </div>
     )

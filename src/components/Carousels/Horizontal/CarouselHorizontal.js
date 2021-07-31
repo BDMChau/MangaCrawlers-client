@@ -24,6 +24,12 @@ function CarouselHorizontal({
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594630/Mangaback/839279_free-download-sword-art-online-sao-computer-wallpapers_3840x2160_h.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1622902745/Mangaback/c4546a602b7c4797.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620740786/Mangaback/714324.png",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594728/Mangaback/qEHxXLP.jpg",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594870/Mangaback/ed004b904fad8a61094f993eab787e05.jpg",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594492/Mangaback/93cc7694e5f3feb317d892a4c331c976.jpg",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594630/Mangaback/839279_free-download-sword-art-online-sao-computer-wallpapers_3840x2160_h.jpg",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1622902745/Mangaback/c4546a602b7c4797.jpg",
+        "https://res.cloudinary.com/mangacrawlers/image/upload/v1620740786/Mangaback/714324.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594728/Mangaback/qEHxXLP.jpg"
     ]
 
@@ -57,7 +63,7 @@ function CarouselHorizontal({
 
     const settings = {
         className: "slider",
-        slidesToShow: itemsShow ? itemsShow : 5,
+        slidesToShow: itemsShow ? itemsShow : 7,
         slidesToScroll: 1,
         initialSlide: randomInitSlide,
         vertical: false,

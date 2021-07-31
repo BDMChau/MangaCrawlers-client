@@ -39,7 +39,7 @@ function ListChapters({ chapters, mangaId, height }) {
                         </NavLink>
                     ))
                     : <Empty
-                        style={{ marginTop: "120px", color: "#8a8d92" }}
+                        style={{ margin: "0 auto" ,marginTop: "120px", color: "#8a8d92" }}
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                         description="No Chapters :("
                     />

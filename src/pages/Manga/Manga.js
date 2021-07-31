@@ -167,7 +167,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentItems comments={comments} isEndCmts={isEndCmts} />
+                                    <CommentItems comments={comments} isEndCmts={isEndCmts} mangaId={manga.manga_id} />
                                 </div>
 
                             </div>

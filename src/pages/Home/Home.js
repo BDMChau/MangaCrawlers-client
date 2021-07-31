@@ -40,7 +40,9 @@ export default function Home({
                     />
 
                     <Col span={23} md={21} xl={17} xxl={21} className="trending">
-                        <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}><h2>Trending Manga</h2></Divider>
+                        <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
+                            <h2>Seasonal</h2>
+                        </Divider>
                         <CarouselHorizontal
                             data={dailyMangas}
                             isLoading={isLoading}
@@ -57,18 +59,18 @@ export default function Home({
 
                     <Row justify={"center"} className="home-middle">
                         <Col span={16} md={11} xl={10} xxl={14} className="lastest">
-                            <h2>Lastest Manga</h2>
+                            <h2>Recently Added</h2>
 
                             <ListHomePagination mangas={latestMangas} />
                         </Col>
 
                         <Col span={16} md={8} xl={7} xxl={7} className="home-side">
                             <div className="weekly-manga">
-                                <h2>Weekly Manga Ranking</h2>
+                                <h2>Weekly Ranking</h2>
                                 <ListSide mangas={weeklyMangas} height={"415px"} />
                             </div>
                             <div className="top-manga">
-                                <h2>Top Manga Ranking</h2>
+                                <h2>Top Views</h2>
                                 <ListSide mangas={topMangas} height={"415px"} />
                             </div>
                         </Col>

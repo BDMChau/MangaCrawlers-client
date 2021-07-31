@@ -2,9 +2,10 @@ import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
 import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
+import { NavLink } from 'react-router-dom';
 
 
-function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
+function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
@@ -16,6 +17,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
+
 
     const handleScroll = (e) => {
         const scrollTop = e.target.scrollTop;
@@ -58,16 +60,18 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts }) {
                                         {comment.chaptercmt_time}
                                     </Typography.Text>
 
-                                    <Tooltip title={comment.chapter_name}>
-                                        <Typography.Text
-                                            className="chapter-name"
-                                            style={{
-                                                color: comment.is_error ? "#D7D8DB" : "#848587",
-                                            }}
-                                        >
-                                            {comment.chapter_name}
-                                        </Typography.Text>
-                                    </Tooltip>
+                                    <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>
+                                        <Tooltip title={comment.chapter_name}>
+                                            <Typography.Text
+                                                className="chapter-name"
+                                                style={{
+                                                    color: comment.is_error ? "#D7D8DB" : "#848587",
+                                                }}
+                                            >
+                                                {comment.chapter_name}
+                                            </Typography.Text>
+                                        </Tooltip>
+                                    </NavLink>
                                 </div>
 
                                 <Typography.Text style={{ color: "#FF4D4F" }}>

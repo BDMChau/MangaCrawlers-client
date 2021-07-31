@@ -32,6 +32,8 @@ export default function Admin({
     handleRemoveTransGroup,
     isLoading,
 
+    tabSelected
+
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -92,14 +94,14 @@ export default function Admin({
             <Row justify={"center"} className="admin-row1">
                 <Typography.Title level={3} className="admin-title">Administrator Page</Typography.Title>
 
-                <Tabs defaultActiveKey="1" className="admin-tabs">
-                    <TabPane tab="User Statistics" key="1">
+                <Tabs defaultActiveKey={tabSelected} className="admin-tabs" onChange={(val) => history.push(`/admin?v=${val}`)}>
+                    <TabPane tab="User Statistics" key="user">
                         {renderUserStatistic()}
                     </TabPane>
-                    <TabPane tab="Manga Statistics" key="2">
+                    <TabPane tab="Manga Statistics" key="manga">
                         {renderMangaStatistic()}
                     </TabPane>
-                    <TabPane tab="Translation Group Statistics" key="3">
+                    <TabPane tab="Translation Group Statistics" key="transgroup">
                         {renderTransGrStatistic()}
                     </TabPane>
                 </Tabs>
