@@ -58,13 +58,13 @@ export default function Home({
                     </Col>
 
                     <Row justify={"center"} className="home-middle">
-                        <Col span={16} md={11} xl={10} xxl={14} className="lastest">
+                        <Col span={18} md={11} xl={10} xxl={14} className="lastest">
                             <h2>Recently Added</h2>
 
                             <ListHomePagination mangas={latestMangas} />
                         </Col>
 
-                        <Col span={16} md={8} xl={7} xxl={7} className="home-side">
+                        <Col span={16} md={10} xl={7} xxl={7} className="home-side">
                             <div className="weekly-manga">
                                 <h2>Weekly Ranking</h2>
                                 <ListSide mangas={weeklyMangas} height={"415px"} />
