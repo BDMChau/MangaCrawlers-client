@@ -36,7 +36,7 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
     <Layout>
       <NavbarService />
 
-      <Content style={{ minHeight: "100vh", background: "#fff" }}>
+      <Content style={{ background: "#fff" }}>
         {Routing()}
       </Content>
 
@@ -53,16 +53,12 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
 
   return (
-    <Provider store={store}>
       <Suspense fallback={<LoadingPage />}>
-
         <BrowserRouter>
 
           {renderMangaComponentPages()}
 
         </BrowserRouter>
       </Suspense >
-
-    </Provider>
   )
 }
