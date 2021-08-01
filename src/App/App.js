@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./App.css"
 import 'antd/dist/antd.css';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from '../store/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -32,30 +32,33 @@ const Routing = () => {
 
 
 export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
+  const renderMangaComponentPages = () => (
+    <Layout>
+      <NavbarService />
+
+      <Content style={{ minHeight: "100vh", background: "#fff" }}>
+        {Routing()}
+      </Content>
+
+      <CheckingScrollEvent scrollYPosition={scrollYPosition} />
+      <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+      <MessengerCustomerChat
+        pageId="101341455476510"
+        appId="496491375126587"
+      />
+      <FooterContainer />
+    </Layout>
+  )
 
 
-  
+
   return (
     <Provider store={store}>
       <Suspense fallback={<LoadingPage />}>
 
         <BrowserRouter>
 
-          <Layout>
-            <NavbarService />
-
-            <Content style={{ minHeight: "100vh", background: "#fff" }}>
-              {Routing()}
-            </Content>
-
-            <CheckingScrollEvent scrollYPosition={scrollYPosition} />
-            <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-            <MessengerCustomerChat
-              pageId="101341455476510"
-              appId="496491375126587"
-            />
-            <FooterContainer />
-          </Layout>
+          {renderMangaComponentPages()}
 
         </BrowserRouter>
       </Suspense >

@@ -135,7 +135,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         <NavLink className="history-btn" to="/user?v=history">
                             <HistoryOutlined style={{ fontSize: "18px" }} />
                             &#160;
-                            Your History
+                            My History
                        </NavLink>
                     </Button>
 
@@ -145,7 +145,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         <NavLink className="following-btn" to="/user?v=following">
                             <UnorderedListOutlined style={{ fontSize: "18px" }} />
                             &#160;
-                            Following Manga
+                            My Following
                         </NavLink>
                     </Button>
 
@@ -156,7 +156,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         <NavLink className="trans-group-btn" to="/user/projects">
                             <TeamOutlined style={{ fontSize: "19px" }} />
                             &#160;
-                            My Translation Team
+                            My Team
                         </NavLink>
                     </Button>
                     : ""
@@ -170,7 +170,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                             <NavLink className="admin-btn" to="/admin">
                                 <ProfileOutlined style={{ fontSize: "19px" }} />
                                 &#160;
-                                Admin Page
+                                Admin
                             </NavLink>
                         </Button>
                     :""

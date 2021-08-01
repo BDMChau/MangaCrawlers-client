@@ -5,9 +5,11 @@ export default function AppService() {
     const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState(Boolean)
     const [scrollYPosition, setScrollYPosition] = useState(0)
 
+
     useEffect(() => {
         window.addEventListener("scroll", (e) => handleScroll(e));
         return () => window.removeEventListener("scroll", (e) => handleScroll(e))
+
     }, [])
 
     const handleScroll = () => {
