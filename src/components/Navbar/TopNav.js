@@ -7,8 +7,8 @@ import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
 
 import { Layout, Menu, Button, Drawer } from "antd";
 import { NavLink, useHistory } from "react-router-dom";
-import SignUpService from "../../pages/SignUp/SignUpService";
-import SignInService from "../../pages/SignIn/SignInService";
+import SignUpService from "../../pages/Auth/SignUp/SignUpService";
+import SignInService from "../../pages/Auth/SignIn/SignInService";
 
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 
