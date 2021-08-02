@@ -3,6 +3,7 @@ import "./CommentItems.css"
 import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
 import { NavLink } from 'react-router-dom';
+import ButtonLike from './ButtonLike';
 
 
 function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
@@ -56,6 +57,12 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                                 </Typography.Text>
 
                                 <div className="cmt-bottom">
+                                    <div className="interact">
+                                        <ButtonLike />
+                                        <Typography.Text className="reply">
+                                            Reply
+                                        </Typography.Text>
+                                    </div>
                                     <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
                                         {comment.chaptercmt_time}
                                     </Typography.Text>

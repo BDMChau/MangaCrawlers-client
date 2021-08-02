@@ -57,12 +57,12 @@ function Manga({
             </Row>
 
             <Row justify={"center"} className="manga-body-row">
-                <Col span={23} md={17} xxl={19} className="manga-body">
+                <Col span={24} sm={22} xxl={19} className="manga-body">
                     <Row justify={"center"} className="header">
-                        <Col className="thumbnail">
+                        <Col span={24} className="thumbnail">
                             <Image preview={false} className="thumbnail-img" src={manga.thumbnail} alt="" />
                         </Col>
-                        <Col md={13} lg={12} sm={4} xs={20} xxl={15} className="title">
+                        <Col md={13} lg={12} sm={12} xs={20} xxl={15} className="title">
                             <div className="name">
                                 <h3>{manga.manga_name}</h3>
                             </div>

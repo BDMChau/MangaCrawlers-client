@@ -44,6 +44,18 @@
   text-overflow: ellipsis;
 }
 
+.comment .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.comment .cmt-bottom .interact .reply:hover {
+  color: #848587;
+  margin-left: 10px;
+}
+
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   .comments-form .text {
@@ -65,7 +77,7 @@
 
 @media only screen and (min-width: 415px) and (max-width: 550px) {
   .comment .cmt-bottom .chapter-name {
-    width: 100px;
+    width: 160px;
   }
 }
 
@@ -75,6 +87,6 @@
   }
 
   .comment .cmt-bottom .chapter-name {
-    width: 100px;
+    width: 130px;
   }
 }

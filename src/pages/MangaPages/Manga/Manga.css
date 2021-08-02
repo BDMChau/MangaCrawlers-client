@@ -128,7 +128,7 @@
 }
 
 .manga-comments {
-  padding-right: 80px;
+  padding-right: 0px;
   margin-top: 60px;
 }
 
@@ -233,13 +233,31 @@
   }
 }
 
-@media only screen and (min-width: 415px) and (max-width: 767px) {
-  
+@media only screen and (min-width: 416px) and (max-width: 767px) {
+  .manga .title {
+    margin: 20px;
+  }
+
+  .desc-wrapper .desc,
+  .chapter-list,
+  .manga-comments .comments,
+  .rank-list .top-week-rank,
+  .rank-list .favorite-suggest {
+    margin: 5px;
+  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .manga .title {
     margin: 20px;
+  }
+
+  .desc-wrapper .desc,
+  .chapter-list,
+  .manga-comments .comments,
+  .rank-list .top-week-rank,
+  .rank-list .favorite-suggest {
+    margin: 5px;
   }
 
   .manga .title .interact {
