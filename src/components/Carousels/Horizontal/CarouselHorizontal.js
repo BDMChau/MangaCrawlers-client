@@ -63,7 +63,7 @@ function CarouselHorizontal({
 
     const settings = {
         className: "slider",
-        slidesToShow: itemsShow ? itemsShow : 7,
+        slidesToShow: itemsShow ? itemsShow : 9,
         slidesToScroll: 1,
         initialSlide: randomInitSlide,
         vertical: false,

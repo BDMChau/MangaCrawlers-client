@@ -31,8 +31,8 @@
 .latest-cards .card .desc {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
-  margin-top: -3px;
+  font-size: 14px;
+  margin-top: 15px;
 }
 
 .latest-cards .card .desc .desc-1,

@@ -11,7 +11,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
 
 
     return (
-        <Col span={20} sm={20} xs={23} xxl={18} className={isScroll ? "home-menu scroll" : "home-menu"}>
+        <Col span={16} sm={20} xs={22} xxl={16} className={isScroll ? "home-menu scroll" : "home-menu"}>
             <Menu className="menu" mode="horizontal" defaultSelectedKeys={["1"]}  >
                 <Menu.Item key="action" className="menu-search">
                     <Input.Search

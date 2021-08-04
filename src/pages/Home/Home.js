@@ -39,7 +39,7 @@ export default function Home({
                         isLoadingSearch={isLoadingSearch}
                     />
 
-                    <Col span={23} md={21} xl={17} xxl={21} className="trending">
+                    <Col span={24} md={21} xl={17} xxl={21} className="trending">
                         <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
                             <h2>Seasonal</h2>
                         </Divider>

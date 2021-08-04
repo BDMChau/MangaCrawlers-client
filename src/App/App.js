@@ -1,8 +1,6 @@
 import React, { Suspense, useEffect } from "react";
 import "./App.css"
 import 'antd/dist/antd.css';
-import { Provider, useSelector } from 'react-redux';
-import { store } from '../store/store';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import routes from '../components/routes/routes'
@@ -13,6 +11,7 @@ import NavbarService from "../components/Navbar/NavbarService";
 import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Layout, { Content } from "antd/lib/layout/layout";
+import BotYoutubeMusicService from "../components/BotYoutubeMusic/BotYoutubeMusicService";
 
 
 const Routing = () => {
@@ -55,7 +54,7 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
   return (
       <Suspense fallback={<LoadingPage />}>
         <BrowserRouter>
-
+        <BotYoutubeMusicService/>
           {renderMangaComponentPages()}
 
         </BrowserRouter>

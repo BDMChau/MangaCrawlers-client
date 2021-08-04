@@ -92,13 +92,13 @@
 
 @media only screen and (min-width: 1200px) {
   .home-middle-wrap {
-    margin: 0 120px;
+    margin: 0;
   }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .home-middle-wrap {
-    margin: 0 70px;
+    margin: 0;
   }
 }
 
@@ -110,7 +110,7 @@
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .home-middle-wrap {
-    margin: 0 50px;
+    margin: 0;
   }
 
   .ant-col-md-8 {
