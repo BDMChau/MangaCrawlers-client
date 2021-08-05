@@ -1,4 +1,4 @@
-import axiosClient from '../axiosClient';
+import { axiosClient } from '../axiosClients';
 
 
 const adminApi = {
@@ -68,7 +68,7 @@ const adminApi = {
                 Authorization: token
             }
         })
-    }, 
+    },
     getReportManga: (token) => {
         const url = '/api/admin/reportmanga'
         return axiosClient.get(url, {

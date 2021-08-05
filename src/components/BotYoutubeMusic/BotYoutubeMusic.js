@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { AutoComplete, Input, Select, Typography } from "antd";
+import "./BotYoutubeMusic.css";
+import { AutoComplete, Input, Select, Tag, Typography } from "antd";
 import YouTube from "react-youtube";
 import Form from "antd/lib/form/Form";
 
@@ -9,14 +10,19 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
     const [commands, setCommands] = useState([]);
 
     const cmdList = [
-        <p>
-            <b>/hello</b>
-            <br /> Start command
-        </p>,
-        "/help ",
-        "/play ",
-        "/stop ",
-        "/pause "
+        {
+            title: "/hello ",
+            subTitle: "Start command"
+        },
+        {
+            title: "/help ",
+            subTitle: "Start command"
+        },
+        {
+            title: "/pause ",
+            subTitle: "Start command"
+        },
+
     ]
 
     const options = {
@@ -44,9 +50,25 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
         },
     }
 
+
+
+    const isCmdLength = () => {
+        let length = 0
+        for (let i = 0; i < cmdList.length; i++) {
+            if (cmdList[i].title.includes(inputVal)) {
+                length = cmdList[i].title.length - 1;
+                break;
+            }
+        }
+
+        return length;
+    }
+
     const handleCommands = () => {
-        if (inputVal.indexOf("/") !== -1) {
-            setCommands(cmdList);
+        if ((inputVal.startsWith("/")) && inputVal.length <= isCmdLength()) {
+            const filtedCmds = cmdList.filter(cmd => cmd.title.includes(inputVal))
+            setCommands(filtedCmds)
+
         } else {
             setCommands([]);
         }
@@ -103,6 +125,7 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
     }
 
 
+
     return (
         <div>
             <YouTube
@@ -116,7 +139,7 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
                 <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
                 {messages.length
                     ? messages.map((mess, i) => (
-                        <p>{mess}</p>
+                        <div dangerouslySetInnerHTML={{ __html: mess }}></div>
                     ))
                     : ""
 
@@ -126,23 +149,26 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
             <Form>
                 <AutoComplete
+                    className={"input-bot"}
                     onSearch={(value) => setInputVal(value)}
+                    onSelect={() => setCommands([])}
                     placeholder="Input hear..."
-                    style={{
-                        width: 200,
-                    }}
+
                 >
                     {commands.length
                         ? commands.map((cmd, i) => (
-                            <AutoComplete.Option key={i} value={cmd}>
-                                {cmd}
+                            <AutoComplete.Option key={i} value={cmd.title}>
+                                <div>
+                                    <div style={{ background: "red", width: "fit-content" }} dangerouslySetInnerHTML={{ __html: cmd.title }}></div>
+                                    <div dangerouslySetInnerHTML={{ __html: cmd.subTitle }}></div>
+                                </div>
                             </AutoComplete.Option>
                         ))
                         : ""
                     }
                 </AutoComplete>
 
-                <button onClick={() => handleSendInput(inputVal)}>Send</button>
+                <button onClick={() => handleSendInput(inputVal)} >Send</button>
             </Form>
 
 

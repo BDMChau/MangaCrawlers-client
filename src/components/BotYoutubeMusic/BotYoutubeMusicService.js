@@ -31,10 +31,10 @@ export default function BotYoutubeMusicService() {
             //     console.log("url")
             // }
 
-            if(inputVal === "/hello"){
+            if(inputVal === "/hello "){
                 const arr = [
                     "Hello ^^, I'm a bot created to play music with youtube",
-                    <p>You can type <b>/help</b> to display a full list of commands available!</p>,
+                   "<p>You can type <b>/help</b> to display a full list of commands available!</p>",
                 ]
 
                 setMessages(arr)

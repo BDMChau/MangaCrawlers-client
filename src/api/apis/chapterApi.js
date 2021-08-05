@@ -1,5 +1,5 @@
-import axiosClient from '../axiosClient';
- 
+import { axiosClient } from '../axiosClients';
+
 
 const chapterApi = {
     getChapterImgs: (data) => {
