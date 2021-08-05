@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "antd";
+import { AutoComplete, Input, Select, Typography } from "antd";
 import YouTube from "react-youtube";
 import Form from "antd/lib/form/Form";
 
 export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
     const [event, setEvent] = useState({});
     const [inputVal, setInputVal] = useState("");
+    const [commands, setCommands] = useState([]);
+
+    const cmdList = [
+        <p>
+            <b>/hello</b>
+            <br /> Start command
+        </p>,
+        "/help ",
+        "/play ",
+        "/stop ",
+        "/pause "
+    ]
 
     const options = {
         height: "390",
@@ -30,8 +42,20 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
         onReady: (e) => {
             setEvent(e);
         },
-
     }
+
+    const handleCommands = () => {
+        if (inputVal.indexOf("/") !== -1) {
+            setCommands(cmdList);
+        } else {
+            setCommands([]);
+        }
+    }
+
+    useEffect(() => {
+        handleCommands()
+    }, [inputVal])
+
 
     // play when have new video id
     useEffect(() => {
@@ -89,17 +113,34 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
             />
 
             <div className="messages-cont">
+                <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
                 {messages.length
-                    ? messages.map((message, i) => (
-                        <p>message</p>
+                    ? messages.map((mess, i) => (
+                        <p>{mess}</p>
                     ))
                     : ""
 
                 }
             </div>
 
+
             <Form>
-                <Input value={inputVal} onChange={(e) => setInputVal(e.target.value)} />
+                <AutoComplete
+                    onSearch={(value) => setInputVal(value)}
+                    placeholder="Input hear..."
+                    style={{
+                        width: 200,
+                    }}
+                >
+                    {commands.length
+                        ? commands.map((cmd, i) => (
+                            <AutoComplete.Option key={i} value={cmd}>
+                                {cmd}
+                            </AutoComplete.Option>
+                        ))
+                        : ""
+                    }
+                </AutoComplete>
 
                 <button onClick={() => handleSendInput(inputVal)}>Send</button>
             </Form>
