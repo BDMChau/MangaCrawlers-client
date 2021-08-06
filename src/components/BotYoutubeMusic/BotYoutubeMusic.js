@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./BotYoutubeMusic.css";
-import { AutoComplete, Input, Select, Tag, Typography } from "antd";
+import { AutoComplete, Button, Input, Row, Select, Tag, Typography } from "antd";
 import YouTube from "react-youtube";
 import Form from "antd/lib/form/Form";
+import { SendOutlined } from "@ant-design/icons"
 
 export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
     const [event, setEvent] = useState({});
@@ -25,11 +26,6 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
     ]
 
-    const options = {
-        height: "390",
-        width: "640"
-    };
-
 
     const interaction = {
         onPlay: () => {
@@ -51,8 +47,32 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
     }
 
 
+    //////// play video when have new videoId
+    useEffect(() => {
+        if (itemId) {
+            interaction.onStop()
+            interaction.onPlay();
+        }
+    }, [itemId]);
 
-    const isCmdLength = () => {
+
+
+    //////// handle command of user's input
+    useEffect(() => {
+        handleCommands()
+    }, [inputVal])
+
+    const handleCommands = () => {
+        if ((inputVal.startsWith("/")) && inputVal.length <= checkCmdLength()) {
+            const filtedCmds = cmdList.filter(cmd => cmd.title.includes(inputVal))
+            setCommands(filtedCmds)
+
+        } else {
+            setCommands([]);
+        }
+    }
+
+    const checkCmdLength = () => {
         let length = 0
         for (let i = 0; i < cmdList.length; i++) {
             if (cmdList[i].title.includes(inputVal)) {
@@ -64,34 +84,11 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
         return length;
     }
 
-    const handleCommands = () => {
-        if ((inputVal.startsWith("/")) && inputVal.length <= isCmdLength()) {
-            const filtedCmds = cmdList.filter(cmd => cmd.title.includes(inputVal))
-            setCommands(filtedCmds)
 
-        } else {
-            setCommands([]);
-        }
-    }
-
-    useEffect(() => {
-        handleCommands()
-    }, [inputVal])
-
-
-    // play when have new video id
-    useEffect(() => {
-        if (itemId) {
-            interaction.onStop()
-            interaction.onPlay();
-        }
-    }, [itemId]);
-
-
+    //////// handle errors
     useEffect(() => {
         handleErrors()
     }, [event]);
-
 
     const handleErrors = () => {
         if (event.data === null) {
@@ -127,10 +124,14 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
 
     return (
-        <div>
+        <Row style={{ margin: "15px 3px" }}>
             <YouTube
+                className="iframe-youtube"
                 videoId={itemId ? itemId : ""}
-                opts={options}
+                opts={{
+                    height: "0",
+                    width: "0",
+                }}
                 onReady={(e) => interaction.onReady(e)}
                 onError={(e) => interaction.onError(e)}
             />
@@ -147,9 +148,9 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
             </div>
 
 
-            <Form>
+            <Form className="form-input-bot" onKeyPress={(e) => e.key === "Enter" ? handleSendInput(inputVal) : ""} >
                 <AutoComplete
-                    className={"input-bot"}
+                    className="input-bot"
                     onSearch={(value) => setInputVal(value)}
                     onSelect={() => setCommands([])}
                     placeholder="Input hear..."
@@ -168,10 +169,16 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
                     }
                 </AutoComplete>
 
-                <button onClick={() => handleSendInput(inputVal)} >Send</button>
+                <Button
+                    className="btn-send"
+                    onClick={() => handleSendInput(inputVal)}
+                >
+                    <SendOutlined style={{ fontSize: "17px", marginTop:"3px" }
+                    } />
+                </Button>
             </Form>
 
 
-        </div>
+        </Row>
     );
 }

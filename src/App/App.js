@@ -11,7 +11,7 @@ import NavbarService from "../components/Navbar/NavbarService";
 import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Layout, { Content } from "antd/lib/layout/layout";
-import BotYoutubeMusicService from "../components/BotYoutubeMusic/BotYoutubeMusicService";
+import AddOnsBtn from "../components/Button/AddOnsBtn/AddOnsBtn";
 
 
 const Routing = () => {
@@ -41,10 +41,10 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
       <CheckingScrollEvent scrollYPosition={scrollYPosition} />
       <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
-      <MessengerCustomerChat
-        pageId="101341455476510"
-        appId="496491375126587"
-      />
+      
+      <AddOnsBtn />
+
+     
       <FooterContainer />
     </Layout>
   )
@@ -54,7 +54,6 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
   return (
       <Suspense fallback={<LoadingPage />}>
         <BrowserRouter>
-        <BotYoutubeMusicService/>
           {renderMangaComponentPages()}
 
         </BrowserRouter>

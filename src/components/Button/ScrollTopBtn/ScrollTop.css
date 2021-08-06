@@ -2,8 +2,8 @@
   width: 45px;
   height: 45px;
   position: fixed;
-  top: 92%;
-  right: 5%;
+  bottom: 85px;
+  right: 4%;
   background: rgba(255, 255, 255, 0.747);
   border: none;
   transition: 0.3s;

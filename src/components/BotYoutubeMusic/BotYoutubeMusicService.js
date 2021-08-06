@@ -4,7 +4,6 @@ import BotYoutubeMusic from './BotYoutubeMusic'
 
 export default function BotYoutubeMusicService() {
     const [messages, setMessages] = useState([
-      
     ]);
     const [apiKey, setApiKey] = useState("");
     const [itemId, setItemId] = useState(null);
@@ -21,15 +20,15 @@ export default function BotYoutubeMusicService() {
 
     const handleSendInput = (inputVal) => {
         if (inputVal) {
-            // const strList = inputVal.split("?v=");
-            // const value = inputVal;
-            // const videoId = strList[1];
+            const strList = inputVal.split("?v=");
+            const value = inputVal;
+            const videoId = strList[1];
 
-            // if (!videoId) { // if inputVal is to search, videoId will be undefined
-            //     getListFromYoutubeApi(value);
-            // } else { // if inputVal is a URL, videoId after ?v= will be persent
-            //     console.log("url")
-            // }
+            if (!videoId) { // if inputVal is to search, videoId will be undefined
+                getListFromYoutubeApi(value);
+            } else { // if inputVal is a URL, videoId after ?v= will be persent
+                console.log("url")
+            }
 
             if(inputVal === "/hello "){
                 const arr = [
@@ -52,6 +51,7 @@ export default function BotYoutubeMusicService() {
             const response = await botMusicApi.getListFromYoutubeApi(data);
 
             const items = response.items;
+            console.log(items[0])
             const firstItemId = items[0].id.videoId
 
             setItemId(firstItemId);

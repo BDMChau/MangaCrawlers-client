@@ -1,0 +1,96 @@
+.addons-btn {
+  width: 45px;
+  height: 45px;
+  position: fixed;
+  bottom: 30px;
+  right: 4%;
+  background: rgba(255, 255, 255, 0.747);
+  border: none;
+  transition: 0.3s;
+  padding-left: 14px;
+  padding-bottom: 2px;
+  border-radius: 50%;
+  z-index: 999;
+}
+
+.addons-btn:hover {
+  background: #fff;
+}
+
+.addons-btn:active {
+  background: #fff;
+  box-shadow: 0px 0px 10px 0 inset #4ca2f33a !important;
+}
+
+.addons-btn:focus {
+  background: #fff;
+  box-shadow: none;
+}
+
+.music-btn {
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+}
+
+/* dropdown menu */
+.dropdown-items{
+  border-radius: 3px;
+  position: fixed;
+  background-color: #fff;
+}
+
+.dropdown-items .ant-dropdown-menu {
+  background-color: transparent;
+  box-shadow: none;
+  display: flex;
+  padding: 5px;
+}
+
+
+.dropdown-items .ant-dropdown-menu-item,
+.dropdown-items .ant-dropdown-menu-submenu-title {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 6px 6px;
+}
+
+.dropdown-items .ant-dropdown-menu-item.ant-dropdown-menu-item-only-child.ant-dropdown-menu-item-active{
+  background-color: transparent;
+  cursor: default;
+}
+
+
+
+
+/* ////// Bot music */
+.bot-modal .ant-modal-body{
+  padding: 5px;
+  margin: 0;
+}
+
+
+
+/* /////////////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .addons-btn {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    top: 88%;
+    right: 10%;
+  }
+
+  .addons-btn span.anticon.anticon-up {
+    margin-left: -3px;
+  }
+}

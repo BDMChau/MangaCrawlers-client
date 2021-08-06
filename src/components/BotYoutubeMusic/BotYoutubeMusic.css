@@ -2,3 +2,59 @@
   width: 200px;
 }
 
+.messages-cont {
+  width: 100%;
+  height: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* ///////////////////// input part */
+form.form-input-bot {
+  margin-right: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+form.form-input-bot .input-bot {
+  margin-right: 5px;
+  width: 100%;
+}
+
+form.form-input-bot .input-bot .ant-select-selector {
+  border: none !important;
+  background: #80808021 !important;
+  border-radius: 50px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+/* text of input */
+form.form-input-bot .input-bot .ant-select-selector .ant-select-selection-search {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+/* when focus input */
+.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  box-shadow: none !important;
+}
+
+form.form-input-bot .btn-send {
+  border: none;
+  height: 100%;
+  border-radius: 5px 15px 5px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .messages-cont {
+    height: 280px;
+  }
+}

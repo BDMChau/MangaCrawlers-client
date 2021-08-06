@@ -17,8 +17,10 @@ export default function ScrollTopBtn({ isVisibleProps }) {
 
     return (
         <Button
+            title="Scroll to Top"
             className="scroll-top-btn" style={{ opacity: isVisibleProps ? 1 : 0, visibility: isVisibleProps ? 'visible' : 'hidden' }}
-            onClick={() => scrollToTop()}>
+            onClick={() => scrollToTop()}
+        >
             <UpOutlined style={{ fontSize: "17px", fontWeight: "800" }} />
         </Button>
     )
