@@ -4,27 +4,15 @@ import { AutoComplete, Button, Input, Row, Select, Tag, Typography } from "antd"
 import YouTube from "react-youtube";
 import Form from "antd/lib/form/Form";
 import { SendOutlined } from "@ant-design/icons"
+import { commandsList } from "./features/commandsList";
+import stereo from "../../assets/img/stereo.svg";
 
-export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
+export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId }) {
     const [event, setEvent] = useState({});
     const [inputVal, setInputVal] = useState("");
     const [commands, setCommands] = useState([]);
 
-    const cmdList = [
-        {
-            title: "/hello ",
-            subTitle: "Start command"
-        },
-        {
-            title: "/help ",
-            subTitle: "Start command"
-        },
-        {
-            title: "/pause ",
-            subTitle: "Start command"
-        },
 
-    ]
 
 
     const interaction = {
@@ -64,7 +52,7 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
     const handleCommands = () => {
         if ((inputVal.startsWith("/")) && inputVal.length <= checkCmdLength()) {
-            const filtedCmds = cmdList.filter(cmd => cmd.title.includes(inputVal))
+            const filtedCmds = commandsList.filter(cmd => cmd.title.includes(inputVal))
             setCommands(filtedCmds)
 
         } else {
@@ -74,14 +62,20 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
     const checkCmdLength = () => {
         let length = 0
-        for (let i = 0; i < cmdList.length; i++) {
-            if (cmdList[i].title.includes(inputVal)) {
-                length = cmdList[i].title.length - 1;
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title.includes(inputVal)) {
+                length = commandsList[i].title.length - 1;
                 break;
             }
         }
 
         return length;
+    }
+
+
+    const handleInput = () => {
+        handleSendInput(inputVal);
+        setInputVal("");
     }
 
 
@@ -129,8 +123,8 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
                 className="iframe-youtube"
                 videoId={itemId ? itemId : ""}
                 opts={{
-                    height: "0",
-                    width: "0",
+                    height: "200",
+                    width: "200",
                 }}
                 onReady={(e) => interaction.onReady(e)}
                 onError={(e) => interaction.onError(e)}
@@ -138,30 +132,69 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
             <div className="messages-cont">
                 <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
-                {messages.length
-                    ? messages.map((mess, i) => (
-                        <div dangerouslySetInnerHTML={{ __html: mess }}></div>
-                    ))
-                    : ""
 
-                }
+                <div className="message-item">
+                    {messages
+                        ? messages.map((mess, i) => (
+                            mess.title === "bot"
+
+                                // bot's message
+                                ? <div className="bot-message-cont">
+                                    {mess.content.length
+                                        ? <div className="message-bot">
+                                            <img className="bot-avatar" src={stereo} alt="" />
+
+                                            <div>
+                                                {mess.content.map((botMess, i) => (
+                                                    <div key={i} dangerouslySetInnerHTML={{ __html: botMess }}></div>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        : ""
+                                    }
+                                </div>
+
+                                // user's message 
+                                : <div className="user-message-cont">
+                                    {mess.content.length
+                                        ? <div className="message-user">
+                                            <div>
+                                                {mess.content.map((userMess, i) => (
+                                                    <div key={i} dangerouslySetInnerHTML={{ __html: userMess }}></div>
+                                                ))}
+                                            </div>
+
+                                            <img className="user-avatar" src="https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg" alt="" />
+                                        </div>
+                                        : ""
+                                    }
+                                </div>
+                        ))
+                        : ""
+                    }
+                </div>
             </div>
 
 
-            <Form className="form-input-bot" onKeyPress={(e) => e.key === "Enter" ? handleSendInput(inputVal) : ""} >
+            {isLoading
+                ? <p>Sending...</p>
+                : ""
+            }
+            <Form className="form-input-bot" onKeyPress={(e) => e.key === "Enter" ? handleInput() : ""} >
                 <AutoComplete
                     className="input-bot"
                     onSearch={(value) => setInputVal(value)}
-                    onSelect={() => setCommands([])}
+                    onSelect={(value) => { setCommands([]); setInputVal(value) }}
+                    value={inputVal}
                     placeholder="Input hear..."
-
                 >
                     {commands.length
                         ? commands.map((cmd, i) => (
                             <AutoComplete.Option key={i} value={cmd.title}>
                                 <div>
-                                    <div style={{ background: "red", width: "fit-content" }} dangerouslySetInnerHTML={{ __html: cmd.title }}></div>
-                                    <div dangerouslySetInnerHTML={{ __html: cmd.subTitle }}></div>
+                                    <div style={{ fontWeight: 600, width: "fit-content" }} dangerouslySetInnerHTML={{ __html: cmd.title }}></div>
+                                    <div style={{ color: "#42414180" }} dangerouslySetInnerHTML={{ __html: cmd.subTitle }}></div>
                                 </div>
                             </AutoComplete.Option>
                         ))
@@ -171,9 +204,9 @@ export default function BotYoutubeMusic({ messages, handleSendInput, itemId }) {
 
                 <Button
                     className="btn-send"
-                    onClick={() => handleSendInput(inputVal)}
+                    onClick={() => handleInput()}
                 >
-                    <SendOutlined style={{ fontSize: "17px", marginTop:"3px" }
+                    <SendOutlined style={{ fontSize: "17px", marginTop: "3px" }
                     } />
                 </Button>
             </Form>

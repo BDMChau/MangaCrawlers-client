@@ -5,9 +5,40 @@
 .messages-cont {
   width: 100%;
   height: 300px;
+  overflow-y: auto;
   margin: 0;
   padding: 0;
 }
+
+.messages-cont .message-item{
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+
+.messages-cont .message-item .message-bot{
+  display: flex;
+  float: left;
+}
+
+.messages-cont .message-item .message-user{
+  display: flex;
+  float: right;
+}
+
+.messages-cont .message-item .message-bot .bot-avatar,
+.messages-cont .message-item .message-user .user-avatar{
+  width: 35px;
+  height: 35px;
+  background-color: rgba(128, 128, 128, 0.308);
+  border-radius: 50px;
+  padding: 5px;
+  margin: 0px 5px 0px 0px
+}
+
+
 
 
 
