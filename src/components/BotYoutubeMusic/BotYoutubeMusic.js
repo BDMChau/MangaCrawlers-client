@@ -20,7 +20,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
 
 
 
-    const interaction = {
+    const interactions = {
         onPlay: () => {
             console.log("play");
             event.target.playVideo();
@@ -42,7 +42,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     //////// play video when have new videoId
     useEffect(() => {
         if (itemId) {
-            interaction.onReady();
+            interactions.onReady();
         }
     }, [itemId]);
 
@@ -78,7 +78,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     const checkisCmd = (input) => {
         const strList = input.split(" ");
         const cmd = strList[0] + " ";
-        
+
         for (let i = 0; i < commandsList.length; i++) {
             if (commandsList[i].title === cmd) {
                 return true;
@@ -94,17 +94,18 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
         const value = strList[1];
 
         const isCmd = checkisCmd(inputVal);
-        if(isCmd === false) {
+        if (isCmd === false) {
             message_error("Wrong command!", 2)
             return;
         }
 
-        if(!value){
+        if (!value) {
             message_warning("Input your URL or some keywords!", 3)
             return;
         }
-        
-        handleSendInput(inputVal)
+
+        handleSendInput(inputVal);
+        setInputVal("");
     }
 
 
@@ -158,8 +159,8 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
                         height: "200",
                         width: "200",
                     }}
-                    onReady={(e) => interaction.onReady(e)}
-                    onError={(e) => interaction.onError(e)}
+                    onReady={(e) => interactions.onReady(e)}
+                    onError={(e) => interactions.onError(e)}
                 />
                 : ""
 

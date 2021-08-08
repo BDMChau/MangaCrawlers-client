@@ -100,10 +100,12 @@ export default function BotYoutubeMusicService() {
     }, [itemId, itemInfo])
 
     const handleReplyUser = () => {
-        if (userInput === "/hello ") {
+        const strList = userInput.split(" ");
+        const cmd = strList[0] + " ";
+
+        if (cmd === "/play ") {
             const arr = [
-                `Jumped to <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a>`,
-                `<b>Now playing</b> <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 2px 3px; border-radius: 3px;">[@${userName}]</p>`,
+                `Queued <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`,
             ]
 
             const botMessages = {
