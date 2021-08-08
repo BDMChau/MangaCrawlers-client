@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import botMusicApi from '../../api/apis/botMusicApi';
+import { message_error } from '../notifications/message';
 import BotYoutubeMusic from './BotYoutubeMusic'
-import pauseicon from "../../assets/img/pause.svg";
+import { commandsList } from './features/commandsList';
 
 export default function BotYoutubeMusicService() {
     const userState = useSelector((state) => state.userState);
@@ -29,7 +30,7 @@ export default function BotYoutubeMusicService() {
 
 
     useEffect(() => {
-        if(userState[0]){
+        if (userState[0]) {
             setUserName(userState[0].user_name)
         }
     }, [userState[0]])
@@ -41,13 +42,27 @@ export default function BotYoutubeMusicService() {
             setIsLoading(true);
             setUserInput(inputVal)
 
+            const strList = inputVal.split(" ");
+            const cmd = strList[0] + " ";
+
             const userMessages = {
                 title: "user",
-                content: [inputVal]
+                cmd: cmd,
+                content: inputVal
             }
+            const newContent = userMessages.content.replace(cmd, "");
+            userMessages.content = newContent
+
             setMessages(prevMess => [...prevMess, userMessages])
 
+            if (cmd === "/play ") {
+                handlePlaySong(inputVal);
+            }
+        }
+    }
 
+    const handlePlaySong = (inputVal) => {
+        if (inputVal) {
             setTimeout(() => {
                 const strList = inputVal.split("?v=");
                 const value = inputVal;
@@ -73,7 +88,8 @@ export default function BotYoutubeMusicService() {
 
     /////////////// reply when have message from user ////////////////
     useEffect(() => {
-        if (itemId && Object.keys(itemInfo).length !==0) {
+        console.log("???")
+        if (itemId && Object.keys(itemInfo).length !== 0) {
             if (messages[messages.length - 1]) {
                 // confirm the last message is from user
                 if (messages[messages.length - 1].title === 'user') {
@@ -86,7 +102,8 @@ export default function BotYoutubeMusicService() {
     const handleReplyUser = () => {
         if (userInput === "/hello ") {
             const arr = [
-                `<img style="width: 25px; height: 25px;" src=${pauseicon} alt="" /> Paused the player`,
+                `Jumped to <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a>`,
+                `<b>Now playing</b> <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 2px 3px; border-radius: 3px;">[@${userName}]</p>`,
             ]
 
             const botMessages = {
@@ -95,6 +112,7 @@ export default function BotYoutubeMusicService() {
             }
 
             setMessages(prevMess => [...prevMess, botMessages])
+
         }
     }
 
@@ -115,13 +133,18 @@ export default function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getListVideosFromYoutubeApi(data);
 
-            const items = response.items;
+            if (response) {
+                const items = response.items;
 
-            const firstItemId = items[0].id.videoId
-            const firstItemSnippet = response.items[0].snippet
+                const firstItemId = items[0].id.videoId
+                const firstItemSnippet = response.items[0].snippet
 
-            setItemId(firstItemId);
-            setItemInfo(firstItemSnippet);
+                setItemId(firstItemId);
+                setItemInfo(firstItemSnippet);
+            } else {
+                message_error("Having an error when play your song :(")
+            }
+
         } catch (e) {
             console.log(e)
         }
@@ -137,11 +160,15 @@ export default function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getVideoFromYoutubeApi(data);
 
-            const itemIdRes = response.items[0].id
-            const itemSnippet = response.items[0].snippet
+            if (response) {
+                const itemIdRes = response.items[0].id
+                const itemSnippet = response.items[0].snippet
 
-            setItemId(itemIdRes);
-            setItemInfo(itemSnippet);
+                setItemId(itemIdRes);
+                setItemInfo(itemSnippet);
+            } else {
+                message_error("Having an error when play your song :(")
+            }
         } catch (e) {
             console.log(e)
         }

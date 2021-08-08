@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./BotYoutubeMusic.css";
-import { AutoComplete, Button, Input, Row, Select, Tag, Typography } from "antd";
+import { AutoComplete, Button, Row, Typography } from "antd";
 import YouTube from "react-youtube";
 import Form from "antd/lib/form/Form";
 import { SendOutlined } from "@ant-design/icons"
 import { commandsList } from "./features/commandsList";
+import { useSelector } from "react-redux";
 
 import stereo from "../../assets/img/stereo.svg";
+import { message_error, message_warning } from "../notifications/message";
 
 export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId }) {
-    const [event, setEvent] = useState({});
+    const userState = useSelector((state) => state.userState);
+
+    const [event, setEvent] = useState(null);
     const [inputVal, setInputVal] = useState("");
     const [commands, setCommands] = useState([]);
 
@@ -23,7 +27,6 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
         },
         onStop: () => {
             console.log("stop");
-
             event.target.stopVideo();
         },
         onError: (e) => {
@@ -39,11 +42,9 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     //////// play video when have new videoId
     useEffect(() => {
         if (itemId) {
-            interaction.onStop()
-            interaction.onPlay();
+            interaction.onReady();
         }
     }, [itemId]);
-
 
 
     //////// handle command of user's input
@@ -52,7 +53,8 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     }, [inputVal])
 
     const handleCommands = () => {
-        if ((inputVal.startsWith("/")) && inputVal.length <= checkCmdLength()) {
+        if ((inputVal.startsWith("/")) && inputVal.length <= cmdLength()) {
+            console.log("??????")
             const filtedCmds = commandsList.filter(cmd => cmd.title.includes(inputVal))
             setCommands(filtedCmds)
 
@@ -61,7 +63,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
         }
     }
 
-    const checkCmdLength = () => {
+    const cmdLength = () => {
         let length = 0
         for (let i = 0; i < commandsList.length; i++) {
             if (commandsList[i].title.includes(inputVal)) {
@@ -73,16 +75,44 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
         return length;
     }
 
+    const checkisCmd = (input) => {
+        const strList = input.split(" ");
+        const cmd = strList[0] + " ";
+        
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title === cmd) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     const handleInput = () => {
-        handleSendInput(inputVal);
-        setInputVal("");
+        const strList = inputVal.split(" ");
+        const value = strList[1];
+
+        const isCmd = checkisCmd(inputVal);
+        if(isCmd === false) {
+            message_error("Wrong command!", 2)
+            return;
+        }
+
+        if(!value){
+            message_warning("Input your URL or some keywords!", 3)
+            return;
+        }
+        
+        handleSendInput(inputVal)
     }
 
 
     //////// handle errors
     useEffect(() => {
-        handleErrors()
+        if (event) {
+            handleErrors()
+        }
     }, [event]);
 
     const handleErrors = () => {
@@ -120,16 +150,21 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
 
     return (
         <Row style={{ margin: "15px 3px" }}>
-            <YouTube
-                className="iframe-youtube"
-                videoId={itemId ? itemId : ""}
-                opts={{
-                    height: "200",
-                    width: "200",
-                }}
-                onReady={(e) => interaction.onReady(e)}
-                onError={(e) => interaction.onError(e)}
-            />
+            {itemId
+                ? <YouTube
+                    className="iframe-youtube"
+                    videoId={itemId ? itemId : ""}
+                    opts={{
+                        height: "200",
+                        width: "200",
+                    }}
+                    onReady={(e) => interaction.onReady(e)}
+                    onError={(e) => interaction.onError(e)}
+                />
+                : ""
+
+            }
+
 
             <div className="messages-cont">
                 <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
@@ -146,6 +181,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
                                             <img className="bot-avatar" src={stereo} alt="" />
 
                                             <div>
+                                                <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
                                                 {mess.content.map((botMess, i) => (
                                                     <div key={i} dangerouslySetInnerHTML={{ __html: botMess }}></div>
                                                 ))}
@@ -158,18 +194,16 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
 
                                 // user's message 
                                 : <div className="user-message-cont">
-                                    {mess.content.length
-                                        ? <div className="message-user">
-                                            <div>
-                                                {mess.content.map((userMess, i) => (
-                                                    <div key={i} dangerouslySetInnerHTML={{ __html: userMess }}></div>
-                                                ))}
-                                            </div>
-
-                                            <img className="user-avatar" src="https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg" alt="" />
+                                    <div className="message-user">
+                                        <div style={{ marginTop: "15px", display: "flex" }} >
+                                            {mess.cmd ? <div className="user-cmd" key={i} dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""}
+                                            &nbsp; <div className="user-content" key={i} dangerouslySetInnerHTML={{ __html: mess.content }}></div>
                                         </div>
-                                        : ""
-                                    }
+
+                                        <div>
+                                            <img className="user-avatar" src={userState[0] ? userState[0].user_avatar : "https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg"} alt="" />
+                                        </div>
+                                    </div>
                                 </div>
                         ))
                         : ""
@@ -188,6 +222,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
                     onSearch={(value) => setInputVal(value)}
                     onSelect={(value) => { setCommands([]); setInputVal(value) }}
                     value={inputVal}
+                    defaultActiveFirstOption
                     placeholder="Input hear..."
                 >
                     {commands.length

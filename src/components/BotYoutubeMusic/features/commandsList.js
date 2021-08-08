@@ -26,6 +26,10 @@
         subTitle: "Unpause current song"
     },
     {
+        title: "/jump ",
+        subTitle: "Jump to a song"
+    },
+    {
         title: "/queue ",
         subTitle: "List all songs in queue"
     },
