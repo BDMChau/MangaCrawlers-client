@@ -1,11 +1,11 @@
  export const commandsList = [
     {
         title: "/hello ",
-        subTitle: "Let's start with me"
+        subTitle: "Some infomation about me"
     },
     {
         title: "/help ",
-        subTitle: "Some information about me"
+        subTitle: "List details of available commands"
     },
 
     ///////// song commands
@@ -31,7 +31,7 @@
     },
     {
         title: "/clear ",
-        subTitle: "Clear queue"
+        subTitle: "Clear the queue"
     },
 
 ]
