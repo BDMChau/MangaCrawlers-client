@@ -3,8 +3,8 @@ import {axiosClient} from '../axiosClients';
 
 const genreApi = {
     getAll: () => {
-        const url = '/api/genre/getallgenres'
-        return axiosClient.get(url)
+        const uri = '/api/genre/getallgenres'
+        return axiosClient.get(uri)
     }
 
 }

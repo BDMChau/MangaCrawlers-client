@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./BotYoutubeMusic.css";
 import { AutoComplete, Button, Row, Typography } from "antd";
 import YouTube from "react-youtube";
@@ -10,14 +10,17 @@ import { useSelector } from "react-redux";
 import stereo from "../../assets/img/stereo.svg";
 import { message_error, message_warning } from "../notifications/message";
 
-export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId }) {
+export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId, userCommand }) {
     const userState = useSelector((state) => state.userState);
 
     const [event, setEvent] = useState(null);
     const [inputVal, setInputVal] = useState("");
+    const [inputWarning, setInputWarning] = useState("");
+
     const [commands, setCommands] = useState([]);
 
-
+    const scrollRef = useRef(null);
+    const [sttScroll, setSttScroll] = useState(false);
 
 
     const interactions = {
@@ -27,10 +30,16 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
         },
         onStop: () => {
             console.log("stop");
+            setEvent(null);
             event.target.stopVideo();
         },
+        onPause: () => {
+            event.target.pauseVideo();
+        },
+        onUnpause: () => {
+            event.target.playVideo();
+        },
         onError: (e) => {
-            console.log("err", e);
             setEvent(e);
         },
         onReady: (e) => {
@@ -39,58 +48,38 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     }
 
 
-    //////// play video when have new videoId
+    ////// userCommand is prop from service, commands here are not all
     useEffect(() => {
-        if (itemId) {
-            interactions.onReady();
+        if (userCommand) {
+            handleUserCmd(userCommand)
         }
-    }, [itemId]);
+    }, [userCommand])
 
+    const handleUserCmd = (command) => {
+        if (command === "/stop ") {
+            if (event) {
+                interactions.onStop()
+            }
 
-    //////// handle command of user's input
-    useEffect(() => {
-        handleCommands()
-    }, [inputVal])
+        } else if (command === "/pause ") {
+            if (event) {
+                interactions.onPause()
+            }
 
-    const handleCommands = () => {
-        if ((inputVal.startsWith("/")) && inputVal.length <= cmdLength()) {
-            console.log("??????")
-            const filtedCmds = commandsList.filter(cmd => cmd.title.includes(inputVal))
-            setCommands(filtedCmds)
-
-        } else {
-            setCommands([]);
-        }
-    }
-
-    const cmdLength = () => {
-        let length = 0
-        for (let i = 0; i < commandsList.length; i++) {
-            if (commandsList[i].title.includes(inputVal)) {
-                length = commandsList[i].title.length - 1;
-                break;
+        } else if (command === "/unpause ") {
+            if (event) {
+                interactions.onUnpause()
             }
         }
-
-        return length;
-    }
-
-    const checkisCmd = (input) => {
-        const strList = input.split(" ");
-        const cmd = strList[0] + " ";
-
-        for (let i = 0; i < commandsList.length; i++) {
-            if (commandsList[i].title === cmd) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
 
+
+
+    ////// send input to service component
     const handleInput = () => {
         const strList = inputVal.split(" ");
+        const cmd = strList[0] + " ";
         const value = strList[1];
 
         const isCmd = checkisCmd(inputVal);
@@ -99,17 +88,43 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
             return;
         }
 
-        if (!value) {
-            message_warning("Input your URL or some keywords!", 3)
-            return;
+        const commandsRequireInput = [
+            "/play ",
+            "/jump "
+        ]
+
+        if (commandsRequireInput.includes(cmd)) {
+            setInputWarning("Input is required. Specify a value")
+            if (!value) {
+                message_warning("Input your URL or some keywords!", 3)
+                return;
+            }
         }
 
         handleSendInput(inputVal);
         setInputVal("");
+        setInputWarning("");
     }
 
 
-    //////// handle errors
+
+    ////// render commands list recommended when user types /...
+    useEffect(() => {
+        handleRenderCommands()
+    }, [inputVal])
+
+    const handleRenderCommands = () => {
+        if ((inputVal.startsWith("/")) && inputVal.length <= cmdLength()) {
+            const filtedCmds = commandsList.filter(cmd => cmd.title.includes(inputVal))
+            setCommands(filtedCmds)
+
+        } else {
+            setCommands([]);
+        }
+    }
+
+
+    //////// handle errors: Have new videoId >>> event change >>> No error ? case null : others
     useEffect(() => {
         if (event) {
             handleErrors()
@@ -117,11 +132,6 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     }, [event]);
 
     const handleErrors = () => {
-        if (event.data === null) {
-            event.target.stopVideo();
-            event.target.playVideo();
-        }
-
         switch (event.data) {
             case null:
                 event.target.stopVideo();
@@ -149,15 +159,74 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
 
 
 
+
+    ///////////// stuffs
+    const cmdLength = () => {
+        let length = 0
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title.includes(inputVal)) {
+                length = commandsList[i].title.length - 1;
+                break;
+            }
+        }
+
+        return length;
+    }
+
+    const checkisCmd = (input) => {
+        const strList = input.split(" ");
+        const cmd = strList[0] + " ";
+
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title === cmd) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+    //// scroll
+    useEffect(() => {
+        let myRef = scrollRef.current;
+        if (myRef) {
+            const currentScroll = myRef.scrollTop + myRef.clientHeight;
+
+            // auto scroll to bottom when have new message
+            if (currentScroll + 300 >= myRef.scrollHeight) {
+                myRef.scrollTop = myRef.scrollHeight;
+            }
+
+            // when first loading message
+            else if (sttScroll === false) {
+                if (myRef.scrollTop === 0) {
+                    myRef.scrollTop = myRef.scrollHeight;
+                }
+            }
+
+            // when get more message >>> see function handleScrollGetMoreMessage()
+            else if (sttScroll === true) {
+                if (myRef.scrollTop === 0) {
+                    myRef.scrollTop = 500;
+
+                }
+            }
+        }
+    })
+
+
+
     return (
-        <Row style={{ margin: "15px 3px" }}>
+        <Row style={{ margin: "5px 3px" }}>
             {itemId
                 ? <YouTube
                     className="iframe-youtube"
                     videoId={itemId ? itemId : ""}
                     opts={{
-                        height: "200",
-                        width: "200",
+                        height: "0",
+                        width: "0",
                     }}
                     onReady={(e) => interactions.onReady(e)}
                     onError={(e) => interactions.onError(e)}
@@ -167,7 +236,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
             }
 
 
-            <div className="messages-cont">
+            <div className="messages-cont" ref={scrollRef}>
                 <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
 
                 <div className="message-item">
@@ -184,7 +253,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
                                             <div>
                                                 <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
                                                 {mess.content.map((botMess, i) => (
-                                                    <div key={i} dangerouslySetInnerHTML={{ __html: botMess }}></div>
+                                                    <div dangerouslySetInnerHTML={{ __html: botMess }}></div>
                                                 ))}
                                             </div>
                                         </div>
@@ -197,8 +266,8 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
                                 : <div className="user-message-cont">
                                     <div className="message-user">
                                         <div style={{ marginTop: "15px", display: "flex" }} >
-                                            {mess.cmd ? <div className="user-cmd" key={i} dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""}
-                                            &nbsp; <div className="user-content" key={i} dangerouslySetInnerHTML={{ __html: mess.content }}></div>
+                                            {mess.cmd ? <div className="user-cmd" dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""}
+                                            &nbsp; <div className="user-content" dangerouslySetInnerHTML={{ __html: mess.content }}></div>
                                         </div>
 
                                         <div>
@@ -214,9 +283,12 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
 
 
             {isLoading
-                ? <p>Sending...</p>
+                ? <p style={{ margin: "0" }}>Sending...</p>
                 : ""
             }
+
+            {inputWarning ? <p style={{ color: "red", margin: "0" }} >{inputWarning}</p> : ""}
+
             <Form className="form-input-bot" onKeyPress={(e) => e.key === "Enter" ? handleInput() : ""} >
                 <AutoComplete
                     className="input-bot"

@@ -42,7 +42,7 @@ axiosClient.interceptors.response.use((res) => {
 
 // second server >> nodejs
 const secondAxiosClient = axios.create({
-    baseURL: endPoint.local,
+    baseURL: endPoint.local02,
     headers: {
     },
     paramsSerializer: params => {

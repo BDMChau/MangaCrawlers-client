@@ -3,40 +3,40 @@ import { axiosClient } from '../axiosClients';
 
 const adminApi = {
     getAllUsers: (token) => {
-        const url = '/api/admin/getallusers'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/getallusers'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     getAllMangas: (token) => {
-        const url = '/api/admin/getallmangas'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/getallmangas'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     getAllTransGroups: (token) => {
-        const url = '/api/admin/getalltransgroup'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/getalltransgroup'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     deprecateUser: (token, data) => {
-        const url = '/api/admin/deprecateuser'
-        return axiosClient.put(url, data, {
+        const uri = '/api/admin/deprecateuser'
+        return axiosClient.put(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     removeUser: (token, data) => {
-        const url = '/api/admin/deleteuser'
-        return axiosClient.delete(url, {
+        const uri = '/api/admin/deleteuser'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
@@ -44,8 +44,8 @@ const adminApi = {
         })
     },
     removeManga: (token, data) => {
-        const url = '/api/admin/deletemanga'
-        return axiosClient.delete(url, {
+        const uri = '/api/admin/deletemanga'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
@@ -53,8 +53,8 @@ const adminApi = {
         })
     },
     removeTransGroup: (token, data) => {
-        const url = '/api/admin/deletetransgroup'
-        return axiosClient.delete(url, {
+        const uri = '/api/admin/deletetransgroup'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
@@ -62,24 +62,24 @@ const adminApi = {
         })
     },
     getReportUser: (token) => {
-        const url = '/api/admin/reportuser'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/reportuser'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     getReportManga: (token) => {
-        const url = '/api/admin/reportmanga'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/reportmanga'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     getReportTransGr: (token) => {
-        const url = '/api/admin/reporttransgroup'
-        return axiosClient.get(url, {
+        const uri = '/api/admin/reporttransgroup'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }

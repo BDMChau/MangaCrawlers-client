@@ -3,74 +3,74 @@ import { axiosClient } from '../axiosClients';
 
 const mangaApi = {
     getLatest: () => {
-        const url = '/api/manga/getlastest'
-        return axiosClient.get(url)
+        const uri = '/api/manga/getlastest'
+        return axiosClient.get(uri)
     },
     getTop: () => {
-        const url = '/api/manga/gettop'
-        return axiosClient.get(url)
+        const uri = '/api/manga/gettop'
+        return axiosClient.get(uri)
     },
     getWeekly: () => {
-        const url = '/api/manga/getweekly'
-        return axiosClient.get(url)
+        const uri = '/api/manga/getweekly'
+        return axiosClient.get(uri)
     },
     getManga: (params) => {
-        const url = `/api/manga/getmangapage?manga_id=${params.manga_id}`
-        return axiosClient.get(url);
+        const uri = `/api/manga/getmangapage?manga_id=${params.manga_id}`
+        return axiosClient.get(uri);
     },
     getMangasFromGenre: (data) => {
-        const url = '/api/manga/findmangafromgenre' // fix this to get method
-        return axiosClient.post(url, data)
+        const uri = '/api/manga/findmangafromgenre' // fix this to get method
+        return axiosClient.post(uri, data)
     },
     getTredingDaily: () => {
-        const url = '/api/manga/getdaily'
-        return axiosClient.get(url)
+        const uri = '/api/manga/getdaily'
+        return axiosClient.get(uri)
     },
     getSuggestionList: () => {
-        const url = '/api/manga/getsuggestion'
-        return axiosClient.get(url)
+        const uri = '/api/manga/getsuggestion'
+        return axiosClient.get(uri)
     },
     search: (data) => {
-        const url = '/api/manga/searchmangas'
-        return axiosClient.post(url, data)
+        const uri = '/api/manga/searchmangas'
+        return axiosClient.post(uri, data)
     },
     getComments: (data) => {
-        const url = '/api/manga/getcommentsmanga'
-        return axiosClient.post(url, data)
+        const uri = '/api/manga/getcommentsmanga'
+        return axiosClient.post(uri, data)
     },
     searchMangasByGenres: (data) => {
-        const url = '/api/manga/advancedsearch'
-        return axiosClient.post(url, data)
+        const uri = '/api/manga/advancedsearch'
+        return axiosClient.post(uri, data)
     },
 
     ///////////// user part
     getHistoryManga: (token) => {
-        const url = '/api/user/gethistorymanga'
-        return axiosClient.get(url, {
+        const uri = '/api/user/gethistorymanga'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     getFollowingManga: (token) => {
-        const url = '/api/user/getfollowingmangas'
-        return axiosClient.get(url, {
+        const uri = '/api/user/getfollowingmangas'
+        return axiosClient.get(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     addToFollowing: (data, token) => {
-        const url = '/api/user/addfollowingmanga'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/addfollowingmanga'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     removeFollowing: (data, token) => {
-        const url = '/api/user/deletefollowingmanga'
-        return axiosClient.delete(url, {
+        const uri = '/api/user/deletefollowingmanga'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
@@ -78,16 +78,16 @@ const mangaApi = {
         })
     },
     updateReadingHistory: (data, token) => {
-        const url = '/api/user/updatereadinghistory'
-        return axiosClient.put(url, data, {
+        const uri = '/api/user/updatereadinghistory'
+        return axiosClient.put(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     ratingManga: (data, token) => {
-        const url = '/api/user/ratingmanga'
-        return axiosClient.put(url, data, {
+        const uri = '/api/user/ratingmanga'
+        return axiosClient.put(uri, data, {
             headers: {
                 Authorization: token
             }

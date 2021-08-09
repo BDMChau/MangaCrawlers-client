@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 import botMusicApi from '../../api/apis/botMusicApi';
 import { message_error } from '../notifications/message';
 import BotYoutubeMusic from './BotYoutubeMusic'
-import { commandsList } from './features/commandsList';
+import botMessagesPreset from './features/botMessagesPreset'
+
+import playicon from '../../assets/img/playicon.svg'
+import pauseicon from '../../assets/img/pause.svg'
 
 export default function BotYoutubeMusicService() {
     const userState = useSelector((state) => state.userState);
@@ -13,6 +16,7 @@ export default function BotYoutubeMusicService() {
     const [messages, setMessages] = useState([]);
 
     const [userInput, setUserInput] = useState("");
+    const [userCommand, setUserCommand] = useState("");
 
     const [isLoading, setIsLoading] = useState("");
 
@@ -37,12 +41,13 @@ export default function BotYoutubeMusicService() {
 
 
 
-    const handleSendInput = (inputVal) => {
+    const handleSendInput = async (inputVal) => {
         if (inputVal) {
             setIsLoading(true);
             setUserInput(inputVal)
 
             const strList = inputVal.split(" ");
+            const value = strList[1];
             const cmd = strList[0] + " ";
 
             const userMessages = {
@@ -55,77 +60,152 @@ export default function BotYoutubeMusicService() {
 
             setMessages(prevMess => [...prevMess, userMessages])
 
-            if (cmd === "/play ") {
-                handlePlaySong(inputVal);
-            }
+
+
+            handleUserCmd(cmd, value)
+
         }
     }
 
-    const handlePlaySong = (inputVal) => {
-        if (inputVal) {
-            setTimeout(() => {
-                const strList = inputVal.split("?v=");
-                const value = inputVal;
-                const videoId = strList[1];
 
-                if (!videoId) { // if inputVal is to search, videoId will be undefined
-                    getListVideosFromYoutubeApi(value);
+    const handleUserCmd = (command, value) => {
+        if (command === "/play ") {
+            setItemId("")
+            playSong(value);
+            setUserCommand(command)
 
-                } else { // if inputVal is a URL, videoId after ?v= will be persent
-                    if (strList[0] !== defaultUrl) {
-                        console.log("invalid Url!")
-                        return;
-                    }
+        } else if (command === "/stop ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.stop(defaultUrl, itemId, itemInfo.title, userName)
+                }
+                
+                setItemId("");
+                setItemInfo({});
+                setMessages(prevMess => [...prevMess, botMessages])
+                setUserCommand(command)
+            }
 
-                    getVideoFromYoutubeApi(videoId);
+            setIsLoading(false)
+
+        } else if (command === "/pause ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.pause(playicon)
                 }
 
-                setIsLoading(false)
-            }, 400)
+                setMessages(prevMess => [...prevMess, botMessages])
+                setUserCommand(command)
+            }
+
+            setIsLoading(false)
+
+        } else if (command === "/unpause ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.unpause(pauseicon)
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+                setUserCommand(command)
+            }
+
+            setIsLoading(false)
+
+        } else if (command === "/clear ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.clear()
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+            }
+
+            setIsLoading(false)
+
+        } else if (command === "/queue ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.queue()
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+                setUserCommand(command)
+            }
+
+            setIsLoading(false)
+
+        } else if (command === "/jump ") {
+            if (itemId) {
+                const botMessages = {
+                    title: "bot",
+                    content: botMessagesPreset.jump(defaultUrl, itemId, itemInfo.title, userName)
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+                setUserCommand(command)
+            }
+
+            setIsLoading(false)
+
+        } else if (command === "/hello ") {
+
+
+        } else if (command === "/help ") {
+
+
         }
     }
 
 
-    /////////////// reply when have message from user ////////////////
+
+
+    //////////// play video /////////////
+    const playSong = async (value) => {
+        if (value) {
+            const strList = value.split("?v=");
+            const videoId = strList[1];
+
+
+            if (!videoId) { // if inputVal is to search, videoId will be undefined
+                getListVideosFromYoutubeApi(value);
+
+            } else { // if inputVal is a URL, videoId after ?v= will be persent
+                if (strList[0] !== defaultUrl) {
+                    console.log("invalid Url!")
+                    return;
+                }
+
+                getVideoFromYoutubeApi(videoId);
+            }
+
+        }
+    }
+
+    // reply for /play command 
     useEffect(() => {
-        console.log("???")
-        if (itemId && Object.keys(itemInfo).length !== 0) {
-            if (messages[messages.length - 1]) {
-                // confirm the last message is from user
-                if (messages[messages.length - 1].title === 'user') {
-                    handleReplyUser()
-                }
-            }
-        }
-    }, [itemId, itemInfo])
-
-    const handleReplyUser = () => {
-        const strList = userInput.split(" ");
-        const cmd = strList[0] + " ";
-
-        if (cmd === "/play ") {
-            const arr = [
-                `Queued <a href=${defaultUrl}?v=${itemId} target="blank_" >${itemInfo.title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`,
-            ]
-
+        console.log(userCommand)
+        if (userCommand === "/play ") {
             const botMessages = {
                 title: "bot",
-                content: arr
+                content: botMessagesPreset.play(defaultUrl, itemId, itemInfo.title, userName)
             }
 
             setMessages(prevMess => [...prevMess, botMessages])
-
+            setIsLoading(false)
         }
-    }
+    }, [itemId, itemInfo])
+
 
 
 
 
     //////////////////////////// apis //////////////////////////
-
-    /**
-    * @param {String} value - The value value to search on youtube
-    */
     const getListVideosFromYoutubeApi = async (value) => {
         try {
             const data = {
@@ -143,8 +223,19 @@ export default function BotYoutubeMusicService() {
 
                 setItemId(firstItemId);
                 setItemInfo(firstItemSnippet);
+                return true;
             } else {
-                message_error("Having an error when play your song :(")
+                const botMessages = {
+                    title: "bot",
+                    content: ["Sorry, there seems to be an error. Try another :("]
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+                setIsLoading(false)
+                message_error("Having an error when play your song :(");
+                setItemId("");
+                setItemInfo({});
+                return false;
             }
 
         } catch (e) {
@@ -168,8 +259,19 @@ export default function BotYoutubeMusicService() {
 
                 setItemId(itemIdRes);
                 setItemInfo(itemSnippet);
+                return true;
             } else {
+                const botMessages = {
+                    title: "bot",
+                    content: ["Sorry, there seems to be an error. Try another :("]
+                }
+
+                setMessages(prevMess => [...prevMess, botMessages])
+                setIsLoading(false)
                 message_error("Having an error when play your song :(")
+                setItemId("");
+                setItemInfo({});
+                return false;
             }
         } catch (e) {
             console.log(e)
@@ -199,6 +301,8 @@ export default function BotYoutubeMusicService() {
             handleSendInput={(inputVal) => handleSendInput(inputVal)}
 
             itemId={itemId}
+
+            userCommand={userCommand}
         />
     )
 }

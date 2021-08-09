@@ -4,10 +4,10 @@
 
 .messages-cont {
   width: 100%;
-  height: 300px;
+  height: 350px;
+  padding: 10px 0;
   overflow-y: auto;
   margin: 0;
-  padding: 0;
 }
 
 .messages-cont .message-item {
@@ -109,4 +109,24 @@ form.form-input-bot .btn-send {
   .messages-cont .message-item .message-user {
     width: 100%;
   }
+}
+
+
+
+.messages-cont::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.messages-cont::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-cont::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.messages-cont::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
 }

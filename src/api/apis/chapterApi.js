@@ -3,12 +3,12 @@ import { axiosClient } from '../axiosClients';
 
 const chapterApi = {
     getChapterImgs: (data) => {
-        const url = '/api/chapter/getimgschapter' // fix this to get method
-        return axiosClient.post(url, data)
+        const uri = '/api/chapter/getimgschapter' // fix this to get method
+        return axiosClient.post(uri, data)
     },
     getComments: (data) => {
-        const url = '/api/chapter/getcommentschapter'
-        return axiosClient.post(url, data)
+        const uri = '/api/chapter/getcommentschapter'
+        return axiosClient.post(uri, data)
     },
 
 }

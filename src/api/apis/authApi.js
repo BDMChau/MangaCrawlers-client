@@ -3,41 +3,41 @@ import { axiosClient } from '../axiosClients';
 
 const authApi = {
     postDataSignIn: (data) => {
-        const url = '/api/auth/signin'
-        return axiosClient.post(url, data)
+        const uri = '/api/auth/signin'
+        return axiosClient.post(uri, data)
     },
     oauthGoogle: () => {
-        const url = '/api/auth/geturloauthgoogle'
-        return axiosClient.get(url)
+        const uri = '/api/auth/geturioauthgoogle'
+        return axiosClient.get(uri)
     },
     getAAA: () => {
-        const url = '/api/auth/getdataoauthgoogle'
-        return axiosClient.get(url)
+        const uri = '/api/auth/getdataoauthgoogle'
+        return axiosClient.get(uri)
     },
 
     postDataSignUp: (data) => {
-        const url = '/api/auth/signup'
-        return axiosClient.post(url, data)
+        const uri = '/api/auth/signup'
+        return axiosClient.post(uri, data)
     },
 
     signOut: (data) => {
-        const url = '/api/auth/signout'
-        return axiosClient.post(url, data)
+        const uri = '/api/auth/signout'
+        return axiosClient.post(uri, data)
     },
 
     changePassword: (data) => {
-        const url = '/api/auth/changepass'
-        return axiosClient.put(url, data)
+        const uri = '/api/auth/changepass'
+        return axiosClient.put(uri, data)
     },
 
     requestchangepassword: (data) => {
-        const url = '/api/auth/requestchangepass'
-        return axiosClient.post(url, data)
+        const uri = '/api/auth/requestchangepass'
+        return axiosClient.post(uri, data)
     },
 
     verifyAccount: (data) => {
-        const url = '/api/auth/confirmverification'
-        return axiosClient.post(url, data)
+        const uri = '/api/auth/confirmverification'
+        return axiosClient.post(uri, data)
     },
 }
 

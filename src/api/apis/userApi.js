@@ -3,8 +3,8 @@ import { axiosClient } from '../axiosClients';
 
 const userApi = {
     updateAvatar: (token, formData) => {
-        const url = '/api/user/updateavatar'
-        return axiosClient.put(url, formData, {
+        const uri = '/api/user/updateavatar'
+        return axiosClient.put(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
@@ -12,16 +12,16 @@ const userApi = {
         })
     },
     removeAvatar: (token) => {
-        const url = '/api/user/removeavatar'
-        return axiosClient.delete(url, {
+        const uri = '/api/user/removeavatar'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             }
         })
     },
     addCmtChapter: (token, data) => {
-        const url = '/api/user/addcommentchapter'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/addcommentchapter'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
@@ -29,32 +29,32 @@ const userApi = {
     },
     ////////////////// translation group
     registerTranslationGroup: (token, data) => {
-        const url = '/api/user/signuptransgroup'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/signuptransgroup'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     getTransGroupInfo: (token, data) => {
-        const url = '/api/user/gettransgroupinfo'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/gettransgroupinfo'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     addNewProjectFields: (token, data) => {
-        const url = '/api/user/addnewprojectmangafields'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/addnewprojectmangafields'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     addNewProjectThumbnail: (token, formData) => {
-        const url = '/api/user/addnewprojectmangathumbnail'
-        return axiosClient.post(url, formData, {
+        const uri = '/api/user/addnewprojectmangathumbnail'
+        return axiosClient.post(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
@@ -62,8 +62,8 @@ const userApi = {
         })
     },
     uploadImagesChapter: (token, formData) => {
-        const url = '/api/user/uploadchapterimgs'
-        return axiosClient.post(url, formData, {
+        const uri = '/api/user/uploadchapterimgs'
+        return axiosClient.post(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
@@ -71,24 +71,24 @@ const userApi = {
         })
     },
     getMangaInfo: (token, data) => {
-        const url = '/api/user/getmangainfo'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/getmangainfo'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     getMangaInfo: (token, data) => {
-        const url = '/api/user/getmangainfo'
-        return axiosClient.post(url, data, {
+        const uri = '/api/user/getmangainfo'
+        return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
         })
     },
     removeManga: (token, data) => {
-        const url = '/api/user/deletemanga'
-        return axiosClient.delete(url, {
+        const uri = '/api/user/deletemanga'
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
