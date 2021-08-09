@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./BotYoutubeMusic.css";
-import { AutoComplete, Button, Row, Typography } from "antd";
-import YouTube from "react-youtube";
-import Form from "antd/lib/form/Form";
-import { SendOutlined } from "@ant-design/icons"
-import { commandsList } from "./features/commandsList";
 import { useSelector } from "react-redux";
+import YouTube from "react-youtube";
 
+import { SendOutlined } from "@ant-design/icons"
 import stereo from "../../assets/img/stereo.svg";
+
+import { AutoComplete, Button, Row, Typography, Form } from "antd";
+
+import { commandsList } from "./features/commandsList";
 import { message_error, message_warning } from "../notifications/message";
 
 export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId, userCommand }) {
@@ -16,7 +17,6 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     const [event, setEvent] = useState(null);
     const [inputVal, setInputVal] = useState("");
     const [inputWarning, setInputWarning] = useState("");
-
     const [commands, setCommands] = useState([]);
 
     const scrollRef = useRef(null);

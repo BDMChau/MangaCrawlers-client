@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import "./Footer.css"
+
 import { Col, Row, Typography } from 'antd'
 import { Footer } from 'antd/lib/layout/layout'
-import "./Footer.css"
 
 
 export default function FooterContainer() {

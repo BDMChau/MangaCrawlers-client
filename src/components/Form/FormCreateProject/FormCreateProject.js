@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import "./FormCreateProject.css"
-import { Form, Input, Button, Select, Popconfirm, Upload, Image, Typography } from 'antd';
 import { GenresTag } from './GenresTag';
-import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+
+import { Form, Input, Button, Select, Popconfirm, Upload, Image, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 
-const { Option } = Select;
+import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+
 
 function getBase64Img(img, callback) {
     const reader = new FileReader();
@@ -121,8 +122,8 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
                         allowClear
                         onChange={(value) => setFieldsData({ ...fieldsData, status: value })}
                     >
-                        <Option value="Ongoing">Ongoing</Option>
-                        <Option value="Completed">Completed</Option>
+                        <Select.Option value="Ongoing">Ongoing</Select.Option>
+                        <Select.Option value="Completed">Completed</Select.Option>
 
                     </Select>
                 </Form.Item>

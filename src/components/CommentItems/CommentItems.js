@@ -1,9 +1,11 @@
 import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
-import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
-import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
 import { NavLink } from 'react-router-dom';
+
+import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
+
 import ButtonLike from './ButtonLike';
+import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
 
 
 function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {

@@ -1,10 +1,11 @@
 import React, { memo } from "react";
 import "./CarouselHorizontal.css";
-import Slider from "react-slick";
+import { NavLink } from "react-router-dom";
 
+import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { NavLink } from "react-router-dom";
+
 import LoadingDots from "../../Loading/LoadingDots/LoadingDots"
 
 

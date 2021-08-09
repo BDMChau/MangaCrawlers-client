@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import "./FadingText.css"
-import { RightOutlined } from "@ant-design/icons"
 import { NavLink } from 'react-router-dom'
+
+import { RightOutlined } from "@ant-design/icons"
+
 
 function FadingText({ content }) {
     const [isExpand, setIsExpand] = useState(false)

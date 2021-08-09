@@ -1,18 +1,9 @@
 import React from 'react'
+
 import { Select, Typography } from 'antd';
-
-const { Option } = Select;
-
-const children = [];
-for (let i = 10; i < 36; i++) {
-  children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-}
 
 
 export const GenresTag = ({ genres, handleChange }) => {
-
-
-
   return (
     <>
       <Select
@@ -29,15 +20,13 @@ export const GenresTag = ({ genres, handleChange }) => {
             ? genres.map((genre, i) => (
               <Select.Option key={i}>
                 <Typography.Text style={{ color: genre.genre_color }}>
-
-                {genre.genre_name}
-
+                  {genre.genre_name}
                 </Typography.Text>
               </Select.Option>
             ))
             : " "
         }
-    </Select>
+      </Select>
     </>
   );
 };

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import "./AddOnsBtn.css"
-import { Button, Dropdown, Menu, Tooltip } from 'antd'
+import BotYoutubeMusicService from "../../BotYoutubeMusic/BotYoutubeMusicService";
+
 import MessengerCustomerChat from 'react-messenger-customer-chat';
+
+import { Button, Dropdown, Menu, Modal } from 'antd'
+
 import { PlusOutlined } from "@ant-design/icons"
 import stereo from "../../../assets/img/stereo.svg"
-import Modal from 'antd/lib/modal/Modal';
-import BotYoutubeMusicService from "../../BotYoutubeMusic/BotYoutubeMusicService";
 
 export default function AddOnsBtn() {
     const [isVisibleModal, setIsVisibleModal] = useState(false)
@@ -57,9 +59,9 @@ export default function AddOnsBtn() {
                 width={700}
                 closable={true}
                 footer={null}
-                
+
             >
-               <BotYoutubeMusicService />
+                <BotYoutubeMusicService />
             </Modal>
         </div>
     )
