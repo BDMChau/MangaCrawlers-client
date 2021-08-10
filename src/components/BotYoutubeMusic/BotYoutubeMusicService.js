@@ -6,8 +6,13 @@ import botMusicApi from '../../api/apis/botMusicApi';
 import BotYoutubeMusic from './BotYoutubeMusic'
 import botMessagesPreset from './features/botMessagesPreset'
 
-import playicon from '../../assets/img/playicon.svg'
-import pauseicon from '../../assets/img/pause.svg'
+import playIcon from '../../assets/img/playicon.svg'
+import pauseIcon from '../../assets/img/pause.svg'
+import kannapalm from '../../assets/img/kannafacepalm.png'
+import kannabored from '../../assets/img/kannabored.gif'
+import kannaconfuse from '../../assets/img/kannawhat.png'
+import kannaaddok from '../../assets/img/Kannaaddokgif.gif'
+import kanndsleep from '../../assets/img/kannasleep.png'
 
 import { message_error } from '../notifications/message';
 
@@ -16,6 +21,7 @@ export default function BotYoutubeMusicService() {
     const userState = useSelector((state) => state.userState);
 
     const [userName, setUserName] = useState("Anonymous");
+    const [userId, setUserId] = useState("");
 
     const [messages, setMessages] = useState([]);
 
@@ -39,9 +45,28 @@ export default function BotYoutubeMusicService() {
 
     useEffect(() => {
         if (userState[0]) {
+            setUserId(userState[0].user_id)
             setUserName(userState[0].user_name)
+            sessionStorage.removeItem("userId")
+        } else {
+            setUserId("")
+            setUserName("")
+        }
+
+        if (sessionStorage.getItem("userId")) {
+            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"))
+            setUserId(sessionUserId)
         }
     }, [userState[0]])
+
+
+    useEffect(() => {
+        if (messages.length) {
+            const lastItem = messages[messages.length - 1];
+
+            postMessage(lastItem);
+        }
+    }, [messages])
 
 
 
@@ -51,8 +76,8 @@ export default function BotYoutubeMusicService() {
             setUserInput(inputVal)
 
             const strList = inputVal.split(" ");
-            const value = strList[1];
             const cmd = strList[0] + " ";
+            const value = inputVal.replace(cmd, "");
 
             const userMessages = {
                 title: "user",
@@ -77,92 +102,66 @@ export default function BotYoutubeMusicService() {
             setItemId("")
             playSong(value);
             setUserCommand(command)
-
-        } else if (command === "/stop ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.stop(defaultUrl, itemId, itemInfo.title, userName)
-                }
-                
-                setItemId("");
-                setItemInfo({});
-                setMessages(prevMess => [...prevMess, botMessages])
-                setUserCommand(command)
-            }
-
-            setIsLoading(false)
-
-        } else if (command === "/pause ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.pause(playicon)
-                }
-
-                setMessages(prevMess => [...prevMess, botMessages])
-                setUserCommand(command)
-            }
-
-            setIsLoading(false)
-
-        } else if (command === "/unpause ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.unpause(pauseicon)
-                }
-
-                setMessages(prevMess => [...prevMess, botMessages])
-                setUserCommand(command)
-            }
-
-            setIsLoading(false)
-
-        } else if (command === "/clear ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.clear()
-                }
-
-                setMessages(prevMess => [...prevMess, botMessages])
-            }
-
-            setIsLoading(false)
-
-        } else if (command === "/queue ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.queue()
-                }
-
-                setMessages(prevMess => [...prevMess, botMessages])
-                setUserCommand(command)
-            }
-
-            setIsLoading(false)
-
-        } else if (command === "/jump ") {
-            if (itemId) {
-                const botMessages = {
-                    title: "bot",
-                    content: botMessagesPreset.jump(defaultUrl, itemId, itemInfo.title, userName)
-                }
-
-                setMessages(prevMess => [...prevMess, botMessages])
-                setUserCommand(command)
-            }
-
-            setIsLoading(false)
+            return;
 
         } else if (command === "/hello ") {
 
-
+            return;
         } else if (command === "/help ") {
 
+            return;
+        }
 
+
+        // interactive commands
+        if (itemId) {
+            if (command === "/stop ") {
+                const content = botMessagesPreset.stop(defaultUrl, itemId, itemInfo.title, userName, kanndsleep);
+                replyFormatForBot(content)
+
+                setItemId("");
+                setItemInfo({});
+                setUserCommand(command)
+                setIsLoading(false)
+
+            } else if (command === "/pause ") {
+                const content = botMessagesPreset.pause(playIcon);
+                replyFormatForBot(content)
+
+                setUserCommand(command)
+                setIsLoading(false)
+
+            } else if (command === "/unpause ") {
+                const content = botMessagesPreset.unpause(pauseIcon);
+                replyFormatForBot(content)
+
+                setUserCommand(command);
+                setIsLoading(false);
+
+            } else if (command === "/clear ") {
+                const content = botMessagesPreset.clear();
+                replyFormatForBot(content)
+
+                setIsLoading(false)
+
+            } else if (command === "/queue ") {
+                const content = botMessagesPreset.queue();
+                replyFormatForBot(content)
+
+                setUserCommand(command)
+                setIsLoading(false)
+
+            } else if (command === "/jump ") {
+                const content = botMessagesPreset.jump(defaultUrl, itemId, itemInfo.title, userName);
+                replyFormatForBot(content)
+
+                setUserCommand(command)
+                setIsLoading(false)
+            }
+
+        } else {
+            const content = botMessagesPreset.recommendedWhenNothing(kannabored, defaultUrl);
+            replyFormatForBot(content)
         }
     }
 
@@ -181,7 +180,10 @@ export default function BotYoutubeMusicService() {
 
             } else { // if inputVal is a URL, videoId after ?v= will be persent
                 if (strList[0] !== defaultUrl) {
-                    console.log("invalid Url!")
+                    const content = botMessagesPreset.invalidUrl(kannaconfuse);
+                    replyFormatForBot(content)
+
+                    setIsLoading(false)
                     return;
                 }
 
@@ -193,17 +195,15 @@ export default function BotYoutubeMusicService() {
 
     // reply for /play command 
     useEffect(() => {
-        console.log(userCommand)
-        if (userCommand === "/play ") {
-            const botMessages = {
-                title: "bot",
-                content: botMessagesPreset.play(defaultUrl, itemId, itemInfo.title, userName)
-            }
+        if (itemId || Object.keys(itemInfo).length !== 0) {
+            if (userCommand === "/play ") {
+                const content = botMessagesPreset.play(defaultUrl, itemId, itemInfo.title, userName, kannaaddok);
+                replyFormatForBot(content)
 
-            setMessages(prevMess => [...prevMess, botMessages])
-            setIsLoading(false)
+                setIsLoading(false)
+            }
         }
-    }, [itemId, itemInfo])
+    }, [itemInfo])
 
 
 
@@ -229,12 +229,9 @@ export default function BotYoutubeMusicService() {
                 setItemInfo(firstItemSnippet);
                 return true;
             } else {
-                const botMessages = {
-                    title: "bot",
-                    content: ["Sorry, there seems to be an error. Try another :("]
-                }
+                const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
+                replyFormatForBot(content)
 
-                setMessages(prevMess => [...prevMess, botMessages])
                 setIsLoading(false)
                 message_error("Having an error when play your song :(");
                 setItemId("");
@@ -265,12 +262,9 @@ export default function BotYoutubeMusicService() {
                 setItemInfo(itemSnippet);
                 return true;
             } else {
-                const botMessages = {
-                    title: "bot",
-                    content: ["Sorry, there seems to be an error. Try another :("]
-                }
+                const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
+                replyFormatForBot(content)
 
-                setMessages(prevMess => [...prevMess, botMessages])
                 setIsLoading(false)
                 message_error("Having an error when play your song :(")
                 setItemId("");
@@ -280,6 +274,32 @@ export default function BotYoutubeMusicService() {
         } catch (e) {
             console.log(e)
         }
+    }
+
+
+    const postMessage = async (lastMessage) => {
+        const data = {
+            userId: userId ? userId : "",
+            message: lastMessage
+        }
+        console.log(data)
+
+        try {
+            const response = await botMusicApi.postMessage(data);
+            if (response.content) {
+                if (!userState[0] && !sessionStorage.getItem("userId")) {
+                    sessionStorage.setItem("userId", JSON.stringify(response.content.user_id))
+                }
+
+                setUserId(response.content.user_id);
+            }
+
+
+        } catch (err) {
+            console.log(err)
+        }
+
+
     }
 
 
@@ -294,6 +314,19 @@ export default function BotYoutubeMusicService() {
             console.log(e)
         }
     }
+
+
+
+    ///////////// stuffs ////////////
+    const replyFormatForBot = (content) => {
+        const botMessages = {
+            title: "bot",
+            content: content
+        }
+
+        setMessages(prevMess => [...prevMess, botMessages])
+    }
+
 
 
 

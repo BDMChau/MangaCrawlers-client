@@ -20,7 +20,7 @@
 .messages-cont .message-item .message-bot {
   display: flex;
   float: left;
-  width: 400px;
+  width: 420px;
 }
 
 .messages-cont .message-item .message-user {
