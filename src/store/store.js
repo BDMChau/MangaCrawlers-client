@@ -13,5 +13,5 @@ export const store = configureStore({
         mangaState: MangaSlice,
         stuffsState: StuffsSlice
     }
-})
+});
 

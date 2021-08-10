@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import "./AddOnsBtn.css"
+import React, { useState } from 'react';
+import "./AddOnsBtn.css";
 import BotYoutubeMusicService from "../../BotYoutubeMusic/BotYoutubeMusicService";
 
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
-import { Button, Dropdown, Menu, Modal } from 'antd'
+import { Button, Dropdown, Menu, Modal } from 'antd';
 
-import { PlusOutlined } from "@ant-design/icons"
-import stereo from "../../../assets/img/stereo.svg"
+import { PlusOutlined } from "@ant-design/icons";
+import stereo from "../../../assets/img/stereo.svg";
 
 export default function AddOnsBtn() {
-    const [isVisibleModal, setIsVisibleModal] = useState(false)
+    const [isVisibleModal, setIsVisibleModal] = useState(false);
 
 
     const dropDownItems = (
@@ -32,7 +32,7 @@ export default function AddOnsBtn() {
                 </Button>
             </Menu.Item>
         </Menu>
-    )
+    );
 
     return (
         <div>
@@ -50,7 +50,7 @@ export default function AddOnsBtn() {
             </Dropdown>
 
 
-            /////////////////////
+            {/* ///////////////////// */}
             <Modal
                 className="bot-modal"
                 title="Bot Music"
@@ -64,5 +64,5 @@ export default function AddOnsBtn() {
                 <BotYoutubeMusicService />
             </Modal>
         </div>
-    )
+    );
 }

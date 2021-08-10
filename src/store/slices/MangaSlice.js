@@ -20,7 +20,7 @@ const MangaSlice = createSlice({
 
         },
     }
-})
+});
 
 const { actions, reducer } = MangaSlice;
 export const { SET_MANGA_ID, SET_MANGA_SEARCHED_BY_GENRES } = actions;

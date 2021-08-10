@@ -1,6 +1,6 @@
-import React from 'react'
-import "./ScrollTop.css"
-import { Button } from 'antd'
+import React from 'react';
+import "./ScrollTop.css";
+import { Button } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
 import smoothscroll from 'smoothscroll-polyfill';
 
@@ -13,7 +13,7 @@ export default function ScrollTopBtn({ isVisibleProps }) {
             top: 0,
             behavior: "smooth"
         });
-    }
+    };
 
     return (
         <Button
@@ -23,5 +23,5 @@ export default function ScrollTopBtn({ isVisibleProps }) {
         >
             <UpOutlined style={{ fontSize: "17px", fontWeight: "800" }} />
         </Button>
-    )
+    );
 }

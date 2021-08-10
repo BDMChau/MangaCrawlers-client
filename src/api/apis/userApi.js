@@ -3,98 +3,90 @@ import { axiosClient } from '../axiosClients';
 
 const userApi = {
     updateAvatar: (token, formData) => {
-        const uri = '/api/user/updateavatar'
+        const uri = '/api/user/updateavatar';
         return axiosClient.put(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
             }
-        })
+        });
     },
     removeAvatar: (token) => {
-        const uri = '/api/user/removeavatar'
+        const uri = '/api/user/removeavatar';
         return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             }
-        })
+        });
     },
     addCmtChapter: (token, data) => {
-        const uri = '/api/user/addcommentchapter'
+        const uri = '/api/user/addcommentchapter';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
-        })
+        });
     },
     ////////////////// translation group
     registerTranslationGroup: (token, data) => {
-        const uri = '/api/user/signuptransgroup'
+        const uri = '/api/user/signuptransgroup';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
-        })
+        });
     },
     getTransGroupInfo: (token, data) => {
-        const uri = '/api/user/gettransgroupinfo'
+        const uri = '/api/user/gettransgroupinfo';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
-        })
+        });
     },
     addNewProjectFields: (token, data) => {
-        const uri = '/api/user/addnewprojectmangafields'
+        const uri = '/api/user/addnewprojectmangafields';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
-        })
+        });
     },
     addNewProjectThumbnail: (token, formData) => {
-        const uri = '/api/user/addnewprojectmangathumbnail'
+        const uri = '/api/user/addnewprojectmangathumbnail';
         return axiosClient.post(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
             }
-        })
+        });
     },
     uploadImagesChapter: (token, formData) => {
-        const uri = '/api/user/uploadchapterimgs'
+        const uri = '/api/user/uploadchapterimgs';
         return axiosClient.post(uri, formData, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token
             }
-        })
+        });
     },
     getMangaInfo: (token, data) => {
-        const uri = '/api/user/getmangainfo'
+        const uri = '/api/user/getmangainfo';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
             }
-        })
-    },
-    getMangaInfo: (token, data) => {
-        const uri = '/api/user/getmangainfo'
-        return axiosClient.post(uri, data, {
-            headers: {
-                Authorization: token
-            }
-        })
+        });
     },
     removeManga: (token, data) => {
-        const uri = '/api/user/deletemanga'
+        const uri = '/api/user/deletemanga';
         return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
             },
             data
-        })
+        });
     },
-}
+};
 
 export default userApi;

@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import botMusicApi from '../../api/apis/botMusicApi';
 
-import BotYoutubeMusic from './BotYoutubeMusic'
-import botMessagesPreset from './features/botMessagesPreset'
+import BotYoutubeMusic from './BotYoutubeMusic';
+import botMessagesPreset from './features/botMessagesPreset';
 
-import playIcon from '../../assets/img/playicon.svg'
-import pauseIcon from '../../assets/img/pause.svg'
-import kannapalm from '../../assets/img/kannafacepalm.png'
-import kannabored from '../../assets/img/kannabored.gif'
-import kannaconfuse from '../../assets/img/kannawhat.png'
-import kannaaddok from '../../assets/img/Kannaaddokgif.gif'
-import kanndsleep from '../../assets/img/kannasleep.png'
+import playIcon from '../../assets/img/playicon.svg';
+import pauseIcon from '../../assets/img/pause.svg';
+import kannapalm from '../../assets/img/kannafacepalm.png';
+import kannabored from '../../assets/img/kannabored.gif';
+import kannaconfuse from '../../assets/img/kannawhat.png';
+import kannaaddok from '../../assets/img/Kannaaddokgif.gif';
+import kanndsleep from '../../assets/img/kannasleep.png';
 
 import { message_error } from '../notifications/message';
 
@@ -35,29 +35,29 @@ export default function BotYoutubeMusicService() {
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
 
-    const defaultUrl = "https://www.youtube.com/watch"
+    const defaultUrl = "https://www.youtube.com/watch";
 
 
     useEffect(() => {
         getApiKey();
-    }, [])
+    }, []);
 
 
     useEffect(() => {
         if (userState[0]) {
-            setUserId(userState[0].user_id)
-            setUserName(userState[0].user_name)
-            sessionStorage.removeItem("userId")
+            setUserId(userState[0].user_id);
+            setUserName(userState[0].user_name);
+            sessionStorage.removeItem("userId");
         } else {
-            setUserId("")
-            setUserName("")
+            setUserId("");
+            setUserName("");
         }
 
         if (sessionStorage.getItem("userId")) {
-            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"))
-            setUserId(sessionUserId)
+            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
+            setUserId(sessionUserId);
         }
-    }, [userState[0]])
+    }, [userState[0]]);
 
 
     useEffect(() => {
@@ -66,14 +66,14 @@ export default function BotYoutubeMusicService() {
 
             postMessage(lastItem);
         }
-    }, [messages])
+    }, [messages]);
 
 
 
-    const handleSendInput = async (inputVal) => {
+    const handleSendInput = (inputVal) => {
         if (inputVal) {
             setIsLoading(true);
-            setUserInput(inputVal)
+            setUserInput(inputVal);
 
             const strList = inputVal.split(" ");
             const cmd = strList[0] + " ";
@@ -83,25 +83,25 @@ export default function BotYoutubeMusicService() {
                 title: "user",
                 cmd: cmd,
                 content: inputVal
-            }
+            };
             const newContent = userMessages.content.replace(cmd, "");
-            userMessages.content = newContent
+            userMessages.content = newContent;
 
-            setMessages(prevMess => [...prevMess, userMessages])
+            setMessages(prevMess => [...prevMess, userMessages]);
 
 
 
-            handleUserCmd(cmd, value)
+            handleUserCmd(cmd, value);
 
         }
-    }
+    };
 
 
     const handleUserCmd = (command, value) => {
         if (command === "/play ") {
-            setItemId("")
+            setItemId("");
             playSong(value);
-            setUserCommand(command)
+            setUserCommand(command);
             return;
 
         } else if (command === "/hello ") {
@@ -117,59 +117,59 @@ export default function BotYoutubeMusicService() {
         if (itemId) {
             if (command === "/stop ") {
                 const content = botMessagesPreset.stop(defaultUrl, itemId, itemInfo.title, userName, kanndsleep);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
                 setItemId("");
                 setItemInfo({});
-                setUserCommand(command)
-                setIsLoading(false)
+                setUserCommand(command);
+                setIsLoading(false);
 
             } else if (command === "/pause ") {
                 const content = botMessagesPreset.pause(playIcon);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setUserCommand(command)
-                setIsLoading(false)
+                setUserCommand(command);
+                setIsLoading(false);
 
             } else if (command === "/unpause ") {
                 const content = botMessagesPreset.unpause(pauseIcon);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
                 setUserCommand(command);
                 setIsLoading(false);
 
             } else if (command === "/clear ") {
                 const content = botMessagesPreset.clear();
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setIsLoading(false)
+                setIsLoading(false);
 
             } else if (command === "/queue ") {
                 const content = botMessagesPreset.queue();
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setUserCommand(command)
-                setIsLoading(false)
+                setUserCommand(command);
+                setIsLoading(false);
 
             } else if (command === "/jump ") {
                 const content = botMessagesPreset.jump(defaultUrl, itemId, itemInfo.title, userName);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setUserCommand(command)
-                setIsLoading(false)
+                setUserCommand(command);
+                setIsLoading(false);
             }
 
         } else {
             const content = botMessagesPreset.recommendedWhenNothing(kannabored, defaultUrl);
-            replyFormatForBot(content)
+            replyFormatForBot(content);
         }
-    }
+    };
 
 
 
 
     //////////// play video /////////////
-    const playSong = async (value) => {
+    const playSong = (value) => {
         if (value) {
             const strList = value.split("?v=");
             const videoId = strList[1];
@@ -181,9 +181,9 @@ export default function BotYoutubeMusicService() {
             } else { // if inputVal is a URL, videoId after ?v= will be persent
                 if (strList[0] !== defaultUrl) {
                     const content = botMessagesPreset.invalidUrl(kannaconfuse);
-                    replyFormatForBot(content)
+                    replyFormatForBot(content);
 
-                    setIsLoading(false)
+                    setIsLoading(false);
                     return;
                 }
 
@@ -191,19 +191,19 @@ export default function BotYoutubeMusicService() {
             }
 
         }
-    }
+    };
 
     // reply for /play command 
     useEffect(() => {
         if (itemId || Object.keys(itemInfo).length !== 0) {
             if (userCommand === "/play ") {
                 const content = botMessagesPreset.play(defaultUrl, itemId, itemInfo.title, userName, kannaaddok);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setIsLoading(false)
+                setIsLoading(false);
             }
         }
-    }, [itemInfo])
+    }, [itemInfo]);
 
 
 
@@ -215,24 +215,24 @@ export default function BotYoutubeMusicService() {
             const data = {
                 apiKey: apiKey,
                 keyword: value
-            }
+            };
 
             const response = await botMusicApi.getListVideosFromYoutubeApi(data);
 
             if (response) {
                 const items = response.items;
 
-                const firstItemId = items[0].id.videoId
-                const firstItemSnippet = response.items[0].snippet
+                const firstItemId = items[0].id.videoId;
+                const firstItemSnippet = response.items[0].snippet;
 
                 setItemId(firstItemId);
                 setItemInfo(firstItemSnippet);
                 return true;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setIsLoading(false)
+                setIsLoading(false);
                 message_error("Having an error when play your song :(");
                 setItemId("");
                 setItemInfo({});
@@ -240,9 +240,9 @@ export default function BotYoutubeMusicService() {
             }
 
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-    }
+    };
 
 
     const getVideoFromYoutubeApi = async (videoId) => {
@@ -250,45 +250,45 @@ export default function BotYoutubeMusicService() {
             const data = {
                 apiKey: apiKey,
                 videoId: videoId
-            }
+            };
 
             const response = await botMusicApi.getVideoFromYoutubeApi(data);
 
             if (response) {
-                const itemIdRes = response.items[0].id
-                const itemSnippet = response.items[0].snippet
+                const itemIdRes = response.items[0].id;
+                const itemSnippet = response.items[0].snippet;
 
                 setItemId(itemIdRes);
                 setItemInfo(itemSnippet);
                 return true;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
-                replyFormatForBot(content)
+                replyFormatForBot(content);
 
-                setIsLoading(false)
-                message_error("Having an error when play your song :(")
+                setIsLoading(false);
+                message_error("Having an error when play your song :(");
                 setItemId("");
                 setItemInfo({});
                 return false;
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-    }
+    };
 
 
     const postMessage = async (lastMessage) => {
         const data = {
             userId: userId ? userId : "",
             message: lastMessage
-        }
-        console.log(data)
+        };
+        console.log(data);
 
         try {
             const response = await botMusicApi.postMessage(data);
             if (response.content) {
                 if (!userState[0] && !sessionStorage.getItem("userId")) {
-                    sessionStorage.setItem("userId", JSON.stringify(response.content.user_id))
+                    sessionStorage.setItem("userId", JSON.stringify(response.content.user_id));
                 }
 
                 setUserId(response.content.user_id);
@@ -296,11 +296,11 @@ export default function BotYoutubeMusicService() {
 
 
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
 
 
-    }
+    };
 
 
     const getApiKey = async () => {
@@ -313,7 +313,7 @@ export default function BotYoutubeMusicService() {
         } catch (e) {
             console.log(e)
         }
-    }
+    };
 
 
 
@@ -322,10 +322,10 @@ export default function BotYoutubeMusicService() {
         const botMessages = {
             title: "bot",
             content: content
-        }
+        };
 
-        setMessages(prevMess => [...prevMess, botMessages])
-    }
+        setMessages(prevMess => [...prevMess, botMessages]);
+    };
 
 
 
@@ -341,5 +341,5 @@ export default function BotYoutubeMusicService() {
 
             userCommand={userCommand}
         />
-    )
+    );
 }

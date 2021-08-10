@@ -1,44 +1,45 @@
 import { Typography } from 'antd';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import authApi from '../../api/apis/authApi';
 
 export default function VerifyAccount() {
     const { token } = useParams();
-    const [isVerified, setIsVerified] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+    const [isVerified, setIsVerified] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
 
     useEffect(() => {
         verifyAccount();
-    }, [token])
+    }, [token]);
 
     useEffect(() => {
         setIsVerified(false);
-        localStorage.removeItem("code_400")
-    }, [JSON.parse(localStorage.getItem("code_400"))])
+        localStorage.removeItem("code_400");
+    }, [JSON.parse(localStorage.getItem("code_400"))]);
 
 
     const verifyAccount = async () => {
-        setIsLoading(true)
+        setIsLoading(true);
         const data = {
             user_verify_token: token
-        }
+        };
+
         try {
             await authApi.verifyAccount(data);
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
-                setIsVerified(false)
-                localStorage.removeItem("code_400")
+                setIsVerified(false);
+                localStorage.removeItem("code_400");
             } else {
-                setIsVerified(true)
+                setIsVerified(true);
             }
 
-            setIsLoading(false)
+            setIsLoading(false);
             return;
         } catch (ex) {
-            console.log(ex)
+            console.log(ex);
         }
-    }
+    };
 
 
     return (
@@ -58,5 +59,5 @@ export default function VerifyAccount() {
                     </div>
                 }
             </div>
-    )
+    );
 }

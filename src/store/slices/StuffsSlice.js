@@ -12,7 +12,7 @@ const StuffsSlice = createSlice({
             }
         }
     }
-})
+});
 
 const { actions, reducer } = StuffsSlice;
 export const { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } = actions;

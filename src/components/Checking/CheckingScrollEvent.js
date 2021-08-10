@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 
 import { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } from "../../store/slices/StuffsSlice";
 import { useDispatch } from 'react-redux';
 
 
 export default function CheckingScrollEvent({ scrollYPosition }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (scrollYPosition) {
@@ -13,12 +13,11 @@ export default function CheckingScrollEvent({ scrollYPosition }) {
         } else {
             dispatch(SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE("false"));
         }
-    }, [scrollYPosition])
+    }, [scrollYPosition]);
 
 
     return (
-        <div>
-
-        </div>
-    )
+        <>
+        </>
+    );
 }

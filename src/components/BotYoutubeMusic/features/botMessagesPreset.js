@@ -55,7 +55,7 @@ const botMessagesPreset = {
             `Go <a href=${url} target="blank_">here</a> and give me what you want to listen`
         ]
     ),
-}
+};
 
 
 export default botMessagesPreset;

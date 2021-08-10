@@ -1,4 +1,4 @@
- export const commandsList = [
+export const commandsList = [
     {
         title: "/hello ",
         subTitle: "Some infomation about me"
@@ -38,4 +38,4 @@
         subTitle: "Clear the queue"
     },
 
-]
+];

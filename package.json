@@ -35,7 +35,8 @@
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -55,5 +56,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-react": "^7.24.0"
+  }
 }

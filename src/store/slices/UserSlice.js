@@ -2,14 +2,14 @@ import Cookies from 'universal-cookie';
 
 const { createSlice } = require("@reduxjs/toolkit");
 
-const cookies = new Cookies()
+const cookies = new Cookies();
 
 const UserSlice = createSlice({
     name: "UserSlice",
     initialState: cookies.get("user") ? [cookies.get("user")] : [],
     reducers: {
         SIGNIN: (state, action) => {
-            state.push(action.payload)
+            state.push(action.payload);
         },
         LOGOUT: (state) => {
             state.length = [];
@@ -21,7 +21,7 @@ const UserSlice = createSlice({
             state[0].user_transgroup_id = action.payload;
         }
     }
-})
+});
 
 const { actions, reducer } = UserSlice;
 export const { SIGNIN, LOGOUT, UPDATE_AVATAR, SET_TRANSGROUP_ID } = actions;

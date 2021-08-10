@@ -15,7 +15,7 @@ const AuthSlice = createSlice({
             state.length = 0;
         }
     }
-})
+});
 
 const { actions, reducer } = AuthSlice;
 export const { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM, RESET } = actions;

@@ -10,7 +10,7 @@ const ApiSlice = createSlice({
         },
       
     }
-})
+});
 
 const { actions, reducer } = ApiSlice;
 export const { SET_ARRAY_WEEKLY_MANGA } = actions;

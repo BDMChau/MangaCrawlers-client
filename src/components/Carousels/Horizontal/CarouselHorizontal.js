@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import LoadingDots from "../../Loading/LoadingDots/LoadingDots"
+import LoadingDots from "../../Loading/LoadingDots/LoadingDots";
 
 
 function CarouselHorizontal({
@@ -32,7 +32,7 @@ function CarouselHorizontal({
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1622902745/Mangaback/c4546a602b7c4797.jpg",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1620740786/Mangaback/714324.png",
         "https://res.cloudinary.com/mangacrawlers/image/upload/v1621594728/Mangaback/qEHxXLP.jpg"
-    ]
+    ];
 
 
     // 10 is data.length when we have real data
@@ -116,4 +116,4 @@ function CarouselHorizontal({
     );
 }
 
-export default memo(CarouselHorizontal)
+export default memo(CarouselHorizontal);
