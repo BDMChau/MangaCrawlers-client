@@ -89,15 +89,12 @@ export default function BotYoutubeMusicService() {
 
             setMessages(prevMess => [...prevMess, userMessages]);
 
-
-
-            handleUserCmd(cmd, value);
-
+            replyUser(cmd, value);
         }
     };
 
 
-    const handleUserCmd = (command, value) => {
+    const replyUser = (command, value) => {
         if (command === "/play ") {
             setItemId("");
             playSong(value);
@@ -115,50 +112,25 @@ export default function BotYoutubeMusicService() {
 
         // interactive commands
         if (itemId) {
-            if (command === "/stop ") {
-                const content = botMessagesPreset.stop(defaultUrl, itemId, itemInfo.title, userName, kanndsleep);
-                replyFormatForBot(content);
-
+            if (command === "/stop " || command === "/clear ") {
                 setItemId("");
                 setItemInfo({});
-                setUserCommand(command);
-                setIsLoading(false);
-
-            } else if (command === "/pause ") {
-                const content = botMessagesPreset.pause(playIcon);
-                replyFormatForBot(content);
-
-                setUserCommand(command);
-                setIsLoading(false);
-
-            } else if (command === "/unpause ") {
-                const content = botMessagesPreset.unpause(pauseIcon);
-                replyFormatForBot(content);
-
-                setUserCommand(command);
-                setIsLoading(false);
-
-            } else if (command === "/clear ") {
-                const content = botMessagesPreset.clear();
-                replyFormatForBot(content);
-
-                setIsLoading(false);
-
-            } else if (command === "/queue ") {
-                const content = botMessagesPreset.queue();
-                replyFormatForBot(content);
-
-                setUserCommand(command);
-                setIsLoading(false);
-
-            } else if (command === "/jump ") {
-                const content = botMessagesPreset.jump(defaultUrl, itemId, itemInfo.title, userName);
-                replyFormatForBot(content);
-
-                setUserCommand(command);
-                setIsLoading(false);
             }
 
+            const rawCommand = command.replace("/", "").replace(" ", ""); // ex: "/pause " >>> "pause"
+            const opts = {
+                url: defaultUrl,
+                id: itemId,
+                title: itemInfo.title,
+                userName: userName,
+                icon: chooseIcon(command)
+            }
+
+            const replyFromBot = botMessagesPreset[rawCommand](opts);
+
+            replyFormatForBot(replyFromBot);
+            setUserCommand(command);
+            setIsLoading(false);
         } else {
             const content = botMessagesPreset.recommendedWhenNothing(kannabored, defaultUrl);
             replyFormatForBot(content);
@@ -193,11 +165,19 @@ export default function BotYoutubeMusicService() {
         }
     };
 
-    // reply for /play command 
+    // reply for /play command: when use /stop or /clear >> itemInfo will be {}
     useEffect(() => {
         if (itemId || Object.keys(itemInfo).length !== 0) {
             if (userCommand === "/play ") {
-                const content = botMessagesPreset.play(defaultUrl, itemId, itemInfo.title, userName, kannaaddok);
+                const opts = {
+                    url: defaultUrl,
+                    id: itemId,
+                    title: itemInfo.title,
+                    userName: userName,
+                    icon: chooseIcon(userCommand)
+                }
+
+                const content = botMessagesPreset.play(opts);
                 replyFormatForBot(content);
 
                 setIsLoading(false);
@@ -217,7 +197,7 @@ export default function BotYoutubeMusicService() {
                 keyword: value
             };
 
-            const response = await botMusicApi.getListVideosFromYoutubeApi(data);
+            const response = await botMusicApi.getListVideosFromYoutubeApi(data, 1);
 
             if (response) {
                 const items = response.items;
@@ -326,6 +306,30 @@ export default function BotYoutubeMusicService() {
 
         setMessages(prevMess => [...prevMess, botMessages]);
     };
+
+
+
+    const chooseIcon = (cmd) => {
+        switch (cmd) {
+            case "/play ":
+                return kannaaddok;
+
+            case "/stop ":
+                return kanndsleep;
+
+            case "/pause ":
+                return playIcon;
+
+            case "/unpause ":
+                return pauseIcon;
+
+            case "/stop ":
+                return kanndsleep;
+
+            default:
+                return "";
+        }
+    }
 
 
 

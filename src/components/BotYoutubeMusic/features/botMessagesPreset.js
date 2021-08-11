@@ -1,22 +1,22 @@
 const botMessagesPreset = {
-    play: (url, id, title, userName, icon) => (
+    play: ({ url, id, title, userName, icon }) => (
         [
             `Queued <a href=${url}?v=${id} target="blank_" >${title}</a>  <img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" />`,
             `<p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`
         ]
     ),
-    stop: (url, id, title, userName, icon) => (
+    stop: ({ url, id, title, userName, icon }) => (
         [
             `Stopped <a href=${url}?v=${id} target="blank_" >${title}</a>  <img style="width: 45px; height: 45px; border-radius: 50px" src=${icon} alt="" />`,
             `<p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`
         ]
     ),
-    pause: (icon) => (
+    pause: ({ icon }) => (
         [
             `<img style="width: 28px; height: 28px;" src=${icon} alt="" /> Paused the player`,
         ]
     ),
-    unpause: (icon) => (
+    unpause: ({ icon }) => (
         [
             `<img style="width: 25px; height: 25px;" src=${icon} alt="" /> unpaused the player`,
         ]
@@ -31,14 +31,14 @@ const botMessagesPreset = {
             `Cleared the queue`,
         ]
     ),
-    jump: (url, id, title, userName) => (
+    jump: ({ url, id, title, userName }) => (
         [
             `Jumped to <a href=${url}?v=${id} target="blank_" >${title}</a>`,
             `<b>Now playing</b> <a href=${url}?v=${id} target="blank_" >${title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`,
         ]
     ),
     ///////////////////
-    invalidUrl: (icon) => (
+    invalidUrl: ({ icon }) => (
         [
             `Unknown URL <img style="width: 50px; height: 50px; border-radius: 3px" src=${icon} alt="" />`,
             `I just can play music from youtube`

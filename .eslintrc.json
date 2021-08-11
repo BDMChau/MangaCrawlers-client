@@ -5,8 +5,8 @@
         "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        // "eslint:recommended",
+        // "plugin:react/recommended"
     ],
     "parser": "babel-eslint",
     "parserOptions": {
@@ -20,41 +20,41 @@
         "react"
     ],
     "rules": {
-        "react/prop-types": 0,
-        "no-unused-vars": [
-            "warn",
-            {
-                "vars": "all",
-                "args": "after-used",
-                "ignoreRestSiblings": false
-            }
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "require-await": "error",
-        "indent": [
-            "warn",
-            4
-        ],
-        "no-multiple-empty-lines": "off",
-        "arrow-spacing": [
-            "error",
-            {
-                "before": true,
-                "after": true
-            }
-        ],
-        "no-confusing-arrow": [
-            "error",
-            {
-                "allowParens": false
-            }
-        ],
-        "no-duplicate-imports": "error",
-        "no-console": "off",
-        "no-empty": "warn",
-        "no-duplicate-case": "error"
+    //     "react/prop-types": 0,
+    //     "no-unused-vars": [
+    //         "warn",
+    //         {
+    //             "vars": "all",
+    //             "args": "after-used",
+    //             "ignoreRestSiblings": false
+    //         }
+    //     ],
+    //     "semi": [
+    //         "off",
+    //         "always"
+    //     ],
+    //     "require-await": "error",
+    //     "indent": [
+    //         "warn",
+    //         4
+    //     ],
+    //     "no-multiple-empty-lines": "off",
+    //     "arrow-spacing": [
+    //         "error",
+    //         {
+    //             "before": true,
+    //             "after": true
+    //         }
+    //     ],
+    //     "no-confusing-arrow": [
+    //         "error",
+    //         {
+    //             "allowParens": false
+    //         }
+    //     ],
+    //     "no-duplicate-imports": "error",
+    //     "no-console": "off",
+    //     "no-empty": "warn",
+    //     "no-duplicate-case": "error"
     }
 }
