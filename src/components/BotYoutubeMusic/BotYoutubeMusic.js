@@ -11,7 +11,18 @@ import { AutoComplete, Button, Row, Typography, Form } from "antd";
 import { commandsList } from "./features/commandsList";
 import { message_error, message_warning } from "../notifications/message";
 
-export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, itemId, userCommand }) {
+export default function BotYoutubeMusic({
+    messages,
+    isLoading,
+    handleSendInput,
+
+    itemId,
+    userCommand,
+
+    getHistoryMessages,
+    isEndConversation,
+    sttScroll
+}) {
     const userState = useSelector((state) => state.userState);
 
     const [event, setEvent] = useState(null);
@@ -20,7 +31,6 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     const [commands, setCommands] = useState([]);
 
     const scrollRef = useRef(null);
-    const [sttScroll, setSttScroll] = useState(false);
 
 
     const interactions = {
@@ -101,9 +111,10 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
             }
         }
 
-        handleSendInput(inputVal);
         setInputVal("");
         setInputWarning("");
+
+        handleSendInput(inputVal); // send to service
     }
 
 
@@ -191,31 +202,37 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
     //// scroll
     useEffect(() => {
         let myRef = scrollRef.current;
+
         if (myRef) {
             const currentScroll = myRef.scrollTop + myRef.clientHeight;
-
             // auto scroll to bottom when have new message
-            if (currentScroll + 300 >= myRef.scrollHeight) {
+            if (currentScroll + 150 >= myRef.scrollHeight) {
                 myRef.scrollTop = myRef.scrollHeight;
             }
 
             // when first loading message
-            else if (sttScroll === false) {
+            if (sttScroll === false) {
                 if (myRef.scrollTop === 0) {
                     myRef.scrollTop = myRef.scrollHeight;
                 }
             }
 
             // when get more message >>> see function handleScrollGetMoreMessage()
-            else if (sttScroll === true) {
+            if (sttScroll === true) {
                 if (myRef.scrollTop === 0) {
-                    myRef.scrollTop = 500;
-
+                    if (!isEndConversation) {
+                        myRef.scrollTop = 500;
+                    }
                 }
             }
         }
     })
 
+    const getMoreHistoryMessages = (e) => {
+        if (e.target.scrollTop === 0) {
+            getHistoryMessages();
+        }
+    }
 
 
     return (
@@ -236,7 +253,7 @@ export default function BotYoutubeMusic({ messages, isLoading, handleSendInput, 
             }
 
 
-            <div className="messages-cont" ref={scrollRef}>
+            <div className="messages-cont" onScroll={(e) => getMoreHistoryMessages(e)} ref={scrollRef}>
                 <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
 
                 <div className="message-item">

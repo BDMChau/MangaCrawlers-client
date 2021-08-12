@@ -26,7 +26,7 @@ export const errCodeResCheking = (errorResponse) => {
                     break;
 
                 default:
-                    message_error("Having a problem, please try again or contact administrator!")
+                    // message_error("Having a problem, please try again or contact administrator!")
                     break;
             }
             localStorage.setItem("code_400", JSON.stringify("BadRequest 400"))

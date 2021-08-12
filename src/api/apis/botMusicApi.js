@@ -19,7 +19,15 @@ const botMusicApi = {
     postMessage: (data) => {
         const uri = `/api/bot/postMessage`;
         return secondAxiosClient.post(uri, data);
-    }
+    },
+    getHistoryMessages: (data) => {
+        const uri = `/api/bot/gethistorymessages`;
+        return secondAxiosClient.post(uri, data);
+    },
+    addToQueue: (data) => {
+        const uri = `/api/bot/addtoqueue`;
+        return secondAxiosClient.post(uri, data);
+    },
 };
 
 export default botMusicApi;

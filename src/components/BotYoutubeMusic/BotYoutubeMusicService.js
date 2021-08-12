@@ -24,16 +24,22 @@ export default function BotYoutubeMusicService() {
     const [userId, setUserId] = useState("");
 
     const [messages, setMessages] = useState([]);
+    const [isHaveNewMessage, setIsHaveNewMessage] = useState(false);
 
     const [userInput, setUserInput] = useState("");
     const [userCommand, setUserCommand] = useState("");
 
-    const [isLoading, setIsLoading] = useState("");
+    const [isLoading, setIsLoading] = useState(Boolean);
+    const [isEndConversation, setIsEndConversation] = useState(Boolean);
 
     const [apiKey, setApiKey] = useState("");
 
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
+
+    const [offset, setOffset] = useState(0);
+    const [sttScroll, setSttScroll] = useState(false);
+
 
     const defaultUrl = "https://www.youtube.com/watch";
 
@@ -42,13 +48,20 @@ export default function BotYoutubeMusicService() {
         getApiKey();
     }, []);
 
+    useEffect(() => {
+        if (userId) getHistoryMessages();
+    }, [userId]);
+
 
     useEffect(() => {
         if (userState[0]) {
             setUserId(userState[0].user_id);
             setUserName(userState[0].user_name);
             sessionStorage.removeItem("userId");
+
+            // getHistoryMessages();
         } else {
+            setMessages([])
             setUserId("");
             setUserName("");
         }
@@ -61,12 +74,13 @@ export default function BotYoutubeMusicService() {
 
 
     useEffect(() => {
-        if (messages.length) {
+        if (isHaveNewMessage) {
             const lastItem = messages[messages.length - 1];
 
+            setIsHaveNewMessage(false);
             postMessage(lastItem);
         }
-    }, [messages]);
+    }, [isHaveNewMessage]);
 
 
 
@@ -88,6 +102,7 @@ export default function BotYoutubeMusicService() {
             userMessages.content = newContent;
 
             setMessages(prevMess => [...prevMess, userMessages]);
+            setIsHaveNewMessage(true);
 
             replyUser(cmd, value);
         }
@@ -125,16 +140,16 @@ export default function BotYoutubeMusicService() {
                 userName: userName,
                 icon: chooseIcon(command)
             }
-
             const replyFromBot = botMessagesPreset[rawCommand](opts);
 
             replyFormatForBot(replyFromBot);
-            setUserCommand(command);
-            setIsLoading(false);
         } else {
             const content = botMessagesPreset.recommendedWhenNothing(kannabored, defaultUrl);
+
             replyFormatForBot(content);
         }
+
+        setUserCommand(command);
     };
 
 
@@ -155,6 +170,7 @@ export default function BotYoutubeMusicService() {
                     const content = botMessagesPreset.invalidUrl(kannaconfuse);
                     replyFormatForBot(content);
 
+                    setIsHaveNewMessage(false);
                     setIsLoading(false);
                     return;
                 }
@@ -186,6 +202,23 @@ export default function BotYoutubeMusicService() {
     }, [itemInfo]);
 
 
+    // handle scroll when loading message
+    useEffect(() => {
+        // when first loading message
+        const setSttTime1 = setTimeout(() => {
+            setSttScroll(false);
+        })
+
+        // when get more message >>> see function handleScrollGetMoreMessage()
+        const setSttTime2 = setTimeout(() => {
+            setSttScroll(true);
+        }, 1000)
+
+        return () => {
+            clearTimeout(setSttTime1)
+            clearTimeout(setSttTime2)
+        };
+    }, []);
 
 
 
@@ -262,7 +295,6 @@ export default function BotYoutubeMusicService() {
             userId: userId ? userId : "",
             message: lastMessage
         };
-        console.log(data);
 
         try {
             const response = await botMusicApi.postMessage(data);
@@ -273,8 +305,6 @@ export default function BotYoutubeMusicService() {
 
                 setUserId(response.content.user_id);
             }
-
-
         } catch (err) {
             console.log(err);
         }
@@ -295,7 +325,40 @@ export default function BotYoutubeMusicService() {
         }
     };
 
+    const getHistoryMessages = async () => {
+        try {
+            const data = {
+                userId: userId,
+                offset: offset,
+                limit: 5
+            }
 
+            const response = await botMusicApi.getHistoryMessages(data);
+            if (response.content) {
+                if (response.content.countinue_at) {
+                    setOffset(response.content.countinue_at)
+                } else {
+                    if (response.content.msg === "end of conversation") {
+                        setIsEndConversation(true);
+                    }
+                }
+
+                console.log(response)
+
+                const messages = response.content.messages;
+
+                setMessages(prevMess => [...messages, ...prevMess])
+            } else {
+
+                // msg: "no messages found"
+                setIsEndConversation(true);
+            }
+
+
+        } catch (e) {
+            console.log(e)
+        }
+    };
 
     ///////////// stuffs ////////////
     const replyFormatForBot = (content) => {
@@ -305,6 +368,9 @@ export default function BotYoutubeMusicService() {
         };
 
         setMessages(prevMess => [...prevMess, botMessages]);
+
+        setIsLoading(false);
+        setIsHaveNewMessage(true);
     };
 
 
@@ -344,6 +410,10 @@ export default function BotYoutubeMusicService() {
             itemId={itemId}
 
             userCommand={userCommand}
+
+            getHistoryMessages={() => getHistoryMessages()}
+            isEndConversation={isEndConversation}
+            sttScroll={sttScroll}
         />
     );
 }
