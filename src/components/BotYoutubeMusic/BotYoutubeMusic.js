@@ -10,6 +10,7 @@ import { AutoComplete, Button, Row, Typography, Form } from "antd";
 
 import { commandsList } from "./features/commandsList";
 import { message_error, message_warning } from "../notifications/message";
+import TransitionAnimate from "../Animation/transition";
 
 export default function BotYoutubeMusic({
     messages,
@@ -206,31 +207,27 @@ export default function BotYoutubeMusic({
         if (myRef) {
             const currentScroll = myRef.scrollTop + myRef.clientHeight;
             // auto scroll to bottom when have new message
-            if (currentScroll + 150 >= myRef.scrollHeight) {
+            if (currentScroll + 500 >= myRef.scrollHeight && !inputVal) {
                 myRef.scrollTop = myRef.scrollHeight;
             }
 
             // when first loading message
-            if (sttScroll === false) {
-                if (myRef.scrollTop === 0) {
-                    myRef.scrollTop = myRef.scrollHeight;
-                }
-            }
-
-            // when get more message >>> see function handleScrollGetMoreMessage()
-            if (sttScroll === true) {
-                if (myRef.scrollTop === 0) {
-                    if (!isEndConversation) {
-                        myRef.scrollTop = 500;
-                    }
-                }
+            if (myRef.scrollTop === 0) {
+                myRef.scrollTop = myRef.scrollHeight;
             }
         }
     })
 
-    const getMoreHistoryMessages = (e) => {
+    const getMoreHistoryMessages = async (e) => {
         if (e.target.scrollTop === 0) {
-            getHistoryMessages();
+            let myRef = scrollRef.current;
+
+            await getHistoryMessages();
+
+            if (!isEndConversation) {
+
+                myRef.scrollTop = 820;
+            }
         }
     }
 
@@ -267,10 +264,13 @@ export default function BotYoutubeMusic({
                                         ? <div className="message-bot">
                                             <img className="bot-avatar" src={stereo} alt="" />
 
-                                            <div>
+                                            <div className="bot-text">
                                                 <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
                                                 {mess.content.map((botMess, i) => (
-                                                    <div dangerouslySetInnerHTML={{ __html: botMess }}></div>
+                                                    <TransitionAnimate
+                                                        renderPart={<div dangerouslySetInnerHTML={{ __html: botMess }}></div>}
+                                                        transitionTime={0.3}
+                                                    />
                                                 ))}
                                             </div>
                                         </div>
@@ -282,9 +282,9 @@ export default function BotYoutubeMusic({
                                 // user's message 
                                 : <div className="user-message-cont">
                                     <div className="message-user">
-                                        <div style={{ marginTop: "15px", display: "flex" }} >
-                                            {mess.cmd ? <div className="user-cmd" dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""}
-                                            &nbsp; <div className="user-content" dangerouslySetInnerHTML={{ __html: mess.content }}></div>
+                                        <div className="user-text" >
+                                            <TransitionAnimate renderPart={mess.cmd ? <div className="user-cmd" dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""} />
+                                            <TransitionAnimate renderPart={<div className="user-content" dangerouslySetInnerHTML={{ __html: mess.content }}></div>} />
                                         </div>
 
                                         <div>

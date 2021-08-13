@@ -11,7 +11,7 @@ export default function TransitionAnimate({ renderPart, transitionTime }) {
             initial={{
                 opacity: 0,
             }}
-            transition={{ duration: transitionTime }}
+            transition={{ duration: transitionTime ? transitionTime : 0.3 }}
         >
             {renderPart}
         </motion.div>

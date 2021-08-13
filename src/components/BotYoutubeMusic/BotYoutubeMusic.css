@@ -21,6 +21,14 @@
   display: flex;
   float: left;
   width: 420px;
+  margin: 5px 0px;
+}
+
+.messages-cont .message-item .message-bot .bot-text {
+  font-weight: 500;
+  padding: 10px;
+  background-color: #7676ad45;
+  border-radius: 5px;
 }
 
 .messages-cont .message-item .message-user {
@@ -28,6 +36,15 @@
   justify-content: flex-end;
   float: right;
   width: 400px;
+}
+
+.messages-cont .message-item .message-user .user-text {
+  font-weight: 500;
+  margin-top: 15px;
+  display: flex;
+  padding: 10px;
+  background-color: #7676ad45;
+  border-radius: 5px;
 }
 
 .messages-cont .message-item .message-user .user-cmd {
@@ -38,6 +55,7 @@
 }
 
 .messages-cont .message-item .message-user .user-content {
+  text-indent: 5px;
   margin-top: 10px;
   word-break: break-all;
 }
@@ -101,17 +119,14 @@ form.form-input-bot .btn-send {
     height: 350px;
   }
 
-
   .messages-cont .message-item .message-bot {
     width: 100%;
   }
-  
+
   .messages-cont .message-item .message-user {
     width: 100%;
   }
 }
-
-
 
 .messages-cont::-webkit-scrollbar {
   width: 6px;

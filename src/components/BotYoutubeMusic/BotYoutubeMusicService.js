@@ -207,7 +207,7 @@ export default function BotYoutubeMusicService() {
         // when first loading message
         const setSttTime1 = setTimeout(() => {
             setSttScroll(false);
-        })
+        }, 0)
 
         // when get more message >>> see function handleScrollGetMoreMessage()
         const setSttTime2 = setTimeout(() => {
@@ -326,37 +326,39 @@ export default function BotYoutubeMusicService() {
     };
 
     const getHistoryMessages = async () => {
-        try {
-            const data = {
-                userId: userId,
-                offset: offset,
-                limit: 5
-            }
-
-            const response = await botMusicApi.getHistoryMessages(data);
-            if (response.content) {
-                if (response.content.countinue_at) {
-                    setOffset(response.content.countinue_at)
-                } else {
-                    if (response.content.msg === "end of conversation") {
-                        setIsEndConversation(true);
-                    }
+        if (!isEndConversation) {
+            try {
+                const data = {
+                    userId: userId,
+                    offset: offset,
+                    limit: 10
                 }
 
-                console.log(response)
+                const response = await botMusicApi.getHistoryMessages(data);
+                if (response.content) {
+                    if (response.content.countinue_at > 0) {
+                        setOffset(response.content.countinue_at)
+                    } else {
+                        if (response.content.msg === "end of conversation") {
+                            setIsEndConversation(true);
+                        }
+                    }
 
-                const messages = response.content.messages;
+                    console.log(response)
 
-                setMessages(prevMess => [...messages, ...prevMess])
-            } else {
+                    const messages = response.content.messages;
 
-                // msg: "no messages found"
-                setIsEndConversation(true);
+                    setMessages(prevMess => [...messages, ...prevMess])
+                } else {
+
+                    // msg: "no messages found"
+                    setIsEndConversation(true);
+                }
+
+
+            } catch (e) {
+                console.log(e)
             }
-
-
-        } catch (e) {
-            console.log(e)
         }
     };
 
