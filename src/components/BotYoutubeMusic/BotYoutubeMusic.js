@@ -29,6 +29,7 @@ export default function BotYoutubeMusic({
     const [event, setEvent] = useState(null);
     const [inputVal, setInputVal] = useState("");
     const [inputWarning, setInputWarning] = useState("");
+
     const [commands, setCommands] = useState([]);
 
     const scrollRef = useRef(null);
@@ -67,21 +68,23 @@ export default function BotYoutubeMusic({
     }, [userCommand])
 
     const handleUserCmd = (command) => {
-        if (command === "/stop ") {
-            if (event) {
-                interactions.onStop()
-            }
+        setTimeout(() => {
+            if (command === "/stop ") {
+                if (event) {
+                    interactions.onStop()
+                }
 
-        } else if (command === "/pause ") {
-            if (event) {
-                interactions.onPause()
-            }
+            } else if (command === "/pause ") {
+                if (event) {
+                    interactions.onPause()
+                }
 
-        } else if (command === "/unpause ") {
-            if (event) {
-                interactions.onUnpause()
+            } else if (command === "/unpause ") {
+                if (event) {
+                    interactions.onUnpause()
+                }
             }
-        }
+        }, 300)
     }
 
 
@@ -225,7 +228,6 @@ export default function BotYoutubeMusic({
             await getHistoryMessages();
 
             if (!isEndConversation) {
-
                 myRef.scrollTop = 820;
             }
         }

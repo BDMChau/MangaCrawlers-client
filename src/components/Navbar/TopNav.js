@@ -74,7 +74,7 @@ function TopNav({ handleLogOut, genres }) {
         } else {
             setIsUserSignIn(false);
         }
-    }, [userState[0]])
+    }, [userState])
 
     const showDrawer = () => {
         setState(true);
@@ -153,7 +153,7 @@ function TopNav({ handleLogOut, genres }) {
             <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <SubMenu
                     title="Account"
-                    popupClassName="list-cccount-dropdown"
+                    className="account-dropdown"
                     children={renderAccountDropDown()}
                 />
             </Menu>
@@ -176,6 +176,7 @@ function TopNav({ handleLogOut, genres }) {
                 <div className="menuCon">
                     <div className="leftMenu">{renderLeft()}</div>
                     <div className="rightMenu">{renderRight()}</div>
+
                     <Button className="barsMenu" onClick={showDrawer}>
                         <span className="barsBtn"></span>
                     </Button>

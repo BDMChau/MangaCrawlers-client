@@ -1,4 +1,14 @@
 const botMessagesPreset = {
+    hello: ({  }) => (
+        [
+            'Hello'
+        ]
+    ),
+    help: ({  }) => (
+        [
+            `Help`
+        ]
+    ),
     play: ({ url, id, title, userName, icon }) => (
         [
             `Queued <a href=${url}?v=${id} target="blank_" >${title}</a>  <img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" />`,
