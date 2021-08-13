@@ -32,10 +32,9 @@ const Routing = () => {
 
 export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
   const renderMangaComponentPages = () => (
-    <Layout>
-      <NavbarService />
+    <Suspense fallback={<LoadingPage />}>
 
-      <Content style={{ background: "#fff" }}>
+      <Content style={{ background: "#fff", minHeight: "100vh" }}>
         {Routing()}
       </Content>
 
@@ -44,19 +43,20 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
 
       <AddOnsBtn />
 
-
       <FooterContainer />
-    </Layout>
+    </Suspense >
   );
 
 
 
   return (
-    <Suspense fallback={<LoadingPage />}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
+        <NavbarService />
+
         {renderMangaComponentPages()}
 
-      </BrowserRouter>
-    </Suspense >
+      </Layout>
+    </BrowserRouter>
   );
 };

@@ -197,11 +197,32 @@
 }
 
 /* custom dropdown genres */
-.list-genres-dropdown ul#item_1\$Menu{
+.list-genres-dropdown ul{
   display: flex;
   flex-wrap: wrap;
   width: 550px;
 }
+
+
+.list-genres-dropdown ul::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.list-genres-dropdown ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.list-genres-dropdown ul::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.list-genres-dropdown ul::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}
+
+
 
 /* animation */
 @keyframes fadedAnimate2 {

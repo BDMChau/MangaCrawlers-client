@@ -1,8 +1,8 @@
 .manga-genres {
   background-color: white;
   border-radius: 3px;
-  height: auto;
   position: relative;
+  min-height: 100vh;
 }
 
 .manga-genres .title {
