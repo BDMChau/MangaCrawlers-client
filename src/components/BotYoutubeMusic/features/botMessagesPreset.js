@@ -34,8 +34,8 @@ const botMessagesPreset = {
     queue: ({ items }) => (
         [
             "queue",
-            items,
-            "This is the end of the queue!"
+            items.length ? items : [{ video_name: "The queue is empty :(" }],
+            items ? "This is the end of the queue!" : ""
         ]
     ),
     clear: () => (
@@ -56,9 +56,25 @@ const botMessagesPreset = {
             `I just can play music from youtube`
         ]
     ),
+    invalidId: ({ icon }) => (
+        [
+            `Unknown your video, I cannot play it <img style="width: 50px; height: 50px; border-radius: 3px" src=${icon} alt="" />`,
+            `I just can play music from youtube`
+        ]
+    ),
     requestYoutubeFailed: (icon) => (
         [
             `<img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" /> Sorry, there seems to be an error. Try another!`
+        ]
+    ),
+    unavailableVideo: (icon) => (
+        [
+            `<img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" /> This video is not available!`
+        ]
+    ),
+    notFoundVideo: (icon) => (
+        [
+            `<img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" /> Not found, maybe this video was removed!`
         ]
     ),
     recommendedWhenNothing: (icon, url) => (

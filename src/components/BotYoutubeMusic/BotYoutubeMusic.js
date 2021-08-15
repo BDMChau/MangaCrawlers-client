@@ -272,10 +272,10 @@ function BotYoutubeMusic({
                                                     ? <div>
                                                         {
                                                             mess.content[1].map((mess, i) => (
-                                                                <h2>{mess}</h2>
+                                                                <h2>{mess.video_name}</h2>
                                                             ))
                                                         }
-                                                        {mess.content[2]}
+                                                        {mess.content[2] ? mess.content[2] : ""}
                                                     </div>
 
                                                     : mess.content.map((botMess, i) => (

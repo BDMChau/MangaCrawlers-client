@@ -4,7 +4,7 @@
 
 .messages-cont {
   width: 100%;
-  height: 350px;
+  height: 300px;
   padding: 10px 0;
   overflow-y: auto;
   margin: 0;
@@ -116,7 +116,7 @@ form.form-input-bot .btn-send {
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .messages-cont {
-    height: 350px;
+    height: 300px;
   }
 
   .messages-cont .message-item .message-bot {
