@@ -40,6 +40,7 @@ function BotYoutubeMusicService() {
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
     const [itemsIdInQueue, setItemsIdInQueue] = useState([]);
+    const [allowToAddQueue, setAllowToAddQueue] = useState(false);
 
     const [offset, setOffset] = useState(0);
     const [sttScroll, setSttScroll] = useState(false);
@@ -109,14 +110,16 @@ function BotYoutubeMusicService() {
 
     // have new videoId >> send to server to add to queue
     useEffect(() => {
-        if (itemId && userState[0]) { //registered account
-            const id = userState[0].user_id;
-            addToQueue(id);
-        } else if (itemId && !userState[0] && sessionStorage.getItem("userId")) { // unregistered account
-            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
-            addToQueue(sessionUserId);
+        if(allowToAddQueue){
+            if (itemId && userState[0]) { //registered account
+                const id = userState[0].user_id;
+                addToQueue(id);
+            } else if (itemId && !userState[0] && sessionStorage.getItem("userId")) { // unregistered account
+                const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
+                addToQueue(sessionUserId);
+            }
         }
-    }, [itemId, userState]);
+    }, [allowToAddQueue ,itemId, userState]);
 
 
 
@@ -174,9 +177,6 @@ function BotYoutubeMusicService() {
                 replyFormatForBot(replyFromBot);
                 return;
             } else if(command === "/queue "){
-                const items = itemsIdInQueue.map((item, i) => (
-                    <h4>{item}</h4>
-                ))
                 opts.items = itemsIdInQueue;
 
                 const replyFromBot = botMessagesPreset.queue(opts);
@@ -184,9 +184,6 @@ function BotYoutubeMusicService() {
                 replyFormatForBot(replyFromBot);
                 return;
             }
-
-
-
 
 
             // interactive commands
@@ -373,6 +370,7 @@ function BotYoutubeMusicService() {
                 }
 
                 setUserId(response.content.user_id);
+                setAllowToAddQueue(true);
             }
         } catch (err) {
             console.log(err);
