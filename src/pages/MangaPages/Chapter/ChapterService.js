@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import Chapter from './Chapter'
 import dayjs from 'dayjs';
-import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
+import { SET_MANGA_ID } from "../../../store/features/manga/MangaSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { message_error, message_success, message_warning } from '../../../components/notifications/message';

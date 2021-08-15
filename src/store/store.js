@@ -1,17 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
-import UserSlice  from "./slices/UserSlice";
-import AuthSlice  from "./slices/AuthSlice";
-import ApiSlice  from "./slices/ApiSlice";
-import MangaSlice  from "./slices/MangaSlice";
-import StuffsSlice  from "./slices/StuffsSlice";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./rootSaga";
+
+import UserSlice from "./features/user/UserSlice";
+import AuthSlice from "./features/auth/AuthSlice";
+import MangaSlice from "./features/manga/MangaSlice";
+import StuffsSlice from "./features/stuffs/StuffsSlice";
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
     reducer: {
         userState: UserSlice,
         authState: AuthSlice,
-        apiState: ApiSlice,
         mangaState: MangaSlice,
         stuffsState: StuffsSlice
+    },
+    middleware: (getDefaultMiddleware) => {
+        getDefaultMiddleware().concat(sagaMiddleware)
     }
 });
+
+sagaMiddleware.run(rootSaga)
 

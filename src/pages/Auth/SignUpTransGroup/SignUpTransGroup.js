@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./SignUpTransGroup.css"
 import { useDispatch } from 'react-redux';
-import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../../store/slices/AuthSlice';
+import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../../store/features/auth/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input, Checkbox, Popover, Tabs, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -10,7 +10,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import userApi from '../../../api/apis/userApi';
 import { message_error, message_success } from '../../../components/notifications/message';
 import Cookies from 'universal-cookie';
-import { SET_TRANSGROUP_ID } from '../../../store/slices/UserSlice';
+import { SET_TRANSGROUP_ID } from '../../../store/features/user/UserSlice';
 
 
 export default function SignUpTransGroup() {

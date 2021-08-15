@@ -3,7 +3,7 @@ import "./Navbar.css";
 import logoText from "../../assets/logo/logoText.svg";
 import logo from "../../assets/logo/logo2.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/slices/AuthSlice";
+import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/features/auth/AuthSlice";
 
 import { Layout, Menu, Button, Drawer } from "antd";
 import { NavLink, useHistory } from "react-router-dom";

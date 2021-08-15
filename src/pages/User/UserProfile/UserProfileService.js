@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import userApi from '../../../api/apis/userApi';
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useDispatch } from 'react-redux';
-import { UPDATE_AVATAR } from "../../../store/slices/UserSlice";
+import { UPDATE_AVATAR } from "../../../store/features/user/UserSlice";
 
 
 export default function UserProfileService({ visible, closeProfileDrawer }) {

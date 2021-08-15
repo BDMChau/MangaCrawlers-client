@@ -4,7 +4,7 @@ import authApi from '../../../api/apis/authApi'
 
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useDispatch } from 'react-redux';
-import { SIGNIN } from '../../../store/slices/UserSlice';
+import { SIGNIN } from '../../../store/features/user/UserSlice';
 import Cookies from 'universal-cookie';
 import endPoint from '../../../config/endPoint';
 

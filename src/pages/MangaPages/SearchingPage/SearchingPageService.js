@@ -5,7 +5,7 @@ import genreApi from '../../../api/apis/genreApi';
 import mangaApi from '../../../api/apis/mangaApi';
 import { message_error } from '../../../components/notifications/message';
 import SearchingPage from './SearchingPage';
-import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/slices/MangaSlice";
+import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/features/manga/MangaSlice";
 
 export default function SearchingPageService() {
     const dispatch = useDispatch()

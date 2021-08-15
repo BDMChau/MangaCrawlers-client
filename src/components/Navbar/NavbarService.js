@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import TopNav from './TopNav'
 import Cookies from 'universal-cookie';
-import { LOGOUT } from "../../store/slices/UserSlice";
+import { LOGOUT } from "../../store/features/user/UserSlice";
 import genreApi from '../../api/apis/genreApi';
 import { message_success } from '../notifications/message';
 

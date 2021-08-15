@@ -4,7 +4,7 @@ import "./SignIn.css";
 import SignUpService from '../SignUp/SignUpService'
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginOutlined, CloseCircleOutlined, GoogleOutlined } from '@ant-design/icons';
-import { CLOSE_SIGN_IN_FORM } from '../../../store/slices/AuthSlice';
+import { CLOSE_SIGN_IN_FORM } from '../../../store/features/auth/AuthSlice';
 import { NavLink } from 'react-router-dom';
 
 

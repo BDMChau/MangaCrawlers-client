@@ -6,7 +6,7 @@ import { debounce } from 'lodash'
 import authApi from '../../api/apis/authApi'
 import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message'
-import { SIGNIN } from '../../store/slices/UserSlice';
+import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
 
 function HomeService() {

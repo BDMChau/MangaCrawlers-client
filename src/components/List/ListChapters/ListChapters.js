@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { Empty, Typography } from 'antd';
-import { SET_MANGA_ID } from "../../../store/slices/MangaSlice";
+import { SET_MANGA_ID } from "../../../store/features/manga/MangaSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./SignUp.css";
 import { useDispatch } from 'react-redux';
-import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../../store/slices/AuthSlice';
+import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../../store/features/auth/AuthSlice';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input } from 'antd';
 import SignInService from '../SignIn/SignInService';

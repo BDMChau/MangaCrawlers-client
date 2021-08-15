@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
 import userApi from '../../../api/apis/userApi';
 import { message_success } from '../../../components/notifications/message';
-import { SET_TRANSGROUP_ID } from '../../../store/slices/UserSlice';
+import { SET_TRANSGROUP_ID } from '../../../store/features/user/UserSlice';
 import SignUpTransGroup from './SignUpTransGroup';
 
 export default function SignUpTransGroupService() {
