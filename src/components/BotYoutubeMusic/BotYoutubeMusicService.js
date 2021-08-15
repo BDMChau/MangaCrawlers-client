@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from 'react';
 import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import botMusicApi from '../../api/apis/botMusicApi';
 
@@ -16,7 +17,6 @@ import kanndsleep from '../../assets/img/kannasleep.png';
 
 import { message_error } from '../notifications/message';
 
-import { v4 as uuidv4 } from 'uuid';
 
 
 function BotYoutubeMusicService() {
@@ -519,6 +519,8 @@ function BotYoutubeMusicService() {
             getHistoryMessages={() => getHistoryMessages()}
             isEndConversation={isEndConversation}
             sttScroll={sttScroll}
+
+            replyFormatForBot={replyFormatForBot}
         />
     );
 }

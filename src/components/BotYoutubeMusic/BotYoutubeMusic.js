@@ -9,8 +9,14 @@ import stereo from "../../assets/img/stereo.svg";
 import { AutoComplete, Button, Row, Typography, Form } from "antd";
 
 import { commandsList } from "./features/commandsList";
-import { message_error, message_warning } from "../notifications/message";
+import { message_error } from "../notifications/message";
 import TransitionAnimate from "../Animation/transition";
+
+import botMessagesPreset from "./features/botMessagesPreset";
+
+import kannapalm from '../../assets/img/kannafacepalm.png';
+import kannaconfuse from '../../assets/img/kannawhat.png';
+
 
 function BotYoutubeMusic({
     messages,
@@ -22,7 +28,9 @@ function BotYoutubeMusic({
 
     getHistoryMessages,
     isEndConversation,
-    sttScroll
+    sttScroll,
+
+    replyFormatForBot
 }) {
     const userState = useSelector((state) => state.userState);
 
@@ -60,7 +68,7 @@ function BotYoutubeMusic({
     }
 
 
-    ////// userCommand is prop from service, commands here are not all
+    ////// userCommand is prop from service (interaction commands), commands here are not all
     useEffect(() => {
         if (userCommand) {
             handleUserCmd(userCommand)
@@ -89,7 +97,6 @@ function BotYoutubeMusic({
 
 
 
-
     ////// send input to service component
     const handleInput = () => {
         const strList = inputVal.split(" ");
@@ -109,10 +116,6 @@ function BotYoutubeMusic({
 
         if (commandsRequireInput.includes(cmd)) {
             setInputWarning("Input is required. Specify a value")
-            if (!value) {
-                message_warning("Input your URL or some keywords!", 3)
-                return;
-            }
         }
 
         setInputVal("");
@@ -147,6 +150,8 @@ function BotYoutubeMusic({
     }, [event]);
 
     const handleErrors = () => {
+        let content;
+
         switch (event.data) {
             case null:
                 event.target.stopVideo();
@@ -154,17 +159,28 @@ function BotYoutubeMusic({
                 break;
 
             case 2: // invalid Id
+                content = botMessagesPreset.invalidId(kannaconfuse);
+                replyFormatForBot(content);
                 break;
 
             case 5: // html5 error
+                content = botMessagesPreset.requestYoutubeFailed(kannapalm);
+                replyFormatForBot(content);
                 break;
 
             case 100: // not found
-
+                content = botMessagesPreset.notFoundVideo(kannaconfuse);
+                replyFormatForBot(content);
                 break;
 
-            case 101 || 150: // not allow
+            case 101: // not allow
+                content = botMessagesPreset.unavailableVideo(kannaconfuse);
+                replyFormatForBot(content);
+                break;
 
+            case 150: // not allow
+                content = botMessagesPreset.unavailableVideo(kannaconfuse);
+                replyFormatForBot(content);
                 break;
 
             default:
@@ -173,37 +189,7 @@ function BotYoutubeMusic({
     }
 
 
-
-
-    ///////////// stuffs
-    const cmdLength = () => {
-        let length = 0
-        for (let i = 0; i < commandsList.length; i++) {
-            if (commandsList[i].title.includes(inputVal)) {
-                length = commandsList[i].title.length - 1;
-                break;
-            }
-        }
-
-        return length;
-    }
-
-    const checkisCmd = (input) => {
-        const strList = input.split(" ");
-        const cmd = strList[0] + " ";
-
-        for (let i = 0; i < commandsList.length; i++) {
-            if (commandsList[i].title === cmd) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-
-    //// scroll
+    ////////// scroll //////////
     useEffect(() => {
         let myRef = scrollRef.current;
 
@@ -231,6 +217,33 @@ function BotYoutubeMusic({
                 myRef.scrollTop = 820;
             }
         }
+    }
+
+
+    ///////////// stuffs /////////////
+    const cmdLength = () => {
+        let length = 0
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title.includes(inputVal)) {
+                length = commandsList[i].title.length - 1;
+                break;
+            }
+        }
+
+        return length;
+    }
+
+    const checkisCmd = (input) => {
+        const strList = input.split(" ");
+        const cmd = strList[0] + " ";
+
+        for (let i = 0; i < commandsList.length; i++) {
+            if (commandsList[i].title === cmd) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
@@ -272,10 +285,10 @@ function BotYoutubeMusic({
                                                     ? <div>
                                                         {
                                                             mess.content[1].map((mess, i) => (
-                                                                <h2>{mess.video_name}</h2>
+                                                                <h2>{mess}</h2>
                                                             ))
                                                         }
-                                                        {mess.content[2] ? mess.content[2] : ""}
+                                                        {mess.content[2]}
                                                     </div>
 
                                                     : mess.content.map((botMess, i) => (
