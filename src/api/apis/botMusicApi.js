@@ -28,6 +28,10 @@ const botMusicApi = {
         const uri = `/api/bot/addtoqueue`;
         return secondAxiosClient.post(uri, data);
     },
+    getQueue: (data) => {
+        const uri = `/api/bot/getqueue`;
+        return secondAxiosClient.post(uri, data);
+    },
 };
 
 export default botMusicApi;

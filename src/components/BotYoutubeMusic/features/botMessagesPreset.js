@@ -1,10 +1,10 @@
 const botMessagesPreset = {
-    hello: ({  }) => (
+    hello: ({ }) => (
         [
             'Hello'
         ]
     ),
-    help: ({  }) => (
+    help: ({ }) => (
         [
             `Help`
         ]
@@ -31,9 +31,11 @@ const botMessagesPreset = {
             `<img style="width: 25px; height: 25px;" src=${icon} alt="" /> unpaused the player`,
         ]
     ),
-    queue: () => (
+    queue: ({ items }) => (
         [
-            `queue`,
+            "queue",
+            items,
+            "This is the end of the queue!"
         ]
     ),
     clear: () => (

@@ -12,7 +12,7 @@ import { commandsList } from "./features/commandsList";
 import { message_error, message_warning } from "../notifications/message";
 import TransitionAnimate from "../Animation/transition";
 
-export default function BotYoutubeMusic({
+function BotYoutubeMusic({
     messages,
     isLoading,
     handleSendInput,
@@ -241,8 +241,8 @@ export default function BotYoutubeMusic({
                     className="iframe-youtube"
                     videoId={itemId ? itemId : ""}
                     opts={{
-                        height: "0",
-                        width: "0",
+                        height: "200",
+                        width: "200",
                     }}
                     onReady={(e) => interactions.onReady(e)}
                     onError={(e) => interactions.onError(e)}
@@ -268,12 +268,22 @@ export default function BotYoutubeMusic({
 
                                             <div className="bot-text">
                                                 <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
-                                                {mess.content.map((botMess, i) => (
-                                                    <TransitionAnimate
-                                                        renderPart={<div dangerouslySetInnerHTML={{ __html: botMess }}></div>}
-                                                        transitionTime={0.3}
-                                                    />
-                                                ))}
+                                                {mess.content[0] === "queue"
+                                                    ? <div>
+                                                        {
+                                                            mess.content[1].map((mess, i) => (
+                                                                <h2>{mess}</h2>
+                                                            ))
+                                                        }
+                                                        {mess.content[2]}
+                                                    </div>
+
+                                                    : mess.content.map((botMess, i) => (
+                                                        <TransitionAnimate
+                                                            renderPart={<div dangerouslySetInnerHTML={{ __html: botMess }}></div>}
+                                                            transitionTime={0.3}
+                                                        />
+                                                    ))}
                                             </div>
                                         </div>
 
@@ -343,3 +353,6 @@ export default function BotYoutubeMusic({
         </Row>
     );
 }
+
+
+export default BotYoutubeMusic;
