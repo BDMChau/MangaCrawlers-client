@@ -30,7 +30,10 @@ function BotYoutubeMusic({
     isEndConversation,
     sttScroll,
 
-    replyFormatForBot
+    replyFormatForBot,
+
+    modifyQueueWhenVideoError,
+    itemsInQueue
 }) {
     const userState = useSelector((state) => state.userState);
 
@@ -152,6 +155,11 @@ function BotYoutubeMusic({
 
     const handleErrors = () => {
         let content;
+
+        if (event.data !== null && itemsInQueue.length) {
+            const lastItem = itemsInQueue[itemsInQueue.length - 1];
+            modifyQueueWhenVideoError(lastItem.queue_id)
+        }
 
         switch (event.data) {
             case null:
@@ -283,14 +291,29 @@ function BotYoutubeMusic({
                                             <div className="bot-text">
                                                 <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
                                                 {mess.content[0] === "queue"
-                                                    ? <div>
-                                                        {
-                                                            mess.content[1].map((mess, i) => (
-                                                                <h2>{mess.video_name}</h2>
-                                                            ))
-                                                        }
-                                                        {mess.content[2] ? mess.content[2] : ""}
-                                                    </div>
+                                                    ? <TransitionAnimate renderPart={
+                                                        <div>
+                                                            {
+                                                                mess.content[1].map((mess, i) => {
+                                                                    if (mess.is_error === false) {
+                                                                        return (
+                                                                            <Typography.Text style={{ display: "block" }} >
+                                                                                <Typography.Text style={{ color: "#19A776" }}>{i}</Typography.Text>)&nbsp;
+                                                                                <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
+                                                                                    {mess.video_name}
+                                                                                </a>
+                                                                            </Typography.Text>
+                                                                        )
+                                                                    }
+                                                                })
+                                                            }
+
+                                                            <p style={{ marginTop: "15px", marginBottom: "0" }}>{mess.content[2] ? mess.content[2] : ""}</p>
+                                                        </div>
+
+                                                    }
+
+                                                        transitionTime={0.3} />
 
                                                     : mess.content.map((botMess, i) => (
                                                         <TransitionAnimate

@@ -39,7 +39,7 @@ function BotYoutubeMusicService() {
 
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
-    const [itemsIdInQueue, setItemsIdInQueue] = useState([]);
+    const [itemsInQueue, setitemsInQueue] = useState([]);
     const [allowToAddQueue, setAllowToAddQueue] = useState(false);
 
     const [offset, setOffset] = useState(0);
@@ -79,11 +79,11 @@ function BotYoutubeMusicService() {
                 setAllowGetHistoryMess(true);
 
                 if (sessionStorage.getItem("queue")) {
-                    setItemsIdInQueue(JSON.parse(sessionStorage.getItem("queue")))
+                    setitemsInQueue(JSON.parse(sessionStorage.getItem("queue")))
                 }
             } else {
                 setUserId("");
-                setItemsIdInQueue([]);
+                setitemsInQueue([]);
             }
         }
 
@@ -177,7 +177,7 @@ function BotYoutubeMusicService() {
                 replyFormatForBot(replyFromBot);
                 return;
             } else if (command === "/queue ") {
-                opts.items = itemsIdInQueue;
+                opts.items = itemsInQueue;
 
                 const replyFromBot = botMessagesPreset.queue(opts);
 
@@ -399,6 +399,7 @@ function BotYoutubeMusicService() {
         }
     };
 
+
     const addToQueue = async (id, videoId, videoTitle) => {
         try {
             const data = {
@@ -410,13 +411,31 @@ function BotYoutubeMusicService() {
             const response = await botMusicApi.addToQueue(data);
             if (response.content) {
                
-                setItemsIdInQueue(prevIds => [...prevIds, response.content.new_item])
+                setitemsInQueue(prevIds => [...prevIds, response.content.new_item])
             }
 
         } catch (e) {
             console.log(e)
         }
     };
+
+    const modifyQueueWhenVideoError = async (queueId) => {
+        try {
+            const data = {
+                queue_id: queueId,
+                user_id: userState[0] ? userState[0].user_id : ""
+            };
+
+            const response = await botMusicApi.modifyWhenVideoError(data);
+            if (response.content) {
+                setitemsInQueue(prevIds => [...prevIds, response.content.modified_item])
+            }
+
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
 
     const getQueue = async (id) => {
         try {
@@ -426,7 +445,7 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getQueue(data);
             if (response.content) {
-                setItemsIdInQueue(response.content.videos_id_queue)
+                setitemsInQueue(response.content.videos_id_queue)
             }
 
         } catch (e) {
@@ -536,6 +555,8 @@ function BotYoutubeMusicService() {
             sttScroll={sttScroll}
 
             replyFormatForBot={replyFormatForBot}
+            modifyQueueWhenVideoError={(queueId) => modifyQueueWhenVideoError(queueId)}
+            itemsInQueue={itemsInQueue}
         />
     );
 }
