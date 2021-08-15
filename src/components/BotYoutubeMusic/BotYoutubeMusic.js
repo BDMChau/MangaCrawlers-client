@@ -114,7 +114,7 @@ function BotYoutubeMusic({
             "/jump "
         ]
 
-        if (commandsRequireInput.includes(cmd)) {
+        if (commandsRequireInput.includes(cmd) && !value) {
             setInputWarning("Input is required. Specify a value")
             return;
         }
