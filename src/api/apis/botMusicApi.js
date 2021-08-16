@@ -26,15 +26,21 @@ const botMusicApi = {
     },
     addToQueue: (data) => {
         const uri = `/api/bot/addtoqueue`;
-        return secondAxiosClient.post(uri, data);
+        return secondAxiosClient.put(uri, data);
     },
     modifyWhenVideoError: (data) => {
         const uri = `/api/bot/modifyerrorvideo`;
-        return secondAxiosClient.post(uri, data);
+        return secondAxiosClient.put(uri, data);
     },
     getQueue: (data) => {
         const uri = `/api/bot/getqueue`;
         return secondAxiosClient.post(uri, data);
+    },
+    removeQueue: (data) => {
+        const uri = `/api/bot/removequeue`;
+        return secondAxiosClient.delete(uri, {
+            data
+        });
     },
 };
 

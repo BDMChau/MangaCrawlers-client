@@ -161,7 +161,7 @@ function BotYoutubeMusicService() {
             }
 
 
-            if (command === "/hello " || command === "/help ") {
+            if (command === "/help ") {
                 const replyFromBot = botMessagesPreset[rawCommand](opts);
                 replyFormatForBot(replyFromBot);
                 return;
@@ -171,20 +171,26 @@ function BotYoutubeMusicService() {
 
                 replyFormatForBot(replyFromBot);
                 return;
+            } else if (command === "/clear ") {
+                setItemId("");
+                setItemInfo({});
+                handleClearQueue();
+                return;
             }
 
 
             // interactive commands
             if (itemId) {
-                if (command === "/stop " || command === "/clear ") {
+                if (command === "/stop ") {
                     setItemId("");
                     setItemInfo({});
-                } else if (command === "/jump ") {
                    
-                }
-             
-                const replyFromBot = botMessagesPreset[rawCommand](opts);
+                } else if (command === "/jump ") {
 
+                }
+
+
+                const replyFromBot = botMessagesPreset[rawCommand](opts);
                 replyFormatForBot(replyFromBot);
             } else {
                 const content = botMessagesPreset.recommendedWhenNothing(kannabored, defaultUrl);
@@ -425,6 +431,23 @@ function BotYoutubeMusicService() {
     };
 
 
+    const removeQueue = async (id) => {
+        try {
+            const data = {
+                user_id: id
+            };
+
+            const response = await botMusicApi.removeQueue(data);
+            if (response.content) {
+                setItemsInQueue(response.content.queue);
+            };
+
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
+
     const getHistoryMessages = async () => {
         if (!isEndConversation) {
             try {
@@ -498,8 +521,6 @@ function BotYoutubeMusicService() {
 
 
     const handleAddQueue = (videoId, videoTitle) => {
-        console.log(JSON.parse(sessionStorage.getItem("userId")))
-
         if (userState[0]) { //registered account
             const id = userState[0].user_id;
             addToQueue(id, videoId, videoTitle);
@@ -516,6 +537,19 @@ function BotYoutubeMusicService() {
 
             sessionStorage.setItem("queue", JSON.stringify(queueItems));
             setItemsInQueue(prevItem => [...prevItem, queueItem]);
+        }
+    }
+
+    const handleClearQueue = () => {
+        if (userState[0]) { //registered account
+            const id = userState[0].user_id;
+            removeQueue(id);
+
+        } else if (!userState[0] && sessionStorage.getItem("userId")) { // unregistered account
+            setTimeout(() => {
+                sessionStorage.removeItem("queue");
+                setItemsInQueue([]);
+            }, 300)
         }
     }
 

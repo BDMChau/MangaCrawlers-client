@@ -1,9 +1,5 @@
 export const commandsList = [
     {
-        title: "/hello ",
-        subTitle: "Some infomation about me"
-    },
-    {
         title: "/help ",
         subTitle: "List details of available commands"
     },

@@ -275,7 +275,7 @@ function BotYoutubeMusic({
 
 
             <div className="messages-cont" onScroll={(e) => getMoreHistoryMessages(e)} ref={scrollRef}>
-                <Typography.Text>Type <b>/hello</b> to start ^^</Typography.Text>
+                <Typography.Text>Type <b>/help</b> to start ^^</Typography.Text>
 
                 <div className="message-item">
                     {messages
