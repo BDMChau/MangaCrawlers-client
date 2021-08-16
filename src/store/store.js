@@ -16,9 +16,9 @@ export const store = configureStore({
         mangaState: MangaSlice,
         stuffsState: StuffsSlice
     },
-    middleware: (getDefaultMiddleware) => {
+    middleware: (getDefaultMiddleware) => (
         getDefaultMiddleware().concat(sagaMiddleware)
-    }
+    )
 });
 
 sagaMiddleware.run(rootSaga)

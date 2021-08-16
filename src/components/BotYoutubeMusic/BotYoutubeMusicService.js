@@ -39,7 +39,7 @@ function BotYoutubeMusicService() {
 
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
-    const [itemsInQueue, setitemsInQueue] = useState([]);
+    const [itemsInQueue, setItemsInQueue] = useState([]);
     const [allowToAddQueue, setAllowToAddQueue] = useState(false);
 
     const [offset, setOffset] = useState(0);
@@ -70,21 +70,17 @@ function BotYoutubeMusicService() {
             sessionStorage.removeItem("queue");
 
             getQueue(userState[0].user_id);
-        } else {
+        } else if (!userState[0] && sessionStorage.getItem("userId")) {
             // unregistered account
-            setUserName("");
-            if (sessionStorage.getItem("userId")) {
-                const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
-                setUserId(sessionUserId);
-                setAllowGetHistoryMess(true);
+            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
 
-                if (sessionStorage.getItem("queue")) {
-                    setitemsInQueue(JSON.parse(sessionStorage.getItem("queue")))
-                }
-            } else {
-                setUserId("");
-                setitemsInQueue([]);
+            if (sessionStorage.getItem("queue")) {
+                setItemsInQueue(JSON.parse(sessionStorage.getItem("queue")))
             }
+
+            setUserId(sessionUserId);
+            setAllowGetHistoryMess(true);
+            setUserName("");
         }
 
 
@@ -97,6 +93,14 @@ function BotYoutubeMusicService() {
     }, [userState]);
 
 
+    // add to queue: allowToAddQueue is "true" when the first message has been saved in db
+    useEffect(() => {
+        if (allowToAddQueue && itemInfo) {
+            handleAddQueue(itemId, itemInfo.title)
+        }
+    }, [itemInfo, userId])
+
+
     // have new message >> send to server
     useEffect(() => {
         if (isHaveNewMessage) {
@@ -106,20 +110,6 @@ function BotYoutubeMusicService() {
             postMessage(lastItem);
         }
     }, [isHaveNewMessage]);
-
-
-    // have new videoId >> send to server to add to queue
-    useEffect(() => {
-        if (allowToAddQueue) {
-            // if (itemId && userState[0]) { //registered account
-            //     const id = userState[0].user_id;
-            //     addToQueue(id);
-            // } else if (itemId && !userState[0] && sessionStorage.getItem("userId")) { // unregistered account
-            //     const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
-            //     // addToQueue(sessionUserId);
-            // }
-        }
-    }, [allowToAddQueue, itemId, userState]);
 
 
 
@@ -226,7 +216,6 @@ function BotYoutubeMusicService() {
             const strList = value.split("?v=");
             const videoId = strList[1];
 
-
             if (!videoId) { // if inputVal is to search, videoId will be undefined
                 getListVideosFromYoutubeApi(value);
 
@@ -299,23 +288,19 @@ function BotYoutubeMusicService() {
             const response = await botMusicApi.getListVideosFromYoutubeApi(data, 1);
 
             if (response.items.length) {
-                const items = response.items;
-
-                const firstItemId = items[0].id.videoId;
+                const firstItemId = response.items[0].id.videoId;
                 const firstItemSnippet = response.items[0].snippet;
 
                 setItemId(firstItemId);
                 setItemInfo(firstItemSnippet);
 
-
-                handleAddQueue(firstItemId, firstItemSnippet.title)
+                // handleAddQueue(firstItemId, firstItemSnippet.title)
                 return;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
                 replyFormatForBot(content);
 
                 setIsLoading(false);
-                message_error("Having an error when play your song :(");
                 setItemId("");
                 setItemInfo({});
                 return;
@@ -336,23 +321,20 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getVideoFromYoutubeApi(data);
 
-            if (response) {
+            if (response.items.length) {
                 const itemIdRes = response.items[0].id;
                 const itemSnippet = response.items[0].snippet;
 
-
-                handleAddQueue(itemIdRes, itemSnippet.title)
-
-
                 setItemId(itemIdRes);
                 setItemInfo(itemSnippet);
+
+                // handleAddQueue(itemIdRes, itemSnippet.title)
                 return;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
                 replyFormatForBot(content);
 
                 setIsLoading(false);
-                message_error("Having an error when play your song :(");
                 setItemId("");
                 setItemInfo({});
                 return;
@@ -410,8 +392,8 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.addToQueue(data);
             if (response.content) {
-               
-                setitemsInQueue(prevIds => [...prevIds, response.content.new_item])
+
+                setItemsInQueue(prevIds => [...prevIds, response.content.new_item])
             }
 
         } catch (e) {
@@ -419,7 +401,7 @@ function BotYoutubeMusicService() {
         }
     };
 
-    const modifyQueueWhenVideoError = async (queueId) => {
+    const modifyVideoErrorAtServer = async (queueId) => {
         try {
             const data = {
                 queue_id: queueId,
@@ -428,7 +410,7 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.modifyWhenVideoError(data);
             if (response.content) {
-                setitemsInQueue(prevIds => [...prevIds, response.content.modified_item])
+                setItemsInQueue(prevIds => [...prevIds, response.content.modified_item])
             }
 
         } catch (e) {
@@ -445,7 +427,7 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getQueue(data);
             if (response.content) {
-                setitemsInQueue(response.content.videos_id_queue)
+                setItemsInQueue(response.content.videos_id_queue)
             }
 
         } catch (e) {
@@ -503,7 +485,6 @@ function BotYoutubeMusicService() {
     };
 
 
-
     const chooseIcon = (cmd) => {
         switch (cmd) {
             case "/play ":
@@ -528,12 +509,42 @@ function BotYoutubeMusicService() {
 
 
     const handleAddQueue = (videoId, videoTitle) => {
+        console.log(JSON.parse(sessionStorage.getItem("userId")))
+
         if (userState[0]) { //registered account
             const id = userState[0].user_id;
             addToQueue(id, videoId, videoTitle);
+
         } else if (!userState[0] && sessionStorage.getItem("userId")) { // unregistered account
-            const sessionUserId = JSON.parse(sessionStorage.getItem("userId"));
-            // addToQueue(sessionUserId);
+            const queueItems = sessionStorage.getItem("queue") ? JSON.parse(sessionStorage.getItem("queue")) : [];
+            const queueItem = {
+                is_error: false,
+                queue_id: uuidv4(),
+                video_id: videoId,
+                video_title: videoTitle
+            }
+            queueItems.push(queueItem);
+
+            sessionStorage.setItem("queue", JSON.stringify(queueItems));
+            setItemsInQueue(prevItem => [...prevItem, queueItem]);
+        }
+    }
+
+
+    const modifyQueueWhenVideoError = (queueId) => {
+        console.log(queueId)
+        if (userState[0]) {
+            modifyVideoErrorAtServer(queueId);
+
+        } else if (!userState[0] && sessionStorage.getItem("userId")) {
+            for (let i = 0; i < itemsInQueue.length; i++) {
+                if (itemsInQueue[i].queue_id === queueId) {
+                    itemsInQueue[i].is_error = true;
+                    sessionStorage.setItem("queue", JSON.stringify(itemsInQueue));
+                    break;
+                }
+            }
+
         }
     }
 
