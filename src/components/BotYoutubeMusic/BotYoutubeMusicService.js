@@ -163,12 +163,10 @@ function BotYoutubeMusicService() {
 
             if (command === "/hello " || command === "/help ") {
                 const replyFromBot = botMessagesPreset[rawCommand](opts);
-                console.log("???")
                 replyFormatForBot(replyFromBot);
                 return;
             } else if (command === "/queue ") {
                 opts.items = itemsInQueue;
-
                 const replyFromBot = botMessagesPreset.queue(opts);
 
                 replyFormatForBot(replyFromBot);
@@ -178,22 +176,13 @@ function BotYoutubeMusicService() {
 
             // interactive commands
             if (itemId) {
-                switch (command) {
-                    case "/stop ":
-                        setItemId("");
-                        setItemInfo({});
-                        break;
-
-                    case "/clear ":
-                        setItemId("");
-                        setItemInfo({});
-                        break;
-
-                    default:
-                        break;
+                if (command === "/stop " || command === "/clear ") {
+                    setItemId("");
+                    setItemInfo({});
+                } else if (command === "/jump ") {
+                   
                 }
-
-
+             
                 const replyFromBot = botMessagesPreset[rawCommand](opts);
 
                 replyFormatForBot(replyFromBot);
