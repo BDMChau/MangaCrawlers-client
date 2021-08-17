@@ -46,7 +46,14 @@ const botMessagesPreset = {
     jump: ({ url, id, title, userName }) => (
         [
             `Jumped to <a href=${url}?v=${id} target="blank_" >${title}</a>`,
-            `<b>Now playing</b> <a href=${url}?v=${id} target="blank_" >${title}</a> <p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`,
+            // `<b>Now playing</b> <a href=${url}?v=${id} target="blank_" >${title}</a> 
+            `<p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`
+        ]
+    ),
+    cannotJump: ({ value, userName }) => (
+        [
+            `A track could not be found for "${value}"!`,
+            `<p style="background: #d0ccccd1; width: fit-content; padding: 5px; border-radius: 3px;">[@${userName}]</p>`
         ]
     ),
     ///////////////////

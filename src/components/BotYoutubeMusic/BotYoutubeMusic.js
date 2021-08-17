@@ -48,11 +48,9 @@ function BotYoutubeMusic({
 
     const interactions = {
         onPlay: () => {
-            console.log("play");
             event.target.playVideo();
         },
         onStop: () => {
-            console.log("stop");
             setEvent(null);
             event.target.stopVideo();
         },
@@ -80,21 +78,29 @@ function BotYoutubeMusic({
 
     const handleUserCmd = (command) => {
         setTimeout(() => {
-            if (command === "/stop ") {
-                if (event) {
-                    interactions.onStop()
-                }
+            switch (command) {
+                case "/stop ":
+                    if (event) interactions.onStop();
+                    break;
 
-            } else if (command === "/pause ") {
-                if (event) {
-                    interactions.onPause()
-                }
+                case "/pause ":
+                    if (event) interactions.onPause();
+                    break;
 
-            } else if (command === "/unpause ") {
-                if (event) {
-                    interactions.onUnpause()
-                }
+                case "/unpause ":
+                    if (event) interactions.onUnpause();
+                    break;
+
+                case "/jump ":
+                    if (event) {
+                        // interactions.onStop();
+                    }
+                    break;
+
+                default:
+                    break;
             }
+
         }, 300)
     }
 
@@ -137,7 +143,7 @@ function BotYoutubeMusic({
 
     const handleRenderCommands = () => {
         if ((inputVal.startsWith("/")) && inputVal.length <= cmdLength()) {
-            const filtedCmds = commandsList.filter(cmd => cmd.title.includes(inputVal))
+            const filtedCmds = commandsList.filter(cmd => cmd.title.toLowerCase().includes(inputVal.toLowerCase()))
             setCommands(filtedCmds)
 
         } else {
@@ -233,7 +239,7 @@ function BotYoutubeMusic({
     const cmdLength = () => {
         let length = 0
         for (let i = 0; i < commandsList.length; i++) {
-            if (commandsList[i].title.includes(inputVal)) {
+            if (commandsList[i].title.toLowerCase().includes(inputVal.toLowerCase())) {
                 length = commandsList[i].title.length - 1;
                 break;
             }
@@ -294,18 +300,24 @@ function BotYoutubeMusic({
                                                     ? <TransitionAnimate renderPart={
                                                         <div>
                                                             {
-                                                                mess.content[1].map((mess, i) => {
-                                                                    if (mess.is_error === false) {
-                                                                        return (
-                                                                            <Typography.Text style={{ display: "block" }} >
+                                                                mess.content[1].map((mess, i) => (
+                                                                    mess.is_error === false
+                                                                        ? mess.playing === true
+                                                                            ? <Typography.Text style={{ display: "block" }} >
+                                                                                <Typography.Text style={{ color: "red" }}>{i}</Typography.Text>)&nbsp;
+                                                                                <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
+                                                                                    {mess.video_name}
+                                                                                </a>
+                                                                            </Typography.Text>
+
+                                                                            : <Typography.Text style={{ display: "block" }} >
                                                                                 <Typography.Text style={{ color: "#19A776" }}>{i}</Typography.Text>)&nbsp;
                                                                                 <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
                                                                                     {mess.video_name}
                                                                                 </a>
                                                                             </Typography.Text>
-                                                                        )
-                                                                    }
-                                                                })
+                                                                        : ""
+                                                                ))
                                                             }
 
                                                             <p style={{ marginTop: "15px", marginBottom: "0" }}>{mess.content[2] ? mess.content[2] : ""}</p>
