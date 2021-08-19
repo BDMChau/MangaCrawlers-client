@@ -306,14 +306,14 @@ function BotYoutubeMusic({
                                                                             ? <Typography.Text style={{ display: "block" }} >
                                                                                 <Typography.Text style={{ color: "red" }}>{i}</Typography.Text>)&nbsp;
                                                                                 <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
-                                                                                    {mess.video_name}
+                                                                                    {mess.video_title}
                                                                                 </a>
                                                                             </Typography.Text>
 
                                                                             : <Typography.Text style={{ display: "block" }} >
                                                                                 <Typography.Text style={{ color: "#19A776" }}>{i}</Typography.Text>)&nbsp;
                                                                                 <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
-                                                                                    {mess.video_name}
+                                                                                    {mess.video_title}
                                                                                 </a>
                                                                             </Typography.Text>
                                                                         : ""

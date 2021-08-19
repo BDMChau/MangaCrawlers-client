@@ -405,7 +405,7 @@ function BotYoutubeMusicService() {
         try {
             const data = {
                 youtube_video_id: videoId,
-                youtube_video_name: videoTitle,
+                youtube_video_title: videoTitle,
                 user_id: id
             };
 
