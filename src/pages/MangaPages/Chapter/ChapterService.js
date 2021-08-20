@@ -111,7 +111,7 @@ export default function ChapterService() {
 
             const chapters = response.content.listChapter;
             chapters.forEach((chapter, i) => {
-                chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+                chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
 
                 if (chapter.chapter_id == chapterid) {
                     setCurChapter(i)

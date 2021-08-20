@@ -76,7 +76,7 @@ function MangaService() {
             }
             const chapters = response.content.chapters;
             chapters.forEach(chapter => {
-                chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+                chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
             });
 
             const mangaObj = response.content.manga;
@@ -258,7 +258,7 @@ function MangaService() {
             if (response.content.comments.length) {
                 const comments = response.content.comments;
                 comments.forEach(comment => {
-                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
+                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("MMM DD, YYYY HH:mm:ss");
                 });
                 setComments(comments)
                 setFromRow(fromRow + 11)

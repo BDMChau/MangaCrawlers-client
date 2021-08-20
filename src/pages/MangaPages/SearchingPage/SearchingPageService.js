@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import genreApi from '../../../api/apis/genreApi';
 import mangaApi from '../../../api/apis/mangaApi';
 import { message_error } from '../../../components/notifications/message';
 import SearchingPage from './SearchingPage';
-import { SET_MANGA_SEARCHED_BY_GENRES, GET_ALL_GENRES } from "../../../store/features/manga/MangaSlice";
+import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/features/manga/MangaSlice";
 
 export default function SearchingPageService() {
     const dispatch = useDispatch()
