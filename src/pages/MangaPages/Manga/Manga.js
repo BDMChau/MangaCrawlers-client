@@ -22,7 +22,6 @@ function Manga({
     removeFollowingManga,
     isLoading,
     isFollowed,
-    // addReadingHistory,
 
     mangaStars,
     handleRatingManga,
