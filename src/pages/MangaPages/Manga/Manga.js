@@ -5,7 +5,7 @@ import { Col, Row, Button, Typography, Tag, Tooltip, Image } from 'antd';
 import ListSide from '../../../components/List/ListSide/ListSide';
 import ListChapters from '../../../components/List/ListChapters/ListChapters';
 import Rating from '../../../components/Rating/Rating';
-import CommentItems from '../../../components/CommentItems/CommentItems';
+import CommentItems from '../../../components/Comment/CommentItems/CommentItems';
 import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';

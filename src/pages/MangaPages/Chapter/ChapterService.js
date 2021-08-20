@@ -244,7 +244,7 @@ export default function ChapterService() {
         }
     }, [isErrorCmt])
 
-    const addCmtChapter = async (cmtContent) => {
+    const addCmt = async (cmtContent) => {
         if (userState[0]) {
             if (cmtContent) {
                 setIsAdding(true);
@@ -273,7 +273,7 @@ export default function ChapterService() {
                 }
 
                 try {
-                    const response = await userApi.addCmtChapter(token, data);
+                    const response = await userApi.addCmt(token, data);
                     if (response.content.comment_info) {
                         // added
                         return;
@@ -342,7 +342,7 @@ export default function ChapterService() {
                 handleNextChapter={() => handleNextChapter()}
                 handlePrevChapter={() => handlePrevChapter()}
 
-                addCmtChapter={(cmtContent) => addCmtChapter(cmtContent)}
+                addCmt={(cmtContent) => addCmt(cmtContent)}
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}
                 isAdding={isAdding}

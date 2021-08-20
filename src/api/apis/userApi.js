@@ -19,7 +19,7 @@ const userApi = {
             }
         });
     },
-    addCmtChapter: (token, data) => {
+    addCmt: (token, data) => {
         const uri = '/api/user/addcommentchapter';
         return axiosClient.post(uri, data, {
             headers: {

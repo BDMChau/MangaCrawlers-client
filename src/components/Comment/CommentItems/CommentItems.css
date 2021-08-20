@@ -1,38 +1,3 @@
-.comments-form {
-  margin-bottom: 50px;
-}
-
-.comments-form .form-input .input {
-  height: 70px;
-  resize: none;
-}
-
-.comments-form .text {
-  max-height: 600px;
-  height: fit-content;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.comments-form .ant-comments-inner {
-  padding: 10px 0;
-}
-
-.comments-form .loading-more {
-  text-align: center;
-}
-
-.comments-form .ant-comments-actions {
-  padding: 0;
-  margin-top: 5px;
-}
-
-.comments-form .comments-likes {
-  cursor: pointer;
-  padding: 0px 5px;
-  font-size: 14px;
-  color: #c1c1c1;
-}
 
 .comment .cmt-bottom .chapter-name {
   margin-right: 10px;

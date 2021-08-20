@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 
 import ButtonLike from './ButtonLike';
-import SkeletonCustom from '../SkeletonCustom/SkeletonCustom';
+import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 
 
 function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {

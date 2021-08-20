@@ -1,29 +1,28 @@
 import React, { memo, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TopNav from './TopNav'
 import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/features/user/UserSlice";
-import genreApi from '../../api/apis/genreApi';
 import { message_success } from '../notifications/message';
+import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
 
 function NavbarService() {
     const dispatch = useDispatch();
+    const genresState = useSelector(state => state.mangaState[2])
+
     const [genres, setGenres] = useState([])
-    const cookies = new Cookies()
+    const cookies = new Cookies();
 
     useEffect(() => {
-        getAllGenres();
+        dispatch(GET_ALL_GENRES());
     }, [])
 
-    // auto logout when user has not been verified
-    // useEffect(() => {
-    //     if (userState[0]) {
-    //         if (!userState[0].user_isVerified) {
-    //             handleLogOut();
-    //             return;
-    //         }
-    //     }
-    // }, [userState[0]])
+    useEffect(() => {
+        if(genresState){
+            setGenres(genresState);
+        }
+    }, [genresState])
+
 
 
     const handleLogOut = () => {
@@ -36,19 +35,7 @@ function NavbarService() {
         return;
     }
 
-    const getAllGenres = async () => {
-        try {
-            const response = await genreApi.getAll();
-            if (response.content.err) {
-                return;
-            }
-
-            setGenres(response.content.genres);
-            return;
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    
 
     return (
         <TopNav

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import "./Chapter.css"
-import CommentItems from '../../../components/CommentItems/CommentItems';
 import { LeftOutlined, RightOutlined, HomeOutlined, AppstoreAddOutlined, MinusSquareOutlined } from "@ant-design/icons";
 import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../../components/notifications/message';
-import { Button, Col, Dropdown, Input, Menu, Row, Tooltip, Typography, Form } from 'antd'
+import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
+import CommentInput from 'components/Comment/CommentInput/CommentInput';
 
-const { TextArea } = Input;
 
 
 function Chapter({
@@ -26,7 +25,7 @@ function Chapter({
     handleNextChapter,
     handlePrevChapter,
 
-    addCmtChapter,
+    addCmt,
     isAddedCmt,
     setIsAddedCmt,
     isAdding,
@@ -40,8 +39,8 @@ function Chapter({
     const stuffsState = useSelector(state => state.stuffsState);
     const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
-    const [cmtContent, setCmtContent] = useState("");
-   
+
+
 
 
     useEffect(() => {
@@ -53,14 +52,6 @@ function Chapter({
 
     }, [imgs])
 
-
-
-    useEffect(() => {
-        if (isAddedCmt === true) {
-            setCmtContent("");
-            setIsAddedCmt(false)
-        }
-    }, [isAddedCmt])
 
     const dropDownItems = (
         <Menu>
@@ -147,32 +138,17 @@ function Chapter({
 
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
 
-            {/* css in  <CommentForm/> */}
-            <Col span={22} xxl={14} className="comments-form">
-                <Form className="form-input">
-                    <Form.Item>
-                        <TextArea
-                            className="input"
-                            type="text"
-                            placeholder="Write a comment..."
-                            value={cmtContent}
-                            onChange={(e) => setCmtContent(e.target.value)}
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button className="btn-submit" type="primary" loading={isAdding} onClick={() => addCmtChapter(cmtContent)}>
-                            Add Comment
-                    </Button>
-                    </Form.Item>
-                </Form>
 
-                <CommentItems
-                    comments={comments}
-                    getCmtsChapter={() => getCmtsChapter()}
-                    isEndCmts={isEndCmts}
-                />
-            </Col>
+            <CommentInput
+                setIsAddedCmt={setIsAddedCmt}
+                isAddedCmt={isAddedCmt}
+                addCmt={(cmtContent) => addCmt(cmtContent)}
+                isAdding={isAdding}
+                isEndCmts={isEndCmts}
 
+                getCmtsChapter={getCmtsChapter}
+                comments={comments}
+            />
         </Row >
     )
 }

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import genreApi from '../../../api/apis/genreApi';
 import mangaApi from '../../../api/apis/mangaApi';
 import { message_error } from '../../../components/notifications/message';
 import SearchingPage from './SearchingPage';
-import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/features/manga/MangaSlice";
+import { SET_MANGA_SEARCHED_BY_GENRES, GET_ALL_GENRES } from "../../../store/features/manga/MangaSlice";
 
 export default function SearchingPageService() {
     const dispatch = useDispatch()
+    const genres = useSelector(state => state.mangaState[2])
 
     const [data, setData] = useState([]);
     const [dataName, setDataName] = useState([]);
@@ -18,29 +19,10 @@ export default function SearchingPageService() {
 
 
     useEffect(() => {
-        getAllGenres();
-    }, [])
-
-
-    const getAllGenres = async () => {
-        try {
-            const response = await genreApi.getAll();
-            if (response.content.err) {
-                return;
-            }
-            const genres = response.content.genres;
-            genres.forEach(genre => {
-                genre.isSelected = false;
-            });
-            // const shuffledGenres = arrayMethods.shuffle(genres);
+        if (genres) {
             setData(genres);
-
-            return;
-        } catch (error) {
-            console.log(error);
         }
-
-    }
+    }, [genres])
 
 
     const handleClickTag = (genre) => {
@@ -80,8 +62,8 @@ export default function SearchingPageService() {
                     arrData.push(response.content.mangas)
                     arrData.push(response.content.genres)
 
-                    dispatch(SET_MANGA_SEARCHED_BY_GENRES(arrData))
-                    history.push(`/manga/genres/tag?v=${dataIds}`)
+                    dispatch(SET_MANGA_SEARCHED_BY_GENRES(arrData));
+                    history.push(`/manga/genres/tag?v=${dataIds}`);
                 }
 
                 setIsLoading(false)
