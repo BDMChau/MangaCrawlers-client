@@ -10,6 +10,7 @@ import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
+import CommentInput from 'components/Comment/CommentInput/CommentInput';
 
 
 function Manga({
@@ -18,6 +19,7 @@ function Manga({
     genres,
     chapters,
     suggestionList,
+    
     addToFollowingManga,
     removeFollowingManga,
     isLoading,
@@ -25,8 +27,14 @@ function Manga({
 
     mangaStars,
     handleRatingManga,
-    isEndCmts,
-    comments
+
+    addCmt,
+    isAddedCmt,
+    setIsAddedCmt,
+    isAdding,
+    comments,
+    getCmtsChapter,
+    isEndCmts
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -68,13 +76,13 @@ function Manga({
 
                             <div className="author">
                                 Author:
-                            <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
+                                <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
                                     {manga.author_name ? manga.author_name : " Unknown"}
                                 </NavLink>
                             </div>
                             <div className="trans_group">
                                 Translated by:
-                            <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
+                                <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
                                     {manga.transgroup_name ? manga.transgroup_name : " Unknown"}
                                 </NavLink>
                             </div>
@@ -115,7 +123,7 @@ function Manga({
                                 <Button className="btn-read-now" title="Read Now">
                                     <NavLink to={`/chapter/${manga.manga_id}/${chapterId01}`} style={{ marginLeft: 0 }}>
                                         Read Now
-                                </NavLink>
+                                    </NavLink>
                                 </Button>
 
                                 <Button
@@ -155,7 +163,6 @@ function Manga({
                                 chapters={chapters}
                                 mangaId={manga.manga_id}
                                 height={"400px"}
-                            // addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
                             />
                         </Col>
 
@@ -166,7 +173,18 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentItems comments={comments} isEndCmts={isEndCmts} mangaId={manga.manga_id} />
+                                    <CommentInput
+                                        mangaId={manga.manga_id}
+
+                                        setIsAddedCmt={setIsAddedCmt}
+                                        isAddedCmt={isAddedCmt}
+                                        addCmt={(cmtContent) => addCmt(cmtContent)}
+                                        isAdding={isAdding}
+                                        isEndCmts={isEndCmts}
+
+                                        getCmtsChapter={getCmtsChapter}
+                                        comments={comments}
+                                    />
                                 </div>
 
                             </div>

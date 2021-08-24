@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
+import { sendMessageSocket, socket } from 'socket/socketClient'
 
 function HomeService() {
     const userState = useSelector((state) => state.userState);
@@ -23,6 +24,7 @@ function HomeService() {
     const [searchResults, setSearchResults] = useState([])
     const typingRef = useRef(null);
 
+    const [text, setText] = useState("")
 
     useEffect(() => {
         getLatestMangas();
@@ -159,8 +161,18 @@ function HomeService() {
     }
 
 
+    useEffect(() => {
+        socket.on('newMessage', (result) => {
+            console.log("result")
+            console.log(result)
+        });
+    }, []);
+
     return (
-        <Home
+   <div>
+       <input value={text} onChange={(e) => setText(e.target.value)} />
+       <button onClick={() => {sendMessageSocket(text)}} >CCCCCCCC</button>
+            <Home
             latestMangas={latestMangas}
             topMangas={topMangas}
             weeklyMangas={weeklyMangas}
@@ -171,6 +183,7 @@ function HomeService() {
             onSearch={(val) => onSearch(val)}
             isLoadingSearch={isLoadingSearch}
         />
+   </div>
     )
 }
 

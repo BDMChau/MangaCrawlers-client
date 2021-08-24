@@ -20,10 +20,15 @@ function MangaService() {
     const [isLoading, setIsLoading] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
 
+    const [isAddedCmt, setIsAddedCmt] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
     const [comments, setComments] = useState([]);
-    const [fromRow, setFromRow] = useState(null);
+    const [fromRow, setFromRow] = useState(0);
     const [amountRows] = useState(10);
     const [isEndCmts, setIsEndCmts] = useState(false);
+    const [isErrorCmt, setIsErrorCmt] = useState(false);
+    const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
+    const [curChapter, setCurChapter] = useState(0);
 
     const { id } = useParams()
     const cookies = new Cookies();
@@ -218,6 +223,68 @@ function MangaService() {
 
     }
 
+
+    // check error when add cmt
+    useEffect(() => {
+        if (isErrorCmt === true) {
+            for (const comment of comments) {
+                if (comment.chaptercmt_time === timeWhenAddedCmt) {
+                    comment.is_error = true;
+                    break;
+                }
+            }
+
+            setComments(comments);
+        }
+    }, [isErrorCmt])
+
+    const addCmt = async (cmtContent) => {
+        if (userState[0]) {
+            if (cmtContent) {
+                setIsAdding(true);
+
+                const newObjComment = {
+                    "chapter_id": chapterid,
+                    "chaptercmt_content": cmtContent,
+                    "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
+                    "chapter_name": chapterInfo.chapter_name,
+                    "user_avatar": userState[0].user_avatar,
+                    "user_email": userState[0].user_email,
+                    "user_id": userState[0].user_id,
+                    "user_name": userState[0].user_name,
+                    "is_error": false
+                }
+
+                setTimeWhenAddedCmt(dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"));
+                setComments(prevCmts => [newObjComment, ...prevCmts])
+                setIsAdding(false);
+                setIsAddedCmt(true)
+
+
+                const data = {
+                    chapter_id: chapterid,
+                    chaptercmt_content: cmtContent.trim()
+                }
+
+                try {
+                    const response = await userApi.addCmt(token, data);
+                    if (response.content.comment_info) {
+                        // added
+                        return;
+                    } else {
+                        setIsErrorCmt(true);
+                        return;
+                    }
+                } catch (ex) {
+                    console.log(ex)
+                }
+            }
+        } else {
+            message_error("You have to login first!");
+            return;
+        }
+    }
+
     const getCmtsManga = async () => {
         const data = {
             manga_id: id,
@@ -263,13 +330,21 @@ function MangaService() {
                 genres={genres}
                 chapters={chapters}
                 suggestionList={suggestionList}
+                
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}
                 isFollowed={isFollowed}
+
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
+                
+                addCmt={(cmtContent) => addCmt(cmtContent)}
+                isAddedCmt={isAddedCmt}
+                setIsAddedCmt={setIsAddedCmt}
+                isAdding={isAdding}
                 comments={comments}
+                getCmtsChapter={() => getCmtsChapter()}
                 isEndCmts={isEndCmts}
             />
         </div>

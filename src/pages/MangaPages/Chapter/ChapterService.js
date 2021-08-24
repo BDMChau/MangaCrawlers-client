@@ -333,6 +333,7 @@ export default function ChapterService() {
                 chapters={chapters}
                 chapterInfo={chapterInfo}
                 isLoading={isLoading}
+                
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(mangaId) => removeFollowingManga(mangaId)}
                 isLoadingAddFollow={isLoadingAddFollow}

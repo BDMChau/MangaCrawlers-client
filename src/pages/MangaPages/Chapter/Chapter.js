@@ -16,6 +16,7 @@ function Chapter({
     chapters,
     chapterInfo,
     isLoading,
+    
     addToFollowingManga,
     removeFollowingManga,
     isLoadingAddFollow,
@@ -32,7 +33,6 @@ function Chapter({
     comments,
     getCmtsChapter,
     isEndCmts
-
 }) {
     const userState = useSelector((state) => state.userState);
     const mangaState = useSelector(state => state.mangaState);

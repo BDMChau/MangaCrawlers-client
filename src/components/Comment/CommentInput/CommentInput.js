@@ -9,15 +9,20 @@ const { TextArea } = Input;
 
 
 export default function CommentInput({
+    mangaId, 
+
     addCmt,
     setIsAddedCmt,
     isAddedCmt,
     isAdding,
     isEndCmts,
 
-    comments
+    
 }) {
     const [cmtContent, setCmtContent] = useState("");
+    const [comments, setCommnts] = useState([
+
+    ]);
 
 
     useEffect(() => {
@@ -56,6 +61,8 @@ export default function CommentInput({
                 comments={comments}
                 getCmtsChapter={() => getCmtsChapter()}
                 isEndCmts={isEndCmts}
+
+                mangaId={mangaId}
             />
         </Col>
     )
