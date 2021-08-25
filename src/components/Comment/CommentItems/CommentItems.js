@@ -93,20 +93,48 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                                 </Typography.Text>
 
 
-                                <div className="cmt-children">
+                                <div className="cmt-children" style={{ padding: comment.children.length ? "5px" : 0 }} >
                                     {
                                         comment.children.length
                                             ? comment.children.map((cmt, i) => (
                                                 <div>
-                                                    <Typography.Text style={{ color: cmt.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                                                        {cmt.content}
-                                                    </Typography.Text>
+                                                    <div>
+                                                        <Typography.Text style={{ color: cmt.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
+                                                            {cmt.content}
+                                                        </Typography.Text>
 
-                                                    {renderCmtBottom(cmt)}
+                                                        {renderCmtBottom(cmt)}
+
+                                                        <Typography.Text style={{ color: "#FF4D4F" }}>
+                                                            {comment.is_error ? "Error, cannot add this comment!" : ""}
+                                                        </Typography.Text>
+                                                    </div>
+
+
+                                                    <div className="cmt-children02" style={{ padding: cmt.children ? "5px" : 0 }}>
+                                                        {
+                                                            cmt.children
+                                                                ? cmt.children.map((cmt02, i) => (
+                                                                    <div>
+                                                                        <Typography.Text style={{ color: cmt02.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
+                                                                            {cmt02.content}
+                                                                        </Typography.Text>
+
+                                                                        {renderCmtBottom(cmt02)}
+
+                                                                        <Typography.Text style={{ color: "#FF4D4F" }}>
+                                                                            {comment.is_error ? "Error, cannot add this comment!" : ""}
+                                                                        </Typography.Text>
+                                                                    </div>
+                                                                ))
+                                                                : ""
+                                                        }
+                                                    </div>
                                                 </div>
                                             ))
                                             : ""
                                     }
+
                                 </div>
                             </div>
                         }

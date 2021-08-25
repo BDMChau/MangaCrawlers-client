@@ -1,4 +1,10 @@
 
+.comment{
+  background-color: #e0e4eb;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .comment .cmt-bottom .chapter-name {
   margin-right: 10px;
   float: right;
@@ -20,6 +26,70 @@
   color: #848587;
   margin-left: 10px;
 }
+
+/* ///////////////////////////////// */
+.cmt-children{
+  background-color: #c8cfdb;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+.cmt-children .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmt-children .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cmt-children .cmt-bottom .interact .reply:hover {
+  color: #848587;
+  margin-left: 10px;
+}
+
+
+
+/* //////////////////////////////////// */
+.cmt-children02{
+  background-color: #e0e4eb;
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.cmt-children02 .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmt-children02 .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cmt-children02 .cmt-bottom .interact .reply:hover {
+  color: #848587;
+  margin-left: 10px;
+}
+
+
+
+
+
 
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
