@@ -35,6 +35,34 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
     }
 
 
+    const renderCmtBottom = (comment) => (
+        <div className="cmt-bottom">
+            <div className="interact">
+                <ButtonLike />
+                <Typography.Text className="reply">
+                    Reply
+                </Typography.Text>
+            </div>
+            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
+                {comment.chaptercmt_time}
+            </Typography.Text>
+
+            <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>
+                <Tooltip title={comment.chapter_name}>
+                    <Typography.Text
+                        className="chapter-name"
+                        style={{
+                            color: comment.is_error ? "#D7D8DB" : "#848587",
+                        }}
+                    >
+                        {comment.chapter_name}
+                    </Typography.Text>
+                </Tooltip>
+            </NavLink>
+        </div>
+    )
+
+
 
     const Items = ({ children }) => {
         return (
@@ -55,37 +83,31 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                         content={
                             <div className="comment" key={i}>
                                 <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                                    {comment.chaptercmt_content}
+                                    {comment.content}
                                 </Typography.Text>
 
-                                <div className="cmt-bottom">
-                                    <div className="interact">
-                                        <ButtonLike />
-                                        <Typography.Text className="reply">
-                                            Reply
-                                        </Typography.Text>
-                                    </div>
-                                    <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
-                                        {comment.chaptercmt_time}
-                                    </Typography.Text>
-
-                                    <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>
-                                        <Tooltip title={comment.chapter_name}>
-                                            <Typography.Text
-                                                className="chapter-name"
-                                                style={{
-                                                    color: comment.is_error ? "#D7D8DB" : "#848587",
-                                                }}
-                                            >
-                                                {comment.chapter_name}
-                                            </Typography.Text>
-                                        </Tooltip>
-                                    </NavLink>
-                                </div>
+                                {renderCmtBottom(comment)}
 
                                 <Typography.Text style={{ color: "#FF4D4F" }}>
                                     {comment.is_error ? "Error, cannot add this comment!" : ""}
                                 </Typography.Text>
+
+
+                                <div className="cmt-children">
+                                    {
+                                        comment.children.length
+                                            ? comment.children.map((cmt, i) => (
+                                                <div>
+                                                    <Typography.Text style={{ color: cmt.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
+                                                        {cmt.content}
+                                                    </Typography.Text>
+
+                                                    {renderCmtBottom(cmt)}
+                                                </div>
+                                            ))
+                                            : ""
+                                    }
+                                </div>
                             </div>
                         }
                     >
@@ -104,7 +126,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
     }
 
     return (
-        <div className="text" onScroll={(e) => handleScroll(e)} >
+        <div className="comment-items" onScroll={(e) => handleScroll(e)} >
             <Items />
 
             {isScrollBottom

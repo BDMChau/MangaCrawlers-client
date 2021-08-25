@@ -133,14 +133,13 @@
 }
 
 .manga-comments .comments {
-  height: 100%;
   padding: 0px;
-  width: 100%;
   background: transparent;
+  height: 850px;
+  margin-bottom: 40px;
 }
 
 .manga-comments .comments-body {
-  max-height: 600px;
   width: 90%;
 }
 
