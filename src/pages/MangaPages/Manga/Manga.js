@@ -151,7 +151,7 @@ function Manga({
                     <Row justify={"center"} className="middle">
                         <Col span={24} md={22} lg={23} xxl={22} className="desc-wrapper">
                             <div className="desc">
-                                <h2>Description</h2>
+                                <h2>Synopsis</h2>
                                 <FadingText content={manga.description} />
                             </div>
                         </Col>

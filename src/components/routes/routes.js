@@ -24,6 +24,21 @@ const routes = [
         component: React.lazy(() => import('../../pages/Home/HomeService')),
         exact: true
     },
+    {
+        path: "/contact_us",
+        component: React.lazy(() => import('../../pages/Contact/Contact')),
+        exact: true
+    },
+    {
+        path: "/legal/privacy_policy",
+        component: React.lazy(() => import('../../pages/Contact/Contact')),
+        exact: true
+    },
+    {
+        path: "/legal/terms_of_policy",
+        component: React.lazy(() => import('../../pages/Contact/Contact')),
+        exact: true
+    },
 
     ////////////// Manga pages
     {

@@ -3,6 +3,7 @@ import "./Footer.css"
 
 import { Col, Row, Typography } from 'antd'
 import { Footer } from 'antd/lib/layout/layout'
+import { NavLink } from 'react-router-dom'
 
 
 export default function FooterContainer() {
@@ -19,11 +20,26 @@ export default function FooterContainer() {
                 <Col span={24} className="col01">
                     <div className="footer-logo"></div>
                     <div className="footer-text">
-                        <Typography.Text>Copyright © 2021 MangaCrawlers</Typography.Text>
+                        <div style={{ color: "#1890FF" }}>
+                            <NavLink to="/contact_us">
+                                Contact us
+                            </NavLink>
+
+                            &nbsp; | &nbsp;
+
+                            <NavLink to="/legal/terms_of_policy">
+                                Terms of Policy
+                            </NavLink>
+
+                            &nbsp; | &nbsp;
+
+                            <NavLink to="/legal/privacy_policy">
+                                Privacy Policy
+                            </NavLink>
+                        </div>
 
                         <Typography.Text style={{ display: "block" }}>
-                            Copyrights and trademarks for the manga, and other promotional materials are held by their respective owners and their use is allowed under the fair use clause of the Copyright Law. © 2021 MangaCrawlers.  <br />
-                            Our Email: mangacrawlers123@gmail.com
+                            All rights reserved © 2021 MangaCrawlers
                         </Typography.Text>
                     </div>
                 </Col>
