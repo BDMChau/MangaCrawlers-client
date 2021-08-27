@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import "./AddOnsBtn.css";
 import BotYoutubeMusicService from "../../BotYoutubeMusic/BotYoutubeMusicService";
 
-import MessengerCustomerChat from 'react-messenger-customer-chat';
-
 import { Button, Dropdown, Menu, Modal } from 'antd';
 
 import { PlusOutlined } from "@ant-design/icons";
 import stereo from "../../../assets/img/stereo.svg";
+
 
 export default function AddOnsBtn() {
     const [isVisibleModal, setIsVisibleModal] = useState(false);
@@ -15,13 +14,6 @@ export default function AddOnsBtn() {
 
     const dropDownItems = (
         <Menu>
-            <Menu.Item>
-                <MessengerCustomerChat
-                    pageId="101341455476510"
-                    appId="496491375126587"
-                />
-            </Menu.Item>
-
             <Menu.Item>
                 <Button
                     className="music-btn"

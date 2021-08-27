@@ -40,7 +40,7 @@ function BotYoutubeMusicService() {
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
     const [itemsInQueue, setItemsInQueue] = useState([]);
-    const [playingPosition, setPlayingPosition] = useState(0);
+    const [playingPosition, setPlayingPosition] = useState(null);
     const [allowToAddQueue, setAllowToAddQueue] = useState(false);
 
     const [offset, setOffset] = useState(0);
@@ -97,7 +97,6 @@ function BotYoutubeMusicService() {
     // add to queue: allowToAddQueue is "true" when the first message has been saved in db
     useEffect(() => {
         if (allowToAddQueue && Object.keys(itemInfo).length !== 0) {
-            console.log("???")
             handleAddQueue(itemId, itemInfo.title)
         }
     }, [itemInfo, userId])
@@ -116,20 +115,22 @@ function BotYoutubeMusicService() {
 
     // set playing video
     useEffect(() => {
-        if (itemsInQueue.length === 1) {
-            itemsInQueue[0].playing = true;
+        if (itemsInQueue.length) {
+            if (itemsInQueue.length === 1) {
+                itemsInQueue[0].playing = true;
 
-        } else if (playingPosition > 0) {
-            itemsInQueue.forEach((item, i) => {
-                if (i === playingPosition) {
-                    item.playing = true;
-                } else {
-                    item.playing = false;
-                }
-            })
+            } else if (playingPosition >= 0) {
+                itemsInQueue.forEach((item, i) => {
+                    if (i === playingPosition) {
+                        item.playing = true;
+
+                    } else {
+                        item.playing = false;
+                    }
+                })
+            }
+
         }
-
-
     }, [itemsInQueue, playingPosition]);
 
 
@@ -171,7 +172,7 @@ function BotYoutubeMusicService() {
         }
 
         const rawCommand = command.replace("/", "").replace(" ", ""); // ex: "/pause " >>> "pause"
-        const nonInteractiveCmds = ["help", "queue", "clear", "help", "jump"];
+        const nonInteractiveCmds = ["help", "queue", "clear", "jump"];
         const opts = {
             value: value,
             url: defaultUrl,
@@ -200,6 +201,7 @@ function BotYoutubeMusicService() {
                     const playingVideoPos = itemsInQueue.findIndex(item => item.video_id === itemToJump.video_id);
                     setPlayingPosition(playingVideoPos)
                     setItemId(itemToJump.video_id);
+                    setItemInfo(itemToJump);
 
                     opts.id = itemToJump.video_id;
                     opts.title = itemToJump.video_title;
@@ -221,10 +223,17 @@ function BotYoutubeMusicService() {
             // interactive commands
             if (itemId) {
                 if (command === "/stop ") {
+                    opts.id = itemId;
+                    opts.title = itemInfo.video_title;
+
                     setItemId("");
                     setItemInfo({});
 
+                    itemsInQueue.forEach(item => {
+                        item.playing = false;
+                    })
                 }
+
 
                 const replyFromBot = botMessagesPreset[rawCommand](opts);
                 replyFormatForBot(replyFromBot);

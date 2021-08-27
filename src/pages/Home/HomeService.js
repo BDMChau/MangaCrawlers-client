@@ -24,7 +24,6 @@ function HomeService() {
     const [searchResults, setSearchResults] = useState([])
     const typingRef = useRef(null);
 
-    const [text, setText] = useState("")
 
     useEffect(() => {
         getLatestMangas();
@@ -170,8 +169,6 @@ function HomeService() {
 
     return (
    <div>
-       <input value={text} onChange={(e) => setText(e.target.value)} />
-       <button onClick={() => {sendMessageSocket(text)}} >CCCCCCCC</button>
             <Home
             latestMangas={latestMangas}
             topMangas={topMangas}
