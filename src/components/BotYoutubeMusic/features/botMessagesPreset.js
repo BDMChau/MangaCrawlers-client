@@ -28,14 +28,14 @@ const botMessagesPreset = {
     ),
     unpause: ({ icon }) => (
         [
-            `<img style="width: 25px; height: 25px;" src=${icon} alt="" /> unpaused the player`,
+            `<img style="width: 25px; height: 25px;" src=${icon} alt="" /> Unpaused the player`,
         ]
     ),
     queue: ({ items }) => (
         [
             "queue",
-            items.length ? items : [{ video_name: "The queue is empty :(" }],
-            items ? "This is the end of the queue!" : ""
+            items.length ? items : { empty: "The queue is empty :(" },
+            items.length ? "This is the end of the queue!" : ""
         ]
     ),
     clear: () => (
