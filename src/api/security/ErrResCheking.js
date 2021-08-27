@@ -42,7 +42,7 @@ export const errCodeResCheking = (errorResponse) => {
             break;
 
         case 403:
-            message_error("You are not allowed to do this action!", 3)
+            console.error("You are not allowed to do this action!")
             break;
 
         default:

@@ -58,10 +58,11 @@ function BotYoutubeMusicService() {
 
 
     useEffect(() => {
-        if (isEndVid === true) {
+        if (isEndVid === true && itemId && Object.keys(itemInfo).length !== 0) {
             const videoEndedPos = itemsInQueue.findIndex(item => item.video_id === itemInfo.video_id);
 
             if (videoEndedPos === itemsInQueue.length - 1) {
+                console.log("clear all")
                 // setItemId("");
                 // setItemInfo({});
                 handleClearQueue();
@@ -190,7 +191,7 @@ function BotYoutubeMusicService() {
 
         if (command === "/play ") {
             playSong(value);
-            if(itemsInQueue.length === 0) setPlayingPosition(0);
+            if (itemsInQueue.length === 0) setPlayingPosition(0);
             return;
         }
 
@@ -224,7 +225,7 @@ function BotYoutubeMusicService() {
                     replyFormatForBot(content);
                     setIsJumpTo(false);
                     return;
-                } 
+                }
 
                 const playingVideoPos = itemsInQueue.findIndex(item => item.video_id === itemToJump.video_id);
                 setPlayingPosition(playingVideoPos)
@@ -338,11 +339,16 @@ function BotYoutubeMusicService() {
 
             if (response.items.length) {
                 const firstItemId = response.items[0].id.videoId;
-                const firstItemSnippet = response.items[0].snippet;
+                const firstItemInfo = {
+                    is_error: false,
+                    video_id: response.items[0].id.videoId,
+                    video_title: response.items[0].snippet.title,
+                    playing: true
+                };
 
                 if (itemsInQueue.length === 0) {
                     setItemId(firstItemId);
-                    setItemInfo(firstItemSnippet);
+                    setItemInfo(firstItemInfo);
                     setIsLoading(false);
                 } else {
                     handleAddQueue(firstItemId, firstItemSnippet.title);
@@ -375,11 +381,16 @@ function BotYoutubeMusicService() {
 
             if (response.items.length) {
                 const itemIdRes = response.items[0].id;
-                const itemSnippet = response.items[0].snippet;
+                const itemInfo = {
+                    is_error: false,
+                    video_id: response.items[0].id,
+                    video_title: response.items[0].snippet.title,
+                    playing: true
+                };
 
                 if (itemsInQueue.length === 0) {
                     setItemId(itemIdRes);
-                    setItemInfo(itemSnippet);
+                    setItemInfo(itemInfo);
                     setIsLoading(false);
                 } else {
                     handleAddQueue(itemIdRes, itemSnippet.title);

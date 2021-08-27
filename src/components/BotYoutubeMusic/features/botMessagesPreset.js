@@ -74,6 +74,11 @@ const botMessagesPreset = {
             `<img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" /> Sorry, there seems to be an error. Try another!`
         ]
     ),
+    limitedRequest: (icon) => (
+        [
+            `I'm too lazy today, come back tomorrow! <img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" />`
+        ]
+    ),
     unavailableVideo: (icon) => (
         [
             `<img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" /> This video is not available!`
