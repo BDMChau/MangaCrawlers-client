@@ -78,6 +78,7 @@ function BotYoutubeMusic({
         }
     }, [userCommand])
 
+
     const handleUserCmd = (command) => {
         setTimeout(() => {
             switch (command) {
@@ -163,7 +164,8 @@ function BotYoutubeMusic({
 
     const handleErrors = () => {
         let content;
-
+        
+        console.log("video_err_code: ",event.data);
         if (event.data !== null) {
             const lastItem = itemsInQueue[itemsInQueue.length - 1];
             modifyQueueWhenVideoError(lastItem.queue_id);
@@ -261,9 +263,9 @@ function BotYoutubeMusic({
 
     return (
         <Row style={{ margin: "5px 3px" }}>
-            {itemId
-                ? <YouTube
+            <YouTube
                     className="iframe-youtube"
+                    // style={{display:"none"}}
                     videoId={itemId ? itemId : ""}
                     opts={{
                         height: "200",
@@ -273,9 +275,7 @@ function BotYoutubeMusic({
                     onError={(e) => { interactions.onError(e) }}
                     onEnd={() => setIsEndVid(true)}
                 />
-                : ""
-
-            }
+               
 
 
             <div className="messages-cont" onScroll={(e) => getMoreHistoryMessages(e)} ref={scrollRef}>

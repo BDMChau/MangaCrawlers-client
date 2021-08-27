@@ -11,7 +11,7 @@ import playIcon from '../../assets/img/playicon.svg';
 import pauseIcon from '../../assets/img/pause.svg';
 import kannapalm from '../../assets/img/kannafacepalm.png';
 import kannabored from '../../assets/img/kannabored.gif';
-import kannaconfuse from '../../assets/img/kannawhat.png';
+import kannawhat from '../../assets/img/kannawhat.png';
 import kannaaddok from '../../assets/img/Kannaaddokgif.gif';
 import kanndsleep from '../../assets/img/kannasleep.png';
 
@@ -62,16 +62,17 @@ function BotYoutubeMusicService() {
             const videoEndedPos = itemsInQueue.findIndex(item => item.video_id === itemInfo.video_id);
 
             if (videoEndedPos === itemsInQueue.length - 1) {
-                console.log("clear all")
                 // setItemId("");
                 // setItemInfo({});
+                setIsJumpTo(false);
                 handleClearQueue();
             } else {
                 setItemId(itemsInQueue[videoEndedPos + 1].video_id);
                 setItemInfo(itemsInQueue[videoEndedPos + 1]);
+                setIsJumpTo(true);
             }
 
-            setIsJumpTo(true);
+
             setIsEndVid(false)
         }
     }, [isEndVid]);
@@ -120,7 +121,7 @@ function BotYoutubeMusicService() {
     // add to queue: allowToAddQueue is "true" when the first message has been saved in db
     useEffect(() => {
         if (allowToAddQueue && Object.keys(itemInfo).length !== 0 && !isJumpTo) {
-            handleAddQueue(itemId, itemInfo.title)
+            handleAddQueue(itemId, itemInfo.video_title)
         }
     }, [itemInfo, userId])
 
@@ -190,8 +191,8 @@ function BotYoutubeMusicService() {
         setUserCommand(command);
 
         if (command === "/play ") {
-            playSong(value);
             if (itemsInQueue.length === 0) setPlayingPosition(0);
+            playSong(value);
             return;
         }
 
@@ -201,7 +202,7 @@ function BotYoutubeMusicService() {
             value: value,
             url: defaultUrl,
             id: itemId,
-            title: itemInfo.title,
+            title: itemInfo.video_title,
             userName: userName,
             icon: chooseIcon(command),
         }
@@ -283,7 +284,7 @@ function BotYoutubeMusicService() {
 
             } else { // if inputVal is a URL, videoId after ?v= will be persent
                 if (strList[0] !== defaultUrl) {
-                    const content = botMessagesPreset.invalidUrl(kannaconfuse);
+                    const content = botMessagesPreset.invalidUrl(kannawhat);
                     replyFormatForBot(content);
 
                     setIsHaveNewMessage(false);
@@ -296,14 +297,6 @@ function BotYoutubeMusicService() {
 
         }
     };
-
-
-
-    // // reply for /play command: when use /stop or /clear >> itemInfo will be {}
-    // useEffect(() => {
-    //     console.log("reply play")
-    //     replyForPlayCmd(itemId, itemInfo);
-    // }, [itemInfo]);
 
 
     // handle scroll when loading message
@@ -351,7 +344,7 @@ function BotYoutubeMusicService() {
                     setItemInfo(firstItemInfo);
                     setIsLoading(false);
                 } else {
-                    handleAddQueue(firstItemId, firstItemSnippet.title);
+                    handleAddQueue(firstItemId, firstItemInfo.video_title);
                 }
 
                 return;
@@ -393,7 +386,7 @@ function BotYoutubeMusicService() {
                     setItemInfo(itemInfo);
                     setIsLoading(false);
                 } else {
-                    handleAddQueue(itemIdRes, itemSnippet.title);
+                    handleAddQueue(itemIdRes, itemInfo.title);
                 }
 
                 return;
