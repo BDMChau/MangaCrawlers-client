@@ -36,6 +36,7 @@ function BotYoutubeMusicService() {
 
     const [apiKey, setApiKey] = useState("");
 
+    const [isVisible, setIsVisible] = useState(false);
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
 
@@ -66,6 +67,7 @@ function BotYoutubeMusicService() {
                 // setItemInfo({});
                 setIsJumpTo(false);
                 handleClearQueue();
+                setIsVisible(false);
             } else {
                 setItemId(itemsInQueue[videoEndedPos + 1].video_id);
                 setItemInfo(itemsInQueue[videoEndedPos + 1]);
@@ -347,6 +349,7 @@ function BotYoutubeMusicService() {
                     handleAddQueue(firstItemId, firstItemInfo.video_title);
                 }
 
+                setIsVisible(true);
                 return;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
@@ -389,6 +392,7 @@ function BotYoutubeMusicService() {
                     handleAddQueue(itemIdRes, itemInfo.title);
                 }
 
+                setIsVisible(true);
                 return;
             } else {
                 const content = botMessagesPreset.requestYoutubeFailed(kannapalm);
@@ -670,7 +674,8 @@ function BotYoutubeMusicService() {
 
             handleSendInput={(inputVal) => handleSendInput(inputVal)}
 
-            itemId={itemId}
+            itemInfo={itemInfo}
+            isVisible={isVisible}
 
             userCommand={userCommand}
 

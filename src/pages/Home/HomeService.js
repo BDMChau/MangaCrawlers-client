@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/mangaApi"
 import Home from './Home'
 import dayjs from 'dayjs'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import authApi from '../../api/apis/authApi'
 import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message'

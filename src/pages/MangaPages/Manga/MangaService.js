@@ -3,10 +3,13 @@ import { useParams } from 'react-router';
 import Manga from './Manga'
 import mangaApi from "../../../api/apis/mangaApi"
 import dayjs from 'dayjs';
+import initial from 'lodash/initial';
 import smoothscroll from 'smoothscroll-polyfill';
 import Cookies from 'universal-cookie';
+
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -15,7 +18,7 @@ function MangaService() {
     const [chapters, setChapters] = useState([]);
     const [weeklyMangas, setWeeklyMangas] = useState([]);
     const [suggestionList, setSuggestionList] = useState([]);
-    
+
     const [isFollowed, setIsFollowed] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
@@ -30,13 +33,23 @@ function MangaService() {
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
     const [curChapter, setCurChapter] = useState(0);
 
-    const { id } = useParams()
     const cookies = new Cookies();
     const token = cookies.get("token")
+
+    const history = useHistory();
+    const { name_id } = useParams()
+    let id;
+    let manga_name_param;
+
 
 
     useEffect(() => {
         getWeeklyTopMangas();
+
+        const splittedParams = name_id.split("-");
+        id = splittedParams[splittedParams.length - 1];
+        manga_name_param = initial(splittedParams).toString().replaceAll(",", " ");
+
     }, [])
 
 
@@ -56,9 +69,9 @@ function MangaService() {
         setIsEndCmts(false);
         setComments([]);
         setFromRow(0);
-        
+
         // if fromRow is 0, run getCmtsManga() below
-        if(fromRow === 0){
+        if (fromRow === 0) {
             getCmtsManga();
         }
     }, [id])
@@ -80,11 +93,15 @@ function MangaService() {
                 return;
             }
             const chapters = response.content.chapters;
+            const mangaObj = response.content.manga;
+
+            if (mangaObj.manga_name !== manga_name_param) {
+                return;
+            }
+
             chapters.forEach(chapter => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
             });
-
-            const mangaObj = response.content.manga;
 
             if (userState[0]) {
                 const followingMangas = await getFollowingMangas();
@@ -330,7 +347,7 @@ function MangaService() {
                 genres={genres}
                 chapters={chapters}
                 suggestionList={suggestionList}
-                
+
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}
@@ -338,7 +355,7 @@ function MangaService() {
 
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
-                
+
                 addCmt={(cmtContent) => addCmt(cmtContent)}
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}

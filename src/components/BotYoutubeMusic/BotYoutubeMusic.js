@@ -23,7 +23,9 @@ function BotYoutubeMusic({
     isLoading,
     handleSendInput,
 
-    itemId,
+    itemInfo,
+    isVisible,
+
     userCommand,
 
     getHistoryMessages,
@@ -160,12 +162,12 @@ function BotYoutubeMusic({
         if (event) {
             handleErrors()
         }
-    }, [event, itemId]);
+    }, [event, itemInfo]);
 
     const handleErrors = () => {
         let content;
-        
-        console.log("video_err_code: ",event.data);
+
+        console.log("video_err_code: ", event.data);
         if (event.data !== null) {
             const lastItem = itemsInQueue[itemsInQueue.length - 1];
             modifyQueueWhenVideoError(lastItem.queue_id);
@@ -263,10 +265,11 @@ function BotYoutubeMusic({
 
     return (
         <Row style={{ margin: "5px 3px" }}>
-            <YouTube
+            {isVisible
+                ? <YouTube
                     className="iframe-youtube"
                     // style={{display:"none"}}
-                    videoId={itemId ? itemId : ""}
+                    videoId={itemInfo.video_id ? itemInfo.video_id : ""}
                     opts={{
                         height: "200",
                         width: "200",
@@ -275,7 +278,10 @@ function BotYoutubeMusic({
                     onError={(e) => { interactions.onError(e) }}
                     onEnd={() => setIsEndVid(true)}
                 />
-               
+                : ""
+
+            }
+
 
 
             <div className="messages-cont" onScroll={(e) => getMoreHistoryMessages(e)} ref={scrollRef}>

@@ -47,7 +47,7 @@ const routes = [
         exact: true
     },
     {
-        path: "/manga/:id",
+        path: "/manga/:name_id",
         component: React.lazy(() => import('../../pages/MangaPages/Manga/MangaService')),
         exact: true
     },

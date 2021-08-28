@@ -19,7 +19,7 @@ function ListHomePagination({ mangas }) {
             setIsLoading(true)
         } else {
             setIsLoading(false)
-
+            
             const shuffledList = arrayMethods.shuffle(mangas);
             setData(shuffledList)
         }
@@ -73,7 +73,7 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_id}`}>
+                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`}>
                                 <Card id={manga.manga_id}
                                     className="card"
                                     hoverable
