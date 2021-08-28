@@ -53,7 +53,7 @@ function ListGenrePagination({ mangas }) {
                 footer={false}
                 renderItem={manga => (
                     <div>
-                        <NavLink to={`/manga/${manga.manga_id}`}>
+                        <NavLink to={`/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`}>
                             <Card
                                 id={manga.manga_id}
                                 className="card"

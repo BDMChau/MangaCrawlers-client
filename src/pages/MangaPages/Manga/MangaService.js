@@ -9,7 +9,6 @@ import Cookies from 'universal-cookie';
 
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -36,24 +35,26 @@ function MangaService() {
     const cookies = new Cookies();
     const token = cookies.get("token")
 
-    const history = useHistory();
     const { name_id } = useParams()
-    let id;
-    let manga_name_param;
+    const [id, setId] = useState("");
+    const [mangaNameParam, setMangaNameParam] = useState("");
 
 
 
     useEffect(() => {
         getWeeklyTopMangas();
-
-        const splittedParams = name_id.split("-");
-        id = splittedParams[splittedParams.length - 1];
-        manga_name_param = initial(splittedParams).toString().replaceAll(",", " ");
-
     }, [])
 
 
     useEffect(() => {
+        const splittedParams = name_id.split("-");
+        setId(splittedParams[splittedParams.length - 1]);
+        setMangaNameParam(initial(splittedParams).toString().replaceAll(",", " "));
+    }, [name_id])
+
+
+    useEffect(() => {
+        console.log("bruh")
         getMangaData();
         getSuggestionList();
 
@@ -95,7 +96,7 @@ function MangaService() {
             const chapters = response.content.chapters;
             const mangaObj = response.content.manga;
 
-            if (mangaObj.manga_name !== manga_name_param) {
+            if (mangaObj.manga_name !== mangaNameParam) {
                 return;
             }
 
@@ -145,7 +146,6 @@ function MangaService() {
             }
 
             setSuggestionList(response.content.suggestion_list)
-            console.log(response.content.suggestion_list)
             return;
         } catch (error) {
             console.log(error);
@@ -311,7 +311,6 @@ function MangaService() {
 
         try {
             const response = await mangaApi.getComments(data);
-            console.log("cmts manga: ", response)
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
                 // message_error("No manga to present!")

@@ -45,7 +45,7 @@ function ListSide({ mangas, height }) {
                             <NavLink
                                 key={i}
                                 title={manga.manga_name}
-                                to={`/manga/${manga.manga_id}`}
+                                to={`/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`}
                                 className="list-side-item"
                             >
                                 <div className="item-img" >

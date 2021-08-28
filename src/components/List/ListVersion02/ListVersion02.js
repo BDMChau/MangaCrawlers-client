@@ -31,7 +31,7 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
                 footer={false}
                 renderItem={manga => (
                     <div className="item">
-                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_id}`} className="item-img">
+                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`} className="item-img">
                             <Image
                                 className="img"
                                 src={manga.thumbnail}
