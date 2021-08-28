@@ -18,9 +18,9 @@ function Chapter({
     chapterInfo,
     mangaName,
     mangaId,
-    
+
     isLoading,
-    
+
     addToFollowingManga,
     removeFollowingManga,
     isLoadingAddFollow,
@@ -71,7 +71,7 @@ function Chapter({
                         <Menu.Item key={i} className="dropdown-item-chapter-page">
                             <NavLink
                                 title={chapter.chapter_name}
-                                className="dropdown-item-title" 
+                                className="dropdown-item-title"
                                 to={setUrl(chapter)}
                                 onChange={() => setChapterName(chapter.chapter_name)}
                                 onClick={() => addReadingHistory(chapterInfo.manga.manga_id, chapter.chapter_id)}
@@ -150,16 +150,18 @@ function Chapter({
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
 
 
-            <CommentInput
-                setIsAddedCmt={setIsAddedCmt}
-                isAddedCmt={isAddedCmt}
-                addCmt={(cmtContent) => addCmt(cmtContent)}
-                isAdding={isAdding}
-                isEndCmts={isEndCmts}
+            <Col span={22} xxl={16}>
+                <CommentInput
+                    setIsAddedCmt={setIsAddedCmt}
+                    isAddedCmt={isAddedCmt}
+                    addCmt={(cmtContent) => addCmt(cmtContent)}
+                    isAdding={isAdding}
+                    isEndCmts={isEndCmts}
 
-                getCmtsChapter={getCmtsChapter}
-                comments={comments}
-            />
+                    getCmtsChapter={getCmtsChapter}
+                    comments={comments}
+                />
+            </Col>
         </Row >
     )
 }

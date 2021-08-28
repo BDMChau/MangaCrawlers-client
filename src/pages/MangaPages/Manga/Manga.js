@@ -11,6 +11,7 @@ import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
+import { regex } from 'config/regex';
 
 
 function Manga({
@@ -19,7 +20,7 @@ function Manga({
     genres,
     chapters,
     suggestionList,
-    
+
     addToFollowingManga,
     removeFollowingManga,
     isLoading,
@@ -39,6 +40,7 @@ function Manga({
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
     const [chapterId01, setChapterId01] = useState("");
+    const [chapterNumber01, setChapterNumber01] = useState("");
 
 
     const goToSearchMangeWithGenrePage = (id) => {
@@ -47,9 +49,14 @@ function Manga({
 
     useEffect(() => {
         if (chapters[0]) {
+            const spittedStr = chapters[0].chapter_name.split(":");
+            const chapterNumber = spittedStr[0];
+
+            setChapterNumber01(chapterNumber)
             setChapterId01(chapters[0].chapter_id)
         }
     }, [chapters])
+
 
 
     return (
@@ -71,7 +78,7 @@ function Manga({
                         </Col>
                         <Col md={13} lg={12} sm={12} xs={20} xxl={15} className="title">
                             <div className="name">
-                                <h3>{manga.manga_name}</h3>
+                                <Typography.Title level={3}>{manga.manga_name}</Typography.Title>
                             </div>
 
                             <div className="author">
@@ -82,7 +89,7 @@ function Manga({
                             </div>
                             <div className="trans_group">
                                 Translated by:
-                                <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
+                                <NavLink to={"#"} className="link" key={manga.author_id}>
                                     {manga.transgroup_name ? manga.transgroup_name : " Unknown"}
                                 </NavLink>
                             </div>
@@ -121,8 +128,13 @@ function Manga({
 
                             <div className="interact">
                                 <Button className="btn-read-now" title="Read Now">
-                                    <NavLink to={`/chapter/${manga.manga_id}/${chapterId01}`} style={{ marginLeft: 0 }}>
-                                        Read Now
+                                    <NavLink to={
+                                        Object.keys(manga).length !== 0
+                                            ? `/chapter/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}/${chapterNumber01.trim().replaceAll(regex.special_char, "-")}_${chapterId01}`
+                                            : ""}
+                                        style={{ marginLeft: 0 }}
+                                    >
+                                        Start Reading
                                     </NavLink>
                                 </Button>
 
