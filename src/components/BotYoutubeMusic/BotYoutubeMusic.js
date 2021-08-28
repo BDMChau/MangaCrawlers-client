@@ -72,6 +72,12 @@ function BotYoutubeMusic({
         },
     }
 
+    
+    // have to reset event when disable <Youtube ... /> component
+    useEffect(() => {
+        if(isVisible === false || Object.keys(itemInfo).length === 0) setEvent(null);
+    }, [itemInfo, isVisible])
+
 
     ////// userCommand is prop from service (interaction commands), commands here are not all
     useEffect(() => {
@@ -275,7 +281,7 @@ function BotYoutubeMusic({
                         width: "200",
                     }}
                     onReady={(e) => interactions.onReady(e)}
-                    onError={(e) => { interactions.onError(e) }}
+                    onError={(e) => interactions.onError(e)}
                     onEnd={() => setIsEndVid(true)}
                 />
                 : ""

@@ -63,8 +63,8 @@ function BotYoutubeMusicService() {
             const videoEndedPos = itemsInQueue.findIndex(item => item.video_id === itemInfo.video_id);
 
             if (videoEndedPos === itemsInQueue.length - 1) {
-                // setItemId("");
-                // setItemInfo({});
+                // setItemId("")
+                // setItemInfo({})
                 setIsJumpTo(false);
                 handleClearQueue();
                 setIsVisible(false);
@@ -78,6 +78,7 @@ function BotYoutubeMusicService() {
             setIsEndVid(false)
         }
     }, [isEndVid]);
+    
 
 
     useEffect(() => {
@@ -217,6 +218,7 @@ function BotYoutubeMusicService() {
                 setItemId("");
                 setItemInfo({});
                 handleClearQueue();
+                setIsVisible(false)
             } else if (command === "/jump ") {
                 setItemId("");
                 setIsJumpTo(true);
@@ -238,6 +240,7 @@ function BotYoutubeMusicService() {
                 opts.id = itemToJump.video_id;
                 opts.title = itemToJump.video_title;
                 setIsJumpTo(false);
+                setIsVisible(true);
             }
 
             if (nonInteractiveCmds.includes(rawCommand)) {
