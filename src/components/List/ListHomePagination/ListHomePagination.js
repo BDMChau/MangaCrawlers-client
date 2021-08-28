@@ -4,6 +4,7 @@ import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { NavLink } from 'react-router-dom';
+import { regex } from 'config/regex';
 
 const { Meta } = Card;
 
@@ -73,7 +74,7 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`}>
+                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`}>
                                 <Card id={manga.manga_id}
                                     className="card"
                                     hoverable

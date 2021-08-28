@@ -3,6 +3,7 @@ import "./ListSide.css";
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import { Typography } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { regex } from 'config/regex';
 
 function ListSide({ mangas, height }) {
     const [data, setData] = useState([]);
@@ -45,7 +46,7 @@ function ListSide({ mangas, height }) {
                             <NavLink
                                 key={i}
                                 title={manga.manga_name}
-                                to={`/manga/${manga.manga_name.replaceAll(" ", "-")}-${manga.manga_id}`}
+                                to={`/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`}
                                 className="list-side-item"
                             >
                                 <div className="item-img" >

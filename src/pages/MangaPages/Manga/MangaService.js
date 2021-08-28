@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
+import { regex } from 'config/regex';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -49,12 +50,11 @@ function MangaService() {
     useEffect(() => {
         const splittedParams = name_id.split("-");
         setId(splittedParams[splittedParams.length - 1]);
-        setMangaNameParam(initial(splittedParams).toString().replaceAll(",", " "));
+        setMangaNameParam(initial(splittedParams).toString().replaceAll(",", ""));
     }, [name_id])
 
 
     useEffect(() => {
-        console.log("bruh")
         getMangaData();
         getSuggestionList();
 
@@ -96,7 +96,8 @@ function MangaService() {
             const chapters = response.content.chapters;
             const mangaObj = response.content.manga;
 
-            if (mangaObj.manga_name !== mangaNameParam) {
+            if (mangaObj.manga_name.replaceAll(regex.special_char, "") !== mangaNameParam) {
+                console.log(mangaNameParam)
                 return;
             }
 

@@ -160,12 +160,12 @@ function HomeService() {
     }
 
 
-    useEffect(() => {
-        socket.on('newMessage', (result) => {
-            console.log("result")
-            console.log(result)
-        });
-    }, []);
+    // useEffect(() => {
+    //     socket.on('newMessage', (result) => {
+    //         console.log("result")
+    //         console.log(result)
+    //     });
+    // }, []);
 
     return (
    <div>
