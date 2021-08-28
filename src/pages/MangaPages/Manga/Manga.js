@@ -162,6 +162,7 @@ function Manga({
                             <ListChapters
                                 chapters={chapters}
                                 mangaId={manga.manga_id}
+                                mangaName={manga.manga_name}
                                 height={"400px"}
                             />
                         </Col>

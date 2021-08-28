@@ -8,6 +8,7 @@ import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../../components/notifications/message';
 import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
+import { regex } from 'config/regex';
 
 
 
@@ -15,6 +16,9 @@ function Chapter({
     imgs,
     chapters,
     chapterInfo,
+    mangaName,
+    mangaId,
+    
     isLoading,
     
     addToFollowingManga,
@@ -35,9 +39,7 @@ function Chapter({
     isEndCmts
 }) {
     const userState = useSelector((state) => state.userState);
-    const mangaState = useSelector(state => state.mangaState);
     const stuffsState = useSelector(state => state.stuffsState);
-    const mangaId = mangaState[0];
     const [chapterName, setChapterName] = useState("");
 
 
@@ -53,6 +55,14 @@ function Chapter({
     }, [imgs])
 
 
+    const setUrl = (chapter) => {
+        const spittedStr = chapter.chapter_name.split(":");
+        const chapterNumber = spittedStr[0];
+
+        return `/chapter/${mangaName.replaceAll(regex.special_char, "-")}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`
+    }
+
+
     const dropDownItems = (
         <Menu>
             {
@@ -61,7 +71,8 @@ function Chapter({
                         <Menu.Item key={i} className="dropdown-item-chapter-page">
                             <NavLink
                                 title={chapter.chapter_name}
-                                className="dropdown-item-title" to={`/chapter/${mangaId}/${chapter.chapter_id}`}
+                                className="dropdown-item-title" 
+                                to={setUrl(chapter)}
                                 onChange={() => setChapterName(chapter.chapter_name)}
                                 onClick={() => addReadingHistory(chapterInfo.manga.manga_id, chapter.chapter_id)}
                             >

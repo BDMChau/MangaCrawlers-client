@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import Chapter from './Chapter'
 import dayjs from 'dayjs';
-import { SET_MANGA_ID } from "../../../store/features/manga/MangaSlice";
+import initial from 'lodash/initial';
+
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { message_error, message_success, message_warning } from '../../../components/notifications/message';
@@ -10,13 +11,12 @@ import { message_error, message_success, message_warning } from '../../../compon
 import mangaApi from '../../../api/apis/mangaApi';
 import userApi from '../../../api/apis/userApi';
 import chapterApi from "../../../api/apis/chapterApi"
+import { regex } from 'config/regex';
 
 
 export default function ChapterService() {
-    const dispatch = useDispatch();
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
-    const { mangaid, chapterid } = useParams();
     const [imgs, setImgs] = useState([]);
     const [chapters, setChapters] = useState([]);
     const [chapterInfo, setChapterInfo] = useState({});
@@ -34,16 +34,15 @@ export default function ChapterService() {
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
     const [curChapter, setCurChapter] = useState(0);
 
-
     const cookies = new Cookies();
-    const token = cookies.get("token")
+    const token = cookies.get("token");
 
+    const { manga_name_id_param, chapter_name_param } = useParams();
+    const [mangaId, setMangaId] = useState("");
+    const [mangaName, setMangaName] = useState("");
+    const [chapterId, setChapterId] = useState("");
+    const [chapterNumber, setChapterNumber] = useState("");
 
-    useEffect(() => {
-        localStorage.setItem("mangaid", JSON.stringify(mangaid));
-        dispatch(SET_MANGA_ID(mangaid))
-
-    }, [])
 
     useEffect(() => {
         setImgs([]);
@@ -56,32 +55,37 @@ export default function ChapterService() {
             createdAt: ""
         })
 
-        getDataChapter();
-        addReadingHistory(mangaid, chapterid);
+        let mangaId;
+        let chapterId;
+        const splittedManga = manga_name_id_param.split("-");
+        const splittedChapter = chapter_name_param.split("_");
+
+        mangaId = splittedManga[splittedManga.length - 1];
+        chapterId = splittedChapter[1];
+
+        setMangaId(mangaId);
+        setMangaName(initial(splittedManga).toString().replaceAll(",", "-"));
+        setChapterNumber(splittedChapter[0]);
+        setChapterId(chapterId);
+
+        getDataChapter(mangaId, chapterId);
+        addReadingHistory(mangaId, chapterId);
 
         setFromRow(0);
         setComments([]);
         setIsEndCmts(false);
-        getCmtsChapter();
-    }, [chapterid || mangaid])
 
-
-    useEffect(() => {
-        for (const [i, chapter] of chapters.entries()) {
-            if (curChapter === i) {
-                history.push(`/chapter/${mangaid}/${chapter.chapter_id}`)
-                break;
-            }
-        }
-    }, [curChapter])
+        getCmtsChapter(mangaId, chapterId);
+    }, [manga_name_id_param, chapter_name_param])
 
 
 
-    const getDataChapter = async () => {
+
+    const getDataChapter = async (mangaId, chapterId) => {
         setIsLoading(true);
         const data = {
-            manga_id: mangaid,
-            chapter_id: chapterid,
+            manga_id: mangaId,
+            chapter_id: chapterId
         }
 
         try {
@@ -113,7 +117,7 @@ export default function ChapterService() {
             chapters.forEach((chapter, i) => {
                 chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
 
-                if (chapter.chapter_id == chapterid) {
+                if (chapter.chapter_id == chapterId) {
                     setCurChapter(i)
                 }
             })
@@ -139,6 +143,16 @@ export default function ChapterService() {
     }
 
 
+    //////// next, prev chapter
+    useEffect(() => {
+        for (const [i, chapter] of chapters.entries()) {
+            if (curChapter === i) {
+                history.push(`/chapter/${mangaName}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`)
+                break;
+            }
+        }
+    }, [curChapter])
+    
     const handleNextChapter = () => {
         setCurChapter(curChapter + 1);
     }
@@ -291,10 +305,10 @@ export default function ChapterService() {
         }
     }
 
-    const getCmtsChapter = async () => {
+    const getCmtsChapter = async (mangaId, chapterId) => {
         const data = {
-            manga_id: mangaid,
-            chapter_id: chapterid,
+            manga_id: mangaId,
+            chapter_id: chapterId,
             from: fromRow,
             amount: amountRows
         }
@@ -332,8 +346,11 @@ export default function ChapterService() {
                 imgs={imgs}
                 chapters={chapters}
                 chapterInfo={chapterInfo}
+                mangaName={mangaName}
+                mangaId={mangaId}
+
                 isLoading={isLoading}
-                
+
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(mangaId) => removeFollowingManga(mangaId)}
                 isLoadingAddFollow={isLoadingAddFollow}

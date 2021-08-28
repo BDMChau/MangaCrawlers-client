@@ -47,6 +47,11 @@ function ListHomePagination({ mangas }) {
         )
     }
 
+
+    const setUrl = (manga) => (
+        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
+    )
+
     const renderLatestManga = () => {
         return (
             isLoading ?
@@ -74,7 +79,7 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                            <NavLink title={manga.manga_name} to={`/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`}>
+                            <NavLink title={manga.manga_name} to={setUrl(manga)}>
                                 <Card id={manga.manga_id}
                                     className="card"
                                     hoverable

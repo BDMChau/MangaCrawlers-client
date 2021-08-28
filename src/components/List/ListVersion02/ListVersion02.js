@@ -14,6 +14,10 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
     }, [mangas.length])
     
 
+    const setUrl = (manga) => (
+        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
+    )
+
     const renderMangas = () => (
         mangas.length
             ? <List
@@ -32,7 +36,7 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
                 footer={false}
                 renderItem={manga => (
                     <div className="item">
-                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`} className="item-img">
+                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : setUrl(manga)} className="item-img">
                             <Image
                                 className="img"
                                 src={manga.thumbnail}

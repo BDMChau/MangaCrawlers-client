@@ -16,8 +16,9 @@ function ListSide({ mangas, height }) {
     }, [mangas || height])
 
 
-
-
+    const setUrl = (manga) => (
+        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
+    )
 
     return (
         <ul className="list-side list-with-img"
@@ -46,7 +47,7 @@ function ListSide({ mangas, height }) {
                             <NavLink
                                 key={i}
                                 title={manga.manga_name}
-                                to={`/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`}
+                                to={setUrl(manga)}
                                 className="list-side-item"
                             >
                                 <div className="item-img" >

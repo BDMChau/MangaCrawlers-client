@@ -2,21 +2,19 @@ import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { Empty, Typography } from 'antd';
-import { SET_MANGA_ID } from "../../../store/features/manga/MangaSlice";
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
+import { regex } from 'config/regex';
 
-function ListChapters({ chapters, mangaId, height }) {
-    const dispatch = useDispatch();
+function ListChapters({ chapters, mangaId, mangaName, height }) {
     const [isLoading] = useState(false)
 
-    const goToChapterPage = () => {
-        localStorage.setItem("mangaid", JSON.stringify(mangaId))
-        dispatch(SET_MANGA_ID(mangaId))
-        
-        return;
-    }
+    const setUrl = (chapter) => {
+        const spittedStr = chapter.chapter_name.split(":");
+        const chapterNumber = spittedStr[0];
 
+        return `/chapter/${mangaName.replaceAll(regex.special_char, "-")}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`
+    }
 
 
     return (
@@ -32,8 +30,8 @@ function ListChapters({ chapters, mangaId, height }) {
                             key={i}
                             title={chapter.chapter_name}
                             className="list-chapter-item" id={chapter.chapter_id}
-                            to={`/chapter/${mangaId}/${chapter.chapter_id}`}
-                            onClick={() => goToChapterPage(chapter.chapter_id)} >
+                            to={setUrl(chapter)}
+                             >
                             <Typography.Text>{chapter.chapter_name}</Typography.Text>
                             <Typography.Text>{chapter.createdAt}</Typography.Text>
                         </NavLink>

@@ -36,6 +36,10 @@ function ListGenrePagination({ mangas }) {
         )
     }
 
+    const setUrl = (manga) => (
+        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
+    )
+
     const renderMangas = () => {
         return (
             <List
@@ -54,7 +58,7 @@ function ListGenrePagination({ mangas }) {
                 footer={false}
                 renderItem={manga => (
                     <div>
-                        <NavLink to={`/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`}>
+                        <NavLink to={setUrl(manga)}>
                             <Card
                                 id={manga.manga_id}
                                 className="card"

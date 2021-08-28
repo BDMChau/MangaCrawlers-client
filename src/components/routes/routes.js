@@ -52,9 +52,9 @@ const routes = [
         exact: true
     },
     {
-        path: "/chapter/:mangaid/:chapterid",
+        path: "/chapter/:manga_name_id_param/:chapter_name_param",
         component: React.lazy(() => import('../../pages/MangaPages/Chapter/ChapterService')),
-        exact: true
+        exact: false
     },
     {
         path: "/manga/genres", // use query param
