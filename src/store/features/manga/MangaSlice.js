@@ -3,7 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const MangaSlice = createSlice({
     name: "MangaSlice",
-    initialState: JSON.parse(localStorage.getItem("mangaid")) ? [JSON.parse(localStorage.getItem("mangaid"))] : [],
+    initialState: [],
     reducers: {
         SET_MANGA_SEARCHED_BY_GENRES: (state, action) => {
             const mangas = action.payload[0];
@@ -35,5 +35,5 @@ const MangaSlice = createSlice({
 });
 
 const { actions, reducer } = MangaSlice;
-export const { SET_MANGA_ID, GET_ALL_GENRES, SET_MANGA_SEARCHED_BY_GENRES, GET_ALL_GENRES_SUCCESS, GET_ALL_GENRES_FAILED } = actions;
+export const { GET_ALL_GENRES, SET_MANGA_SEARCHED_BY_GENRES, GET_ALL_GENRES_SUCCESS, GET_ALL_GENRES_FAILED } = actions;
 export default reducer;

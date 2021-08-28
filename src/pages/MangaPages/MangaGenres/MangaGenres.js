@@ -33,7 +33,7 @@ export default function MangaGenres({ mangas, genres }) {
                                     ? genres.map((item, i) => {
                                         if (item !== null) {
                                             return (
-                                                <Tooltip title={item.genre_desc} className="item-tag">
+                                                <Tooltip title={item.genre_description} className="item-tag">
                                                     <Tag key={i} color={item.genre_color}>{item.genre_name}</Tag>
                                                 </Tooltip>
                                             )

@@ -26,17 +26,29 @@ export default function SearchingPageService() {
 
     const handleClickTag = (genre) => {
         if (genre.isSelected === false) {
-            genre.isSelected = true
+            const dataCopies = data.map(item => ({ ...item }))
+            for (let i = 0; i < dataCopies.length; i++) {
+                if (dataCopies[i].genre_id === genre.genre_id) {
+                    dataCopies[i].isSelected = true;
+                    break;
+                }
+            }
 
-            setData(data)
+            setData(dataCopies)
             setDataName((prevData) => [...prevData, genre.genre_name])
             setDataIds((prevData) => [...prevData, genre.genre_id])
             return;
 
         } else {
-            genre.isSelected = false
+            const dataCopies = data.map(item => ({ ...item }))
+            for (let i = 0; i < dataCopies.length; i++) {
+                if (dataCopies[i].genre_id === genre.genre_id) {
+                    dataCopies[i].isSelected = false;
+                    break;
+                }
+            }
 
-            setData(data)
+            setData(dataCopies)
             setDataName(dataName.filter(name => name !== genre.genre_name))
             setDataIds(dataIds.filter(id => id !== genre.genre_id))
             return;
