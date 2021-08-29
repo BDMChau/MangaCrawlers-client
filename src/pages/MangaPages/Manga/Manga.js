@@ -83,13 +83,13 @@ function Manga({
 
                             <div className="author">
                                 Author:
-                                <NavLink to={`/manga/${manga.manga_id}`} className="link" key={manga.author_id}>
+                                <NavLink to="#" className="link" key={manga.author_id}>
                                     {manga.author_name ? manga.author_name : " Unknown"}
                                 </NavLink>
                             </div>
                             <div className="trans_group">
                                 Translated by:
-                                <NavLink to={"#"} className="link" key={manga.author_id}>
+                                <NavLink to="#" className="link" key={manga.author_id}>
                                     {manga.transgroup_name ? manga.transgroup_name : " Unknown"}
                                 </NavLink>
                             </div>
@@ -207,13 +207,13 @@ function Manga({
                             <div className="top-week-rank">
                                 <h3>Weekly Manga Ranking</h3>
 
-                                <ListSide mangas={weeklyMangas} height={"415px"} />
+                                <ListSide mangas={weeklyMangas} height={"415px"} isLoading={isLoading} />
 
                             </div>
                             <div className="favorite-suggest">
                                 <h3>You may also like</h3>
 
-                                <ListSide mangas={suggestionList} height={"415px"} />
+                                <ListSide mangas={suggestionList} height={"415px"} isLoading={isLoading} />
                             </div>
                         </Col>
 

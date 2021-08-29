@@ -67,11 +67,11 @@ export default function Home({
                         <Col span={16} md={10} xl={7} xxl={7} className="home-side">
                             <div className="weekly-manga">
                                 <h2>Weekly Ranking</h2>
-                                <ListSide mangas={weeklyMangas} height={"415px"} />
+                                <ListSide mangas={weeklyMangas} height={"415px"} isLoading={isLoading} />
                             </div>
                             <div className="top-manga">
                                 <h2>Top Views</h2>
-                                <ListSide mangas={topMangas} height={"415px"} />
+                                <ListSide mangas={topMangas} height={"415px"} isLoading={isLoading} />
                             </div>
                         </Col>
 

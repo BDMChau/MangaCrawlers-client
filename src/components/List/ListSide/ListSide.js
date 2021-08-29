@@ -5,9 +5,8 @@ import { Typography } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { regex } from 'config/regex';
 
-function ListSide({ mangas, height }) {
+function ListSide({ mangas, height, isLoading }) {
     const [data, setData] = useState([]);
-    const [isLoading] = useState(false)
 
     useEffect(() => {
         if (mangas) {
@@ -24,7 +23,7 @@ function ListSide({ mangas, height }) {
         <ul className="list-side list-with-img"
             style={
                 { height: isLoading ? "415px" : height }} > {
-                data.length === 0 ?
+                isLoading ?
                     <div key="1" style={{ marginTop: "20px" }}>
                         <SkeletonCustom paragraphRows={1}
                             avatarShape={"square"}
@@ -44,20 +43,20 @@ function ListSide({ mangas, height }) {
                     </div>
                     :
                     data.map((manga, i) => (
-                            <NavLink
-                                key={i}
-                                title={manga.manga_name}
-                                to={setUrl(manga)}
-                                className="list-side-item"
-                            >
-                                <div className="item-img" >
-                                    <div className="img"
-                                        style={{ backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
-                                <div className="item-title" >
-                                    <Typography.Text > {manga.manga_name} </Typography.Text>
-                                    <Typography.Text > {manga.views ? manga.views : 0} views </Typography.Text>
-                                </div>
-                            </NavLink>
+                        <NavLink
+                            key={i}
+                            title={manga.manga_name}
+                            to={setUrl(manga)}
+                            className="list-side-item"
+                        >
+                            <div className="item-img" >
+                                <div className="img"
+                                    style={{ backgroundImage: `url(${manga.thumbnail})` }} > </div> </div>
+                            <div className="item-title" >
+                                <Typography.Text > {manga.manga_name} </Typography.Text>
+                                <Typography.Text > {manga.views ? manga.views : 0} views </Typography.Text>
+                            </div>
+                        </NavLink>
                     ))
 
             } </ul >

@@ -31,7 +31,6 @@ function MangaService() {
     const [isEndCmts, setIsEndCmts] = useState(false);
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
-    const [curChapter, setCurChapter] = useState(0);
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -126,6 +125,8 @@ function MangaService() {
     }
 
     const getWeeklyTopMangas = async () => {
+        setIsLoading(true);
+
         try {
             const response = await mangaApi.getWeekly();
             if (response.content.err) {
@@ -133,6 +134,7 @@ function MangaService() {
             }
 
             setWeeklyMangas(response.content.list_weekly)
+            setIsLoading(false);
             return;
         } catch (error) {
             console.log(error);
@@ -140,6 +142,8 @@ function MangaService() {
     }
 
     const getSuggestionList = async () => {
+        setIsLoading(true);
+
         try {
             const response = await mangaApi.getSuggestionList();
             if (response.content.err) {
@@ -147,6 +151,7 @@ function MangaService() {
             }
 
             setSuggestionList(response.content.suggestion_list)
+            setIsLoading(false);
             return;
         } catch (error) {
             console.log(error);

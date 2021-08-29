@@ -62,6 +62,10 @@ function Chapter({
         return `/chapter/${mangaName.replaceAll(regex.special_char, "-")}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`
     }
 
+    const setUrlToMangaPage = (manga) => {
+            return `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
+    }
+
 
     const dropDownItems = (
         <Menu>
@@ -101,7 +105,7 @@ function Chapter({
             <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
-                        <NavLink to={`/manga/${mangaId}`}>
+                        <NavLink to={chapterInfo.manga ? setUrlToMangaPage(chapterInfo.manga) : "#"}>
                             <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>
