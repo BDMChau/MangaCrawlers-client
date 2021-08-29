@@ -160,15 +160,16 @@ function HomeService() {
     }
 
 
-    // useEffect(() => {
-    //     socket.on('newMessage', (result) => {
-    //         console.log("result")
-    //         console.log(result)
-    //     });
-    // }, []);
+    useEffect(() => {
+        socket.on('newMessageToClient', (result) => {
+            console.log("result")
+            console.log(result)
+        });
+    }, []);
 
     return (
    <div>
+       <button onClick={() => sendMessageSocket("hello minh chou")} >Click</button>
             <Home
             latestMangas={latestMangas}
             topMangas={topMangas}
