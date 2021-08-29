@@ -24,7 +24,9 @@ function Manga({
     addToFollowingManga,
     removeFollowingManga,
     isLoading,
+
     isFollowed,
+    isLoadingFollow,
 
     mangaStars,
     handleRatingManga,
@@ -142,7 +144,7 @@ function Manga({
                                     type="primary"
                                     className="btn-add-favorite"
                                     title="Add to Library"
-                                    loading={isLoading}
+                                    loading={isLoadingFollow}
                                     onClick={() =>
                                         userState[0]
                                             ? isFollowed

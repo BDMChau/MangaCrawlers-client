@@ -18,9 +18,10 @@ function MangaService() {
     const [chapters, setChapters] = useState([]);
     const [weeklyMangas, setWeeklyMangas] = useState([]);
     const [suggestionList, setSuggestionList] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [isFollowed, setIsFollowed] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingFollow, setIsLoadingFollow] = useState(false);
     const [mangaStars, setMangaStars] = useState(0);
 
     const [isAddedCmt, setIsAddedCmt] = useState(false);
@@ -54,14 +55,14 @@ function MangaService() {
 
 
     useEffect(() => {
-        getMangaData();
-        getSuggestionList();
-
         smoothscroll.polyfill();
         window.scroll({
             top: 0,
             behavior: "smooth"
         });
+
+        getMangaData();
+        getSuggestionList();
     }, [id])
 
     // get comments
@@ -159,7 +160,7 @@ function MangaService() {
     }
 
     const addToFollowingManga = async (mangaId) => {
-        setIsLoading(true)
+        setIsLoadingFollow(true)
         const data = {
             manga_id: mangaId
         }
@@ -178,7 +179,7 @@ function MangaService() {
 
             message_success("Added to your library", 4)
             setIsFollowed(true);
-            setIsLoading(false);
+            setIsLoadingFollow(false);
             return;
         } catch (error) {
             console.log(error);
@@ -202,7 +203,7 @@ function MangaService() {
     }
 
     const removeFollowingManga = async (mangaId) => {
-        setIsLoading(true)
+        setIsLoadingFollow(true)
         const data = {
             manga_id: mangaId,
         }
@@ -216,7 +217,7 @@ function MangaService() {
 
             message_success("Removed from your library!", 3)
             setIsFollowed(false);
-            setIsLoading(false);
+            setIsLoadingFollow(false);
             return;
         } catch (ex) {
             console.log(ex)
@@ -356,7 +357,9 @@ function MangaService() {
                 addToFollowingManga={(mangaId) => addToFollowingManga(mangaId)}
                 removeFollowingManga={(managId) => removeFollowingManga(managId)}
                 isLoading={isLoading}
+
                 isFollowed={isFollowed}
+                isLoadingFollow={isLoadingFollow}
 
                 handleRatingManga={(value) => handleRatingManga(value)}
                 mangaStars={mangaStars}
