@@ -3,8 +3,7 @@ import "./ListGenrePagination.css";
 import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { NavLink } from 'react-router-dom';
-import { regex } from 'config/regex';
-import uriRedirect from 'helpers/uriRedirect';
+import redirectURI from 'helpers/redirectURI';
 
 const { Meta } = Card;
 
@@ -57,7 +56,7 @@ function ListGenrePagination({ mangas }) {
                 footer={false}
                 renderItem={manga => (
                     <div>
-                        <NavLink to={uriRedirect.uriMangaPage(manga.manga_id, manga.manga_name)}>
+                        <NavLink to={redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name)}>
                             <Card
                                 id={manga.manga_id}
                                 className="card"

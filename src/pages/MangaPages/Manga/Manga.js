@@ -10,8 +10,7 @@ import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
-import { regex } from 'helpers/regex';
-import uriRedirect from 'helpers/uriRedirect';
+import redirectURI from 'helpers/redirectURI';
 
 
 function Manga({
@@ -131,7 +130,7 @@ function Manga({
                                 <Button className="btn-read-now" title="Read Now">
                                     <NavLink to={
                                         Object.keys(manga).length !== 0
-                                            ? uriRedirect.uriChapterPage(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
+                                            ? redirectURI.chapterPage_uri(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
                                             : ""
                                     }
                                         style={{ marginLeft: 0 }}

@@ -4,8 +4,7 @@ import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { NavLink } from 'react-router-dom';
-import { regex } from 'helpers/regex';
-import uriRedirect from 'helpers/uriRedirect';
+import redirectURI from 'helpers/redirectURI';
 
 const { Meta } = Card;
 
@@ -77,7 +76,7 @@ function ListHomePagination({ mangas }) {
                     footer={false}
                     renderItem={
                         manga => (<div id={manga.manga_id} >
-                            <NavLink title={manga.manga_name} to={uriRedirect.uriMangaPage(manga.manga_id, manga.manga_name)}>
+                            <NavLink title={manga.manga_name} to={redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name)}>
                                 <Card id={manga.manga_id}
                                     className="card"
                                     hoverable

@@ -8,8 +8,7 @@ import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../../components/notifications/message';
 import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
-import { regex } from 'helpers/regex';
-import uriRedirect from 'helpers/uriRedirect';
+import redirectURI from 'helpers/redirectURI';
 
 
 
@@ -68,7 +67,7 @@ function Chapter({
                             <NavLink
                                 title={chapter.chapter_name}
                                 className="dropdown-item-title"
-                                to={uriRedirect.uriChapterPage(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
+                                to={redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
                                 onChange={() => setChapterName(chapter.chapter_name)}
                                 onClick={() => addReadingHistory(chapterInfo.manga.manga_id, chapter.chapter_id)}
                             >
@@ -97,7 +96,7 @@ function Chapter({
             <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
-                        <NavLink to={chapterInfo.manga ? uriRedirect.uriMangaPage(chapterInfo.manga) : "#"}>
+                        <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga) : "#"}>
                             <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>

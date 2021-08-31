@@ -5,7 +5,7 @@ import { Empty, Typography } from 'antd';
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { regex } from 'config/regex';
-import uriRedirect from 'helpers/uriRedirect';
+import redirectURI from 'helpers/redirectURI';
 
 function ListChapters({ chapters, mangaId, mangaName, height }) {
     const [isLoading] = useState(false)
@@ -26,7 +26,7 @@ function ListChapters({ chapters, mangaId, mangaName, height }) {
                             key={i}
                             title={chapter.chapter_name}
                             className="list-chapter-item" id={chapter.chapter_id}
-                            to={uriRedirect.uriChapterPage(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
+                            to={redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
                              >
                             <Typography.Text>{chapter.chapter_name}</Typography.Text>
                             <Typography.Text>{chapter.createdAt}</Typography.Text>
