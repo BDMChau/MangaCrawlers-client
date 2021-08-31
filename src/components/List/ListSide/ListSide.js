@@ -3,7 +3,8 @@ import "./ListSide.css";
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import { Typography } from 'antd';
 import { NavLink } from 'react-router-dom';
-import { regex } from 'config/regex';
+import { regex } from 'helpers/regex';
+import uriRedirect from 'helpers/uriRedirect';
 
 function ListSide({ mangas, height, isLoading }) {
     const [data, setData] = useState([]);
@@ -15,9 +16,6 @@ function ListSide({ mangas, height, isLoading }) {
     }, [mangas || height])
 
 
-    const setUrl = (manga) => (
-        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
-    )
 
     return (
         <ul className="list-side list-with-img"
@@ -46,7 +44,7 @@ function ListSide({ mangas, height, isLoading }) {
                         <NavLink
                             key={i}
                             title={manga.manga_name}
-                            to={setUrl(manga)}
+                            to={uriRedirect.uriMangaPage(manga.manga_id, manga.manga_name)}
                             className="list-side-item"
                         >
                             <div className="item-img" >

@@ -5,16 +5,12 @@ import { Empty, Typography } from 'antd';
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { regex } from 'config/regex';
+import uriRedirect from 'helpers/uriRedirect';
 
 function ListChapters({ chapters, mangaId, mangaName, height }) {
     const [isLoading] = useState(false)
 
-    const setUrl = (chapter) => {
-        const spittedStr = chapter.chapter_name.split(":");
-        const chapterNumber = spittedStr[0];
 
-        return `/chapter/${mangaName.replaceAll(regex.special_char, "-")}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`
-    }
 
 
     return (
@@ -30,7 +26,7 @@ function ListChapters({ chapters, mangaId, mangaName, height }) {
                             key={i}
                             title={chapter.chapter_name}
                             className="list-chapter-item" id={chapter.chapter_id}
-                            to={setUrl(chapter)}
+                            to={uriRedirect.uriChapterPage(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
                              >
                             <Typography.Text>{chapter.chapter_name}</Typography.Text>
                             <Typography.Text>{chapter.createdAt}</Typography.Text>

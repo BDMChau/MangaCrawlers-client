@@ -5,13 +5,13 @@ import { Col, Row, Button, Typography, Tag, Tooltip, Image } from 'antd';
 import ListSide from '../../../components/List/ListSide/ListSide';
 import ListChapters from '../../../components/List/ListChapters/ListChapters';
 import Rating from '../../../components/Rating/Rating';
-import CommentItems from '../../../components/Comment/CommentItems/CommentItems';
 import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
-import { regex } from 'config/regex';
+import { regex } from 'helpers/regex';
+import uriRedirect from 'helpers/uriRedirect';
 
 
 function Manga({
@@ -41,8 +41,10 @@ function Manga({
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
+
+    // state for Start Reading button
     const [chapterId01, setChapterId01] = useState("");
-    const [chapterNumber01, setChapterNumber01] = useState("");
+    const [chapterName01, setChapterName01] = useState("");
 
 
     const goToSearchMangeWithGenrePage = (id) => {
@@ -51,10 +53,7 @@ function Manga({
 
     useEffect(() => {
         if (chapters[0]) {
-            const spittedStr = chapters[0].chapter_name.split(":");
-            const chapterNumber = spittedStr[0];
-
-            setChapterNumber01(chapterNumber)
+            setChapterName01(chapters[0].chapter_name)
             setChapterId01(chapters[0].chapter_id)
         }
     }, [chapters])
@@ -132,8 +131,9 @@ function Manga({
                                 <Button className="btn-read-now" title="Read Now">
                                     <NavLink to={
                                         Object.keys(manga).length !== 0
-                                            ? `/chapter/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}/${chapterNumber01.trim().replaceAll(regex.special_char, "-")}_${chapterId01}`
-                                            : ""}
+                                            ? uriRedirect.uriChapterPage(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
+                                            : ""
+                                    }
                                         style={{ marginLeft: 0 }}
                                     >
                                         Start Reading

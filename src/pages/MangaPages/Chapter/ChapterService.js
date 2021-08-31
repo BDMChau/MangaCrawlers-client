@@ -11,7 +11,7 @@ import { message_error, message_success, message_warning } from '../../../compon
 import mangaApi from '../../../api/apis/mangaApi';
 import userApi from '../../../api/apis/userApi';
 import chapterApi from "../../../api/apis/chapterApi"
-import { regex } from 'config/regex';
+import { regex } from 'helpers/regex';
 
 
 export default function ChapterService() {

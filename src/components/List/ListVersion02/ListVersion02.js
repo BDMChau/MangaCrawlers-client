@@ -4,7 +4,8 @@ import "./ListVersion02.css"
 import Rating from "../../Rating/Rating"
 import { NavLink } from 'react-router-dom'
 import { DeleteOutlined } from "@ant-design/icons"
-import { regex } from 'config/regex'
+import { regex } from 'helpers/regex'
+import uriRedirect from 'helpers/uriRedirect'
 
 export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDelete, disableActions }) {
     // const [pageSize, setPageSize] = useState(9)
@@ -14,9 +15,6 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
     }, [mangas.length])
     
 
-    const setUrl = (manga) => (
-        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
-    )
 
     const renderMangas = () => (
         mangas.length
@@ -36,7 +34,7 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
                 footer={false}
                 renderItem={manga => (
                     <div className="item">
-                        <NavLink to={manga.isProject ? `/user/projects/upload?v=${manga.manga_id}` : setUrl(manga)} className="item-img">
+                        <NavLink to={manga.isProject ? uriRedirect.uriProjectMangaPage(manga.manga_id) : uriRedirect.uriMangaPage(manga.manga_id, manga.manga_name)} className="item-img">
                             <Image
                                 className="img"
                                 src={manga.thumbnail}

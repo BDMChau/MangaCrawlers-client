@@ -9,7 +9,7 @@ import Cookies from 'universal-cookie';
 
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
-import { regex } from 'config/regex';
+import { regex } from 'helpers/regex';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);

@@ -4,6 +4,7 @@ import { Row, Card, List } from 'antd';
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { NavLink } from 'react-router-dom';
 import { regex } from 'config/regex';
+import uriRedirect from 'helpers/uriRedirect';
 
 const { Meta } = Card;
 
@@ -36,9 +37,7 @@ function ListGenrePagination({ mangas }) {
         )
     }
 
-    const setUrl = (manga) => (
-        `/manga/${manga.manga_name.replaceAll(regex.special_char, "-")}-${manga.manga_id}`
-    )
+    
 
     const renderMangas = () => {
         return (
@@ -58,7 +57,7 @@ function ListGenrePagination({ mangas }) {
                 footer={false}
                 renderItem={manga => (
                     <div>
-                        <NavLink to={setUrl(manga)}>
+                        <NavLink to={uriRedirect.uriMangaPage(manga.manga_id, manga.manga_name)}>
                             <Card
                                 id={manga.manga_id}
                                 className="card"
