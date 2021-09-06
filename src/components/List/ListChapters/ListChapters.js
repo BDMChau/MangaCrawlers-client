@@ -2,9 +2,7 @@ import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
 import { Empty, Typography } from 'antd';
-import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
-import { regex } from 'config/regex';
 import redirectURI from 'helpers/redirectURI';
 
 function ListChapters({ chapters, mangaId, mangaName, height }) {

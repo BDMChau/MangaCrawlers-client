@@ -97,7 +97,7 @@ function Manga({
                             <div className="genre">
                                 {genres
                                     ? genres.map((genre, i) => (
-                                        <Tooltip title={genre.genre_description} className="item-tag">
+                                        <Tooltip key={i} title={genre.genre_description} className="item-tag">
                                             <Tag
                                                 key={i}
                                                 className="link"

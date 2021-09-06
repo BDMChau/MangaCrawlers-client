@@ -142,7 +142,7 @@ function BotYoutubeMusicService() {
 
     // set playing video
     useEffect(() => {
-        if (itemsInQueue.length) {
+        if (itemsInQueue) {
             if (itemsInQueue.length === 1) {
                 itemsInQueue[0].playing = true;
 

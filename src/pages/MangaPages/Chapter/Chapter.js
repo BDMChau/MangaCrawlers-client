@@ -96,7 +96,7 @@ function Chapter({
             <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
-                        <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga) : "#"}>
+                        <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga.manga_id ,chapterInfo.manga.manga_name) : "#"}>
                             <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>

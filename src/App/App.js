@@ -8,7 +8,6 @@ import LoadingPage from '../components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from '../components/Button/ScrollTopBtn/ScrollTopBtn';
 import FooterContainer from "../components/Footer/Footer";
 import NavbarService from "../components/Navbar/NavbarService";
-import CheckingScrollEvent from "../components/Checking/CheckingScrollEvent";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Layout, { Content } from "antd/lib/layout/layout";
 import AddOnsBtn from "../components/Button/AddOnsBtn/AddOnsBtn";
@@ -30,7 +29,7 @@ const Routing = () => {
 };
 
 
-export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
+export default function App({ isVisibleScrollTopBtn }) {
   const renderMangaComponentPages = () => (
     <Suspense fallback={<LoadingPage />}>
 
@@ -38,13 +37,12 @@ export default function App({ isVisibleScrollTopBtn, scrollYPosition }) {
         {Routing()}
       </Content>
 
-      <CheckingScrollEvent scrollYPosition={scrollYPosition} />
       <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
 
-      <MessengerCustomerChat
+      {/* <MessengerCustomerChat
         pageId="101341455476510"
         appId="496491375126587"
-      />
+      /> */}
 
       <AddOnsBtn />
 
