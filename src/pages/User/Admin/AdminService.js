@@ -60,14 +60,18 @@ export default function AdminService() {
             const allUsers = response.content.users;
             const sortedUsers = allUsers.sort(arrayMethods.dynamicSort("user_id"))
 
+            const arrAdmins = [];
+            const arrUsers = [];
             sortedUsers.forEach(user => {
                 if (user.user_isAdmin === true) {
-                    setAdmins(prevUser => [...prevUser, user]);
+                    arrAdmins.push(user);
                 } else {
-                    setUsers(prevUser => [...prevUser, user]);
+                    arrUsers.push(user)
                 }
             });
 
+            setAdmins(arrAdmins);
+            setUsers(arrUsers);
             return;
         } catch (ex) {
             console.log(ex)
@@ -84,12 +88,14 @@ export default function AdminService() {
 
             console.log(response)
 
+
             const allMangas = response.content.mangas;
             const sortedMangas = allMangas.sort(arrayMethods.dynamicSort("manga_id"))
-
-            sortedMangas.forEach(manga => {
-                setMangas(prev => [...prev, manga]);
-            });
+            
+            setMangas(sortedMangas)
+            // sortedMangas.forEach(manga => {
+            //     setMangas(prev => [...prev, manga]);
+            // });
 
             return;
         } catch (ex) {
@@ -111,9 +117,10 @@ export default function AdminService() {
             const allTransGroups = response.content.list_transgroup;
             const sortedTransGroups = allTransGroups.sort(arrayMethods.dynamicSort("transgroup_id"))
 
-            sortedTransGroups.forEach(transGr => {
-                setTransGrs(prev => [...prev, transGr]);
-            });
+            setTransGrs(sortedTransGroups)
+            // sortedTransGroups.forEach(transGr => {
+            //     setTransGrs(prev => [...prev, transGr]);
+            // });
 
             return;
         } catch (ex) {
@@ -138,12 +145,13 @@ export default function AdminService() {
 
             const allUsers = response.content.users;
 
-            setUsers([]);
+            const newArrUsers = [];
             allUsers.forEach(user => {
                 if (user.user_isAdmin === false) {
-                    setUsers(prevUser => [...prevUser, user]);
+                    newArrUsers.push(user);
                 }
             });
+            setUsers(newArrUsers);
 
             message_success("Deprecated this account!", 3);
             setIsLoading(false);
