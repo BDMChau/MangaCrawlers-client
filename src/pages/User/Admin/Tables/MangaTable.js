@@ -4,7 +4,6 @@ import "./Tables.css"
 import "../Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
-import { NavLink } from 'react-router-dom';
 import DropOption from 'components/DropOption/DropOption';
 
 export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
