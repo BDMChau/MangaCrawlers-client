@@ -15,6 +15,8 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             title: 'Avatar',
             dataIndex: 'user_avatar',
             key: 'user_avatar',
+            width:"6%",
+            fixed: 'left',
             render: src => <Avatar size={30} src={src} />,
         },
         {
@@ -39,6 +41,8 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
         {
             title: 'Operation',
             key: 'operation',
+            fixed: 'right',
+            width: '8%',
             render: (user, record) => (
                 <DropOption
                     menuOptions={[
@@ -64,8 +68,13 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             <Table
                 className="user-table"
                 columns={columns}
+                bordered
+                simple
                 dataSource={users}
-                pagination={true}
+                pagination={{
+                    showTotal: () => `Total ${users.length} Users`,
+                }}
+                rowKey={user => user.manga_id}
             />
         </Col>
     )

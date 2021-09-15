@@ -12,6 +12,8 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             title: 'Team Name',
             dataIndex: 'transgroup_name',
             key: 'transgroup_name',
+            fixed: 'left',
+            width:"6%",
             className: "name-col",
             render: text => <p>{text}</p>,
         },
@@ -30,6 +32,8 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
         {
             title: 'Operation',
             key: 'operation',
+            fixed: 'right',
+            width: '8%',
             render: (transgroup) => (
                 <DropOption
                     menuOptions={[
@@ -54,8 +58,13 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             <Table
                 className="trans-gr-table"
                 columns={columns}
+                bordered
+                simple
                 dataSource={transGrs}
-                pagination={true}
+                pagination={{
+                    showTotal: () => `Total ${users.length} Translation Teams`,
+                }}
+                rowKey={transgr => transgr.transgroup_id}
             />
         </Col>
     )

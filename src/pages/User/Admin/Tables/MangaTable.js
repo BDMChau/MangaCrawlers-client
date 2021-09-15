@@ -15,6 +15,8 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             title: 'Thumbnail',
             dataIndex: 'thumbnail',
             key: 'thumbnail',
+            width: '6%',
+            fixed: 'left',
             render: text => <Image
                 className="image-thumb-admin"
                 style={{ width: "30px", borderRadius: "2px" }}
@@ -56,6 +58,8 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
         {
             title: 'Operation',
             key: 'operation',
+            fixed: 'right',
+            width: '8%',
             render: (manga) => (
                 <DropOption
                     menuOptions={[
@@ -81,13 +85,15 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             <Table
                 className="manga-table"
                 columns={columns}
+                bordered
+                simple
                 dataSource={mangas}
                 pagination={{
                     showTotal: () => `Total ${mangas.length} Manga Series`,
                 }}
                 rowKey={manga => manga.manga_id}
-                // scroll={{ x: 1200 }}
-                simple
+            // scroll={{ x: 1200 }}
+
             />
 
         </Col>
