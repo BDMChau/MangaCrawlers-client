@@ -5,6 +5,7 @@ import "../Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
 import { Avatar } from 'antd';
+import DropOption from 'components/DropOption/DropOption';
 
 export default function TableUser({ users, handleDeprecateUser, handleRemoveUser, isLoading }) {
 
@@ -36,39 +37,20 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             render: isVerified => isVerified ? <p>Verified</p> : <p>Unverified</p>
         },
         {
-            title: 'Action',
-            key: 'action',
+            title: 'Operation',
+            key: 'operation',
             render: (user, record) => (
-                <div style={{ display: 'flex' }}>
-                    <Space size="middle">
-                        <Popconfirm
-                            title="Are you sure to deprecated this account?"
-                            onConfirm={() => handleDeprecateUser(user.user_id)}
-                            onCancel={"cancel"}
-                            okText="Yes"
-                            cancelText="No"
-                        >
-                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Unapprove</Typography.Text>
-                        </Popconfirm>
-                    </Space>
-                    <p style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</p>
-                    <Space size="middle">
-                        <Popconfirm
-                            title="Are you sure to delete this account?"
-                            onConfirm={() => handleRemoveUser(user.user_id)}
-                            onCancel={"cancel"}
-                            okText="Yes"
-                            cancelText="No"
-                        >
-                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
-                        </Popconfirm>
-                    </Space>
-                </div>
-            ),
+                <DropOption
+                    menuOptions={[
+                        { key: '1', name: `deprecated`, keyId: "delete", funcAction: () => handleDeprecateUser(user.user_id) },
+                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveUser(user.user_id) },
+                    ]}
+                />
+            )
         },
     ];
 
-    
+
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
             <div style={{ display: "flex" }}>

@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 import { SendOutlined } from "@ant-design/icons"
 import stereo from "../../assets/img/stereo.svg";
 
-import { AutoComplete, Button, Row, Typography, Form } from "antd";
+import { AutoComplete, Button, Row, Typography, Form, Tag } from "antd";
 
 import { commandsList } from "./features/commandsList";
 import { message_error } from "../notifications/message";
@@ -72,10 +72,10 @@ function BotYoutubeMusic({
         },
     }
 
-    
+
     // have to reset event when disable <Youtube ... /> component
     useEffect(() => {
-        if(isVisible === false || Object.keys(itemInfo).length === 0) setEvent(null);
+        if (isVisible === false || Object.keys(itemInfo).length === 0) setEvent(null);
     }, [itemInfo, isVisible])
 
 
@@ -383,6 +383,7 @@ function BotYoutubeMusic({
                     onSearch={(value) => setInputVal(value)}
                     onSelect={(value) => { setCommands([]); setInputVal(value) }}
                     value={inputVal}
+                    type="tag"
                     defaultActiveFirstOption
                     placeholder="Input hear..."
                 >
@@ -390,7 +391,10 @@ function BotYoutubeMusic({
                         ? commands.map((cmd, i) => (
                             <AutoComplete.Option key={i} value={cmd.title}>
                                 <div>
-                                    <div style={{ fontWeight: 600, width: "fit-content" }} dangerouslySetInnerHTML={{ __html: cmd.title }}></div>
+                                    <Tag color="geekblue" style={{ padding: "5px 10px", fontSize: "14px" }}>
+                                        <div style={{ fontWeight: 600, width: "fit-content" }} dangerouslySetInnerHTML={{ __html: cmd.title }}></div>
+                                    </Tag>
+
                                     <div style={{ color: "#42414180" }} dangerouslySetInnerHTML={{ __html: cmd.subTitle }}></div>
                                 </div>
                             </AutoComplete.Option>

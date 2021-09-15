@@ -5,6 +5,7 @@ import "../Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
+import DropOption from 'components/DropOption/DropOption';
 
 export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
 
@@ -53,26 +54,15 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             render: text => <Typography.Text>{text}/5</Typography.Text>
         },
         {
-            title: 'Action',
-            key: 'action',
+            title: 'Operation',
+            key: 'operation',
             render: (manga) => (
-                <div style={{ display: 'flex' }}>
-                    <Space size="middle">
-                        <NavLink to={`/manga/${manga.manga_id}`} >Preview</NavLink>
-                    </Space>
-                    <Typography.Text style={{ color: "#18AEFF", margin: "0" }}>&nbsp;/&nbsp;</Typography.Text>
-                    <Space size="middle">
-                        <Popconfirm
-                            title="Are you sure to delete this account?"
-                            onConfirm={() => handleRemoveManga(manga.manga_id)}
-                            onCancel={"cancel"}
-                            okText="Yes"
-                            cancelText="No"
-                        >
-                            <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
-                        </Popconfirm>
-                    </Space>
-                </div>
+                <DropOption
+                    menuOptions={[
+                        { key: '1', name: `Preview`, path: `/manga/${manga.manga_id}` },
+                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveManga(manga.manga_id) },
+                    ]}
+                />
             ),
         },
     ];
@@ -92,8 +82,14 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
                 className="manga-table"
                 columns={columns}
                 dataSource={mangas}
-                pagination={true}
+                pagination={{
+                    showTotal: () => `Total ${mangas.length} Manga Series`,
+                }}
+                rowKey={manga => manga.manga_id}
+                // scroll={{ x: 1200 }}
+                simple
             />
+
         </Col>
     )
 }

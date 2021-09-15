@@ -4,6 +4,7 @@ import "./Tables.css"
 import "../Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
+import DropOption from 'components/DropOption/DropOption';
 
 export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {
     const columns = [
@@ -27,20 +28,14 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
         //     render: text => <a>{text} member(s)</a>
         // },
         {
-            title: 'Action',
-            key: 'action',
+            title: 'Operation',
+            key: 'operation',
             render: (transgroup) => (
-                <Space size="middle">
-                    <Popconfirm
-                        title="Are you sure to delete this team?"
-                        onConfirm={() => handleRemoveTransGroup(transgroup.transgroup_id)}
-                        onCancel={"cancel"}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                         <Typography.Text style={{ color: "#629EFF", cursor: "pointer" }} >Remove</Typography.Text>
-                    </Popconfirm>
-                </Space>
+                <DropOption
+                    menuOptions={[
+                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveTransGroup(transgroup.transgroup_id) },
+                    ]}
+                />
             ),
         },
     ];

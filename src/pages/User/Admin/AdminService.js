@@ -83,7 +83,6 @@ export default function AdminService() {
             }
 
             console.log(response)
-            console.log(response.content.msg)
 
             const allMangas = response.content.mangas;
             const sortedMangas = allMangas.sort(arrayMethods.dynamicSort("manga_id"))
