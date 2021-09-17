@@ -78,7 +78,6 @@ function BotYoutubeMusicService() {
             setIsEndVid(false)
         }
     }, [isEndVid]);
-    
 
 
     useEffect(() => {
@@ -412,19 +411,22 @@ function BotYoutubeMusicService() {
 
 
     const postMessage = async (lastMessage) => {
+        let newUserId;
+        if (!userState[0] && !sessionStorage.getItem("userId")) {
+            newUserId = uuidv4();
+            sessionStorage.setItem("userId", JSON.stringify(newUserId));
+            setUserId(newUserId);
+        }
+
         const data = {
-            userId: userId ? userId : uuidv4(),
+            userId: userId ? userId : newUserId,
             message: lastMessage
         };
 
         try {
             const response = await botMusicApi.postMessage(data);
             if (response.content) {
-                if (!userState[0] && !sessionStorage.getItem("userId")) {
-                    sessionStorage.setItem("userId", JSON.stringify(response.content.user_id));
-                }
-
-                setUserId(response.content.user_id);
+                console.log(response.content.user_id)
                 setAllowToAddQueue(true);
             }
         } catch (err) {
