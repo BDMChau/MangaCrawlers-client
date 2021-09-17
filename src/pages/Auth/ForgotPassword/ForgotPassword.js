@@ -6,26 +6,35 @@ import "./ForgotPassword.css"
 const { Title, Text } = Typography;
 
 export default function ForgotPassword() {
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("")
 
 
     const handleSendEmail = async (e) => {
         e.preventDefault();
-
+        
         try {
             if (email) {
+                setIsLoading(true);
+                setIsDisabled(true);
+
                 const data = {
                     user_email: email
                 }
 
                 const response = await authApi.requestchangepassword(data);
-                
+
                 if (response.content.err) {
                     message_error("Missing or your email is not exist!")
+
+                    setIsDisabled(false);
+                    setIsLoading(false)
                     return;
                 }
 
                 message_success(response.content.msg, 10);
+                setIsLoading(false)
                 return;
 
             }
@@ -47,7 +56,7 @@ export default function ForgotPassword() {
                             name="email"
                             rules={[{ required: true, message: 'Please fill in your email!' }]}
                         >
-                            <Input style={{ borderRadius: "3px" }} placeholder="Type your email here!" onChange={(e) => setEmail(e.target.value)} />
+                            <Input maxLength={40} style={{ borderRadius: "3px" }} placeholder="Type your email here!" onChange={(e) => setEmail(e.target.value)} />
                         </Form.Item>
 
                         <Form.Item >
@@ -55,6 +64,8 @@ export default function ForgotPassword() {
                                 type="primary"
                                 htmlType="submit"
                                 style={{ width: "100%" }}
+                                disabled={isDisabled}
+                                loading={isLoading}
                                 onClick={(e) => handleSendEmail(e)}
                             >
                                 Submit

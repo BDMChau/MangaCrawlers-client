@@ -7,9 +7,12 @@ import { errMsgResNotification } from '../../../api/security/ErrResCheking';
 import { message_success, message_warning } from '../../../components/notifications/message';
 
 export default function SignUpService() {
+    const [isLoading, setIsLoading] = useState(false)
     const [isCloseModal, setIsCloseModal] = useState(false)
 
+
     const handleSignUp = async (name, email, password) => {
+        setIsLoading(true);
         try {
             const data = {
                 "user_name": name,
@@ -20,12 +23,15 @@ export default function SignUpService() {
 
             if (response.content.err) {
                 errMsgResNotification(response.content.err);
+                setIsLoading(false)
                 return;
             }
 
             console.log(response);
             message_success("Sign up successfully!", 3);
             message_warning("Please check your email to confirm the account before sign in ^^", 10);
+            
+            setIsLoading(false)
             setIsCloseModal(true);
             return;
         } catch (error) {

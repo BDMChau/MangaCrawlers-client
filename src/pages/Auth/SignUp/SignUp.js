@@ -7,7 +7,7 @@ import { Button, Modal, Form, Input } from 'antd';
 import SignInService from '../SignIn/SignInService';
 
 
-export default function SignUp({ handleSignUp, isCloseModal }) {
+export default function SignUp({ isLoading, handleSignUp, isCloseModal }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -91,7 +91,7 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                                 message: 'Please fill in your nickname!',
                             }]}
                         >
-                            <Input placeholder="Choose your nickname" onChange={(e) => setName(e.target.value.trim())} />
+                            <Input minLength={1} maxLength={30} placeholder="Choose your nickname" onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -101,7 +101,7 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value.trim())} />
+                            <Input maxLength={100} placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -111,7 +111,7 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value.trim())} />
+                            <Input.Password minLength={8} placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -121,7 +121,7 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                                 message: 'Confirm your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Confirm your password" onChange={(e) => setPasswordRepeat(e.target.value)} />
+                            <Input.Password minLength={8} placeholder="Confirm your password" onChange={(e) => setPasswordRepeat(e.target.value)} />
                         </Form.Item>
                         {isMatchPass ?
                             <p style={{ color: "#FF4D4F" }} >{isMatchPass}</p>
@@ -133,6 +133,8 @@ export default function SignUp({ handleSignUp, isCloseModal }) {
                             <Button className="btn-submit-signup" type="primary" htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
                                 icon={<CheckCircleOutlined />}
+                                loading={isLoading}
+                                disabled={isLoading}
                             >
                                 Register
                             </Button>

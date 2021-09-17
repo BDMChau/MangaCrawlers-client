@@ -10,6 +10,8 @@ import { Button, Col, Input, Row, Typography, Form } from 'antd'
 const { Title, Text } = Typography;
 
 export default function ChangePassword() {
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [password, setPassword] = useState("")
     const { token } = useParams();
 
@@ -18,6 +20,9 @@ export default function ChangePassword() {
 
         try {
             if (password) {
+                setIsLoading(true);
+                setIsDisabled(true);
+                
                 const data = {
                     user_password: password,
                     user_change_pass_token: token
@@ -25,10 +30,14 @@ export default function ChangePassword() {
                 const response = await authApi.changePassword(data);
                 console.log(response)
                 if (response.content.err) {
+                    setIsDisabled(false);
+                    setIsLoading(false)
                     return;
                 }
+
                 setPassword("");
                 message_success(response.content.msg, 10);
+                setIsLoading(false)
                 return;
             }
         } catch (err) {
@@ -63,6 +72,7 @@ export default function ChangePassword() {
                                 htmlType="submit"
                                 style={{ width: "100%" }}
                                 onClick={(e) => handleSendNewPass(e)}
+                                minLength={8}
                             >
                                 Confirm your new password
                             </Button>

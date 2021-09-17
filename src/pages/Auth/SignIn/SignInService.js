@@ -10,6 +10,7 @@ import endPoint from '../../../config/endPoint';
 
 
 export default function SignInService() {
+    const [isLoading, setIsLoading] = useState(false)
     const [isCloseModal, setIsCloseModal] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
     const [isErr, setIsErr] = useState(false)
@@ -18,6 +19,7 @@ export default function SignInService() {
 
     const handleSignIn = async (email, password) => {
         if (email && password) {
+            setIsLoading(true)
             try {
                 const data = {
                     "user_email": email,
@@ -40,7 +42,7 @@ export default function SignInService() {
                         setErrorMsg(response.content.err)
                         setIsErr(true)
                     }
-
+                    setIsLoading(false)
                     return;
                 }
 
@@ -53,6 +55,7 @@ export default function SignInService() {
                 dispatch(SIGNIN(user));
 
                 message_success("Signed in!");
+                setIsLoading(false);
                 setIsCloseModal(true);
                 return;
             } catch (error) {
@@ -63,6 +66,7 @@ export default function SignInService() {
 
 
     const handleSignInWithGoogle = async () => {
+        setIsLoading(true);
         try {
             const response = await authApi.oauthGoogle();
             console.log(response)
@@ -75,6 +79,7 @@ export default function SignInService() {
                 message_error("Having a problem, please try another method to login!")
             }
 
+            setIsLoading(false)
             return;
         } catch (ex) {
             console.log(ex)
@@ -85,6 +90,7 @@ export default function SignInService() {
     return (
         <div>
             <SignIn
+                isLoading={isLoading}
                 handleSignIn={(email, password) => handleSignIn(email, password)}
                 handleSignInWithGoogle={() => handleSignInWithGoogle()}
                 isCloseModal={isCloseModal}

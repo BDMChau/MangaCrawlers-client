@@ -121,7 +121,7 @@ export default function SignUpTransGroup() {
                                 message: 'Please fill in your translation team name!',
                             }]}
                         >
-                            <Input placeholder="Choose your translation team name" onChange={(e) => setName(e.target.value.trim())} />
+                            <Input minLength={1} maxLength={60} placeholder="Choose your translation team name" onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -131,7 +131,7 @@ export default function SignUpTransGroup() {
                                 message: 'Tell us something about your team!',
                             }]}
                         >
-                            <TextArea placeholder="Description about your team" onChange={(e) => setDesc(e.target.value.trim())} style={{ resize: "none", height: "150px" }} />
+                            <TextArea maxLength={200} placeholder="Description about your team" onChange={(e) => setDesc(e.target.value.trim())} style={{ resize: "none", height: "150px" }} />
                         </Form.Item>
 
                         <Form.Item

@@ -8,7 +8,7 @@ import { CLOSE_SIGN_IN_FORM } from '../../../store/features/auth/AuthSlice';
 import { NavLink } from 'react-router-dom';
 
 
-export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseModal, errorMsg, isErr }) {
+export default function SignIn({ isLoading, handleSignIn, handleSignInWithGoogle, isCloseModal, errorMsg, isErr }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -99,7 +99,7 @@ export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseMo
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input placeholder="Email" onChange={(e) => setEmail(e.target.value.trim())} />
+                            <Input maxLength={100} placeholder="Email" onChange={(e) => setEmail(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -109,7 +109,7 @@ export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseMo
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password placeholder="Password" onChange={(e) => setPassword(e.target.value.trim())} />
+                            <Input.Password minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
 
@@ -121,6 +121,8 @@ export default function SignIn({ handleSignIn, handleSignInWithGoogle, isCloseMo
                                 htmlType="submit"
                                 onClick={(e) => handleSubmit(e)}
                                 icon={<LoginOutlined />}
+                                loading={isLoading}
+                                disabled={isLoading}
                             >
                                 Sign In
                             </Button>

@@ -17,7 +17,7 @@ const DropOption = ({
                 title="Do you want to continue?"
                 onConfirm={item.funcAction}
                 onCancel={"cancel"}
-                okText="Delete"
+                okText="Confirm"
                 cancelText="Cancle"
             >
                 <Menu.Item icon={item.icon} key={item.key} style={{ color: "#629EFF", cursor: "pointer", padding: "10px" }} >{item.name}</Menu.Item>
