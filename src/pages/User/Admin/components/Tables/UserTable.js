@@ -3,7 +3,7 @@ import "../../Admin.css"
 import "./Tables.css"
 import "../../components/Charts/Chart.css"
 
-import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
+import { Table, Col, Typography, Button } from 'antd';
 import { Avatar } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 import { DeleteOutlined, FieldTimeOutlined } from '@ant-design/icons';
