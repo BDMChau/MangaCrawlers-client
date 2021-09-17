@@ -27,14 +27,15 @@ export default function FooterContainer() {
 
                             &nbsp; | &nbsp;
 
-                            <NavLink to="/legal/terms_of_policy">
-                                Terms of Policy
+                            <NavLink to="/legal/privacy_policy">
+                                Privacy Policy
                             </NavLink>
 
                             &nbsp; | &nbsp;
 
-                            <NavLink to="/legal/privacy_policy">
-                                Privacy Policy
+
+                            <NavLink to="/legal/terms_of_policy">
+                                Terms of Policy
                             </NavLink>
                         </div>
 
