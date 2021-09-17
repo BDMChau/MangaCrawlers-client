@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Admin.css"
-import "./Tables/Tables.css"
-import "./Charts/Chart.css"
-import { Row, Typography, Tabs } from 'antd';
-import UserTable from './Tables/UserTable';
-import AdminTable from './Tables/AdminTable';
-import UserChart from './Charts/UserChart';
-import MangaTable from './Tables/MangaTable';
-import MangaChart from './Charts/MangaChart';
-import TransGrTable from './Tables/TransGrTable';
-import TransGrChart from './Charts/TransGrChart';
+import "./components/Tables/Tables.css"
+import "./components/Charts/Chart.css"
+import { Row, Typography, Tabs, Layout, Drawer, Breadcrumb, Menu } from 'antd';
+import UserTable from './components/Tables/UserTable';
+import AdminTable from './components/Tables/AdminTable';
+import UserChart from './components/Charts/UserChart';
+import MangaTable from './components/Tables/MangaTable';
+import MangaChart from './components/Charts/MangaChart';
+import TransGrTable from './components/Tables/TransGrTable';
+import TransGrChart from './components/Charts/TransGrChart';
 import { useHistory } from 'react-router';
 import { message_error } from "../../../components/notifications/message";
 import { useSelector } from 'react-redux';
+import { enquireScreen, unenquireScreen } from 'enquire-js'
 
 const { TabPane } = Tabs;
+
+import { Content } from 'antd/lib/layout/layout';
+import SiderMenu from './components/SiderMenu/SiderMenu';
 
 
 export default function Admin({
@@ -37,7 +41,20 @@ export default function Admin({
 
 }) {
     const userState = useSelector((state) => state.userState);
+    const [isMobile, setIsMobile] = useState(false)
+    const [collapsed, setCollapsed] = useState(false)
     const history = useHistory();
+
+
+    useEffect(() => {
+        const enquireHandler = enquireScreen(mobile => {
+            if (isMobile !== mobile) {
+                setIsMobile(mobile)
+            }
+        })
+
+        return () => unenquireScreen(enquireHandler);
+    }, [])
 
     useEffect(() => {
         if (userState[0]) {
@@ -92,23 +109,34 @@ export default function Admin({
 
     return (
         <div className="admin-page">
-            <Row justify={"center"} className="admin-row1">
-                <Typography.Title level={3} className="admin-title">Administrator Page</Typography.Title>
+            {isMobile ? (
+                <Drawer
+                    maskClosable
+                    closable={false}
+                    // onClose={onCollapseChange.bind(this, !collapsed)}
+                    visible={!collapsed}
+                    placement="left"
+                    width={200}
+                    style={{
+                        padding: 0,
+                        height: '100vh',
+                    }}
+                >
+                    <div>notthing</div>
+                </Drawer>
+            ) : (
+                <Layout>
+                    <SiderMenu collapsed={collapsed} setCollapsed={setCollapsed} ></SiderMenu>
 
-                <Tabs activeKey={tabSelected} className="admin-tabs" onChange={(val) => history.push(`/admin?v=${val}`)}>
-                    <TabPane tab="User Statistics" key="user">
-                        {renderUserStatistic()}
-                    </TabPane>
-                    <TabPane tab="Manga Statistics" key="manga">
-                        {renderMangaStatistic()}
-                    </TabPane>
-                    <TabPane tab="Translation Group Statistics" key="transgroup">
-                        {renderTransGrStatistic()}
-                    </TabPane>
-                </Tabs>
-
-                <AdminTable admins={admins} />
-            </Row>
+                    <Layout className="site-layout">
+                        <Content className="admin-content">
+                            <div style={{ padding: '0 10px' }}>
+                                {renderUserStatistic()}
+                            </div>
+                        </Content>
+                    </Layout>
+                </Layout>
+            )}
         </div>
     )
 }

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import "../Admin.css"
+import "../../Admin.css"
 import "./Tables.css"
-import "../Charts/Chart.css"
+import "../../components/Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
+import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 
 export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
 
@@ -62,8 +63,8 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             render: (manga) => (
                 <DropOption
                     menuOptions={[
-                        { key: '1', name: `Preview`, path: `/manga/${manga.manga_id}` },
-                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveManga(manga.manga_id) },
+                        { key: '1', name: `Preview`, icon: <EyeOutlined style={{ fontSize: "20px" }} />, path: `/manga/${manga.manga_id}` },
+                        { key: '2', name: `Delete`, icon: <DeleteOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleRemoveManga(manga.manga_id) },
                     ]}
                 />
             ),

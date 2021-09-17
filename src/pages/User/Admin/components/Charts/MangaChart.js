@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import "../Tables/Tables.css"
 import "./Chart.css"
-import "../Admin.css"
+import "../../Admin.css"
 import { Line } from '@ant-design/charts';
 import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { PicLeftOutlined, CalendarOutlined } from '@ant-design/icons';

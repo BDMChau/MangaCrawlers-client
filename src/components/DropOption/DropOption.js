@@ -3,6 +3,7 @@ import { BarsOutlined, DownOutlined } from '@ant-design/icons'
 import { Dropdown, Button, Menu, Popconfirm } from 'antd'
 import { NavLink } from 'react-router-dom'
 
+
 const DropOption = ({
     onMenuClick,
     menuOptions = [],
@@ -19,11 +20,11 @@ const DropOption = ({
                 okText="Delete"
                 cancelText="Cancle"
             >
-                <Menu.Item key={item.key} style={{ color: "#629EFF", cursor: "pointer" }} >{item.name}</Menu.Item>
+                <Menu.Item icon={item.icon} key={item.key} style={{ color: "#629EFF", cursor: "pointer", padding: "10px" }} >{item.name}</Menu.Item>
             </Popconfirm>
 
             : <NavLink to={item.path ? item.path : "#"} key={i}>
-                <Menu.Item style={{ color: "#629EFF", cursor: "pointer" }} key={item.key}>{item.name}</Menu.Item>
+                <Menu.Item style={{ color: "#629EFF", cursor: "pointer", padding: "10px" }} key={item.key}>{item.name}</Menu.Item>
             </NavLink>
     ))
 

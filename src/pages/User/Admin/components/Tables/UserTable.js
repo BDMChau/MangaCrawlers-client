@@ -1,11 +1,13 @@
 import React from 'react'
-import "../Admin.css"
+import "../../Admin.css"
 import "./Tables.css"
-import "../Charts/Chart.css"
+import "../../components/Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
 import { Avatar } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
+import { DeleteOutlined, FieldTimeOutlined } from '@ant-design/icons';
+
 
 export default function TableUser({ users, handleDeprecateUser, handleRemoveUser, isLoading }) {
 
@@ -46,8 +48,8 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             render: (user, record) => (
                 <DropOption
                     menuOptions={[
-                        { key: '1', name: `deprecated`, keyId: "delete", funcAction: () => handleDeprecateUser(user.user_id) },
-                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveUser(user.user_id) },
+                        { key: '1', name: `Deprecated`, icon: <FieldTimeOutlined style={{fontSize:"20px"}} />, keyId: "delete", funcAction: () => handleDeprecateUser(user.user_id) },
+                        { key: '2', name: `Delete`, icon: <DeleteOutlined style={{fontSize:"20px"}} />, keyId: "delete", funcAction: () => handleRemoveUser(user.user_id) },
                     ]}
                 />
             )

@@ -1,7 +1,8 @@
 import React from 'react'
-import "../Admin.css"
+import "../../Admin.css"
 import "./Tables.css"
-import "../Charts/Chart.css"
+import "../../components/Charts/Chart.css"
+import { DeleteOutlined } from '@ant-design/icons';
 
 import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
@@ -13,7 +14,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             dataIndex: 'transgroup_name',
             key: 'transgroup_name',
             fixed: 'left',
-            width:"6%",
+            width: "6%",
             className: "name-col",
             render: text => <p>{text}</p>,
         },
@@ -37,7 +38,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             render: (transgroup) => (
                 <DropOption
                     menuOptions={[
-                        { key: '2', name: `Delete`, keyId: "delete", funcAction: () => handleRemoveTransGroup(transgroup.transgroup_id) },
+                        { key: '2', name: `Delete`, icon: <DeleteOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleRemoveTransGroup(transgroup.transgroup_id) },
                     ]}
                 />
             ),
