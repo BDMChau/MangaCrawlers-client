@@ -91,7 +91,7 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
                     name="Manga Name"
                     rules={[{ required: true, message: 'Please fill the name of manga!' }]}
                 >
-                    <Input placeholder="Manga Name" allowClear onChange={(e) => setFieldsData({ ...fieldsData, mangaName: e.target.value })} />
+                    <Input minLength={1} placeholder="Manga Name" allowClear onChange={(e) => setFieldsData({ ...fieldsData, mangaName: e.target.value })} />
                 </Form.Item>
 
                 <Form.Item
@@ -131,7 +131,7 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
                 <Form.Item
                     name="year release"
                 >
-                    <Input placeholder="Year release" type="number" onChange={(e) => setFieldsData({ ...fieldsData, publicationYear: e.target.value })} />
+                    <Input minLength={4} maxLength={4} placeholder="Year release" type="number" onChange={(e) => setFieldsData({ ...fieldsData, publicationYear: e.target.value })} />
                 </Form.Item>
 
                 <Form.Item

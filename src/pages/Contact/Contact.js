@@ -66,16 +66,16 @@ export default function Contact() {
                     className="contact-tabs"
                     onChange={(val) => val === "contact_us" ? history.push(`/${val}`) : history.push(`/legal/${val}`)}
                 >
+                    <TabPane tab="Contact us" key="contact_us">
+                        {renderContact()}
+                    </TabPane>
+
                     <TabPane tab="Privacy Policy" key="privacy_policy">
                         {renderpolicy()}
                     </TabPane>
 
                     <TabPane tab="Terms of Service" key="terms_of_policy">
                         {renderTerms()}
-                    </TabPane>
-
-                    <TabPane tab="Contact us" key="contact_us">
-                        {renderContact()}
                     </TabPane>
                 </Tabs>
             </Col>

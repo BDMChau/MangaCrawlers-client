@@ -120,6 +120,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                         <Tooltip title="Chapter's name" >
                             <Input
                                 type="text"
+                                minLength={1}
                                 placeholder="Chapter's name"
                                 onChange={(e) => setChapterName(e.target.value)}
                             />
