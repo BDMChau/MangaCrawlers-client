@@ -115,10 +115,15 @@ function MangaService() {
 
             }
 
-            setMangaStars(mangaObj.stars)
             setManga(mangaObj)
-            setGenres(response.content.genres)
-            setChapters(response.content.chapters)
+            setTimeout(() => {
+                setMangaStars(mangaObj.stars)
+                setGenres(response.content.genres)
+            }, 200)
+            setTimeout(() => {
+                setChapters(response.content.chapters)
+            }, 400)
+
             return;
         } catch (error) {
             console.log(error);
