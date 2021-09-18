@@ -1,11 +1,11 @@
 import React, { memo, useEffect, useState } from 'react'
 import "./Dashboard.css"
 
-import { Col, Row, Typography } from 'antd'
+import { Col, Row, Spin, Typography } from 'antd'
 import teamIcon from "../../../../../assets/img/team.svg";
 import userIcon from "../../../../../assets/img/users.svg";
 import mangaIcon from "../../../../../assets/img/comic.svg";
-import online from "../../../../../assets/img/online.svg";
+import postIcon from "../../../../../assets/img/post.svg";
 import DashboardChart01 from '../Charts/components/DashboardChart01';
 import DashboardChart02 from '../Charts/components/DashboardChart02';
 
@@ -16,9 +16,11 @@ function Dashboard({
 
     allReports,
 
+    weatherStatus,
+
     isMobile
 }) {
-    const [items, setItems] = useState(["init"])
+    const [items, setItems] = useState(["init"]);
 
 
     useEffect(() => {
@@ -39,8 +41,8 @@ function Dashboard({
                 quantity: transGrs.length
             },
             {
-                name: "Online Now", // realtime
-                icon: online,
+                name: "Posts", // realtime
+                icon: postIcon,
                 quantity: transGrs.length
             },
         ]
@@ -55,7 +57,7 @@ function Dashboard({
                 <div className="dash-section01">
                     {items.length
                         ? items.map((item, i) => (
-                            <Col key={i} span={6} className="dash-total-item" >
+                            <Col key={i} span={6} title={item.name} className="dash-total-item" >
                                 <img src={item.icon} alt="" />
                                 <div style={{ marginTop: "-10px", marginLeft: "10px" }}>
                                     {isMobile
@@ -76,6 +78,26 @@ function Dashboard({
 
                 <div className="dash-section03">
                     <DashboardChart02 allReports={allReports} />
+
+                    <div className="weather">
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            padding: "10px",
+                            width: "100%"
+                        }}
+                        >
+                            <div style={{ textAlign: "center" }}>
+                                <Typography.Title level={4} style={{ color: "#ffffffb3" }}>{Object.keys(weatherStatus).length ? weatherStatus.name : ""}</Typography.Title>
+                                <Typography.Text style={{ color: "#ffffffb3", textTransform: "capitalize" }}>{Object.keys(weatherStatus).length ? weatherStatus.weather[0].description : ""}</Typography.Text>
+                            </div>
+
+                            <div style={{ textAlign: "center" }}>
+                                <Typography.Title level={4} style={{ color: "#ffffffb3" }}>{Object.keys(weatherStatus).length ? weatherStatus.main.temp : ""}°C</Typography.Title>
+                                <Spin size="default" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Row>

@@ -5,6 +5,7 @@ import adminApi from '../../../api/apis/adminApi';
 import { message_success } from '../../../components/notifications/message';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function AdminService() {
     const [users, setUsers] = useState([]);
@@ -15,6 +16,8 @@ function AdminService() {
     const [reportUsers, setReportUsers] = useState([]);
     const [reportManga, setReportManga] = useState([]);
     const [reportTransGr, setReportTransGr] = useState([]);
+
+    const [weatherStatus, setWeatherStatus] = useState({});
 
     const [allReports, setAllReports] = useState([]);
 
@@ -46,7 +49,34 @@ function AdminService() {
         getReportUser();
         getReportManga();
         getReportTransGr();
+
+        getPosition();
     }, [])
+
+
+    const getPosition = async () => {
+        try {
+            const response = await axios.get(`https://geolocation-db.com/json/`)
+            if (response.data) {
+                getWeather(response.data.city);
+            }
+        } catch (err) {
+            getWeather("Ho Chi Minh");
+            console.log(err)
+        }
+    }
+
+
+    const getWeather = async (city) => {
+        try {
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}`)
+            if (response.data) {
+                setWeatherStatus(response.data)
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
     const getAllUsers = async () => {
@@ -93,7 +123,7 @@ function AdminService() {
 
             const allMangas = response.content.mangas;
             const sortedMangas = allMangas.sort(arrayMethods.dynamicSort("manga_id"))
-            
+
             setMangas(sortedMangas)
             // sortedMangas.forEach(manga => {
             //     setMangas(prev => [...prev, manga]);
@@ -299,7 +329,7 @@ function AdminService() {
                     report.month = report.month.toString();
                 }
             })
-            
+
             setReportManga(reports)
             setAllReports(prev => [...prev, ...reports]);
 
@@ -344,27 +374,30 @@ function AdminService() {
         }
     }
 
+
     return (
-            <Admin
-                users={users}
-                admins={admins}
-                mangas={mangas}
-                transGrs={transGrs}
+        <Admin
+            users={users}
+            admins={admins}
+            mangas={mangas}
+            transGrs={transGrs}
 
-                reportUsers={reportUsers}
-                reportManga={reportManga}
-                reportTransGr={reportTransGr}
+            reportUsers={reportUsers}
+            reportManga={reportManga}
+            reportTransGr={reportTransGr}
 
-                allReports={allReports}
+            allReports={allReports}
 
-                handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
-                handleRemoveUser={(userId) => handleRemoveUser(userId)}
-                handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
-                handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
-                isLoading={isLoading}
+            weatherStatus={weatherStatus}
 
-                tabSelected={tabSelected}
-            />
+            handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
+            handleRemoveUser={(userId) => handleRemoveUser(userId)}
+            handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+            handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
+            isLoading={isLoading}
+
+            tabSelected={tabSelected}
+        />
     )
 }
 

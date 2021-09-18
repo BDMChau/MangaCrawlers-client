@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import App from './App'
 import { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } from "../store/features/stuffs/StuffsSlice";
 import { useDispatch } from 'react-redux';

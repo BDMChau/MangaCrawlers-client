@@ -33,6 +33,8 @@ function Admin({
 
     allReports,
 
+    weatherStatus,
+
     handleDeprecateUser,
     handleRemoveUser,
     handleRemoveManga,
@@ -66,7 +68,7 @@ function Admin({
         }
     }, [users, mangas, transGrs])
 
-
+ 
     useEffect(() => {
         if (userState[0]) {
             if (!userState[0].user_isAdmin) {
@@ -90,6 +92,8 @@ function Admin({
                         transGrs={transGrs}
 
                         allReports={allReports}
+
+                        weatherStatus={weatherStatus}
 
                         isMobile={isMobile}
                     />
