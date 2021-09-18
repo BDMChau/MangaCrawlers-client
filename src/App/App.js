@@ -37,7 +37,7 @@ export default function App({ isVisibleScrollTopBtn }) {
         {Routing()}
       </Content>
 
-      <ScrollTopBtn isVisibleProps={isVisibleScrollTopBtn} />
+      <ScrollTopBtn isVisibleProp={isVisibleScrollTopBtn} />
 
       {/* <MessengerCustomerChat
         pageId="101341455476510"

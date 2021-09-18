@@ -47,22 +47,22 @@ const DashboardChart01 = ({ allReports }) => {
 
     return (
         <div className="dashbroadchart01">
-            <div style={{ margin: "6px 0px 0px 3px", zIndex: "999", position: "absolute" }}>
+            <div style={{ margin: "6px 0px 0px 3px", zIndex:"999", position:"absolute" }}>
                 <Tooltip title="Quantity">
                     <PicLeftOutlined style={{ fontSize: "20px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>
 
-            <Area style={{ padding: "5px" }} {...config} />
+            <Area style={{ padding: "5px"}} {...config} />
 
-            <div style={{ margin: "-38px 0px 0px -4px", zIndex: "999", position: "absolute" }}>
+            <div style={{ margin: "-38px 0px 0px -4px", zIndex:"999", position:"absolute" }}>
                 <Tooltip title="Month">
                     <CalendarOutlined style={{ fontSize: "20px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>
 
             <Dropdown overlay={menuDropDown} trigger={['click']}>
-                <Button title="Year" style={{ marginLeft: "10px", marginTop: "5px" }}>
+                <Button title="Year" style={{ marginLeft: "10px",  marginTop: "5px"  }}>
                     2021
                 </Button>
             </Dropdown>

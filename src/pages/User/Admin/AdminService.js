@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import Admin from './Admin'
 import Cookies from 'universal-cookie';
 import adminApi from '../../../api/apis/adminApi';
@@ -6,7 +6,7 @@ import { message_success } from '../../../components/notifications/message';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
 
-export default function AdminService() {
+function AdminService() {
     const [users, setUsers] = useState([]);
     const [admins, setAdmins] = useState([]);
     const [mangas, setMangas] = useState([]);
@@ -29,13 +29,13 @@ export default function AdminService() {
 
 
     useEffect(() => {
-        if (!query.get("v")) {
-            history.push(`/admin?v=user`)
-        } else {
-            setTabSelected(query.get("v"))
-        }
+        // if (!query.get("v")) {
+        //     history.push(`/admin?v=user`)
+        // } else {
+        //     setTabSelected(query.get("v"))
+        // }
 
-    }, [query.get("v")])
+    }, [])
 
 
     useEffect(() => {
@@ -345,7 +345,6 @@ export default function AdminService() {
     }
 
     return (
-        <div>
             <Admin
                 users={users}
                 admins={admins}
@@ -366,6 +365,7 @@ export default function AdminService() {
 
                 tabSelected={tabSelected}
             />
-        </div>
     )
 }
+
+export default AdminService;

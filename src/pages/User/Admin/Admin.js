@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import "./Admin.css"
 import "./components/Tables/Tables.css"
 import "./components/Charts/Chart.css"
@@ -20,9 +20,8 @@ const { TabPane } = Tabs;
 import { Content } from 'antd/lib/layout/layout';
 import SiderMenu from './components/SiderMenu/SiderMenu';
 import Dashboard from './components/Dashboard/Dashboard';
-import { BellOutlined } from "@ant-design/icons"
 
-export default function Admin({
+function Admin({
     users,
     admins,
     mangas,
@@ -60,6 +59,7 @@ export default function Admin({
         return () => unenquireScreen(enquireHandler);
     }, [])
 
+
     useEffect(() => {
         if (users.length || mangas.length || transGrs.length) {
             setIsGetDataDone(true)
@@ -80,50 +80,9 @@ export default function Admin({
     }, [userState[0]])
 
 
-    const renderUserStatistic = () => (
-        <div>
-            <UserTable
-                users={users}
-                handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
-                handleRemoveUser={(userId) => handleRemoveUser(userId)}
-                isLoading={isLoading}
-            />
-            <UserChart reportUsers={reportUsers} />
-        </div>
-    )
-
-
-    const renderMangaStatistic = () => (
-        <div>
-            <MangaTable
-                mangas={mangas}
-                handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
-                isLoading={isLoading}
-            />
-
-            <MangaChart reportManga={reportManga} />
-        </div>
-    )
-
-    const renderTransGrStatistic = () => (
-        <div>
-            <TransGrTable
-                transGrs={transGrs}
-                handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
-                isLoading={isLoading}
-            />
-
-            <TransGrChart reportTransGr={reportTransGr} />
-        </div>
-    )
-
     const SiteLayout = ({ isMobile }) => (
         <Layout className="site-layout">
             <Content className="admin-content">
-                <div className="admin-header">
-                    <BellOutlined />
-                </div>
-
                 <div style={{ padding: '0 10px' }}>
                     <Dashboard
                         mangas={mangas}
@@ -181,3 +140,5 @@ export default function Admin({
         </div>
     )
 }
+
+export default Admin;

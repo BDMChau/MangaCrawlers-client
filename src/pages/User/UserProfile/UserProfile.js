@@ -189,7 +189,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                 }
 
                 <div className="contact-admin">
-                    <p>Contact me via email if you have any questions ^^</p>
+                    <p>Contact us via email if you have any questions ^^</p>
                     <Input
                         addonBefore={<CopyOutlined
                             style={{ fontSize: "18px", marginTop: "5px", cursor: "pointer" }}

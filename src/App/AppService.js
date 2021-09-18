@@ -23,7 +23,7 @@ export default function AppService() {
 
         setTimeout(() => {
             setIsVisibleScrollTopBtn(temp);
-            dispatch(SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE(temp));
+            dispatch(SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE(true));
 
             temp = true;
         }, 200);
