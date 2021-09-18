@@ -169,7 +169,6 @@ function HomeService() {
 
     return (
    <div>
-       <button onClick={() => sendMessageSocket("hello minh chou")} >Click</button>
             <Home
             latestMangas={latestMangas}
             topMangas={topMangas}

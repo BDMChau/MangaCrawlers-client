@@ -1,7 +1,7 @@
 import React from 'react'
-import "../../Admin.css"
-import "./Tables.css"
-import "../../components/Charts/Chart.css"
+import "../../../Admin.css"
+import "../Tables.css"
+import "../../../components/Charts/Chart.css"
 
 import { Table, Col, Typography, Button } from 'antd';
 import { Avatar } from 'antd';

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
-import "../Tables/Tables.css"
-import "./Chart.css"
-import "../../Admin.css"
+import "../../Tables/Tables.css"
+import "../Chart.css"
+import "../../../Admin.css"
 import { Line } from '@ant-design/charts';
 import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { PicLeftOutlined, CalendarOutlined } from '@ant-design/icons';
@@ -36,7 +36,7 @@ export default function MangaChart({ reportManga }) {
             <Menu.Item>
                 <Typography.Text>
                     2021
-            </Typography.Text>
+                </Typography.Text>
             </Menu.Item>
         </Menu>
     );
@@ -64,7 +64,7 @@ export default function MangaChart({ reportManga }) {
                 <Dropdown overlay={menuDropDown} trigger={['click']}>
                     <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         2021
-            </Button>
+                    </Button>
                 </Dropdown>
             </div>
         </Col>

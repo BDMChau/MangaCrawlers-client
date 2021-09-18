@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout, Menu } from 'antd';
 import {
-    PieChartOutlined,
+    BarChartOutlined,
     TableOutlined,
     DashboardOutlined
 } from '@ant-design/icons';
@@ -22,7 +22,7 @@ export default function SiderMenu({ collapsed, setCollapsed }) {
                     Tables
                 </Menu.Item>
 
-                <Menu.Item key="3" icon={<PieChartOutlined style={{ fontSize: "20px" }} />}>
+                <Menu.Item key="3" icon={<BarChartOutlined style={{ fontSize: "20px" }} />}>
                     Charts
                 </Menu.Item>
             </Menu>

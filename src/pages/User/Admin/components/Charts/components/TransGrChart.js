@@ -1,28 +1,28 @@
 import React, { useRef } from 'react';
-import "../Tables/Tables.css"
-import "./Chart.css"
-import "../../Admin.css"
+import "../../Tables/Tables.css"
+import "../Chart.css"
+import "../../../Admin.css"
 import { Line } from '@ant-design/charts';
 import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
-import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
+import { TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
-export default function UserChart({ reportUsers }) {
+export default function TransGrChart({ reportTransGr }) {
     const chartRef = useRef();
 
 
     const config = {
-        data: reportUsers,
+        data: reportTransGr,
         height: 300,
-        xField: 'month', // must be string
-        yField: 'Users',
+        xField: 'month',
+        yField: 'Quantity',
         point: {
-            size: 4,
-            shape: 'circle',
+            size: 5,
+            shape: 'diamond',
             style: {
                 fill: 'white',
                 stroke: '#2593fc',
-                lineWidth: 1,
+                lineWidth: 2,
             },
         },
     };
@@ -43,14 +43,14 @@ export default function UserChart({ reportUsers }) {
     );
 
     return (
-        <Col xxl={14} xs={23} sm={20} className="user-chart">
+        <Col xxl={14} xs={23} sm={20} className="trans-gr-chart">
             <Button type="button" onClick={downloadImage} style={{ marginRight: 24, marginBottom: 30 }}>
                 Export image
-            </Button>
+        </Button>
 
             <div className="text01">
-                <Tooltip title="Registed Users">
-                    <UserOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
+                <Tooltip title="Registed Translation Team">
+                    <TeamOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>
             <Line className="chart" {...config} chartRef={chartRef} />
@@ -65,7 +65,7 @@ export default function UserChart({ reportUsers }) {
                 <Dropdown overlay={menuDropDown} trigger={['click']}>
                     <Button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                         2021
-                    </Button>
+                </Button>
                 </Dropdown>
             </div>
         </Col>

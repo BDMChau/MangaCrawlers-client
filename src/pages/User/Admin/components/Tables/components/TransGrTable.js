@@ -1,7 +1,7 @@
 import React from 'react'
-import "../../Admin.css"
-import "./Tables.css"
-import "../../components/Charts/Chart.css"
+import "../../../Admin.css"
+import "../Tables.css"
+import "../../../components/Charts/Chart.css"
 import { DeleteOutlined } from '@ant-design/icons';
 
 import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';

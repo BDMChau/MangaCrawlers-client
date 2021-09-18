@@ -7,18 +7,20 @@ import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
 
 export default function AdminService() {
-    const [users, setUsers] = useState([])
-    const [admins, setAdmins] = useState([])
-    const [mangas, setMangas] = useState([])
-    const [transGrs, setTransGrs] = useState([])
+    const [users, setUsers] = useState([]);
+    const [admins, setAdmins] = useState([]);
+    const [mangas, setMangas] = useState([]);
+    const [transGrs, setTransGrs] = useState([]);
 
-    const [reportUsers, setReportUsers] = useState([])
-    const [reportManga, setReportManga] = useState([])
-    const [reportTransGr, setReportTransGr] = useState([])
+    const [reportUsers, setReportUsers] = useState([]);
+    const [reportManga, setReportManga] = useState([]);
+    const [reportTransGr, setReportTransGr] = useState([]);
 
-    const [tabSelected, setTabSelected] = useState(null)
+    const [allReports, setAllReports] = useState([]);
 
-    const [isLoading, setIsLoading] = useState(false)
+    const [tabSelected, setTabSelected] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(false);
     const cookies = new Cookies();
     const token = cookies.get("token")
 
@@ -255,7 +257,7 @@ export default function AdminService() {
             reports.forEach(report => {
                 if (report.hasOwnProperty("values")) {
                     report.Users = report.values;
-                    delete report.values;
+                    report.name = "Users"
                 }
 
                 if (report.month <= 9) {
@@ -264,11 +266,11 @@ export default function AdminService() {
                     report.month = report.month.toString();
                 }
             })
-            console.log(reports)
-            setReportUsers(reports)
+
+            setReportUsers(reports);
+            setAllReports(prev => [...prev, ...reports]);
 
             console.log("Get report user OK!");
-            console.log(response)
             return;
 
         } catch (ex) {
@@ -288,7 +290,7 @@ export default function AdminService() {
             reports.forEach(report => {
                 if (report.hasOwnProperty("values")) {
                     report.Quantity = report.values;
-                    delete report.values;
+                    report.name = "Manga Series"
                 }
 
                 if (report.month <= 9) {
@@ -297,11 +299,11 @@ export default function AdminService() {
                     report.month = report.month.toString();
                 }
             })
-            console.log(reports)
+            
             setReportManga(reports)
+            setAllReports(prev => [...prev, ...reports]);
 
             console.log("Get report manga OK!");
-            console.log(response)
             return;
 
         } catch (ex) {
@@ -321,7 +323,7 @@ export default function AdminService() {
             reports.forEach(report => {
                 if (report.hasOwnProperty("values")) {
                     report.Quantity = report.values;
-                    delete report.values;
+                    report.name = "Translation Teams"
                 }
 
                 if (report.month <= 9) {
@@ -330,11 +332,11 @@ export default function AdminService() {
                     report.month = report.month.toString();
                 }
             })
-            console.log(reports)
+
             setReportTransGr(reports)
+            setAllReports(prev => [...prev, ...reports]);
 
             console.log("Get report trans group OK!");
-            console.log(response)
             return;
 
         } catch (ex) {
@@ -353,6 +355,8 @@ export default function AdminService() {
                 reportUsers={reportUsers}
                 reportManga={reportManga}
                 reportTransGr={reportTransGr}
+
+                allReports={allReports}
 
                 handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                 handleRemoveUser={(userId) => handleRemoveUser(userId)}

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import "../../Admin.css"
-import "./Tables.css"
-import "../../components/Charts/Chart.css"
+import "../../../Admin.css"
+import "../../../components/Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
