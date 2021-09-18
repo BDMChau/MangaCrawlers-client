@@ -29,7 +29,7 @@ const Routing = () => {
 };
 
 
-export default function App({ isVisibleScrollTopBtn }) {
+export default function App() {
   const renderMangaComponentPages = () => (
     <Suspense fallback={<LoadingPage />}>
 
@@ -37,7 +37,7 @@ export default function App({ isVisibleScrollTopBtn }) {
         {Routing()}
       </Content>
 
-      <ScrollTopBtn isVisibleProp={isVisibleScrollTopBtn} />
+      <ScrollTopBtn />
 
       {/* <MessengerCustomerChat
         pageId="101341455476510"

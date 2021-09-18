@@ -7,7 +7,7 @@ const StuffsSlice = createSlice({
         SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE: (state, action) => {
             if (!state.length) {
                 state.push(action.payload);
-            } else if (state[0]) {
+            } else if (state[0] === false || state[0] === true) {
                 state[0] = action.payload;
             }
         }

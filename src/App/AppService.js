@@ -4,7 +4,6 @@ import { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } from "../store/features/stuffs
 import { useDispatch } from 'react-redux';
 
 export default function AppService() {
-    const [isVisibleScrollTopBtn, setIsVisibleScrollTopBtn] = useState(Boolean)
     const dispatch = useDispatch();
 
 
@@ -22,7 +21,6 @@ export default function AppService() {
         }
 
         setTimeout(() => {
-            setIsVisibleScrollTopBtn(temp);
             dispatch(SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE(temp));
 
             temp = true;
@@ -32,7 +30,6 @@ export default function AppService() {
 
     return (
         <App
-            isVisibleScrollTopBtn={isVisibleScrollTopBtn}
         />
     )
 }
