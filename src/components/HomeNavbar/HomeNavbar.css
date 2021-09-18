@@ -1,6 +1,6 @@
 .home-menu {
   position: relative;
-  top: 10px;
+  top: -40px;
   height: 65px;
   transition: 0.3s;
   z-index: 99;
@@ -32,6 +32,7 @@
   border-radius: 3px;
 }
 
+
 .home-menu .result-box::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -50,6 +51,8 @@
   background: RGB(150, 150, 150);
 }
 
+
+
 .home-menu .menu .menu-search,
 .home-menu .menu .item {
   line-height: 65px;
@@ -64,6 +67,7 @@
 /* .ant-menu-overflow-item.ant-menu-item.ant-menu-item-active.ant-menu-item-selected.ant-menu-item-only-child.menu-search::after{
   border-bottom: none !important;
 } */
+
 
 .home-menu .menu .menu-search .searching-box {
   margin-top: 14px;
@@ -157,6 +161,7 @@
 
 .home-menu .searching-list a.searching-item:hover {
   background: #f1f1f1;
+  
 }
 
 .home-menu .searching-item img.img {
@@ -189,10 +194,6 @@
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .home-menu {
-    top: -40px;
-  }
-
   .home-menu .menu .menu-search .searching-box {
     margin-top: 15px;
   }

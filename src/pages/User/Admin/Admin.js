@@ -55,7 +55,7 @@ export default function Admin({
             if (isMobile !== mobile) {
                 setIsMobile(mobile)
             }
-        })
+        }, "only screen and (min-width: 375px) and (max-width: 767px)")
 
         return () => unenquireScreen(enquireHandler);
     }, [])

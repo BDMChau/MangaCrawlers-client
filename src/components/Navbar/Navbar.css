@@ -86,12 +86,14 @@
   margin-left: 35px;
 }
 
-.menuCon .leftMenu {
+.leftMenu {
   float: left;
+  width: inherit;
 }
 
-.menuCon .rightMenu {
+.rightMenu {
   float: right;
+  width: fit-content;
 }
 
 .barsMenu {
