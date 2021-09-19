@@ -139,7 +139,7 @@ function Manga({
                             </div>
 
                             <div className="interact">
-                                <Button className="btn-read-now" title="Read Now">
+                                <Button className="btn-read-now" title="Start Reading">
                                     <NavLink to={
                                         Object.keys(manga).length !== 0
                                             ? redirectURI.chapterPage_uri(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
@@ -169,17 +169,20 @@ function Manga({
                                 </Button>
 
                                 {userState[0].user_isAdmin ?
-                                    <Button
-                                        className="btn-modify"
-                                        icon={<EditOutlined style={{ fontSize: "20px" }} />}
-                                        loading={isLoadingFollow}
-                                        onClick={() =>
-                                            userState[0].user_isAdmin
-                                                ? setIsModify(!isModify)
-                                                : message_error("You are not an admin")
-                                        }
-                                    >
-                                    </Button>
+                                    <Tooltip title="Edit Manga">
+                                        <Button
+
+                                            className="btn-modify"
+                                            icon={<EditOutlined style={{ fontSize: "20px" }} />}
+                                            loading={isLoadingFollow}
+                                            onClick={() =>
+                                                userState[0].user_isAdmin
+                                                    ? setIsModify(!isModify)
+                                                    : message_error("You are not an admin")
+                                            }
+                                        >
+                                        </Button>
+                                    </Tooltip>
                                     : ""
                                 }
                             </div>

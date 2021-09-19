@@ -1,14 +1,13 @@
 import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
-import { Empty, Input, Typography } from 'antd';
+import { Empty, Input, Typography, Button, Tooltip } from 'antd';
 import { NavLink } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
+import { DeleteOutlined } from '@ant-design/icons';
 
 function ListChapters({ chapters, mangaId, mangaName, height, isModify }) {
     const [isLoading] = useState(false)
-
-
 
 
     return (
@@ -29,6 +28,15 @@ function ListChapters({ chapters, mangaId, mangaName, height, isModify }) {
                             {isModify
                                 ? <>
                                     <Input className="input-modify" defaultValue={chapter.chapter_name} />
+
+                                    <Tooltip title="Delete Chapter">
+                                        <Button
+                                            style={{ borderRadius: "3px", height: "50px", width: "50px" }}
+                                            type="danger"
+                                            icon={<DeleteOutlined style={{ fontSize: "20px" }} />}
+                                        >
+                                        </Button>
+                                    </Tooltip>
                                 </>
                                 : <>
                                     <Typography.Text>{chapter.chapter_name}</Typography.Text>
