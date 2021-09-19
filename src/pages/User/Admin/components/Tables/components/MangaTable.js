@@ -12,7 +12,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
 
     const columns = [
         {
-            title: 'Thumbnail',
+            title: 'THUMBNAIL',
             dataIndex: 'thumbnail',
             key: 'thumbnail',
             width: '6%',
@@ -25,38 +25,38 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             />
         },
         {
-            title: 'Manga',
+            title: 'MANGA',
             dataIndex: 'manga_name',
             key: 'manga_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            title: 'Author',
+            title: 'AUTHORS',
             dataIndex: 'author_name',
             key: 'author_name',
         },
         {
-            title: 'Views',
+            title: 'VIEWS',
             key: 'views',
             dataIndex: 'views',
             className: "views-col",
             render: text => <p>{text}</p>
         },
         {
-            title: 'Chapters',
+            title: 'CHAPTERS',
             key: 'chapters_length',
             dataIndex: 'chapters_length',
             render: (text, manga) => <a>{text} chapter(s)</a>
         },
         {
-            title: 'Rating',
+            title: 'RATING',
             key: 'stars',
             dataIndex: 'stars',
             render: text => <Typography.Text>{text}/5</Typography.Text>
         },
         {
-            title: 'Operation',
+            title: 'OPERATION',
             key: 'operation',
             fixed: 'right',
             width: '8%',

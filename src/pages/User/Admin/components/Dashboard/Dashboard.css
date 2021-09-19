@@ -1,6 +1,7 @@
 .dashboard {
   min-height: 100vh;
   margin: 0 5px;
+  margin-bottom: 20px;
 }
 
 .dash-section01 {
@@ -23,20 +24,18 @@
   width: 100%;
   height: fit-content;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  margin-top: 30px
 }
 
-.dash-section03 .weather {
+.dash-section03 .stuffs {
   max-width: 100%;
-  height: 200px;
+  height: 400px;
   width: 350px;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #1caaef87;
+  justify-content: space-around;
   margin-right: 30px;
 }
 
@@ -64,4 +63,11 @@
   color: #727272;
   margin: 0;
   font-size: 24px;
+}
+
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .dash-section03 {
+   flex-direction: column;
+  }
 }

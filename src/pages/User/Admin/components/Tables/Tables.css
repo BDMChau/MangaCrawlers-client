@@ -109,10 +109,8 @@
 
 /*  */
 .table-admin {
-  margin: 0 auto;
-  padding-bottom: 50px;
-  max-height: 500px;
-  width: 100%;
+  margin: 0 15px;
+  max-width: 635px;
 }
 
 .table-admin .admin-table td.ant-table-cell,

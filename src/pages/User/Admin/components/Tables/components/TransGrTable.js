@@ -10,7 +10,7 @@ import DropOption from 'components/DropOption/DropOption';
 export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {
     const columns = [
         {
-            title: 'Team Name',
+            title: 'TEAM NAME',
             dataIndex: 'transgroup_name',
             key: 'transgroup_name',
             fixed: 'left',
@@ -19,7 +19,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             render: text => <p>{text}</p>,
         },
         {
-            title: 'Team Email',
+            title: 'TEAM EMAIL',
             dataIndex: 'transgroup_email',
             key: 'transgroup_email',
             render: text => <p>{text}</p>,
@@ -31,7 +31,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
         //     render: text => <a>{text} member(s)</a>
         // },
         {
-            title: 'Operation',
+            title: 'OPERATION',
             key: 'operation',
             fixed: 'right',
             width: '8%',

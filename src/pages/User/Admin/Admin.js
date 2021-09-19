@@ -84,6 +84,7 @@ function Admin({
                 <Dashboard
                     mangas={mangas}
                     users={users}
+                    admins={admins}
                     transGrs={transGrs}
 
                     allReports={allReports}

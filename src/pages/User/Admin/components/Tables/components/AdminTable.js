@@ -6,39 +6,44 @@ import { Table, Col, Typography } from 'antd';
 import { Avatar } from 'antd';
 
 
-export default function AdminTable({admins}) {
+export default function AdminTable({ admins }) {
 
     const columns = [
         {
-            title: 'Avatar',
+            width: '6%',
+            fixed: 'left',
+            title: 'AVATAR',
             dataIndex: 'user_avatar',
             key: 'user_avatar',
             render: src => <Avatar size={30} src={src} />,
         },
         {
-            title: 'Name',
+            title: 'NAME',
             dataIndex: 'user_name',
+            width: '8%',
             key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            title: 'Email',
-            dataIndex: 'user_email',
-            key: 'user_email',
-            className: "email-col"
-        },
-        {
-            title: 'Role',
+            width: '8%',
+            title: 'ROLE',
             dataIndex: 'user_isAdmin',
             key: 'user_isAdmin',
             render: () => <p>Admin</p>
         },
+        {
+            fixed: 'right',
+            width: '25%',
+            title: 'EMAIL',
+            dataIndex: 'user_email',
+            key: 'user_email',
+            className: "email-col"
+        },
     ];
 
     return (
-        <Col  xxl={14} xs={23} sm={20} className="table-admin">
-            <Typography.Title level={3}>Administrators</Typography.Title>
+        <Col xxl={14} xs={23} sm={20} className="table-admin">
             <Table
                 className="admin-table"
                 columns={columns}

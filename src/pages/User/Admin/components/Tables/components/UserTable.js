@@ -14,7 +14,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
 
     const columns = [
         {
-            title: 'Avatar',
+            title: 'AVATAR',
             dataIndex: 'user_avatar',
             key: 'user_avatar',
             width:"6%",
@@ -22,26 +22,26 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             render: src => <Avatar size={30} src={src} />,
         },
         {
-            title: 'Name',
+            title: 'NAME',
             dataIndex: 'user_name',
             key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            title: 'Email',
+            title: 'EMAIL',
             dataIndex: 'user_email',
             key: 'user_email',
             className: "email-col"
         },
         {
-            title: 'Verification',
+            title: 'VERTIFICATION',
             dataIndex: 'user_isVerified',
             key: 'user_isVerified',
             render: isVerified => isVerified ? <p>Verified</p> : <p>Unverified</p>
         },
         {
-            title: 'Operation',
+            title: 'OPERATION',
             key: 'operation',
             fixed: 'right',
             width: '8%',

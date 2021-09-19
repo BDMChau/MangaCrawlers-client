@@ -27,7 +27,7 @@ const DashboardChart01 = ({ allReports }) => {
         xField: 'month',
         yField: 'values',
         seriesField: 'name',
-        color: ['#569D6F', '#A35DA2', '#698BBF'],
+        color: ['#569D6F', '#A35DA2', '#698BBF', "#8BBDC2"],
         yAxis: {
             label: {
                 formatter: function formatter(v) {

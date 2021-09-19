@@ -1,50 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from '@ant-design/charts';
 
-const DashbroadChart02 = () => {
-    var data = [
-        {
-            type: '分类一',
-            value: 27,
-        },
-        {
-            type: '分类二',
-            value: 25,
-        },
-        {
-            type: '分类三',
-            value: 18,
-        },
-        {
-            type: '分类四',
-            value: 15,
-        },
-        {
-            type: '分类五',
-            value: 10,
-        },
-        {
-            type: '其他',
-            value: 5,
-        },
-    ];
-    var config = {
+const DashbroadChart02 = ({ mangas, users, transGrs }) => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const totalMangas = mangas.length;
+        const totalUsers = users.length;
+        const totalTransGrs = transGrs.length;
+
+        const newArr = [
+            {
+                name: "Users",
+                value: totalUsers
+            },
+            {
+                name: "Manga Series",
+                value: totalMangas
+            },
+            {
+                name: "Translation Teams",
+                value: totalTransGrs
+            },
+            {
+                name: "Post on Forum",
+                value: totalUsers
+            },
+        ]
+
+        setData(newArr)
+    }, []);
+
+
+    const config = {
         appendPadding: 10,
+        width: 450,
+        autoFit:true,
+        color: ['#72ad87', '#F797D6', '#698BBF', "#8BBDC2"],
+        theme: {
+            styleSheet: {
+                backgroundColor: 'white',
+            }
+        },
         data: data,
         angleField: 'value',
-        colorField: 'type',
-        radius: 1,
-        innerRadius: 0.6,
+        colorField: 'name',
+        innerRadius: 0.5,
         label: {
             type: 'inner',
             offset: '-50%',
-            content: '{value}',
             style: {
                 textAlign: 'center',
                 fontSize: 14,
             },
+            content: (_ref) => {
+                const percent = _ref.percent;
+                return ''.concat((percent * 100).toFixed(0), '%');
+            }
         },
-        interactions: [{ type: 'element-selected' }, { type: 'element-active' }],
         statistic: {
             title: false,
             content: {
@@ -52,12 +65,17 @@ const DashbroadChart02 = () => {
                     whiteSpace: 'pre-wrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
+                    color: "#727272"
                 },
-                content: 'AntV\nG2Plot',
+                content: "2021",
             },
         },
     };
-    return <Pie {...config} />;
+    return (
+        <div className="dashbroadchart02">
+            <Pie {...config} />
+        </div>
+    );
 };
 
 export default DashbroadChart02;

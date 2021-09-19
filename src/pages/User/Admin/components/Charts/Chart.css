@@ -124,6 +124,15 @@
   transition: 0.3s;
 }
 
-.dashbroadchart01:hover {
+.dashbroadchart02{
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  transition: 0.3s;
+}
+
+
+.dashbroadchart01:hover, 
+.dashbroadchart02:hover{
   box-shadow: 0px 0px 5px 0 #b3b3b4;
 }

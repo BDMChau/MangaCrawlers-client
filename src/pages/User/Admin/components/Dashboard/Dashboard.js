@@ -8,10 +8,12 @@ import mangaIcon from "../../../../../assets/img/comic.svg";
 import postIcon from "../../../../../assets/img/post.svg";
 import DashboardChart01 from '../Charts/components/DashboardChart01';
 import DashboardChart02 from '../Charts/components/DashboardChart02';
+import AdminTable from '../Tables/components/AdminTable';
 
 function Dashboard({
     mangas,
     users,
+    admins,
     transGrs,
 
     allReports,
@@ -77,14 +79,24 @@ function Dashboard({
                 </div>
 
                 <div className="dash-section03">
-                    <DashboardChart02 allReports={allReports} />
+                    <DashboardChart02
+                        mangas={mangas}
+                        users={users}
+                        transGrs={transGrs}
+                    />
 
-                    <div className="weather">
+                    <AdminTable admins={admins} />
+
+                    <div className="stuffs">
                         <div style={{
                             display: "flex",
                             justifyContent: "space-between",
+                            alignItems: "center",
+                            height: "200px",
                             padding: "10px",
-                            width: "100%"
+                            borderRadius: "3px",
+                            width: "100%",
+                            background: "#A5D4FC"
                         }}
                         >
                             <div style={{ textAlign: "center" }}>
@@ -95,6 +107,28 @@ function Dashboard({
                             <div style={{ textAlign: "center" }}>
                                 <Typography.Title level={4} style={{ color: "#ffffffb3" }}>{Object.keys(weatherStatus).length ? weatherStatus.main.temp : ""}°C</Typography.Title>
                                 <Spin size="default" />
+                            </div>
+                        </div>
+
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            height: "200px",
+                            padding: "10px",
+                            borderRadius: "3px",
+                            width: "100%",
+                            background: "#F797D6",
+                            marginTop: "15px"
+                        }}
+                        >
+                            <div style={{ textAlign: "center" }}>
+                                <Typography.Title level={5} style={{ color: "#ffffffb3" }}>
+                                    I'm impatient, a little insecure, I always make mistakes, out of control at times. But if you can't handle, that's not your fault...
+                                </Typography.Title>
+                                <Typography.Title level={5} style={{ color: "#ffffffb3", float: "right", marginRight: "40px" }}>
+                                    -???-
+                                </Typography.Title>
                             </div>
                         </div>
                     </div>
