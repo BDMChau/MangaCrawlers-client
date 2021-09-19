@@ -19,7 +19,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             fixed: 'left',
             render: text => <Image
                 className="image-thumb-admin"
-                style={{ width: "30px", borderRadius: "2px" }}
+                style={{ width: "40px", borderRadius: "2px" }}
                 src={text}
                 alt={text}
             />

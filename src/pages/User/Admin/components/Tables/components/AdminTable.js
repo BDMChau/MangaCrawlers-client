@@ -15,7 +15,7 @@ export default function AdminTable({ admins }) {
             title: 'AVATAR',
             dataIndex: 'user_avatar',
             key: 'user_avatar',
-            render: src => <Avatar size={30} src={src} />,
+            render: src => <Avatar size={45} src={src} />,
         },
         {
             title: 'NAME',
@@ -30,11 +30,11 @@ export default function AdminTable({ admins }) {
             title: 'ROLE',
             dataIndex: 'user_isAdmin',
             key: 'user_isAdmin',
-            render: () => <p>Admin</p>
+            render: () => <p style={{ marginTop: "12px" }}>Admin</p>
         },
         {
             fixed: 'right',
-            width: '25%',
+            width: '8%',
             title: 'EMAIL',
             dataIndex: 'user_email',
             key: 'user_email',

@@ -19,7 +19,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             key: 'user_avatar',
             width:"6%",
             fixed: 'left',
-            render: src => <Avatar size={30} src={src} />,
+            render: src => <Avatar size={40} src={src} />,
         },
         {
             title: 'NAME',

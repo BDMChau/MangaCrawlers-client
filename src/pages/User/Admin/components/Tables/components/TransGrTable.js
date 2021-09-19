@@ -19,6 +19,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
             render: text => <p>{text}</p>,
         },
         {
+            width:"8%",
             title: 'TEAM EMAIL',
             dataIndex: 'transgroup_email',
             key: 'transgroup_email',

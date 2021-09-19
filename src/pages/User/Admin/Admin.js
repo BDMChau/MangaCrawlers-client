@@ -9,12 +9,11 @@ import { message_error } from "../../../components/notifications/message";
 import { useSelector } from 'react-redux';
 import { enquireScreen, unenquireScreen } from 'enquire-js'
 
-const { TabPane } = Tabs;
-
 import { Content } from 'antd/lib/layout/layout';
 import SiderMenu from './components/SiderMenu/SiderMenu';
 import Dashboard from './components/Dashboard/Dashboard';
 import Tables from './components/Tables/Tables';
+import Charts from './components/Charts/Charts';
 
 function Admin({
     users,
@@ -114,7 +113,15 @@ function Admin({
 
                 : tabSelected === "charts"
                     ? <div>
+                        <Charts
+                           reportUsers={reportUsers}
+                           reportManga={reportManga}
+                           reportTransGr={reportTransGr}
 
+                            allReports={allReports}
+
+                            isMobile={isMobile}
+                        />
                     </div>
                     : ""
     )
