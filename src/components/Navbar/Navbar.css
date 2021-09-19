@@ -88,12 +88,11 @@
 
 .leftMenu {
   float: left;
-  width: inherit;
+  width: 240px;
 }
 
 .rightMenu {
   float: right;
-  width: fit-content;
 }
 
 .barsMenu {

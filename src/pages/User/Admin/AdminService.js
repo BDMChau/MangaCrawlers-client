@@ -32,12 +32,11 @@ function AdminService() {
 
 
     useEffect(() => {
-        // if (!query.get("v")) {
-        //     history.push(`/admin?v=user`)
-        // } else {
-        //     setTabSelected(query.get("v"))
-        // }
-
+        if (!query.get("v")) {
+            history.push(`/admin?v=dashboard`)
+        } else {
+            setTabSelected(query.get("v"))
+        }
     }, [])
 
 
