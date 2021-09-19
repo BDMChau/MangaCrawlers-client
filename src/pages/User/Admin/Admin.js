@@ -1,15 +1,9 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Admin.css"
 import "./components/Tables/Tables.css"
 import "./components/Charts/Chart.css"
-import { Row, Typography, Tabs, Layout, Drawer, Breadcrumb, Menu, Spin } from 'antd';
-import UserTable from './components/Tables/components/UserTable';
-import AdminTable from './components/Tables/components/AdminTable';
-import UserChart from './components/Charts/components/UserChart';
-import MangaTable from './components/Tables/components/MangaTable';
-import MangaChart from './components/Charts/components/MangaChart';
-import TransGrTable from './components/Tables/components/TransGrTable';
-import TransGrChart from './components/Charts/components/TransGrChart';
+import { Tabs, Layout, Drawer, Spin } from 'antd';
+
 import { useHistory } from 'react-router';
 import { message_error } from "../../../components/notifications/message";
 import { useSelector } from 'react-redux';
@@ -20,6 +14,7 @@ const { TabPane } = Tabs;
 import { Content } from 'antd/lib/layout/layout';
 import SiderMenu from './components/SiderMenu/SiderMenu';
 import Dashboard from './components/Dashboard/Dashboard';
+import Tables from './components/Tables/Tables';
 
 function Admin({
     users,
@@ -41,7 +36,8 @@ function Admin({
     handleRemoveTransGroup,
     isLoading,
 
-    tabSelected
+    tabSelected,
+    setTabSelected
 
 }) {
     const userState = useSelector((state) => state.userState);
@@ -68,7 +64,7 @@ function Admin({
         }
     }, [users, mangas, transGrs])
 
- 
+
     useEffect(() => {
         if (userState[0]) {
             if (!userState[0].user_isAdmin) {
@@ -82,22 +78,50 @@ function Admin({
     }, [userState[0]])
 
 
-    const SiteLayout = ({ isMobile }) => (
-        <Layout className="site-layout">
-            <Content className="admin-content">
-                <div style={{ padding: '0 10px' }}>
-                    <Dashboard
+    const renderBodySiteLayout = (isMobile) => (
+        tabSelected === "dashboard"
+            ? <div style={{ padding: '0 10px' }}>
+                <Dashboard
+                    mangas={mangas}
+                    users={users}
+                    transGrs={transGrs}
+
+                    allReports={allReports}
+
+                    weatherStatus={weatherStatus}
+
+                    isMobile={isMobile}
+                />
+            </div>
+            : tabSelected === "tables"
+                ? <div>
+                    <Tables
                         mangas={mangas}
                         users={users}
                         transGrs={transGrs}
 
-                        allReports={allReports}
 
-                        weatherStatus={weatherStatus}
+                        handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
+                        handleRemoveUser={(userId) => handleRemoveUser(userId)}
+                        handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+                        handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
+                        isLoading={isLoading}
 
                         isMobile={isMobile}
                     />
                 </div>
+
+                : tabSelected === "charts"
+                    ? <div>
+
+                    </div>
+                    : ""
+    )
+
+    const SiteLayout = ({ isMobile }) => (
+        <Layout className="site-layout">
+            <Content className="admin-content">
+                {renderBodySiteLayout(isMobile)}
             </Content>
         </Layout>
     )
@@ -131,7 +155,7 @@ function Admin({
                 </Layout>
             ) : (
                 <Layout>
-                    <SiderMenu collapsed={collapsed} setCollapsed={setCollapsed} ></SiderMenu>
+                    <SiderMenu collapsed={collapsed} setCollapsed={setCollapsed} tabSelected={tabSelected} setTabSelected={setTabSelected} ></SiderMenu>
 
                     {isGetDataDone
                         ? <SiteLayout isMobile={isMobile} />

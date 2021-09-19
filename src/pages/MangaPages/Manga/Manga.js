@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Manga.css"
 import { NavLink, useHistory } from 'react-router-dom';
-import { Col, Row, Button, Typography, Tag, Tooltip, Image } from 'antd';
+import { Col, Row, Button, Typography, Tag, Tooltip, Image, Input } from 'antd';
 import ListSide from '../../../components/List/ListSide/ListSide';
 import ListChapters from '../../../components/List/ListChapters/ListChapters';
 import Rating from '../../../components/Rating/Rating';
@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
 import redirectURI from 'helpers/redirectURI';
+import { EditOutlined } from '@ant-design/icons';
 
 
 function Manga({
@@ -45,6 +46,8 @@ function Manga({
     const [chapterId01, setChapterId01] = useState("");
     const [chapterName01, setChapterName01] = useState("");
 
+    const [isModify, setIsModify] = useState(false);
+
 
     const goToSearchMangeWithGenrePage = (id) => {
         history.push(`/manga/genre/tag?v=${id}`);
@@ -78,14 +81,23 @@ function Manga({
                         </Col>
                         <Col md={13} lg={12} sm={12} xs={20} xxl={15} className="title">
                             <div className="name">
-                                <Typography.Title level={3}>{manga.manga_name}</Typography.Title>
+                                {isModify
+                                    ? <Input className="input-modify" defaultValue={manga.manga_name} />
+                                    : <Typography.Title level={3}>{manga.manga_name}</Typography.Title>
+
+                                }
                             </div>
 
                             <div className="author">
                                 Author:
-                                <NavLink to="#" className="link" key={manga.author_id}>
-                                    {manga.author_name ? manga.author_name : " Unknown"}
-                                </NavLink>
+
+                                {isModify
+                                    ? <Input className="input-modify" style={{ marginLeft: "5px" }} defaultValue={manga.author_name ? manga.author_name : " Unknown"} />
+                                    : <NavLink to="#" className="link" key={manga.author_id}>
+                                        {manga.author_name ? manga.author_name : " Unknown"}
+                                    </NavLink>
+
+                                }
                             </div>
                             <div className="trans_group">
                                 Translated by:
@@ -155,6 +167,21 @@ function Manga({
                                 >
                                     {isFollowed ? "Remove from Library" : "Add to Library"}
                                 </Button>
+
+                                {userState[0].user_isAdmin ?
+                                    <Button
+                                        className="btn-modify"
+                                        icon={<EditOutlined style={{ fontSize: "20px" }} />}
+                                        loading={isLoadingFollow}
+                                        onClick={() =>
+                                            userState[0].user_isAdmin
+                                                ? setIsModify(!isModify)
+                                                : message_error("You are not an admin")
+                                        }
+                                    >
+                                    </Button>
+                                    : ""
+                                }
                             </div>
                         </Col>
 
@@ -177,6 +204,7 @@ function Manga({
                                 mangaId={manga.manga_id}
                                 mangaName={manga.manga_name}
                                 height={"400px"}
+                                isModify={isModify}
                             />
                         </Col>
 

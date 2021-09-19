@@ -48,7 +48,6 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
     return (
         <Col xxl={14} xs={23} sm={20} className="table-trans-gr">
             <div style={{ display: "flex" }}>
-                <Typography.Title level={3}>Translation Team</Typography.Title>
                 {
                     isLoading
                         ? <Button className="table-btn-loading" loading={isLoading}></Button>

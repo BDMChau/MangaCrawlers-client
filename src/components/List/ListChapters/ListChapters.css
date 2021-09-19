@@ -57,6 +57,11 @@
   background-color: #e2e6eb;
 }
 
+.list-chapter-item .input-modify{
+  height: 50px;
+  border-radius: 2px;
+  margin: 5px;
+}
 
 @media only screen and (min-width: 1024px) {
   .list-chapter-item {

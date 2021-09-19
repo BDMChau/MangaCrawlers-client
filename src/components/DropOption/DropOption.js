@@ -16,7 +16,6 @@ const DropOption = ({
                 placement="top"
                 title="Do you want to continue?"
                 onConfirm={item.funcAction}
-                onCancel={"cancel"}
                 okText="Confirm"
                 cancelText="Cancle"
             >
@@ -24,7 +23,7 @@ const DropOption = ({
             </Popconfirm>
 
             : <NavLink to={item.path ? item.path : "#"} key={i}>
-                <Menu.Item style={{ color: "#629EFF", cursor: "pointer", padding: "10px" }} key={item.key}>{item.name}</Menu.Item>
+                <Menu.Item icon={item.icon} style={{ color: "#629EFF", cursor: "pointer", padding: "10px" }} key={item.key}>{item.name}</Menu.Item>
             </NavLink>
     ))
 

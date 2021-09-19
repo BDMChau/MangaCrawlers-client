@@ -20,10 +20,10 @@
 }
 
 .table-user .user-table {
-  max-height: 670px;
-  height: fit-content;
+  max-height: 100vh;
   overflow: auto;
   background: var(--color-theme-02);
+  margin: 10px;
 }
 
 .table-user .user-table .ant-table-pagination.ant-pagination {
@@ -44,10 +44,10 @@
 }
 
 .table-manga .manga-table {
-  max-height: 650px;
-  height: fit-content;
+  max-height: 100vh;
   overflow: auto;
-  background-color: var(--color-theme-02);
+  background: var(--color-theme-02);
+  margin: 10px;
 }
 
 .table-manga .manga-table .ant-table-pagination.ant-pagination {
@@ -85,9 +85,10 @@
 }
 
 .table-trans-gr .trans-gr-table {
-  max-height: 650px;
+  max-height: 100vh;
   overflow: auto;
   background: var(--color-theme-02);
+  margin: 10px;
 }
 
 .admin-row1

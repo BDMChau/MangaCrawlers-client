@@ -31,6 +31,8 @@ const MangaSlice = createSlice({
         GET_ALL_GENRES_FAILED: (state, action) => {
             console.error(action.payload)
         },
+        ///////////////////
+
     }
 });
 

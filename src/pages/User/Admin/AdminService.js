@@ -1,11 +1,13 @@
 import React, { memo, useEffect, useState } from 'react'
 import Admin from './Admin'
 import Cookies from 'universal-cookie';
-import adminApi from '../../../api/apis/adminApi';
 import { message_success } from '../../../components/notifications/message';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import mangaApi from 'api/apis/mangaApi';
+import adminApi from 'api/apis/adminApi';
+import dayjs from 'dayjs';
 
 function AdminService() {
     const [users, setUsers] = useState([]);
@@ -21,7 +23,7 @@ function AdminService() {
 
     const [allReports, setAllReports] = useState([]);
 
-    const [tabSelected, setTabSelected] = useState(null);
+    const [tabSelected, setTabSelected] = useState("dashboard");
 
     const [isLoading, setIsLoading] = useState(false);
     const cookies = new Cookies();
@@ -32,12 +34,8 @@ function AdminService() {
 
 
     useEffect(() => {
-        if (!query.get("v")) {
-            history.push(`/admin?v=dashboard`)
-        } else {
-            setTabSelected(query.get("v"))
-        }
-    }, [])
+        history.push(`/admin?v=${tabSelected}`)
+    }, [tabSelected])
 
 
     useEffect(() => {
@@ -50,7 +48,7 @@ function AdminService() {
         getReportTransGr();
 
         getPosition();
-    }, [])
+    }, []);
 
 
     const getPosition = async () => {
@@ -64,7 +62,6 @@ function AdminService() {
             console.log(err)
         }
     }
-
 
     const getWeather = async (city) => {
         try {
@@ -117,7 +114,7 @@ function AdminService() {
                 return;
             }
 
-            console.log(response)
+            console.log("all mangas in admin ", response)
 
 
             const allMangas = response.content.mangas;
@@ -396,6 +393,7 @@ function AdminService() {
             isLoading={isLoading}
 
             tabSelected={tabSelected}
+            setTabSelected={setTabSelected}
         />
     )
 }

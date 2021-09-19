@@ -18,6 +18,10 @@ const mangaApi = {
         const uri = `/api/manga/getmangapage?manga_id=${params.manga_id}`;
         return axiosClient.get(uri);
     },
+    getChaptersOfManga: (params) => {
+        const uri = `/api/manga/getchaptersofmanga?manga_id=${params.manga_id}`;
+        return axiosClient.get(uri);
+    },
     getMangasFromGenre: (data) => {
         const uri = '/api/manga/findmangafromgenre'; // fix this to get method
         return axiosClient.post(uri, data);

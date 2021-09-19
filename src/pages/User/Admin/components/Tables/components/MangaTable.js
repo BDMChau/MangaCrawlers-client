@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../../Admin.css"
 import "../../../components/Charts/Chart.css"
 
 import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import redirectURI from 'helpers/redirectURI';
+
 
 export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
-
 
     const columns = [
         {
@@ -46,7 +47,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             title: 'Chapters',
             key: 'chapters_length',
             dataIndex: 'chapters_length',
-            render: text => <Typography.Text>{text} chapter(s)</Typography.Text>
+            render: (text, manga) => <a>{text} chapter(s)</a>
         },
         {
             title: 'Rating',
@@ -62,7 +63,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             render: (manga) => (
                 <DropOption
                     menuOptions={[
-                        { key: '1', name: `Preview`, icon: <EyeOutlined style={{ fontSize: "20px" }} />, path: `/manga/${manga.manga_id}` },
+                        { key: '1', name: `Preview`, icon: <EyeOutlined style={{ fontSize: "20px" }} />, path: redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name) },
                         { key: '2', name: `Delete`, icon: <DeleteOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleRemoveManga(manga.manga_id) },
                     ]}
                 />
@@ -73,7 +74,6 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
     return (
         <Col xxl={16} xs={23} sm={20} className="table-manga">
             <div style={{ display: "flex" }}>
-                <Typography.Title level={3}>Manga</Typography.Title>
                 {
                     isLoading
                         ? <Button className="table-btn-loading" loading={isLoading}></Button>
