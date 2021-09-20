@@ -38,6 +38,7 @@ function MangaService() {
     // edit data
     const [mangaId, setMangaId] = useState("");
     const [mangaName, setMangaName] = useState("");
+    const [authorId, setAuthorId] = useState("");
     const [authorName, setAuthorName] = useState("");
 
     
@@ -386,9 +387,10 @@ function MangaService() {
         const data = {
             manga_id: mangaId ? mangaId : 0,
             manga_name: mangaName,
+            author_id: authorId,
             author_name: authorName,
         };
-
+console.log(data)
         try {
             const response = await adminApi.editManga(token, data);
             if (response) {
@@ -454,6 +456,7 @@ function MangaService() {
 
                 setMangaId={setMangaId}
                 setMangaName={setMangaName}
+                setAuthorId={setAuthorId}
                 setAuthorName={setAuthorName}
 
                 editChapter={(chapterId, chapterName) => editChapter(chapterId, chapterName)}

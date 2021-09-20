@@ -41,6 +41,7 @@ function Manga({
 
     setMangaId,
     setMangaName,
+    setAuthorId,
     setAuthorName,
 
     editChapter,
@@ -74,10 +75,12 @@ function Manga({
     useEffect(() => {
         if (isModify === true) {
             setMangaId(manga.manga_id);
+            setAuthorId(manga.author_id);
 
         } else if (isModify === false) {
             setMangaId("");
             setMangaName("");
+            setAuthorId("");
             setAuthorName("");
         }
     }, [isModify])
