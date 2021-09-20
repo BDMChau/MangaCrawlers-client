@@ -69,6 +69,14 @@ const adminApi = {
             }
         })
     },
+    editChapter: (token, data) => {
+        const uri = '/api/admin/editchapter'
+        return axiosClient.put(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     removeChapter: (token, data) => {
         const uri = '/api/admin/deletechapter'
         return axiosClient.delete(uri, {

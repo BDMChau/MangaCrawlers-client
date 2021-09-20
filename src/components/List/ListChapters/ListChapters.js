@@ -6,9 +6,12 @@ import { NavLink } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 import { CloseOutlined } from '@ant-design/icons';
 
-function ListChapters({ chapters, mangaId, mangaName, height, isModify, setChapterId, setChapterName, removeChapter }) {
+function ListChapters({ chapters, mangaId, mangaName, height, isModifyChapter, setIsModifyChapter, editChapter, removeChapter }) {
     const [isLoading] = useState(false)
     const [isRemoving, setIsRemoving] = useState(false)
+
+    const [chapterId, setChapterId] = useState(0);
+    const [chapterName, setChapterName] = useState("");
 
 
     return (
@@ -24,15 +27,16 @@ function ListChapters({ chapters, mangaId, mangaName, height, isModify, setChapt
                             key={i}
                             title={chapter.chapter_name}
                             className="list-chapter-item" id={chapter.chapter_id}
-                            to={isRemoving ? "#" : redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
+                            to={isRemoving || !isModifyChapter ? "#" : redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
                         >
-                            {isModify
+                            {!isModifyChapter
                                 ? <>
                                     <Input
                                         className="input-modify"
                                         defaultValue={chapter.chapter_name}
                                         onClick={() => { setChapterId(chapter.chapter_id); setChapterName(chapter.chapter_name) }}
                                         onChange={(e) => setChapterName(e.target.value)}
+                                        onKeyUp={(e) => e.key === "Enter" ? editChapter(chapterId, chapterName) : ""}
                                     />
                                 </>
                                 : <>

@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
 import CommentInput from 'components/Comment/CommentInput/CommentInput';
 import redirectURI from 'helpers/redirectURI';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, CheckOutlined } from '@ant-design/icons';
 
 
 function Manga({
@@ -42,8 +42,8 @@ function Manga({
     setMangaId,
     setMangaName,
     setAuthorName,
-    setChapterId,
-    setChapterName,
+
+    editChapter,
     editManga,
 
     removeChapter,
@@ -55,7 +55,9 @@ function Manga({
     const [chapterId01, setChapterId01] = useState("");
     const [chapterName01, setChapterName01] = useState("");
 
-    const [isModify, setIsModify] = useState(false);
+    const [isModify, setIsModify] = useState(false); // modify manga
+
+    const [isModifyChapter, setIsModifyChapter] = useState(false);
 
 
     const goToSearchMangeWithGenrePage = (id) => {
@@ -71,23 +73,21 @@ function Manga({
 
     useEffect(() => {
         if (isModify === true) {
-                setMangaId(manga.manga_id);
-            
-        } else if(isModify === false){
+            setMangaId(manga.manga_id);
+
+        } else if (isModify === false) {
             setMangaId("");
             setMangaName("");
             setAuthorName("");
-            setChapterName("");
-            setChapterId("");
         }
     }, [isModify])
 
 
 
-        const handleModify = () => {
-            editManga();
-            setIsModify(false);
-        }
+    const handleModify = () => {
+        editManga();
+        setIsModify(false);
+    }
 
 
 
@@ -121,12 +121,12 @@ function Manga({
                                 Author:
 
                                 {isModify
-                                    ? <Input 
-                                    className="input-modify" 
-                                    style={{ marginLeft: "5px" }} 
-                                    defaultValue={manga.author_name ? manga.author_name : "Unknown"} 
-                                    onChange={(e) => setAuthorName(e.target.value)}
-                                     />
+                                    ? <Input
+                                        className="input-modify"
+                                        style={{ marginLeft: "5px" }}
+                                        defaultValue={manga.author_name ? manga.author_name : "Unknown"}
+                                        onChange={(e) => setAuthorName(e.target.value)}
+                                    />
 
                                     : <NavLink to="#" className="link" key={manga.author_id}>
                                         {manga.author_name ? manga.author_name : " Unknown"}
@@ -204,11 +204,10 @@ function Manga({
                                 </Button>
 
                                 {userState[0]?.user_isAdmin ?
-                                    <Tooltip title="Edit Manga">
+                                    <Tooltip title={isModify ? "Save" : "Edit Manga"}>
                                         <Button
-
                                             className="btn-modify"
-                                            icon={<EditOutlined style={{ fontSize: "20px" }} />}
+                                            icon={isModify ? <CheckOutlined style={{ fontSize: "20px" }} /> : <EditOutlined style={{ fontSize: "20px" }} />}
                                             loading={isLoadingFollow}
                                             onClick={() =>
                                                 isModify === true
@@ -242,10 +241,11 @@ function Manga({
                                 mangaId={manga.manga_id}
                                 mangaName={manga.manga_name}
                                 height={"400px"}
-                                isModify={isModify}
 
-                                setChapterId={setChapterId}
-                                setChapterName={setChapterName}
+                                isModifyChapter={isModifyChapter}
+                                setIsModifyChapter={setIsModifyChapter}
+
+                                editChapter={(chapterId, chapterName) => editChapter(chapterId, chapterName)}
 
                                 removeChapter={(chapterId) => removeChapter(chapterId)}
                             />

@@ -39,8 +39,8 @@ function MangaService() {
     const [mangaId, setMangaId] = useState("");
     const [mangaName, setMangaName] = useState("");
     const [authorName, setAuthorName] = useState("");
-    const [chapterId, setChapterId] = useState("");
-    const [chapterName, setChapterName] = useState("");
+
+    
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -362,7 +362,23 @@ function MangaService() {
 
 
     /////////// admin actions ///////////
+    const editChapter= async (chapterId, chapterName) => {
+        const data = {
+            chapter_id: chapterId ? chapterId : 0,
+            chapter_name: chapterName,
+        };
+        console.log(data)
 
+        try {
+            const response = await adminApi.editChapter(token, data);
+            if (response) {
+                console.log(response.content.manga)
+                message_success("Updated!");
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 
 
@@ -371,8 +387,6 @@ function MangaService() {
             manga_id: mangaId ? mangaId : 0,
             manga_name: mangaName,
             author_name: authorName,
-            chapter_id: chapterId ? chapterId : 0,
-            chapter_name: chapterName
         };
 
         try {
@@ -441,9 +455,8 @@ function MangaService() {
                 setMangaId={setMangaId}
                 setMangaName={setMangaName}
                 setAuthorName={setAuthorName}
-                setChapterId={setChapterId}
-                setChapterName={setChapterName}
 
+                editChapter={(chapterId, chapterName) => editChapter(chapterId, chapterName)}
                 editManga={() => editManga()}
                 removeChapter={(chapterId) => removeChapter(chapterId)}
             />
