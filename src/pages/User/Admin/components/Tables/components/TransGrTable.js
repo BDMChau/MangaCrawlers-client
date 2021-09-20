@@ -63,7 +63,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
                 simple
                 dataSource={transGrs}
                 pagination={{
-                    showTotal: () => `Total ${users.length} Translation Teams`,
+                    showTotal: () => `Total ${transGrs.length} Translation Teams`,
                 }}
                 rowKey={transgr => transgr.transgroup_id}
             />

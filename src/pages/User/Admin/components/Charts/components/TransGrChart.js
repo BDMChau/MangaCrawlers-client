@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import "../../Tables/Tables.css"
 import "../Chart.css"
 import "../../../Admin.css"
-import { Line } from '@ant-design/charts';
+import { Column, Line } from '@ant-design/charts';
 import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { TeamOutlined, CalendarOutlined } from '@ant-design/icons';
 
@@ -18,7 +18,7 @@ export default function TransGrChart({ reportTransGr }) {
         yField: 'Quantity',
         point: {
             size: 5,
-            shape: 'diamond',
+            shape: 'circle',
             style: {
                 fill: 'white',
                 stroke: '#2593fc',
@@ -53,6 +53,9 @@ export default function TransGrChart({ reportTransGr }) {
                     <TeamOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>
+
+            <Column className="chart" {...config} chartRef={chartRef} />
+            <div style={{ height: "80px" }} ></div>
             <Line className="chart" {...config} chartRef={chartRef} />
 
 

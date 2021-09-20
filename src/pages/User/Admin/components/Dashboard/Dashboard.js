@@ -88,7 +88,7 @@ function Dashboard({
                     <AdminTable admins={admins} />
 
                     <div className="stuffs">
-                        <div style={{
+                        <div className="item" style={{
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",
@@ -110,7 +110,7 @@ function Dashboard({
                             </div>
                         </div>
 
-                        <div style={{
+                        <div className="item" style={{
                             display: "flex",
                             justifyContent: "space-between",
                             alignItems: "center",

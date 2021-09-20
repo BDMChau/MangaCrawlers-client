@@ -168,7 +168,7 @@ function Manga({
                                     {isFollowed ? "Remove from Library" : "Add to Library"}
                                 </Button>
 
-                                {userState[0].user_isAdmin ?
+                                {userState[0]?.user_isAdmin ?
                                     <Tooltip title="Edit Manga">
                                         <Button
 

@@ -24,6 +24,12 @@
   overflow: auto;
   background: var(--color-theme-02);
   margin: 10px;
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  transition: 0.3s;
+}
+
+.table-user .user-table:hover {
+  box-shadow: 0px 0px 5px 0 #b3b3b4;
 }
 
 .table-user .user-table .ant-table-pagination.ant-pagination {
@@ -48,6 +54,12 @@
   overflow: auto;
   background: var(--color-theme-02);
   margin: 10px;
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  transition: 0.3s;
+}
+
+.table-manga .manga-table:hover {
+  box-shadow: 0px 0px 5px 0 #b3b3b4;
 }
 
 .table-manga .manga-table .ant-table-pagination.ant-pagination {
@@ -89,6 +101,12 @@
   overflow: auto;
   background: var(--color-theme-02);
   margin: 10px;
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  transition: 0.3s;
+}
+
+.table-trans-gr .trans-gr-table:hover {
+  box-shadow: 0px 0px 5px 0 #b3b3b4;
 }
 
 .admin-row1
@@ -110,7 +128,7 @@
 /*  */
 .table-admin {
   margin: 0 15px;
-  max-width: 635px;
+  max-width: 800px;
 }
 
 .table-admin .admin-table td.ant-table-cell,
@@ -123,9 +141,14 @@
 }
 
 .table-admin .admin-table {
-  max-height: 350px;
   overflow: auto;
   background: var(--color-theme-02);
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  transition: 0.3s;
+}
+
+.table-admin .admin-table:hover {
+  box-shadow: 0px 0px 5px 0 #b3b3b4;
 }
 
 .table-btn-loading,
