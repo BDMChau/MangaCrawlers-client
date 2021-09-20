@@ -390,7 +390,7 @@ function MangaService() {
             author_id: authorId,
             author_name: authorName,
         };
-console.log(data)
+
         try {
             const response = await adminApi.editManga(token, data);
             if (response) {
