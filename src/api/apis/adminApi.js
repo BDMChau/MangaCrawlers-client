@@ -61,6 +61,23 @@ const adminApi = {
             data
         })
     },
+    editManga: (token, data) => {
+        const uri = '/api/admin/editmanga'
+        return axiosClient.put(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    removeChapter: (token, data) => {
+        const uri = '/api/admin/deletechapter'
+        return axiosClient.delete(uri, {
+            headers: {
+                Authorization: token
+            },
+            data
+        })
+    },
     getReportUser: (token) => {
         const uri = '/api/admin/reportuser'
         return axiosClient.get(uri, {

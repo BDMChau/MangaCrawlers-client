@@ -10,9 +10,11 @@ import Cookies from 'universal-cookie';
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
+import adminApi from 'api/apis/adminApi';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
+
     const [manga, setManga] = useState({});
     const [genres, setGenres] = useState([]);
     const [chapters, setChapters] = useState([]);
@@ -32,6 +34,13 @@ function MangaService() {
     const [isEndCmts, setIsEndCmts] = useState(false);
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
+
+    // edit data
+    const [mangaId, setMangaId] = useState("");
+    const [mangaName, setMangaName] = useState("");
+    const [authorName, setAuthorName] = useState("");
+    const [chapterId, setChapterId] = useState("");
+    const [chapterName, setChapterName] = useState("");
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -97,7 +106,6 @@ function MangaService() {
             const mangaObj = response.content.manga;
 
             if (mangaObj.manga_name.replaceAll(regex.special_char, "") !== mangaNameParam) {
-                console.log(mangaNameParam)
                 return;
             }
 
@@ -267,6 +275,7 @@ function MangaService() {
         }
     }, [isErrorCmt])
 
+
     const addCmt = async (cmtContent) => {
         if (userState[0]) {
             if (cmtContent) {
@@ -314,6 +323,7 @@ function MangaService() {
         }
     }
 
+
     const getCmtsManga = async () => {
         const data = {
             manga_id: id,
@@ -350,6 +360,57 @@ function MangaService() {
         }
     }
 
+
+    /////////// admin actions ///////////
+
+
+
+
+    const editManga = async () => {
+        const data = {
+            manga_id: mangaId ? mangaId : 0,
+            manga_name: mangaName,
+            author_name: authorName,
+            chapter_id: chapterId ? chapterId : 0,
+            chapter_name: chapterName
+        };
+
+        try {
+            const response = await adminApi.editManga(token, data);
+            if (response) {
+                console.log(response.content.manga)
+                setManga(response.content.manga);
+                message_success("Updated!");
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    const removeChapter = async (chapterId) => {
+        const data = {
+            chapter_id: chapterId
+        };
+
+        try {
+            const response = await adminApi.removeChapter(token, data);
+            if (response) {
+                const chapterIdRemoved = response.content.chapter.chapter_id;
+                const chaptersAfterRemoved = chapters.filter(chapter => chapter.chapter_id !== chapterIdRemoved)
+
+                setChapters(chaptersAfterRemoved);
+                message_success("Removed this chapter!");
+            }
+
+            setChapterId({});
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+
     return (
         <div>
             <Manga
@@ -376,6 +437,15 @@ function MangaService() {
                 comments={comments}
                 getCmtsChapter={() => getCmtsChapter()}
                 isEndCmts={isEndCmts}
+
+                setMangaId={setMangaId}
+                setMangaName={setMangaName}
+                setAuthorName={setAuthorName}
+                setChapterId={setChapterId}
+                setChapterName={setChapterName}
+
+                editManga={() => editManga()}
+                removeChapter={(chapterId) => removeChapter(chapterId)}
             />
         </div>
     )

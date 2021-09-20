@@ -37,7 +37,16 @@ function Manga({
     isAdding,
     comments,
     getCmtsChapter,
-    isEndCmts
+    isEndCmts,
+
+    setMangaId,
+    setMangaName,
+    setAuthorName,
+    setChapterId,
+    setChapterName,
+    editManga,
+
+    removeChapter,
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -59,6 +68,26 @@ function Manga({
             setChapterId01(chapters[0].chapter_id)
         }
     }, [chapters])
+
+    useEffect(() => {
+        if (isModify === true) {
+                setMangaId(manga.manga_id);
+            
+        } else if(isModify === false){
+            setMangaId("");
+            setMangaName("");
+            setAuthorName("");
+            setChapterName("");
+            setChapterId("");
+        }
+    }, [isModify])
+
+
+
+        const handleModify = () => {
+            editManga();
+            setIsModify(false);
+        }
 
 
 
@@ -82,7 +111,7 @@ function Manga({
                         <Col md={13} lg={12} sm={12} xs={20} xxl={15} className="title">
                             <div className="name">
                                 {isModify
-                                    ? <Input className="input-modify" defaultValue={manga.manga_name} />
+                                    ? <Input className="input-modify" defaultValue={manga.manga_name} onChange={(e) => setMangaName(e.target.value)} />
                                     : <Typography.Title level={3}>{manga.manga_name}</Typography.Title>
 
                                 }
@@ -92,7 +121,13 @@ function Manga({
                                 Author:
 
                                 {isModify
-                                    ? <Input className="input-modify" style={{ marginLeft: "5px" }} defaultValue={manga.author_name ? manga.author_name : " Unknown"} />
+                                    ? <Input 
+                                    className="input-modify" 
+                                    style={{ marginLeft: "5px" }} 
+                                    defaultValue={manga.author_name ? manga.author_name : "Unknown"} 
+                                    onChange={(e) => setAuthorName(e.target.value)}
+                                     />
+
                                     : <NavLink to="#" className="link" key={manga.author_id}>
                                         {manga.author_name ? manga.author_name : " Unknown"}
                                     </NavLink>
@@ -176,9 +211,9 @@ function Manga({
                                             icon={<EditOutlined style={{ fontSize: "20px" }} />}
                                             loading={isLoadingFollow}
                                             onClick={() =>
-                                                userState[0].user_isAdmin
-                                                    ? setIsModify(!isModify)
-                                                    : message_error("You are not an admin")
+                                                isModify === true
+                                                    ? handleModify()
+                                                    : setIsModify(true)
                                             }
                                         >
                                         </Button>
@@ -208,6 +243,11 @@ function Manga({
                                 mangaName={manga.manga_name}
                                 height={"400px"}
                                 isModify={isModify}
+
+                                setChapterId={setChapterId}
+                                setChapterName={setChapterName}
+
+                                removeChapter={(chapterId) => removeChapter(chapterId)}
                             />
                         </Col>
 

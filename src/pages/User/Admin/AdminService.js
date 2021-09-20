@@ -30,7 +30,6 @@ function AdminService() {
     const token = cookies.get("token")
 
     const history = useHistory();
-    const query = new URLSearchParams(useLocation().search);
 
 
     useEffect(() => {
