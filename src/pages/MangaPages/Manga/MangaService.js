@@ -11,6 +11,7 @@ import { message_error, message_success } from '../../../components/notification
 import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/adminApi';
+import { notification_success } from 'components/notifications/notification';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -249,7 +250,6 @@ function MangaService() {
                 const response = await mangaApi.ratingManga(data, token);
 
                 const newRating = response.content.manga.stars
-                console.log(newRating)
                 setMangaStars(newRating)
 
             } catch (ex) {
@@ -373,8 +373,18 @@ function MangaService() {
         try {
             const response = await adminApi.editChapter(token, data);
             if (response) {
-                console.log(response.content.manga)
-                message_success("Updated!");
+                const chapterModified = response.content.chapter;
+                const chaptersCopied = [...chapters];
+
+                for (let i = 0; i < chaptersCopied.length; i++) {
+                    if(chaptersCopied[i].chapter_id === chapterModified.chapter_id){
+                        chaptersCopied[i] = chapterModified;
+                        break;
+                    }
+                }
+
+                setChapters(chaptersCopied);
+                notification_success("Updated!");
             }
         } catch (err) {
             console.log(err)
@@ -396,7 +406,7 @@ function MangaService() {
             if (response) {
                 console.log(response.content.manga)
                 setManga(response.content.manga);
-                message_success("Updated!");
+                notification_success("Updated!");
             }
         } catch (err) {
             console.log(err)
@@ -416,7 +426,7 @@ function MangaService() {
                 const chaptersAfterRemoved = chapters.filter(chapter => chapter.chapter_id !== chapterIdRemoved)
 
                 setChapters(chaptersAfterRemoved);
-                message_success("Removed this chapter!");
+                notification_success("Removed!");
             }
 
             setChapterId({});
