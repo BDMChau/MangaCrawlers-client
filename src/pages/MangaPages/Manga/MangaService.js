@@ -404,7 +404,6 @@ function MangaService() {
         try {
             const response = await adminApi.editManga(token, data);
             if (response) {
-                console.log(response.content.manga)
                 setManga(response.content.manga);
                 notification_success("Updated!");
             }
