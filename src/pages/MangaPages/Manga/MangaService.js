@@ -42,7 +42,7 @@ function MangaService() {
     const [authorId, setAuthorId] = useState("");
     const [authorName, setAuthorName] = useState("");
 
-    
+
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -363,12 +363,11 @@ function MangaService() {
 
 
     /////////// admin actions ///////////
-    const editChapter= async (chapterId, chapterName) => {
+    const editChapter = async (chapterId, chapterName) => {
         const data = {
             chapter_id: chapterId ? chapterId : 0,
             chapter_name: chapterName,
         };
-        console.log(data)
 
         try {
             const response = await adminApi.editChapter(token, data);
@@ -377,8 +376,8 @@ function MangaService() {
                 const chaptersCopied = [...chapters];
 
                 for (let i = 0; i < chaptersCopied.length; i++) {
-                    if(chaptersCopied[i].chapter_id === chapterModified.chapter_id){
-                        chaptersCopied[i] = chapterModified;
+                    if (chaptersCopied[i].chapter_id === chapterModified.chapter_id) {
+                        chaptersCopied[i].chapter_name = chapterModified.chapter_name;
                         break;
                     }
                 }
