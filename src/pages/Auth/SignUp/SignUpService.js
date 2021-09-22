@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import SignUp from './SignUp'
 
-import authApi from '../../../api/apis/authApi'
-import { errMsgResNotification } from '../../../api/security/ErrResCheking';
+import authApi from '../../../api/apis/MainServer/authApi'
+import { errMsgResNotification } from '../../../api/checking/ErrResCheking';
 
 import { message_success, message_warning } from '../../../components/notifications/message';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Manga from './Manga'
-import mangaApi from "../../../api/apis/mangaApi"
+import mangaApi from "../../../api/apis/MainServer/mangaApi"
 import dayjs from 'dayjs';
 import initial from 'lodash/initial';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -10,7 +10,7 @@ import Cookies from 'universal-cookie';
 import { message_error, message_success } from '../../../components/notifications/message';
 import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
-import adminApi from 'api/apis/adminApi';
+import adminApi from 'api/apis/MainServer/adminApi';
 import { notification_success } from 'components/notifications/notification';
 
 function MangaService() {

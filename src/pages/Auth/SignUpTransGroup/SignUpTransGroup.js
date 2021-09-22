@@ -7,7 +7,7 @@ import { Button, Modal, Form, Input, Checkbox, Popover, Tabs, Typography } from 
 import TextArea from 'antd/lib/input/TextArea';
 import rules from "../../../helpers/Rules";
 import { CheckOutlined } from "@ant-design/icons";
-import userApi from '../../../api/apis/userApi';
+import userApi from '../../../api/apis/MainServer/userApi';
 import { message_error, message_success } from '../../../components/notifications/message';
 import Cookies from 'universal-cookie';
 import { SET_TRANSGROUP_ID } from '../../../store/features/user/UserSlice';

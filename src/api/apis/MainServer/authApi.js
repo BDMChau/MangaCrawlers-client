@@ -1,4 +1,4 @@
-import { axiosClient } from '../axiosClients';
+import { axiosClient } from '../../axiosClients';
 
 
 const authApi = {

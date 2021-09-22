@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import authApi from '../../api/apis/authApi';
+import authApi from '../../api/apis/MainServer/authApi';
 
 export default function VerifyAccount() {
     const { token } = useParams();

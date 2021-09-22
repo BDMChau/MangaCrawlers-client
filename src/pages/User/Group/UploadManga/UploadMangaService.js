@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { message_success, message_warning } from '../../../../components/notifications/message';
 import dayjs from 'dayjs';
-import userApi from '../../../../api/apis/userApi';
+import userApi from '../../../../api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
 
 

@@ -9,7 +9,7 @@ import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/notifications/message';
-import CommentInput from 'components/Comment/CommentInput/CommentInput';
+import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
 import { EditOutlined, CheckOutlined } from '@ant-design/icons';
 
@@ -261,7 +261,7 @@ function Manga({
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
-                                    <CommentInput
+                                    <CommentContainter
                                         mangaId={manga.manga_id}
 
                                         setIsAddedCmt={setIsAddedCmt}

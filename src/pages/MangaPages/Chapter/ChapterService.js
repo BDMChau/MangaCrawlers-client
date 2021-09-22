@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
 import { message_error, message_success, message_warning } from '../../../components/notifications/message';
 
-import mangaApi from '../../../api/apis/mangaApi';
-import userApi from '../../../api/apis/userApi';
-import chapterApi from "../../../api/apis/chapterApi"
+import mangaApi from '../../../api/apis/MainServer/mangaApi';
+import userApi from '../../../api/apis/MainServer/userApi';
+import chapterApi from "../../../api/apis/MainServer/chapterApi"
 import { regex } from 'helpers/regex';
 
 

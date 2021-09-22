@@ -1,4 +1,4 @@
-import { secondAxiosClient, axiosClient } from '../axiosClients';
+import { secondAxiosClient, axiosClient } from '../../axiosClients';
 
 
 const botMusicApi = {

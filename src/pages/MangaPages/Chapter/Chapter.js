@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../../components/notifications/message';
 import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
-import CommentInput from 'components/Comment/CommentInput/CommentInput';
+import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
 
 
@@ -146,7 +146,7 @@ function Chapter({
 
 
             <Col span={22} xxl={16}>
-                <CommentInput
+                <CommentContainter
                     setIsAddedCmt={setIsAddedCmt}
                     isAddedCmt={isAddedCmt}
                     addCmt={(cmtContent) => addCmt(cmtContent)}

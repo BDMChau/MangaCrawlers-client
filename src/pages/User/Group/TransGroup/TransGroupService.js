@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import userApi from '../../../../api/apis/userApi';
+import userApi from '../../../../api/apis/MainServer/userApi';
 import TransGroup from './TransGroup'
 import Cookies from 'universal-cookie';
-import genreApi from '../../../../api/apis/genreApi';
+import genreApi from '../../../../api/apis/MainServer/genreApi';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';

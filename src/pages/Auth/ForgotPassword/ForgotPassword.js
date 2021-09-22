@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Typography, Form } from 'antd'
 import React, { useState } from 'react'
-import authApi from '../../../api/apis/authApi';
+import authApi from '../../../api/apis/MainServer/authApi';
 import { message_error, message_success } from '../../../components/notifications/message';
 import "./ForgotPassword.css"
 const { Title, Text } = Typography;

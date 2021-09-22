@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router';
-import mangaApi from '../../../api/apis/mangaApi';
+import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import MangaGenre from './MangaGenre'
 import arraysMethods from "../../../helpers/arrayMethods"
 

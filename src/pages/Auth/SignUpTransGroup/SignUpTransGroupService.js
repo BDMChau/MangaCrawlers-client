@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
-import userApi from '../../../api/apis/userApi';
+import userApi from '../../../api/apis/MainServer/userApi';
 import { message_success } from '../../../components/notifications/message';
 import { SET_TRANSGROUP_ID } from '../../../store/features/user/UserSlice';
 import SignUpTransGroup from './SignUpTransGroup';

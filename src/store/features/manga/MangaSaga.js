@@ -1,4 +1,4 @@
-import genreApi from 'api/apis/genreApi';
+import genreApi from 'api/apis/MainServer/genreApi';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { GET_ALL_GENRES, GET_ALL_GENRES_SUCCESS, GET_ALL_GENRES_FAILED } from './MangaSlice';
 

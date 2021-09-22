@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router';
 import UserPage from './UserPage'
 import Cookies from 'universal-cookie';
-import mangaApi from '../../../api/apis/mangaApi';
+import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
 

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
-import mangaApi from "../../api/apis/mangaApi"
+import mangaApi from "../../api/apis/MainServer/mangaApi"
 import Home from './Home'
 import dayjs from 'dayjs'
 import debounce from 'lodash/debounce'
-import authApi from '../../api/apis/authApi'
+import authApi from '../../api/apis/MainServer/authApi'
 import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';

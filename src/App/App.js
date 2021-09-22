@@ -3,7 +3,7 @@ import "./App.css";
 import 'antd/dist/antd.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import routes from '../components/routes/routes';
+import routes from './routes/routes';
 import LoadingPage from '../components/Loading/LoadingPage/LoadingPage';
 import ScrollTopBtn from '../components/Button/ScrollTopBtn/ScrollTopBtn';
 import FooterContainer from "../components/Footer/Footer";

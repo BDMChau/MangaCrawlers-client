@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./CommentInput.css";
+import "./CommentContainter.css";
 
 import CommentItems from '../CommentItems/CommentItems';
 
@@ -8,7 +8,7 @@ import { Button, Col, Form, Input } from 'antd'
 const { TextArea } = Input;
 
 
-export default function CommentInput({
+export default function CommentContainter({
     mangaId,
 
     addCmt,
@@ -28,7 +28,7 @@ export default function CommentInput({
             children: [
                 {
                     content: " cmt child 011_0111",
-                    children:[
+                    children: [
                         {
                             content: " cmt child 011_0111_01111111",
                         },
@@ -53,7 +53,7 @@ export default function CommentInput({
 
                 {
                     content: " cmt child 022_0222",
-                    children:[
+                    children: [
                         {
                             content: " cmt child 022_0222_01111111",
                         },
@@ -123,6 +123,7 @@ export default function CommentInput({
                 </Form.Item>
             </Form>
 
+            {/* render cmts */}
             <CommentItems
                 comments={comments}
                 getCmtsChapter={() => getCmtsChapter()}

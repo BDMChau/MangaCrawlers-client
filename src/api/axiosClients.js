@@ -1,12 +1,12 @@
 import axios from 'axios';
 import queryString from 'query-string';
 import endPoint from '../config/endPoint';
-import { errCodeResCheking, code2xxCheking } from './security/ErrResCheking';
+import { errCodeResCheking, code2xxCheking } from './checking/ErrResCheking';
 
 
 // Main server >> spring boot
 const axiosClient = axios.create({
-    baseURL: endPoint.local,
+    baseURL: endPoint.product,
     headers: {
     },
     paramsSerializer: params => {
