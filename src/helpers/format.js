@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 
 export const format = {
-    formatDate01: (element) => {
-        dayjs(element).format("MMM DD, YYYY");
+    formatDate01: (value) => {
+        dayjs(value).format("MMM DD, YYYY");
     },
-    formatDate02: (element) => {
-        dayjs(element).format("DD-MM-YYYY HH:mm:ss")
+    formatDate02: (value) => {
+        dayjs(value).format("DD-MM-YYYY HH:mm:ss")
     }
 }
