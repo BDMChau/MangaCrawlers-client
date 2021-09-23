@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import mangaApi from "../../api/apis/MainServer/mangaApi"
 import Home from './Home'
-import dayjs from 'dayjs'
 import debounce from 'lodash/debounce'
 import authApi from '../../api/apis/MainServer/authApi'
 import Cookies from 'universal-cookie';
@@ -9,6 +8,7 @@ import { message_success } from '../../components/notifications/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { sendMessageSocket, socket } from 'socket/socketClient'
+import { format } from 'helpers/format'
 
 function HomeService() {
     const userState = useSelector((state) => state.userState);
@@ -46,7 +46,7 @@ function HomeService() {
 
             response.content.data.forEach(manga => {
                 const chapterName = manga.chapter_name;
-                const createdAtChapterFormated = dayjs(manga.createdAt).format("MMM DD, YYYY"); //createdAt is milisecond
+                const createdAtChapterFormated = format.formatDate01(manga.createdAt); //createdAt is milisecond
 
                 manga.createdAt = createdAtChapterFormated;
                 manga.chapter_name = chapterName.split(":")[0];

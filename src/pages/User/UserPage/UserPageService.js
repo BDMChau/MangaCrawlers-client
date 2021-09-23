@@ -3,8 +3,8 @@ import { useLocation } from 'react-router';
 import UserPage from './UserPage'
 import Cookies from 'universal-cookie';
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
-import dayjs from 'dayjs';
 import { useHistory } from 'react-router-dom';
+import { format } from 'helpers/format';
 
 export default function UserPageService() {
     const query = new URLSearchParams(useLocation().search);
@@ -36,7 +36,7 @@ export default function UserPageService() {
                 console.log(responseHistory)
                 if (responseHistory) {
                     responseHistory.content.mangas.forEach(manga => {
-                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
                     })
 
                     setHistoryMangas(responseHistory.content.mangas)
@@ -45,7 +45,7 @@ export default function UserPageService() {
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
                     responseFollowing.content.mangas.forEach(manga => {
-                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
                     })
 
                     setFollowingMangas(responseFollowing.content.mangas)
@@ -55,7 +55,7 @@ export default function UserPageService() {
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
                     responseFollowing.content.mangas.forEach(manga => {
-                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
                     })
 
                     setFollowingMangas(responseFollowing.content.mangas)
@@ -64,7 +64,7 @@ export default function UserPageService() {
                 const responseHistory = await mangaApi.getHistoryManga(token)
                 if (responseHistory) {
                     responseHistory.content.mangas.forEach(manga => {
-                        manga.createdAt = dayjs(manga.createdAt).format("DD-MM-YYYY"); //createdAt is milisecond;
+                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
                     })
 
                     setHistoryMangas(responseHistory.content.mangas)

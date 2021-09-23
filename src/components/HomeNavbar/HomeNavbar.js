@@ -4,6 +4,7 @@ import "./HomeNavbar.css"
 import { List, Typography } from 'antd';
 import TransitionAnimate from '../Animation/transition';
 import { NavLink } from 'react-router-dom';
+import redirectURI from 'helpers/redirectURI';
 
 
 function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
@@ -37,7 +38,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
                                 dataSource={searchResults}
                                 renderItem={manga => (
                                     <List.Item id={manga.manga_id} title={manga.manga_name}>
-                                        <NavLink to={`/manga/${manga.manga_id}`} className="searching-item">
+                                        <NavLink to={redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name)} className="searching-item">
                                             <img className="img" src={manga.thumbnail} alt="" />
                                             <div className="text">
                                                 <Typography.Text className="manga-name">{manga.manga_name}</Typography.Text>

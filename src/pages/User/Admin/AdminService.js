@@ -5,9 +5,7 @@ import { message_success } from '../../../components/notifications/message';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import mangaApi from 'api/apis/MainServer/mangaApi';
 import adminApi from 'api/apis/MainServer/adminApi';
-import dayjs from 'dayjs';
 
 function AdminService() {
     const [users, setUsers] = useState([]);

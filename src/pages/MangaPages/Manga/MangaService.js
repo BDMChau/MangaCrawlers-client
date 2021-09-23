@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Manga from './Manga'
 import mangaApi from "../../../api/apis/MainServer/mangaApi"
-import dayjs from 'dayjs';
 import initial from 'lodash/initial';
 import smoothscroll from 'smoothscroll-polyfill';
 import Cookies from 'universal-cookie';
@@ -12,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/MainServer/adminApi';
 import { notification_success } from 'components/notifications/notification';
+import { format } from 'helpers/format';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -83,14 +83,14 @@ function MangaService() {
         setFromRow(0);
 
         // if fromRow is 0, run getCmtsManga() below
-        if (fromRow === 0) {
+        if (fromRow === 0 && id) {
             getCmtsManga();
         }
     }, [id])
 
     useEffect(() => {
         // if fromRow is 0, this effect won't be invoked
-        getCmtsManga()
+        if(fromRow) getCmtsManga()
     }, [fromRow])
 
 
@@ -112,7 +112,7 @@ function MangaService() {
             }
 
             chapters.forEach(chapter => {
-                chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
+                chapter.createdAt = format.formatDate01(chapter.createdAt);
             });
 
             if (userState[0]) {
@@ -285,7 +285,7 @@ function MangaService() {
                 const newObjComment = {
                     "chapter_id": chapterid,
                     "chaptercmt_content": cmtContent,
-                    "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
+                    "chaptercmt_time": format.formatDate02(Date.now()),
                     "chapter_name": chapterInfo.chapter_name,
                     "user_avatar": userState[0].user_avatar,
                     "user_email": userState[0].user_email,
@@ -294,7 +294,7 @@ function MangaService() {
                     "is_error": false
                 }
 
-                setTimeWhenAddedCmt(dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"));
+                setTimeWhenAddedCmt(format.formatDate02(Date.now()));
                 setComments(prevCmts => [newObjComment, ...prevCmts])
                 setIsAdding(false);
                 setIsAddedCmt(true)
@@ -345,11 +345,11 @@ function MangaService() {
                 return;
             }
 
-
+console.log(response)
             if (response.content.comments.length) {
                 const comments = response.content.comments;
                 comments.forEach(comment => {
-                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("MMM DD, YYYY HH:mm:ss");
+                    comment.chaptercmt_time = format.formatDate02(Date.now());
                 });
                 setComments(comments)
                 setFromRow(fromRow + 11)

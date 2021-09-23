@@ -40,7 +40,8 @@
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "lint": "lint -- --fix"
+    "deploy": "npm run build && firebase deploy",
+    "lint": "eslint --fix --ext .js,.jsx ."
   },
   "eslintConfig": {
     "extends": [

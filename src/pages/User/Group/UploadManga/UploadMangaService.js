@@ -3,9 +3,9 @@ import UploadManga from './UploadManga'
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { message_success, message_warning } from '../../../../components/notifications/message';
-import dayjs from 'dayjs';
 import userApi from '../../../../api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
+import { format } from 'helpers/format';
 
 
 export default function UploadMangaService() {
@@ -70,7 +70,7 @@ export default function UploadMangaService() {
 
                 const chapters = response.content.chapters;
                 chapters.forEach(chapter => {
-                    chapter.createdAt = dayjs(chapter.createdAt).format("DD-MM-YYYY");
+                    chapter.createdAt = format.formatDate01(chapter.createdAt);
                 })
 
                 setChapters(chapters)

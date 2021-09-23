@@ -3,10 +3,10 @@ import userApi from '../../../../api/apis/MainServer/userApi';
 import TransGroup from './TransGroup'
 import Cookies from 'universal-cookie';
 import genreApi from '../../../../api/apis/MainServer/genreApi';
-import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { message_error, message_success, message_warning } from '../../../../components/notifications/message';
+import { format } from 'helpers/format';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
@@ -61,7 +61,7 @@ export default function TransGroupService() {
                 if (manga.createdAt === null) {
                     manga.createdAt = "";
                 } else {
-                    manga.createdAt = dayjs(manga.createdAt).format("HH:MM DD-MM-YYYY"); //createdAt is milisecond;
+                    manga.createdAt = format.formatDate02(manga.createdAt); //createdAt is milisecond;
                 }
             })
 
@@ -111,7 +111,7 @@ export default function TransGroupService() {
 
                 if(response02.content.msg){
                     const newManga = response02.content.manga;
-                    newManga.createdAt =  dayjs(newManga.createdAt).format("DD-MM-YYYY");
+                    newManga.createdAt =  format.formatDate01(newManga.createdAt);
                     setMangas([...mangas, newManga]);
                     
                     message_success("Upload new manga successfully!")

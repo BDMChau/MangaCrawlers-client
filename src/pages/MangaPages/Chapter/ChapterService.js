@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import Chapter from './Chapter'
-import dayjs from 'dayjs';
 import initial from 'lodash/initial';
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import userApi from '../../../api/apis/MainServer/userApi';
 import chapterApi from "../../../api/apis/MainServer/chapterApi"
 import { regex } from 'helpers/regex';
+import { format } from 'helpers/format';
 
 
 export default function ChapterService() {
@@ -115,7 +115,7 @@ export default function ChapterService() {
 
             const chapters = response.content.listChapter;
             chapters.forEach((chapter, i) => {
-                chapter.createdAt = dayjs(chapter.createdAt).format("MMM DD, YYYY");
+                chapter.createdAt = format.formatDate01(chapter.createdAt);
 
                 if (chapter.chapter_id == chapterId) {
                     setCurChapter(i)
@@ -266,7 +266,7 @@ export default function ChapterService() {
                 const newObjComment = {
                     "chapter_id": chapterid,
                     "chaptercmt_content": cmtContent,
-                    "chaptercmt_time": dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"),
+                    "chaptercmt_time": format.formatDate02(Date.now()),
                     "chapter_name": chapterInfo.chapter_name,
                     "user_avatar": userState[0].user_avatar,
                     "user_email": userState[0].user_email,
@@ -275,7 +275,7 @@ export default function ChapterService() {
                     "is_error": false
                 }
 
-                setTimeWhenAddedCmt(dayjs(Date.now()).format("DD-MM-YYYY HH:mm:ss"));
+                setTimeWhenAddedCmt(format.formatDate02(Date.now()));
                 setComments(prevCmts => [newObjComment, ...prevCmts])
                 setIsAdding(false);
                 setIsAddedCmt(true)
@@ -324,7 +324,7 @@ export default function ChapterService() {
             if (response.content.comments) {
                 const comments = response.content.comments;
                 comments.forEach(comment => {
-                    comment.chaptercmt_time = dayjs(comment.chaptercmt_time).format("DD-MM-YYYY HH:mm:ss");
+                    comment.chaptercmt_time = format.formatDate02(comment.chaptercmt_time);
                 });
 
                 setComments(prevCmts => [...prevCmts, ...comments])

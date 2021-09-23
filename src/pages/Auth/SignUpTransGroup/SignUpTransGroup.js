@@ -5,7 +5,7 @@ import { CLOSE_SIGN_UP_FORM, CLOSE_SIGN_IN_FORM } from '../../../store/features/
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { Button, Modal, Form, Input, Checkbox, Popover, Tabs, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import rules from "../../../helpers/Rules";
+import rules from "../../../utils/rules";
 import { CheckOutlined } from "@ant-design/icons";
 import userApi from '../../../api/apis/MainServer/userApi';
 import { message_error, message_success } from '../../../components/notifications/message';

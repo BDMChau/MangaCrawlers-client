@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Input, Typography, Dropdown, Menu, Popconfirm } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 
 
@@ -20,6 +21,7 @@ export default function Item({
     setAllowToModify,
     editChapter
 }) {
+    const userState = useSelector((state) => state.userState);
     const [isModifyChapter, setIsModifyChapter] = useState(false)
 
 
@@ -68,21 +70,25 @@ export default function Item({
 
                     <div>
                         <Typography.Text>{chapter.createdAt}</Typography.Text>
+                        {userState[0]?.user_isAdmin
+                            ? allowToModify
+                                ? <Dropdown
+                                    trigger={['click']}
+                                    overlay={menuDropDown}
+                                    onClick={() => setChapterId(chapter.chapter_id)}
+                                >
+                                    <DownOutlined
+                                        style={{ fontSize: "15px", padding: "5px", color: "#1890FF" }}
+                                    />
+                                </Dropdown>
+                                : <Dropdown trigger={['click']} disabled >
+                                    <DownOutlined style={{ fontSize: "15px", padding: "5px", color: "#afafaf" }} />
+                                </Dropdown>
 
-                        {allowToModify
-                            ? <Dropdown
-                                trigger={['click']}
-                                overlay={menuDropDown}
-                                onClick={() => setChapterId(chapter.chapter_id)}
-                            >
-                                <DownOutlined
-                                    style={{ fontSize: "15px", padding: "5px", color: "#1890FF" }}
-                                />
-                            </Dropdown>
-                            : <Dropdown trigger={['click']} disabled >
-                                <DownOutlined style={{ fontSize: "15px", padding: "5px", color: "#afafaf" }} />
-                            </Dropdown>
+                            : ""
+
                         }
+
                     </div>
                 </>
             }
