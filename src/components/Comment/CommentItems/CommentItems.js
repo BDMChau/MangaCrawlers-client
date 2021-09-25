@@ -67,9 +67,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
 
     const renderCmtBody = (comment) => (
         <div key={comment.manga_comment_id}>
-            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                {comment.manga_comment_content}
-            </Typography.Text>
+            <div style={{fontSize:"16px"}} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
 
             {renderCmtBottom(comment)}
 

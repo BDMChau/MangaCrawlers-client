@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import "../CommentContainter/CommentContainter.css"
 
-import { Button, Form, Image } from 'antd'
-import { CloseOutlined } from '@ant-design/icons'
+import { Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
+import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
 import ContentEditable from 'react-contenteditable'
 
 export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
+    const sticker_collection01 = require("../../../utils/sticker.json").stickers_collection01
+    const [stickers, setStickers] = useState(sticker_collection01);
+
     const [cmtContent, setCmtContent] = useState('');
     const [isAdding, setIsAdding] = useState(false);
 
     const inputRef = useRef(null);
+
+    // render vars
+    const [visible, setVisible] = useState(false);
 
 
     useEffect(() => {
@@ -31,6 +37,36 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
     }
 
 
+    const handleSetContent = (value, type) => {
+        if (type === "img") {
+            const content = cmtContent + `<img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
+
+            setCmtContent(content);
+        } else {
+            setCmtContent(value);
+        }
+    }
+
+
+
+    const propsUploadImg = {
+        name: 'file',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
     return (
         <Form className="form-input">
             <Form.Item style={{ marginBottom: "10px" }}>
@@ -40,23 +76,14 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                         className="input"
                         placeholder="Write a comment..."
                         html={cmtContent}
-                        onChange={(e) => setCmtContent(e.target.value)}
+                        onChange={(e) => handleSetContent(e.target.value, "text")}
                         tagName='div'
                     />
 
                     <div className="bottom-cont">
                         <div className="image-cont">
                             <Button
-                                style={{
-                                    width: "30px",
-                                    height: "30px",
-                                    borderRadius:"50%",
-                                    background:"transparent",
-                                    position: "absolute",
-                                    zIndex:"9",
-                                    color:"white",
-                                    border:"none"
-                                }}
+                                className="btn-remove-img"
                                 icon={<CloseOutlined />}
                             />
 
@@ -64,6 +91,38 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                         </div>
 
                         <div className="addons-cont">
+                            <Tooltip title="Attach a photo">
+                                <Upload {...propsUploadImg}>
+                                    <Button icon={<CameraOutlined />} />
+                                </Upload>
+                            </Tooltip>
+
+                            <Tooltip title="Insert Sticker and GIF">
+                                <Popover
+                                    trigger="click"
+                                    visible={visible}
+                                    onVisibleChange={(e) => setVisible(e)}
+                                    content={
+                                        stickers?.length
+                                            ? <div className="sticker-cont">
+                                                {stickers.map((sticker, i) => (
+                                                    <div
+                                                        key={i}
+                                                        style={{ cursor: "pointer", padding: "5px" }}
+                                                        title="Insert Sticker and GIF"
+                                                        onClick={() => handleSetContent(sticker, "img")}
+                                                    >
+                                                        <img style={{ borderRadius: "50%" }} src={sticker} alt="" width="40px" height="40px" />
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            : ""
+                                    }
+                                >
+                                    <Button icon={<SmileOutlined />} />
+                                </Popover>
+                            </Tooltip>
 
                         </div>
                     </div>
