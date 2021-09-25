@@ -34,7 +34,6 @@ function Manga({
     addCmt,
     isAddedCmt,
     setIsAddedCmt,
-    isAdding,
     comments,
     getCmtsChapter,
     isEndCmts,
@@ -267,7 +266,6 @@ function Manga({
                                         setIsAddedCmt={setIsAddedCmt}
                                         isAddedCmt={isAddedCmt}
                                         addCmt={(cmtContent) => addCmt(cmtContent)}
-                                        isAdding={isAdding}
                                         isEndCmts={isEndCmts}
 
                                         getCmtsChapter={getCmtsChapter}

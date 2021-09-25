@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import "../CommentItems/CommentItems.css"
 
 import { Tooltip } from 'antd'
-
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 
 
@@ -29,7 +29,7 @@ export default function ButtonLike() {
                 {action === 'liked'
                     ? <LikeFilled style={{ fontSize: "16px", color: "#1890FF", cursor: "pointer" }} />
                     : <LikeOutlined style={{ fontSize: "16px", color: "#C1C1C1", cursor: "pointer" }} />}
-                <span className="comment-likes">{likes}</span>
+                <span style={{marginLeft:"5px"}} className="comment-likes">{likes}</span>
             </span>
         </Tooltip>
     )

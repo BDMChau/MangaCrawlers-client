@@ -12,6 +12,7 @@ import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/MainServer/adminApi';
 import { notification_success } from 'components/notifications/notification';
 import { format } from 'helpers/format';
+import userApi from 'api/apis/MainServer/userApi';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -28,7 +29,6 @@ function MangaService() {
     const [mangaStars, setMangaStars] = useState(0);
 
     const [isAddedCmt, setIsAddedCmt] = useState(false);
-    const [isAdding, setIsAdding] = useState(false);
     const [comments, setComments] = useState([]);
     const [fromRow, setFromRow] = useState(0);
     const [amountRows] = useState(10);
@@ -41,8 +41,6 @@ function MangaService() {
     const [mangaName, setMangaName] = useState("");
     const [authorId, setAuthorId] = useState("");
     const [authorName, setAuthorName] = useState("");
-
-
 
     const cookies = new Cookies();
     const token = cookies.get("token")
@@ -66,11 +64,11 @@ function MangaService() {
 
 
     useEffect(() => {
-        smoothscroll.polyfill();
-        window.scroll({
-            top: 0,
-            behavior: "smooth"
-        });
+        // smoothscroll.polyfill();
+        // window.scroll({
+        //     top: 0,
+        //     behavior: "smooth"
+        // });
 
         getMangaData();
         getSuggestionList();
@@ -83,14 +81,14 @@ function MangaService() {
         setFromRow(0);
 
         // if fromRow is 0, run getCmtsManga() below
-        if (fromRow === 0 && id) {
+        if (fromRow === 0) {
             getCmtsManga();
         }
     }, [id])
 
     useEffect(() => {
         // if fromRow is 0, this effect won't be invoked
-        if(fromRow) getCmtsManga()
+        if (fromRow) getCmtsManga()
     }, [fromRow])
 
 
@@ -117,12 +115,12 @@ function MangaService() {
 
             if (userState[0]) {
                 const followingMangas = await getFollowingMangas();
-                followingMangas.forEach(folllowingManga => {
-                    if (folllowingManga.manga_id === mangaObj.manga_id) {
+                for (let i = 0; i < followingMangas.length; i++) {
+                    if (followingMangas[i].manga_id === mangaObj.manga_id) {
                         setIsFollowed(true);
+                        break;
                     }
-                })
-
+                }
             }
 
             setManga(mangaObj)
@@ -278,15 +276,20 @@ function MangaService() {
 
 
     const addCmt = async (cmtContent) => {
+        console.log(cmtContent)
         if (userState[0]) {
             if (cmtContent) {
-                setIsAdding(true);
-
                 const newObjComment = {
-                    "chapter_id": chapterid,
-                    "chaptercmt_content": cmtContent,
-                    "chaptercmt_time": format.formatDate02(Date.now()),
-                    "chapter_name": chapterInfo.chapter_name,
+                    // "chapter_id": chapterid,
+                    // "chaptercmt_content": cmtContent,
+                    // "chaptercmt_time": format.formatDate02(Date.now()),
+                    // "chapter_name": chapterInfo.chapter_name,
+                    "manga_id": mangaId,
+                    "chapter_id": null,
+                    "manga_comment_content": cmtContent.trim(),
+                    "image_url": null,
+                    "level": 0,
+                    "parent_id": null,
                     "user_avatar": userState[0].user_avatar,
                     "user_email": userState[0].user_email,
                     "user_id": userState[0].user_id,
@@ -296,27 +299,29 @@ function MangaService() {
 
                 setTimeWhenAddedCmt(format.formatDate02(Date.now()));
                 setComments(prevCmts => [newObjComment, ...prevCmts])
-                setIsAdding(false);
                 setIsAddedCmt(true)
 
 
                 const data = {
-                    chapter_id: chapterid,
-                    chaptercmt_content: cmtContent.trim()
+                    manga_id: mangaId.toString(),
+                    chapter_id: "",
+                    manga_comment_content: cmtContent.trim(),
+                    image_url: "",
+                    level: 0,
+                    parent_id: ""
                 }
 
                 try {
                     const response = await userApi.addCmt(token, data);
                     if (response.content.comment_info) {
                         // added
-                        return;
                     } else {
                         setIsErrorCmt(true);
-                        return;
                     }
                 } catch (ex) {
-                    console.log(ex)
+                    console.log(ex);
                 }
+                return;
             }
         } else {
             message_error("You have to login first!");
@@ -345,7 +350,7 @@ function MangaService() {
                 return;
             }
 
-console.log(response)
+
             if (response.content.comments.length) {
                 const comments = response.content.comments;
                 comments.forEach(comment => {
@@ -457,7 +462,6 @@ console.log(response)
                 addCmt={(cmtContent) => addCmt(cmtContent)}
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}
-                isAdding={isAdding}
                 comments={comments}
                 getCmtsChapter={() => getCmtsChapter()}
                 isEndCmts={isEndCmts}

@@ -1,8 +1,33 @@
+.comment-items::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
-.comment{
+.comment-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.comment-items::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.comment-items::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}
+
+.comment-items .comment-item {
+  padding: 0 10px 0 0;
+}
+
+.comment {
   background-color: #e0e4eb;
   border-radius: 5px;
   padding: 5px;
+}
+
+.comment .cmt-bottom {
+  margin-top: 10px;
 }
 
 .comment .cmt-bottom .chapter-name {
@@ -16,22 +41,32 @@
 }
 
 .comment .cmt-bottom .interact .reply {
-  color: #a4a5a6;
+  color: #87888a;
   margin-left: 10px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .comment .cmt-bottom .interact .reply:hover {
-  color: #848587;
+  color: #5c5d5e;
   margin-left: 10px;
 }
 
+.comment .cmt-avatar {
+  margin-left: 5px;
+}
+
+.ant-comment-inner {
+  margin: 0;
+  padding: 10px 0;
+}
+
 /* ///////////////////////////////// */
-.cmt-children{
+.cmt-children {
   background-color: #c8cfdb;
   border-radius: 5px;
-  margin-left: 20px;
+  margin-left: 0;
+  padding: 5px;
 }
 .cmt-children .cmt-bottom .chapter-name {
   margin-right: 10px;
@@ -55,14 +90,12 @@
   margin-left: 10px;
 }
 
-
-
 /* //////////////////////////////////// */
-.cmt-children02{
+.cmt-children02 {
   background-color: #e0e4eb;
   border-radius: 5px;
-  margin-left: 20px;
-  margin-bottom: 10px;
+  margin-left: 0;
+  padding: 5px;
 }
 .cmt-children02 .cmt-bottom .chapter-name {
   margin-right: 10px;
@@ -85,11 +118,6 @@
   color: #848587;
   margin-left: 10px;
 }
-
-
-
-
-
 
 /* //////////////////// */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {

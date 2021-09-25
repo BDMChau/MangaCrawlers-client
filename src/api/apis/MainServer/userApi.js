@@ -20,7 +20,7 @@ const userApi = {
         });
     },
     addCmt: (token, data) => {
-        const uri = '/api/user/addcommentchapter';
+        const uri = '/api/user/addcommentmanga';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token

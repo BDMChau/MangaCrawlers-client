@@ -116,7 +116,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                 </div>
 
                 <div className="name">
-                    <Input addonBefore="Nick Name" title="Nick Name" defaultValue={profile.user_name ? profile.user_name : "Anonymous"} />
+                    <Input addonBefore="Nick Name" title="Nick Name" defaultValue={profile.user_name ? profile.user_name : "Anonymous"} readOnly />
                 </div>
 
                 <div className="email">

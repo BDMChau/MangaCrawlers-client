@@ -4,8 +4,9 @@ import { NavLink } from 'react-router-dom';
 
 import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 
-import ButtonLike from './ButtonLike';
+import ButtonLike from '../features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
+import Reply from '../features/Reply';
 
 
 function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
@@ -20,6 +21,10 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
+
+    useEffect(() => {
+        console.log(comments)
+    }, [])
 
 
     const handleScroll = (e) => {
@@ -39,9 +44,7 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
         <div className="cmt-bottom">
             <div className="interact">
                 <ButtonLike />
-                <Typography.Text className="reply">
-                    Reply
-                </Typography.Text>
+                <Reply />
             </div>
             <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
                 {comment.chaptercmt_time}
@@ -62,7 +65,19 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
         </div>
     )
 
+    const renderCmtBody = (comment) => (
+        <div key={comment.manga_comment_id}>
+            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
+                {comment.manga_comment_content}
+            </Typography.Text>
 
+            {renderCmtBottom(comment)}
+
+            <Typography.Text style={{ color: "#FF4D4F" }}>
+                {comment.is_error ? "Error, cannot add this comment!" : ""}
+            </Typography.Text>
+        </div>
+    )
 
     const Items = ({ children }) => {
         return (
@@ -75,62 +90,65 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                         avatar={
                             <Avatar
                                 className="cmt-avatar"
+                                title={comment.user_name}
                                 style={{ cursor: "default" }}
                                 src={comment.user_avatar}
                                 alt="Avatar"
                             />
                         }
                         content={
-                            <div className="comment" key={i}>
-                                <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                                    {comment.content}
-                                </Typography.Text>
+                            <div className="comment">
+                                {renderCmtBody(comment)}
 
-                                {renderCmtBottom(comment)}
-
-                                <Typography.Text style={{ color: "#FF4D4F" }}>
-                                    {comment.is_error ? "Error, cannot add this comment!" : ""}
-                                </Typography.Text>
-
-
-                                <div className="cmt-children" style={{ padding: comment.children.length ? "5px" : 0 }} >
+                                <div style={{ padding: comment.comments_level_01?.length ? "5px" : 0 }} >
                                     {
-                                        comment.children.length
-                                            ? comment.children.map((cmt, i) => (
-                                                <div>
-                                                    <div>
-                                                        <Typography.Text style={{ color: cmt.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                                                            {cmt.content}
-                                                        </Typography.Text>
+                                        comment.comments_level_01?.length
+                                            ? comment.comments_level_01.map((cmt) => (
+                                                <Comment
+                                                    className="comment-item"
+                                                    key={i}
+                                                    author={<Typography.Text style={{ cursor: "default" }}>{cmt.user_name}</Typography.Text>}
+                                                    avatar={
+                                                        <Avatar
+                                                            className="cmt-avatar"
+                                                            style={{ cursor: "default" }}
+                                                            src={cmt.user_avatar}
+                                                            alt="Avatar"
+                                                        />
+                                                    }
+                                                    content={
+                                                        <div className="cmt-children">
+                                                            {renderCmtBody(cmt)}
 
-                                                        {renderCmtBottom(cmt)}
-
-                                                        <Typography.Text style={{ color: "#FF4D4F" }}>
-                                                            {comment.is_error ? "Error, cannot add this comment!" : ""}
-                                                        </Typography.Text>
-                                                    </div>
-
-
-                                                    <div className="cmt-children02" style={{ padding: cmt.children ? "5px" : 0 }}>
-                                                        {
-                                                            cmt.children
-                                                                ? cmt.children.map((cmt02, i) => (
-                                                                    <div>
-                                                                        <Typography.Text style={{ color: cmt02.is_error ? "#D7D8DB" : "black", fontSize: "16px" }} >
-                                                                            {cmt02.content}
-                                                                        </Typography.Text>
-
-                                                                        {renderCmtBottom(cmt02)}
-
-                                                                        <Typography.Text style={{ color: "#FF4D4F" }}>
-                                                                            {comment.is_error ? "Error, cannot add this comment!" : ""}
-                                                                        </Typography.Text>
-                                                                    </div>
-                                                                ))
-                                                                : ""
-                                                        }
-                                                    </div>
-                                                </div>
+                                                            <div style={{ padding: cmt.comments_level02?.length ? "5px" : 0 }}>
+                                                                {
+                                                                    cmt.comments_level02?.length
+                                                                        ? cmt.comments_level02.map((cmt02) => (
+                                                                            <Comment
+                                                                                className="comment-item"
+                                                                                key={i}
+                                                                                author={<Typography.Text style={{ cursor: "default" }}>{cmt02.user_name}</Typography.Text>}
+                                                                                avatar={
+                                                                                    <Avatar
+                                                                                        className="cmt-avatar"
+                                                                                        style={{ cursor: "default" }}
+                                                                                        src={cmt02.user_avatar}
+                                                                                        alt="Avatar"
+                                                                                    />
+                                                                                }
+                                                                                content={
+                                                                                    <div className="cmt-children02">
+                                                                                        {renderCmtBody(cmt02)}
+                                                                                    </div>
+                                                                                }
+                                                                            ></Comment>
+                                                                        ))
+                                                                        : ""
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                ></Comment>
                                             ))
                                             : ""
                                     }
