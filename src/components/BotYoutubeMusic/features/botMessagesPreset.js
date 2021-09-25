@@ -34,8 +34,8 @@ const botMessagesPreset = {
     queue: ({ items }) => (
         [
             "queue",
-            items.length ? items : { empty: "The queue is empty :(" },
-            items.length ? "This is the end of the queue!" : ""
+            items?.length ? items : { empty: "The queue is empty :(" },
+            items?.length ? "This is the end of the queue!" : ""
         ]
     ),
     clear: () => (

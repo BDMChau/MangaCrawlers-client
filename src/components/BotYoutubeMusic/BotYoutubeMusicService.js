@@ -193,7 +193,7 @@ function BotYoutubeMusicService() {
         setUserCommand(command);
 
         if (command === "/play ") {
-            if (itemsInQueue.length === 0) setPlayingPosition(0);
+            if (itemsInQueue?.length === 0) setPlayingPosition(0);
             playSong(value);
             return;
         }
@@ -610,7 +610,7 @@ function BotYoutubeMusicService() {
     }
 
 
-    const handleAddQueue = (videoId, videoTitle) => {
+    const handleAddQueue = async (videoId, videoTitle) => {
         const videosExisted = itemsInQueue.filter(item => item.video_id.includes(videoId));
         if (videosExisted.length) {
             replyForPlayCmd(videoId, videoTitle);
@@ -619,7 +619,7 @@ function BotYoutubeMusicService() {
 
         if (userState[0]) { //registered account
             const id = userState[0].user_id;
-            addToQueue(id, videoId, videoTitle);
+            await addToQueue(id, videoId, videoTitle);
 
         } else if (!userState[0] && sessionStorage.getItem("userId")) { // unregistered account
             const queueItems = sessionStorage.getItem("queue") ? JSON.parse(sessionStorage.getItem("queue")) : [];

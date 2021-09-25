@@ -4,10 +4,54 @@
 }
 
 .comments-form .form-input .input {
-  height: 50px;
-  resize: none;
+  border: 1px solid #D9D9D9;
+  background-color: white;
+  padding: 5px;
+  min-height: 50px;
+  max-height: 200px;
+  overflow-y: auto;
   margin-bottom: -8px;
+  font-size: 15px;
+  transition: 0.3s;
+  border-radius: 3px;
 }
+
+.comments-form .form-input .input:hover {
+  border: 1px solid #66B5F6;
+}
+
+.comments-form .form-input .input:focus {
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border: 1px solid #66B5F6;
+}
+
+.comments-form .form-input .input:focus-visible {
+  outline: none;
+}
+
+.comments-form .form-input .input::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+
+/* input for comment is a div with contentEditable="true" */
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(placeholder);
+  color:grey;
+  font-size: 15px;
+}
+
+.comments-form .bottom-cont{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comments-form .image-cont{
+  margin-top: 15px;
+  margin-left: 3px;
+}
+
 
 .comments-form .comment-items {
   overflow-y: auto;

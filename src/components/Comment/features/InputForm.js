@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import "../CommentItems/CommentItems.css"
+import React, { useState, useEffect, useRef } from 'react'
+import "../CommentContainter/CommentContainter.css"
 
-import { Button, Col, Form, Input } from 'antd'
+import { Button, Form, Image } from 'antd'
+import { CloseOutlined } from '@ant-design/icons'
 import ContentEditable from 'react-contenteditable'
 
-const { TextArea } = Input;
-
 export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
-    const [cmtContent, setCmtContent] = useState("");
+    const [cmtContent, setCmtContent] = useState('');
     const [isAdding, setIsAdding] = useState(false);
+
+    const inputRef = useRef(null);
 
 
     useEffect(() => {
@@ -32,18 +33,39 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
 
     return (
         <Form className="form-input">
-            <Form.Item>
+            <Form.Item style={{ marginBottom: "10px" }}>
                 <div>
-                    <TextArea
+                    <ContentEditable
+                        innerRef={inputRef}
                         className="input"
-                        type="text"
                         placeholder="Write a comment..."
-                        value={cmtContent}
+                        html={cmtContent}
                         onChange={(e) => setCmtContent(e.target.value)}
+                        tagName='div'
                     />
 
-                    <div className="bottom-container">
+                    <div className="bottom-cont">
+                        <div className="image-cont">
+                            <Button
+                                style={{
+                                    width: "30px",
+                                    height: "30px",
+                                    borderRadius:"50%",
+                                    background:"transparent",
+                                    position: "absolute",
+                                    zIndex:"9",
+                                    color:"white",
+                                    border:"none"
+                                }}
+                                icon={<CloseOutlined />}
+                            />
 
+                            <Image src={"https://gvn360.com/wp-content/uploads/2021/04/NIERRV1P2_SS_EV_KAINE.0.jpg"} alt="" width="150px" height="100px" style={{ borderRadius: "3px" }} />
+                        </div>
+
+                        <div className="addons-cont">
+
+                        </div>
                     </div>
                 </div>
             </Form.Item>

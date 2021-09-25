@@ -22,21 +22,25 @@
   margin: auto;
 }
 
-.rules .ant-typography{
-    display: block;
-    text-align: justify;
-    padding: 5px 0px;
+.rules .ant-typography {
+  display: block;
+  text-align: justify;
+  padding: 5px 0px;
 }
 
-.checkbox-accept-terms span.popover-checkbox{
+.checkbox-accept-terms span.popover-checkbox {
   transition: 0.3s;
   color: #63aef5;
 }
-.checkbox-accept-terms span.popover-checkbox:hover{
-  color: #1890FF;
+
+.checkbox-accept-terms span.popover-checkbox:hover {
+  color: #1890ff;
+}
+
+.ant-popover-inner-content {
+  border-radius: 3px;
 }
 
 /* this rule is in SignIn.css */
 /* .logo-signup-trans-group-signup-trans-group {
   } */
-  

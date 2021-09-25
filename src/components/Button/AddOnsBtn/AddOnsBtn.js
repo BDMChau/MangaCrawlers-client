@@ -33,7 +33,7 @@ export default function AddOnsBtn() {
                 overlayClassName="dropdown-items"
                 overlay={dropDownItems}
                 placement="topCenter"
-                trigger={['hover']}
+                trigger={['click']}
             >
 
                 <Button title="Add Ons">
