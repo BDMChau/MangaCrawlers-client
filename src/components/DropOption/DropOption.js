@@ -16,6 +16,7 @@ const DropOption = ({
                 placement="top"
                 title="Do you want to continue?"
                 onConfirm={item.funcAction}
+                okType="danger"
                 okText="Confirm"
                 cancelText="Cancle"
             >

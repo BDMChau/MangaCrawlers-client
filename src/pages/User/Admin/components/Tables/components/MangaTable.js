@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "../../../Admin.css"
 import "../../../components/Charts/Chart.css"
 
-import { Table, Space, Col, Typography, Popconfirm, Image, Button } from 'antd';
+import { Table, Col, Typography, Image, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import redirectURI from 'helpers/redirectURI';

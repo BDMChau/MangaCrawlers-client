@@ -156,19 +156,21 @@ function TopNav({ handleLogOut, genres }) {
     const RenderRight = () => (
         isUserSignIn
             ? <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
-                <Menu.Item key="notification">
-                    <Popover
-                        trigger="click"
-                        visible={visible}
-                        onVisibleChange={(e) => setVisible(e)}
-                        content={<h2>notification</h2>}
-                    >
+
+                <Popover
+                    trigger="click"
+                    visible={visible}
+                    onVisibleChange={(e) => setVisible(e)}
+                    content={<h2>notification</h2>}
+                >
+                    <Menu.Item key="notification">
                         <Badge count={1} >
                             <BellOutlined style={{ fontSize: "20px" }} />
                         </Badge>
-                    </Popover>
+                    </Menu.Item>
+                </Popover>
 
-                </Menu.Item>
+
 
                 <SubMenu
                     title="Account"

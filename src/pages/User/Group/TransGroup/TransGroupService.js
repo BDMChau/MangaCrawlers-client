@@ -3,13 +3,17 @@ import userApi from '../../../../api/apis/MainServer/userApi';
 import TransGroup from './TransGroup'
 import Cookies from 'universal-cookie';
 import genreApi from '../../../../api/apis/MainServer/genreApi';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_TRANSGROUP_ID } from "../../../../store/features/user/UserSlice"
 import { useHistory } from 'react-router';
 import { message_error, message_success, message_warning } from '../../../../components/notifications/message';
 import { format } from 'helpers/format';
+import { notification_error, notification_success } from 'components/notifications/notification';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
+    const dispatch = useDispatch()
+
     const [transGrInfo, setTransGrInfo] = useState({})
     const [mangas, setMangas] = useState([])
     const [users, setUsers] = useState([])
@@ -17,6 +21,9 @@ export default function TransGroupService() {
     const [isLoading, setIsLoading] = useState(false);
     const [IsLoadingDelete, setIsLoadingDelete] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
+
+    const [valToSearch, setValToSearch] = useState("");
+    const [usersSearchResult, setUsersSearchResult] = useState([]);
 
     const history = useHistory();
 
@@ -30,15 +37,16 @@ export default function TransGroupService() {
     // }
 
     useEffect(() => {
-        if (!userState[0]) {
+        if (!userState[0] || !userState[0].user_transgroup_id) {
             history.push("/");
-            message_warning("Please login first!")
+            message_warning("You haven't joined any team or signed in yet!")
             return;
         } else {
             getTransGroupInfo();
             getAllGenres();
         }
     }, [])
+
 
     const getTransGroupInfo = async () => {
         const data = {
@@ -47,8 +55,7 @@ export default function TransGroupService() {
 
         try {
             const response = await userApi.getTransGroupInfo(token, data);
-            console.log(response)
-
+        
             if (response.content.err) {
                 setIsLogin(true);
                 return;
@@ -93,6 +100,26 @@ export default function TransGroupService() {
 
     }
 
+    const deleteGroup = async (transgroupId) => {
+        const data = {
+            transgroup_id: transgroupId.toString()
+        }
+
+        try {
+            const response = await userApi.deleteGroup(token, data);
+            if (response.content.err) {
+                notification_error("Something wrong, please try again!");
+                return;
+            }
+
+            dispatch(SET_TRANSGROUP_ID(null));
+            notification_success("Your organization has been deleted!", 4);
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleCreateNewProject = async (fieldsData, img) => {
         setIsLoading(true);
         const data = {
@@ -109,11 +136,11 @@ export default function TransGroupService() {
 
                 const response02 = await userApi.addNewProjectThumbnail(token, formData);
 
-                if(response02.content.msg){
+                if (response02.content.msg) {
                     const newManga = response02.content.manga;
-                    newManga.createdAt =  format.formatDate01(newManga.createdAt);
+                    newManga.createdAt = format.formatDate01(newManga.createdAt);
                     setMangas([...mangas, newManga]);
-                    
+
                     message_success("Upload new manga successfully!")
                 }
 
@@ -139,7 +166,7 @@ export default function TransGroupService() {
             try {
                 const response = await userApi.removeManga(token, data);
 
-                if(response.content.msg){
+                if (response.content.msg) {
                     const mangaIdRemoved = response.content.manga_id
 
                     setMangas(mangas.filter(manga => manga.manga_id !== mangaIdRemoved));
@@ -155,6 +182,50 @@ export default function TransGroupService() {
     }
 
 
+    useEffect(() => {
+        if(valToSearch) searchUsers()
+        else setUsersSearchResult([]);
+    }, [valToSearch])
+
+
+    const searchUsers = async () => {
+        const data = {
+            value: valToSearch
+        }
+
+        try {
+            const response = await userApi.searchUsers(token, data);
+            if (response.content.err) {
+                setUsersSearchResult([]);
+                return;
+            }
+
+            setUsersSearchResult(response.content.data);
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const inviteUser = async (val) => {
+        const data = {
+            user_email: val
+        }
+
+        try {
+            // const response = await userApi.inviteUser(token, data);
+            // if (response.content.err) {
+            //     setUsersSearchResult([]);
+            //     return;
+            // }
+
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <TransGroup
             transGrInfo={transGrInfo}
@@ -166,8 +237,17 @@ export default function TransGroupService() {
             isLoading={isLoading}
             isLogin={isLogin}
 
+            deleteGroup={(transgroupId) => deleteGroup(transgroupId)}
+
             handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)}
             IsLoadingDelete={IsLoadingDelete}
+
+            setValToSearch={setValToSearch}
+            valToSearch={valToSearch}
+            setUsersSearchResult={setUsersSearchResult}
+            usersSearchResult={usersSearchResult}
+
+            inviteUser={(val) => inviteUser(val)}
         />
     )
 }

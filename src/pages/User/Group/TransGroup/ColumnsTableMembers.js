@@ -22,12 +22,17 @@ const columns = [
         className: "email-col"
     },
     {
+        title: 'Role',
+        dataIndex: 'user_role',
+        key: 'role',
+    },
+    {
         title: 'Action',
         key: 'action',
         render: (user, record) => (
                 <Space size="middle">
                     <Popconfirm
-                        title="Are you sure to delete this account?"
+                        title="Are you sure to remove this member?"
                         // onConfirm={() => handleRemoveUser(user.user_id)}
                         onCancel={"cancel"}
                         okText="Yes"

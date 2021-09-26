@@ -156,7 +156,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         <NavLink className="trans-group-btn" to="/user/projects">
                             <TeamOutlined style={{ fontSize: "19px" }} />
                             &#160;
-                            My Team
+                            My Organization
                         </NavLink>
                     </Button>
                     : ""
@@ -180,11 +180,11 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                 
                 {userState[0].user_transgroup_id
                     ?<div style={{pointerEvents:"none", opacity:"0.5"}} className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
-                        <p>Create your own translation group?</p>
+                        <p>Create your own organization?</p>
                     </div>
                     
                     :<div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
-                        <p>Create your own translation group?</p>
+                        <p>Create your own organization?</p>
                     </div>
                 }
 

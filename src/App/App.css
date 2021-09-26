@@ -35,3 +35,23 @@
 :root::-webkit-scrollbar-thumb:hover {
   background: RGB(150, 150, 150);
 }
+
+
+
+.ant-drawer-body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.ant-drawer-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-drawer-body::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.ant-drawer-body::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}

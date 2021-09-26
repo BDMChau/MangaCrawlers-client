@@ -52,6 +52,11 @@
   margin: 80px auto 0 auto;
 }
 
+.table-members .invite-user {
+  margin-left: 10px;
+  width: 200px;
+}
+
 .table-members .members-table table {
   border: 1px solid #f0f0f0;
   border-bottom: none;

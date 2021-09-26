@@ -4,7 +4,7 @@ import "../Tables.css"
 import "../../../components/Charts/Chart.css"
 import { DeleteOutlined } from '@ant-design/icons';
 
-import { Table, Space, Col, Typography, Popconfirm, Button } from 'antd';
+import { Table, Col, Button } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 
 export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {

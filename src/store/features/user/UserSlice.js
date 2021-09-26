@@ -18,7 +18,11 @@ const UserSlice = createSlice({
             state[0].user_avatar = action.payload;
         },
         SET_TRANSGROUP_ID: (state, action) => {
-            state[0].user_transgroup_id = action.payload;
+            if (action.payload === null) {
+                delete state[0].user_transgroup_id
+            } else {
+                state[0].user_transgroup_id = action.payload;
+            }
         }
     }
 });

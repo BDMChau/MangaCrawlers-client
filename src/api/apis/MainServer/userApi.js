@@ -27,6 +27,14 @@ const userApi = {
             }
         });
     },
+    searchUsers: (token, data) => {
+        const uri = '/api/user/searchusers';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     ////////////////// translation group
     registerTranslationGroup: (token, data) => {
         const uri = '/api/user/signuptransgroup';
@@ -34,6 +42,15 @@ const userApi = {
             headers: {
                 Authorization: token
             }
+        });
+    },
+    deleteGroup: (token, data) => {
+        const uri = '/api/user/deletetransgroup';
+        return axiosClient.delete(uri, {
+            headers: {
+                Authorization: token
+            },
+            data
         });
     },
     getTransGroupInfo: (token, data) => {

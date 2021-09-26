@@ -64,7 +64,7 @@ export default function SignUpTransGroup() {
             const response = await userApi.registerTranslationGroup(token, data);
 
             if (response.content.err) {
-                message_error("response.content.err");
+                message_error(response.content.err);
                 setIsLoading(false)
             } else if (response.content.msg) {
                 const transGroupId = response.content.transgroup_id;
@@ -84,6 +84,8 @@ export default function SignUpTransGroup() {
         }
     }
 
+
+    
     const renderRules = () => (
         <div className="rules">
             <Typography.Text><CheckOutlined style={{ fontSize: "18px", color: "green" }} /> {rules.rule01}</Typography.Text>
@@ -121,7 +123,7 @@ export default function SignUpTransGroup() {
                                 message: 'Please fill in your translation team name!',
                             }]}
                         >
-                            <Input minLength={1} maxLength={60} placeholder="Choose your translation team name" onChange={(e) => setName(e.target.value.trim())} />
+                            <Input minLength={1} maxLength={60} placeholder="Choose your organization name..." onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -131,7 +133,7 @@ export default function SignUpTransGroup() {
                                 message: 'Tell us something about your team!',
                             }]}
                         >
-                            <TextArea maxLength={200} placeholder="Description about your team" onChange={(e) => setDesc(e.target.value.trim())} style={{ resize: "none", height: "150px" }} />
+                            <TextArea maxLength={200} placeholder="Description about your organization..." onChange={(e) => setDesc(e.target.value.trim())} style={{ resize: "none", height: "150px" }} />
                         </Form.Item>
 
                         <Form.Item

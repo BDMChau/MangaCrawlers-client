@@ -128,7 +128,7 @@ form.form-input-bot .btn-send {
 }
 
 .messages-cont::-webkit-scrollbar {
-  width: 6px;
+  width: 60px;
   height: 6px;
 }
 

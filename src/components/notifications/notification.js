@@ -1,16 +1,16 @@
 import { notification } from 'antd';
 
-const notification_success = (value) => {
+const notification_success = (value, time) => {
     notification['success']({
         message: value,
-        duration: 3
+        duration: time ? time : 3
     });
 }
 
-const notification_error = (value) => {
+const notification_error = (value, time) => {
     notification['error']({
         message: value,
-        duration: 3
+        duration: time ? time : 3
     });
 }
 
