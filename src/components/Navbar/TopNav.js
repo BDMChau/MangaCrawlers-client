@@ -3,18 +3,20 @@ import "./Navbar.css";
 import logoText from "../../assets/logo/logoText.svg";
 import logo from "../../assets/logo/logo2.svg";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/features/auth/AuthSlice";
 
-import { Layout, Menu, Button, Drawer } from "antd";
-import { NavLink, useHistory } from "react-router-dom";
+import { Layout, Menu, Button, Drawer, Badge, Popover } from "antd";
+import { BellOutlined } from "@ant-design/icons";
 import SignUpService from "../../pages/Auth/SignUp/SignUpService";
 import SignInService from "../../pages/Auth/SignIn/SignInService";
 
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 
+
 const { SubMenu } = Menu;
 const { Header } = Layout;
-
 
 
 function TopNav({ handleLogOut, genres }) {
@@ -28,6 +30,10 @@ function TopNav({ handleLogOut, genres }) {
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
     const [isVisibleProfileDrawer, setIsVisibleProfileDrawer] = useState(false);
     const history = useHistory(false);
+
+    // notification form
+    const [visible, setVisible] = useState(false);
+
 
     // handle open close modal SignIn SignUp
     useEffect(() => {
@@ -119,7 +125,7 @@ function TopNav({ handleLogOut, genres }) {
             : ""
     )
 
-    const renderLeft = () => {
+    const RenderLeft = () => {
         return (
             <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="Home">
@@ -147,10 +153,23 @@ function TopNav({ handleLogOut, genres }) {
 
     )
 
-    const renderRight = () => (
+    const RenderRight = () => (
         isUserSignIn
-            ?
-            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+            ? <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+                <Menu.Item key="notification">
+                    <Popover
+                        trigger="click"
+                        visible={visible}
+                        onVisibleChange={(e) => setVisible(e)}
+                        content={<h2>notification</h2>}
+                    >
+                        <Badge count={1} >
+                            <BellOutlined style={{ fontSize: "20px" }} />
+                        </Badge>
+                    </Popover>
+
+                </Menu.Item>
+
                 <SubMenu
                     title="Account"
                     popupClassName="list-account-dropdown"
@@ -158,8 +177,7 @@ function TopNav({ handleLogOut, genres }) {
                 />
             </Menu>
 
-            :
-            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+            : <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
                     Signin
                 </Menu.Item>
@@ -174,11 +192,13 @@ function TopNav({ handleLogOut, genres }) {
             <nav className="menuBar">
                 <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} />
                 <div className="menuCon">
-                    <div className="leftMenu">{renderLeft()}</div>
-                    <div className="rightMenu">{renderRight()}</div>
+                    <div className="leftMenu"><RenderLeft /></div>
+                    <div className="rightMenu"><RenderRight /></div>
+
                     <Button className="barsMenu" onClick={showDrawer}>
                         <span className="barsBtn"></span>
                     </Button>
+
                     <Drawer
                         className="drawer"
                         title={<img className="logo-drawer" src={logo} alt="" />}
@@ -187,8 +207,8 @@ function TopNav({ handleLogOut, genres }) {
                         onClose={onClose}
                         visible={state}
                     >
-                        {renderLeft()}
-                        {renderRight()}
+                        <RenderLeft />
+                        <RenderRight />
                     </Drawer>
                 </div>
             </nav>

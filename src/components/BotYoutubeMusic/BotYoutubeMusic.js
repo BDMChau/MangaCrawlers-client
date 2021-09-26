@@ -6,7 +6,7 @@ import YouTube from "react-youtube";
 import { SendOutlined } from "@ant-design/icons"
 import stereo from "../../assets/img/stereo.svg";
 
-import { AutoComplete, Button, Row, Typography, Form, Tag } from "antd";
+import { AutoComplete, Button, Row, Typography, Form, Tag, Avatar } from "antd";
 
 import { commandsList } from "./features/commandsList";
 import { message_error } from "../notifications/message";
@@ -302,10 +302,9 @@ function BotYoutubeMusic({
                                 ? <div className="bot-message-cont">
                                     {mess.content.length
                                         ? <div className="message-bot">
-                                            <img className="bot-avatar" src={stereo} alt="" />
+                                            <Avatar size="large" className="bot-avatar" src={stereo} alt="" />
 
                                             <div className="bot-text">
-                                                <Typography.Text style={{ fontWeight: "500" }}>Bot</Typography.Text>
                                                 {mess.content[0] === "queue"
                                                     ? <TransitionAnimate renderPart={
                                                         <div>
@@ -354,12 +353,12 @@ function BotYoutubeMusic({
                                 : <div className="user-message-cont">
                                     <div className="message-user">
                                         <div className="user-text" >
-                                            <TransitionAnimate renderPart={mess.cmd ? <div className="user-cmd" dangerouslySetInnerHTML={{ __html: mess.cmd }}></div> : ""} />
+                                            <TransitionAnimate renderPart={mess.cmd ? <Tag color="geekblue" className="user-cmd" >{mess.cmd}</Tag> : ""} />
                                             <TransitionAnimate renderPart={<div className="user-content" dangerouslySetInnerHTML={{ __html: mess.content }}></div>} />
                                         </div>
 
                                         <div>
-                                            <img className="user-avatar" src={userState[0] ? userState[0].user_avatar : "https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg"} alt="" />
+                                            <Avatar size="large" className="user-avatar" src={userState[0] ? userState[0].user_avatar : "https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg"} alt="" />
                                         </div>
                                     </div>
                                 </div>

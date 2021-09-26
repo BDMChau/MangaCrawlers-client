@@ -7,7 +7,7 @@ const authApi = {
         return axiosClient.post(uri, data);
     },
     oauthGoogle: () => {
-        const uri = '/api/auth/geturioauthgoogle';
+        const uri = '/api/auth/geturloauthgoogle';
         return axiosClient.get(uri);
     },
     getAAA: () => {
