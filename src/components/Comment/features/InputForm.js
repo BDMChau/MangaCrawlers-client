@@ -4,12 +4,26 @@ import "../CommentContainter/CommentContainter.css"
 import { Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
 import ContentEditable from 'react-contenteditable'
+import { message_error } from 'components/notifications/message'
+import handleFile from 'helpers/handleFile'
+
+
+
+const fileTypesAllowed = [
+    "image/jpeg",
+    "image/jpg",
+    "image/gif",
+    "image/png",
+]
+
 
 export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
     const sticker_collection01 = require("../../../utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
 
     const [cmtContent, setCmtContent] = useState('');
+    const [img, setImg] = useState('');
+    const [imgDemo, setImgDemo] = useState("")
     const [isAdding, setIsAdding] = useState(false);
 
     const inputRef = useRef(null);
@@ -27,12 +41,8 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
 
 
     const handleAddCmt = async () => {
-        if (!cmtContent) {
-            return;
-        }
-
         setIsAdding(true);
-        await addCmt(cmtContent);
+        await addCmt(cmtContent, img);
         setIsAdding(false);
     }
 
@@ -48,24 +58,29 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
     }
 
 
+    const onChangeFile = (info) => {
+        console.log("file to upload: ", info)
+        setImg(info.file)
+
+        handleFile.getBase64Img(info.file.originFileObj, (file) => {
+            setImgDemo(file)
+        });
+    }
 
     const propsUploadImg = {
         name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         headers: {
             authorization: 'authorization-text',
         },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
+        beforeUpload: file => {
+            if (!fileTypesAllowed.includes(file.type)) {
+                message_error(`Please select png, jpg, jpeg, GIF only!`);
             }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
-            }
+            return fileTypesAllowed.includes(file.type) ? true : Upload.LIST_IGNORE;
         },
+        onChange: (info) => onChangeFile(info)
     };
+
 
     return (
         <Form className="form-input">
@@ -81,19 +96,39 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                     />
 
                     <div className="bottom-cont">
-                        <div className="image-cont">
-                            <Button
-                                className="btn-remove-img"
-                                icon={<CloseOutlined />}
-                            />
+                        <div className="interaction-cont">
+                            {img
+                                ? <>
+                                    <Button
+                                        className="btn-remove-img"
+                                        icon={<CloseOutlined />}
+                                        onClick={() => { setImg(""); setImgDemo(""); }}
+                                    />
 
-                            <Image src={"https://gvn360.com/wp-content/uploads/2021/04/NIERRV1P2_SS_EV_KAINE.0.jpg"} alt="" width="150px" height="100px" style={{ borderRadius: "3px" }} />
+                                    <Image src={imgDemo} alt="" style={{ borderRadius: "3px", width: "fit-content", height: "110px" }} />
+                                </>
+                                : ""
+
+                            }
+
+                            <Button
+                                className="btn-submit"
+                                style={{ marginTop: "10px", width: "fit-content" }}
+                                type="primary"
+                                loading={isAdding}
+                                onClick={() => handleAddCmt()}
+                            >
+                                Add Comment
+                            </Button>
                         </div>
 
                         <div className="addons-cont">
-                            <Tooltip title="Attach a photo">
-                                <Upload {...propsUploadImg}>
-                                    <Button icon={<CameraOutlined />} />
+                            <Tooltip title={img ? "Just a photo" : "Attach a photo"}>
+                                <Upload
+                                    showUploadList={false}
+                                    {...propsUploadImg}
+                                >
+                                    <Button icon={<CameraOutlined />} disabled={img ? true : false} />
                                 </Upload>
                             </Tooltip>
 
@@ -127,12 +162,6 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                         </div>
                     </div>
                 </div>
-            </Form.Item>
-
-            <Form.Item>
-                <Button className="btn-submit" type="primary" loading={isAdding} onClick={() => handleAddCmt()}>
-                    Add Comment
-                </Button>
             </Form.Item>
         </Form>
     )

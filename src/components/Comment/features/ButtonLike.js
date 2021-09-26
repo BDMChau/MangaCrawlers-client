@@ -22,14 +22,14 @@ export default function ButtonLike() {
     };
 
     return (
-        <Tooltip key="btn-like" title={action === 'liked' ? "Dislike" : "Like"}>
+        <Tooltip key="btn-like" title={action === 'liked' ? "Dislike" : "Give a like"}>
             <span
                 onClick={() => handleLikeCmt()}
             >
                 {action === 'liked'
-                    ? <LikeFilled style={{ fontSize: "16px", color: "#1890FF", cursor: "pointer" }} />
-                    : <LikeOutlined style={{ fontSize: "16px", color: "#C1C1C1", cursor: "pointer" }} />}
-                <span style={{marginLeft:"5px"}} className="comment-likes">{likes}</span>
+                    ? <LikeFilled style={{ fontSize: "18px", color: "#1890FF", cursor: "pointer" }} />
+                    : <LikeOutlined style={{ fontSize: "18px", color: "#C1C1C1", cursor: "pointer" }} />}
+                <span style={{ marginLeft: "5px", color: "#5c5d5e" }} className="comment-likes"  >{likes}</span>
             </span>
         </Tooltip>
     )

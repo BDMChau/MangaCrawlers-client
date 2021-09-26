@@ -278,51 +278,50 @@ function MangaService() {
     const addCmt = async (cmtContent) => {
         console.log(cmtContent)
         if (userState[0]) {
-            if (cmtContent) {
-                const newObjComment = {
-                    // "chapter_id": chapterid,
-                    // "chaptercmt_content": cmtContent,
-                    // "chaptercmt_time": format.formatDate02(Date.now()),
-                    // "chapter_name": chapterInfo.chapter_name,
-                    "manga_id": mangaId,
-                    "chapter_id": null,
-                    "manga_comment_content": cmtContent.trim(),
-                    "image_url": null,
-                    "level": 0,
-                    "parent_id": null,
-                    "user_avatar": userState[0].user_avatar,
-                    "user_email": userState[0].user_email,
-                    "user_id": userState[0].user_id,
-                    "user_name": userState[0].user_name,
-                    "is_error": false
-                }
-
-                setTimeWhenAddedCmt(format.formatDate02(Date.now()));
-                setComments(prevCmts => [newObjComment, ...prevCmts])
-                setIsAddedCmt(true)
-
-
-                const data = {
-                    manga_id: mangaId.toString(),
-                    chapter_id: "",
-                    manga_comment_content: cmtContent.trim(),
-                    image_url: "",
-                    level: 0,
-                    parent_id: ""
-                }
-
-                try {
-                    const response = await userApi.addCmt(token, data);
-                    if (response.content.comment_info) {
-                        // added
-                    } else {
-                        setIsErrorCmt(true);
-                    }
-                } catch (ex) {
-                    console.log(ex);
-                }
-                return;
+            const newObjComment = {
+                // "chapter_id": chapterid,
+                // "chaptercmt_content": cmtContent,
+                // "chaptercmt_time": format.formatDate02(Date.now()),
+                // "chapter_name": chapterInfo.chapter_name,
+                "manga_id": mangaId,
+                "chapter_id": null,
+                "manga_comment_content": cmtContent ? cmtContent.trim() : "",
+                "image_url": null,
+                "level": 0,
+                "parent_id": null,
+                "user_avatar": userState[0].user_avatar,
+                "user_email": userState[0].user_email,
+                "user_id": userState[0].user_id,
+                "user_name": userState[0].user_name,
+                "is_error": false
             }
+
+            setTimeWhenAddedCmt(format.formatDate02(Date.now()));
+            setComments(prevCmts => [newObjComment, ...prevCmts])
+            setIsAddedCmt(true)
+
+
+            const data = {
+                manga_id: mangaId.toString(),
+                chapter_id: "",
+                manga_comment_content: cmtContent ? cmtContent.trim() : "",
+                image: img ? img : "",
+                level: 0,
+                parent_id: ""
+            }
+
+            try {
+                const response = await userApi.addCmt(token, data);
+                if (response.content.comment_info) {
+                    // added
+                } else {
+                    setIsErrorCmt(true);
+                }
+            } catch (ex) {
+                console.log(ex);
+            }
+            return;
+
         } else {
             message_error("You have to login first!");
             return;
@@ -338,7 +337,7 @@ function MangaService() {
         }
 
         try {
-            const response = await mangaApi.getComments(data);
+            const response = await mangaApi.getCommentsManga(data);
 
             if (JSON.parse(localStorage.getItem("code_400"))) {
                 // message_error("No manga to present!")
@@ -353,9 +352,7 @@ function MangaService() {
 
             if (response.content.comments.length) {
                 const comments = response.content.comments;
-                comments.forEach(comment => {
-                    comment.chaptercmt_time = format.formatDate02(Date.now());
-                });
+               
                 setComments(comments)
                 setFromRow(fromRow + 11)
             }
@@ -463,7 +460,7 @@ function MangaService() {
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}
                 comments={comments}
-                getCmtsChapter={() => getCmtsChapter()}
+                getCmtsManga={() => getCmtsManga()}
                 isEndCmts={isEndCmts}
 
                 setMangaId={setMangaId}

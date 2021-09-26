@@ -6,13 +6,8 @@ import { Form, Input, Button, Select, Popconfirm, Upload, Image, Typography } fr
 import TextArea from 'antd/lib/input/TextArea';
 
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons';
+import handleFile from 'helpers/handleFile';
 
-
-function getBase64Img(img, callback) {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result));
-    reader.readAsDataURL(img);
-}
 
 const uploadButton = (
     <div>
@@ -30,19 +25,18 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
         views: 0,
     })
 
-    const onChange = (info) => {
+    const onChangeFile = (info) => {
         console.log("file to upload: ", info)
         setImg(info.file)
 
-        getBase64Img(info.file, (file) => {
+        handleFile.getBase64Img(info.file, (file) => {
             setImgDemo(file)
         });
-
     }
 
     const handleSubmit = () => {
         const { mangaName, author, genres, status, publicationYear, description } = fieldsData;
-        if (!img || !mangaName || !author || !genres.length || !publicationYear || !description ||!status) {
+        if (!img || !mangaName || !author || !genres.length || !publicationYear || !description || !status) {
             setIsRequired(true)
             return;
         }
@@ -57,9 +51,9 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
         name: 'file',
         headers: {
             authorization: 'authorization-text',
-        }, 
+        },
         beforeUpload: (file) => false,
-        onChange: (info) => onChange(info)
+        onChange: (info) => onChangeFile(info)
     };
 
     return (
@@ -68,7 +62,7 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
                 <Upload
                     showUploadList={false}
                     listType="picture-card"
-                   {...propsUpload}
+                    {...propsUpload}
                     disabled={img ? true : false}
                 >
                     {img
@@ -159,9 +153,9 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
                 {isRequired
                     ? <Form.Item
                         name="required warning"
-                        style={{margin:"0"}}
+                        style={{ margin: "0" }}
                     >
-                        <Typography.Text style={{color:"red"}} >All fields are required!</Typography.Text>
+                        <Typography.Text style={{ color: "red" }} >All fields are required!</Typography.Text>
                     </Form.Item>
                     : ""
                 }

@@ -6,16 +6,17 @@ import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
 
 import ButtonLike from '../features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import Reply from '../features/Reply';
+import InteractionForm from '../features/InteractionForm';
+import { format } from 'helpers/format';
 
 
-function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
+function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
     useEffect(() => {
         if (isScrollBottom === true) {
-            getCmtsChapter()
+            getCmtsManga()
 
             const timer = setTimeout(() => setIsScrollBottom(false), 700)
             return () => clearTimeout(timer);
@@ -40,15 +41,38 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
     }
 
 
+    const renderCmtTitle = (comment) => (
+        <Typography.Text style={{ cursor: "default", fontSize: "14px", fontWeight: "500" }}>{comment.user_name}</Typography.Text>
+    )
+
+
+    const renderCmtBody = (comment) => (
+        <div key={comment.manga_comment_id}>
+            <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
+
+            {renderCmtBottom(comment)}
+
+            <Typography.Text style={{ color: "#FF4D4F" }}>
+                {comment.is_error ? "Error, cannot add this comment!" : ""}
+            </Typography.Text>
+        </div>
+    )
+
+
     const renderCmtBottom = (comment) => (
         <div className="cmt-bottom">
+            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
+                {format.formatDate02(comment.manga_comment_time)}
+            </Typography.Text>
+
             <div className="interact">
                 <ButtonLike />
-                <Reply />
+
+                <InteractionForm />
+
+            
             </div>
-            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
-                {comment.chaptercmt_time}
-            </Typography.Text>
+
 
             <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>
                 <Tooltip title={comment.chapter_name}>
@@ -65,26 +89,14 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
         </div>
     )
 
-    const renderCmtBody = (comment) => (
-        <div key={comment.manga_comment_id}>
-            <div style={{fontSize:"16px"}} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
-
-            {renderCmtBottom(comment)}
-
-            <Typography.Text style={{ color: "#FF4D4F" }}>
-                {comment.is_error ? "Error, cannot add this comment!" : ""}
-            </Typography.Text>
-        </div>
-    )
-
     const Items = ({ children }) => {
         return (
             comments.length
-                ? comments.map((comment, i) => (
+                ? comments.map((comment) => (
                     <Comment
                         className="comment-item"
-                        key={i}
-                        author={<Typography.Text style={{ cursor: "default" }}>{comment.user_name}</Typography.Text>}
+                        key={comment.manga_comment_id}
+                        author={renderCmtTitle(comment)}
                         avatar={
                             <Avatar
                                 className="cmt-avatar"
@@ -103,9 +115,9 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                                         comment.comments_level_01?.length
                                             ? comment.comments_level_01.map((cmt) => (
                                                 <Comment
-                                                    className="comment-item"
-                                                    key={i}
-                                                    author={<Typography.Text style={{ cursor: "default" }}>{cmt.user_name}</Typography.Text>}
+                                                    className="comment-item01"
+                                                    key={cmt.manga_comment_id}
+                                                    author={renderCmtTitle(comment)}
                                                     avatar={
                                                         <Avatar
                                                             className="cmt-avatar"
@@ -123,9 +135,9 @@ function CommentItems({ comments, getCmtsChapter, isEndCmts, mangaId }) {
                                                                     cmt.comments_level02?.length
                                                                         ? cmt.comments_level02.map((cmt02) => (
                                                                             <Comment
-                                                                                className="comment-item"
-                                                                                key={i}
-                                                                                author={<Typography.Text style={{ cursor: "default" }}>{cmt02.user_name}</Typography.Text>}
+                                                                                className="comment-item02"
+                                                                                key={cmt02.manga_comment_id}
+                                                                                author={renderCmtTitle(comment)}
                                                                                 avatar={
                                                                                     <Avatar
                                                                                         className="cmt-avatar"

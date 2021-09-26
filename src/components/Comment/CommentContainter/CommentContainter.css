@@ -46,9 +46,11 @@
   justify-content: space-between;
 }
 
-.comments-form .image-cont {
+.comments-form .interaction-cont {
   margin-top: 15px;
   margin-left: 3px;
+  display: flex;
+  flex-direction: column;
 }
 
 .comments-form .addons-cont {
@@ -74,7 +76,7 @@
   margin: 0px 0px 0 5px;
 }
 
-.comments-form .image-cont button.btn-remove-img {
+.comments-form .interaction-cont button.btn-remove-img {
   position: absolute;
   z-index: 9;
   background: #00000038;

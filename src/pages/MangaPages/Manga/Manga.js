@@ -35,7 +35,7 @@ function Manga({
     isAddedCmt,
     setIsAddedCmt,
     comments,
-    getCmtsChapter,
+    getCmtsManga,
     isEndCmts,
 
     setMangaId,
@@ -268,7 +268,7 @@ function Manga({
                                         addCmt={(cmtContent) => addCmt(cmtContent)}
                                         isEndCmts={isEndCmts}
 
-                                        getCmtsChapter={getCmtsChapter}
+                                        getCmtsManga={getCmtsManga}
                                         comments={comments}
                                     />
                                 </div>

@@ -15,7 +15,7 @@ export default function CommentContainter({
     isAdding,
     isEndCmts,
 
-    getCmtsChapter,
+    getCmtsManga,
     comments
 }) {
     // const [comments, setComments] = useState([
@@ -101,7 +101,7 @@ export default function CommentContainter({
             {/* render cmts */}
             <CommentItems
                 comments={comments}
-                getCmtsChapter={() => getCmtsChapter()}
+                getCmtsManga={() => getCmtsChapter()}
                 isEndCmts={isEndCmts}
 
                 mangaId={mangaId}

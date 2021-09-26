@@ -21,15 +21,19 @@
 }
 
 .comment {
-  background-color: #e0e4eb;
   border-radius: 5px;
   padding: 5px;
+}
+
+.comment-item .ant-comment-content {
+  background-color: red;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .comment .cmt-bottom {
   margin-top: 10px;
 }
-
 
 .comment .cmt-bottom .chapter-name {
   margin-right: 10px;
@@ -41,6 +45,10 @@
   text-overflow: ellipsis;
 }
 
+.comment .cmt-bottom .interact {
+  margin-top: 3px;
+}
+
 .comment .cmt-bottom .interact .reply {
   color: #87888a;
   margin-left: 10px;
@@ -49,6 +57,18 @@
 }
 
 .comment .cmt-bottom .interact .reply:hover {
+  color: #5c5d5e;
+  margin-left: 10px;
+}
+
+.comment .cmt-bottom .interact .btn-remove {
+  color: #87888a;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.comment .cmt-bottom .interact .btn-remove:hover {
   color: #5c5d5e;
   margin-left: 10px;
 }
@@ -64,11 +84,18 @@
 
 /* ///////////////////////////////// */
 .cmt-children {
-  background-color: #c8cfdb;
   border-radius: 5px;
   margin-left: 0;
   padding: 5px;
 }
+
+.comment-item01 .ant-comment-content {
+  background-color: blue;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
 .cmt-children .cmt-bottom .chapter-name {
   margin-right: 10px;
   float: right;
@@ -93,11 +120,17 @@
 
 /* //////////////////////////////////// */
 .cmt-children02 {
-  background-color: #e0e4eb;
   border-radius: 5px;
   margin-left: 0;
   padding: 5px;
 }
+
+.comment-item02 .ant-comment-content {
+  background-color: purple;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .cmt-children02 .cmt-bottom .chapter-name {
   margin-right: 10px;
   float: right;

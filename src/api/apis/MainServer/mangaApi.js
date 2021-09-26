@@ -38,7 +38,7 @@ const mangaApi = {
         const uri = '/api/manga/searchmangas';
         return axiosClient.post(uri, data);
     },
-    getComments: (data) => {
+    getCommentsManga: (data) => {
         const uri = '/api/manga/getcommentsmanga';
         return axiosClient.post(uri, data);
     },
