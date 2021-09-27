@@ -55,11 +55,11 @@ export default function TransGroupService() {
 
         try {
             const response = await userApi.getTransGroupInfo(token, data);
-        
             if (response.content.err) {
                 setIsLogin(true);
                 return;
             }
+            const transGroup = response.content.trans_group;
 
             const mangas = response.content.list_manga;
             mangas.forEach(manga => {
@@ -72,11 +72,19 @@ export default function TransGroupService() {
                 }
             })
 
+            const users = response.content.list_user;
+            users.forEach(user => {
+                if(user.user_email === transGroup.transgroup_email){
+                    user.role = "Lead"
+                } else{
+                    user.role = "Member";
+                }
+            })
 
-            console.log(response.content.msg)
-            setTransGrInfo(response.content.trans_group)
+
+            setTransGrInfo(transGroup)
             setMangas(response.content.list_manga)
-            setUsers(response.content.list_user)
+            setUsers(users)
             setIsLogin(false);
             return;
         } catch (ex) {

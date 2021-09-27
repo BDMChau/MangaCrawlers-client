@@ -23,7 +23,7 @@ const columns = [
     },
     {
         title: 'Role',
-        dataIndex: 'user_role',
+        dataIndex: 'role',
         key: 'role',
     },
     {
