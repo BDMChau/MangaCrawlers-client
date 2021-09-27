@@ -7,7 +7,6 @@ import Cookies from 'universal-cookie';
 import { message_success } from '../../components/notifications/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
-import { sendMessageSocket, socket } from 'socket/socketClient'
 import { format } from 'helpers/format'
 
 function HomeService() {
@@ -159,13 +158,6 @@ function HomeService() {
         }
     }
 
-
-    useEffect(() => {
-        socket.on('newMessageToClient', (result) => {
-            console.log("result")
-            console.log(result)
-        });
-    }, []);
 
     return (
    <div>

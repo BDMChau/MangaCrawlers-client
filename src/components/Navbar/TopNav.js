@@ -13,6 +13,7 @@ import SignUpService from "../../pages/Auth/SignUp/SignUpService";
 import SignInService from "../../pages/Auth/SignIn/SignInService";
 
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
+import { socketActions } from "socket/socketClient";
 
 
 const { SubMenu } = Menu;
@@ -74,9 +75,12 @@ function TopNav({ handleLogOut, genres }) {
         }
     }, [authState]);
 
+
+
     useEffect(() => {
         if (userState[0]) {
             setIsUserSignIn(true);
+            socketActions.updateSocketId(userState[0].user_id)
         } else {
             setIsUserSignIn(false);
         }

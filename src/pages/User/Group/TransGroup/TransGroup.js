@@ -105,7 +105,7 @@ export default function TransGroup({
                                                     visibility: valToSearch ? 'visible' : 'hidden',
                                                     transition: "0.3s"
                                                 }}
-                                                onClick={() => inviteUser(valToSearch)}
+                                                onClick={() => inviteUser(valToSearch, transGrInfo)}
                                             >
                                                 Invite
                                             </Button>

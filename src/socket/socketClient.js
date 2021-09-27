@@ -1,25 +1,30 @@
 import io from 'socket.io-client';
 import endPoint from '../config/endPoint';
+import EVENTS_NAME from './features/eventsName';
 
 const socket = io(endPoint.socket_local);
 
-const updateSocketId = (userId) => {
-    socket.emit("updateSocketId", userId);
-}
+const socketActions = {
+    updateSocketId: (userId) => {
+        socket.emit(EVENTS_NAME.UPDATE_SOCKETID, { user_id: userId });
+    },
 
+    /** 
+     * @param message: message: string
+     * @param users_identification: Can be user_email: string or user_id: number
+    */
+    sendMessageToServer: (message, users_identification) => {
+        const data = {
+            message: message,
+            users_identification: users_identification ? users_identification : []
+        }
 
-const sendMessageSocket = (message, userId) => {
-    const data = {
-        message: message,
-        userId: 48
+        socket.emit(EVENTS_NAME.SPECIFIC_USERS, data);
     }
-
-    socket.emit('sendMessageFromClient', data);
 }
 
 
 export {
     socket,
-    updateSocketId,
-    sendMessageSocket,
+    socketActions
 }

@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 import { message_error, message_success, message_warning } from '../../../../components/notifications/message';
 import { format } from 'helpers/format';
 import { notification_error, notification_success } from 'components/notifications/notification';
+import { socket, socketActions } from 'socket/socketClient';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
@@ -74,9 +75,9 @@ export default function TransGroupService() {
 
             const users = response.content.list_user;
             users.forEach(user => {
-                if(user.user_email === transGroup.transgroup_email){
+                if (user.user_email === transGroup.transgroup_email) {
                     user.role = "Lead"
-                } else{
+                } else {
                     user.role = "Member";
                 }
             })
@@ -191,7 +192,7 @@ export default function TransGroupService() {
 
 
     useEffect(() => {
-        if(valToSearch) searchUsers()
+        if (valToSearch) searchUsers()
         else setUsersSearchResult([]);
     }, [valToSearch])
 
@@ -216,22 +217,13 @@ export default function TransGroupService() {
     }
 
 
-    const inviteUser = async (val) => {
-        const data = {
-            user_email: val
-        }
+   
+    
+    const inviteUser = async (val, transGr) => {
+        const user_email = val;
+        const message = `<h1>Want to join ${transGr.transgroup_name} with us </h1>`
 
-        try {
-            // const response = await userApi.inviteUser(token, data);
-            // if (response.content.err) {
-            //     setUsersSearchResult([]);
-            //     return;
-            // }
-
-            return;
-        } catch (error) {
-            console.log(error);
-        }
+        socketActions.sendMessageToServer(message, [user_email])
     }
 
     return (
@@ -255,7 +247,7 @@ export default function TransGroupService() {
             setUsersSearchResult={setUsersSearchResult}
             usersSearchResult={usersSearchResult}
 
-            inviteUser={(val) => inviteUser(val)}
+            inviteUser={(val, transGr) => inviteUser(val, transGr)}
         />
     )
 }

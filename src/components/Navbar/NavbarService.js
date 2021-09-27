@@ -5,6 +5,8 @@ import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/features/user/UserSlice";
 import { message_success } from '../notifications/message';
 import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
+import { socket } from 'socket/socketClient';
+import EVENTS_NAME from 'socket/features/eventsName';
 
 function NavbarService() {
     const dispatch = useDispatch();
@@ -13,9 +15,19 @@ function NavbarService() {
     const [genres, setGenres] = useState([])
     const cookies = new Cookies();
 
+
+    // socket
+    useEffect(() => {
+        socket.on(EVENTS_NAME.FROM_SERVER_TO_SPECIFIC_USERS, (result) => {
+            console.log(result)
+        });
+    }, []);
+
+
     useEffect(() => {
         dispatch(GET_ALL_GENRES());
     }, [])
+
 
     useEffect(() => {
         if(genresState){
