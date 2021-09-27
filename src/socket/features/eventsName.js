@@ -2,7 +2,7 @@ const EVENTS_NAME = {
     UPDATE_SOCKETID: 'updateSocketId',
 
     // to server
-    SPECIFIC_USERS: 'sendMessageToSpectificUsers_server',
+    SPECIFIC_USERS: 'sendMessageToSpecificUsers_server',
     ALL_USERS: 'sendMessageToAllUsers_server',
 
     // from server
