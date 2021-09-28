@@ -9,16 +9,8 @@ const socketActions = {
         socket.emit(EVENTS_NAME.UPDATE_SOCKETID, { user_id: userId });
     },
 
-    /** 
-     * @param message: message: string
-     * @param users_identification: Can be user_email: string or user_id: number
-    */
-    sendMessageToServer: (message, users_identification) => {
-        const data = {
-            message: message,
-            users_identification: users_identification ? users_identification : []
-        }
 
+    sendMessageToServer: (data) => {
         socket.emit(EVENTS_NAME.SPECIFIC_USERS, data);
     }
 }

@@ -10,6 +10,8 @@ import { message_error, message_success, message_warning } from '../../../../com
 import { format } from 'helpers/format';
 import { notification_error, notification_success } from 'components/notifications/notification';
 import { socket, socketActions } from 'socket/socketClient';
+import { Upload } from 'antd';
+import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);
@@ -31,6 +33,7 @@ export default function TransGroupService() {
 
     const cookies = new Cookies();
     const token = cookies.get("token");
+    const [img, setImg] = useState('');
 
     // if (transGrInfo.transgroup_email === userState[0].user_email) {
     //     message_error("You cannot delete yourself ~.~");
@@ -217,37 +220,78 @@ export default function TransGroupService() {
     }
 
 
-   
-    
+
+
     const inviteUser = async (val, transGr) => {
         const user_email = val;
         const message = `<h1>Want to join ${transGr.transgroup_name} with us </h1>`
 
-        socketActions.sendMessageToServer(message, [user_email])
+
+const response = await cloudinaryApi.uploadFile(img);
+
+console.log(response)
+        const data = {
+            message: message,
+            userId: userState[0].user_id,
+            listTo: user_email ? [user_email] : [],
+            image: "",
+            obj: {
+                title: "translation team",
+                name: transGrInfo.transgroup_name
+            }
+        }
+
+        socketActions.sendMessageToServer(data)
     }
 
+    const onChangeFile = (info) => {
+        console.log("file to upload: ", info)
+        setImg(info.file)
+
+    
+    }
+
+    const propsUploadImg = {
+        name: 'file',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        beforeUpload: file => false,
+        onChange: (info) => onChangeFile(info)
+    };
+
+
     return (
-        <TransGroup
-            transGrInfo={transGrInfo}
-            mangas={mangas}
-            users={users}
-            genres={genres}
+        <>
+            <Upload
+                showUploadList={false}
+                {...propsUploadImg}
+            >
+                ascac
+            </Upload>
 
-            handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
-            isLoading={isLoading}
-            isLogin={isLogin}
+            <TransGroup
+                transGrInfo={transGrInfo}
+                mangas={mangas}
+                users={users}
+                genres={genres}
 
-            deleteGroup={(transgroupId) => deleteGroup(transgroupId)}
+                handleCreateNewProject={(fieldsData, img) => handleCreateNewProject(fieldsData, img)}
+                isLoading={isLoading}
+                isLogin={isLogin}
 
-            handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)}
-            IsLoadingDelete={IsLoadingDelete}
+                deleteGroup={(transgroupId) => deleteGroup(transgroupId)}
 
-            setValToSearch={setValToSearch}
-            valToSearch={valToSearch}
-            setUsersSearchResult={setUsersSearchResult}
-            usersSearchResult={usersSearchResult}
+                handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)}
+                IsLoadingDelete={IsLoadingDelete}
 
-            inviteUser={(val, transGr) => inviteUser(val, transGr)}
-        />
+                setValToSearch={setValToSearch}
+                valToSearch={valToSearch}
+                setUsersSearchResult={setUsersSearchResult}
+                usersSearchResult={usersSearchResult}
+
+                inviteUser={(val, transGr) => inviteUser(val, transGr)}
+            />
+        </>
     )
 }
