@@ -52,11 +52,13 @@ function AdminService() {
         try {
             const response = await axios.get(`https://geolocation-db.com/json/`)
             if (response.data) {
-                getWeather(response.data.city);
+                console.log(response.data)
+                const position = response.data.city ? response.data.city : response.data.country_name ? response.data.country_name : "Ho Chi Minh";
+                getWeather(position);
             }
         } catch (err) {
             getWeather("Ho Chi Minh");
-            console.log(err)
+            console.log(err);
         }
     }
 
@@ -67,7 +69,8 @@ function AdminService() {
                 setWeatherStatus(response.data)
             }
         } catch (err) {
-            console.log(err)
+            getWeather("Ho Chi Minh");
+            console.log(err);
         }
     }
 
