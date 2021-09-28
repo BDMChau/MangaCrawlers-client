@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../../Admin.css"
 import "../Tables.css"
 import "../../../components/Charts/Chart.css"
 
-import { Table, Col, Typography, Button } from 'antd';
+import { Table, Col, Input, Button } from 'antd';
 import { Avatar } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 import { DeleteOutlined, FieldTimeOutlined } from '@ant-design/icons';
 
 
 export default function TableUser({ users, handleDeprecateUser, handleRemoveUser, isLoading }) {
+    const [data, setData] = useState([])
+
+
+    useEffect(() => {
+        if (users.length) setData(users);
+    }, [users])
+
+
+    const onSearch = (val) => {
+        setTimeout(() => {
+            if (val) {
+                const result = users.filter(item => item.user_name.toLowerCase().includes(val.toLowerCase()))
+
+                setData(result)
+            } else {
+                setData(users)
+            }
+        }, 300);
+    }
 
 
     const columns = [
@@ -59,6 +78,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
 
     return (
         <Col xxl={14} xs={23} sm={20} className="table-user">
+            <Input placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ width: 200, margin: '5px 11px' }} />
             <div style={{ display: "flex" }}>
                 {
                     isLoading
@@ -71,7 +91,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
                 columns={columns}
                 bordered
                 simple
-                dataSource={users}
+                dataSource={data}
                 pagination={{
                     showTotal: () => `Total ${users.length} Users`,
                 }}

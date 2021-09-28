@@ -1,14 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../../Admin.css"
 import "../../../components/Charts/Chart.css"
 
-import { Table, Col, Typography, Image, Button } from 'antd';
+import { Table, Col, Typography, Image, Button, Input } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import redirectURI from 'helpers/redirectURI';
 
 
 export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
+    const [data, setData] = useState([])
+
+
+    useEffect(() => {
+        if (mangas.length) setData(mangas);
+    }, [mangas])
+
+
+    const onSearch = (val) => {
+        setTimeout(() => {
+            if (val) {
+                const result = mangas.filter(item => item.manga_name.toLowerCase().includes(val.toLowerCase()))
+
+                setData(result)
+            } else {
+                setData(mangas)
+            }
+        }, 300);
+    }
+
+
 
     const columns = [
         {
@@ -32,7 +53,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
             render: text => <p>{text}</p>,
         },
         {
-            title: 'AUTHORS',
+            title: 'AUTHOR',
             dataIndex: 'author_name',
             key: 'author_name',
         },
@@ -74,6 +95,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
     return (
         <Col xxl={16} xs={23} sm={20} className="table-manga">
             <div style={{ display: "flex" }}>
+                <Input placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ width: 200, margin: '5px 11px' }} />
                 {
                     isLoading
                         ? <Button className="table-btn-loading" loading={isLoading}></Button>
@@ -86,7 +108,7 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
                 columns={columns}
                 bordered
                 simple
-                dataSource={mangas}
+                dataSource={data}
                 pagination={{
                     showTotal: () => `Total ${mangas.length} Manga Series`,
                 }}

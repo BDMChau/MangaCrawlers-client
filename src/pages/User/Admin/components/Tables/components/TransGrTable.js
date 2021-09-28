@@ -1,13 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../../Admin.css"
 import "../Tables.css"
 import "../../../components/Charts/Chart.css"
 import { DeleteOutlined } from '@ant-design/icons';
 
-import { Table, Col, Button } from 'antd';
+import { Table, Col, Button, Input } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
 
 export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        if (transGrs.length) setData(transGrs);
+    }, [transGrs])
+
+    const onSearch = (val) => {
+        setTimeout(() => {
+            if (val) {
+                const result = transGrs.filter(item => item.transgroup_name.toLowerCase().includes(val.toLowerCase()))
+
+                setData(result)
+            } else {
+                setData(transGrs)
+            }
+        }, 300);
+    }
+
     const columns = [
         {
             title: 'TEAM NAME',
@@ -48,6 +66,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
 
     return (
         <Col xxl={14} xs={23} sm={20} className="table-trans-gr">
+            <Input placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ width: 200, margin: '5px 11px' }} />
             <div style={{ display: "flex" }}>
                 {
                     isLoading
@@ -61,7 +80,7 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
                 columns={columns}
                 bordered
                 simple
-                dataSource={transGrs}
+                dataSource={data}
                 pagination={{
                     showTotal: () => `Total ${transGrs.length} Translation Teams`,
                 }}
