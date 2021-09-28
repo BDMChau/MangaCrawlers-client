@@ -226,10 +226,6 @@ export default function TransGroupService() {
         const user_email = val;
         const message = `<h1>Want to join ${transGr.transgroup_name} with us </h1>`
 
-
-const response = await cloudinaryApi.uploadFile(img);
-
-console.log(response)
         const data = {
             message: message,
             userId: userState[0].user_id,
@@ -248,7 +244,7 @@ console.log(response)
         console.log("file to upload: ", info)
         setImg(info.file)
 
-    
+
     }
 
     const propsUploadImg = {
