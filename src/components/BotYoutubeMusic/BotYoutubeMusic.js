@@ -9,7 +9,7 @@ import stereo from "../../assets/img/stereo.svg";
 import { AutoComplete, Button, Row, Typography, Form, Tag, Avatar } from "antd";
 
 import { commandsList } from "./features/commandsList";
-import { message_error } from "../notifications/message";
+import { message_error } from "../alerts/message";
 import TransitionAnimate from "../Animation/transition";
 
 import botMessagesPreset from "./features/botMessagesPreset";

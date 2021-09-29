@@ -8,7 +8,7 @@ import Rating from '../../../components/Rating/Rating';
 import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
-import { message_error } from '../../../components/notifications/message';
+import { message_error } from '../../../components/alerts/message';
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
 import { EditOutlined, CheckOutlined } from '@ant-design/icons';

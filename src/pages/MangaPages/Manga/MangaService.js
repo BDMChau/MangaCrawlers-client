@@ -6,11 +6,11 @@ import initial from 'lodash/initial';
 import smoothscroll from 'smoothscroll-polyfill';
 import Cookies from 'universal-cookie';
 
-import { message_error, message_success } from '../../../components/notifications/message';
+import { message_error, message_success } from '../../../components/alerts/message';
 import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/MainServer/adminApi';
-import { notification_success } from 'components/notifications/notification';
+import { notification_success } from 'components/alerts/notification';
 import { format } from 'helpers/format';
 import userApi from 'api/apis/MainServer/userApi';
 

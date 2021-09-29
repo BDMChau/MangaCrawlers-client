@@ -3,7 +3,7 @@ import "./ChangePassword.css"
 
 import { useParams } from 'react-router';
 import authApi from '../../../api/apis/MainServer/authApi';
-import { message_success } from '../../../components/notifications/message';
+import { message_success } from '../../../components/alerts/message';
 import { Button, Col, Input, Row, Typography, Form } from 'antd'
 
 

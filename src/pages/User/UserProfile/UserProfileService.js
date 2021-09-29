@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserProfile from './UserProfile';
 import Cookies from 'universal-cookie';
 import userApi from '../../../api/apis/MainServer/userApi';
-import { message_error, message_success } from '../../../components/notifications/message';
+import { message_error, message_success } from '../../../components/alerts/message';
 import { useDispatch } from 'react-redux';
 import { UPDATE_AVATAR } from "../../../store/features/user/UserSlice";
 

@@ -6,9 +6,9 @@ import genreApi from '../../../../api/apis/MainServer/genreApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_TRANSGROUP_ID } from "../../../../store/features/user/UserSlice"
 import { useHistory } from 'react-router';
-import { message_error, message_success, message_warning } from '../../../../components/notifications/message';
+import { message_error, message_success, message_warning } from '../../../../components/alerts/message';
 import { format } from 'helpers/format';
-import { notification_error, notification_success } from 'components/notifications/notification';
+import { notification_error, notification_success } from 'components/alerts/notification';
 import { socket, socketActions } from 'socket/socketClient';
 import { Upload } from 'antd';
 import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi';

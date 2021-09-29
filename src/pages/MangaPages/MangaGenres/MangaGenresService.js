@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MangaGenres from './MangaGenres'
 import { useLocation } from 'react-router'
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
-import { message_error } from '../../../components/notifications/message';
+import { message_error } from '../../../components/alerts/message';
 import { useSelector } from 'react-redux';
 
 

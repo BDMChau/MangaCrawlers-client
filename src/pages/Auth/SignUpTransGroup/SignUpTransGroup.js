@@ -8,7 +8,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import rules from "../../../utils/rules";
 import { CheckOutlined } from "@ant-design/icons";
 import userApi from '../../../api/apis/MainServer/userApi';
-import { message_error, message_success } from '../../../components/notifications/message';
+import { message_error, message_success } from '../../../components/alerts/message';
 import Cookies from 'universal-cookie';
 import { SET_TRANSGROUP_ID } from '../../../store/features/user/UserSlice';
 

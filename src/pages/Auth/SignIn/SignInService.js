@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SignIn from './SignIn'
 import authApi from '../../../api/apis/MainServer/authApi'
 
-import { message_error, message_success } from '../../../components/notifications/message';
+import { message_error, message_success } from '../../../components/alerts/message';
 import { useDispatch } from 'react-redux';
 import { SIGNIN } from '../../../store/features/user/UserSlice';
 import Cookies from 'universal-cookie';

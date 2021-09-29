@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
-import { message_error } from '../../../components/notifications/message';
+import { message_error } from '../../../components/alerts/message';
 import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';

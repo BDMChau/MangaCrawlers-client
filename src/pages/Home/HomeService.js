@@ -4,7 +4,7 @@ import Home from './Home'
 import debounce from 'lodash/debounce'
 import authApi from '../../api/apis/MainServer/authApi'
 import Cookies from 'universal-cookie';
-import { message_success } from '../../components/notifications/message'
+import { message_success } from '../../components/alerts/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'helpers/format'

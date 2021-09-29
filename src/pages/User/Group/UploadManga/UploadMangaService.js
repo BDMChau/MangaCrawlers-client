@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import UploadManga from './UploadManga'
 import { useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
-import { message_success, message_warning } from '../../../../components/notifications/message';
+import { message_success, message_warning } from '../../../../components/alerts/message';
 import userApi from '../../../../api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
 import { format } from 'helpers/format';

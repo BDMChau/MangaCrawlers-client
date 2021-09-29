@@ -1,4 +1,4 @@
-import { message_error } from "../../components/notifications/message";
+import { message_error } from "../../components/alerts/message";
 
 export const errCodeResCheking = (errorResponse) => {
     switch (errorResponse.status) {

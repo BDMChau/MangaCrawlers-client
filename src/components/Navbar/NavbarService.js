@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TopNav from './TopNav'
 import Cookies from 'universal-cookie';
 import { LOGOUT } from "../../store/features/user/UserSlice";
-import { message_success } from '../notifications/message';
+import { message_success } from '../alerts/message';
 import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
 import { socket } from 'socket/socketClient';
 import EVENTS_NAME from 'socket/features/eventsName';

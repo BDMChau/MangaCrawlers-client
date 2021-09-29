@@ -4,7 +4,7 @@ import "../CommentContainter/CommentContainter.css"
 import { Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
 import ContentEditable from 'react-contenteditable'
-import { message_error } from 'components/notifications/message'
+import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
 
 

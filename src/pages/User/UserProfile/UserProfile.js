@@ -3,7 +3,7 @@ import "./UserProfile.css"
 import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload } from 'antd';
 import { SettingOutlined, UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
-import { message_success } from '../../../components/notifications/message';
+import { message_success } from '../../../components/alerts/message';
 import SignUpTransGroupService from "../../Auth/SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
