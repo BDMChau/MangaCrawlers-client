@@ -125,7 +125,7 @@ export default function TransGroupService() {
             }
 
             dispatch(SET_TRANSGROUP_ID(null));
-            notification_success("Your organization has been deleted!", 4);
+            notification_success("Your organization has been deleted :(", 4);
             return;
         } catch (error) {
             console.log(error);
@@ -220,20 +220,19 @@ export default function TransGroupService() {
     }
 
 
-
-
     const inviteUser = async (val, transGr) => {
         const user_email = val;
-        const message = `<h1>Want to join ${transGr.transgroup_name} with us </h1>`
+        const message = `invitaion to join team ${transGr.transgroup_name}`
 
         const data = {
-            message: message,
-            userId: userState[0].user_id,
-            listTo: user_email ? [user_email] : [],
-            image: "",
-            obj: {
-                title: "translation team",
-                name: transGrInfo.transgroup_name
+            type: 1,
+            message: `Want to join our team <b>${transGrInfo.transgroup_name}</b>`,
+            image_url: "",
+            user_id: userState[0].user_id,
+            list_to: user_email ? [user_email] : [],
+            obj_data: {
+                target_id: transGrInfo.transgroup_id.toString(),
+                target_title: "transgroup"
             }
         }
 

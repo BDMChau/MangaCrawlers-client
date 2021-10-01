@@ -18,11 +18,13 @@ export default function Notification({ type, from, to, img, obj }) {
 
 
     const Invitation = () => (
-        
+        <p>this is invitaion for something
+
+        </p>
     )
 
     const FriendRequest = ({ }) => (
-
+<div></div>
     )
 
 
