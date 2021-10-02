@@ -1,39 +1,57 @@
-import React from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import "../Navbar.css"
 
 import { Typography, Button } from 'antd';
 
 
-export default function Notification({
+const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
+
+function Notification({
     item,
     key,
 
-    handleCancle,
+    updateInteracted,
     handleAcceptInvitation
 }) {
-    const {
-        created_at,
-        image_url,
-        is_interacted,
-        is_viewed,
-        notification_id,
-        notification_content,
-        notification_type,
-        notification_type_id,
-        receiver_id,
-        receiver_name,
-        receiver_socket_id,
-        sender_id,
-        sender_name,
-        target_id,
-        target_title,
-    } = item;
-    const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
+    // const {
+    //     created_at,
+    //     image_url,
+    //     is_interacted,
+    //     is_viewed,
+    //     notification_id,
+    //     notification_content,
+    //     notification_type,
+    //     notification_type_id,
+    //     receiver_id,
+    //     receiver_name,
+    //     receiver_socket_id,
+    //     sender_id,
+    //     sender_name,
+    //     target_id,
+    //     target_title,
+    // } = item;
+    const [notification, setNotification] = useState({})
 
+
+    useEffect(() => {
+        setNotification(item);
+    }, [item])
+
+
+    const handleInteract = async (type) => {
+        if (type === 'delete') {
+            await updateInteracted(notification.notification_id);
+            setNotification({ ...notification, is_interacted: true });
+
+        } else if (type === 'confirm') {
+            await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
+            setNotification({ ...notification, is_interacted: true });
+        }
+    }
 
 
     const handleRender = () => {
-        switch (notification_type) {
+        switch (notification.notification_type) {
             case 1:
                 return <Invitation />
             case 2:
@@ -47,24 +65,24 @@ export default function Notification({
 
     const Invitation = () => (
         <div style={{ display: 'flex' }} >
-            <img className='image' src={image_url ? image_url : imgDefault} alt="" />
+            <img className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
 
             <div className='content'>
                 <Typography.Text >
-                    <b>{sender_name}</b> invited you: "<div title={notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification_content }}></div>"
+                    <b>{notification.sender_name}</b> invited you: "<div title={notification.notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification.notification_content }}></div>"
                 </Typography.Text>
 
 
-                <div className="interact" style={{ opacity: is_interacted ? '0' : '1', }}>
+                <div className="interact" style={{ display: notification.is_interacted ? 'none' : 'unset', }}>
                     <Button
                         type='primary'
-                        onClick={() => handleAcceptInvitation(notification_id, target_id, target_title)}
+                        onClick={() => handleInteract('confirm')}
                     >
                         Confirm
                     </Button>
 
                     <Button
-                        onClick={() => handleCancle(notification_id)}
+                        onClick={() => handleInteract('delete')}
                         style={{ marginLeft: "5px" }}
                     >
                         Delete
@@ -82,9 +100,11 @@ export default function Notification({
 
 
     return (
-        <div className="notification-item" key={key} style={{ background: is_viewed ? '' : '#daf1f985', cursor: "default" }} >
+        <div className="notification-item" key={key} style={{ background: notification.is_viewed ? '' : '#daf1f985', cursor: "default" }} >
             {handleRender()}
-            <div style={{ color: "#8f8f8f", fontSize: '13px' }} >{created_at}</div>
+            <div style={{ color: "#8f8f8f", fontSize: '13px' }} >{notification.created_at}</div>
         </div>
     )
 }
+
+export default memo(Notification);

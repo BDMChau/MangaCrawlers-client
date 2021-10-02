@@ -329,8 +329,9 @@
 .notifications-cont .notification-item .interact {
   margin-bottom: 10px;
   margin-top: 2px;
-  transition: 0.3s !important;
+  transition: 2s !important;
 }
+
 
 .notifications-cont .notification-item .interact button {
   font-weight: 500;

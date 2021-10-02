@@ -33,6 +33,8 @@ function NotificationService() {
         socket.on(EVENTS_NAME.FROM_SERVER_TO_SPECIFIC_USERS, (result) => {
             unshiftItem(result)
         });
+
+        setIsFirstRender(false);
     }, []);
 
 
@@ -72,8 +74,6 @@ function NotificationService() {
                         item.created_at = format.formatDate02(item.created_at);
                     });
 
-                    if (response.content.fromRow > 5) setIsFirstRender(false);
-
                     setFromRow(response.content.fromRow);
                     setNotifications(prev => [...prev, ...notificationsList]);
                 }
@@ -93,8 +93,6 @@ function NotificationService() {
 
     //////////////// services api ////////////////
     const readAll = async () => {
-        setIsFirstRender(false);
-
         const copy = [...notifications];
         notifications.forEach(item => {
             item.is_viewed = true;
@@ -111,26 +109,14 @@ function NotificationService() {
     }
 
 
-    const handleCancle = async (id) => {
-        setIsFirstRender(false);
-
-        // const copy = notifications.map(item => ({ ...item }));
-        // for (let i = 0; i < copy.length; i++) {
-        //     let item = copy[i];
-        //     if (item.notification_id === id) {
-        //         item.is_interacted = true;
-        //         break;
-        //     }
-        // }
-        // setNotifications(copy);
-
-        // call to server
+    const updateInteracted = async (id) => {
         try {
             const data = {
                 notification_id: id.toString()
             };
 
             await userApi.updateInteractedNotification(token, data);
+            return;
         } catch (err) {
             console.log(err)
         }
@@ -147,7 +133,8 @@ function NotificationService() {
 
             await userApi.acceptInvitation(token, data);
 
-            await handleCancle(notificationId);
+            await updateInteracted(notificationId);
+            return;
         } catch (err) {
             console.log(err)
         }
@@ -172,7 +159,7 @@ function NotificationService() {
                     isEnd={isEnd}
 
                     readAll={readAll}
-                    handleCancle={handleCancle}
+                    updateInteracted={updateInteracted}
                     handleAcceptInvitation={handleAcceptInvitation}
                 />
             }

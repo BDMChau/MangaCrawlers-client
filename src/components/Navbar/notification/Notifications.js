@@ -15,7 +15,7 @@ function Notifications({
 
     // funtions
     readAll,
-    handleCancle,
+    updateInteracted,
     handleAcceptInvitation
 }) {
     const scrollRef = useRef(null);
@@ -70,14 +70,13 @@ function Notifications({
 
             {notifications.length
                 ? <div className="notifications-cont" onScroll={(e) => getMoreHistoryNotifications(e)} ref={scrollRef}>
-
                     {notifications.map((item, i) => (
                         <>
                             <Notification
                                 item={item}
                                 key={i}
 
-                                handleCancle={handleCancle}
+                                updateInteracted={updateInteracted}
                                 handleAcceptInvitation={handleAcceptInvitation}
                             />
                         </>

@@ -1,15 +1,15 @@
 import React from 'react'
 import { motion } from "framer-motion";
 
-export default function TransitionAnimate({ renderPart, transitionTime }) {
+export default function TransitionAnimate({ renderPart, transitionTime, initOpacity, EndOpacity }) {
     return (
         <motion.div
             className="block"
             animate={{
-                opacity: 1,
+                opacity: EndOpacity ? EndOpacity : 1,
             }}
             initial={{
-                opacity: 0,
+                opacity: initOpacity ? initOpacity : 0,
             }}
             transition={{ duration: transitionTime ? transitionTime : 0.3 }}
         >
