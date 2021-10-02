@@ -113,6 +113,7 @@ function TopNav({ handleLogOut, genres }) {
         genres
             ? genres.map((genre, i) => (
                 <Menu.Item
+                    title="Genres of Manga"
                     key={i}
                     title={genre.genre_name}
                     onClick={() => history.push(`/manga/genre/tag?v=${genre.genre_id}`)}
@@ -130,7 +131,7 @@ function TopNav({ handleLogOut, genres }) {
     const RenderLeft = () => {
         return (
             <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
-                <Menu.Item key="Home">
+                <Menu.Item key="Home" title="Home">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
                 <SubMenu
@@ -145,10 +146,10 @@ function TopNav({ handleLogOut, genres }) {
 
     const renderAccountDropDown = () => (
         <>
-            <Menu.Item key="profile" onClick={() => openProfileDrawer()}>
+            <Menu.Item key="profile" onClick={() => openProfileDrawer()} title="Profile">
                 Profile
             </Menu.Item>
-            <Menu.Item key="logOut" onClick={() => handleLogOut()}>
+            <Menu.Item key="logOut" onClick={() => handleLogOut()} title="Log out">
                 Log out
             </Menu.Item>
         </>
@@ -168,10 +169,10 @@ function TopNav({ handleLogOut, genres }) {
             </Menu>
 
             : <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
-                <Menu.Item key="openSignIn" onClick={() => openSignInModal()}>
+                <Menu.Item key="openSignIn" onClick={() => openSignInModal()} title="Sign in" >
                     Signin
                 </Menu.Item>
-                <Menu.Item key="openSignUp" onClick={() => openSignUpModal()}>
+                <Menu.Item key="openSignUp" onClick={() => openSignUpModal()} title="Register">
                     Register
                 </Menu.Item>
             </Menu>

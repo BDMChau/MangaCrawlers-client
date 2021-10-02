@@ -7,7 +7,17 @@ import Notification from './Notification';
 import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 
 
-function Notifications({isFirstRender, getListNotifications, notifications, isEnd, readAll }) {
+function Notifications({
+    isFirstRender,
+    getListNotifications,
+    notifications,
+    isEnd,
+
+    // funtions
+    readAll,
+    handleCancle,
+    handleAcceptInvitation
+}) {
     const scrollRef = useRef(null);
 
 
@@ -17,7 +27,7 @@ function Notifications({isFirstRender, getListNotifications, notifications, isEn
 
         if (myRef) {
             // when first loading
-            if(isFirstRender) myRef.scrollTop = 0;
+            if (isFirstRender) myRef.scrollTop = 0;
             else myRef.scrollTop = myRef.scrollTop;
         }
     })
@@ -63,7 +73,13 @@ function Notifications({isFirstRender, getListNotifications, notifications, isEn
 
                     {notifications.map((item, i) => (
                         <>
-                            <Notification item={item} key={i} />
+                            <Notification
+                                item={item}
+                                key={i}
+
+                                handleCancle={handleCancle}
+                                handleAcceptInvitation={handleAcceptInvitation}
+                            />
                         </>
                     ))}
 

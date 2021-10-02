@@ -119,7 +119,15 @@ const userApi = {
                 Authorization: token
             }
         });
-    }
+    },
+    updateInteractedNotification: (token, data) => {
+        const uri = '/api/notification/update_interacted';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 };
 
 export default userApi;

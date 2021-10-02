@@ -16,7 +16,6 @@
   height: 70px;
 }
 
-
 /* .ant-menu-submenu-title{
   background-color: red;
 } */
@@ -122,11 +121,8 @@
   top: -6px;
   left: 0;
   height: 2px;
-  background: #4b9eeb
+  background: #4b9eeb;
 }
-
-
-
 
 .barsBtn:after {
   top: auto;
@@ -198,12 +194,11 @@
 }
 
 /* custom dropdown genres */
-.list-genres-dropdown ul{
+.list-genres-dropdown ul {
   display: flex;
   flex-wrap: wrap;
   width: 550px;
 }
-
 
 .list-genres-dropdown ul::-webkit-scrollbar {
   width: 10px;
@@ -223,8 +218,6 @@
   background: RGB(150, 150, 150);
 }
 
-
-
 /* animation */
 @keyframes fadedAnimate2 {
   0% {
@@ -236,19 +229,15 @@
   }
 }
 
-
 @media only screen and (min-width: 375px) and (max-width: 414px) {
-  .list-genres-dropdown ul#item_1\$Menu{
+  .list-genres-dropdown ul#item_1\$Menu {
     display: flex;
     width: 250px;
   }
 }
 
-
-
-
 /* /////////// notification /////////// */
-.popover-notification{
+.popover-notification {
   left: unset !important;
   right: 50px !important;
   top: 75px !important;
@@ -258,30 +247,29 @@
   border-radius: 50%;
 }
 
-.popover-notification .ant-popover-inner-content{
+.popover-notification .ant-popover-inner-content {
   padding: 0 !important;
 }
 
-.popover-notification .ant-popover-arrow{
+.popover-notification .ant-popover-arrow {
   visibility: hidden;
   opacity: 0;
 }
 
-.notification-title{
+.notification-title {
   padding: 10px 10px 0 10px;
   display: flex;
 }
 
-.notification-title h3.ant-typography{
+.notification-title h3.ant-typography {
   margin: 0;
 }
 
-.notifications-cont{
+.notifications-cont {
   width: 100%;
   max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
-
 }
 
 .notifications-cont::-webkit-scrollbar {
@@ -303,7 +291,7 @@
   background: RGB(150, 150, 150);
 }
 
-.notifications-cont .notification-item{
+.notifications-cont .notification-item {
   padding: 10px 10px;
   margin: 10px 10px;
   border-radius: 3px;
@@ -315,19 +303,38 @@
   transition: 0.3s;
 }
 
-.notifications-cont .notification-item:hover{
+.notifications-cont .notification-item:hover {
   box-shadow: 0px 3px 5px 0 #b3b3b4;
 }
 
-.notifications-cont .notification-item .image{
+.notifications-cont .notification-item .image {
   width: 40px;
   height: 40px;
   border-radius: 5px;
 }
 
-.notifications-cont .notification-item .content{
-  margin-left: 5px; 
-  max-height: 70px; 
+.notifications-cont .notification-item .content {
+  margin-left: 5px;
+  max-height: 110px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.notifications-cont .notification-item .content span.ant-typography {
+  max-height: 71px;
   overflow: hidden;
 }
 
+.notifications-cont .notification-item .interact {
+  margin-bottom: 10px;
+  margin-top: 2px;
+  transition: 0.3s !important;
+}
+
+.notifications-cont .notification-item .interact button {
+  font-weight: 500;
+  width: 110px;
+  height: 32px;
+  border-radius: 5px;
+}

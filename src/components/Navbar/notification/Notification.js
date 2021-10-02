@@ -1,11 +1,16 @@
 import React from 'react'
 import "../Navbar.css"
 
-import { Typography } from 'antd';
+import { Typography, Button } from 'antd';
 
 
-export default function Notification({ item, key }) {
-    const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
+export default function Notification({
+    item,
+    key,
+
+    handleCancle,
+    handleAcceptInvitation
+}) {
     const {
         created_at,
         image_url,
@@ -23,6 +28,8 @@ export default function Notification({ item, key }) {
         target_id,
         target_title,
     } = item;
+    const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
+
 
 
     const handleRender = () => {
@@ -46,8 +53,27 @@ export default function Notification({ item, key }) {
                 <Typography.Text >
                     <b>{sender_name}</b> invited you: "<div title={notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification_content }}></div>"
                 </Typography.Text>
+
+
+                <div className="interact" style={{ opacity: is_interacted ? '0' : '1', }}>
+                    <Button
+                        type='primary'
+                        onClick={() => handleAcceptInvitation(notification_id, target_id, target_title)}
+                    >
+                        Confirm
+                    </Button>
+
+                    <Button
+                        onClick={() => handleCancle(notification_id)}
+                        style={{ marginLeft: "5px" }}
+                    >
+                        Delete
+                    </Button>
+                </div>
+
+
             </div>
-        </div>
+        </div >
     )
 
     const FriendRequest = ({ }) => (

@@ -60,7 +60,7 @@ function NotificationService() {
 
             try {
                 const response = await userApi.getNotifications(token, data);
-                console.log(response)
+
                 if (response.content.msg) {
                     const notificationsList = response.content.notifications_list;
                     if (notificationsList.length === 0 || notificationsList < 5) {
@@ -72,7 +72,7 @@ function NotificationService() {
                         item.created_at = format.formatDate02(item.created_at);
                     });
 
-                    if(response.content.fromRow > 5) setIsFirstRender(false);
+                    if (response.content.fromRow > 5) setIsFirstRender(false);
 
                     setFromRow(response.content.fromRow);
                     setNotifications(prev => [...prev, ...notificationsList]);
@@ -90,13 +90,15 @@ function NotificationService() {
     }
 
 
-    const readAll = async () => {
-        const copy = [...notifications];
 
+    //////////////// services api ////////////////
+    const readAll = async () => {
+        setIsFirstRender(false);
+
+        const copy = [...notifications];
         notifications.forEach(item => {
             item.is_viewed = true;
         })
-
         setNotifications(copy);
 
         // call to server
@@ -109,6 +111,51 @@ function NotificationService() {
     }
 
 
+    const handleCancle = async (id) => {
+        setIsFirstRender(false);
+
+        // const copy = notifications.map(item => ({ ...item }));
+        // for (let i = 0; i < copy.length; i++) {
+        //     let item = copy[i];
+        //     if (item.notification_id === id) {
+        //         item.is_interacted = true;
+        //         break;
+        //     }
+        // }
+        // setNotifications(copy);
+
+        // call to server
+        try {
+            const data = {
+                notification_id: id.toString()
+            };
+
+            await userApi.updateInteractedNotification(token, data);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    const handleAcceptInvitation = async (notificationId, targetId, targetTitle) => {
+        setIsFirstRender(false);
+        // call to server
+        try {
+            const data = {
+                notification_id: notificationId.toString()
+            };
+
+            await userApi.acceptInvitation(token, data);
+
+            await handleCancle(notificationId);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+
+
     return (
         <Popover
             overlayClassName="popover-notification"
@@ -118,17 +165,19 @@ function NotificationService() {
             onVisibleChange={(e) => setVisible(e)}
             content={
                 <NotificationsService
-                isFirstRender={isFirstRender}
+                    isFirstRender={isFirstRender}
                     getListNotifications={getListNotifications}
                     notifications={notifications}
 
                     isEnd={isEnd}
 
                     readAll={readAll}
+                    handleCancle={handleCancle}
+                    handleAcceptInvitation={handleAcceptInvitation}
                 />
             }
         >
-            <Menu.Item key="notification">
+            <Menu.Item key="notification" title="Notifications" >
                 <Badge count={badgeCount} >
                     <BellOutlined style={{ fontSize: "20px" }} />
                 </Badge>
