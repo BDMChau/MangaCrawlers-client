@@ -104,6 +104,14 @@ const userApi = {
             data
         });
     },
+    getNotifications: (token, data) => {
+        const uri = '/api/notification/get_list_notification';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    }
 };
 
 export default userApi;

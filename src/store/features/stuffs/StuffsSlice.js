@@ -10,11 +10,14 @@ const StuffsSlice = createSlice({
             } else if (state[0] === false || state[0] === true) {
                 state[0] = action.payload;
             }
+        },
+        SET_VISIBLE_STATE_POPOVER_NOTIFICATION: (state, action) => {
+            state[1] = action.payload;
         }
     }
 });
 
 const { actions, reducer } = StuffsSlice;
-export const { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } = actions;
+export const { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE, SET_VISIBLE_STATE_POPOVER_NOTIFICATION } = actions;
 
 export default reducer;
