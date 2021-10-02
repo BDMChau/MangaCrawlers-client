@@ -13,7 +13,7 @@ import SignInService from "../../pages/Auth/SignIn/SignInService";
 
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 import { socketActions } from "socket/socketClient";
-import NotificationMain from "./notification/NotificationMain";
+import NotificationService from "./notification/NotificationService";
 
 
 const { SubMenu } = Menu;
@@ -158,10 +158,7 @@ function TopNav({ handleLogOut, genres }) {
     const RenderRight = () => (
         isUserSignIn
             ? <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
-
-                <NotificationMain />
-
-
+                <NotificationService />
 
                 <SubMenu
                     title="Account"
