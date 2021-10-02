@@ -111,6 +111,14 @@ const userApi = {
                 Authorization: token
             }
         });
+    },
+    updateViewedNotifications: (token) => {
+        const uri = '/api/notification/update_viewed';
+        return axiosClient.post(uri, {}, {
+            headers: {
+                Authorization: token
+            }
+        });
     }
 };
 

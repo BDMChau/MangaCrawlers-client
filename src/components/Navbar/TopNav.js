@@ -7,21 +7,20 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/features/auth/AuthSlice";
 
-import { Layout, Menu, Button, Drawer, Badge, Popover, Typography } from "antd";
-import { BellOutlined } from "@ant-design/icons";
+import { Layout, Menu, Button, Drawer, Badge, Popover } from "antd";
 import SignUpService from "../../pages/Auth/SignUp/SignUpService";
 import SignInService from "../../pages/Auth/SignIn/SignInService";
 
 import UserProfileService from "../../pages/User/UserProfile/UserProfileService";
 import { socketActions } from "socket/socketClient";
-import Notification from "./notification/Notification";
+import NotificationMain from "./notification/NotificationMain";
 
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
 
 
-function TopNav({ handleLogOut, genres, notifications, getListNotifications, isEnd }) {
+function TopNav({ handleLogOut, genres }) {
     const authState = useSelector((state) => state.authState);
     const userState = useSelector((state) => state.userState);
     const [isUserSignIn, setIsUserSignIn] = useState(false);
@@ -33,10 +32,6 @@ function TopNav({ handleLogOut, genres, notifications, getListNotifications, isE
     const [isVisibleProfileDrawer, setIsVisibleProfileDrawer] = useState(false);
     const history = useHistory(false);
 
-    // notification form
-    const [visible, setVisible] = useState(false);
-
-    const scrollRef = useRef(null);
 
     // handle open close modal SignIn SignUp
     useEffect(() => {
@@ -113,34 +108,6 @@ function TopNav({ handleLogOut, genres, notifications, getListNotifications, isE
     }
 
 
-    ////////// scroll //////////
-    useEffect(() => {
-        let myRef = scrollRef.current;
-
-        if (myRef) {
-            const currentScroll = myRef.scrollTop + myRef.clientHeight;
-
-            // when first loading
-            myRef.scrollTop = 0;
-        }
-    })
-
-    const getMoreHistoryNotifications = async (e) => {
-        const bottom = e.target.scrollHeight - e.target.clientHeight;
-
-        if (e.target.scrollTop === bottom) {
-            console.log("ascac")
-            let myRef = scrollRef.current;
-
-            await getListNotifications();
-
-            if (!isEnd) {
-                myRef.scrollTop = bottom;
-            }
-        }
-    }
-
-
 
     const renderGenresDropDown = () => (
         genres
@@ -192,28 +159,7 @@ function TopNav({ handleLogOut, genres, notifications, getListNotifications, isE
         isUserSignIn
             ? <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
 
-                <Popover
-                    overlayClassName="popover-notification"
-                    style={{ background: "red" }}
-                    trigger="click"
-                    visible={true}
-                    onVisibleChange={(e) => setVisible(e)}
-                    content={
-                        notifications.length
-                            ? <div className="notifications-cont" onScroll={(e) => getMoreHistoryNotifications(e)} ref={scrollRef}>
-                                {notifications.map((item, i) => (
-                                    <Notification item={item} key={i} />
-                                ))}
-                            </div>
-                            : <Typography.Text>You dont have any notifications :(</Typography.Text>
-                    }
-                >
-                    <Menu.Item key="notification">
-                        <Badge count={1} >
-                            <BellOutlined style={{ fontSize: "20px" }} />
-                        </Badge>
-                    </Menu.Item>
-                </Popover>
+                <NotificationMain />
 
 
 

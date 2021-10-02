@@ -267,6 +267,15 @@
   opacity: 0;
 }
 
+.notification-title{
+  padding: 10px 10px 0 10px;
+  display: flex;
+}
+
+.notification-title h3.ant-typography{
+  margin: 0;
+}
+
 .notifications-cont{
   width: 100%;
   max-height: 400px;
@@ -276,8 +285,22 @@
 }
 
 .notifications-cont::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+}
+
+.notifications-cont::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notifications-cont::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.notifications-cont::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
 }
 
 .notifications-cont .notification-item{

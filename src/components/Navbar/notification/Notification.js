@@ -1,6 +1,8 @@
-import { Typography } from 'antd';
-import React, { useEffect } from 'react'
+import React from 'react'
 import "../Navbar.css"
+
+import { Typography } from 'antd';
+
 
 export default function Notification({ item, key }) {
     const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';

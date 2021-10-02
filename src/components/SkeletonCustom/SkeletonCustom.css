@@ -1,9 +1,17 @@
 span.ant-skeleton-avatar-square {
-  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.ant-skeleton-avatar {
+  margin-top: 10px;
 }
 
 .skeleton-custom .ant-skeleton-content{
   width: 100%;
+}
+
+.skeleton-custom .ant-skeleton-content .ant-skeleton-paragraph{
+  margin-top: 17px !important;
 }
 
 .skeleton-custom .ant-skeleton-content h3.ant-skeleton-title,
