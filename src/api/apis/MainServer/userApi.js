@@ -104,6 +104,15 @@ const userApi = {
             data
         });
     },
+    removeMember: (token, data) => {
+        const uri = '/api/user/remove_member';
+        return axiosClient.delete(uri, {
+            headers: {
+                Authorization: token
+            },
+            data
+        });
+    },
     getNotifications: (token, data) => {
         const uri = '/api/notification/get_list_notification';
         return axiosClient.post(uri, data, {

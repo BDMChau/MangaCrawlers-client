@@ -3,8 +3,8 @@ import "./TransGroup.css"
 import { Row, Typography, Tabs, Table, Col, Spin, Button, Popconfirm, AutoComplete, Avatar } from 'antd';
 import FormCreateProject from '../../../../components/Form/FormCreateProject/FormCreateProject';
 import ListVersion02 from '../../../../components/List/ListVersion02/ListVersion02';
-import columns from './ColumnsTableMembers';
 import { useSelector } from 'react-redux';
+import tableColumns from './ColumnsTableMembers';
 
 
 const { TabPane } = Tabs;
@@ -28,6 +28,7 @@ export default function TransGroup({
     setValToSearch,
     setUsersSearchResult,
     usersSearchResult,
+    handleRemoveUser,
 
     inviteUser
 }) {
@@ -80,7 +81,7 @@ export default function TransGroup({
                                                 value={valToSearch}
                                                 type="tag"
                                                 defaultActiveFirstOption
-                                                placeholder="Invite collaborator..."
+                                                placeholder="Invite a collaborator..."
                                                 title="Search by email"
                                             >
                                                 {usersSearchResult.length
@@ -105,7 +106,7 @@ export default function TransGroup({
                                                     visibility: valToSearch ? 'visible' : 'hidden',
                                                     transition: "0.3s"
                                                 }}
-                                                onClick={() => inviteUser(valToSearch, transGrInfo)}
+                                                onClick={() => {inviteUser(valToSearch, transGrInfo); setValToSearch("")}}
                                             >
                                                 Invite
                                             </Button>
@@ -116,7 +117,7 @@ export default function TransGroup({
 
                                 <Table
                                     className="members-table"
-                                    columns={columns}
+                                    columns={tableColumns(userState[0]?.user_email, transGrInfo.transgroup_email, handleRemoveUser)}
                                     dataSource={users}
                                     pagination={true}
                                 />

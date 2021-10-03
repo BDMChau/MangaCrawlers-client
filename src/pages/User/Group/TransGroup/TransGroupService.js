@@ -79,7 +79,7 @@ export default function TransGroupService() {
             const users = response.content.list_user;
             users.forEach(user => {
                 if (user.user_email === transGroup.transgroup_email) {
-                    user.role = "Lead"
+                    user.role = "Admin"
                 } else {
                     user.role = "Member";
                 }
@@ -220,9 +220,8 @@ export default function TransGroupService() {
     }
 
 
-    const inviteUser = async (val, transGr) => {
+    const inviteUser = (val, transGr) => {
         const user_email = val;
-        const message = `invitaion to join team ${transGr.transgroup_name}`
 
         const data = {
             type: 1,
@@ -231,13 +230,44 @@ export default function TransGroupService() {
             user_id: userState[0].user_id,
             list_to: user_email ? [user_email] : [],
             obj_data: {
-                target_id: transGrInfo.transgroup_id.toString(),
+                target_id: transGr.transgroup_id.toString(),
                 target_title: "transgroup"
             }
         }
 
-        socketActions.sendMessageToServer(data)
+        socketActions.sendMessageToServer(data);
+        notification_success("Sent your invitation!")
     }
+
+
+    const handleRemoveUser = async (userId) => {
+        const data = {
+            member_id: userId
+        }
+
+        try {
+            const response = await userApi.removeMember(token, data);
+            if (response.content.err_code === 1) {
+                notification_error("You are not allowed to do this action!");
+                return;
+            } else if(response.content.err_code === 2){
+                notification_error("You cannot remove an admin team!");
+                return;
+            }
+            const memberName = response.content.member_name;
+            const memberId = response.content.member_id;
+
+            const remainingUsers = users.filter(user => user.user_id !== memberId);
+            console.log(remainingUsers)
+            setUsers(remainingUsers);
+
+            notification_success(`removed ${memberName} from your team!`)
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     const onChangeFile = (info) => {
         console.log("file to upload: ", info)
@@ -261,9 +291,9 @@ export default function TransGroupService() {
             <Upload
                 showUploadList={false}
                 {...propsUploadImg}
-                style={{display:"none"}}
+                style={{ display: "none" }}
             >
-                
+
             </Upload>
 
             <TransGroup
@@ -285,6 +315,7 @@ export default function TransGroupService() {
                 valToSearch={valToSearch}
                 setUsersSearchResult={setUsersSearchResult}
                 usersSearchResult={usersSearchResult}
+                handleRemoveUser={handleRemoveUser}
 
                 inviteUser={(val, transGr) => inviteUser(val, transGr)}
             />
