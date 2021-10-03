@@ -261,8 +261,9 @@ export default function TransGroupService() {
             <Upload
                 showUploadList={false}
                 {...propsUploadImg}
+                style={{display:"none"}}
             >
-                ascac
+                
             </Upload>
 
             <TransGroup

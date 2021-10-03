@@ -4,6 +4,7 @@ import TopNav from './TopNav'
 import { LOGOUT } from "../../store/features/user/UserSlice";
 import { message_success } from '../alerts/message';
 import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
+import Cookies from 'universal-cookie';
 
 
 function NavbarService() {
@@ -11,7 +12,7 @@ function NavbarService() {
     const genresState = useSelector(state => state.mangaState[2]);
     const [genres, setGenres] = useState([])
 
-
+    const cookies = new Cookies();
 
    
     useEffect(() => {

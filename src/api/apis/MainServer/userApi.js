@@ -128,6 +128,14 @@ const userApi = {
             }
         });
     },
+    acceptInvitationToJoinTem: (token, data) => {
+        const uri = '/api/user/accept_to_join_team';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 };
 
 export default userApi;

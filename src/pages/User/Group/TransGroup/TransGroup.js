@@ -47,7 +47,7 @@ export default function TransGroup({
                         {
                             isLogin
                                 ? <div style={{ display: "flex", flexDirection: "column", marginLeft: "15px" }} >
-                                    <Typography.Text style={{ color: "#FF4D4F", }} >Did you just created this team, right?</Typography.Text>
+                                    <Typography.Text style={{ color: "#FF4D4F", }} >Did you just created or joined this team, right?</Typography.Text>
                                     <Typography.Text style={{ color: "#FF4D4F" }} >Please login again before visit this page in the first time!</Typography.Text>
                                 </div>
                                 : ""

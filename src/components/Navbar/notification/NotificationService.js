@@ -5,15 +5,18 @@ import { Menu, Badge, Popover } from 'antd'
 import { BellOutlined } from "@ant-design/icons";
 import NotificationsService from './Notifications';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_TRANSGROUP_ID} from 'store/features/user/UserSlice';
+
 import { socket } from 'socket/socketClient';
 import userApi from 'api/apis/MainServer/userApi';
 import { format } from 'helpers/format';
 import EVENTS_NAME from 'socket/features/eventsName';
+import { message_error, message_success } from 'components/alerts/message';
 
 
 function NotificationService() {
-    const userState = useSelector(state => state.userState);
+    const dispatch = useDispatch();
 
     const [fromRow, setFromRow] = useState(0)
     const [notifications, setNotifications] = useState([])
@@ -40,8 +43,8 @@ function NotificationService() {
 
 
     useEffect(() => {
-        if (userState[0]) getListNotifications();
-    }, [userState[0]])
+        getListNotifications();
+    }, [])
 
 
     useEffect(() => {
@@ -65,14 +68,15 @@ function NotificationService() {
 
                 if (response.content.msg) {
                     const notificationsList = response.content.notifications_list;
-                    if (notificationsList.length === 0 || notificationsList < 5) {
-                        setIsEnd(true);
-                        return;
-                    }
-
                     notificationsList.forEach(item => {
                         item.created_at = format.formatDate02(item.created_at);
                     });
+
+                    if (notificationsList.length === 0 || notificationsList.length < 5) {
+                        setIsEnd(true);
+                        setNotifications(prev => [...prev, ...notificationsList]);
+                        return;
+                    }
 
                     setFromRow(response.content.fromRow);
                     setNotifications(prev => [...prev, ...notificationsList]);
@@ -127,14 +131,23 @@ function NotificationService() {
         setIsFirstRender(false);
         // call to server
         try {
-            const data = {
-                notification_id: notificationId.toString()
-            };
+            if(targetTitle === 'transgroup'){
+                const data = {
+                    transgroup_id: targetId.toString()
+                };
+    
+                const response = await userApi.acceptInvitationToJoinTem(token, data);
+                if(response.content.err){
+                    message_error('You were in a team, cannot join more than one in a time!', 4);
+                    return false;
+                }
 
-            await userApi.acceptInvitation(token, data);
+                dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
+                message_success('Joined ^^!');
+            }
 
             await updateInteracted(notificationId);
-            return;
+            return true;
         } catch (err) {
             console.log(err)
         }

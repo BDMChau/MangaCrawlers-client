@@ -44,8 +44,10 @@ function Notification({
             setNotification({ ...notification, is_interacted: true });
 
         } else if (type === 'confirm') {
-            await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
-            setNotification({ ...notification, is_interacted: true });
+            const response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
+            if(response){
+                setNotification({ ...notification, is_interacted: true });
+            }
         }
     }
 
@@ -73,7 +75,7 @@ function Notification({
                 </Typography.Text>
 
 
-                <div className="interact" style={{ display: notification.is_interacted ? 'none' : 'unset', }}>
+                <div className="interact" style={{ display: notification.is_interacted || !notification.target_id ? 'none' : 'unset', }}>
                     <Button
                         type='primary'
                         onClick={() => handleInteract('confirm')}

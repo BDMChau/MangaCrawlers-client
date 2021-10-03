@@ -30,6 +30,7 @@ function Notifications({
             if (isFirstRender) myRef.scrollTop = 0;
             else myRef.scrollTop = myRef.scrollTop;
         }
+
     })
 
 
