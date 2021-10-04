@@ -103,7 +103,7 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1800px) {
-  .home-bg .home-bg-img{
+  .home-bg .home-bg-img {
     height: 250px;
   }
 }
@@ -119,5 +119,11 @@
 
   .home-spacing-top {
     margin-left: -13px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .lastest h2 {
+    margin-left: 3px;
   }
 }

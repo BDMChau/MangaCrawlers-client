@@ -6,7 +6,7 @@ import { errCodeResCheking, code2xxCheking } from './checking/ErrResCheking';
 
 // Main server >> spring boot
 const axiosClient = axios.create({
-    baseURL: endPoint.product,
+    baseURL: endPoint.local,
     headers: {
     },
     paramsSerializer: params => {

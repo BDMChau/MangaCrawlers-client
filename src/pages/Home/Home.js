@@ -58,7 +58,7 @@ export default function Home({
                     </Col>
 
                     <Row justify={"center"} className="home-middle">
-                        <Col span={18} md={11} xl={10} xxl={14} className="lastest">
+                        <Col span={18} md={11} xl={10} xxl={14} xs={16} className="lastest">
                             <h2>Recently Added</h2>
 
                             <ListHomePagination mangas={latestMangas} />

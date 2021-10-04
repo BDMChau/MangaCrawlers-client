@@ -96,24 +96,24 @@
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .latest-cards .card {
-    width: 170px;
-    height: 230px;
+    width: 140px;
+    height: 190px;
   }
 
   .latest-cards .card .desc {
     font-size: 12px;
-    margin-top: -2px;
+    margin-top: -8px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .latest-cards .card {
-    width: 170px;
+    width: 160px;
     height: 210px;
   }
 
   .latest-cards .card .desc {
-    font-size: 10px;
+    font-size: 11px;
     margin-top: -7px;
   }
 }
@@ -126,9 +126,9 @@
   }
 
   .latest-cards .card {
-    margin: 5px 5px 5px 15px;
+    margin: 5px 0px 8px 14px;
     padding: 0;
-    width: 150px;
+    width: 160px;
     height: 210px;
   }
 

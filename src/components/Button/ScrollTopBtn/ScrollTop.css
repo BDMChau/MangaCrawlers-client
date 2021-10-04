@@ -42,8 +42,8 @@
     width: 40px;
     height: 40px;
     position: fixed;
-    top: 88%;
-    right: 10%;
+    bottom: 70px;
+    right: 6%;
   }
 
   .scroll-top-btn span.anticon.anticon-up {
