@@ -272,18 +272,19 @@ function BotYoutubeMusic({
     return (
         <Row style={{ margin: "5px 3px" }}>
             {isVisible
-                ? <YouTube
-                    className="iframe-youtube"
-                    // style={{display:"none"}}
-                    videoId={itemInfo.video_id ? itemInfo.video_id : ""}
-                    opts={{
-                        height: "200",
-                        width: "200",
-                    }}
-                    onReady={(e) => interactions.onReady(e)}
-                    onError={(e) => interactions.onError(e)}
-                    onEnd={() => setIsEndVid(true)}
-                />
+                ? <div style={{ display: "none" }}>
+                    <YouTube
+                        className="iframe-youtube"
+                        videoId={itemInfo.video_id ? itemInfo.video_id : ""}
+                        // opts={{
+                        //     height: "200",
+                        //     width: "200",
+                        // }}
+                        onReady={(e) => interactions.onReady(e)}
+                        onError={(e) => interactions.onError(e)}
+                        onEnd={() => setIsEndVid(true)}
+                    />
+                </div>
                 : ""
 
             }
@@ -312,15 +313,41 @@ function BotYoutubeMusic({
                                                                 mess.content[1].length
                                                                     ? mess.content[1].map((mess, i) => (
                                                                         mess.playing === true
-                                                                            ? <Typography.Text style={{ display: "block" }} >
-                                                                                <Typography.Text style={{ color: "red" }}>{i}</Typography.Text>)&nbsp;
-                                                                                <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
+                                                                            ? <Typography.Text
+                                                                                style={{
+                                                                                    display: "block",
+                                                                                    background: "#9f9ed57d",
+                                                                                    padding: "5px",
+                                                                                    borderRadius: "5px"
+                                                                                }}
+                                                                            >
+                                                                                <Typography.Text style={{ color: "#593bfffa", fontWeight: "600", fontSize: "15px" }} >{i + 1})</Typography.Text>&nbsp;
+                                                                                <a
+                                                                                    className="vid-title"
+                                                                                    href={`https://www.youtube.com/watch?v=${mess.video_id}`}
+                                                                                    title={mess.video_title}
+                                                                                    target="_blank"
+                                                                                    key={i}
+                                                                                >
                                                                                     {mess.video_title}
                                                                                 </a>
                                                                             </Typography.Text>
-                                                                            : <Typography.Text style={{ display: "block" }} >
-                                                                                <Typography.Text style={{ color: "#19A776" }}>{i}</Typography.Text>)&nbsp;
-                                                                                <a href={`https://www.youtube.com/watch?v=${mess.video_id}`} target="_blank" key={i}>
+                                                                            : <Typography.Text
+                                                                                style={{
+                                                                                    display: "block",
+                                                                                    background: "transparent",
+                                                                                    padding: "5px",
+                                                                                    borderRadius: "5px"
+                                                                                }}
+                                                                            >
+                                                                                <Typography.Text style={{ color: "#593bfffa", fontWeight: "600", fontSize: "15px" }}>{i + 1})</Typography.Text>&nbsp;
+                                                                                <a
+                                                                                    className="vid-title"
+                                                                                    href={`https://www.youtube.com/watch?v=${mess.video_id}`}
+                                                                                    title={mess.video_title}
+                                                                                    target="_blank"
+                                                                                    key={i}
+                                                                                >
                                                                                     {mess.video_title}
                                                                                 </a>
                                                                             </Typography.Text>

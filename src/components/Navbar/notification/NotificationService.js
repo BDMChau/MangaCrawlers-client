@@ -6,7 +6,7 @@ import { BellOutlined } from "@ant-design/icons";
 import NotificationsService from './Notifications';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_TRANSGROUP_ID} from 'store/features/user/UserSlice';
+import { SET_TRANSGROUP_ID } from 'store/features/user/UserSlice';
 
 import { socket } from 'socket/socketClient';
 import userApi from 'api/apis/MainServer/userApi';
@@ -15,7 +15,7 @@ import EVENTS_NAME from 'socket/features/eventsName';
 import { message_error, message_success } from 'components/alerts/message';
 
 
-function NotificationService() {
+function NotificationService({ isMobile }) {
     const dispatch = useDispatch();
 
     const [fromRow, setFromRow] = useState(0)
@@ -131,13 +131,13 @@ function NotificationService() {
         setIsFirstRender(false);
         // call to server
         try {
-            if(targetTitle === 'transgroup'){
+            if (targetTitle === 'transgroup') {
                 const data = {
                     transgroup_id: targetId.toString()
                 };
-    
+
                 const response = await userApi.acceptInvitationToJoinTem(token, data);
-                if(response.content.err){
+                if (response.content.err) {
                     message_error('You were in a team, cannot join more than one in a time!', 4);
                     return false;
                 }
@@ -177,9 +177,17 @@ function NotificationService() {
                 />
             }
         >
-            <Menu.Item key="notification" title="Notifications" >
-                <Badge count={badgeCount} >
-                    <BellOutlined style={{ fontSize: "20px" }} />
+            <Menu.Item key="notification" title="Notifications" icon={<BellOutlined style={{ fontSize: "22px" }} />} style={{ paddingTop: "3px" }} >
+                {isMobile ? "Notifications" : ""}
+
+                <Badge
+                    count={badgeCount}
+                    style={{
+                        position: 'absolute',
+                        right: isMobile ? '82px' : '0px',
+                        marginTop: '-23px',
+                    }}
+                >
                 </Badge>
             </Menu.Item>
         </Popover>

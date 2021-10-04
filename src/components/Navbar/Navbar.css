@@ -47,7 +47,13 @@
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
 .ant-menu-horizontal > .ant-menu-item-selected a {
   color: unset;
-  border-bottom: 2px solid transparent;
+  border-bottom: none !important;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-item-selected:hover {
+  color: unset;
+  border-bottom: none !important;
 }
 
 .menu-left .ant-menu-horizontal,
@@ -62,10 +68,12 @@
 
 .menuCon .ant-menu-item,
 .menuCon .ant-menu-submenu {
-  top: 2px !important;
-  background-color: transparent;
+  margin-top: 2px !important;
+  transition: 0.3s;
+  border-radius: 3px;
   font-size: 16px;
 }
+
 
 .menuCon .ant-menu-item {
   padding: 0px 5px;
@@ -294,7 +302,7 @@
 .notifications-cont .notification-item {
   padding: 10px 10px;
   margin: 10px 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   border-bottom: 1px solid #c0c0c0;
   display: flex;
   flex-direction: column;

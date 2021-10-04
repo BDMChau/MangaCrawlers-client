@@ -7,7 +7,9 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/features/auth/AuthSlice";
 
-import { Layout, Menu, Button, Drawer, Badge, Popover } from "antd";
+import { Layout, Menu, Button, Drawer } from "antd";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+
 import SignUpService from "../../pages/Auth/SignUp/SignUpService";
 import SignInService from "../../pages/Auth/SignIn/SignInService";
 
@@ -128,9 +130,9 @@ function TopNav({ handleLogOut, genres }) {
             : ""
     )
 
-    const RenderLeft = () => {
+    const RenderLeft = ({ isMobile }) => {
         return (
-            <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+            <Menu mode={isMobile ? "vertical" : "horizontal"} triggerSubMenuAction={isMobile ? 'click' : 'hover'} className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="Home" title="Home">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
@@ -144,31 +146,47 @@ function TopNav({ handleLogOut, genres }) {
     };
 
 
-    const renderAccountDropDown = () => (
+    const renderAccountDropDown = (isMobile) => (
         <>
-            <Menu.Item key="profile" onClick={() => openProfileDrawer()} title="Profile">
+            {isMobile ? <NotificationService isMobile={isMobile} /> : ""}
+            <Menu.Item key="profile" onClick={() => openProfileDrawer()} icon={<UserOutlined style={{ fontSize: "18px" }} />} title="Profile">
                 Profile
             </Menu.Item>
-            <Menu.Item key="logOut" onClick={() => handleLogOut()} title="Log out">
+            <Menu.Item key="logOut" icon={<LogoutOutlined style={{ fontSize: "18px" }} />} onClick={() => handleLogOut()} title="Log out">
                 Log out
             </Menu.Item>
         </>
 
     )
 
-    const RenderRight = () => (
+    const RenderRight = ({ isMobile }) => (
         isUserSignIn
-            ? <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
-                <NotificationService />
-
-                <SubMenu
-                    title="Account"
-                    popupClassName="list-account-dropdown"
-                    children={renderAccountDropDown()}
-                />
+            ? <Menu
+                mode={isMobile ? "vertical" : "horizontal"}
+                triggerSubMenuAction='click'
+                className="menu-left"
+                style={{ background: "transparent" }}
+            >
+                {isMobile
+                    ? <>
+                        <SubMenu
+                            title="Account"
+                            popupClassName="list-account-dropdown"
+                            children={renderAccountDropDown(isMobile)}
+                        />
+                    </>
+                    : <>
+                        <NotificationService />
+                        <SubMenu
+                            title="Account"
+                            popupClassName="list-account-dropdown"
+                            children={renderAccountDropDown(false)}
+                        />
+                    </>
+                }
             </Menu>
 
-            : <Menu mode="horizontal" className="menu-left" style={{ background: "transparent" }}>
+            : <Menu mode={isMobile ? "vertical" : "horizontal"} className="menu-left" style={{ background: "transparent" }}>
                 <Menu.Item key="openSignIn" onClick={() => openSignInModal()} title="Sign in" >
                     Signin
                 </Menu.Item>
@@ -181,7 +199,7 @@ function TopNav({ handleLogOut, genres }) {
     const renderMenu = () => {
         return (
             <nav className="menuBar">
-                <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} />
+                <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} style={{ cursor: "pointer" }} />
                 <div className="menuCon">
                     <div className="leftMenu"><RenderLeft /></div>
                     <div className="rightMenu"><RenderRight /></div>
@@ -198,8 +216,8 @@ function TopNav({ handleLogOut, genres }) {
                         onClose={onClose}
                         visible={state}
                     >
-                        <RenderLeft />
-                        <RenderRight />
+                        <RenderLeft isMobile={true} />
+                        <RenderRight isMobile={true} />
                     </Drawer>
                 </div>
             </nav>

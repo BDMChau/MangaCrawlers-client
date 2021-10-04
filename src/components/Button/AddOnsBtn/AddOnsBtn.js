@@ -28,7 +28,7 @@ export default function AddOnsBtn() {
 
     return (
         <div>
-            <Dropdown
+            {/* <Dropdown
                 className="addons-btn"
                 overlayClassName="dropdown-items"
                 overlay={dropDownItems}
@@ -39,8 +39,15 @@ export default function AddOnsBtn() {
                 <Button title="Add Ons">
                     <PlusOutlined style={{ fontSize: "20px", margin: "3px 0 0 -1.5px" }} />
                 </Button>
-            </Dropdown>
+            </Dropdown> */}
 
+            <Button
+                className="addons-btn music-btn"
+                title="Music"
+                onClick={() => setIsVisibleModal(true)}
+            >
+                <img src={stereo} alt="" style={{ height: "25px", margin: "0 0 0 -6px" }} />
+            </Button>
 
             {/* ///////////////////// */}
             <Modal

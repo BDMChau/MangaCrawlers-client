@@ -36,7 +36,9 @@ function BotYoutubeMusicService() {
 
     const [apiKey, setApiKey] = useState("");
 
-    const [isVisible, setIsVisible] = useState(false);
+    // **IMPORTANT: visible the <YouTube/>, have to reset when interact
+    const [isVisible, setIsVisible] = useState(false); 
+
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
 
@@ -122,7 +124,7 @@ function BotYoutubeMusicService() {
 
     // add to queue: allowToAddQueue is "true" when the first message has been saved in db
     useEffect(() => {
-        if (allowToAddQueue && Object.keys(itemInfo).length !== 0 && !isJumpTo) {
+        if (Object.keys(itemInfo).length !== 0 && !isJumpTo) {
             handleAddQueue(itemId, itemInfo.video_title)
         }
     }, [itemInfo, userId])
@@ -214,11 +216,12 @@ function BotYoutubeMusicService() {
                 opts.items = itemsInQueue;
 
             } else if (command === "/clear ") {
+                setIsVisible(false);
                 setItemId("");
                 setItemInfo({});
                 handleClearQueue();
-                setIsVisible(false)
             } else if (command === "/jump ") {
+                setIsVisible(false);
                 setItemId("");
                 setIsJumpTo(true);
 
@@ -238,8 +241,11 @@ function BotYoutubeMusicService() {
 
                 opts.id = itemToJump.video_id;
                 opts.title = itemToJump.video_title;
-                setIsJumpTo(false);
-                setIsVisible(true);
+                
+                setTimeout(() => {
+                    setIsJumpTo(false);
+                    setIsVisible(true);
+                }, 200);       
             }
 
             if (nonInteractiveCmds.includes(rawCommand)) {
@@ -252,15 +258,18 @@ function BotYoutubeMusicService() {
             // interactive commands
             if (itemId) {
                 if (command === "/stop ") {
-                    opts.id = itemId;
-                    opts.title = itemInfo.video_title;
+                    setIsVisible(false);
+                    setTimeout(() => {
+                        opts.id = itemId;
+                        opts.title = itemInfo.video_title;
 
-                    setItemId("");
-                    setItemInfo({});
+                        setItemId("");
+                        setItemInfo({});
 
-                    itemsInQueue.forEach(item => {
-                        item.playing = false;
-                    })
+                        itemsInQueue.forEach(item => {
+                            item.playing = false;
+                        })
+                    }, 100)
                 }
 
 
@@ -425,10 +434,9 @@ function BotYoutubeMusicService() {
 
         try {
             const response = await botMusicApi.postMessage(data);
-            if (response.content) {
-                console.log(response.content.user_id)
-                setAllowToAddQueue(true);
-            }
+
+            console.log(response.content.user_id)
+            setAllowToAddQueue(true);
         } catch (err) {
             console.log(err);
         }
@@ -460,10 +468,9 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.addToQueue(data);
             if (response.content) {
-
                 setItemsInQueue(prevIds => [...prevIds, response.content.new_item])
             }
-
+            return;
         } catch (e) {
             console.log(e)
         }
@@ -645,10 +652,8 @@ function BotYoutubeMusicService() {
             removeQueue(id);
 
         } else if (!userState[0] && sessionStorage.getItem("userId")) { // unregistered account
-            setTimeout(() => {
-                sessionStorage.removeItem("queue");
-                setItemsInQueue([]);
-            }, 300)
+            sessionStorage.removeItem("queue");
+            setItemsInQueue([]);
         }
     }
 
