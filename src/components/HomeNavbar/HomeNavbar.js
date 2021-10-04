@@ -29,7 +29,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
             </Menu>
 
 
-            <div className="result-box" style={{ height: searchValue ? searchResults.length ? "350px" : "200px" : "unset" }} >
+            <div className="result-box" style={{ maxHeight: searchValue ? searchResults.length ? "350px" : "200px" : "unset" }} >
                 {searchValue
                     ? searchResults.length
                         ? <TransitionAnimate renderPart={
