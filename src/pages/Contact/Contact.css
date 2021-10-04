@@ -1,0 +1,11 @@
+.contact-tabs .ant-tabs-nav {
+  margin: 0 auto 20px auto !important;
+  height: 185px;
+}
+
+@media only screen and (min-width: 375px) and (max-width: 767px) {
+  .contact-tabs .ant-tabs-nav {
+    margin: 0 auto 20px auto !important;
+    height: unset !important;
+  }
+}

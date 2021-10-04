@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from 'react'
+import "./Contact.css"
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { Col, Row, Tabs, Typography } from 'antd'
-
+import { enquireScreen, unenquireScreen } from 'enquire-js'
 
 const { TabPane } = Tabs
 
 export default function Contact() {
+    const [isMobile, setIsMobile] = useState(false)
     let location = useLocation()
     let history = useHistory()
     const [tabSelected, setTabSelected] = useState("");
+
+
+    useEffect(() => {
+        const enquireHandler = enquireScreen(mobile => {
+            if (isMobile !== mobile) {
+                setIsMobile(mobile)
+            }
+        }, "only screen and (min-width: 375px) and (max-width: 767px)")
+
+        return () => unenquireScreen(enquireHandler);
+    }, [])
+
 
     useEffect(() => {
         const paths = location.pathname.split("/");
         const tabKey = paths[1] === "legal" ? paths[2] : paths[1]
 
-
         setTabSelected(tabKey);
     }, [location])
 
     const renderContact = () => (
-        <div>
+        <div style={{ padding: "10px" }}>
             <Typography.Title level={3}>Contact us</Typography.Title>
 
             <div>
@@ -35,7 +48,7 @@ export default function Contact() {
     )
 
     const renderTerms = () => (
-        <div>
+        <div style={{ padding: "10px" }}>
             <Typography.Title level={3}>Terms of Service</Typography.Title>
 
             <div>
@@ -97,7 +110,7 @@ export default function Contact() {
     )
 
     const renderpolicy = () => (
-        <div>
+        <div style={{ padding: "10px" }}>
             <Typography.Title level={3}>Privacy Policy</Typography.Title>
 
             <div>
@@ -118,14 +131,23 @@ export default function Contact() {
 
 
     return (
-        <Row justify="center">
+        <Row justify="center" style={{ marginBottom: "30px" }} >
             <Col md={20} xxl={20} sm={24} xs={24}>
                 <Tabs
                     style={{ marginTop: "70px" }}
                     activeKey={tabSelected}
-                    tabPosition={"left"}
+                    tabPosition={isMobile ? "top" : "left"}
+                    setTabSelected={setTabSelected}
                     className="contact-tabs"
-                    onChange={(val) => val === "contact_us" ? history.push(`/${val}`) : history.push(`/legal/${val}`)}
+                    onChange={(key) => {
+                        if (key === "contact_us") {
+                            window.history.replaceState(null, null, `/${key}`)
+                        } else {
+                            window.history.replaceState(null, null, `/legal/${key}`)
+                        }
+
+                        setTabSelected(key)
+                    }}
                 >
                     <TabPane tab="Contact us" key="contact_us">
                         {renderContact()}

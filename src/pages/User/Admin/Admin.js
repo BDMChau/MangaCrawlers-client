@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Admin.css"
 import "./components/Tables/Tables.css"
 import "./components/Charts/Chart.css"
-import { Tabs, Layout, Drawer, Spin } from 'antd';
+import { Layout, Drawer, Spin } from 'antd';
 
 import { useHistory } from 'react-router';
 import { message_error } from "../../../components/alerts/message";
