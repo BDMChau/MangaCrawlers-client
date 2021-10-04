@@ -71,8 +71,20 @@
   margin-top: 2px !important;
   transition: 0.3s;
   border-radius: 3px;
-  font-size: 16px;
+  font-size: 17px;
+  font-weight: 400;
 }
+
+.menuCon .ant-menu-item:hover,
+.menuCon .ant-menu-submenu:hover {
+  /* box-shadow: 0px 0px 4px 0 #b3b3b4; */
+}
+
+.ant-menu-horizontal > .ant-menu-item::after, .ant-menu-horizontal > .ant-menu-submenu::after {
+  transition: 0s !important;
+}
+
+
 
 
 .menuCon .ant-menu-item {
@@ -95,7 +107,7 @@
 
 .leftMenu {
   float: left;
-  width: 240px;
+  width: 260px;
 }
 
 .rightMenu {

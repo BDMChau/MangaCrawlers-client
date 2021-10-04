@@ -13,6 +13,12 @@
 
 }
 
+
+.ant-card-meta-title{
+  margin-top: 3px;
+}
+
+
 .ant-layout {
   background: none !important;
 }

@@ -32,7 +32,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 .latest-cards .card .desc .desc-1,
@@ -73,19 +73,24 @@
     width: 160px;
     height: 210px;
   }
+
+  .latest-cards .card .desc {
+    font-size: 11px;
+    margin-top: -6px;
+  }
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1400px) {
   .latest-cards .card {
     padding: 0;
-    margin: 3px;
-    width: 135px;
-    height: 180px;
+    margin: 5px;
+    width: 150px;
+    height: 190px;
   }
 
   .latest-cards .card .desc {
-    font-size: 9px;
-    margin-top: -8px;
+    font-size: 10px;
+    margin-top: -6px;
   }
 }
 
@@ -103,8 +108,8 @@
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .latest-cards .card {
-    width: 135px;
-    height: 190px;
+    width: 170px;
+    height: 210px;
   }
 
   .latest-cards .card .desc {
@@ -134,8 +139,6 @@
 }
 
 @media only screen and (min-width: 415px) and (max-width: 600px) {
-
-
   .latest-cards .card {
     margin: 5px 10px;
     padding: 0;
