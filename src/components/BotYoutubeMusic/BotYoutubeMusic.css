@@ -117,7 +117,7 @@ form.form-input-bot
 form.form-input-bot .btn-send {
   border: none;
   height: 100%;
-  border-radius: 5px 15px 5px;
+  border-radius: 15px 5px 15px;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
