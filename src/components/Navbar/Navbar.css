@@ -3,17 +3,20 @@
 .header-nav {
   background: white;
   padding: 0;
-  box-shadow: 0px 0px 50px 0 var(--color-box-shadow);
   z-index: 999;
-  height: 70px;
+  height: 60px;
   animation: fadedAnimate2 0.3s;
 }
 
 .header-nav .menuBar {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
+  box-shadow: 0px 0px 10px 0px var(--color-box-shadow);
   overflow: hidden;
-  height: 70px;
+  height: 60px;
+  background: #ffffffe8;
+  position: fixed;
+  width: 100%;
 }
 
 /* .ant-menu-submenu-title{
@@ -23,9 +26,9 @@
 .logo {
   width: 70px;
   float: left;
-  transform: scale(3.5);
+  transform: scale(3.2);
   padding: 0px;
-  margin: 12px 30px 0px 50px;
+  margin: 12px 30px 0px 45px;
   /* background-image: url("../../assets/logo/logo2.svg"); */
   /* background-position: center;
   background-repeat: no-repeat;
@@ -68,22 +71,17 @@
 
 .menuCon .ant-menu-item,
 .menuCon .ant-menu-submenu {
-  margin-top: 2px !important;
-  transition: 0.3s;
+  margin-top: -1px !important;
+  transition: 0s;
   border-radius: 3px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 400;
 }
 
-.menuCon .ant-menu-item:hover,
-.menuCon .ant-menu-submenu:hover {
-  /* box-shadow: 0px 0px 4px 0 #b3b3b4; */
-}
 
 .ant-menu-horizontal > .ant-menu-item::after, .ant-menu-horizontal > .ant-menu-submenu::after {
   transition: 0s !important;
 }
-
 
 
 

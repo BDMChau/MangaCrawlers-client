@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-const cloudinary_name = process.env.REACT_APP_CLOUDINARY_NAME;
-const cloudinary_preset = process.env.REACT_APP_CLOUDINARY_PRESET;
+const cloudinary_name = mangacrawlers;
+const cloudinary_preset = preset01;
 
 const END_POINT = `https://api.cloudinary.com/v1_1/${cloudinary_name}/upload`;
 

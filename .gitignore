@@ -13,6 +13,7 @@
 
 # firebase
 /.firebase
+/functions
 
 # testing
 /coverage

@@ -411,7 +411,7 @@ function BotYoutubeMusic({
                     value={inputVal}
                     type="tag"
                     defaultActiveFirstOption
-                    placeholder="Input hear..."
+                    placeholder="/ to see all available commands"
                 >
                     {commands.length
                         ? commands.map((cmd, i) => (

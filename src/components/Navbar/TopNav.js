@@ -118,13 +118,12 @@ function TopNav({ handleLogOut, genres }) {
                     title="Genres of Manga"
                     key={i}
                     title={genre.genre_name}
-                    onClick={() => history.push(`/manga/genre/tag?v=${genre.genre_id}`)}
                     style={{
                         color: genre.genre_color,
                         width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
                         borderRadius: "3px"
                     }} >
-                    {genre.genre_name}
+                    <NavLink to={`/manga/genre/tag?v=${genre.genre_id}`} style={{ color: genre.genre_color }}>{genre.genre_name}</NavLink>
                 </Menu.Item>
             ))
             : ""

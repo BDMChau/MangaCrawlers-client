@@ -73,10 +73,19 @@ const routes = [
         component: React.lazy(() => import('../../pages/User/UserPage/UserPageService')),
         exact: true
     },
-
     {
         path: "/admin",
         component: React.lazy(() => import('../../pages/User/Admin/AdminService')),
+        exact: true
+    },
+    {
+        path: "/user/id", // query param
+        component: React.lazy(() => import('../../pages/User/UserInfo/UserInfoService')),
+        exact: true
+    },
+    {
+        path: "/:id/friends",
+        component: React.lazy(() => import('../../pages/User/Friends/FriendsService')),
         exact: true
     },
 
