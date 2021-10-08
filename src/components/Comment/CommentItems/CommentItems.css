@@ -3,6 +3,18 @@
   height: 6px;
 }
 
+.cmt-body {
+  border-radius: 8px;
+  padding: 7px 10px;
+  margin-top: -4px;
+}
+
+.item {
+  border-left: 0px solid #afafaf85;
+  border-radius: 0;
+  margin-top: 5px;
+}
+
 .comment-items::-webkit-scrollbar-track {
   background: transparent;
 }
@@ -22,11 +34,10 @@
 
 .comment {
   border-radius: 5px;
-  padding: 5px;
+  padding: 0px;
 }
 
 .comment-item .ant-comment-content {
-  background-color: red;
   padding: 5px;
   border-radius: 5px;
 }
@@ -86,15 +97,13 @@
 .cmt-children {
   border-radius: 5px;
   margin-left: 0;
-  padding: 5px;
+  padding: 0px;
 }
 
 .comment-item01 .ant-comment-content {
-  background-color: blue;
-  padding: 5px;
+  padding: 0px;
   border-radius: 5px;
 }
-
 
 .cmt-children .cmt-bottom .chapter-name {
   margin-right: 10px;
@@ -126,8 +135,7 @@
 }
 
 .comment-item02 .ant-comment-content {
-  background-color: purple;
-  padding: 5px;
+  padding: 0px;
   border-radius: 5px;
 }
 
@@ -186,4 +194,41 @@
   .comment .cmt-bottom .chapter-name {
     width: 130px;
   }
+
+  .modal-del-cmt {
+    margin-top: 300px !important;
+  }
+
+  .modal-del-cmt .ant-modal-content {
+    padding: 15px 10px !important;
+  }
+
+  .modal-del-cmt .ant-modal-body .ant-typography {
+    font-size: 14px !important;
+  }
+
+  .modal-del-cmt .ant-modal-body button {
+    margin-top: 20px !important;
+  }
+}
+
+.modal-del-cmt {
+  margin-top: 350px;
+}
+
+.modal-del-cmt .ant-modal-content {
+  padding: 20px;
+  height: 100px;
+  border-radius: 12px;
+}
+
+.modal-del-cmt .ant-modal-body .ant-typography {
+  font-size: 15px;
+}
+
+.modal-del-cmt .ant-modal-body button {
+  margin-left: 5px;
+  margin-top: 10px;
+  float: right;
+  border-radius: 3px;
 }

@@ -10,13 +10,13 @@ import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
 
 
-function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
+function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
     useEffect(() => {
         if (isScrollBottom === true) {
-            getCmtsManga()
+            getCmts()
 
             const timer = setTimeout(() => setIsScrollBottom(false), 700)
             return () => clearTimeout(timer);
@@ -41,16 +41,16 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
     }
 
 
-    const renderCmtTitle = (comment) => (
+    const CmtTitle = ({ comment }) => (
         <Typography.Text style={{ cursor: "default", fontSize: "14px", fontWeight: "500" }}>{comment.user_name}</Typography.Text>
     )
 
 
-    const renderCmtBody = (comment) => (
-        <div key={comment.manga_comment_id}>
+    const CmtBody = ({ comment, background }) => (
+        <div className="cmt-body" key={comment.manga_comment_id} style={{ background: background }} >
             <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
 
-            {renderCmtBottom(comment)}
+            <CmtBottom comment={comment} />
 
             <Typography.Text style={{ color: "#FF4D4F" }}>
                 {comment.is_error ? "Error, cannot add this comment!" : ""}
@@ -59,7 +59,7 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
     )
 
 
-    const renderCmtBottom = (comment) => (
+    const CmtBottom = ({ comment }) => (
         <div className="cmt-bottom">
             <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
                 {format.formatDate02(comment.manga_comment_time)}
@@ -68,9 +68,7 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
             <div className="interact">
                 <ButtonLike />
 
-                <InteractionForm />
-
-            
+                <InteractionForm cmtId={comment.manga_comment_id} deleteCmt={deleteCmt} />
             </div>
 
 
@@ -96,7 +94,7 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
                     <Comment
                         className="comment-item"
                         key={comment.manga_comment_id}
-                        author={renderCmtTitle(comment)}
+                        author={<CmtTitle comment={comment} />}
                         avatar={
                             <Avatar
                                 className="cmt-avatar"
@@ -108,16 +106,16 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
                         }
                         content={
                             <div className="comment">
-                                {renderCmtBody(comment)}
+                                <CmtBody comment={comment} background={"white"} />
 
-                                <div style={{ padding: comment.comments_level_01?.length ? "5px" : 0 }} >
+                                <div style={{ padding: comment.comments_level_01?.length ? "5px" : 0 }} className="item" >
                                     {
                                         comment.comments_level_01?.length
                                             ? comment.comments_level_01.map((cmt) => (
                                                 <Comment
                                                     className="comment-item01"
                                                     key={cmt.manga_comment_id}
-                                                    author={renderCmtTitle(comment)}
+                                                    author={<CmtTitle comment={comment} />}
                                                     avatar={
                                                         <Avatar
                                                             className="cmt-avatar"
@@ -128,16 +126,16 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
                                                     }
                                                     content={
                                                         <div className="cmt-children">
-                                                            {renderCmtBody(cmt)}
+                                                            <CmtBody comment={cmt} background={"grey"} />
 
-                                                            <div style={{ padding: cmt.comments_level02?.length ? "5px" : 0 }}>
+                                                            <div style={{ padding: cmt.comments_level_02?.length ? "5px" : 0 }} >
                                                                 {
-                                                                    cmt.comments_level02?.length
-                                                                        ? cmt.comments_level02.map((cmt02) => (
+                                                                    cmt.comments_level_02?.length
+                                                                        ? cmt.comments_level_02.map((cmt02) => (
                                                                             <Comment
                                                                                 className="comment-item02"
                                                                                 key={cmt02.manga_comment_id}
-                                                                                author={renderCmtTitle(comment)}
+                                                                                author={<CmtTitle comment={comment} />}
                                                                                 avatar={
                                                                                     <Avatar
                                                                                         className="cmt-avatar"
@@ -148,7 +146,7 @@ function CommentItems({ comments, getCmtsManga, isEndCmts, mangaId }) {
                                                                                 }
                                                                                 content={
                                                                                     <div className="cmt-children02">
-                                                                                        {renderCmtBody(cmt02)}
+                                                                                        <CmtBody comment={cmt02} background={"white"} />
                                                                                     </div>
                                                                                 }
                                                                             ></Comment>

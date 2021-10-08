@@ -27,6 +27,14 @@ const userApi = {
             }
         });
     },
+    deleteCmt: (token, data) => {
+        const uri = '/api/user/deletecomment';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     searchUsers: (token, data) => {
         const uri = '/api/user/searchusers';
         return axiosClient.post(uri, data, {

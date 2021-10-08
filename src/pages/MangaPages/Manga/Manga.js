@@ -31,13 +31,6 @@ function Manga({
     mangaStars,
     handleRatingManga,
 
-    addCmt,
-    isAddedCmt,
-    setIsAddedCmt,
-    comments,
-    getCmtsManga,
-    isEndCmts,
-
     setMangaId,
     setMangaName,
     setAuthorId,
@@ -262,14 +255,6 @@ function Manga({
                                 <div className="comments-body">
                                     <CommentContainter
                                         mangaId={manga.manga_id}
-
-                                        setIsAddedCmt={setIsAddedCmt}
-                                        isAddedCmt={isAddedCmt}
-                                        addCmt={(cmtContent) => addCmt(cmtContent)}
-                                        isEndCmts={isEndCmts}
-
-                                        getCmtsManga={getCmtsManga}
-                                        comments={comments}
                                     />
                                 </div>
 
