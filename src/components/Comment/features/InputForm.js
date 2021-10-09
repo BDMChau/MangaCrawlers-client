@@ -8,7 +8,6 @@ import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
 import userApi from 'api/apis/MainServer/userApi'
-import { TagsInput } from 'react-tag-input-component'
 
 
 
@@ -69,7 +68,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
         for (let i = 0; i < texts.length; i++) {
             const text = texts[i].replaceAll("&nbsp;", "");
             console.log(text)
-            if (text.startsWith("@")) {
+            if (text.match(/@/)) {
                 setTextToReplace(text);
                 debounceSearchUsers(text);
             } else {
@@ -123,7 +122,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             setCmtContent(value);
 
         } else if (type === "user") {
-            const content = cmtContent + `<TagsInput value={${value}}/>`
+            const content = cmtContent + `{${value}}`
             // console.log(content)
             setCmtContent(content.replace(textToReplace, ""));
             setTextToReplace("");
