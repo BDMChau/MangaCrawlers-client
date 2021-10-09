@@ -25,7 +25,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
     const cookies = new Cookies();
     const token = cookies.get("token");
 
-    
+
     // check error when add cmt
     useEffect(() => {
         if (isErrorCmt === true) {
@@ -114,21 +114,32 @@ export default function CommentContainter({ mangaId, chapterId }) {
     }
 
     const deleteCmt = async (id) => {
-        // if (!userState[0]) return message_error("You have to sign in first!");
+        if (!userState[0]) return message_error("You have to sign in first!");
 
-        // const data = mangaId ? { manga_comment_id: id } : { chapter_comment_id: id }
+        const data = mangaId
+            ? {
+                manga_comment_id: id,
+                comments: comments
+            }
+            : {
+                chapter_comment_id: id,
+                comments: comments
+            }
 
-        // try {
-        //     const response = await userApi.deleteCmt(token, data);
-        //     if (response.content.err) {
-        //         notification_error("Something wrong, please try again :(")
-        //         return;
-        //     }
+        try {
+            const response = await userApi.deleteCmt(token, data);
+            if (response.content.err) {
+                notification_error("Something wrong, please try again :(")
+                return;
+            }
+            const restCmts = response.content.comments
 
-        //     // notification_success("")
-        // } catch (err) {
-        //     console.log(err)
-        // }
+            console.log(restCmts)
+            setTimeout(() => setComments(restCmts), 200)
+        } catch (err) {
+            notification_error("Something wrong, please try again :(")
+            console.log(err)
+        }
     }
 
 

@@ -115,7 +115,7 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
                                                 <Comment
                                                     className="comment-item01"
                                                     key={cmt.manga_comment_id}
-                                                    author={<CmtTitle comment={comment} />}
+                                                    author={<CmtTitle comment={cmt} />}
                                                     avatar={
                                                         <Avatar
                                                             className="cmt-avatar"
@@ -135,7 +135,7 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
                                                                             <Comment
                                                                                 className="comment-item02"
                                                                                 key={cmt02.manga_comment_id}
-                                                                                author={<CmtTitle comment={comment} />}
+                                                                                author={<CmtTitle comment={cmt02} />}
                                                                                 avatar={
                                                                                     <Avatar
                                                                                         className="cmt-avatar"
