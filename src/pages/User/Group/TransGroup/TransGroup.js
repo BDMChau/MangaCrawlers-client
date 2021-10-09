@@ -86,14 +86,14 @@ export default function TransGroup({
                                             >
                                                 {usersSearchResult.length
                                                     ? usersSearchResult.map((user, i) => (
-                                                        <AutoComplete.Option key={i} value={user.user_email}>
+                                                        <AutoComplete >
                                                             <Avatar src={user.user_avatar} style={{ cursor: "default" }} alt="Avatar" />
                                                             <Typography.Text style={{ fontSize: "15px" }}>{user.user_name}</Typography.Text>
                                                             <div>
                                                                 <Typography.Text style={{ fontSize: "13px", color: "#646464c9", fontStyle: "italic" }}>{user.user_email}</Typography.Text>
 
                                                             </div>
-                                                        </AutoComplete.Option>
+                                                        </AutoComplete>
                                                     ))
                                                     : ""
                                                 }

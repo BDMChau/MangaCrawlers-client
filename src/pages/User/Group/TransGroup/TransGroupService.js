@@ -202,7 +202,8 @@ export default function TransGroupService() {
 
     const searchUsers = async () => {
         const data = {
-            value: valToSearch
+            value: valToSearch,
+            key: 1
         }
 
         try {

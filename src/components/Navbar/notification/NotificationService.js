@@ -159,7 +159,7 @@ function NotificationService({ isMobile }) {
     return (
         <Popover
             overlayClassName="popover-notification"
-            style={{ background: "red" }}
+            style={{ position: "fixed" }}
             trigger="click"
             visible={visible}
             onVisibleChange={(e) => setVisible(e)}

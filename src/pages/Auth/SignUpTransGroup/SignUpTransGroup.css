@@ -39,6 +39,7 @@
 
 .ant-popover-inner-content {
   border-radius: 3px;
+  padding: 3px;
 }
 
 /* this rule is in SignIn.css */

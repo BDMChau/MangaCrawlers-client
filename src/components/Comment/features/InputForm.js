@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import "../CommentContainter/CommentContainter.css"
 
-import { Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
+import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
 import ContentEditable from 'react-contenteditable'
 import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
+import { debounce } from 'lodash'
+import userApi from 'api/apis/MainServer/userApi'
+import { TagsInput } from 'react-tag-input-component'
 
 
 
@@ -17,12 +20,20 @@ const fileTypesAllowed = [
 ]
 
 
-export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
-    const sticker_collection01 = require("../../../utils/sticker.json").stickers_collection01
+
+export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, parentId }) {
+    const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
 
-    const [cmtContent, setCmtContent] = useState('');
-    const [img, setImg] = useState('');
+
+    const [isLoadingSearch, setIsLoadingSearch] = useState(false);
+    const [usersSearchResult, setUsersSearchResult] = useState([]);
+    const [toUsersId, setToUsersId] = useState([]);
+
+    const [textToReplace, setTextToReplace] = useState("");
+
+    const [cmtContent, setCmtContent] = useState("");
+    const [img, setImg] = useState("");
     const [imgDemo, setImgDemo] = useState("")
     const [isAdding, setIsAdding] = useState(false);
 
@@ -30,6 +41,7 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
 
     // render vars
     const [visible, setVisible] = useState(false);
+    const [visiblePopoverUsers, setVisiblePopoverUsers] = useState(false);
 
 
     useEffect(() => {
@@ -39,22 +51,89 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
         }
     }, [isAddedCmt])
 
+    useEffect(() => {
+        if (usersSearchResult.length) setVisiblePopoverUsers(true);
+        else setVisiblePopoverUsers(false)
+    }, [usersSearchResult])
+
 
     const handleAddCmt = async () => {
         setIsAdding(true);
-        await addCmt(cmtContent, img);
+        await addCmt(cmtContent, img, parentId);
         setIsAdding(false);
     }
+
+    const prepareBeforeSearch = (value) => {
+        const texts = value.split(" ");
+        // console.log(texts)
+        for (let i = 0; i < texts.length; i++) {
+            const text = texts[i].replaceAll("&nbsp;", "");
+            console.log(text)
+            if (text.startsWith("@")) {
+                setTextToReplace(text);
+                debounceSearchUsers(text);
+            } else {
+                handleSetContent(value, "text");
+                setUsersSearchResult([]);
+            }
+        }
+    }
+
+    const debounceSearchUsers = debounce(async (val) => {
+        if (!val) {
+            setUsersSearchResult([]);
+            return;
+        }
+
+        const splitStr = val.split("@");
+        const valToSearch = splitStr[1];
+        if (valToSearch) {
+            try {
+                setIsLoadingSearch(true);
+                const data = {
+                    value: valToSearch,
+                    key: 2
+                }
+
+                const response = await userApi.searchUsers(token, data);
+                if (response.content.err) {
+                    setUsersSearchResult([]);
+                    setIsLoadingSearch(false);
+                    return;
+                }
+ 
+                setUsersSearchResult(response.content.data);
+                setIsLoadingSearch(false);
+                return;
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setUsersSearchResult([]);
+        }
+    }, 200)
 
 
     const handleSetContent = (value, type) => {
         if (type === "img") {
             const content = cmtContent + `<img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
-
             setCmtContent(content);
-        } else {
+
+        } else if (type === "text") {
             setCmtContent(value);
+
+        } else if (type === "user") {
+            const content = cmtContent + `<TagsInput value={${value}}/>`
+            // console.log(content)
+            setCmtContent(content.replace(textToReplace, ""));
+            setTextToReplace("");
         }
+    }
+
+
+    const handleSelectUsers = (user) => {
+        setToUsersId(prevId => [...prevId, user.user_id])
+        handleSetContent(user.user_name, "user")
     }
 
 
@@ -66,6 +145,7 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
             setImgDemo(file)
         });
     }
+
 
     const propsUploadImg = {
         name: 'file',
@@ -81,7 +161,6 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
         onChange: (info) => onChangeFile(info)
     };
 
-
     return (
         <Form className="form-input">
             <Form.Item style={{ marginBottom: "10px" }}>
@@ -91,9 +170,42 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                         className="input"
                         placeholder="Write a comment..."
                         html={cmtContent}
-                        onChange={(e) => handleSetContent(e.target.value, "text")}
+                        onChange={(e) => prepareBeforeSearch(e.target.value)}
                         tagName='div'
+                        onBlur={() => debounceSearchUsers("")}
+                        dir="auto"
+                        spellCheck="false"
                     />
+
+                    <Popover
+                        placement="bottom"
+                        overlayClassName="tag-users-popover"
+                        visible={visiblePopoverUsers}
+                        content={
+                            usersSearchResult.length
+                                ? <div className="tag-users" >
+                                    {usersSearchResult.map((user, i) => ((
+                                        <div className="tag" onKeyPress={(e) => console.log(e.key)} onClick={() => handleSelectUsers(user)} key={i}>
+                                            <div style={{ display: "flex" }}>
+                                                <Avatar className="user-ava" src={user.user_avatar} alt="" />
+
+                                                <div>
+                                                    <h3>{user.user_name}</h3>
+                                                    <p>{user.user_email}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p>Friend</p>
+                                            </div>
+                                        </div>
+
+                                    )))}
+                                </div>
+                                : ""
+                        }
+                    />
+
+
 
                     <div className="bottom-cont">
                         <div className="interaction-cont">
@@ -121,14 +233,14 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                                 Add Comment
                             </Button>
                         </div>
-
+                        
                         <div className="addons-cont">
                             <Tooltip title={img ? "Just a photo" : "Attach a photo"}>
                                 <Upload
                                     showUploadList={false}
                                     {...propsUploadImg}
                                 >
-                                    <Button icon={<CameraOutlined />} disabled={img ? true : false} />
+                                    <Button icon={<CameraOutlined style={{fontSize:"20px"}} />} disabled={img ? true : false} />
                                 </Upload>
                             </Tooltip>
 
@@ -155,7 +267,7 @@ export default function InputForm({ isAddedCmt, setIsAddedCmt, addCmt }) {
                                             : ""
                                     }
                                 >
-                                    <Button icon={<SmileOutlined />} />
+                                    <Button icon={<SmileOutlined style={{fontSize:"20px"}} />} />
                                 </Popover>
                             </Tooltip>
 
