@@ -6,16 +6,17 @@
   border-radius: 3px;
 }
 
+/* mentions container */
 .mentionSuggestions {
+  display: flex !important;
   border-top: 1px solid #eee;
   background: #fff;
   border-radius: 5px;
-  width: 320px;
-  max-height: 300px;
+  width: 320px !important;
+  max-height: 300px !important;
   overflow-y: auto;
   cursor: pointer;
   padding: 2px 0px;
-  display: flex;
   flex-direction: column;
   box-sizing: border-box;
   transform-origin: 50% 0%;
@@ -31,22 +32,21 @@
 }
 
 .mentionSuggestionsEntryContainer {
-  display: flex;
-  width: 100%;
+  display: flex !important;
+  width: 320px !important;
 }
 
 .mentionSuggestionsEntryContainerRight {
-  width: 100%;
-  display: flex;
+  display: flex !important;
+  width: 100% !important;
   flex-direction: column;
   padding-left: 5px;
 }
 
-
 .mentionSuggestionsEntry {
   padding: 7px;
   transition: background-color 0.4s cubic-bezier(0.27, 1.27, 0.48, 0.56);
-  display: flex;
+  display: flex !important;
 }
 
 .mentionSuggestionsEntry:active {
@@ -58,13 +58,13 @@
   background-color: #e6f3ff;
 }
 
-.mentionSuggestionsEntryTitle02{
+.mentionSuggestionsEntryTitle02 {
   float: right;
-  padding-right: 3px;
+  padding-right: 15px;
 }
 
 .mentionSuggestionsEntryText,
-.mentionSuggestionsEntryTitle{
+.mentionSuggestionsEntryTitle {
   width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -85,7 +85,7 @@
 }
 
 .mentionSuggestionsEntryAvatar {
-  display: block;
+  display: block !important;
   width: 40px;
   height: 39px;
   border-radius: 50%;

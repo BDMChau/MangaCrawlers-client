@@ -1,0 +1,54 @@
+/* .cmt-editor .DraftEditor-root {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 5px 0px 5px 5px;
+  border-radius: 3px;
+  margin-bottom: 2em;
+  box-shadow: inset 0px 1px 8px -3px #ababab;
+  background: #fefefe;
+  overflow-y: auto;
+  min-height: 70px !important;
+  max-height: 200px !important;
+  transition: 0.3s;
+}
+
+.cmt-editor .DraftEditor-root::-webkit-scrollbar,
+.cmt-editor .DraftEditor-root .DraftEditor-editorContainer::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.cmt-editor .DraftEditor-root:hover {
+  border: 1px solid #66b5f6;
+}
+
+.cmt-editor .DraftEditor-root:focus-within {
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border: 1px solid #66b5f6;
+}
+
+.cmt-editor .DraftEditor-root .DraftEditor-editorContainer {
+  min-height: 70px !important;
+  max-height: 190px !important;
+  overflow-y: auto;
+  font-size: 16px;
+}
+
+.cmt-editor .DraftEditor-root figure {
+  width: fit-content;
+  display: inline-block;
+}
+
+.cmt-editor .DraftEditor-root figure img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.cmt-editor .DraftEditor-root .public-DraftEditorPlaceholder-root {
+  position: absolute;
+  color: #afafaf;
+  font-style: italic;
+  z-index: 0;
+} */

@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './styles/Editor.css'
+// import '@draft-js-plugins/mention/lib/plugin.css';
+
 import editorStyles from "./styles/editorStyles.module.css";
 import mentionsStyles from './styles/mentionsStyles.module.css';
 
@@ -41,6 +43,8 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
       });
 
       setSuggestions(suggestionsProp);
+    } else {
+      setSuggestions([]);
     }
   }, [suggestionsProp])
 
@@ -51,6 +55,7 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
     const inputDiv = document.getElementById("inputDivId");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
   }, [editorState])
+
 
   useEffect(() => {
     if (sticker) {
@@ -78,14 +83,23 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
     const contentState = editorState.getCurrentContent();
     const raw = convertToRaw(contentState);
     const inputContent = raw.blocks[0].text;
-    console.log(raw)
+
+    onSetUsersMention(raw.entityMap);
     setContent(inputContent);
   };
 
 
-  const onSetUsersMention = (obj) => {
-    const userId = obj.user_id;
-    setToUsersId(prev => [...prev, userId]);
+  const onSetUsersMention = (objEntityMap) => {
+    const mentionedUsers = [];
+    for (let key in objEntityMap) {
+      const ent = objEntityMap[key];
+      if (ent.type === "mention") {
+        mentionedUsers.push(ent.data.mention.user_id);
+      }
+    }
+
+    setToUsersId(mentionedUsers);
+    setSuggestions([]);
   };
 
 
@@ -121,7 +135,6 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
           onOpenChange={(e) => setOpen(e)}
           onSearchChange={handleOnSearch}
           suggestions={suggestions}
-          onAddMention={onSetUsersMention}
           entryComponent={Entry}
         />
       </div>
