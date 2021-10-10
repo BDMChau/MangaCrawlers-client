@@ -3,11 +3,11 @@ import "../CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
-import ContentEditable from 'react-contenteditable'
 import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
 import userApi from 'api/apis/MainServer/userApi'
+import MyTextArea from 'components/Editor/MyTextArea'
 
 
 
@@ -63,19 +63,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     }
 
     const prepareBeforeSearch = (value) => {
-        const texts = value.split(" ");
-        // console.log(texts)
-        for (let i = 0; i < texts.length; i++) {
-            const text = texts[i].replaceAll("&nbsp;", "");
-            console.log(text)
-            if (text.match(/@/)) {
-                setTextToReplace(text);
-                debounceSearchUsers(text);
-            } else {
-                handleSetContent(value, "text");
-                setUsersSearchResult([]);
-            }
-        }
+        debounceSearchUsers(value);
     }
 
     const debounceSearchUsers = debounce(async (val) => {
@@ -84,13 +72,10 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             return;
         }
 
-        const splitStr = val.split("@");
-        const valToSearch = splitStr[1];
-        if (valToSearch) {
             try {
                 setIsLoadingSearch(true);
                 const data = {
-                    value: valToSearch,
+                    value: val,
                     key: 2
                 }
 
@@ -107,9 +92,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             } catch (error) {
                 console.log(error);
             }
-        } else {
-            setUsersSearchResult([]);
-        }
+        
     }, 200)
 
 
@@ -122,7 +105,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             setCmtContent(value);
 
         } else if (type === "user") {
-            const content = cmtContent + `{${value}}`
+            const content = cmtContent + `&nbsp;@${value}&nbsp;`
             // console.log(content)
             setCmtContent(content.replace(textToReplace, ""));
             setTextToReplace("");
@@ -164,19 +147,15 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
         <Form className="form-input">
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div>
-                    <ContentEditable
-                        innerRef={inputRef}
-                        className="input"
-                        placeholder="Write a comment..."
-                        html={cmtContent}
-                        onChange={(e) => prepareBeforeSearch(e.target.value)}
-                        tagName='div'
-                        onBlur={() => debounceSearchUsers("")}
-                        dir="auto"
-                        spellCheck="false"
+                   <MyTextArea 
+                   onSearchFunc={prepareBeforeSearch}
+
+                   suggestionsProp={usersSearchResult}
+                   setContent={setCmtContent}
+                   setToUsersId={setToUsersId}
                     />
 
-                    <Popover
+                    {/* <Popover
                         placement="bottom"
                         overlayClassName="tag-users-popover"
                         visible={visiblePopoverUsers}
@@ -202,7 +181,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                 </div>
                                 : ""
                         }
-                    />
+                    /> */}
 
 
 

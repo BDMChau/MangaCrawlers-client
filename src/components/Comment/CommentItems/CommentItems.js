@@ -23,10 +23,6 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
         }
     }, [isScrollBottom])
 
-    useEffect(() => {
-        console.log(comments)
-    }, [])
-
 
     const handleScroll = (e) => {
         const scrollTop = e.target.scrollTop;

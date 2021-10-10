@@ -1,0 +1,30 @@
+.editor {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 5px 0px 5px 5px;
+  border-radius: 3px;
+  margin-bottom: 2em;
+  /* box-shadow: inset 0px 1px 8px -3px #ababab; */
+  background: #fefefe;
+  min-height: 50px;
+  max-height: 200px;
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 50px;
+  max-height: 190px;
+  overflow-y: auto;
+  font-size: 16px;
+}
+
+.editor :global(.public-DraftEditorPlaceholder-root) {
+  position: absolute;
+  color: #AFAFAF;
+  font-style: italic;
+}
+
+.editor::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}

@@ -40,6 +40,9 @@ function Manga({
     editManga,
 
     removeChapter,
+
+    commentsProp,
+    isEndCmts
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -254,7 +257,8 @@ function Manga({
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
                                     <CommentContainter
-                                        mangaId={manga.manga_id}
+                                        commentsProp={commentsProp}
+                                        isEndCmts={isEndCmts}
                                     />
                                 </div>
 

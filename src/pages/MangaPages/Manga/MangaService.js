@@ -34,11 +34,16 @@ function MangaService() {
     const [authorId, setAuthorId] = useState("");
     const [authorName, setAuthorName] = useState("");
 
+    // comments
+    const [fromRow, setFromRow] = useState(0);
+    const [isEndCmts, setIsEndCmts] = useState(false);
+    const [comments, setComments] = useState([])
+
     const cookies = new Cookies();
     const token = cookies.get("token");
 
     const { name_id } = useParams()
-    const [id, setId] = useState("");
+    const [id, setId] = useState("ascac"); // mangaId when init
     const [mangaNameParam, setMangaNameParam] = useState("");
 
 
@@ -66,7 +71,7 @@ function MangaService() {
         getSuggestionList();
     }, [id])
 
- 
+
 
     const getMangaData = async () => {
         try {
@@ -235,7 +240,7 @@ function MangaService() {
     }
 
 
-  
+
 
 
 
@@ -311,6 +316,59 @@ function MangaService() {
     }
 
 
+    // get comments
+    useEffect(() => {
+        setIsEndCmts(false);
+        setComments([]);
+        setFromRow(0);
+
+        // if fromRow is 0, run getCmts() below
+        if (fromRow === 0) {
+            getCmts();
+        }
+    }, [id])
+
+
+    useEffect(() => {
+        // if fromRow is 0, this effect won't be invoked
+        if (fromRow) getCmts()
+    }, [fromRow])
+
+
+    const getCmts = async () => {
+        if (id) {
+            const data = {
+                manga_id: id ? id : null,
+                chapter_id: null,
+                from: fromRow,
+                amount: 10
+            }
+
+            try {
+                const response = await mangaApi.getCommentsManga(data);
+
+                if (JSON.parse(localStorage.getItem("code_400"))) {
+                    // message_error("No manga to present!")
+                    localStorage.removeItem("code_400")
+                    return;
+                }
+                else if (response.content.msg === "No comments found!") {
+                    setIsEndCmts(true);
+                    return;
+                }
+
+                const comments = response.content.comments;
+
+                setComments(comments)
+                setFromRow(fromRow + 11)
+                return;
+            } catch (ex) {
+                console.log(ex)
+            }
+        }
+    }
+
+
 
     return (
         <div>
@@ -339,6 +397,9 @@ function MangaService() {
                 editChapter={(chapterId, chapterName) => editChapter(chapterId, chapterName)}
                 editManga={() => editManga()}
                 removeChapter={(chapterId) => removeChapter(chapterId)}
+
+                commentsProp={comments}
+                isEndCmts={isEndCmts}
             />
         </div>
     )

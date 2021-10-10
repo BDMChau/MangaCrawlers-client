@@ -5,20 +5,19 @@ import CommentItems from '../CommentItems/CommentItems';
 import InputForm from '../features/InputForm';
 import mangaApi from 'api/apis/MainServer/mangaApi';
 import userApi from 'api/apis/MainServer/userApi';
-import { notification_error, notification_success } from 'components/alerts/notification';
+import { notification_error } from 'components/alerts/notification';
 import { message_error } from 'components/alerts/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 
 
 
-export default function CommentContainter({ mangaId, chapterId }) {
+export default function CommentContainter({ mangaId, chapterId, commentsProp, isEndCmts }) {
     const userState = useSelector((state) => state.userState);
 
     const [comments, setComments] = useState([])
     const [isAddedCmt, setIsAddedCmt] = useState(false);
-    const [fromRow, setFromRow] = useState(0);
-    const [isEndCmts, setIsEndCmts] = useState(false);
+    
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
 
@@ -41,23 +40,11 @@ export default function CommentContainter({ mangaId, chapterId }) {
     }, [isErrorCmt])
 
 
-    // get comments
     useEffect(() => {
-        setIsEndCmts(false);
-        setComments([]);
-        setFromRow(0);
+        if(commentsProp.length) setComments(commentsProp);
+    }, [commentsProp])
 
-        // if fromRow is 0, run getCmtsManga() below
-        if (fromRow === 0) {
-            getCmts();
-        }
-    }, [mangaId, chapterId])
-
-
-    useEffect(() => {
-        // if fromRow is 0, this effect won't be invoked
-        if (fromRow) getCmts()
-    }, [fromRow])
+   
 
 
     const addCmt = async (cmtContent, img, parentId, toUsers) => {
@@ -90,7 +77,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
     }
 
     const deleteCmt = async (id) => {
-        if (!userState[0]) return message_error("You have to sign in first!");
+        if (!userState[0]) return message_error("You have to login first!");
 
         const data = mangaId
             ? {
@@ -118,43 +105,6 @@ export default function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
-
-    const getCmts = async () => {
-        if (mangaId || chapterId) {
-            const data = {
-                manga_id: mangaId ? mangaId : null,
-                chapter_id: chapterId ? chapterId : null,
-                from: fromRow,
-                amount: 100
-            }
-
-            try {
-                const response = await mangaApi.getCommentsManga(data);
-
-                if (JSON.parse(localStorage.getItem("code_400"))) {
-                    // message_error("No manga to present!")
-                    localStorage.removeItem("code_400")
-                    return;
-                }
-                else if (response.content.msg === "No comments found!") {
-                    setIsEndCmts(true);
-                    return;
-                }
-
-
-                if (response.content.comments.length) {
-                    const comments = response.content.comments;
-
-                    setComments(comments)
-                    setFromRow(fromRow + 11)
-                }
-
-                return;
-            } catch (ex) {
-                console.log(ex)
-            }
-        }
-    }
 
 
 
