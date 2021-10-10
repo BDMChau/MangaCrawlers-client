@@ -23,6 +23,7 @@ const fileTypesAllowed = [
 export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, parentId }) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
+    const [sticker, setSticker] = useState("");
 
 
     const [isLoadingSearch, setIsLoadingSearch] = useState(false);
@@ -72,27 +73,27 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             return;
         }
 
-            try {
-                setIsLoadingSearch(true);
-                const data = {
-                    value: val,
-                    key: 2
-                }
+        try {
+            setIsLoadingSearch(true);
+            const data = {
+                value: val,
+                key: 2
+            }
 
-                const response = await userApi.searchUsers(token, data);
-                if (response.content.err) {
-                    setUsersSearchResult([]);
-                    setIsLoadingSearch(false);
-                    return;
-                }
- 
-                setUsersSearchResult(response.content.data);
+            const response = await userApi.searchUsers(token, data);
+            if (response.content.err) {
+                setUsersSearchResult([]);
                 setIsLoadingSearch(false);
                 return;
-            } catch (error) {
-                console.log(error);
             }
-        
+
+            setUsersSearchResult(response.content.data);
+            setIsLoadingSearch(false);
+            return;
+        } catch (error) {
+            console.log(error);
+        }
+
     }, 200)
 
 
@@ -100,16 +101,8 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
         if (type === "img") {
             const content = cmtContent + `<img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
             setCmtContent(content);
-
-        } else if (type === "text") {
-            setCmtContent(value);
-
-        } else if (type === "user") {
-            const content = cmtContent + `&nbsp;@${value}&nbsp;`
-            // console.log(content)
-            setCmtContent(content.replace(textToReplace, ""));
-            setTextToReplace("");
-        }
+            setSticker(value)
+        } 
     }
 
 
@@ -147,43 +140,16 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
         <Form className="form-input">
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div>
-                   <MyTextArea 
-                   onSearchFunc={prepareBeforeSearch}
+                    <MyTextArea
+                        sticker={sticker}
+                        setSticker={setSticker}
 
-                   suggestionsProp={usersSearchResult}
-                   setContent={setCmtContent}
-                   setToUsersId={setToUsersId}
+                        onSearchFunc={prepareBeforeSearch}
+
+                        suggestionsProp={usersSearchResult}
+                        setContent={setCmtContent}
+                        setToUsersId={setToUsersId}
                     />
-
-                    {/* <Popover
-                        placement="bottom"
-                        overlayClassName="tag-users-popover"
-                        visible={visiblePopoverUsers}
-                        content={
-                            usersSearchResult.length
-                                ? <div className="tag-users" >
-                                    {usersSearchResult.map((user, i) => ((
-                                        <div className="tag" onKeyPress={(e) => console.log(e.key)} onClick={() => handleSelectUsers(user)} key={i}>
-                                            <div style={{ display: "flex" }}>
-                                                <Avatar className="user-ava" src={user.user_avatar} alt="" />
-
-                                                <div>
-                                                    <h3>{user.user_name}</h3>
-                                                    <p>{user.user_email}</p>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <p>Friend</p>
-                                            </div>
-                                        </div>
-
-                                    )))}
-                                </div>
-                                : ""
-                        }
-                    /> */}
-
-
 
                     <div className="bottom-cont">
                         <div className="interaction-cont">
@@ -211,14 +177,14 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                 Add Comment
                             </Button>
                         </div>
-                        
+
                         <div className="addons-cont">
                             <Tooltip title={img ? "Just a photo" : "Attach a photo"}>
                                 <Upload
                                     showUploadList={false}
                                     {...propsUploadImg}
                                 >
-                                    <Button icon={<CameraOutlined style={{fontSize:"20px"}} />} disabled={img ? true : false} />
+                                    <Button icon={<CameraOutlined style={{ fontSize: "20px" }} />} disabled={img ? true : false} />
                                 </Upload>
                             </Tooltip>
 
@@ -245,7 +211,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                             : ""
                                     }
                                 >
-                                    <Button icon={<SmileOutlined style={{fontSize:"20px"}} />} />
+                                    <Button icon={<SmileOutlined style={{ fontSize: "20px" }} />} />
                                 </Popover>
                             </Tooltip>
 
@@ -256,3 +222,39 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
         </Form>
     )
 }
+
+
+
+
+
+
+
+
+
+{/* <Popover
+                        placement="bottom"
+                        overlayClassName="tag-users-popover"
+                        visible={visiblePopoverUsers}
+                        content={
+                            usersSearchResult.length
+                                ? <div className="tag-users" >
+                                    {usersSearchResult.map((user, i) => ((
+                                        <div className="tag" onKeyPress={(e) => console.log(e.key)} onClick={() => handleSelectUsers(user)} key={i}>
+                                            <div style={{ display: "flex" }}>
+                                                <Avatar className="user-ava" src={user.user_avatar} alt="" />
+
+                                                <div>
+                                                    <h3>{user.user_name}</h3>
+                                                    <p>{user.user_email}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p>Friend</p>
+                                            </div>
+                                        </div>
+
+                                    )))}
+                                </div>
+                                : ""
+                        }
+                    /> */}
