@@ -41,8 +41,6 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     const [imgDemo, setImgDemo] = useState("")
     const [isAdding, setIsAdding] = useState(false);
 
-    const inputRef = useRef(null);
-
     // render vars
     const [visible, setVisible] = useState(false);
     const [visiblePopoverUsers, setVisiblePopoverUsers] = useState(false);
@@ -51,9 +49,12 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     useEffect(() => {
         if (isAddedCmt === true) {
             setCmtContent("");
+            setImg("");
+            setImgDemo("");
             setIsAddedCmt(false);
         }
     }, [isAddedCmt])
+
 
     useEffect(() => {
         if (usersSearchResult.length) setVisiblePopoverUsers(true);
@@ -61,10 +62,26 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     }, [usersSearchResult])
 
 
-    const prepareToAddCmt = async () => {
+    const prepareToAddCmt = async (sticker) => {
+        console.log(sticker)
+        if (sticker) {
+            const dataInput = {
+                content: "",
+                image: fileDefault,
+                sticker_url: sticker,
+                to_users_id: toUsersId,
+                parent_id: parentId ? parentId.toString() : ""
+            };
+
+            setIsAdding(true);
+            await addCmt(dataInput);
+            setIsAdding(false);
+            return;
+        }
+
         if (cmtContent || img) {
             const dataInput = {
-                content: cmtContent, // text and sticker <img /> tag
+                content: cmtContent,
                 image: img ? img : fileDefault,
                 to_users_id: toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
@@ -148,6 +165,8 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div>
                     <MyTextArea
+                        isAddedCmt={isAddedCmt}
+
                         sticker={sticker}
                         setSticker={setSticker}
 
@@ -210,7 +229,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                                         key={i}
                                                         style={{ cursor: "pointer", padding: "5px" }}
                                                         title="Insert Sticker and GIF"
-                                                        onClick={() => handleSetContent(sticker, "img")}
+                                                        onClick={() => prepareToAddCmt(sticker)}
                                                     >
                                                         <img style={{ borderRadius: "50%" }} src={sticker} alt="" width="70px" height="70px" />
                                                     </div>

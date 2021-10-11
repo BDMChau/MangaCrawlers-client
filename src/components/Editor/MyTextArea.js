@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './styles/Editor.css'
-// import '@draft-js-plugins/mention/lib/plugin.css';
+import '@draft-js-plugins/mention/lib/plugin.css';
 
 import editorStyles from "./styles/editorStyles.module.css";
 import mentionsStyles from './styles/mentionsStyles.module.css';
@@ -14,7 +14,7 @@ import createImagePlugin from '@draft-js-plugins/image';
 import Entry from './features/Entry';
 
 
-export default function MyTextArea({ onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
+export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
   const [suggestions, setSuggestions] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [open, setOpen] = useState(false);
@@ -52,15 +52,18 @@ export default function MyTextArea({ onSearchFunc, suggestionsProp, content, set
 
   useEffect(() => {
     onExtractData();
-
+    console.log("?")
     const inputDiv = document.getElementById("inputDivId");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
   }, [editorState])
 
 
   useEffect(() => {
-    if(!content) setEditorState(EditorState.createEmpty());
-  },[content])
+    if (isAddedCmt) {
+      console.log('acascac')
+      setEditorState(EditorState.createEmpty());
+    }
+  }, [isAddedCmt])
 
 
   const handleChange = (editorState) => {
@@ -71,7 +74,7 @@ export default function MyTextArea({ onSearchFunc, suggestionsProp, content, set
   const handleOnSearch = (event) => {
     const trigger = event.trigger;
     const value = event.value;
-
+    console.log(event)
     onSearchFunc(value);
   }
 

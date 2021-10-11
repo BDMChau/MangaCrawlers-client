@@ -242,8 +242,6 @@ function MangaService() {
 
 
 
-
-
     /////////// admin actions ///////////
     const editChapter = async (chapterId, chapterName) => {
         const data = {
@@ -329,10 +327,10 @@ function MangaService() {
     }, [id])
 
 
-    useEffect(() => {
-        // if fromRow is 0, this effect won't be invoked
-        if (fromRow) getCmts()
-    }, [fromRow])
+    // useEffect(() => {
+    //     // if fromRow is 0, this effect won't be invoked
+    //     if (fromRow) getCmts()
+    // }, [fromRow])
 
 
     const getCmts = async () => {
@@ -341,7 +339,7 @@ function MangaService() {
                 manga_id: id ? id : null,
                 chapter_id: null,
                 from: fromRow,
-                amount: 10
+                amount: 100
             }
 
             try {

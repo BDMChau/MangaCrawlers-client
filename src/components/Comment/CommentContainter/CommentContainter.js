@@ -12,7 +12,7 @@ import { Typography } from 'antd';
 
 
 
-export default function CommentContainter({ mangaId, chapterId, commentsProp, isEndCmts }) {
+export default function CommentContainter({ mangaId, chapterId, commentsProp, isEndCmts, getCmts }) {
     const userState = useSelector((state) => state.userState);
 
     const [comments, setComments] = useState([])
@@ -54,23 +54,25 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
             formData.append("chapter_id", chapterId ? chapterId.toString() : "");
             formData.append("manga_comment_content", dataInput.content);
             formData.append("image", dataInput.image);
+            formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
             formData.append("parent_id", dataInput.parent_id);
-            formData.append("to_users_id", dataInput.to_users_id);          
+            formData.append("to_users_id", dataInput.to_users_id);
 
 
             try {
                 const response = await userApi.addCmt(token, formData);
-                if (response.content.comment_info) {
-                    console.log(response)
-                    // added
+                if (response.content.comment_information) {
+                    const newComment = response.content.comment_information;
+
+                    setComments(prev => [newComment, ...prev])
                 } else {
                     setIsErrorCmt(true);
                 }
+                setIsAddedCmt(true);
             } catch (ex) {
                 console.log(ex);
+                setIsAddedCmt(true);
             }
-            return;
-
         } else {
             message_error("You have to login first!");
             return;

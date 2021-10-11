@@ -37,22 +37,19 @@
 }
 
 
-
+/* 
 .editor figure {
   width: fit-content;
   display: inline-block;white-space: pre
-}
+} */
 
-.editor div {
-  width: fit-content;
-  display: inline-block;white-space: pre
-}
 
-.editor figure img {
+
+/* .editor figure img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
+} */
 
 .editor::-webkit-scrollbar,
 .editor :global(.public-DraftEditor-content)::-webkit-scrollbar {

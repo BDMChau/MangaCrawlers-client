@@ -45,6 +45,7 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
     const CmtBody = ({ comment, background }) => (
         <div className="cmt-body" key={comment.manga_comment_id} style={{ background: background }} >
             <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
+            {comment.image_url ? <img src={comment.image_url} alt="" style={{ height: "110px", width: "fit-content", borderRadius: "8px", marginTop: "5px" }} /> : ""}
 
             <CmtBottom comment={comment} />
 
@@ -83,7 +84,7 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
         </div>
     )
 
-    
+
     const Items = ({ children }) => {
         return (
             comments.length
