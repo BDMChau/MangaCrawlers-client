@@ -19,6 +19,8 @@
     "axios": "^0.21.1",
     "dayjs": "^1.10.4",
     "draft-js": "^0.11.7",
+    "draft-js-emoji-mart-plugin": "^1.0.1",
+    "draft-js-export-html": "^1.4.1",
     "enquire-js": "^0.2.1",
     "framer-motion": "^4.0.3",
     "i": "^0.3.7",
@@ -40,6 +42,7 @@
     "smoothscroll-polyfill": "^0.4.4",
     "socket.io-client": "^2.1.1",
     "tslib": "^2.2.0",
+    "uni": "0.0.6",
     "universal-cookie": "^4.0.4",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"

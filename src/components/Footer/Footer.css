@@ -15,20 +15,48 @@
 }
 
 .footer .footer-bg {
-    background: rgb(225, 255, 255);
-    background: -moz-linear-gradient(45deg, rgba(225, 255, 255, 1) 0%, rgba(225, 255, 255, 1) 7%, rgba(225, 255, 255, 1) 12%, rgba(253, 255, 255, 1) 12%, rgba(230, 248, 253, 1) 30%, rgba(200, 238, 251, 1) 54%, rgba(190, 228, 248, 1) 75%, rgba(177, 216, 245, 1) 100%);
-    background: -webkit-linear-gradient(45deg, rgba(225, 255, 255, 1) 0%, rgba(225, 255, 255, 1) 7%, rgba(225, 255, 255, 1) 12%, rgba(253, 255, 255, 1) 12%, rgba(230, 248, 253, 1) 30%, rgba(200, 238, 251, 1) 54%, rgba(190, 228, 248, 1) 75%, rgba(177, 216, 245, 1) 100%);
-    background: linear-gradient(45deg, rgba(225, 255, 255, 1) 0%, rgba(225, 255, 255, 1) 7%, rgba(225, 255, 255, 1) 12%, rgba(253, 255, 255, 1) 12%, rgba(230, 248, 253, 1) 30%, rgba(200, 238, 251, 1) 54%, rgba(190, 228, 248, 1) 75%, rgba(177, 216, 245, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5', GradientType=1);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    width: 100%;
-    height: 100%;
-    height: 135px;
-    z-index: 9;
-    width: 100%;
+  background: rgb(225, 255, 255);
+  background: -moz-linear-gradient(
+    45deg,
+    rgba(225, 255, 255, 1) 0%,
+    rgba(225, 255, 255, 1) 7%,
+    rgba(225, 255, 255, 1) 12%,
+    rgba(253, 255, 255, 1) 12%,
+    rgba(230, 248, 253, 1) 30%,
+    rgba(200, 238, 251, 1) 54%,
+    rgba(190, 228, 248, 1) 75%,
+    rgba(177, 216, 245, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    45deg,
+    rgba(225, 255, 255, 1) 0%,
+    rgba(225, 255, 255, 1) 7%,
+    rgba(225, 255, 255, 1) 12%,
+    rgba(253, 255, 255, 1) 12%,
+    rgba(230, 248, 253, 1) 30%,
+    rgba(200, 238, 251, 1) 54%,
+    rgba(190, 228, 248, 1) 75%,
+    rgba(177, 216, 245, 1) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgba(225, 255, 255, 1) 0%,
+    rgba(225, 255, 255, 1) 7%,
+    rgba(225, 255, 255, 1) 12%,
+    rgba(253, 255, 255, 1) 12%,
+    rgba(230, 248, 253, 1) 30%,
+    rgba(200, 238, 251, 1) 54%,
+    rgba(190, 228, 248, 1) 75%,
+    rgba(177, 216, 245, 1) 100%
+  );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5', GradientType=1);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 110px;
+  z-index: 9;
+  width: 100%;
 }
 
 .footer .footer-row {
@@ -55,7 +83,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  transform: scale(1.3);
+  transform: scale(1.2);
   margin-top: 20px;
 }
 
@@ -83,11 +111,27 @@
   .footer .footer-text {
     margin-right: 20px;
   }
+
+  .footer .footer-bg {
+    height: 100px;
+  }
+
+  .footer .footer-logo {
+    transform: scale(1.1);
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .footer .footer-text {
     margin-right: 20px;
+  }
+
+  .footer .footer-bg {
+    height: 100px;
+  }
+
+  .footer .footer-logo {
+    transform: scale(1.1);
   }
 }
 
@@ -97,7 +141,7 @@
     flex-direction: column;
   }
   .footer .footer-bg {
-    height: 212px;
+    height: 180px;
   }
 }
 
@@ -106,7 +150,13 @@
     display: flex;
     flex-direction: column;
   }
+
   .footer .footer-bg {
-    height: 235px;
+    height: 130px;
+  }
+
+  .footer .footer-logo {
+    transform: scale(1);
+    margin-bottom: -20px;
   }
 }

@@ -212,15 +212,20 @@
 }
 
 /* custom dropdown genres */
+.list-genres-dropdown {
+  position: fixed;
+}
+
 .list-genres-dropdown ul {
   display: flex;
   flex-wrap: wrap;
   width: 550px;
+  background-color: #ffffffe8 !important;
 }
 
 .list-genres-dropdown ul::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 .list-genres-dropdown ul::-webkit-scrollbar-track {

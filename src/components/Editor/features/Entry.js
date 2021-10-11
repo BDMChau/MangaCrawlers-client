@@ -1,3 +1,4 @@
+import { Avatar } from 'antd';
 import React from 'react'
 
 export default function Entry(props) {
@@ -14,7 +15,7 @@ export default function Entry(props) {
         <div {...parentProps}>
             <div className={theme?.mentionSuggestionsEntryContainer}>
                 <div className={theme?.mentionSuggestionsEntryContainerLeft}>
-                    <img
+                    <Avatar
                         src={mention.user_avatar}
                         className={theme?.mentionSuggestionsEntryAvatar}
                         role="presentation"

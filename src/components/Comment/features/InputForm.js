@@ -57,10 +57,19 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     }, [usersSearchResult])
 
 
-    const handleAddCmt = async () => {
+    const prepareToAddCmt = async () => {
+       if(cmtContent || img){
+        const dataInput = {
+            content: cmtContent, // text and sticker <img /> tag
+            image: img ? img : "",
+            to_users_id: toUsersId,
+            parent_id: parentId ? parentId : null
+        };
+
         setIsAdding(true);
-        await addCmt(cmtContent, img, parentId);
+        await addCmt(dataInput);
         setIsAdding(false);
+       }
     }
 
     const prepareBeforeSearch = (value) => {
@@ -99,21 +108,15 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
 
     const handleSetContent = (value, type) => {
         if (type === "img") {
-            const content = cmtContent + `<img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
-            setCmtContent(content);
+            // const content = cmtContent + ` <img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
+            // console.log(content)
+            // setCmtContent(content);
             setSticker(value)
         } 
     }
 
 
-    const handleSelectUsers = (user) => {
-        setToUsersId(prevId => [...prevId, user.user_id])
-        handleSetContent(user.user_name, "user")
-    }
-
-
     const onChangeFile = (info) => {
-        console.log("file to upload: ", info)
         setImg(info.file)
 
         handleFile.getBase64Img(info.file.originFileObj, (file) => {
@@ -147,6 +150,8 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                         onSearchFunc={prepareBeforeSearch}
 
                         suggestionsProp={usersSearchResult}
+                        
+                        content={cmtContent}
                         setContent={setCmtContent}
                         setToUsersId={setToUsersId}
                     />
@@ -172,7 +177,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                 style={{ marginTop: "10px", width: "fit-content" }}
                                 type="primary"
                                 loading={isAdding}
-                                onClick={() => handleAddCmt()}
+                                onClick={() => prepareToAddCmt()}
                             >
                                 Add Comment
                             </Button>
@@ -203,7 +208,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                                         title="Insert Sticker and GIF"
                                                         onClick={() => handleSetContent(sticker, "img")}
                                                     >
-                                                        <img style={{ borderRadius: "50%" }} src={sticker} alt="" width="40px" height="40px" />
+                                                        <img style={{ borderRadius: "50%" }} src={sticker} alt="" width="70px" height="70px" />
                                                     </div>
                                                 ))}
                                             </div>

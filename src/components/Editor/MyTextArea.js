@@ -14,7 +14,7 @@ import createImagePlugin from '@draft-js-plugins/image';
 import Entry from './features/Entry';
 
 
-export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggestionsProp, setContent, setToUsersId }) {
+export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
   const [suggestions, setSuggestions] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [open, setOpen] = useState(false);
@@ -35,6 +35,7 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
     return { plugins, MentionSuggestions };
   }, []);
 
+
   useEffect(() => {
     if (suggestionsProp.length) {
       suggestionsProp.forEach(item => {
@@ -50,7 +51,7 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
 
 
   useEffect(() => {
-    onExtractData()
+    onExtractData();
 
     const inputDiv = document.getElementById("inputDivId");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
@@ -128,6 +129,7 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
           onChange={handleChange}
           plugins={plugins}
           placeholder="Write a comment..."
+          value="acasc"
         />
 
         <MentionSuggestions

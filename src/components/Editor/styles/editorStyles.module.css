@@ -40,12 +40,12 @@
 
 .editor figure {
   width: fit-content;
-  display: inline-block;
+  display: inline-block;white-space: pre
 }
 
 .editor div {
   width: fit-content;
-  display: inline-block;
+  display: inline-block;white-space: pre
 }
 
 .editor figure img {

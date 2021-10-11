@@ -3,12 +3,12 @@ import "./CommentContainter.css";
 
 import CommentItems from '../CommentItems/CommentItems';
 import InputForm from '../features/InputForm';
-import mangaApi from 'api/apis/MainServer/mangaApi';
 import userApi from 'api/apis/MainServer/userApi';
 import { notification_error } from 'components/alerts/notification';
 import { message_error } from 'components/alerts/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
+import { Typography } from 'antd';
 
 
 
@@ -17,7 +17,7 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
 
     const [comments, setComments] = useState([])
     const [isAddedCmt, setIsAddedCmt] = useState(false);
-    
+
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
 
@@ -41,23 +41,25 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
 
 
     useEffect(() => {
-        if(commentsProp.length) setComments(commentsProp);
+        if (commentsProp.length) setComments(commentsProp);
     }, [commentsProp])
 
-   
 
 
-    const addCmt = async (cmtContent, img, parentId, toUsers) => {
-        console.log(cmtContent)
+
+    const addCmt = async (dataInput) => {
         if (userState[0]) {
             const formData = new FormData();
             formData.append("manga_id", mangaId ? mangaId : null);
             formData.append("chapter_id", chapterId ? chapterId : null);
-            formData.append("manga_comment_content", cmtContent);
-            formData.append("img", img);
-            formData.append("parent_id", parentId ? parentId : "");
-            formData.append("to_user_id", toUsers ? toUsers : []);
+            formData.append("manga_comment_content", dataInput.content);
+            formData.append("image", dataInput.image);
+            formData.append("parent_id", dataInput.parent_id);
+            formData.append("to_users_id", dataInput.to_users_id);
 
+            // formData.forEach(item =>{
+            //     console.log(item)
+            // })
             try {
                 // const response = await userApi.addCmt(token, formData);
                 // if (response.content.comment_info) {
@@ -110,13 +112,17 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
 
     return (
         <div className="comments-form">
-            <InputForm
-                token={token}
+            {userState[0]
+                ? <InputForm
+                    token={token}
 
-                isAddedCmt={isAddedCmt}
-                setIsAddedCmt={setIsAddedCmt}
-                addCmt={(content) => addCmt(content)}
-            />
+                    isAddedCmt={isAddedCmt}
+                    setIsAddedCmt={setIsAddedCmt}
+                    addCmt={(content) => addCmt(content)}
+                />
+                : <Typography.Title level={5} style={{ color: "#FF4D4F" }} >You must be logged in to post a comment!</Typography.Title>
+
+            }
 
             {/* render cmts */}
             <CommentItems
