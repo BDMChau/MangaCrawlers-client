@@ -50,23 +50,22 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
     const addCmt = async (dataInput) => {
         if (userState[0]) {
             const formData = new FormData();
-            formData.append("manga_id", mangaId ? mangaId : null);
-            formData.append("chapter_id", chapterId ? chapterId : null);
+            formData.append("manga_id", mangaId ? mangaId.toString() : "");
+            formData.append("chapter_id", chapterId ? chapterId.toString() : "");
             formData.append("manga_comment_content", dataInput.content);
             formData.append("image", dataInput.image);
             formData.append("parent_id", dataInput.parent_id);
-            formData.append("to_users_id", dataInput.to_users_id);
+            formData.append("to_users_id", dataInput.to_users_id);          
 
-            // formData.forEach(item =>{
-            //     console.log(item)
-            // })
+
             try {
-                // const response = await userApi.addCmt(token, formData);
-                // if (response.content.comment_info) {
-                //     // added
-                // } else {
-                //     setIsErrorCmt(true);
-                // }
+                const response = await userApi.addCmt(token, formData);
+                if (response.content.comment_info) {
+                    console.log(response)
+                    // added
+                } else {
+                    setIsErrorCmt(true);
+                }
             } catch (ex) {
                 console.log(ex);
             }

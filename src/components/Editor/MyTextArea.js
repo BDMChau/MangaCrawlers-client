@@ -14,7 +14,7 @@ import createImagePlugin from '@draft-js-plugins/image';
 import Entry from './features/Entry';
 
 
-export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
+export default function MyTextArea({ onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
   const [suggestions, setSuggestions] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [open, setOpen] = useState(false);
@@ -59,12 +59,8 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
 
 
   useEffect(() => {
-    if (sticker) {
-      const newEditorState = insertImage(editorState, sticker);
-      setEditorState(newEditorState)
-      setSticker("");
-    }
-  }, [sticker])
+    if(!content) setEditorState(EditorState.createEmpty());
+  },[content])
 
 
   const handleChange = (editorState) => {
@@ -95,7 +91,7 @@ export default function MyTextArea({ sticker, setSticker, onSearchFunc, suggesti
     for (let key in objEntityMap) {
       const ent = objEntityMap[key];
       if (ent.type === "mention") {
-        mentionedUsers.push(ent.data.mention.user_id);
+        mentionedUsers.push(ent.data.mention.user_id.toString());
       }
     }
 

@@ -23,6 +23,7 @@ const userApi = {
         const uri = '/api/user/addcommentmanga';
         return axiosClient.post(uri, data, {
             headers: {
+                "Content-Type": 'multipart/form-data',
                 Authorization: token
             }
         });

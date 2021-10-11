@@ -9,7 +9,11 @@ import { debounce } from 'lodash'
 import userApi from 'api/apis/MainServer/userApi'
 import MyTextArea from 'components/Editor/MyTextArea'
 
+import imgDefault from "assets/8031DF085D7DBABC0F4B3651081CE70ED84622AE9305200F2FC1D789C95CF06F.svg"
 
+const fileDefault = new File(["foo"], imgDefault, {
+    type: "text/plain",
+})
 
 const fileTypesAllowed = [
     "image/jpeg",
@@ -47,7 +51,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
     useEffect(() => {
         if (isAddedCmt === true) {
             setCmtContent("");
-            setIsAddedCmt(false)
+            setIsAddedCmt(false);
         }
     }, [isAddedCmt])
 
@@ -58,18 +62,18 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
 
 
     const prepareToAddCmt = async () => {
-       if(cmtContent || img){
-        const dataInput = {
-            content: cmtContent, // text and sticker <img /> tag
-            image: img ? img : "",
-            to_users_id: toUsersId,
-            parent_id: parentId ? parentId : null
-        };
+        if (cmtContent || img) {
+            const dataInput = {
+                content: cmtContent, // text and sticker <img /> tag
+                image: img ? img : fileDefault,
+                to_users_id: toUsersId,
+                parent_id: parentId ? parentId.toString() : ""
+            };
 
-        setIsAdding(true);
-        await addCmt(dataInput);
-        setIsAdding(false);
-       }
+            setIsAdding(true);
+            await addCmt(dataInput);
+            setIsAdding(false);
+        }
     }
 
     const prepareBeforeSearch = (value) => {
@@ -112,12 +116,12 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
             // console.log(content)
             // setCmtContent(content);
             setSticker(value)
-        } 
+        }
     }
 
 
     const onChangeFile = (info) => {
-        setImg(info.file)
+        setImg(info.file.originFileObj)
 
         handleFile.getBase64Img(info.file.originFileObj, (file) => {
             setImgDemo(file)
@@ -150,7 +154,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                         onSearchFunc={prepareBeforeSearch}
 
                         suggestionsProp={usersSearchResult}
-                        
+
                         content={cmtContent}
                         setContent={setCmtContent}
                         setToUsersId={setToUsersId}
@@ -193,7 +197,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                 </Upload>
                             </Tooltip>
 
-                            <Tooltip title="Insert Sticker and GIF">
+                            <Tooltip title="Comment with a Sticker">
                                 <Popover
                                     trigger="click"
                                     visible={visible}
