@@ -42,6 +42,7 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
     )
 
 
+
     const CmtBody = ({ comment, background }) => (
         <div className="cmt-body" key={comment.manga_comment_id} style={{ background: background }} >
             <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />

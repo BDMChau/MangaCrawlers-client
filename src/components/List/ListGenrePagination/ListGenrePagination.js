@@ -26,17 +26,16 @@ function ListGenrePagination({ mangas }) {
         }
     })
 
-
-    const renderCardDesc = () => {
+    const renderCardDesc = (name, time) => {
         return (
-            <div className="desc">
-                <span className="desc-1" >Chapter 100</span>
-                <span className="desc-2" >10 hours ago</span>
-            </div>
+        <div className="desc" >
+            <span className="desc-1" > {name} </span>
+            <span className="desc-2" > {time} </span>
+        </div >
         )
     }
 
-    
+
 
     const renderMangas = () => {
         return (
@@ -63,7 +62,7 @@ function ListGenrePagination({ mangas }) {
                                 hoverable
                                 cover={<div className="manga-img" alt="example" style={{ backgroundImage: `url(${manga.thumbnail})` }} />}
                             >
-                                <Meta title={manga.manga_name} description={renderCardDesc()} />
+                                <Meta title={manga.manga_name} description={renderCardDesc(manga.chapter_name, manga.created_at)} />
                             </Card>
                         </NavLink>
                     </div >

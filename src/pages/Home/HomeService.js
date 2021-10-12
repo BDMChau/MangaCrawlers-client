@@ -45,9 +45,9 @@ function HomeService() {
 
             response.content.data.forEach(manga => {
                 const chapterName = manga.chapter_name;
-                const createdAtChapterFormated = format.formatDate01(manga.createdAt); //createdAt is milisecond
+                const created_atChapterFormated = format.formatDate01(manga.created_at); //created_at is milisecond
 
-                manga.createdAt = createdAtChapterFormated;
+                manga.created_at = created_atChapterFormated;
                 manga.chapter_name = chapterName.split(":")[0];
             });
 

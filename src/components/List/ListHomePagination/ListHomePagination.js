@@ -91,7 +91,7 @@ function ListHomePagination({ mangas }) {
                                 >
                                     <Meta
                                         title={manga.manga_name}
-                                        description={renderCardDesc(manga.chapter_name, manga.createdAt)}
+                                        description={renderCardDesc(manga.chapter_name, manga.created_at)}
                                     />
                                 </Card>
                             </NavLink>

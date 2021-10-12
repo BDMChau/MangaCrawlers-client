@@ -90,7 +90,7 @@ function MangaService() {
             }
 
             chapters.forEach(chapter => {
-                chapter.createdAt = format.formatDate01(chapter.createdAt);
+                chapter.created_at = format.formatDate01(chapter.created_at);
             });
 
             if (userState[0]) {

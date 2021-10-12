@@ -70,170 +70,106 @@
 .manga-genre-cards .card .desc {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.manga-genre-cards .card .desc .desc-1,
+.manga-genre-cards .card .desc .desc-2 {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* /////////////// */
+@media only screen and (min-width: 1400px) and (max-width: 1600px) {
+  .manga-genre-cards .card {
+    width: 160px;
+    height: 210px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 11px;
+    margin-top: -6px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .manga-genre-cards .card {
+    padding: 0;
+    margin: 5px;
+    width: 150px;
+    height: 190px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 10px;
+    margin-top: -6px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1300px) {
+  .manga-genre-cards .card {
+    width: 130px;
+    height: 240px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .manga-genre-cards .card {
+    width: 150px;
+    height: 240px;
+  }
+
+  .manga-genre-cards .card .desc {
+    font-size: 12px;
+    margin-top: 0px;
+  }
+}
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .list-genre-pagination ul.ant-list-items .card {
     width: 150px;
     margin: 10px 10px;
   }
-}
 
-/* @media only screen and (min-width: 1200px) and (max-width: 1600px) {
-  .manga-genre-cards .card {
-    width: 150px;
-    height: 190px;
-  }
-}
-
-@media only screen and (min-width: 414px) and (max-width: 600px) {
-  .list-genre-pagination{
-    height: unset;
-  }
-
-  .manga-genre-cards .card {
-    width: 160px;
-    height: 225px;
-  }
-
-  .manga-genre-cards .card .ant-card-meta-title {
-    font-size: 15px;
-  }
-
-  .manga-genre-cards .card .desc {
-    font-size: 12px;
-    margin-top: 0px;
-  }
-
-  .list-genre-pagination .ant-list-pagination {
-    margin-left: 13.5px;
-    margin-bottom: 50px;
-  }
-
-  .list-genre-pagination ul.ant-list-items {
-    margin-left: 19px;
-    width: 100%;
+  .list-genre-pagination ul.ant-list-items  {
+    justify-content: center;
+    margin: 0 0px;
     padding: 0;
-    height: 720px;
-  }
-
-  .list-genre-pagination ul.ant-pagination {
-    margin-left: 5px;
-    display: flex;
-  }
-}
-
-@media only screen and (min-width: 375px) and (max-width: 414px) {
-  .list-genre-pagination{
-    height: unset;
   }
 
   .manga-genre-cards .card {
-    width: 160px;
-    height: 225px;
-  }
-
-  .manga-genre-cards .card .ant-card-meta-title {
-    font-size: 15px;
-  }
-
-  .manga-genre-cards .card .desc {
-    font-size: 12px;
-    margin-top: 0px;
-  }
-
-  .list-genre-pagination .ant-list-pagination {
-    margin-left: 13.5px;
-    margin-bottom: 50px;
-  }
-
-  .list-genre-pagination ul.ant-list-items {
-    margin-left: 19px;
-    width: 100%;
+    margin: 5px 0px 8px 14px;
     padding: 0;
-    height: 720px;
-  }
-
-  .list-genre-pagination ul.ant-pagination {
-    margin-left: 5px;
-    display: flex;
-  }
-}
-
-@media only screen and (min-width: 1200px) and (max-width: 1600px) {
-  .manga-genre-cards .card {
     width: 160px;
     height: 210px;
   }
 
-  .manga-genre-cards .card .ant-card-meta-title {
-    font-size: 14px;
-  }
-
   .manga-genre-cards .card .desc {
     font-size: 11px;
-    margin-top: -6px;
-  }
-
-  .list-genre-pagination ul.ant-list-items {
-    margin-left: 103px;
-    height: 680px;
-  }
-
-  .list-genre-pagination ul.ant-pagination {
-    margin-left: 103px;
+    margin-top: -4px;
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 415px) and (max-width: 600px) {
   .manga-genre-cards .card {
-    width: 160px;
-    height: 210px;
-  }
-
-  .manga-genre-cards .card .ant-card-meta-title {
-    font-size: 14px;
+    margin: 5px 10px;
+    padding: 0;
+    width: 110px;
+    height: 220px;
   }
 
   .manga-genre-cards .card .desc {
-    font-size: 11px;
-    margin-top: -6px;
-  }
-
-  .list-genre-pagination ul.ant-list-items {
-    margin-left: 103px;
-    height: 910px;
-  }
-
-  .list-genre-pagination ul.ant-pagination {
-    margin-left: 103px;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-  .manga-genre-cards .card {
-    width: 120px;
-    height: 160px;
-  }
-
-  .manga-genre-cards .card .ant-card-meta-title {
     font-size: 12px;
-  }
-
-  .manga-genre-cards .card .desc {
-    font-size: 9px;
     margin-top: -6px;
   }
+}
 
-  .list-genre-pagination ul.ant-list-items {
-    margin-left: 74px;
-    height: 700px;
-  }
 
-  .list-genre-pagination ul.ant-pagination {
-    margin-left: 74px;
-  }
-} */

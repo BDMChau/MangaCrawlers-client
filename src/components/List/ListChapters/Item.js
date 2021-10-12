@@ -69,7 +69,7 @@ export default function Item({
                     <Typography.Text style={{ width: "65%", overflow: "hidden", textOverflow: "ellipsis" }}>{chapter.chapter_name}</Typography.Text>
 
                     <div>
-                        <Typography.Text>{chapter.createdAt}</Typography.Text>
+                        <Typography.Text>{chapter.created_at}</Typography.Text>
                         {userState[0]?.user_isAdmin
                             ? allowToModify
                                 ? <Dropdown
