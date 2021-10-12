@@ -52,7 +52,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
   useEffect(() => {
     onExtractData();
-    console.log("?")
+    
     const inputDiv = document.getElementById("inputDivId");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
   }, [editorState])
@@ -60,8 +60,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
   useEffect(() => {
     if (isAddedCmt) {
-      console.log('acascac')
-      setEditorState(EditorState.createEmpty());
+      // setEditorState(EditorState.createEmpty());
     }
   }, [isAddedCmt])
 

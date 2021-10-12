@@ -9,12 +9,17 @@ import { message_error } from 'components/alerts/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { Typography } from 'antd';
+import TransitionAnimate from 'components/Animation/transition';
+import mangaApi from 'api/apis/MainServer/mangaApi';
 
 
 
-export default function CommentContainter({ mangaId, chapterId, commentsProp, isEndCmts, getCmts }) {
+export default function CommentContainter({ mangaId, chapterId }) {
     const userState = useSelector((state) => state.userState);
 
+    // comments
+    const [fromRow, setFromRow] = useState(0);
+    const [isEndCmts, setIsEndCmts] = useState(false);
     const [comments, setComments] = useState([])
     const [isAddedCmt, setIsAddedCmt] = useState(false);
 
@@ -39,10 +44,58 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
         }
     }, [isErrorCmt])
 
-
+    // get comments
     useEffect(() => {
-        if (commentsProp.length) setComments(commentsProp);
-    }, [commentsProp])
+        setIsEndCmts(false);
+        setComments([]);
+        setFromRow(0);
+
+        // if fromRow is 0, run getCmts() below
+        if (fromRow === 0) {
+            getCmts();
+        }
+    }, [mangaId, chapterId])
+
+
+
+
+    // useEffect(() => {
+    //     // if fromRow is 0, this effect won't be invoked
+    //     if (fromRow) getCmts()
+    // }, [fromRow])
+
+
+    const getCmts = async () => {
+        const data = {
+            manga_id: mangaId ? mangaId : null,
+            chapter_id: chapterId ? chapterId : null,
+            from: fromRow,
+            amount: 100
+        }
+
+        try {
+            const response = await mangaApi.getCommentsManga(data);
+
+            if (JSON.parse(localStorage.getItem("code_400"))) {
+                // message_error("No manga to present!")
+                localStorage.removeItem("code_400")
+                return;
+            }
+            else if (response.content.msg === "No comments found!") {
+                setIsEndCmts(true);
+                return;
+            }
+
+            const comments = response.content.comments;
+
+            setComments(comments)
+            setFromRow(fromRow + 11)
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+
+    }
 
 
 
@@ -56,11 +109,13 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
             formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
             formData.append("parent_id", dataInput.parent_id);
             formData.append("to_users_id", dataInput.to_users_id);
+            formData.append("current_cmts", comments);
+
 
 
             try {
                 const response = await userApi.addCmt(token, formData);
-                if (response.content.comment_information) {
+                if (response.content.msg) {
                     const newComment = response.content.comment_information;
 
                     setComments(prev => [newComment, ...prev])
@@ -99,7 +154,6 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
             }
             const restCmts = response.content.comments
 
-            console.log(restCmts)
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
             notification_error("Something wrong, please try again :(")
@@ -113,13 +167,15 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
     return (
         <div className="comments-form">
             {userState[0]
-                ? <InputForm
-                    token={token}
+                ? <TransitionAnimate renderPart={
+                    <InputForm
+                        token={token}
 
-                    isAddedCmt={isAddedCmt}
-                    setIsAddedCmt={setIsAddedCmt}
-                    addCmt={(content) => addCmt(content)}
-                />
+                        isAddedCmt={isAddedCmt}
+                        setIsAddedCmt={setIsAddedCmt}
+                        addCmt={(dataInput) => addCmt(dataInput)}
+                    />
+                } transitionTime={0.2} />
                 : <Typography.Title level={5} style={{ color: "#FF4D4F" }} >You must be logged in to post a comment!</Typography.Title>
 
             }
@@ -133,6 +189,10 @@ export default function CommentContainter({ mangaId, chapterId, commentsProp, is
                 mangaId={mangaId}
 
                 deleteCmt={deleteCmt}
+
+                addCmt={(dataInput) => addCmt(dataInput)}
+                isAddedCmt={isAddedCmt}
+                setIsAddedCmt={setIsAddedCmt}
             />
         </div>
     )

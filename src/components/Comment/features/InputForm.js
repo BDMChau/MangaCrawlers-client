@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import "../CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
-import { CloseOutlined, CameraOutlined, SmileOutlined } from '@ant-design/icons'
+import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined  } from '@ant-design/icons'
 import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
@@ -24,7 +24,7 @@ const fileTypesAllowed = [
 
 
 
-export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, parentId }) {
+export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, addCmt }) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
     const [sticker, setSticker] = useState("");
@@ -197,9 +197,10 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
 
                             <Button
                                 className="btn-submit"
-                                style={{ marginTop: "10px", width: "fit-content" }}
+                                style={{ marginTop: "10px", height:"40px", borderRadius:"3px", width: "fit-content" }}
                                 type="primary"
                                 loading={isAdding}
+                                icon={<CommentOutlined style={{fontSize:"18px"}} />}
                                 onClick={() => prepareToAddCmt()}
                             >
                                 Add Comment
@@ -231,7 +232,7 @@ export default function InputForm({ token, isAddedCmt, setIsAddedCmt, addCmt, pa
                                                         title="Insert Sticker and GIF"
                                                         onClick={() => prepareToAddCmt(sticker)}
                                                     >
-                                                        <img style={{ borderRadius: "50%" }} src={sticker} alt="" width="70px" height="70px" />
+                                                        <img style={{ borderRadius: "10px" }} src={sticker} alt="" width="70px" height="70px" />
                                                     </div>
                                                 ))}
                                             </div>

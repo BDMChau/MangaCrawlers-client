@@ -257,8 +257,6 @@ function Manga({
                                 <h2>MangaClawers Comments</h2>
                                 <div className="comments-body">
                                     <CommentContainter
-                                        commentsProp={commentsProp}
-                                        isEndCmts={isEndCmts}
                                         mangaId={manga.manga_id}
                                     />
                                 </div>

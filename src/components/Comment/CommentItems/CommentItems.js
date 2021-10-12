@@ -8,9 +8,19 @@ import ButtonLike from '../features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
+import InputForm from '../features/InputForm';
 
 
-function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
+function CommentItems({
+    comments,
+    getCmts,
+    isEndCmts,
+    mangaId,
+    deleteCmt,
+    addCmt,
+    isAddedCmt,
+    setIsAddedCmt
+}) {
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
@@ -66,7 +76,15 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
             <div className="interact">
                 <ButtonLike />
 
-                <InteractionForm cmtId={comment.manga_comment_id} deleteCmt={deleteCmt} />
+                <InteractionForm
+                    cmtId={comment.manga_comment_id}
+
+                    deleteCmt={deleteCmt}
+
+                    addCmt={(dataInput) => addCmt(dataInput)}
+                    isAddedCmt={isAddedCmt}
+                    setIsAddedCmt={setIsAddedCmt}
+                />
             </div>
 
 
@@ -84,6 +102,8 @@ function CommentItems({ comments, getCmts, isEndCmts, mangaId, deleteCmt }) {
             </NavLink>
         </div>
     )
+
+
 
 
     const Items = ({ children }) => {
