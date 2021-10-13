@@ -213,7 +213,7 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
                                     showUploadList={false}
                                     {...propsUploadImg}
                                 >
-                                    <Button icon={<CameraOutlined style={{ fontSize: "20px" }} />} disabled={img ? true : false} />
+                                    <Button icon={<CameraOutlined style={{ fontSize: "16px" }} />} disabled={img ? true : false} />
                                 </Upload>
                             </Tooltip>
 
@@ -240,7 +240,7 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
                                             : ""
                                     }
                                 >
-                                    <Button icon={<TagsOutlined style={{ fontSize: "20px" }} />} />
+                                    <Button icon={<TagsOutlined style={{ fontSize: "16px" }} />} />
                                 </Popover>
                             </Tooltip>
 

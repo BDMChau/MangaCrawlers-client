@@ -1,18 +1,21 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
+
 import './styles/Editor.css'
 import '@draft-js-plugins/mention/lib/plugin.css';
+import '@draft-js-plugins/emoji/lib/plugin.css';
 import 'draft-js/dist/Draft.css';
 
 import editorStyles from "./styles/editorStyles.module.css";
 import mentionsStyles from './styles/mentionsStyles.module.css';
 
-
 import { EditorState, convertToRaw, AtomicBlockUtils } from "draft-js";
 import Editor from '@draft-js-plugins/editor';
 import createMentionPlugin from "@draft-js-plugins/mention";
 import createImagePlugin from '@draft-js-plugins/image';
+import createEmojiPlugin from '@draft-js-plugins/emoji';
 
 import Entry from './features/Entry';
+import { Tooltip } from 'antd';
 
 
 export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
@@ -22,7 +25,12 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
   const editorRef = useRef(null);
 
-  const { MentionSuggestions, plugins } = useMemo(() => {
+  const {
+    MentionSuggestions,
+    plugins,
+    EmojiSuggestions,
+    EmojiSelect
+  } = useMemo(() => {
     const mentionPlugin = createMentionPlugin({
       entityMutability: 'IMMUTABLE',
       theme: mentionsStyles,
@@ -31,9 +39,12 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
     const { MentionSuggestions } = mentionPlugin;
 
     const imagePlugin = createImagePlugin();
+    const emojiPlugin = createEmojiPlugin();
 
-    const plugins = [mentionPlugin, imagePlugin];
-    return { plugins, MentionSuggestions };
+    const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
+
+    const plugins = [mentionPlugin, imagePlugin, emojiPlugin];
+    return { plugins, MentionSuggestions, EmojiSuggestions, EmojiSelect };
   }, []);
 
 
@@ -54,14 +65,14 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   useEffect(() => {
     onExtractData();
 
-    const inputDiv = document.getElementById("inputDivId");
+    const inputDiv = document.getElementById("inputDiv");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
   }, [editorState])
 
 
   useEffect(() => {
     if (isAddedCmt) {
-      // setEditorState(EditorState.createEmpty());
+      setEditorState(EditorState.createEmpty());
     }
   }, [isAddedCmt])
 
@@ -120,26 +131,32 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   };
 
   return (
-    <div className="textarea-editor" >
-      <div className={editorStyles.editor} id="inputDivId">
-        <Editor
-          ref={editorRef}
-          editorState={editorState}
-          onChange={handleChange}
-          plugins={plugins}
-          placeholder="Write a comment..."
-          value="acasc"
-        />
+    <div className={editorStyles.editor} id="inputDiv">
+      <Editor
+        ref={editorRef}
+        editorState={editorState}
+        onChange={handleChange}
+        plugins={plugins}
+        placeholder="Write a comment..."
+        value="acasc"
+      />
 
-        <MentionSuggestions
-          open={open}
-          onOpenChange={(e) => setOpen(e)}
-          onSearchChange={handleOnSearch}
-          suggestions={suggestions}
-          entryComponent={Entry}
-        />
-      </div>
+      <EmojiSuggestions />
+      <Tooltip title="Insert an emoji" >
+        <div className={editorStyles.options}>
 
+          <EmojiSelect />
+        </div>
+
+      </Tooltip>
+
+      <MentionSuggestions
+        open={open}
+        onOpenChange={(e) => setOpen(e)}
+        onSearchChange={handleOnSearch}
+        suggestions={suggestions}
+        entryComponent={Entry}
+      />
     </div>
   );
 }

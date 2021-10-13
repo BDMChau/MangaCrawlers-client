@@ -59,6 +59,9 @@
 .comments-form .addons-cont {
   margin-top: 15px;
   display: flex;
+  position: absolute;
+  right: 64px;
+  bottom: 79px;
 }
 
 .sticker-cont {
@@ -75,11 +78,13 @@
 }
 
 .comments-form .addons-cont button {
-  border-radius: 50%;
+  border-radius: 50px;
   margin: 0px 0px 0 5px;
-  width: 38px;
-  height: 38px;
+  width: 54px;
+  height: 32px;
+  padding: 5px 0 0 0;
 }
+
 
 .comments-form .addons-cont span svg {
   margin-top: 4px;

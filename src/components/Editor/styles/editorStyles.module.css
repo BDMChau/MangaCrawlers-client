@@ -8,13 +8,13 @@
   /* box-shadow: inset 0px 1px 8px -3px #ababab; */
   background: #fefefe;
   overflow-y: auto;
-  min-height: 70px;
+  min-height: 50px;
   max-height: 200px;
   transition: 0.3s;
 }
 
 .editor :global(.public-DraftEditor-content) {
-  min-height: 70px;
+  min-height: 50px;
   max-height: 190px;
   overflow-y: auto;
   font-size: 16px;
@@ -36,14 +36,11 @@
   z-index: 0;
 }
 
-
 /* 
 .editor figure {
   width: fit-content;
   display: inline-block;white-space: pre
 } */
-
-
 
 /* .editor figure img {
   width: 40px;
@@ -57,7 +54,6 @@
   height: 3px;
 }
 
-
 .editor :global(.public-DraftEditor-content)::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background: RGB(175, 175, 175);
@@ -65,4 +61,10 @@
 
 .editor :global(.public-DraftEditor-content)::-webkit-scrollbar-thumb:hover {
   background: RGB(150, 150, 150);
+}
+
+/* emoji container */
+.options {
+  float: right;
+  padding: 4px 5px 0px 5px;
 }
