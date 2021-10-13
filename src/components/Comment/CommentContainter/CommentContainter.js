@@ -109,7 +109,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
             formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
             formData.append("parent_id", dataInput.parent_id);
             formData.append("to_users_id", dataInput.to_users_id);
-            formData.append("current_cmts", comments);
+            formData.append("current_cmts", dataInput.parent_id ? comments : []);
 
 
 
@@ -117,12 +117,16 @@ export default function CommentContainter({ mangaId, chapterId }) {
                 const response = await userApi.addCmt(token, formData);
                 if (response.content.msg) {
                     const newComment = response.content.comment_information;
+                    const comments = response.content.comments;
 
-                    setComments(prev => [newComment, ...prev])
+                    if(newComment) setComments(prev => [newComment, ...prev])
+                    else if(comments.length) setComments(comments)
                 } else {
                     setIsErrorCmt(true);
                 }
+
                 setIsAddedCmt(true);
+                return;
             } catch (ex) {
                 console.log(ex);
                 setIsAddedCmt(true);
