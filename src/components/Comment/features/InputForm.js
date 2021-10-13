@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import "../CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
-import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined  } from '@ant-design/icons'
+import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, TagsOutlined } from '@ant-design/icons'
 import { message_error } from 'components/alerts/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
@@ -197,10 +197,10 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
 
                             <Button
                                 className="btn-submit"
-                                style={{ marginTop: "10px", height:"40px", borderRadius:"3px", width: "fit-content" }}
+                                style={{ marginTop: "10px", height: "40px", borderRadius: "3px", width: "fit-content" }}
                                 type="primary"
                                 loading={isAdding}
-                                icon={<CommentOutlined style={{fontSize:"18px"}} />}
+                                icon={<CommentOutlined style={{ fontSize: "18px" }} />}
                                 onClick={() => prepareToAddCmt()}
                             >
                                 Add Comment
@@ -240,7 +240,7 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
                                             : ""
                                     }
                                 >
-                                    <Button icon={<SmileOutlined style={{ fontSize: "20px" }} />} />
+                                    <Button icon={<TagsOutlined style={{ fontSize: "20px" }} />} />
                                 </Popover>
                             </Tooltip>
 
