@@ -11,7 +11,7 @@ const { Meta } = Card;
 function ListHomePagination({ mangas }) {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    // const [pageSize, setPageSize] = useState(9)
+    const [pageNumber, setPageNumber] = useState(1)
 
 
 
@@ -20,7 +20,7 @@ function ListHomePagination({ mangas }) {
             setIsLoading(true)
         } else {
             setIsLoading(false)
-            
+
             const shuffledList = arrayMethods.shuffle(mangas);
             setData(shuffledList)
         }
@@ -64,12 +64,14 @@ function ListHomePagination({ mangas }) {
                     size="large"
                     pagination={
                         {
-                            onChange: () => {
-                                console.log("page");
+                            onChange: (pageNumber) => {
+                                setPageNumber(pageNumber);
                             },
                             pageSize: 12,
                             defaultCurrent: 1,
+                            current: pageNumber,
                             total: data.length,
+                            showQuickJumper: true
                         }
                     }
                     dataSource={data}

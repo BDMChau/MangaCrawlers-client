@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import "./ListChapters.css";
 import LoadingCircle from '../../Loading/LoadingCircle/LoadingCircle';
-import { Empty, Input, Typography, Button, Popconfirm, Menu, Dropdown } from 'antd';
+import { Empty, List } from 'antd';
 import { NavLink } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 import Item from './Item';
@@ -15,51 +15,74 @@ function ListChapters({ chapters, mangaId, mangaName, height, editChapter, remov
 
     const [allowToModify, setAllowToModify] = useState(true);
 
-
+    const [pageNumber, setPageNumber] = useState(1)
 
 
 
     return (
-        <ul
-            className="list-chapter"
-            style={{ height: height }}
-        >
+        <div className="list-chapter">
             {isLoading
                 ? <LoadingCircle />
                 : chapters.length
-                    ? chapters.map((chapter, i) => (
-                        <NavLink
-                            key={i}
-                            title={chapter.chapter_name}
-                            className="list-chapter-item" id={chapter.chapter_id}
-                            to={isRemoving ? "#" : redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
-                        >
-                            <Item
-                                chapter={chapter}
+                    ? <List
+                        itemLayout="vertical"
+                        size="large"
+                        pagination={
+                            {
+                                onChange: (pageNumber) => {
+                                    setPageNumber(pageNumber);
+                                },
+                                pageSize: 12,
+                                defaultCurrent: 1,
+                                current: pageNumber,
+                                total: chapters.length,
+                                showQuickJumper: true
+                            }
+                        }
+                        dataSource={chapters}
+                        footer={false}
+                        renderItem={
+                            (chapter, i) => (
+                                <NavLink
+                                    key={i}
+                                    title={chapter.chapter_name}
+                                    className="list-chapter-item" id={chapter.chapter_id}
+                                    to={isRemoving ? "#" : redirectURI.chapterPage_uri(mangaId, mangaName, chapter.chapter_id, chapter.chapter_name)}
+                                >
+                                    <Item
+                                        chapter={chapter}
 
-                                setIsRemoving={setIsRemoving}
+                                        setIsRemoving={setIsRemoving}
 
-                                removeChapter={removeChapter}
+                                        removeChapter={removeChapter}
 
-                                setChapterId={setChapterId}
-                                chapterId={chapterId}
-                                setChapterName={setChapterName}
-                                chapterName={chapterName}
+                                        setChapterId={setChapterId}
+                                        chapterId={chapterId}
+                                        setChapterName={setChapterName}
+                                        chapterName={chapterName}
 
-                                allowToModify={allowToModify}
-                                setAllowToModify={setAllowToModify}
-                                editChapter={editChapter}
-                            />
-                        </NavLink>
+                                        allowToModify={allowToModify}
+                                        setAllowToModify={setAllowToModify}
+                                        editChapter={editChapter}
+                                    />
+                                </NavLink>
 
-                    ))
+                            )
+                        }
+                    />
+
+
+
+                    // chapters.map((chapter, i) => (
+
+                    // ))
                     : <Empty
                         style={{ margin: "0 auto", marginTop: "120px", color: "#8a8d92" }}
                         image={Empty.PRESENTED_IMAGE_SIMPLE}
                         description="No Chapters :("
                     />
             }
-        </ul >
+        </div >
     )
 }
 

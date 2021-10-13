@@ -112,15 +112,14 @@ export default function CommentContainter({ mangaId, chapterId }) {
             formData.append("current_cmts", dataInput.parent_id ? comments : []);
 
 
-
             try {
                 const response = await userApi.addCmt(token, formData);
                 if (response.content.msg) {
                     const newComment = response.content.comment_information;
                     const comments = response.content.comments;
 
-                    if(newComment) setComments(prev => [newComment, ...prev])
-                    else if(comments.length) setComments(comments)
+                    if (newComment) setComments(prev => [newComment, ...prev])
+                    else if (comments.length) setComments(comments)
                 } else {
                     setIsErrorCmt(true);
                 }

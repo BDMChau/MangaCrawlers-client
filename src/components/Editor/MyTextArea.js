@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './styles/Editor.css'
 import '@draft-js-plugins/mention/lib/plugin.css';
+import 'draft-js/dist/Draft.css';
 
 import editorStyles from "./styles/editorStyles.module.css";
 import mentionsStyles from './styles/mentionsStyles.module.css';
@@ -52,7 +53,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
   useEffect(() => {
     onExtractData();
-    
+
     const inputDiv = document.getElementById("inputDivId");
     inputDiv.scrollTop = inputDiv.scrollHeight; // auto scroll to bottom
   }, [editorState])

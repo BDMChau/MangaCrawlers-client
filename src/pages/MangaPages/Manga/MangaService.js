@@ -18,10 +18,10 @@ function MangaService() {
 
     const [manga, setManga] = useState({});
     const [genres, setGenres] = useState([]);
-    const [chapters, setChapters] = useState([]);
     const [weeklyMangas, setWeeklyMangas] = useState([]);
     const [suggestionList, setSuggestionList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [chapters, setChapters] = useState([]);
 
     const [isFollowed, setIsFollowed] = useState(false);
     const [isLoadingFollow, setIsLoadingFollow] = useState(false);
@@ -107,10 +107,10 @@ function MangaService() {
             setTimeout(() => {
                 setMangaStars(mangaObj.stars)
                 setGenres(response.content.genres)
-            }, 200)
+            }, 100)
             setTimeout(() => {
                 setChapters(response.content.chapters)
-            }, 400)
+            }, 200)
 
             return;
         } catch (error) {
