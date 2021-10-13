@@ -88,8 +88,10 @@ export default function CommentContainter({ mangaId, chapterId }) {
 
             const comments = response.content.comments;
 
-            setComments(comments)
-            setFromRow(fromRow + 11)
+            setTimeout(() => {
+                setComments(comments)
+                setFromRow(fromRow + 11)
+            }, 200)
             return;
         } catch (ex) {
             console.log(ex)
@@ -109,7 +111,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
             formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
             formData.append("parent_id", dataInput.parent_id);
             formData.append("to_users_id", dataInput.to_users_id);
-            formData.append("current_cmts", dataInput.parent_id ? comments : []);
+            // formData.append("current_cmts", dataInput.parent_id ? JSON.stringify : []);
 
 
             try {
@@ -164,6 +166,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
+    const editCmt = () => {}
 
 
 
@@ -196,6 +199,8 @@ export default function CommentContainter({ mangaId, chapterId }) {
                 addCmt={(dataInput) => addCmt(dataInput)}
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}
+
+                editCmt={editCmt}
             />
         </div>
     )

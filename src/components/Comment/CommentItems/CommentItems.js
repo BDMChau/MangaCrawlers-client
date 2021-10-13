@@ -9,6 +9,7 @@ import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
 import InputForm from '../features/InputForm';
+import { useSelector } from 'react-redux';
 
 
 function CommentItems({
@@ -19,8 +20,12 @@ function CommentItems({
     deleteCmt,
     addCmt,
     isAddedCmt,
-    setIsAddedCmt
+    setIsAddedCmt,
+
+    editCmt
 }) {
+    const userState = useSelector((state) => state.userState);
+
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
 
@@ -73,19 +78,25 @@ function CommentItems({
                 {format.formatDate02(comment.manga_comment_time)}
             </Typography.Text>
 
-            <div className="interact">
-                <ButtonLike />
+            {!userState[0]
+                ? <div className="interact">
+                    <ButtonLike />
 
-                <InteractionForm
-                    cmtId={comment.manga_comment_id}
+                    <InteractionForm
+                        comment={comment}
+                        cmtId={comment.manga_comment_id}
 
-                    deleteCmt={deleteCmt}
+                        deleteCmt={deleteCmt}
 
-                    addCmt={(dataInput) => addCmt(dataInput)}
-                    isAddedCmt={isAddedCmt}
-                    setIsAddedCmt={setIsAddedCmt}
-                />
-            </div>
+                        addCmt={(dataInput) => addCmt(dataInput)}
+                        isAddedCmt={isAddedCmt}
+                        setIsAddedCmt={setIsAddedCmt}
+
+                        editCmt={editCmt}
+                    />
+                </div>
+                : ""
+            }
 
 
             <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>

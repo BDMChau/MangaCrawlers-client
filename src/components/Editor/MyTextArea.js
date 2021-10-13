@@ -3,22 +3,23 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './styles/Editor.css'
 import '@draft-js-plugins/mention/lib/plugin.css';
 import '@draft-js-plugins/emoji/lib/plugin.css';
+
 import 'draft-js/dist/Draft.css';
 
 import editorStyles from "./styles/editorStyles.module.css";
 import mentionsStyles from './styles/mentionsStyles.module.css';
 
-import { EditorState, convertToRaw, AtomicBlockUtils } from "draft-js";
+import { EditorState, convertToRaw, AtomicBlockUtils, ContentState } from "draft-js";
 import Editor from '@draft-js-plugins/editor';
 import createMentionPlugin from "@draft-js-plugins/mention";
 import createImagePlugin from '@draft-js-plugins/image';
-import createEmojiPlugin from '@draft-js-plugins/emoji';
+import createEmojiPlugin, {defaultTheme} from '@draft-js-plugins/emoji';
 
 import Entry from './features/Entry';
 import { Tooltip } from 'antd';
 
 
-export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, content, setContent, setToUsersId }) {
+export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, setContent, setToUsersId, isEditting, editCmt, objEdit }) {
   const [suggestions, setSuggestions] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [open, setOpen] = useState(false);
@@ -39,13 +40,24 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
     const { MentionSuggestions } = mentionPlugin;
 
     const imagePlugin = createImagePlugin();
-    const emojiPlugin = createEmojiPlugin();
+    const emojiPlugin = createEmojiPlugin({
+      theme:defaultTheme
+    });
 
     const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
 
     const plugins = [mentionPlugin, imagePlugin, emojiPlugin];
     return { plugins, MentionSuggestions, EmojiSuggestions, EmojiSelect };
   }, []);
+
+
+  useEffect(() => {
+    console.log(objEdit)
+    
+    setEditorState(EditorState.createWithContent(
+      ContentState.createFromText("hahaahah")
+    ))
+  }, [objEdit])
 
 
   useEffect(() => {
@@ -85,7 +97,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   const handleOnSearch = (event) => {
     const trigger = event.trigger;
     const value = event.value;
-    console.log(event)
+ 
     onSearchFunc(value);
   }
 
@@ -93,7 +105,13 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   const onExtractData = () => {
     const contentState = editorState.getCurrentContent();
     const raw = convertToRaw(contentState);
-    const inputContent = raw.blocks[0].text;
+
+    let inputContent = ""
+    raw.blocks.forEach(block => {
+      inputContent = inputContent + block.text.trim();
+    })
+
+    console.log(inputContent)
 
     onSetUsersMention(raw.entityMap);
     setContent(inputContent);
@@ -137,14 +155,12 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
         editorState={editorState}
         onChange={handleChange}
         plugins={plugins}
-        placeholder="Write a comment..."
-        value="acasc"
+        placeholder={"Write a comment..."}
       />
 
       <EmojiSuggestions />
       <Tooltip title="Insert an emoji" >
         <div className={editorStyles.options}>
-
           <EmojiSelect />
         </div>
 

@@ -1,19 +1,36 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import "../CommentContainter/CommentContainter.css"
 
-import { Button, Modal, Typography } from 'antd'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
+import { Button, Input, Modal, Typography, Upload } from 'antd'
+import { CloseOutlined, CameraOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css';
 
 import InputForm from './InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 
-export default function InteractionForm({ cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt}) {
+export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
     const [visible, setVisible] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalEditVisible, setIsModalEditVisible] = useState(false);
+
+    const [isEditting, setIsEditting] = useState(false);
+    const [imgEditting, setImgEditting] = useState("");
+    const [imgDemo, setImgDemo] = useState("");
+    const [contentEditting, setContentEditting] = useState(comment.manga_comment_content ? comment.manga_comment_content : "");
+    const [objEdit, setObjEdit] = useState({});
 
     const cookies = new Cookies();
     const token = cookies.get("token");
+
+    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg", "image/gif"]
+
+   
+
+    const handleEdit = () => {
+        setIsEditting(!isEditting);
+    }
+
 
 
 
@@ -26,6 +43,7 @@ export default function InteractionForm({ cmtId, deleteCmt, addCmt, isAddedCmt, 
         <Modal wrapClassName="modal-del-cmt" closeIcon={undefined} visible={isModalVisible} footer={null}>
             <Typography.Text>Do you want to delete this commment?</Typography.Text>
 
+
             <div>
                 <Button onClick={() => handleDelete()} type="primary" >Delete</Button>
                 <Button onClick={() => setIsModalVisible(false)} type="text">Cancle</Button>
@@ -36,13 +54,34 @@ export default function InteractionForm({ cmtId, deleteCmt, addCmt, isAddedCmt, 
 
     return (
         <>
-            <Typography.Text className="reply" onClick={() => setVisible(!visible)} >
+            <Button
+                className="reply"
+                type="text"
+                disabled={isEditting}
+                onClick={() => setVisible(!visible)}
+                style={{ borderRadius: "10px", padding: "0 2px" }}
+            >
                 Reply
-            </Typography.Text>
+            </Button>
 
-            <Typography.Text className="btn-remove" onClick={() => setIsModalVisible(true)}>
+            <Button
+                className="reply"
+                type="text"
+                disabled={visible}
+                onClick={() => handleEdit()}
+                style={{ borderRadius: "10px", padding: "0 2px" }}
+            >
+                Edit
+            </Button>
+
+            <Button
+                className="btn-remove"
+                type="text"
+                onClick={() => setIsModalVisible(true)}
+                style={{ borderRadius: "10px", padding: "0 2px" }}
+            >
                 Delete
-            </Typography.Text>
+            </Button>
 
             {visible
                 ? <div style={{ width: "100%", marginTop: "10px" }} >
@@ -55,6 +94,9 @@ export default function InteractionForm({ cmtId, deleteCmt, addCmt, isAddedCmt, 
                                 isAddedCmt={isAddedCmt}
                                 setIsAddedCmt={setIsAddedCmt}
                                 addCmt={(dataInput) => addCmt(dataInput)}
+
+                                editCmt={editCmt}
+                                objEdit={objEdit}
                             />
                         }
                         transitionTime={0.2}

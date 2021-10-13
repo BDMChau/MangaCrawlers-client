@@ -24,7 +24,7 @@ const fileTypesAllowed = [
 
 
 
-export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, addCmt }) {
+export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, addCmt, editCmt, objEdit}) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
     const [sticker, setSticker] = useState("");
@@ -177,6 +177,9 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
                         content={cmtContent}
                         setContent={setCmtContent}
                         setToUsersId={setToUsersId}
+
+                        editCmt={editCmt}
+                        objEdit={objEdit}
                     />
 
                     <div className="bottom-cont">

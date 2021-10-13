@@ -232,3 +232,54 @@
   float: right;
   border-radius: 3px;
 }
+
+.modal-edit-cmt {
+  margin-top: 200px !important;
+}
+
+.modal-edit-cmt .ant-modal-content {
+  border-radius: 10px;
+  height: 300px;
+}
+
+.modal-edit-cmt .ant-modal-close,
+.modal-del-cmt.ant-modal-close {
+  display: none;
+}
+
+.modal-edit-cmt .ant-modal-body {
+  font-size: 15px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.modal-edit-cmt .modal-edit-btn button {
+  float: right;
+}
+
+.modal-edit-cmt .ant-upload {
+  height: 150px;
+  width: 150px;
+}
+
+.modal-edit-cmt .btn-clear-img {
+  position: absolute;
+  z-index: 9;
+  background: #00000038;
+  border-radius: 50%;
+  color: white;
+  border: none;
+  box-shadow: 0 0 5px 0 #ffffff;
+  margin-left: 0px;
+  margin-top: 3px;
+  width: 30px;
+  height: 30px;
+}
+
+.modal-edit-cmt .btn-clear-img:before {
+  box-shadow: none;
+}

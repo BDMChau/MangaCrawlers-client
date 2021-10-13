@@ -110,7 +110,7 @@ function MangaService() {
             }, 100)
             setTimeout(() => {
                 setChapters(response.content.chapters)
-            }, 200)
+            }, 300)
 
             return;
         } catch (error) {
