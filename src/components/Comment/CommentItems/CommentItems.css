@@ -73,7 +73,7 @@
 }
 
 .comment .cmt-bottom .interact .btn-remove {
-  color: #87888a;
+  color: #a4a5a6;
   margin-left: 10px;
   cursor: pointer;
   transition: 0.3s;
@@ -82,6 +82,10 @@
 .comment .cmt-bottom .interact .btn-remove:hover {
   color: #5c5d5e;
   margin-left: 10px;
+}
+
+.comment .cmt-bottom .interact .ant-image-img {
+  margin: auto;
 }
 
 .comment .cmt-avatar {

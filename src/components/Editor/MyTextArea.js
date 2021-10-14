@@ -13,13 +13,13 @@ import { EditorState, convertToRaw, AtomicBlockUtils, ContentState } from "draft
 import Editor from '@draft-js-plugins/editor';
 import createMentionPlugin from "@draft-js-plugins/mention";
 import createImagePlugin from '@draft-js-plugins/image';
-import createEmojiPlugin, {defaultTheme} from '@draft-js-plugins/emoji';
+import createEmojiPlugin, { defaultTheme } from '@draft-js-plugins/emoji';
 
 import Entry from './features/Entry';
 import { Tooltip } from 'antd';
 
 
-export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, setContent, setToUsersId, isEditting, editCmt, objEdit }) {
+export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, setContent, setToUsersId, isEditting, editCmt, objEdit, replying }) {
   const [suggestions, setSuggestions] = useState([]);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [open, setOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
     const imagePlugin = createImagePlugin();
     const emojiPlugin = createEmojiPlugin({
-      theme:defaultTheme
+      theme: defaultTheme
     });
 
     const { EmojiSuggestions, EmojiSelect } = emojiPlugin;
@@ -52,12 +52,16 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
 
   useEffect(() => {
-    console.log(objEdit)
-    
-    setEditorState(EditorState.createWithContent(
-      ContentState.createFromText("hahaahah")
-    ))
+    if (objEdit && Object.keys(objEdit).length > 0) {
+      setEditorState(EditorState.createWithContent(
+        ContentState.createFromText(objEdit.content)
+      ))
+    }
   }, [objEdit])
+
+  useEffect(() => {
+    if (replying) setEditorState(EditorState.createEmpty())
+  }, [replying])
 
 
   useEffect(() => {
@@ -83,9 +87,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
 
 
   useEffect(() => {
-    if (isAddedCmt) {
-      setEditorState(EditorState.createEmpty());
-    }
+    if (isAddedCmt) setEditorState(EditorState.createEmpty());
   }, [isAddedCmt])
 
 
@@ -97,7 +99,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   const handleOnSearch = (event) => {
     const trigger = event.trigger;
     const value = event.value;
- 
+
     onSearchFunc(value);
   }
 
@@ -111,8 +113,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
       inputContent = inputContent + block.text.trim();
     })
 
-    console.log(inputContent)
-
+    if (objEdit) objEdit.content = inputContent;
     onSetUsersMention(raw.entityMap);
     setContent(inputContent);
   };
@@ -155,7 +156,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
         editorState={editorState}
         onChange={handleChange}
         plugins={plugins}
-        placeholder={"Write a comment..."}
+        placeholder={isEditting ? "Edit your comment here..." : "Write a comment..."}
       />
 
       <EmojiSuggestions />

@@ -57,8 +57,6 @@ export default function CommentContainter({ mangaId, chapterId }) {
     }, [mangaId, chapterId])
 
 
-
-
     // useEffect(() => {
     //     // if fromRow is 0, this effect won't be invoked
     //     if (fromRow) getCmts()
@@ -70,29 +68,20 @@ export default function CommentContainter({ mangaId, chapterId }) {
             manga_id: mangaId ? mangaId : null,
             chapter_id: chapterId ? chapterId : null,
             from: fromRow,
-            amount: 100
+            amount: 10
         }
 
         try {
             const response = await mangaApi.getCommentsManga(data);
+            const comments = response.content.comments ? response.content.comments : [];
 
-            if (JSON.parse(localStorage.getItem("code_400"))) {
-                // message_error("No manga to present!")
-                localStorage.removeItem("code_400")
-                return;
-            }
-            else if (response.content.msg === "No comments found!") {
+            if (comments.length < 10 && response.content.msg === "No comments found!") {
                 setIsEndCmts(true);
                 return;
             }
 
-            const comments = response.content.comments;
-
-            setTimeout(() => {
-                setComments(comments)
-                setFromRow(fromRow + 11)
-            }, 200)
-            return;
+            setFromRow(fromRow + 11)
+            setTimeout(() => setComments(prev => [...prev, ...comments]), 300)
         } catch (ex) {
             console.log(ex)
         }
@@ -166,7 +155,27 @@ export default function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
-    const editCmt = () => {}
+    const editCmt = async (editObj) => {
+        const formData = new FormData();
+        formData.append("manga_comment_id", editObj.cmt_id);
+        formData.append("manga_comment_content", editObj.content);
+        formData.append("image", editObj.image);
+
+        try {
+            const response = await userApi.updateCmt(token, formData);
+            if (response.content.err) {
+                notification_error("Something wrong, please try again :(")
+                return;
+            }
+            console.log(response)
+            const restCmts = response.content.comments
+
+            setTimeout(() => setComments(restCmts), 200)
+        } catch (err) {
+            notification_error("Something wrong, please try again :(")
+            console.log(err)
+        }
+    }
 
 
 
@@ -181,7 +190,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
                         setIsAddedCmt={setIsAddedCmt}
                         addCmt={(dataInput) => addCmt(dataInput)}
                     />
-                } transitionTime={0.2} />
+                } transitionTime={0.1} />
                 : <Typography.Title level={5} style={{ color: "#FF4D4F" }} >You must be logged in to post a comment!</Typography.Title>
 
             }

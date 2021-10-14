@@ -24,7 +24,20 @@ const fileTypesAllowed = [
 
 
 
-export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, addCmt, editCmt, objEdit}) {
+export default function InputForm({
+    token,
+    parentId,
+
+    isAddedCmt,
+    setIsAddedCmt,
+    addCmt,
+
+    editCmt,
+    objEdit,
+    isEditting,
+
+    replying
+}) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
     const [sticker, setSticker] = useState("");
@@ -57,13 +70,17 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
 
 
     useEffect(() => {
+        if (objEdit) setImgDemo(objEdit.image);
+    }, [objEdit])
+
+
+    useEffect(() => {
         if (usersSearchResult.length) setVisiblePopoverUsers(true);
         else setVisiblePopoverUsers(false)
     }, [usersSearchResult])
 
 
     const prepareToAddCmt = async (sticker) => {
-        console.log(sticker)
         if (sticker) {
             const dataInput = {
                 content: "",
@@ -92,6 +109,13 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
             setIsAdding(false);
         }
     }
+
+    const prepareToEditCmt = () => {
+        if (!objEdit.image) objEdit.image = fileDefault;
+
+        editCmt(objEdit)
+    }
+
 
     const prepareBeforeSearch = (value) => {
         debounceSearchUsers(value);
@@ -127,18 +151,17 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
     }, 200)
 
 
-    const handleSetContent = (value, type) => {
-        if (type === "img") {
-            // const content = cmtContent + ` <img style="border-radius: 50%;" src=${value} alt="" width="40px" height="40px" /> `
-            // console.log(content)
-            // setCmtContent(content);
-            setSticker(value)
-        }
+    const handleRemoveImg = () => {
+        setImg("");
+        setImgDemo("");
+
+        if (objEdit) objEdit.image = "";
     }
 
 
     const onChangeFile = (info) => {
         setImg(info.file.originFileObj)
+        if (objEdit) objEdit.image = info.file.originFileObj;
 
         handleFile.getBase64Img(info.file.originFileObj, (file) => {
             setImgDemo(file)
@@ -180,16 +203,19 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
 
                         editCmt={editCmt}
                         objEdit={objEdit}
+                        isEditting={isEditting}
+
+                        replying={replying}
                     />
 
                     <div className="bottom-cont">
                         <div className="interaction-cont">
-                            {img
+                            {imgDemo
                                 ? <>
                                     <Button
                                         className="btn-remove-img"
                                         icon={<CloseOutlined />}
-                                        onClick={() => { setImg(""); setImgDemo(""); }}
+                                        onClick={() => handleRemoveImg()}
                                     />
 
                                     <Image src={imgDemo} alt="" style={{ borderRadius: "3px", width: "fit-content", height: "110px" }} />
@@ -204,9 +230,9 @@ export default function InputForm({ token, parentId, isAddedCmt, setIsAddedCmt, 
                                 type="primary"
                                 loading={isAdding}
                                 icon={<CommentOutlined style={{ fontSize: "18px" }} />}
-                                onClick={() => prepareToAddCmt()}
+                                onClick={() => isEditting ? prepareToEditCmt() : prepareToAddCmt()}
                             >
-                                Add Comment
+                                {isEditting ? "Edit" : "Add Comment"}
                             </Button>
                         </div>
 

@@ -2,7 +2,7 @@ import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
 import { NavLink } from 'react-router-dom';
 
-import { Comment, Avatar, Empty, Typography, Tooltip } from 'antd';
+import { Comment, Avatar, Empty, Typography, Tooltip, Button } from 'antd';
 
 import ButtonLike from '../features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
@@ -10,6 +10,7 @@ import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
 import InputForm from '../features/InputForm';
 import { useSelector } from 'react-redux';
+import FadingText from 'components/FadingText/FadingText';
 
 
 function CommentItems({
@@ -31,9 +32,9 @@ function CommentItems({
 
     useEffect(() => {
         if (isScrollBottom === true) {
-            getCmts()
+            getCmts();
 
-            const timer = setTimeout(() => setIsScrollBottom(false), 700)
+            const timer = setTimeout(() => setIsScrollBottom(false), 600)
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
@@ -80,7 +81,7 @@ function CommentItems({
                 {format.formatDate02(comment.manga_comment_time)}
             </Typography.Text>
 
-            {!userState[0]
+            {userState[0]
                 ? <div className="interact">
                     <ButtonLike />
 
@@ -117,6 +118,10 @@ function CommentItems({
     )
 
 
+    const BtnLoadMore = () => (
+        <Button>Load more</Button>
+    )
+
 
 
     const Items = ({ children }) => {
@@ -143,53 +148,61 @@ function CommentItems({
                                 <div style={{ padding: comment.comments_level_01?.length ? "5px" : 0 }} className="item" >
                                     {
                                         comment.comments_level_01?.length
-                                            ? comment.comments_level_01.map((cmt01) => (
-                                                <Comment
-                                                    className="comment-item01"
-                                                    key={cmt01.manga_comment_id}
-                                                    author={<CmtTitle comment={cmt01} />}
-                                                    avatar={
-                                                        <Avatar
-                                                            className="cmt-avatar"
-                                                            style={{ cursor: "default" }}
-                                                            src={cmt01.user_avatar}
-                                                            alt="Avatar"
-                                                        />
-                                                    }
-                                                    content={
-                                                        <div className="cmt-children">
-                                                            <CmtBody comment={cmt01} background={"grey"} />
+                                            ? <div>
+                                                {comment.comments_level_01.map((cmt01) => (
+                                                    <Comment
+                                                        className="comment-item01"
+                                                        key={cmt01.manga_comment_id}
+                                                        author={<CmtTitle comment={cmt01} />}
+                                                        avatar={
+                                                            <Avatar
+                                                                className="cmt-avatar"
+                                                                style={{ cursor: "default" }}
+                                                                src={cmt01.user_avatar}
+                                                                alt="Avatar"
+                                                            />
+                                                        }
+                                                        content={
+                                                            <div className="cmt-children">
+                                                                <CmtBody comment={cmt01} background={"#e4edf3"} />
 
-                                                            <div style={{ padding: cmt01.comments_level_02?.length ? "5px" : 0 }} >
-                                                                {
-                                                                    cmt01.comments_level_02?.length
-                                                                        ? cmt01.comments_level_02.map((cmt02) => (
-                                                                            <Comment
-                                                                                className="comment-item02"
-                                                                                key={cmt02.manga_comment_id}
-                                                                                author={<CmtTitle comment={cmt02} />}
-                                                                                avatar={
-                                                                                    <Avatar
-                                                                                        className="cmt-avatar"
-                                                                                        style={{ cursor: "default" }}
-                                                                                        src={cmt02.user_avatar}
-                                                                                        alt="Avatar"
-                                                                                    />
-                                                                                }
-                                                                                content={
-                                                                                    <div className="cmt-children02">
-                                                                                        <CmtBody comment={cmt02} background={"white"} />
-                                                                                    </div>
-                                                                                }
-                                                                            ></Comment>
-                                                                        ))
-                                                                        : ""
-                                                                }
+                                                                <div style={{ padding: cmt01.comments_level_02?.length ? "5px" : 0 }} >
+                                                                    {
+                                                                        cmt01.comments_level_02?.length
+                                                                            ? <div>
+                                                                                {cmt01.comments_level_02.map((cmt02) => (
+                                                                                    <Comment
+                                                                                        className="comment-item02"
+                                                                                        key={cmt02.manga_comment_id}
+                                                                                        author={<CmtTitle comment={cmt02} />}
+                                                                                        avatar={
+                                                                                            <Avatar
+                                                                                                className="cmt-avatar"
+                                                                                                style={{ cursor: "default" }}
+                                                                                                src={cmt02.user_avatar}
+                                                                                                alt="Avatar"
+                                                                                            />
+                                                                                        }
+                                                                                        content={
+                                                                                            <div className="cmt-children02">
+                                                                                                <CmtBody comment={cmt02} background={"white"} />
+                                                                                            </div>
+                                                                                        }
+                                                                                    ></Comment>
+                                                                                ))}
+
+                                                                                <BtnLoadMore />
+                                                                            </div>
+                                                                            : ""
+                                                                    }
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    }
-                                                ></Comment>
-                                            ))
+                                                        }
+                                                    ></Comment>
+                                                ))}
+
+                                                <BtnLoadMore />
+                                            </div>
                                             : ""
                                     }
 
@@ -217,7 +230,7 @@ function CommentItems({
 
             {isScrollBottom
                 ? <div className="loading-more" >
-                    <SkeletonCustom paragraphRows={3} avatarShape={"circle"} />
+                    <SkeletonCustom paragraphRows={4} avatarShape={"circle"} />
                 </div>
                 : ""
             }

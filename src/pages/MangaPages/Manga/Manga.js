@@ -39,10 +39,8 @@ function Manga({
     editChapter,
     editManga,
 
-    removeChapter,
-
-    commentsProp,
-    isEndCmts
+    removeChapter
+  
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
