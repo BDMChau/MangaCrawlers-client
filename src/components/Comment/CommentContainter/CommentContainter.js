@@ -143,14 +143,14 @@ export default function CommentContainter({ mangaId, chapterId }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
-                notification_error("Something wrong, please try again :(")
+                notification_error("Something wrong :(")
                 return;
             }
             const restCmts = response.content.comments
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
-            notification_error("Something wrong, please try again :(")
+            notification_error("Something wrong :(")
             console.log(err)
         }
     }
@@ -164,7 +164,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
         try {
             const response = await userApi.updateCmt(token, formData);
             if (response.content.err) {
-                notification_error("Something wrong, please try again :(")
+                notification_error("Something wrong :(")
                 return;
             }
             console.log(response)
@@ -172,7 +172,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
-            notification_error("Something wrong, please try again :(")
+            notification_error("Something wrong :(")
             console.log(err)
         }
     }
