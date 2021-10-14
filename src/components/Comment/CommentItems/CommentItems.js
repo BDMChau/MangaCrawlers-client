@@ -52,6 +52,8 @@ function CommentItems({
     }
 
 
+
+    ////////////////////////////// components //////////////////////////////
     const CmtTitle = ({ comment }) => (
         <Typography.Text style={{ cursor: "default", fontSize: "14px", fontWeight: "500" }}>{comment.user_name}</Typography.Text>
     )
@@ -141,27 +143,27 @@ function CommentItems({
                                 <div style={{ padding: comment.comments_level_01?.length ? "5px" : 0 }} className="item" >
                                     {
                                         comment.comments_level_01?.length
-                                            ? comment.comments_level_01.map((cmt) => (
+                                            ? comment.comments_level_01.map((cmt01) => (
                                                 <Comment
                                                     className="comment-item01"
-                                                    key={cmt.manga_comment_id}
-                                                    author={<CmtTitle comment={cmt} />}
+                                                    key={cmt01.manga_comment_id}
+                                                    author={<CmtTitle comment={cmt01} />}
                                                     avatar={
                                                         <Avatar
                                                             className="cmt-avatar"
                                                             style={{ cursor: "default" }}
-                                                            src={cmt.user_avatar}
+                                                            src={cmt01.user_avatar}
                                                             alt="Avatar"
                                                         />
                                                     }
                                                     content={
                                                         <div className="cmt-children">
-                                                            <CmtBody comment={cmt} background={"grey"} />
+                                                            <CmtBody comment={cmt01} background={"grey"} />
 
-                                                            <div style={{ padding: cmt.comments_level_02?.length ? "5px" : 0 }} >
+                                                            <div style={{ padding: cmt01.comments_level_02?.length ? "5px" : 0 }} >
                                                                 {
-                                                                    cmt.comments_level_02?.length
-                                                                        ? cmt.comments_level_02.map((cmt02) => (
+                                                                    cmt01.comments_level_02?.length
+                                                                        ? cmt01.comments_level_02.map((cmt02) => (
                                                                             <Comment
                                                                                 className="comment-item02"
                                                                                 key={cmt02.manga_comment_id}
