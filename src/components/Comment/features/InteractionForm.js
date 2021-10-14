@@ -29,7 +29,7 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
     useEffect(() => {
         if (isEditting) {
             const obj = {
-                cmt_id: comment.manga_comment_id,
+                cmt_id: cmtId,
                 content: comment.manga_comment_content,
                 image: comment.image_url ? comment.image_url : ""
             };
@@ -98,7 +98,7 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
                         renderPart={
                             <InputForm
                                 token={token}
-                                parentId={cmtId}
+                                parentId={comment.parent_id}
 
                                 isAddedCmt={isAddedCmt}
                                 setIsAddedCmt={setIsAddedCmt}

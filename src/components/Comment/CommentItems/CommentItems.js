@@ -8,9 +8,7 @@ import ButtonLike from '../features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
-import InputForm from '../features/InputForm';
 import { useSelector } from 'react-redux';
-import FadingText from 'components/FadingText/FadingText';
 
 
 function CommentItems({
