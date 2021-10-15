@@ -89,7 +89,6 @@ export default function CommentContainter({ mangaId, chapterId }) {
     }
 
 
-
     const addCmt = async (dataInput) => {
         if (userState[0]) {
             const formData = new FormData();
@@ -127,6 +126,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
+
     const deleteCmt = async (id) => {
         if (!userState[0]) return message_error("You have to login first!");
 
@@ -156,6 +156,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
+    
     const editCmt = async (editObj) => {
         const formData = new FormData();
         formData.append("manga_comment_id", editObj.cmt_id);

@@ -19,11 +19,24 @@ import Entry from './features/Entry';
 import { Tooltip } from 'antd';
 
 
-export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, setContent, setToUsersId, isEditting, editCmt, objEdit, replying }) {
-  const [suggestions, setSuggestions] = useState([]);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [open, setOpen] = useState(false);
+export default function MyTextArea({ 
+  isAddedCmt, 
 
+  onSearchFunc, 
+  suggestionsProp, 
+
+  setContent, 
+  setToUsersId,
+
+   isEditting,
+     objEdit,
+
+      replying
+     }) {
+      const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [suggestions, setSuggestions] = useState([]);
+
+  const [open, setOpen] = useState(false);
   const editorRef = useRef(null);
 
   const {
@@ -58,10 +71,6 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
       ))
     }
   }, [objEdit])
-
-  useEffect(() => {
-    // if (replying) setEditorState(EditorState.createEmpty())
-  }, [replying])
 
 
   useEffect(() => {
@@ -109,9 +118,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
     const raw = convertToRaw(contentState);
 
     let inputContent = ""
-    raw.blocks.forEach(block => {
-      inputContent = inputContent + block.text.trim();
-    })
+    raw.blocks.forEach(block => inputContent = inputContent + block.text.trim());
 
     if (objEdit) objEdit.content = inputContent;
     onSetUsersMention(raw.entityMap);
@@ -122,10 +129,8 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   const onSetUsersMention = (objEntityMap) => {
     const mentionedUsers = [];
     for (let key in objEntityMap) {
-      const ent = objEntityMap[key];
-      if (ent.type === "mention") {
-        mentionedUsers.push(ent.data.mention.user_id.toString());
-      }
+      const entity = objEntityMap[key];
+      if (entity.type === "mention") mentionedUsers.push(entity.data.mention.user_id.toString());
     }
 
     setToUsersId(mentionedUsers);
@@ -141,6 +146,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
       { src: img },
     );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+
     const newEditorState = EditorState.set(
       editorState,
       { currentContent: contentStateWithEntity },

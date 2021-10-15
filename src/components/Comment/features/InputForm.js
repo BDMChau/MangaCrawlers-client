@@ -74,6 +74,7 @@ export default function InputForm({
         if (objEdit) setImgDemo(objEdit.image);
     }, [objEdit])
 
+
     useEffect(() => {
         console.log(toUsersId)
     }, [setToUsersId])
@@ -94,7 +95,7 @@ export default function InputForm({
                 to_users_id: parentId ? [replyingUserId.toString(), ...toUsersId] : toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
             };
-      
+
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);
@@ -122,10 +123,6 @@ export default function InputForm({
     }
 
 
-    const prepareBeforeSearch = (value) => {
-        debounceSearchUsers(value);
-    }
-
     const debounceSearchUsers = debounce(async (val) => {
         if (!val) {
             setUsersSearchResult([]);
@@ -136,7 +133,7 @@ export default function InputForm({
             setIsLoadingSearch(true);
             const data = {
                 value: val,
-                key: 2
+                key: 2 // search with: 1: email, 2: name
             }
 
             const response = await userApi.searchUsers(token, data);
@@ -180,9 +177,7 @@ export default function InputForm({
             authorization: 'authorization-text',
         },
         beforeUpload: file => {
-            if (!fileTypesAllowed.includes(file.type)) {
-                message_error(`Please select png, jpg, jpeg, GIF only!`);
-            }
+            if (!fileTypesAllowed.includes(file.type)) message_error(`Please select png, jpg, jpeg, GIF only!`);
             return fileTypesAllowed.includes(file.type) ? true : Upload.LIST_IGNORE;
         },
         onChange: (info) => onChangeFile(info)
@@ -198,15 +193,13 @@ export default function InputForm({
                         sticker={sticker}
                         setSticker={setSticker}
 
-                        onSearchFunc={prepareBeforeSearch}
-
+                        onSearchFunc={debounceSearchUsers}
                         suggestionsProp={usersSearchResult}
 
                         content={cmtContent}
                         setContent={setCmtContent}
                         setToUsersId={setToUsersId}
 
-                        editCmt={editCmt}
                         objEdit={objEdit}
                         isEditting={isEditting}
 
@@ -226,7 +219,6 @@ export default function InputForm({
                                     <Image src={imgDemo} alt="" style={{ borderRadius: "3px", width: "fit-content", height: "110px" }} />
                                 </>
                                 : ""
-
                             }
 
                             <Button
