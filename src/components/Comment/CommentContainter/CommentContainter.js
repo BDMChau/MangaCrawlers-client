@@ -143,10 +143,11 @@ export default function CommentContainter({ mangaId, chapterId }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
-                notification_error("Something wrong :(")
+                notification_error("Something wrong :(");
+                setTimeout(() => setComments([]), 200)
                 return;
             }
-            const restCmts = response.content.comments
+            const restCmts = response.content.comments;
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
