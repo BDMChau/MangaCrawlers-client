@@ -91,10 +91,10 @@ export default function InputForm({
                 content: "",
                 image: fileDefault,
                 sticker_url: sticker,
-                to_users_id: parentId ? toUsersId.unshift(replyingUserId.toString()) : toUsersId,
+                to_users_id: parentId ? [replyingUserId.toString(), ...toUsersId] : toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
             };
-            console.log(toUsersId)
+      
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);
@@ -105,10 +105,10 @@ export default function InputForm({
             const dataInput = {
                 content: cmtContent,
                 image: img ? img : fileDefault,
-                to_users_id: parentId ? toUsersId.unshift(replyingUserId.toString()) : toUsersId,
+                to_users_id: parentId ? [replyingUserId.toString(), ...toUsersId] : toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
             };
-console.log(toUsersId)
+
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);
