@@ -60,7 +60,7 @@ export default function MyTextArea({ isAddedCmt, onSearchFunc, suggestionsProp, 
   }, [objEdit])
 
   useEffect(() => {
-    if (replying) setEditorState(EditorState.createEmpty())
+    // if (replying) setEditorState(EditorState.createEmpty())
   }, [replying])
 
 

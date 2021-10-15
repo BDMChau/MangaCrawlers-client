@@ -36,7 +36,8 @@ export default function InputForm({
     objEdit,
     isEditting,
 
-    replying
+    replying,
+    replyingUserId
 }) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
@@ -73,6 +74,10 @@ export default function InputForm({
         if (objEdit) setImgDemo(objEdit.image);
     }, [objEdit])
 
+    useEffect(() => {
+        console.log(toUsersId)
+    }, [setToUsersId])
+
 
     useEffect(() => {
         if (usersSearchResult.length) setVisiblePopoverUsers(true);
@@ -86,10 +91,10 @@ export default function InputForm({
                 content: "",
                 image: fileDefault,
                 sticker_url: sticker,
-                to_users_id: toUsersId,
+                to_users_id: parentId ? toUsersId.unshift(replyingUserId.toString()) : toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
             };
-
+            console.log(toUsersId)
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);
@@ -100,10 +105,10 @@ export default function InputForm({
             const dataInput = {
                 content: cmtContent,
                 image: img ? img : fileDefault,
-                to_users_id: toUsersId,
+                to_users_id: parentId ? toUsersId.unshift(replyingUserId.toString()) : toUsersId,
                 parent_id: parentId ? parentId.toString() : ""
             };
-
+console.log(toUsersId)
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);

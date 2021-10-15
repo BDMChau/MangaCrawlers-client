@@ -109,6 +109,7 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
                                 isEditting={isEditting}
 
                                 replying={replying}
+                                replyingUserId={comment.user_id}
                             />
                         }
                         transitionTime={0.1}
