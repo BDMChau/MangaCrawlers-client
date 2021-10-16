@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, memo } from 'react'
 import "../CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
@@ -24,7 +24,7 @@ const fileTypesAllowed = [
 
 
 
-export default function InputForm({
+function InputForm({
     token,
     parentId,
 
@@ -278,38 +278,4 @@ export default function InputForm({
     )
 }
 
-
-
-
-
-
-
-
-
-{/* <Popover
-                        placement="bottom"
-                        overlayClassName="tag-users-popover"
-                        visible={visiblePopoverUsers}
-                        content={
-                            usersSearchResult.length
-                                ? <div className="tag-users" >
-                                    {usersSearchResult.map((user, i) => ((
-                                        <div className="tag" onKeyPress={(e) => console.log(e.key)} onClick={() => handleSelectUsers(user)} key={i}>
-                                            <div style={{ display: "flex" }}>
-                                                <Avatar className="user-ava" src={user.user_avatar} alt="" />
-
-                                                <div>
-                                                    <h3>{user.user_name}</h3>
-                                                    <p>{user.user_email}</p>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <p>Friend</p>
-                                            </div>
-                                        </div>
-
-                                    )))}
-                                </div>
-                                : ""
-                        }
-                    /> */}
+export default memo(InputForm);

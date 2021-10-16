@@ -23,7 +23,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
         }
     }, [visible])
 
-    
+
     useEffect(() => {
         if (userState) {
             setProfile(userState[0])
@@ -32,11 +32,11 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
 
 
     useEffect(() => {
-        if(file){
+        if (file) {
             updateAvatar(file)
             setFile(null)
         }
-     }, [file])
+    }, [file])
 
 
     const handleOpenFormSignUpTransTeam = () => {
@@ -70,25 +70,25 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
         name: 'file',
         headers: {
             authorization: 'authorization-text',
-        }, 
+        },
         beforeUpload: (file) => false,
         onChange: (info) => setFile(info.file)
     };
 
 
     const dropdownSettingsAva = (
-        <Menu style={{width:"100%"}}>
+        <Menu style={{ width: "100%" }}>
             <Menu.Item>
                 <Upload {...propsUpload} className="btn-upload-avatar">
                     Change Avatar
-                   
+
                 </Upload>
             </Menu.Item>
 
             <Menu.Item onClick={removeAvatar}>
                 <Typography.Text >
                     Remove Avatar
-            </Typography.Text>
+                </Typography.Text>
             </Menu.Item>
         </Menu>
     );
@@ -110,9 +110,9 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         src={profile.user_avatar ? profile.user_avatar : ""}
                     />
 
-                        <Dropdown overlay={dropdownSettingsAva} trigger={['click']} placement="bottomCenter" >
-                            <Button className="btn-settings-avatar" loading={isLoading} icon={<SettingOutlined style={{ fontSize: "24px" }} />} />
-                        </Dropdown>
+                    <Dropdown overlay={dropdownSettingsAva} trigger={['click']} placement="bottomCenter" >
+                        <Button className="btn-settings-avatar" loading={isLoading} icon={<SettingOutlined style={{ fontSize: "24px" }} />} />
+                    </Dropdown>
                 </div>
 
                 <div className="name">
@@ -127,6 +127,17 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                     <Input addonBefore="Role" title="Role" defaultValue={profile.user_isAdmin ? "Admin" : "Regular User"} readOnly />
                 </div>
 
+                <div className="desc">
+                    <Input.TextArea
+                        placeholder="Write something about yourself..."
+                        showCount
+                        maxLength={150}
+                        addonBefore="Your feelings"
+                        title="Your feelings"
+                        defaultValue={profile.user_isAdmin ? "Admin" : "Regular User"}
+                    />
+                </div>
+
                 <div className="interact">
                     <Button
                         type="primary"
@@ -136,7 +147,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                             <HistoryOutlined style={{ fontSize: "18px" }} />
                             &#160;
                             My History
-                       </NavLink>
+                        </NavLink>
                     </Button>
 
                     <Button
@@ -149,41 +160,41 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         </NavLink>
                     </Button>
 
-                    {userState[0].user_transgroup_id 
-                    ? <Button
-                        type="primary"
-                     >
-                        <NavLink className="trans-group-btn" to="/user/projects">
-                            <TeamOutlined style={{ fontSize: "19px" }} />
-                            &#160;
-                            My Organization
-                        </NavLink>
-                    </Button>
-                    : ""
+                    {userState[0].user_transgroup_id
+                        ? <Button
+                            type="primary"
+                        >
+                            <NavLink className="trans-group-btn" to="/user/projects">
+                                <TeamOutlined style={{ fontSize: "19px" }} />
+                                &#160;
+                                My Organization
+                            </NavLink>
+                        </Button>
+                        : ""
 
                     }
 
                     {userState[0].user_isAdmin === true
-                    ? <Button
-                        type="primary"
-                    >
+                        ? <Button
+                            type="primary"
+                        >
                             <NavLink className="admin-btn" to="/admin">
                                 <ProfileOutlined style={{ fontSize: "19px" }} />
                                 &#160;
                                 Admin
                             </NavLink>
                         </Button>
-                    :""
-                       
+                        : ""
+
                     }
                 </div>
-                
+
                 {userState[0].user_transgroup_id
-                    ?<div style={{pointerEvents:"none", opacity:"0.5"}} className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
+                    ? <div style={{ pointerEvents: "none", opacity: "0.5" }} className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
                         <p>Create your own organization?</p>
                     </div>
-                    
-                    :<div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
+
+                    : <div className="create-trans-group" onClick={() => handleOpenFormSignUpTransTeam()}>
                         <p>Create your own organization?</p>
                     </div>
                 }

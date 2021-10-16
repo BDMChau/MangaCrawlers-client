@@ -9,7 +9,7 @@ import InputForm from './InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 
-export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
+export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt, getCmtsChild }) {
     const [replying, setReplying] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);

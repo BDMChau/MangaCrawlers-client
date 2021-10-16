@@ -89,6 +89,12 @@
   padding: 20px;
 }
 
+.user-drawer .user textarea {
+  height: 85px;
+  resize: none;
+}
+
+
 @media only screen and (min-width: 1199px) {
   .user-drawer .user .contact-admin span.ant-input-group {
     width: 320px;

@@ -14,9 +14,13 @@ import { useSelector } from 'react-redux';
 function CommentItems({
     comments,
     getCmts,
+    getCmtsChild,
     isEndCmts,
+
     mangaId,
+
     deleteCmt,
+
     addCmt,
     isAddedCmt,
     setIsAddedCmt,
@@ -116,8 +120,20 @@ function CommentItems({
     )
 
 
-    const BtnLoadMore = () => (
-        <Button>Load more</Button>
+    const BtnSeeMore = ({ comment }) => (
+        <Button
+            type="text"
+            style={{
+                padding: "2px",
+                marginLeft: "10px",
+                borderRadius: "10px",
+                fontSize: "13px",
+                fontWeight: 500
+            }}
+            onClick={() => getCmtsChild(comment.manga_comment_id)}
+        >
+            See more
+        </Button>
     )
 
 
@@ -189,7 +205,7 @@ function CommentItems({
                                                                                     ></Comment>
                                                                                 ))}
 
-                                                                                <BtnLoadMore />
+                                                                                <BtnSeeMore comment={comment} />
                                                                             </div>
                                                                             : ""
                                                                     }
@@ -199,7 +215,7 @@ function CommentItems({
                                                     ></Comment>
                                                 ))}
 
-                                                <BtnLoadMore />
+                                                <BtnSeeMore comment={comment} />
                                             </div>
                                             : ""
                                     }

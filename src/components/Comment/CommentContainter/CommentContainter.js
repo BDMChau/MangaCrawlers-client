@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import "./CommentContainter.css";
 
 import CommentItems from '../CommentItems/CommentItems';
@@ -14,7 +14,7 @@ import mangaApi from 'api/apis/MainServer/mangaApi';
 
 
 
-export default function CommentContainter({ mangaId, chapterId }) {
+function CommentContainter({ mangaId, chapterId }) {
     const userState = useSelector((state) => state.userState);
 
     // comments
@@ -22,6 +22,10 @@ export default function CommentContainter({ mangaId, chapterId }) {
     const [isEndCmts, setIsEndCmts] = useState(false);
     const [comments, setComments] = useState([])
     const [isAddedCmt, setIsAddedCmt] = useState(false);
+
+    // child cmts
+    const [fromRowsChild, setFromRowsChild] = useState(0);
+    const [isEndCmtsChild, setIsEndCmtsChild] = useState(false);
 
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
@@ -82,6 +86,44 @@ export default function CommentContainter({ mangaId, chapterId }) {
 
             setFromRow(fromRow + 11)
             setTimeout(() => setComments(prev => [...prev, ...comments]), 300)
+        } catch (ex) {
+            console.log(ex)
+        }
+
+    }
+
+    const getCmtsChild = async (id) => {
+        const data = {
+            manga_comment_id: id,
+            from: fromRowsChild,
+            amount: 4
+        }
+
+        try {
+            const response = await mangaApi.getCommentsChild(data);
+            const commentsRes = response.content.comments ? response.content.comments : [];
+
+            if (comments.length < 4 && response.content.msg === "No comments found!") {
+                setIsEndCmts(true);
+                return;
+            }
+
+            const copied = comments.map(item => item);
+            for (let i = 0; i < copied.length; i++) {
+                console.log("HHHHHHHHHHH")
+                console.log(copied[i].manga_comment_id)
+                console.log(id)
+                if(copied[i].manga_comment_id === id){
+                    commentsRes.forEach(item =>{
+                        copied.comments_level_01.push(item)
+                    })
+                }
+                
+            }
+
+
+            setFromRowsChild(fromRow + 5)
+            setTimeout(() => setComments(copied), 300)
         } catch (ex) {
             console.log(ex)
         }
@@ -201,6 +243,7 @@ export default function CommentContainter({ mangaId, chapterId }) {
             <CommentItems
                 comments={comments}
                 getCmts={() => getCmts()}
+                getCmtsChild={(id) => getCmtsChild(id)}
                 isEndCmts={isEndCmts}
 
                 mangaId={mangaId}
@@ -216,3 +259,5 @@ export default function CommentContainter({ mangaId, chapterId }) {
         </div>
     )
 }
+
+export default memo(CommentContainter);
