@@ -13,6 +13,17 @@
   height: 150px;
 }
 
+.user-info-page .mutual-text {
+  color: #747373;
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.user-info-page .mutual-text:hover {
+  color: #383737;
+}
+
 .user-info-page .info-cont {
   display: flex;
   justify-content: left;

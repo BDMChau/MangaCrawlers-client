@@ -113,12 +113,12 @@ function CommentContainter({ mangaId, chapterId }) {
                 console.log("HHHHHHHHHHH")
                 console.log(copied[i].manga_comment_id)
                 console.log(id)
-                if(copied[i].manga_comment_id === id){
-                    commentsRes.forEach(item =>{
+                if (copied[i].manga_comment_id === id) {
+                    commentsRes.forEach(item => {
                         copied.comments_level_01.push(item)
                     })
                 }
-                
+
             }
 
 
@@ -148,10 +148,20 @@ function CommentContainter({ mangaId, chapterId }) {
                 const response = await userApi.addCmt(token, formData);
                 if (response.content.msg) {
                     const newComment = response.content.comment_information;
-                    const comments = response.content.comments;
 
-                    if (newComment) setComments(prev => [newComment, ...prev])
-                    else if (comments.length) setComments(comments)
+                    if (newComment.level !== "0") {
+                        const data = {
+                            comments: comments,
+                            manga_comment_id: newComment.manga_comment_id,
+                        };
+
+                        const response02 = await userApi.filter(token, data);
+                        if (response02.content.msg) {
+                            setComments(response02.content.comments ? response02.content.comments : [])
+                        }
+                    } else {
+                        setComments(prev => [newComment, ...prev])
+                    }
                 } else {
                     setIsErrorCmt(true);
                 }
@@ -198,7 +208,7 @@ function CommentContainter({ mangaId, chapterId }) {
         }
     }
 
-    
+
     const editCmt = async (editObj) => {
         const formData = new FormData();
         formData.append("manga_comment_id", editObj.cmt_id);
@@ -211,8 +221,19 @@ function CommentContainter({ mangaId, chapterId }) {
                 notification_error("Something wrong :(")
                 return;
             }
-            console.log(response)
-            const restCmts = response.content.comments
+            const comment = response.content.comment_info;
+
+            const data = {
+                comments: comments,
+                manga_comment_id: comment.manga_comment_id,
+            };
+
+            const response02 = await userApi.filter(token, data);
+            if (response02.content.err) {
+                notification_error("Something wrong :(")
+                return;
+            }
+            const restCmts = response02.content.comments ? response02.content.comments : [];
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {

@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./UserInfo.css";
 
 import { Col, Image, Row, Typography, Button } from 'antd';
 import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
+import MultualFriendsModal from '../Friends/components/MultualFriendsModal';
 
 export default function UserInfo() {
+    const [visibleMutualModal, setVisibleMutualModal] = useState(false)
+
+    useEffect(() => {
+        console.log(visibleMutualModal)
+    }, [visibleMutualModal])
+
     return (
         <Row justify="center" className="user-info-page">
             <Col xs={23} sm={18} md={18} xl={13} className="col01">
@@ -18,7 +25,11 @@ export default function UserInfo() {
 
                     <div className="info">
                         <Typography.Title level={3} style={{ margin: 0 }}>Minh Chou</Typography.Title>
-                        <Typography.Text style={{ color: "#747373" }}>bdmchau105@gmail.com</Typography.Text>
+                        <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>bdmchau105@gmail.com</Typography.Text>
+
+                        <NavLink to="#" className="mutual-text" onClick={() => setVisibleMutualModal(true)} >
+                            100 mutual friends
+                        </NavLink>
 
                         <Typography.Text style={{ color: "#747373" }}>
                             Team:
@@ -54,6 +65,8 @@ export default function UserInfo() {
                     </div>
                 </div>
             </Col>
+
+            <MultualFriendsModal visibleProp={visibleMutualModal} closeModal={(status) => setVisibleMutualModal(status)} />
         </Row>
     )
 }

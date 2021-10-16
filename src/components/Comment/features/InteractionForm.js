@@ -49,7 +49,7 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
     }
 
     const modalDeleteCmt = () => (
-        <Modal wrapClassName="modal-del-cmt" closeIcon={undefined} visible={isModalVisible} footer={null}>
+        <Modal wrapClassName="modal-del-cmt" closeIcon={undefined} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
             <Typography.Text>Do you want to delete this comment?</Typography.Text>
 
 

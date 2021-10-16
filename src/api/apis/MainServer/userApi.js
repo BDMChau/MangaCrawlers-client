@@ -28,6 +28,14 @@ const userApi = {
             }
         });
     },
+    filter: (token, data) => {
+        const uri = '/api/user/filter_comments';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     deleteCmt: (token, data) => {
         const uri = '/api/user/deletecomment';
         return axiosClient.post(uri, data, {
