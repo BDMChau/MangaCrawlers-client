@@ -92,38 +92,29 @@ function CommentContainter({ mangaId, chapterId }) {
 
     }
 
-    const getCmtsChild = async (id) => {
+    const getCmtsChild = async (id, level) => {
+        if(isEndCmtsChild) return;
+        
         const data = {
             manga_comment_id: id,
             from: fromRowsChild,
-            amount: 4
+            amount: 4,
+            level: level
         }
 
         try {
             const response = await mangaApi.getCommentsChild(data);
             const commentsRes = response.content.comments ? response.content.comments : [];
+            const nextFromRow = response.content.comments;
 
-            if (comments.length < 4 && response.content.msg === "No comments found!") {
-                setIsEndCmts(true);
+            if (response.content.is_end) {
+                setIsEndCmtsChild(true);
                 return;
             }
 
-            const copied = comments.map(item => item);
-            for (let i = 0; i < copied.length; i++) {
-                console.log("HHHHHHHHHHH")
-                console.log(copied[i].manga_comment_id)
-                console.log(id)
-                if (copied[i].manga_comment_id === id) {
-                    commentsRes.forEach(item => {
-                        copied.comments_level_01.push(item)
-                    })
-                }
 
-            }
-
-
-            setFromRowsChild(fromRow + 5)
-            setTimeout(() => setComments(copied), 300)
+            setFromRowsChild(nextFromRow)
+            setTimeout(() => setComments(commentsRes), 300)
         } catch (ex) {
             console.log(ex)
         }
@@ -153,6 +144,7 @@ function CommentContainter({ mangaId, chapterId }) {
                         const data = {
                             comments: comments,
                             manga_comment_id: newComment.manga_comment_id,
+                            key: 3
                         };
 
                         const response02 = await userApi.filter(token, data);
@@ -226,6 +218,7 @@ function CommentContainter({ mangaId, chapterId }) {
             const data = {
                 comments: comments,
                 manga_comment_id: comment.manga_comment_id,
+                key: 2
             };
 
             const response02 = await userApi.filter(token, data);
@@ -264,7 +257,9 @@ function CommentContainter({ mangaId, chapterId }) {
             <CommentItems
                 comments={comments}
                 getCmts={() => getCmts()}
-                getCmtsChild={(id) => getCmtsChild(id)}
+                getCmtsChild={(id, level) => getCmtsChild(id, level)}
+
+                isEndCmtsChild={isEndCmtsChild}
                 isEndCmts={isEndCmts}
 
                 mangaId={mangaId}

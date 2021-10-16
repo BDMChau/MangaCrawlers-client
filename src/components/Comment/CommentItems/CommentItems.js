@@ -15,6 +15,8 @@ function CommentItems({
     comments,
     getCmts,
     getCmtsChild,
+
+    isEndCmtsChild,
     isEndCmts,
 
     mangaId,
@@ -121,19 +123,21 @@ function CommentItems({
 
 
     const BtnSeeMore = ({ comment }) => (
-        <Button
-            type="text"
-            style={{
-                padding: "2px",
-                marginLeft: "10px",
-                borderRadius: "10px",
-                fontSize: "13px",
-                fontWeight: 500
-            }}
-            onClick={() => getCmtsChild(comment.manga_comment_id)}
-        >
-            See more
-        </Button>
+        isEndCmtsChild
+            ? ""
+            : <Button
+                type="text"
+                style={{
+                    padding: "2px",
+                    marginLeft: "10px",
+                    borderRadius: "10px",
+                    fontSize: "13px",
+                    fontWeight: 500
+                }}
+                onClick={() => getCmtsChild(comment.manga_comment_id, comment.level)}
+            >
+                See more
+            </Button>
     )
 
 
@@ -205,7 +209,7 @@ function CommentItems({
                                                                                     ></Comment>
                                                                                 ))}
 
-                                                                                <BtnSeeMore comment={comment} />
+                                                                                <BtnSeeMore comment={cmt01} />
                                                                             </div>
                                                                             : ""
                                                                     }
