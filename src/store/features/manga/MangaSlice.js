@@ -29,7 +29,7 @@ const MangaSlice = createSlice({
             state[2] = genres;
         },
         GET_ALL_GENRES_FAILED: (state, action) => {
-            console.error(action.payload)
+            console.error("Get all genres failed: ", action.payload)
         },
         ///////////////////
 
