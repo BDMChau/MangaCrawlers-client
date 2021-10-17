@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { message_error, message_success, message_warning } from '../../../../components/alerts/message';
 import { format } from 'helpers/format';
 import { notification_error, notification_success } from 'components/alerts/notification';
-import { socket, socketActions } from 'socket/socketClient';
+import { socketActions } from 'socket/socketClient';
 import { Upload } from 'antd';
 import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi';
 
@@ -237,7 +237,7 @@ export default function TransGroupService() {
         }
 
         socketActions.sendMessageToServer(data);
-        notification_success("Sent your invitation!")
+        notification_success("Sent your invitation!");
     }
 
 

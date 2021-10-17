@@ -7,6 +7,12 @@
   min-height: 100vh;
 }
 
+.user-info-page .ant-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
 .user-info-page .avatar {
   border-radius: 50%;
   width: 150px;
@@ -39,7 +45,6 @@
 .user-info-page .ant-image-mask {
   border-radius: 50%;
   width: 150px;
-  height: 150px;
   color: transparent !important;
   background-color: transparent !important;
 }

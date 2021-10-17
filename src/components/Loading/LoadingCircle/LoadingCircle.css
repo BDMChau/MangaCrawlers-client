@@ -1,19 +1,46 @@
 .loading-circle {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-circle .circle {
+  color: #52606fc7;
+}
+
+.loading-circle svg {
+  width: 80px;
+  transform-origin: center;
+  animation: rotate 1.5s linear infinite;
+}
+
+.loading-circle circle {
+  fill: none;
+  stroke: #a5a6a7;
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
   }
-  
-  .loading-circle .circle {
-    color: #52606fc7;
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
-  
-  .loading-circle .circle svg {
-    color: transparent;
-    border-radius: 50px;
-    border: 3px solid #a5a6a7;
-    border-bottom: none;
-    border-top: none;
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
   }
-  
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}

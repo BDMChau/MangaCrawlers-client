@@ -329,8 +329,9 @@
 }
 
 .notifications-cont .notification-item .image {
-  width: 40px;
-  height: 40px;
+  margin-top: 2px;
+  width: 45px;
+  height: 45px;
   border-radius: 5px;
 }
 

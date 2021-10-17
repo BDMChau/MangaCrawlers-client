@@ -171,6 +171,12 @@ const userApi = {
             }
         });
     },
+
+    ////////////////// unauth parts //////////////////
+    getUserInfo: (data) => {
+        const uri = '/api/user_unauth/get_userinfo';
+        return axiosClient.post(uri, data);
+    }
 };
 
 export default userApi;

@@ -54,7 +54,7 @@ function Notifications({
     return (
         <div style={{ minHeight: '50px' }}>
             <div className="notification-title">
-                <Typography.Title level={3} >Notifications</Typography.Title>
+                <Typography.Title level={4} >Notifications</Typography.Title>
 
                 <Tooltip title='Read All'>
                     <Button

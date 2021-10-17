@@ -30,7 +30,18 @@ function Notification({
     //     target_id,
     //     target_title,
     // } = item;
-    const [notification, setNotification] = useState({})
+
+    /**
+     * @param: 1: delete 
+     * @param: 2: confirm_toJoinTeam 
+     * @param: 3: accept_friend 
+     */
+    const listTypes = {
+        1: "delete",
+        2: "confirm_toJoinTeam",
+        3: "accept_friend"
+    }
+    const [notification, setNotification] = useState({});
 
 
     useEffect(() => {
@@ -39,16 +50,27 @@ function Notification({
 
 
     const handleInteract = async (type) => {
-        if (type === 'delete') {
-            await updateInteracted(notification.notification_id);
-            setNotification({ ...notification, is_interacted: true });
-
-        } else if (type === 'confirm') {
-            const response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
-            if(response){
+        switch (type) {
+            case listTypes[1]:
+                await updateInteracted(notification.notification_id);
                 setNotification({ ...notification, is_interacted: true });
-            }
+
+                break;
+            case listTypes[2]:
+                const response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
+                if (response) {
+                    setNotification({ ...notification, is_interacted: true });
+                }
+                break;
+            case listTypes[3]:
+                console.log("ok friend")
+                break;
+
+            default:
+                break;
         }
+
+
     }
 
 
@@ -65,12 +87,13 @@ function Notification({
     }
 
 
+    /////////////////////////// components ///////////////////////////
     const Invitation = () => (
         <div style={{ display: 'flex' }} >
             <img className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
 
             <div className='content'>
-                <Typography.Text >
+                <Typography.Text>
                     <b>{notification.sender_name}</b> invited you: "<div title={notification.notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification.notification_content }}></div>"
                 </Typography.Text>
 
@@ -78,26 +101,50 @@ function Notification({
                 <div className="interact" style={{ display: notification.is_interacted || !notification.target_id ? 'none' : 'unset', }}>
                     <Button
                         type='primary'
-                        onClick={() => handleInteract('confirm')}
+                        onClick={() => handleInteract(listTypes[2])}
                     >
                         Confirm
                     </Button>
 
                     <Button
-                        onClick={() => handleInteract('delete')}
+                        onClick={() => handleInteract(listTypes[1])}
                         style={{ marginLeft: "5px" }}
                     >
                         Delete
                     </Button>
                 </div>
-
-
             </div>
         </div >
     )
 
+
     const FriendRequest = ({ }) => (
-        <div></div>
+        <div style={{ display: 'flex' }} >
+            <img className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+
+            <div className='content'>
+                <Typography.Text >
+                    <b>{notification.sender_name}</b> sent you a request: "<div title={notification.notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification.notification_content }}></div>"
+                </Typography.Text>
+
+
+                <div className="interact" style={{ display: notification.is_interacted || !notification.target_id ? 'none' : 'unset', }}>
+                    <Button
+                        type='primary'
+                        onClick={() => handleInteract(listTypes[3])}
+                    >
+                        Accept
+                    </Button>
+
+                    <Button
+                        onClick={() => handleInteract(listTypes[1])}
+                        style={{ marginLeft: "5px" }}
+                    >
+                        Delete
+                    </Button>
+                </div>
+            </div>
+        </div >
     )
 
 

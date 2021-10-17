@@ -132,9 +132,9 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         placeholder="Write something about yourself..."
                         showCount
                         maxLength={150}
-                        addonBefore="Your feelings"
-                        title="Your feelings"
-                        defaultValue={profile.user_isAdmin ? "Admin" : "Regular User"}
+                        addonBefore="Your status"
+                        title="Your status"
+                        defaultValue={profile.user_desc}
                     />
                 </div>
 

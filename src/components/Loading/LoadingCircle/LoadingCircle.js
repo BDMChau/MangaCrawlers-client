@@ -7,12 +7,9 @@ export default function LoadingCircle({ width, height, fontSizeIcon, fontSizeTex
 
     return (
         <div className="loading-circle" style={{ width: width, height: height }}>
-            <Spin
-                className="circle"
-                style={{ fontSize: fontSizeText }}
-                indicator={<LoadingOutlined style={{ fontSize: fontSizeIcon, color: "#52606fc7" }} />}
-                tip="Loading..."
-            />
+            <svg viewBox="25 25 50 50">
+                <circle cx="50" cy="50" r="20"></circle>
+            </svg>
         </div>
     )
 }
