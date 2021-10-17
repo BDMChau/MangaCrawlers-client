@@ -43,7 +43,7 @@ function MangaService() {
     const token = cookies.get("token");
 
     const { name_id } = useParams()
-    const [id, setId] = useState("ascac"); // mangaId when init
+    const [id, setId] = useState(""); // mangaId when init
     const [mangaNameParam, setMangaNameParam] = useState("");
 
 
@@ -67,8 +67,10 @@ function MangaService() {
         //     behavior: "smooth"
         // });
 
+       if(id){
         getMangaData();
         getSuggestionList();
+       }
     }, [id])
 
 

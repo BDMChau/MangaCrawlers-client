@@ -7,8 +7,9 @@ import { errMsgResNotification } from '../../../api/checking/ErrResCheking';
 import { message_success, message_warning } from '../../../components/alerts/message';
 
 export default function SignUpService() {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isCloseModal, setIsCloseModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const [isCloseModal, setIsCloseModal] = useState(false);
+    const [msgFromSignUp, setMsgFromSignUp] = useState("");
 
 
     const handleSignUp = async (name, email, password) => {
@@ -29,8 +30,8 @@ export default function SignUpService() {
 
             console.log(response);
             message_success("Sign up successfully!", 3);
-            message_warning("Please check your email to confirm the account before sign in ^^", 10);
-            
+            setMsgFromSignUp("Check your email to confirm before sign in ^^");
+
             setIsLoading(false)
             setIsCloseModal(true);
             return;
@@ -44,8 +45,11 @@ export default function SignUpService() {
     return (
         <div>
             <SignUp
+                isLoading={isLoading}
                 handleSignUp={(name, email, password) => handleSignUp(name, email, password)}
                 isCloseModal={isCloseModal}
+
+                msgFromSignUp={msgFromSignUp}
             />
         </div>
     )

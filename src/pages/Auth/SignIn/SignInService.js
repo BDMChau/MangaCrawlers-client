@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SignIn from './SignIn'
 import authApi from '../../../api/apis/MainServer/authApi'
 
@@ -9,13 +9,18 @@ import Cookies from 'universal-cookie';
 import endPoint from '../../../config/endPoint';
 
 
-export default function SignInService() {
+export default function SignInService({ msgFromSignUp }) {
     const [isLoading, setIsLoading] = useState(false)
     const [isCloseModal, setIsCloseModal] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
     const [isErr, setIsErr] = useState(false)
 
     const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        if (msgFromSignUp) setErrorMsg(msgFromSignUp);
+    }, [msgFromSignUp])
 
     const handleSignIn = async (email, password) => {
         if (email && password) {
@@ -26,11 +31,11 @@ export default function SignInService() {
                     "user_password": password
                 }
                 const response = await authApi.postDataSignIn(data);
-                console.log(response)
+
                 if (response.content.err) {
                     if (response.content.err === "Check email to verify the account!") {
                         setErrorMsg("Your account isn't verified or approved, check your email to confirm first!")
-                        setIsErr(false)
+                        setIsErr(true)
                     } else if (response.content.err === "Password does not match!") {
                         setErrorMsg("Wrong password!")
                         setIsErr(true)
@@ -42,6 +47,7 @@ export default function SignInService() {
                         setErrorMsg(response.content.err)
                         setIsErr(true)
                     }
+
                     setIsLoading(false)
                     return;
                 }
@@ -96,6 +102,8 @@ export default function SignInService() {
                 isCloseModal={isCloseModal}
                 errorMsg={errorMsg}
                 isErr={isErr}
+
+                msgFromSignUp={msgFromSignUp}
             />
         </div>
     )

@@ -151,7 +151,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal }) {
             </Modal>
             {
                 isModalSignInVisible
-                    ? <SignInService isOpenModal={isModalSignInVisible} />
+                    ? <SignInService isOpenModal={isModalSignInVisible} msgFromSignUp={msgFromSignUp} />
                     : ""
             }
         </div>
