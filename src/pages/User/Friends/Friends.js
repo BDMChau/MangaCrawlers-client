@@ -4,8 +4,9 @@ import "./Friends.css"
 import { Col, Empty, Row, Tabs, Typography } from 'antd'
 import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
+import FriendRequest from './components/FriendRequest';
 
-export default function Friends({ userId, selectedKey, setSelectedKey }) {
+export default function Friends({ userId, listRequests, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
 
     const [friends, setFriends] = useState([
@@ -84,33 +85,52 @@ export default function Friends({ userId, selectedKey, setSelectedKey }) {
 
 
     const AllFriends = () => (
-        <>
-            <Typography.Text
-                style={{
-                    fontWeight: "500",
-                    fontSize: "16px",
-                    margin: "0px 0 0px 6px"
-                }}
-            >
-                100 friends
-            </Typography.Text>
-            <div className="all-friends">
-                {friends.length
-                    ? friends.map((item, i) => (
+        friends.length
+            ? <>
+                <Typography.Text
+                    style={{
+                        fontWeight: "500",
+                        fontSize: "16px",
+                        margin: "0px 0 0px 6px"
+                    }}
+                >
+                    100 friends
+                </Typography.Text>
+                <div className="all-friends">
+                    {friends.map((item, i) => (
                         <Friend friend={item} i={i} />
-                    ))
-                    : ""
+                    ))}
 
-                }
-            </div>
-        </>
+                </div>
+            </>
+            : <Empty description="" style={{ marginTop: "80px" }} />
     )
 
 
 
-    const AllRequests = () => (
+    const AllFriendRequests = () => (
         userState[0]
-            ? <div>acacasc</div>
+            ? <>
+                <Typography.Text
+                    style={{
+                        fontWeight: "500",
+                        fontSize: "16px",
+                        margin: "0px 0 0px 6px"
+                    }}
+                >
+                    100 friends
+                </Typography.Text>
+                <div className="all-friends">
+                    {listRequests.length
+                        ? listRequests.map((request, i) => (
+                            <FriendRequest requestProp={request} i={i} />
+                        ))
+
+                        : ""
+                    }
+
+                </div>
+            </>
             : <Empty description="" style={{ marginTop: "80px" }} />
 
     )
@@ -138,7 +158,7 @@ export default function Friends({ userId, selectedKey, setSelectedKey }) {
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab="Friend Requests" key="friend_requests">
-                            <AllRequests />
+                            <AllFriendRequests />
                         </Tabs.TabPane>
                     </Tabs>
 

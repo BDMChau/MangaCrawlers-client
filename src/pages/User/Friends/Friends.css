@@ -69,12 +69,48 @@
   font-size: 16px;
 }
 
+.friends .request {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+  margin: 0 5px 15px 5px;
+  width: 49%;
+  border-radius: 10px;
+  background-color: transparent;
+  box-shadow: 0px 0px 5px 0 #c1c1c1;
+}
+
+.friends .request .interaction {
+  display: flex;
+}
+
+.friends .request .user-name,
+.friends .request .user-email {
+  cursor: pointer;
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friends .request button {
+  /* border: none; */
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
 .item {
   width: 450px;
 }
 
 @media only screen and (min-width: 375px) and (max-width: 767px) {
   .friends .friend {
+    width: 100%;
+  }
+
+  .friends .request {
     width: 100%;
   }
 
@@ -88,6 +124,19 @@
     width: 48%;
   }
 
+  .friends .request .interaction {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .friends .request .interaction button {
+    margin-top: 5px !important;
+  }
+
+  .friends .request {
+    width: 48%;
+  }
+
   .item {
     width: 225px;
   }
@@ -98,8 +147,6 @@
     width: 350px;
   }
 }
-
-
 
 /* /////////////////////////////// */
 .modal-mutual-cmt {

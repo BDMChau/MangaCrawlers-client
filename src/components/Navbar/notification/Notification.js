@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react'
 import "../Navbar.css"
 
-import { Typography, Button } from 'antd';
+import { Typography, Button, Avatar } from 'antd';
 
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
@@ -90,7 +90,9 @@ function Notification({
     /////////////////////////// components ///////////////////////////
     const Invitation = () => (
         <div style={{ display: 'flex' }} >
-            <img className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+            <div>
+                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+            </div>
 
             <div className='content'>
                 <Typography.Text>
@@ -120,7 +122,9 @@ function Notification({
 
     const FriendRequest = ({ }) => (
         <div style={{ display: 'flex' }} >
-            <img className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+            <div>
+                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+            </div>
 
             <div className='content'>
                 <Typography.Text >
@@ -151,7 +155,7 @@ function Notification({
     return (
         <div className="notification-item" key={key} style={{ background: notification.is_viewed ? '' : '#daf1f985', cursor: "default" }} >
             {handleRender()}
-            <div style={{ color: "#8f8f8f", fontSize: '13px' }} >{notification.created_at}</div>
+            <div style={{ color: "#8f8f8f", fontSize: '13px', marginTop: "5px" }} >{notification.created_at}</div>
         </div>
     )
 }

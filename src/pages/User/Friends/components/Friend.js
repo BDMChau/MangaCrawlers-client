@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 
 import { Avatar, Button, Dropdown, Typography, Menu } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 
 
-export default function Friend({ friend, i }) {
+function Friend({ friend, i }) {
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -27,10 +27,10 @@ export default function Friend({ friend, i }) {
     return (
         <div key={i} className="friend" >
             <div style={{ padding: "0 7px 0 0", display: "flex" }} className="item">
-                <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} src={user.user_avatar} />
+                <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} title="Avatar" src={user.user_avatar} />
 
                 <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "65%" }}>
-                    <Typography.Title level={5} className="user-name" >{user.user_name}</Typography.Title>
+                    <Typography.Title level={5} className="user-name" title={user.user_name}>{user.user_name}</Typography.Title>
 
                     <Dropdown overlay={dropDownItems} trigger={['click']}>
                         <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
@@ -50,3 +50,5 @@ export default function Friend({ friend, i }) {
         </div>
     )
 }
+
+export default memo(Friend);

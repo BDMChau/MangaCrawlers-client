@@ -50,7 +50,12 @@
   height: 270px;
   margin: 5px 15px 10px 0px;
   border-radius: 3px;
-  box-shadow: 0 0 10px 0px var(--color-box-shadow);
+  box-shadow: 0px 0px 5px 0 #cdcdce;
+  transition: 0.3s;
+}
+
+.manga-genre-cards .card:hover {
+  box-shadow: 0px 0px 5px 0 #b3b3b4;
 }
 
 .manga-genre-cards .card .ant-card-cover {

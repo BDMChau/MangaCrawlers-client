@@ -6,6 +6,7 @@ body,
 html {
   font-family: "Poppins", "Roboto", 'Segoe UI' !important;
   /* font-family: 'Open Sans', sans-serif !important; */
+  --antd-wave-shadow-color: var(--color-primary) !important;
 }
 
 * {

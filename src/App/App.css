@@ -1,28 +1,24 @@
 :root {
   --color-box-shadow: rgba(0, 0, 0, 0.192);
+  --color-box-shadow-primary: rgb(255 103 64 / 23%);
   --color-one: #c9cacc;
+  --color-primary: #1890ff;
 
+  --color-theme: #f0f2f5;
+  --color-theme-02: white;
 
-  --color-theme:#F0F2F5;
-  --color-theme-02:white;
-
-  --color-text:#fff;
-
+  --color-text: #fff;
 
   /* Triet, continue this task here */
-
 }
 
-
-.ant-card-meta-title{
+.ant-card-meta-title {
   margin-top: 3px;
 }
-
 
 .ant-layout {
   background: none !important;
 }
-
 
 :root::-webkit-scrollbar {
   width: 10px;
@@ -42,7 +38,14 @@
   background: RGB(150, 150, 150);
 }
 
-.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after{
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after {
   border: none !important;
 }
 
@@ -64,10 +67,62 @@
   background: RGB(150, 150, 150);
 }
 
+.ant-btn-primary {
+  /* background: var(--color-primary) !important; */
+  border: none !important;
+}
 
-span.ant-tag{
+.ant-menu-title-content{
+  font-weight: 500;
+}
+
+button {
+  font-weight: 500 !important;
+}
+
+span.ant-tag {
   border-radius: 10px;
   padding: 5px 10px !important;
   border: none;
   font-weight: 500;
 }
+
+/*
+.ant-pagination-item:focus-visible,
+.ant-pagination-item:hover,
+.ant-pagination-item-active {
+  border-color: var(--color-primary) !important;
+}
+
+.ant-pagination-item-active:focus-visible a,
+.ant-pagination-item-active:hover a.ant-pagination-item-active:focus-visible a,
+.ant-pagination-item-active a,
+.ant-pagination-item:hover a,
+.ant-pagination-item-active:hover a,
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn,
+.ant-tabs-tab:hover {
+  color: var(--color-primary) !important;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active{
+  border-color: var(--color-primary) !important;
+}
+
+::selection{
+  background: var(--color-primary) !important;
+}
+
+.ant-pagination-prev:focus-visible .ant-pagination-item-link,
+.ant-pagination-next:focus-visible .ant-pagination-item-link,
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+}
+
+.ant-pagination-options-quick-jumper input:hover,
+.ant-pagination-options-quick-jumper input:focus,
+.ant-pagination-options-quick-jumper input-focused {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 2px var(--color-box-shadow-primary) !important;
+} */

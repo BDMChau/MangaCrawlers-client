@@ -25,7 +25,7 @@ export default function FriendsService() {
         setSelectedKey(path);
     }, [path])
 
-    
+
     useEffect(() => {
         if (userState[0]) getAllFriendRequests();
     }, [userState[0]])
@@ -44,13 +44,13 @@ export default function FriendsService() {
 
 
     return (
-        <div>
-            <Friends
-                userId={param_userId}
+        <Friends
+            userId={param_userId}
 
-                selectedKey={selectedKey}
-                setSelectedKey={setSelectedKey}
-            />
-        </div>
+            listRequests={listRequests}
+
+            selectedKey={selectedKey}
+            setSelectedKey={setSelectedKey}
+        />
     )
 }
