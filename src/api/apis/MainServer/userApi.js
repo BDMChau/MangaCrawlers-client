@@ -19,6 +19,14 @@ const userApi = {
             }
         });
     },
+    getFriendRequest: (token) => {
+        const uri = `/api/user/get_friend_requests`;
+        return axiosClient.get(uri,{
+            headers:{
+                Authorization: token
+            }
+        });
+    },
     addCmt: (token, data) => {
         const uri = '/api/user/addcommentmanga';
         return axiosClient.post(uri, data, {

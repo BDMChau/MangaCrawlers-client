@@ -66,7 +66,7 @@ export default function UserInfo({ userInfo, handleSendFriendRequest }) {
                             </div>
                         </div>
                     </>
-                    : <Empty style={{ paddingTop: "50px" }} />
+                    : <Empty description="" style={{ paddingTop: "80px" }} />
                 }
             </Col>
 

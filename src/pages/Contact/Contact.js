@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Contact.css"
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Col, Row, Tabs, Typography } from 'antd'
 import { enquireScreen, unenquireScreen } from 'enquire-js'
@@ -10,7 +10,6 @@ const { TabPane } = Tabs
 export default function Contact() {
     const [isMobile, setIsMobile] = useState(false)
     let location = useLocation()
-    let history = useHistory()
     const [tabSelected, setTabSelected] = useState("");
 
 

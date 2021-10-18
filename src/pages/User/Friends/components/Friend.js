@@ -26,14 +26,14 @@ export default function Friend({ friend, i }) {
 
     return (
         <div key={i} className="friend" >
-            <div style={{ padding: "0 7px 0 0", display: "flex"}} className="item">
+            <div style={{ padding: "0 7px 0 0", display: "flex" }} className="item">
                 <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} src={user.user_avatar} />
 
-                <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width:"65%" }}>
+                <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "65%" }}>
                     <Typography.Title level={5} className="user-name" >{user.user_name}</Typography.Title>
 
                     <Dropdown overlay={dropDownItems} trigger={['click']}>
-                        <Button icon={<EllipsisOutlined style={{ fontSize: "23px" }} />} />
+                        <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
                     </Dropdown>
                 </div>
             </div>

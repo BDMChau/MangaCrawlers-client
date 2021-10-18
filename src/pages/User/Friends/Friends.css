@@ -28,6 +28,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
+  margin-top: 10px;
 }
 
 .friends .friend {
@@ -55,6 +56,13 @@
 }
 
 .friends .friend button {
+  border: none;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.friends .friend button:hover {
   border: none;
   border-radius: 50px;
   font-weight: 500;

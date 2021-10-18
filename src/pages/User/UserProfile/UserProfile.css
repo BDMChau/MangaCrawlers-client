@@ -77,6 +77,25 @@
   cursor: pointer;
 }
 
+.user-drawer .user .friends {
+  text-align: left;
+  margin: 15px 0 0 0;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.user-drawer .user .friends p {
+  font-size: 16px;
+  color: #727272;
+}
+
+.user-drawer .user .friends p:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  text-decoration: underline;
+  color: #000000;
+}
+
 .user-drawer .user button {
   padding: 20px;
   margin-right: 10px;

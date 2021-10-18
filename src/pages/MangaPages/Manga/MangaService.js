@@ -80,6 +80,7 @@ function MangaService() {
             const params = {
                 manga_id: id,
             }
+
             const response = await mangaApi.getManga(params);
             if (response.content.err) {
                 return;

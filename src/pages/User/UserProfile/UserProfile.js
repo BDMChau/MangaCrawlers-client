@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./UserProfile.css"
-import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload } from 'antd';
+import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload, Tooltip } from 'antd';
 import { SettingOutlined, UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 import { message_success } from '../../../components/alerts/message';
@@ -136,6 +136,15 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         title="Your status"
                         defaultValue={profile.user_desc}
                     />
+                </div>
+
+                <div>
+                    <div className="friends">
+                        Friends:
+                        <Tooltip title="See all friends">
+                            <p>100 friends</p>
+                        </Tooltip>
+                    </div>
                 </div>
 
                 <div className="interact">
