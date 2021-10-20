@@ -100,8 +100,12 @@ const routes = [
         component: React.lazy(() => import('../../pages/User/Group/UploadManga/UploadMangaService')),
         exact: true
     },
-
-
+    ////////////// Forum
+    {
+        path: "/forum/newpost",
+        component: React.lazy(() => import('../../pages/Forum/NewPost/NewPostService')),
+        exact: true
+    },
     /////////////// not found 404
     {
         path: "",

@@ -74,8 +74,8 @@
   margin-top: -1px !important;
   transition: 0s;
   border-radius: 3px;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .ant-menu-horizontal > .ant-menu-item::after,

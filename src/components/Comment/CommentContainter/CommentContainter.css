@@ -36,11 +36,11 @@
 }
 
 /* input for comment is a div with contentEditable="true" */
-[contentEditable="true"]:empty:not(:focus):before {
+/* [contentEditable="true"]:empty:not(:focus):before {
   content: attr(placeholder);
   color: grey;
   font-size: 15px;
-}
+} */
 
 .comments-form .bottom-cont {
   display: flex;

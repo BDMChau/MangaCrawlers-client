@@ -229,7 +229,7 @@ function InputForm({
                                 icon={<CommentOutlined style={{ fontSize: "18px" }} />}
                                 onClick={() => isEditting ? prepareToEditCmt() : prepareToAddCmt()}
                             >
-                                {isEditting ? "Edit" : "Add Comment"}
+                                {isEditting ? "Submit Edit" : "Add Comment"}
                             </Button>
                         </div>
 

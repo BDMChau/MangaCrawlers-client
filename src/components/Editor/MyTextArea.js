@@ -74,7 +74,7 @@ export default function MyTextArea({
 
 
   useEffect(() => {
-    if (suggestionsProp.length) {
+    if (suggestionsProp?.length) {
       suggestionsProp.forEach(item => {
         item.isFriend = true;
         item.name = item.user_name;
