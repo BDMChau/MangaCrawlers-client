@@ -8,7 +8,6 @@ export default function NewPost() {
     return (
         <div>
             <MyMarkdown />
-            aaca
         </div>
     )
 }

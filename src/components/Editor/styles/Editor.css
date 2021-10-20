@@ -2,3 +2,89 @@
 .ejr02pv {
   right: -114px !important;
 }
+
+/******** markdown editor ********/
+.md-container {
+  padding: 20px 10px 30px 10px;
+}
+
+.md-container button.btn-post {
+  border-radius: 8px;
+  height: 40px;
+}
+
+.title .link-instructions {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.md-editor-cont {
+  margin: 50px 0 20px 0;
+}
+
+.md-editor-cont .ant-typography {
+  display: block;
+  /* text-align: center; */
+  color: #f5212d;
+}
+
+.md-editor-cont input.input-title {
+  width: 50%;
+  margin-bottom: 5px;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.md-editor-cont .md-editor .w-md-editor-bar {
+  height: 16px !important;
+  margin: 0px 6px 0px 0 !important;
+}
+
+.md-editor-cont .md-editor .w-md-editor-toolbar ul li button {
+  height: auto;
+}
+
+.md-editor-cont .md-editor .w-md-editor-toolbar ul li button:hover {
+  color: #586069;
+}
+
+.md-editor-cont .md-editor .w-md-editor-toolbar ul li button svg {
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.md-editor-cont .md-editor .wmde-markdown-color {
+  overflow-y: hidden;
+}
+
+.md-editor-cont .md-editor .wmde-markdown-color.w-md-editor-preview {
+  overflow-y: auto;
+}
+
+.md-editor-cont .md-editor .w-md-editor-text-pre.w-md-editor-text-input {
+  height: fit-content;
+}
+
+.md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar,
+.md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-track,
+.md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-thumb,
+.md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-thumb:hover,
+.md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}
