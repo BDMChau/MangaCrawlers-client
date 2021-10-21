@@ -38,7 +38,7 @@
 }
 
 .md-editor-cont .md-editor .w-md-editor-bar {
-  height: 16px !important;
+  /* height: 16px !important; */
   margin: 0px 6px 0px 0 !important;
 }
 
@@ -68,23 +68,27 @@
 }
 
 .md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar,
+.w-md-editor-aree.w-md-editor-input::-webkit-scrollbar,
 .md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 .md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-track,
+.w-md-editor-aree.w-md-editor-input::-webkit-scrollbar-track,
 .md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-thumb,
+.w-md-editor-aree.w-md-editor-input::-webkit-scrollbar-thumb,
 .md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background: RGB(175, 175, 175);
 }
 
 .md-editor-cont .md-editor .w-md-editor-text::-webkit-scrollbar-thumb:hover,
+.w-md-editor-aree.w-md-editor-input::-webkit-scrollbar-thumb:hover,
 .md-editor-cont .md-editor .w-md-editor-preview::-webkit-scrollbar-thumb:hover {
   background: RGB(150, 150, 150);
 }

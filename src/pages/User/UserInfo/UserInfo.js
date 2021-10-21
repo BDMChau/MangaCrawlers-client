@@ -4,10 +4,11 @@ import "./UserInfo.css";
 import { Col, Image, Row, Typography, Button, Empty } from 'antd';
 import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
-import MultualFriendsModal from '../Friends/components/MultualFriendsModal';
+import FriendsModal from '../Friends/components/FriendsModal';
 
 export default function UserInfo({ userInfo, handleSendFriendRequest }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
+    const [visibleFriendsModal, setVisibleFriendsModal] = useState(false)
 
 
 
@@ -17,15 +18,15 @@ export default function UserInfo({ userInfo, handleSendFriendRequest }) {
                 {Object.keys(userInfo).length > 0
                     ? <>
                         <div className="info-cont">
-                            <Image
-                                className="avatar"
-                                src={userInfo.user_avatar}
-                                alt=""
-                            />
+                            <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
 
                             <div className="info">
                                 <Typography.Title level={3} style={{ margin: 0 }}>{userInfo.user_name}</Typography.Title>
                                 <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>{userInfo.user_email}</Typography.Text>
+
+                                <NavLink to="#" className="friends-text" onClick={() => setVisibleFriendsModal(true)} >
+                                    100 friends
+                                </NavLink>
 
                                 <NavLink to="#" className="mutual-text" onClick={() => setVisibleMutualModal(true)} >
                                     100 mutual friends
@@ -41,7 +42,7 @@ export default function UserInfo({ userInfo, handleSendFriendRequest }) {
                                 </Typography.Text>
 
                                 <Button
-                                    style={{ marginTop: "20px", width: 'fit-content' }}
+                                    style={{ marginTop: "20px", width: 'fit-content', height: "35px" }}
                                     type="primary"
                                     icon={<UserAddOutlined style={{ fontSize: "16px" }} />}
                                     onClick={handleSendFriendRequest}
@@ -70,7 +71,8 @@ export default function UserInfo({ userInfo, handleSendFriendRequest }) {
                 }
             </Col>
 
-            <MultualFriendsModal visibleProp={visibleMutualModal} closeModal={(status) => setVisibleMutualModal(status)} />
+            <FriendsModal visibleProp={visibleMutualModal} closeModal={(status) => setVisibleMutualModal(status)} title="Mutual Friends" />
+            <FriendsModal visibleProp={visibleFriendsModal} closeModal={(status) => setVisibleFriendsModal(status)} title="Friends" />
         </Row>
     )
 }

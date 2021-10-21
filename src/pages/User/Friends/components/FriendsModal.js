@@ -3,7 +3,7 @@ import "../Friends.css"
 
 import { Button, Modal } from 'antd';
 
-export default function MultualFriendsModal({ visibleProp, closeModal }) {
+export default function FriendsModal({ visibleProp, closeModal, title }) {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
 
@@ -27,8 +27,8 @@ export default function MultualFriendsModal({ visibleProp, closeModal }) {
     return (
         <>
             <Modal
-                wrapClassName="modal-mutual-cmt"
-                title="Multual friend with Chou"
+                wrapClassName="modal-friends"
+                title={title}
                 visible={isModalVisible}
                 onCancel={handleCancel}
                 footer={null}

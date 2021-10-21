@@ -40,7 +40,7 @@ export default function UserInfoService() {
 
     const handleSendFriendRequest = () => {
         if (!userState[0]) return message_error("You have to logged in to do this action!");
-        if (userState[0].user_id.toString() === query.get("id").toString()) return message_error("You cannot send request with yourseft!")
+        if (userState[0].user_id.toString() === query.get("id").toString()) return message_error("You cannot send request to yourself!")
 
         const data = {
             type: 2,
