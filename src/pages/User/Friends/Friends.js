@@ -11,6 +11,7 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
 
     const [friends, setFriends] = useState([
         {
+            "user_id":555,
             "user_name": "Minh Chau Minhhh Minhhh Minhhh MinhhhMinhhh",
             "status": "Friend",
             "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
@@ -146,9 +147,9 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
                     <Tabs className="friends-tabs" activeKey={selectedKey ? selectedKey : "all_friends"} setTabSelected={setSelectedKey}
                         onChange={(key) => {
                             if (key === "all_friends") {
-                                window.history.replaceState(null, null, `/${userId}/friends/${key}`)
+                                window.history.replaceState(null, null, `/user/${userId}/friends/${key}`)
                             } else {
-                                window.history.replaceState(null, null, `/${userId}/friends/${key}`)
+                                window.history.replaceState(null, null, `/user/${userId}/friends/${key}`)
                             }
 
                             setSelectedKey(key)

@@ -12,16 +12,22 @@ function Friend({ friend, i }) {
     }, [friend])
 
 
- 
+
+    const handleDeleteFriend = (id) => {
+        if(!id) return;
+
+        console.log(id)
+
+    }
+
 
     const dropDownItems = (
         <Menu style={{ borderRadius: "10px" }}>
-            <Menu.Item key="0" style={{ borderRadius: "8px" }}>
+            <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleDeleteFriend(user.user_id)} >
                 Unfriend
             </Menu.Item>
         </Menu>
     );
-
 
 
     return (
