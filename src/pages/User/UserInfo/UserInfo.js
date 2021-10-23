@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import "./UserInfo.css";
 
-import { Col, Image, Row, Typography, Button, Empty } from 'antd';
+import { Col, Image, Row, Typography, Button, Empty, Divider } from 'antd';
 import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
+import { LeftOutlined } from "@ant-design/icons"
 
-export default function UserInfo({ userInfo, handleSendFriendRequest }) {
+export default function UserInfo({ userLoggedState, userInfo, handleSendFriendRequest }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
     const [visibleFriendsModal, setVisibleFriendsModal] = useState(false)
 
+    const history = useHistory();
 
 
     return (
         <Row justify="center" className="user-info-page">
             <Col xs={23} sm={18} md={18} xl={13} className="col01">
-                {Object.keys(userInfo).length > 0
+                <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
+                    <Button title="Go Back" className="btn-left" onClick={history.goBack} >
+                        <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
+                    </Button>
+                </Divider>
+                
+{/* && userInfo.user_id !== userLoggedState.user_id */}
+                {Object.keys(userInfo).length > 0 
                     ? <>
                         <div className="info-cont">
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>

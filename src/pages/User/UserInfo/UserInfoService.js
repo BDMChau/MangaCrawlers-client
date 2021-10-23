@@ -61,6 +61,7 @@ export default function UserInfoService() {
 
     return (
         <UserInfo
+            userLoggedState={userState[0]}
             userInfo={userInfo}
 
             handleSendFriendRequest={handleSendFriendRequest}

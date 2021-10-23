@@ -1,10 +1,18 @@
 .user-info-page .col01 {
   flex-direction: column;
   align-items: space-around;
-  padding: 0 10px;
-  padding-top: 50px;
+  padding: 0 5px;
+  padding-top: 20px;
   padding-bottom: 30px;
   min-height: 100vh;
+}
+
+.user-info-page .col01 .btn-left {
+  background: transparent;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  box-shadow: none;
 }
 
 .user-info-page .ant-image {
@@ -48,6 +56,7 @@
 .user-info-page .info-cont {
   display: flex;
   justify-content: left;
+  margin-top: 20px;
 }
 
 .user-info-page .info-cont .info {

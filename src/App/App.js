@@ -30,11 +30,11 @@ const Routing = () => {
 
 
 export default function App() {
-  const renderMangaComponentPages = () => (
+  const ComponentPages = () => (
     <Suspense fallback={<LoadingPage />}>
 
       <Content style={{ background: "#fff", minHeight: "100vh" }}>
-        {Routing()}
+        <Routing />
       </Content>
 
       <ScrollTopBtn />
@@ -55,9 +55,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Layout>
+        
         <NavbarService />
-
-        {renderMangaComponentPages()}
+        <ComponentPages />
 
       </Layout>
     </BrowserRouter>

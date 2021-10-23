@@ -12,7 +12,7 @@ function Friend({ friend, i }) {
     }, [friend])
 
 
-
+ 
 
     const dropDownItems = (
         <Menu style={{ borderRadius: "10px" }}>
