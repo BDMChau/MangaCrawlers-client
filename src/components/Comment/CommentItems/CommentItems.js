@@ -1,6 +1,6 @@
 import React, { useEffect, memo, useState } from 'react'
 import "./CommentItems.css"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import { Comment, Avatar, Empty, Typography, Tooltip, Button } from 'antd';
 
@@ -9,6 +9,7 @@ import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
 import { useSelector } from 'react-redux';
+import redirectURI from 'helpers/redirectURI';
 
 
 function CommentItems({
@@ -33,6 +34,7 @@ function CommentItems({
 
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
+    const history = useHistory();
 
     useEffect(() => {
         if (isScrollBottom === true) {
@@ -60,7 +62,12 @@ function CommentItems({
 
     ////////////////////////////// components //////////////////////////////
     const CmtTitle = ({ comment }) => (
-        <Typography.Text style={{ cursor: "default", fontSize: "14px", fontWeight: "500" }}>{comment.user_name}</Typography.Text>
+        <Typography.Text
+            style={{ cursor: "pointer", fontSize: "14px", fontWeight: "500" }}
+            onClick={() => history.push(redirectURI.userPage_uri(comment.user_id))}
+        >
+            {comment.user_name}
+        </Typography.Text>
     )
 
 
@@ -154,9 +161,10 @@ function CommentItems({
                             <Avatar
                                 className="cmt-avatar"
                                 title={comment.user_name}
-                                style={{ cursor: "default" }}
+                                style={{ cursor: "pointer" }}
                                 src={comment.user_avatar}
                                 alt="Avatar"
+                                onClick={() => history.push(redirectURI.userPage_uri(comment.user_id))}
                             />
                         }
                         content={
@@ -175,9 +183,10 @@ function CommentItems({
                                                         avatar={
                                                             <Avatar
                                                                 className="cmt-avatar"
-                                                                style={{ cursor: "default" }}
+                                                                style={{ cursor: "pointer" }}
                                                                 src={cmt01.user_avatar}
                                                                 alt="Avatar"
+                                                                onClick={() => history.push(redirectURI.userPage_uri(cmt01.user_id))}
                                                             />
                                                         }
                                                         content={
@@ -196,9 +205,10 @@ function CommentItems({
                                                                                         avatar={
                                                                                             <Avatar
                                                                                                 className="cmt-avatar"
-                                                                                                style={{ cursor: "default" }}
+                                                                                                style={{ cursor: "pointer" }}
                                                                                                 src={cmt02.user_avatar}
                                                                                                 alt="Avatar"
+                                                                                                onClick={() => history.push(redirectURI.userPage_uri(cmt02.user_id))}
                                                                                             />
                                                                                         }
                                                                                         content={

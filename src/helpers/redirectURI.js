@@ -13,7 +13,10 @@ const redirectURI = {
     },
     projectMangaPage_uri: (mangaId) => {
         return `/user/projects/upload?v=${mangaId}`;
-    }
+    },
+    userPage_uri: (userId) => {
+        return `/user/id?id=${userId}`;
+    },
 }
 
 export default redirectURI;

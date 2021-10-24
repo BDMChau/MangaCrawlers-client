@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import "../Navbar.css";
 import { Button, Empty, Typography, Tooltip } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
@@ -32,6 +32,7 @@ function Notifications({
         }
 
     })
+    
 
 
     const getMoreHistoryNotifications = async (e) => {
@@ -104,4 +105,4 @@ function Notifications({
     )
 }
 
-export default Notifications;
+export default memo(Notifications);

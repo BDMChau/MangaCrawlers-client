@@ -3,10 +3,11 @@ import Cookies from 'universal-cookie';
 
 import { Menu, Badge, Popover } from 'antd'
 import { BellOutlined } from "@ant-design/icons";
-import NotificationsService from './Notifications';
+import Notifications from './Notifications';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_TRANSGROUP_ID } from 'store/features/user/UserSlice';
+import { SET_INTERACT_NOTIFICATION } from "store/features/stuffs/StuffsSlice"
 
 import { socket } from 'socket/socketClient';
 import userApi from 'api/apis/MainServer/userApi';
@@ -16,6 +17,9 @@ import { message_error, message_success } from 'components/alerts/message';
 
 
 function NotificationService({ isMobile }) {
+    const stuffSlice = useSelector((state) => state.stuffsState);
+    const notificationIdToUpdate = stuffSlice[1] ? stuffSlice[1] : null;
+
     const dispatch = useDispatch();
 
     const [fromRow, setFromRow] = useState(0)
@@ -34,6 +38,7 @@ function NotificationService({ isMobile }) {
     // socket
     useEffect(() => {
         socket.on(EVENTS_NAME.FROM_SERVER_TO_SPECIFIC_USERS, (result) => {
+            result.created_at = format.formatDate02(result.created_at);
             unshiftItem(result)
         });
 
@@ -43,8 +48,27 @@ function NotificationService({ isMobile }) {
 
 
     useEffect(() => {
-        getListNotifications();
+        if (!notifications.length) getListNotifications();
     }, [])
+
+
+    // update interact in client
+    useEffect(() => {
+        if (notificationIdToUpdate) {
+            const copy = notifications.map(item => ({ ...item }));
+            for (let i = 0; i < copy.length; i++) {
+                if (copy[i].notification_id === notificationIdToUpdate) {
+                    copy[i].is_viewed = true;
+                    copy[i].is_interacted = true;
+                    break;
+                }
+
+            }
+
+            setNotifications(copy);
+            dispatch(SET_INTERACT_NOTIFICATION(null))
+        }
+    }, [notificationIdToUpdate])
 
 
     useEffect(() => {
@@ -52,11 +76,22 @@ function NotificationService({ isMobile }) {
     }, [notifications])
 
 
+    useEffect(() => {
+        if (badgeCount < 0) setBadgeCount(0);
+    }, [badgeCount])
+
+
     const countUnreadNotifications = () => {
         setBadgeCount(notifications.filter(item => item.is_viewed === false).length)
     }
 
+    
+    const unshiftItem = (item) => {
+        setNotifications(prevState => [item, ...prevState]);
+    }
 
+
+    //////////////// services api ////////////////
     const getListNotifications = async () => {
         if (!isEnd) {
             const data = {
@@ -87,15 +122,7 @@ function NotificationService({ isMobile }) {
         }
     }
 
-
-
-    const unshiftItem = (item) => {
-        setNotifications(prevState => [item, ...prevState]);
-    }
-
-
-
-    //////////////// services api ////////////////
+    
     const readAll = async () => {
         const copy = [...notifications];
         notifications.forEach(item => {
@@ -120,6 +147,9 @@ function NotificationService({ isMobile }) {
             };
 
             await userApi.updateInteractedNotification(token, data);
+
+            dispatch(SET_INTERACT_NOTIFICATION(id))
+            setBadgeCount(badgeCount - 1);
             return;
         } catch (err) {
             console.log(err)
@@ -143,6 +173,8 @@ function NotificationService({ isMobile }) {
                 }
 
                 dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
+                setBadgeCount(badgeCount - 1);
+                
                 message_success('Joined ^^!');
             }
 
@@ -164,7 +196,7 @@ function NotificationService({ isMobile }) {
             visible={visible}
             onVisibleChange={(e) => setVisible(e)}
             content={
-                <NotificationsService
+                <Notifications
                     isFirstRender={isFirstRender}
                     getListNotifications={getListNotifications}
                     notifications={notifications}

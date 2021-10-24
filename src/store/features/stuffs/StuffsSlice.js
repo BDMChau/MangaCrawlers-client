@@ -11,13 +11,13 @@ const StuffsSlice = createSlice({
                 state[0] = action.payload;
             }
         },
-        SET_COUNT_UNREAD_NOTIFICATIONS: (state, action) => {
+        SET_INTERACT_NOTIFICATION: (state, action) => {
             state[1] = action.payload;
         }
     }
 });
 
 const { actions, reducer } = StuffsSlice;
-export const { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE, SET_COUNT_UNREAD_NOTIFICATIONS } = actions;
+export const { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE, SET_INTERACT_NOTIFICATION } = actions;
 
 export default reducer;

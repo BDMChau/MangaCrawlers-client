@@ -7,7 +7,7 @@ import { Button, Modal, Form, Input } from 'antd';
 import SignInService from '../SignIn/SignInService';
 
 
-export default function SignUp({ isLoading, handleSignUp, isCloseModal }) {
+export default function SignUp({ isLoading, handleSignUp, isCloseModal, msgFromSignUp }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,6 +16,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal }) {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalSignInVisible, setIsModalSignInVisible] = useState(false);
+
     const dispatch = useDispatch();
 
 
@@ -28,7 +29,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal }) {
         if (isCloseModal === true) {
             setIsModalVisible(false);
             setIsModalSignInVisible(true);
-
+            
             dispatch(CLOSE_SIGN_UP_FORM("closeSignUpAndRedirectToSignIn"))
         }
     }, [isCloseModal])

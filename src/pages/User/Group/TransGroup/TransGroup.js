@@ -34,11 +34,13 @@ export default function TransGroup({
 }) {
     const userState = useSelector((state) => state.userState);
 
-    const renderProjects = () => (
+
+    const RenderProjects = () => (
         <Row justify={"center"} className="projects">
             <ListVersion02 mangas={mangas} handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)} IsLoadingDelete={IsLoadingDelete} />
         </Row>
     )
+
 
     return (
         <Row justify={"center"} className="transgrouppage-row1">
@@ -67,7 +69,8 @@ export default function TransGroup({
                                 }
                             </div>
 
-                            {renderProjects()}
+                            <RenderProjects />
+
                             <Col xs={23} sm={23} md={23} xxl={23} className="table-members">
                                 <div style={{ display: "flex" }}>
                                     <Typography.Title level={4} >Members</Typography.Title>
@@ -86,14 +89,13 @@ export default function TransGroup({
                                             >
                                                 {usersSearchResult.length
                                                     ? usersSearchResult.map((user, i) => (
-                                                        <AutoComplete >
+                                                        <AutoComplete.Option key={user.user_email}>
                                                             <Avatar src={user.user_avatar} style={{ cursor: "default" }} alt="Avatar" />
                                                             <Typography.Text style={{ fontSize: "15px" }}>{user.user_name}</Typography.Text>
                                                             <div>
                                                                 <Typography.Text style={{ fontSize: "13px", color: "#646464c9", fontStyle: "italic" }}>{user.user_email}</Typography.Text>
-
                                                             </div>
-                                                        </AutoComplete>
+                                                        </AutoComplete.Option>
                                                     ))
                                                     : ""
                                                 }
@@ -106,7 +108,7 @@ export default function TransGroup({
                                                     visibility: valToSearch ? 'visible' : 'hidden',
                                                     transition: "0.3s"
                                                 }}
-                                                onClick={() => {inviteUser(valToSearch, transGrInfo); setValToSearch("")}}
+                                                onClick={() => { inviteUser(valToSearch, transGrInfo); }}
                                             >
                                                 Invite
                                             </Button>

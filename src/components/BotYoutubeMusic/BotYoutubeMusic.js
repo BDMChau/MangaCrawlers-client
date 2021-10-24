@@ -385,7 +385,7 @@ function BotYoutubeMusic({
                                         </div>
 
                                         <div>
-                                            <Avatar size="large" className="user-avatar" src={userState[0] ? userState[0].user_avatar : "https://i.pinimg.com/originals/6b/a5/b9/6ba5b90780203734faa5ef940b983029.jpg"} alt="" />
+                                            <Avatar size="large" className="user-avatar" src={userState[0] ? userState[0].user_avatar : "https://emoji.discord.st/emojis/bdc1faec-8960-474b-bb7b-900a01b52cdb.png"} alt="" />
                                         </div>
                                     </div>
                                 </div>

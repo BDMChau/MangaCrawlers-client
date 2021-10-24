@@ -68,11 +68,19 @@
   word-break: break-all;
 }
 
-.messages-cont .message-item .message-bot .bot-avatar,
 .messages-cont .message-item .message-user .user-avatar {
-  border-radius: 50px;
-  padding: 5px;
+  padding: 1px;
   margin: 0px 5px 0px 0px;
+}
+
+.messages-cont .message-item .message-bot .bot-avatar{
+  padding: 3px;
+  margin: 0px 5px 0px 0px;
+}
+
+.messages-cont .message-item .message-bot .bot-avatar img,
+.messages-cont .message-item .message-user .user-avatar img {
+  border-radius: 50px;
 }
 
 /* ///////////////////// input part */

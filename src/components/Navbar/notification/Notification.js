@@ -3,6 +3,8 @@ import "../Navbar.css"
 
 import { Typography, Button, Avatar } from 'antd';
 
+import { useDispatch } from 'react-redux';
+
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
 
@@ -41,6 +43,8 @@ function Notification({
         2: "confirm_toJoinTeam",
         3: "accept_friend"
     }
+    const dispatch = useDispatch();
+
     const [notification, setNotification] = useState({});
 
 
@@ -53,13 +57,13 @@ function Notification({
         switch (type) {
             case listTypes[1]:
                 await updateInteracted(notification.notification_id);
-                setNotification({ ...notification, is_interacted: true });
+                setNotification({ ...notification, is_interacted: true, is_viewed:true });
 
                 break;
             case listTypes[2]:
                 const response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
                 if (response) {
-                    setNotification({ ...notification, is_interacted: true });
+                    setNotification({ ...notification, is_interacted: true, is_viewed:true });
                 }
                 break;
             case listTypes[3]:
@@ -72,6 +76,7 @@ function Notification({
 
 
     }
+
 
 
     const handleRender = () => {
@@ -153,7 +158,7 @@ function Notification({
 
 
     return (
-        <div className="notification-item" key={key} style={{ background: notification.is_viewed ? '' : '#daf1f985', cursor: "default" }} >
+        <div className="notification-item" key={key} style={{ background: notification.is_viewed || notification.is_interacted ? '#fff' : '#daf1f985', cursor: "default" }} >
             {handleRender()}
             <div style={{ color: "#8f8f8f", fontSize: '13px', marginTop: "5px" }} >{notification.created_at}</div>
         </div>

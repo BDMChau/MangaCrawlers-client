@@ -238,6 +238,8 @@ export default function TransGroupService() {
 
         socketActions.sendMessageToServer(data);
         notification_success("Sent your invitation!");
+
+        setValToSearch("");
     }
 
 
