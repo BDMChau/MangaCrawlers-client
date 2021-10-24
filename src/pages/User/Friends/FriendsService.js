@@ -35,7 +35,9 @@ export default function FriendsService() {
         try {
             const res = await userApi.getFriendRequest(token);
 
-            if (res.content.msg) setListRequests(res.content.requests);
+            if (res.content.msg) {
+                setListRequests(res.content.requests);
+            }
         } catch (err) {
             console.log(err)
         }

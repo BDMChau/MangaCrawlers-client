@@ -70,7 +70,7 @@ function FriendRequest({ requestProp, i }) {
                         disabled={isLoadingDel}
                         onClick={() => handleConfirmReq()}
                     >
-                        Confirm
+                        Accept
                     </Button>
 
                     <Button

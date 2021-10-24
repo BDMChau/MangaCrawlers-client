@@ -6,7 +6,8 @@ import Avatar from 'antd/lib/avatar/avatar';
 import { message_success } from '../../../components/alerts/message';
 import SignUpTransGroupService from "../../Auth/SignUpTransGroup/SignUpTransGroup";
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import redirectURI from 'helpers/redirectURI';
 
 export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar, isLoading }) {
     const userState = useSelector((state) => state.userState);
@@ -16,6 +17,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
     const [file, setFile] = useState(null);
     const [openFormSignUpTransTeam, setOpenFormSignUpTransTeam] = useState("");
 
+    const history = useHistory();
 
     useEffect(() => {
         if (visible === true) {
@@ -142,7 +144,11 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                     <div className="friends">
                         Friends:
                         <Tooltip title="See all friends">
-                            <p>100 friends</p>
+                            <p
+                                onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}
+                            >
+                                100 friends
+                                </p>
                         </Tooltip>
                     </div>
                 </div>

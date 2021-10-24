@@ -7,7 +7,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 import { LeftOutlined } from "@ant-design/icons"
 
-export default function UserInfo({ userLoggedState, userInfo, handleSendFriendRequest }) {
+export default function UserInfo({ userLoggedState, userInfo, queryId, handleSendFriendRequest }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
     const [visibleFriendsModal, setVisibleFriendsModal] = useState(false)
 
@@ -22,9 +22,9 @@ export default function UserInfo({ userLoggedState, userInfo, handleSendFriendRe
                         <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                     </Button>
                 </Divider>
-                
-{/* && userInfo.user_id !== userLoggedState.user_id */}
-                {Object.keys(userInfo).length > 0 
+
+                {/* && userInfo.user_id !== userLoggedState.user_id */}
+                {Object.keys(userInfo).length > 0
                     ? <>
                         <div className="info-cont">
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
@@ -50,14 +50,17 @@ export default function UserInfo({ userLoggedState, userInfo, handleSendFriendRe
                                     {userInfo.user_desc ? userInfo.user_desc : "This user haven't updated the status :("}
                                 </Typography.Text>
 
-                                <Button
-                                    style={{ marginTop: "20px", width: 'fit-content', height: "35px" }}
-                                    type="primary"
-                                    icon={<UserAddOutlined style={{ fontSize: "16px" }} />}
-                                    onClick={handleSendFriendRequest}
-                                >
-                                    Add Friend
-                                </Button>
+                                {userLoggedState.user_id.toString() === queryId
+                                    ? ""
+                                    : <Button
+                                        style={{ marginTop: "20px", width: 'fit-content', height: "35px" }}
+                                        type="primary"
+                                        icon={<UserAddOutlined style={{ fontSize: "16px" }} />}
+                                        onClick={handleSendFriendRequest}
+                                    >
+                                        Add Friend
+                                    </Button>
+                                }
                             </div>
                         </div>
 

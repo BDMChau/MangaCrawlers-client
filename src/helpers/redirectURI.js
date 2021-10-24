@@ -17,6 +17,9 @@ const redirectURI = {
     userPage_uri: (userId) => {
         return `/user/id?id=${userId}`;
     },
+    friendPage_uri: (userId) => {
+        return `/user/${userId}/friends/all_friends`;
+    },
 }
 
 export default redirectURI;

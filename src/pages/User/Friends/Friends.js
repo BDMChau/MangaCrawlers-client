@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Friends.css"
 
 import { Col, Empty, Row, Tabs, Typography } from 'antd'
@@ -83,7 +83,7 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
         },
     ]);
 
-
+    
 
     const AllFriends = () => (
         friends.length
@@ -112,22 +112,13 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
     const AllFriendRequests = () => (
         userState[0]
             ? <>
-                <Typography.Text
-                    style={{
-                        fontWeight: "500",
-                        fontSize: "16px",
-                        margin: "0px 0 0px 6px"
-                    }}
-                >
-                    100 friends
-                </Typography.Text>
                 <div className="all-friends">
                     {listRequests.length
                         ? listRequests.map((request, i) => (
                             <FriendRequest requestProp={request} i={i} />
                         ))
 
-                        : ""
+                        : <Empty description="" style={{ marginTop: "80px" }} />
                     }
 
                 </div>

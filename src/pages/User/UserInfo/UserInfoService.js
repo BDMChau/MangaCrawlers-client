@@ -53,7 +53,7 @@ export default function UserInfoService() {
                 target_title: "user"
             }
         }
-        console.log(data)
+     
         socketActions.sendMessageToServer(data);
         message_success("Sent!");
     }
@@ -63,6 +63,7 @@ export default function UserInfoService() {
         <UserInfo
             userLoggedState={userState[0]}
             userInfo={userInfo}
+            queryId={query.get("id").toString()}
 
             handleSendFriendRequest={handleSendFriendRequest}
         />
