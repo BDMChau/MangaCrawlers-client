@@ -31,10 +31,11 @@
 }
 
 .user-info-page .mutual-text {
+  width: fit-content;
   color: #747373;
   transition: 0.3s;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 

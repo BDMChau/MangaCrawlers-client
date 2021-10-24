@@ -6,6 +6,7 @@ import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
 import { NavLink, useHistory } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 import { LeftOutlined } from "@ant-design/icons"
+import redirectURI from 'helpers/redirectURI';
 
 export default function UserInfo({ userLoggedState, userInfo, queryId, handleSendFriendRequest }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
@@ -13,6 +14,9 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, handleSen
 
     const history = useHistory();
 
+    useEffect(() => {
+        console.log(userInfo)
+    }, [userInfo])
 
     return (
         <Row justify="center" className="user-info-page">
@@ -33,21 +37,19 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, handleSen
                                 <Typography.Title level={3} style={{ margin: 0 }}>{userInfo.user_name}</Typography.Title>
                                 <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>{userInfo.user_email}</Typography.Text>
 
-                                <NavLink to="#" className="friends-text" onClick={() => setVisibleFriendsModal(true)} >
-                                    100 friends
-                                </NavLink>
-
                                 <NavLink to="#" className="mutual-text" onClick={() => setVisibleMutualModal(true)} >
                                     100 mutual friends
                                 </NavLink>
 
                                 <Typography.Text style={{ color: "#747373" }}>
-                                    Team:
-                                    <NavLink to="#"> {userInfo.transgroup_name ? userInfo.transgroup_name : "Unknown"}</NavLink>
+                                    Team:&nbsp;
+                                    <NavLink to={redirectURI.userPage_uri(userInfo.user_id)}>
+                                        {userInfo.transgroup_name ? userInfo.transgroup_name : "Unknown"}
+                                    </NavLink>
                                 </Typography.Text>
 
                                 <Typography.Text style={{ color: "#747373" }}>
-                                    {userInfo.user_desc ? userInfo.user_desc : "This user haven't updated the status :("}
+                                    {userInfo.user_desc ? userInfo.user_desc : ""}
                                 </Typography.Text>
 
                                 {userLoggedState.user_id.toString() === queryId

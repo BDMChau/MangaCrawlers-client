@@ -19,8 +19,8 @@ const userApi = {
             }
         });
     },
-    getFriendRequest: (token, data) => {
-        const uri = `/api/user/get_friend_requests?from=${data.from}&amount=${data.amount}`;
+    getFriendRequest: (token) => {
+        const uri = `/api/user/get_friend_requests`;
         return axiosClient.get(uri,{
             headers:{
                 Authorization: token
