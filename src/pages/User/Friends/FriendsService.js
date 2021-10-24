@@ -11,7 +11,10 @@ export default function FriendsService() {
 
     const [selectedKey, setSelectedKey] = useState("");
     const [listRequests, setListRequests] = useState([]);
+    const [listFriends, setListFriends] = useState([]);
 
+    const [fromRowFriends, setFromRowFriends] = useState(0);
+    
     const params = useParams();
     const param_userId = params.id;
     const path = params.path;
@@ -27,17 +30,39 @@ export default function FriendsService() {
 
 
     useEffect(() => {
-        if (userState[0]) getAllFriendRequests();
+        if (userState[0]) {
+            getAllFriendRequests();
+            getAllFriends();
+        }
     }, [userState[0]])
 
 
     const getAllFriendRequests = async () => {
         try {
             const res = await userApi.getFriendRequest(token);
-
             if (res.content.msg) {
                 setListRequests(res.content.requests);
             }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getAllFriends = async () => {
+        const data = {
+            from: fromRowFriends,
+            amount: 5
+        }
+
+        try {
+            const res = await userApi.getFriends(token, data);
+            if (res.content.err) {
+                setListFriends([]);
+                return;
+            }
+
+            setListFriends(res.content.list_friends);
+            setFromRowFriends(res.content.from)
         } catch (err) {
             console.log(err)
         }
