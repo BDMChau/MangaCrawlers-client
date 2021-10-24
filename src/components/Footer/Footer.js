@@ -20,7 +20,7 @@ export default function FooterContainer() {
                 <Col span={24} className="col01">
                     <div className="footer-logo"></div>
                     <div className="footer-text">
-                        <div style={{ color: "#ff6740" }}>
+                        <div style={{ color: "#1890ff" }}>
                             <NavLink to="/contact_us">
                                 Contact us
                             </NavLink>
