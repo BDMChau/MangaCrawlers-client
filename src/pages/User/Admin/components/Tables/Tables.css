@@ -23,7 +23,7 @@
   max-height: 100vh;
   overflow: auto;
   background: var(--color-theme-02);
-  margin: 10px;
+  margin: 0px 10px;
   box-shadow: 0px 0px 5px 0 #e3e4e6;
   transition: 0.3s;
 }
@@ -53,7 +53,7 @@
   max-height: 100vh;
   overflow: auto;
   background: var(--color-theme-02);
-  margin: 10px;
+  margin: 0px 10px;
   box-shadow: 0px 0px 5px 0 #e3e4e6;
   transition: 0.3s;
 }
@@ -100,7 +100,7 @@
   max-height: 100vh;
   overflow: auto;
   background: var(--color-theme-02);
-  margin: 10px;
+  margin: 0px 10px;
   box-shadow: 0px 0px 5px 0 #e3e4e6;
   transition: 0.3s;
 }

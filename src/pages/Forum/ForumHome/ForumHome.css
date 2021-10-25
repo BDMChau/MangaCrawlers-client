@@ -1,11 +1,25 @@
-.left {
+.banner {
   padding: 20px 10px;
+  text-align: center;
+  background-color: #e1eeff;
 }
 
-.left span.ant-tag {
-    padding: 2px 5px !important;
-    border-radius: 3px;
-    cursor: pointer;
+
+.left {
+  padding: 0px 10px 20px 10px;
+  min-height: 100vh;
+}
+
+.right {
+  padding: 0px 10px 20px 10px;
+  min-height: 100vh;
+}
+
+.left span.ant-tag,
+.right span.ant-tag {
+  padding: 2px 5px !important;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .post {
@@ -20,7 +34,17 @@
 }
 
 .post:hover {
-    box-shadow: 0px 0px 5px 0 #d3d3d3;
+  box-shadow: 0px 0px 5px 0 #d3d3d3;
+}
+
+.post .title-small {
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 400px;
+  font-size: 15px;
 }
 
 .post .title {
@@ -29,7 +53,8 @@
   word-break: break-word;
 }
 
-.post .title:hover {
+.post .title:hover,
+.post .title-small:hover {
   text-decoration: underline;
 }
 
@@ -49,6 +74,13 @@
   cursor: pointer;
 }
 
+.post .img .avatar-small {
+  margin-top: 5px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
 .post .categories {
   display: flex;
   flex-wrap: wrap;
@@ -57,7 +89,7 @@
 }
 
 .post .categories .category {
- padding: 0 0 5px 0;
+  padding: 0 0 5px 0;
 }
 
 .post .info {
@@ -70,8 +102,60 @@
   font-style: italic;
 }
 
-.post .info .comments {
+.post .info .comments-count {
   color: green;
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: 600;
+}
+
+.post .post-title .comments-count {
+  color: green;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.categories-cont {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: #f0f2f5;
+}
+
+.categories-cont .category-tag {
+  margin: 3px;
+}
+
+@media only screen and (min-width: 1401px) and (max-width: 1750px) {
+  .post .title-small {
+    width: 270px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .post .title-small {
+    width: 220px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .post .title-small {
+    width: 300px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .post .title-small {
+    width: 210px;
+  }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 550px) {
+  .post .title-small {
+    width: 350px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .post .title-small {
+    width: 230px;
+  }
 }
