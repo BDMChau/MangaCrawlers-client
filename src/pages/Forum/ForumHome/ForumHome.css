@@ -1,0 +1,77 @@
+.left {
+  padding: 20px 10px;
+}
+
+.left span.ant-tag {
+    padding: 2px 5px !important;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.post {
+  display: flex;
+  margin: 10px 0px;
+  padding: 7.5px 10px 7.5px 10px;
+  justify-content: left;
+  border-radius: 5px;
+  border: 1px solid #d7d7d799;
+  /* box-shadow: 0px 0px 5px 0 #e3e4e6; */
+  transition: 0.3s;
+}
+
+.post:hover {
+    box-shadow: 0px 0px 5px 0 #d3d3d3;
+}
+
+.post .title {
+  cursor: pointer;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.post .title:hover {
+  text-decoration: underline;
+}
+
+.post .post-title {
+  width: 100%;
+}
+
+.post .img {
+  margin-right: 5px;
+  width: fit-content;
+}
+
+.post .img .avatar {
+  margin-top: 5px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.post .categories {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0px;
+  overflow-x: auto;
+}
+
+.post .categories .category {
+ padding: 0 0 5px 0;
+}
+
+.post .info {
+  display: flex;
+  justify-content: space-between;
+  height: 22px;
+}
+
+.post .info .time {
+  font-style: italic;
+}
+
+.post .info .comments {
+  color: green;
+  font-size: 18px;
+  font-weight: 600;
+}

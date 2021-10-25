@@ -118,7 +118,7 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
                             <FriendRequest requestProp={request} i={i} />
                         ))
 
-                        : <Empty description="" style={{ marginTop: "80px" }} />
+                        : <Empty description="" style={{ margin:"0 auto", marginTop: "80px" }} />
                     }
 
                 </div>

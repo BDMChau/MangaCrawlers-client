@@ -102,6 +102,11 @@ const routes = [
     },
     ////////////// Forum
     {
+        path: "/forum",
+        component: React.lazy(() => import('../../pages/Forum/ForumHome/ForumHomeService')),
+        exact: true
+    },
+    {
         path: "/forum/newpost",
         component: React.lazy(() => import('../../pages/Forum/NewPost/NewPostService')),
         exact: true

@@ -43,6 +43,7 @@ export default function Home({
                         <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
                             <h2>Seasonal</h2>
                         </Divider>
+                        
                         <CarouselHorizontal
                             data={dailyMangas}
                             isLoading={isLoading}
