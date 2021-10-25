@@ -245,7 +245,7 @@ function BotYoutubeMusicService() {
                 setTimeout(() => {
                     setIsJumpTo(false);
                     setIsVisible(true);
-                }, 200);       
+                }, 300);       
             }
 
             if (nonInteractiveCmds.includes(rawCommand)) {
@@ -269,7 +269,7 @@ function BotYoutubeMusicService() {
                         itemsInQueue.forEach(item => {
                             item.playing = false;
                         })
-                    }, 100)
+                    }, 200)
                 }
 
 
