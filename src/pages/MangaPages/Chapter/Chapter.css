@@ -4,8 +4,7 @@
   border-radius: 3px;
 }
 
-
-.chapter .title{
+.chapter .title {
   width: 100%;
   text-align: center;
   padding: 0;
@@ -26,16 +25,18 @@
 .chapter .dropdown-chapter.sticky {
   animation: moveDown 0.5s ease-in-out;
   position: fixed;
-  top: 3px;
+  top: 65px;
   margin-top: 0px;
 }
 
 @keyframes moveDown {
   from {
-    transform: translateY(-3rem);
+    transform: translateY(-5rem);
+    opacity: 0;
   }
   to {
     transform: translateY(0rem);
+    opacity: 1;
   }
 }
 
@@ -67,7 +68,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 60%;
-  width: 100%;
+  width: 480px;
   padding: 6px 0px;
 }
 
@@ -76,8 +77,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 40%;
-  width: 100%;
 }
 
 .chapter .dropdown-chapter .btn-prev,
@@ -91,7 +90,6 @@
   margin: 0 3px 0 3px;
   padding: 3px 14px 0 14px;
 }
-
 
 .dropdown-item-chapter-page {
   text-align: center;
@@ -147,14 +145,13 @@
   background: transparent;
 }
 
-ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
   width: 40%;
   margin: 0 auto;
   background: white;
 }
 
-
-.chapter .chapter-comment{
+.chapter .chapter-comment {
   margin-bottom: 50px;
 }
 
@@ -177,7 +174,7 @@ ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown
   }
 
   .dropdown-item-chapter-page .dropdown-item-title {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .dropdown-item-chapter-page .dropdown-item-title .title-name {
@@ -210,21 +207,20 @@ ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown
   }
 
   .dropdown-item-chapter-page .dropdown-item-title {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .dropdown-item-chapter-page .dropdown-item-title .title-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 200px;
+    width: 300px;
   }
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-  width: 90%;
+    width: 90%;
   }
 }
-
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
@@ -234,12 +230,16 @@ ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
-    max-width: 100%;
+    width: 700px;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
-  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical{
+  ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
     width: 70%;
+  }
+
+  .dropdown-item-chapter-page .dropdown-item-title .title-name {
+    width: 400px;
   }
 }

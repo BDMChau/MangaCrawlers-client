@@ -3,9 +3,18 @@
   width: 500px !important;
 }
 
+.user-drawer .title {
+  width: fit-content;
+  cursor: pointer;
+}
+
 .user-drawer .title span {
   font-size: 22px;
   margin-right: 5px;
+}
+
+.user-drawer .title span:hover {
+  text-decoration: underline;
 }
 
 .user-drawer .user {

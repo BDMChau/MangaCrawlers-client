@@ -61,7 +61,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
 
 
     const renderTitle = () => (
-        <div className="title">
+        <div className="title" onClick={() => history.push(redirectURI.userPage_uri(profile.user_id))} title="Go to profile page" >
             <span><UserOutlined /></span>
             <span>Profile</span>
         </div>
@@ -148,7 +148,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                                 onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}
                             >
                                 100 friends
-                                </p>
+                            </p>
                         </Tooltip>
                     </div>
                 </div>

@@ -39,7 +39,7 @@ function Chapter({
     isEndCmts
 }) {
     const userState = useSelector((state) => state.userState);
-    const stuffsState = useSelector(state => state.stuffsState);
+    const stuffsState = useSelector(state => state.stuffsState); // stuffsState[0] is status to sticky menu chapters
     const [chapterName, setChapterName] = useState("");
 
 
@@ -89,28 +89,28 @@ function Chapter({
                 : <Typography.Title level={2} className="title" style={{ color: "transparent" }}>.</Typography.Title>
 
             }
-            {stuffsState[0] === "true"
+            {stuffsState[0] === true
                 ? <Col span={23} sm={13} md={20} xxl={10} style={{ height: "44px", marginTop: "10px" }}></Col>
                 : ""
             }
-            <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === "true" ? "dropdown-chapter sticky" : "dropdown-chapter"}>
+            <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === true ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
                         <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga.manga_id ,chapterInfo.manga.manga_name) : "#"}>
-                            <HomeOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
+                            <HomeOutlined style={{ fontSize: stuffsState[0] === true ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>
                 </Tooltip>
 
                 <Tooltip title="Previous Chap">
                     <Button className="btn-prev" onClick={() => handlePrevChapter()}>
-                        <LeftOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
+                        <LeftOutlined style={{ fontSize: stuffsState[0] === true ? "22px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
                 <Tooltip title={chapterName ? chapterName : chapterInfo.chapter_name}>
                     <Dropdown className="dropdown-items" overlay={dropDownItems} trigger={['click']} >
-                        <Typography.Text title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }}>
+                        <Typography.Text title="" onClick={e => e.preventDefault()} style={{ fontSize: stuffsState[0] === true ? "22px" : "22px", transition: "0.5s" }}>
                             {chapterName ? chapterName : chapterInfo.chapter_name}
                         </Typography.Text>
                     </Dropdown>
@@ -118,7 +118,7 @@ function Chapter({
 
                 <Tooltip title="Next Chap">
                     <Button className="btn-next" onClick={() => handleNextChapter()}>
-                        <RightOutlined style={{ fontSize: stuffsState[0] === "true" ? "22px" : "22px", transition: "0.5s" }} />
+                        <RightOutlined style={{ fontSize: stuffsState[0] === true ? "22px" : "22px", transition: "0.5s" }} />
                     </Button>
                 </Tooltip>
 
@@ -135,8 +135,8 @@ function Chapter({
                         }
                     >
                         {isFollowed
-                            ? <MinusSquareOutlined style={{ fontSize: stuffsState[0] === "true" ? "20px" : "20px", transition: "0.5s", marginTop: "3px" }} />
-                            : <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === "true" ? "18px" : "18px", transition: "0.5s" }} />}
+                            ? <MinusSquareOutlined style={{ fontSize: stuffsState[0] === true ? "20px" : "20px", transition: "0.5s", marginTop: "3px" }} />
+                            : <AppstoreAddOutlined style={{ fontSize: stuffsState[0] === true ? "18px" : "18px", transition: "0.5s" }} />}
                     </Button>
                 </Tooltip>
 
