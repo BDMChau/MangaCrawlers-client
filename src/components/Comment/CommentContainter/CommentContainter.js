@@ -99,20 +99,21 @@ function CommentContainter({ mangaId, chapterId }) {
             manga_comment_id: id,
             from: fromRowsChild,
             amount: 4,
-            level: level
+            level: level,
+            comments: comments
         }
 
         try {
             const response = await mangaApi.getCommentsChild(data);
             const commentsRes = response.content.comments ? response.content.comments : [];
-            const nextFromRow = response.content.comments;
+            const nextFromRow = response.content.from;
 
-            if (response.content.is_end) {
-                setIsEndCmtsChild(true);
-                return;
-            }
+            // if (response.content.is_end) {
+            //     setIsEndCmtsChild(true);
+            //     return;
+            // }
 
-
+console.log(commentsRes)
             setFromRowsChild(nextFromRow)
             setTimeout(() => setComments(commentsRes), 300)
         } catch (ex) {

@@ -94,8 +94,6 @@ function CommentItems({
 
             {userState[0]
                 ? <div className="interact">
-                    <ButtonLike />
-
                     <InteractionForm
                         comment={comment}
                         cmtId={comment.manga_comment_id}

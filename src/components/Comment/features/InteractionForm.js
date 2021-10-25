@@ -8,6 +8,7 @@ import 'antd/dist/antd.css';
 import InputForm from './InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
+import ButtonLike from './ButtonLike';
 
 export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt, getCmtsChild }) {
     const [replying, setReplying] = useState(false);
@@ -63,6 +64,8 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
 
     return (
         <>
+            <ButtonLike />
+
             <Button
                 className="reply"
                 type="text"
