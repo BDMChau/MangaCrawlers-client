@@ -10,7 +10,7 @@ import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 import ButtonLike from './ButtonLike';
 
-export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt, getCmtsChild }) {
+export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
     const [replying, setReplying] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);

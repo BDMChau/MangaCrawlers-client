@@ -92,8 +92,7 @@ function CommentContainter({ mangaId, chapterId }) {
 
     }
 
-    const getCmtsChild = async (id, level, comment) => {
-        console.log(comment);
+    const getCmtsChild = async (id, level) => {
         if(isEndCmtsChild) return;
         
         const data = {
