@@ -35,6 +35,14 @@ const userApi = {
             }
         });
     },
+    checkReqStatus: (token, data) => {
+        const uri = `/api/user/check_status`;
+        return axiosClient.post(uri,data,{
+            headers:{
+                Authorization: token
+            }
+        });
+    },
     addCmt: (token, data) => {
         const uri = '/api/user/addcommentmanga';
         return axiosClient.post(uri, data, {

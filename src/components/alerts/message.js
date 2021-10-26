@@ -2,7 +2,7 @@ import { message } from 'antd';
 
 message.config({
     top: 30,
-    maxCount: 3,
+    maxCount: 2,
 });
 
 const message_success = (text, durationSEC) => {

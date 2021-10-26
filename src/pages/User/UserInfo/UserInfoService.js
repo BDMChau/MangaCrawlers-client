@@ -7,6 +7,7 @@ import userApi from 'api/apis/MainServer/userApi';
 import { socketActions } from 'socket/socketClient';
 import { message_error, message_success } from 'components/alerts/message';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 export default function UserInfoService() {
     const userState = useSelector((state) => state.userState);
@@ -14,26 +15,45 @@ export default function UserInfoService() {
     const query = new URLSearchParams(useLocation().search);
     const [userInfo, setUserInfo] = useState({});
 
+    const cookies = new Cookies();
+    const token = cookies.get("token");
+
     useEffect(() => {
         if (query.get("id")) getUserInfo(query.get("id"))
     }, [query.get("id")])
+
+
+    useEffect(() => {
+        if (userState[0]) checkFriendStatus(query.get("id"))
+    }, [userState[0]])
 
 
     const getUserInfo = async (id) => {
         const data = { user_id: id.toString() }
 
         try {
-            const response = await userApi.getUserInfo(data);
-            if (response.content.err) return;
+            const res = await userApi.getUserInfo(data);
+            if (res.content.err) return;
 
-            // if (userState[0].user_id.toString() === query.get("id").toString()) {
-            //     setUserInfo({});
-            //     return
-            // }
-
-            setUserInfo(response.content.user)
+            setUserInfo(res.content.user)
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    
+    const checkFriendStatus = async (id) => {
+        if (!userState[0]) return message_error("You have to logged in to do this action!");
+        
+        const data ={
+            to_user_id: id
+        };
+
+        try {
+            const res = await userApi.checkReqStatus(token, data);
+            console.log(res)
+        } catch (err) {
+            console.log(err)
         }
     }
 

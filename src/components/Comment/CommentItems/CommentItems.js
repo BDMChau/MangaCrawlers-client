@@ -137,7 +137,7 @@ function CommentItems({
         const [fromRowsChild, setFromRowsChild] = useState(2);
 
         const getCmtsChildBtnSeeMore = async () => {
-            // if(isEndCmtsChild) return;
+            if (isEndCmtsChildId.includes(comment.parent_id)) return;
 
             const data = {
                 manga_comment_id: comment.parent_id,
@@ -157,14 +157,12 @@ function CommentItems({
                     if(!isEndCmtsChildId.includes(comment.parent_id)) setTimeout(() => setIsEndCmtsChildId(prev => [...prev, comment.parent_id]), 200);
                 }
 
-                if (isEndCmtsChildId.includes(comment.parent_id)) return;
 
                 setFromRowsChild(nextFromRow);
                 setTimeout(() => setComments(commentsRes), 200)
             } catch (ex) {
                 console.log(ex)
             }
-
         }
 
         return (

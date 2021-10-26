@@ -137,14 +137,14 @@ function CommentContainter({ mangaId, chapterId }) {
                 setIsAddedCmt(true);
             }
         } else {
-            message_error("You have to login first!");
+            message_error("You have to logged in to do this action");
             return;
         }
     }
 
 
     const deleteCmt = async (id) => {
-        if (!userState[0]) return message_error("You have to login first!");
+        if (!userState[0]) return message_error("You have to logged in to do this action");
 
         const data = mangaId
             ? {

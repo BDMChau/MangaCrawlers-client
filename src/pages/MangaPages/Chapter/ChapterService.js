@@ -300,7 +300,7 @@ export default function ChapterService() {
                 }
             }
         } else {
-            message_error("You have to login first!");
+            message_error("You have to logged in to do this action");
             return;
         }
     }

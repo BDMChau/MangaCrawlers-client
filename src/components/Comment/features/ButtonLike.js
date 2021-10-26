@@ -1,17 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../CommentItems/CommentItems.css"
 
 import { Tooltip } from 'antd'
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
 
 
-export default function ButtonLike() {
+export default function ButtonLike({comment}) {
     const [likes, setLikes] = useState(0);
     const [action, setAction] = useState("");
 
+    // 
+
+    useEffect(() => {
+    }, [])
+
+
+    const getTotalLikes = () => {
+        const data = {
+            manga_comment_id:1,
+            user_id:2
+        };
+
+        try{
+            console.log("chou")
+         }catch(err){
+             console.log(err)
+         }
+    }
+
+    const checkUserLiked = () => {
+        const data = {
+            manga_comment_id:1,
+            user_id:2
+        };
+
+        try{
+            console.log("chou")
+         }catch(err){
+             console.log(err)
+         }
+    }
 
 
     const handleLikeCmt = () => {
+        const data = {
+            manga_comment_id:1,
+            user_id:2
+        };
+
+        
+        if (action === 'liked') {
+            setLikes(likes - 1);
+            setAction('dislike');
+        } else {
+            setLikes(likes + 1);
+            setAction('liked');
+        }
+    };
+
+    const handleDislikeCmt = () => {
+        const data = {
+            manga_comment_id:1,
+            user_id:2
+        };
+
+
         if (action === 'liked') {
             setLikes(likes - 1);
             setAction('dislike');
