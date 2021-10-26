@@ -66,12 +66,13 @@ function CommentItems({
 
     ////////////////////////////// components //////////////////////////////
     const CmtTitle = ({ comment }) => (
-        <Typography.Text
-            style={{ cursor: "pointer", fontSize: "14px", fontWeight: "500" }}
-            onClick={() => history.push(redirectURI.userPage_uri(comment.user_id))}
-        >
-            {comment.user_name}
-        </Typography.Text>
+        <NavLink to={redirectURI.userPage_uri(comment.user_id)} >
+            <Typography.Text
+                style={{ cursor: "pointer", fontSize: "14px", fontWeight: "500" }}
+            >
+                {comment.user_name}
+            </Typography.Text>
+        </NavLink>
     )
 
 
@@ -153,14 +154,10 @@ function CommentItems({
                 const nextFromRow = response.content.from;
 
                 if (response.content.is_end) {
-                    setIsEndCmtsChildId(prev => [...prev, comment.parent_id]);
+                    setTimeout(() => setIsEndCmtsChildId(prev => [...prev, comment.parent_id]), 200);
                 }
 
-                if (isEndCmtsChildId.includes(comment.parent_id)) {
-                    console.log("okokokok")
-                    return;
-                }
-
+                if (isEndCmtsChildId.includes(comment.parent_id)) return;
 
                 setFromRowsChild(nextFromRow);
                 setTimeout(() => setComments(commentsRes), 200)
@@ -171,19 +168,21 @@ function CommentItems({
         }
 
         return (
-            <Button
-                type="text"
-                style={{
-                    padding: "2px",
-                    marginLeft: "10px",
-                    borderRadius: "10px",
-                    fontSize: "13px",
-                    fontWeight: 500
-                }}
-                onClick={() => getCmtsChildBtnSeeMore()}
-            >
-                See more
-            </Button>
+            isEndCmtsChildId.includes(comment.parent_id)
+                ? ""
+                : <Button
+                    type="text"
+                    style={{
+                        padding: "2px",
+                        marginLeft: "10px",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        fontWeight: 500
+                    }}
+                    onClick={() => getCmtsChildBtnSeeMore()}
+                >
+                    See more
+                </Button>
         )
     }
 
@@ -198,14 +197,15 @@ function CommentItems({
                         key={comment.manga_comment_id}
                         author={<CmtTitle comment={comment} />}
                         avatar={
-                            <Avatar
-                                className="cmt-avatar"
-                                title={comment.user_name}
-                                style={{ cursor: "pointer" }}
-                                src={comment.user_avatar}
-                                alt="Avatar"
-                                onClick={() => history.push(redirectURI.userPage_uri(comment.user_id))}
-                            />
+                            <NavLink to={redirectURI.userPage_uri(comment.user_id)}>
+                                <Avatar
+                                    className="cmt-avatar"
+                                    title={comment.user_name}
+                                    style={{ cursor: "pointer" }}
+                                    src={comment.user_avatar}
+                                    alt="Avatar"
+                                />
+                            </NavLink>
                         }
                         content={
                             <div className="comment">
@@ -221,13 +221,15 @@ function CommentItems({
                                                         key={cmt01.manga_comment_id}
                                                         author={<CmtTitle comment={cmt01} />}
                                                         avatar={
-                                                            <Avatar
-                                                                className="cmt-avatar"
-                                                                style={{ cursor: "pointer" }}
-                                                                src={cmt01.user_avatar}
-                                                                alt="Avatar"
-                                                                onClick={() => history.push(redirectURI.userPage_uri(cmt01.user_id))}
-                                                            />
+                                                            <NavLink to={redirectURI.userPage_uri(comment.user_id)}>
+                                                                <Avatar
+                                                                    className="cmt-avatar"
+                                                                    style={{ cursor: "pointer" }}
+                                                                    src={cmt01.user_avatar}
+                                                                    alt="Avatar"
+                                                                    onClick={() => history.push(redirectURI.userPage_uri(cmt01.user_id))}
+                                                                />
+                                                            </NavLink>
                                                         }
                                                         content={
                                                             <div className="cmt-children">
@@ -243,13 +245,15 @@ function CommentItems({
                                                                                         key={cmt02.manga_comment_id}
                                                                                         author={<CmtTitle comment={cmt02} />}
                                                                                         avatar={
-                                                                                            <Avatar
-                                                                                                className="cmt-avatar"
-                                                                                                style={{ cursor: "pointer" }}
-                                                                                                src={cmt02.user_avatar}
-                                                                                                alt="Avatar"
-                                                                                                onClick={() => history.push(redirectURI.userPage_uri(cmt02.user_id))}
-                                                                                            />
+                                                                                            <NavLink to={redirectURI.userPage_uri(comment.user_id)}>
+                                                                                                <Avatar
+                                                                                                    className="cmt-avatar"
+                                                                                                    style={{ cursor: "pointer" }}
+                                                                                                    src={cmt02.user_avatar}
+                                                                                                    alt="Avatar"
+                                                                                                    onClick={() => history.push(redirectURI.userPage_uri(cmt02.user_id))}
+                                                                                                />
+                                                                                            </NavLink>
                                                                                         }
                                                                                         content={
                                                                                             <div className="cmt-children02">
