@@ -24,7 +24,7 @@ function CommentContainter({ mangaId, chapterId }) {
     const [isAddedCmt, setIsAddedCmt] = useState(false);
 
     // child cmts
-    const [fromRowsChild, setFromRowsChild] = useState(0);
+    const [fromRowsChild, setFromRowsChild] = useState(2);
     const [isEndCmtsChild, setIsEndCmtsChild] = useState(false);
 
     const [isErrorCmt, setIsErrorCmt] = useState(false);
@@ -92,35 +92,6 @@ function CommentContainter({ mangaId, chapterId }) {
 
     }
 
-    const getCmtsChild = async (id, level) => {
-        if(isEndCmtsChild) return;
-        
-        const data = {
-            manga_comment_id: id,
-            from: fromRowsChild,
-            amount: 4,
-            level: level,
-            comments: comments
-        }
-
-        try {
-            const response = await mangaApi.getCommentsChild(data);
-            const commentsRes = response.content.comments ? response.content.comments : [];
-            const nextFromRow = response.content.from;
-
-            // if (response.content.is_end) {
-            //     setIsEndCmtsChild(true);
-            //     return;
-            // }
-
-console.log(commentsRes)
-            setFromRowsChild(nextFromRow)
-            setTimeout(() => setComments(commentsRes), 300)
-        } catch (ex) {
-            console.log(ex)
-        }
-
-    }
 
 
     const addCmt = async (dataInput) => {
@@ -257,10 +228,10 @@ console.log(commentsRes)
             {/* render cmts */}
             <CommentItems
                 comments={comments}
-                getCmts={() => getCmts()}
-                getCmtsChild={getCmtsChild}
+                setComments={setComments}
 
-                isEndCmtsChild={isEndCmtsChild}
+                getCmts={() => getCmts()}
+
                 isEndCmts={isEndCmts}
 
                 mangaId={mangaId}

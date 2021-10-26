@@ -10,14 +10,15 @@ import InteractionForm from '../features/InteractionForm';
 import { format } from 'helpers/format';
 import { useSelector } from 'react-redux';
 import redirectURI from 'helpers/redirectURI';
+import mangaApi from 'api/apis/MainServer/mangaApi';
 
 
 function CommentItems({
     comments,
-    getCmts,
-    getCmtsChild,
+    setComments,
 
-    isEndCmtsChild,
+    getCmts,
+
     isEndCmts,
 
     mangaId,
@@ -31,6 +32,9 @@ function CommentItems({
     editCmt
 }) {
     const userState = useSelector((state) => state.userState);
+
+    const [isEndCmtsChildId, setIsEndCmtsChildId] = useState([]);
+    const [count, setCount] = useState(0);
 
     const [isScrollBottom, setIsScrollBottom] = useState(false)
 
@@ -127,10 +131,47 @@ function CommentItems({
     )
 
 
-    const BtnSeeMore = ({ comment }) => (
-        isEndCmtsChild
-            ? ""
-            : <Button
+    const BtnSeeMore = ({ comment, setComments, setIsEndCmtsChildId }) => {
+        // child cmts
+        const [fromRowsChild, setFromRowsChild] = useState(2);
+
+        const getCmtsChildBtnSeeMore = async () => {
+            // if(isEndCmtsChild) return;
+
+            const data = {
+                manga_comment_id: comment.parent_id,
+                from: fromRowsChild,
+                amount: 4,
+                level: comment.level,
+                comments: comments
+            }
+
+
+            try {
+                const response = await mangaApi.getCommentsChild(data);
+                const commentsRes = response.content.comments ? response.content.comments : [];
+                const nextFromRow = response.content.from;
+
+                if (response.content.is_end) {
+                    setIsEndCmtsChildId(prev => [...prev, comment.parent_id]);
+                }
+
+                if (isEndCmtsChildId.includes(comment.parent_id)) {
+                    console.log("okokokok")
+                    return;
+                }
+
+
+                setFromRowsChild(nextFromRow);
+                setTimeout(() => setComments(commentsRes), 200)
+            } catch (ex) {
+                console.log(ex)
+            }
+
+        }
+
+        return (
+            <Button
                 type="text"
                 style={{
                     padding: "2px",
@@ -139,11 +180,12 @@ function CommentItems({
                     fontSize: "13px",
                     fontWeight: 500
                 }}
-                onClick={() => getCmtsChild(comment.parent_id, comment.level)}
+                onClick={() => getCmtsChildBtnSeeMore()}
             >
                 See more
             </Button>
-    )
+        )
+    }
 
 
 
@@ -217,7 +259,7 @@ function CommentItems({
                                                                                     ></Comment>
                                                                                 ))}
 
-                                                                                <BtnSeeMore comment={cmt01} />
+                                                                                <BtnSeeMore comment={cmt01} setComments={setComments} setIsEndCmtsChildId={setIsEndCmtsChildId} />
                                                                             </div>
                                                                             : ""
                                                                     }
@@ -227,7 +269,7 @@ function CommentItems({
                                                     ></Comment>
                                                 ))}
 
-                                                <BtnSeeMore comment={comment} />
+                                                <BtnSeeMore comment={comment} setComments={setComments} setIsEndCmtsChildId={setIsEndCmtsChildId} />
                                             </div>
                                             : ""
                                     }
