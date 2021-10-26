@@ -139,7 +139,7 @@ function CommentItems({
                     fontSize: "13px",
                     fontWeight: 500
                 }}
-                onClick={() => getCmtsChild(comment.manga_comment_id, comment.level)}
+                onClick={() => getCmtsChild(comment.manga_comment_id, comment.level, comment)}
             >
                 See more
             </Button>
