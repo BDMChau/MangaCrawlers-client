@@ -5,8 +5,11 @@ import EVENTS_NAME from './features/eventsName';
 const socket = io(endPoint.socket_local);
 
 const socketActions = {
-    updateSocketId: (userId) => {
-        socket.emit(EVENTS_NAME.UPDATE_SOCKETID, { user_id: userId });
+    updateSocketId: (userId, isDisconnect) => {
+        socket.emit(EVENTS_NAME.UPDATE_SOCKETID, { 
+            user_id: userId,
+            is_disconnect: isDisconnect
+        });
     },
 
 

@@ -75,15 +75,15 @@ function TopNav({ handleLogOut, genres }) {
     }, [authState]);
 
 
-
     useEffect(() => {
         if (userState[0]) {
             setIsUserSignIn(true);
-            socketActions.updateSocketId(userState[0].user_id)
+            socketActions.updateSocketId(userState[0].user_id, false)
         } else {
             setIsUserSignIn(false);
         }
     }, [userState[0]])
+
 
     const showDrawer = () => {
         setState(true);
@@ -233,4 +233,4 @@ function TopNav({ handleLogOut, genres }) {
     );
 }
 
-export default memo(TopNav)
+export default TopNav;
