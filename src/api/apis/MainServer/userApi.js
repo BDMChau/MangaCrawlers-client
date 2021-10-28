@@ -68,11 +68,35 @@ const userApi = {
             }
         });
     },
-    updateCmt: (data) => {
+    updateCmt: (token,data) => {
         const uri = '/api/user/updatecomment';
         return axiosClient.post(uri, data, {
             headers: {
                 "Content-Type": 'multipart/form-data',
+                Authorization: token
+            }
+        });
+    },
+    checkIsLiked: (token,data) => {
+        const uri = '/api/user/check_user_like';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
+    likeCmt: (token,data) => {
+        const uri = '/api/user/add_like';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
+    unlikeCmt: (token,data) => {
+        const uri = '/api/user/unlike';
+        return axiosClient.post(uri, data, {
+            headers: {
                 Authorization: token
             }
         });
