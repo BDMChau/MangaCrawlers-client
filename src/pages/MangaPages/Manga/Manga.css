@@ -85,7 +85,6 @@
   max-width: 400px;
 }
 
-
 /* .manga .title .interact .link {
   padding: 15px 20px;
   background: #c5c5c5;
@@ -243,7 +242,7 @@
 
 @media only screen and (min-width: 416px) and (max-width: 767px) {
   .manga .title {
-    margin: 20px;
+    margin: 4rem;
   }
 
   .desc-wrapper .desc,
@@ -258,6 +257,7 @@
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .manga .title {
     margin: 20px;
+    margin-top: 4rem;
   }
 
   .desc-wrapper .desc,
@@ -283,5 +283,19 @@
 
   .manga-comments .comments-body {
     max-height: 600px;
+  }
+
+  .manga .title .interact .btn-add-favorite,
+  .manga .title .interact .btn-read-now {
+    width: 125px;
+    margin-right: 10px;
+  }
+
+  .manga .title .interact .btn-add-favorite {
+    margin-right: 0;
+  }
+
+  .manga .title .interact .btn-modify {
+    margin-top: 10px;
   }
 }

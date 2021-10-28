@@ -17,12 +17,15 @@ import UserProfileService from "../../pages/User/UserProfile/UserProfileService"
 import { socketActions } from "socket/socketClient";
 import NotificationService from "./notification/NotificationService";
 
+import { enquireScreen, unenquireScreen } from 'enquire-js'
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
 
 
-function TopNav({ handleLogOut, genres }) {
+function TopNav({ handleLogOut, genres, getListNotifications, notifications, setNotifications, fromRow, isEnd }) {
+    const [isMobile, setIsMobile] = useState(false);
+
     const authState = useSelector((state) => state.authState);
     const userState = useSelector((state) => state.userState);
     const [isUserSignIn, setIsUserSignIn] = useState(false);
@@ -33,6 +36,17 @@ function TopNav({ handleLogOut, genres }) {
     const [isModalVisibleSignIn, setIsModalVisibleSignIn] = useState(false);
     const [isVisibleProfileDrawer, setIsVisibleProfileDrawer] = useState(false);
     const history = useHistory(false);
+
+
+    // check mobile device
+    useEffect(() => {
+        const enquireHandler = enquireScreen(mobile => {
+            if (mobile === true) setIsMobile(mobile);
+            else setIsMobile(false)
+        }, "only screen and (min-width: 300px) and (max-width: 767px)")
+
+        return () => unenquireScreen(enquireHandler);
+    }, [])
 
 
     // handle open close modal SignIn SignUp
@@ -83,6 +97,7 @@ function TopNav({ handleLogOut, genres }) {
             setIsUserSignIn(false);
         }
     }, [userState[0]])
+
 
 
     const showDrawer = () => {
@@ -138,7 +153,7 @@ function TopNav({ handleLogOut, genres }) {
                 <SubMenu
                     title="Genres"
                     popupClassName="list-genres-dropdown"
-                    children={renderGenresDropDown()}
+                    children={renderGenresDropDown(isMobile)}
                 />
             </Menu>
         );
@@ -147,7 +162,14 @@ function TopNav({ handleLogOut, genres }) {
 
     const renderAccountDropDown = (isMobile) => (
         <>
-            {isMobile ? <NotificationService isMobile={isMobile} /> : ""}
+            {isMobile ? <NotificationService
+                isMobile={isMobile}
+                getListNotifications={getListNotifications}
+                notifications={notifications}
+                setNotifications={setNotifications}
+                fromRow={fromRow}
+                isEnd={isEnd}
+            /> : ""}
             <Menu.Item key="profile" onClick={() => openProfileDrawer()} icon={<UserOutlined style={{ fontSize: "18px" }} />} title="Profile">
                 Profile
             </Menu.Item>
@@ -175,11 +197,17 @@ function TopNav({ handleLogOut, genres }) {
                         />
                     </>
                     : <>
-                        <NotificationService />
+                        <NotificationService
+                            getListNotifications={getListNotifications}
+                            notifications={notifications}
+                            setNotifications={setNotifications}
+                            fromRow={fromRow}
+                            isEnd={isEnd}
+                        />
                         <SubMenu
                             title="Account"
                             popupClassName="list-account-dropdown"
-                            children={renderAccountDropDown(false)}
+                            children={renderAccountDropDown(isMobile)}
                         />
                     </>
                 }
@@ -200,24 +228,27 @@ function TopNav({ handleLogOut, genres }) {
             <nav className="menuBar">
                 <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} style={{ cursor: "pointer" }} />
                 <div className="menuCon">
-                    <div className="leftMenu"><RenderLeft /></div>
-                    <div className="rightMenu"><RenderRight /></div>
-
                     <Button className="barsMenu" onClick={showDrawer}>
                         <span className="barsBtn"></span>
                     </Button>
 
-                    <Drawer
-                        className="drawer"
-                        title={<img className="logo-drawer" src={logo} alt="" />}
-                        placement="right"
-                        closable={true}
-                        onClose={onClose}
-                        visible={state}
-                    >
-                        <RenderLeft isMobile={true} />
-                        <RenderRight isMobile={true} />
-                    </Drawer>
+                    {isMobile
+                        ? <Drawer
+                            className="drawer"
+                            title={<img className="logo-drawer" src={logo} alt="" />}
+                            placement="right"
+                            closable={true}
+                            onClose={onClose}
+                            visible={state}
+                        >
+                            <RenderLeft isMobile={isMobile} />
+                            <RenderRight isMobile={isMobile} />
+                        </Drawer>
+                        : <>
+                            <div className="leftMenu"><RenderLeft isMobile={isMobile} /></div>
+                            <div className="rightMenu"><RenderRight isMobile={isMobile} /></div>
+                        </>
+                    }
                 </div>
             </nav>
         );

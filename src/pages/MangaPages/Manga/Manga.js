@@ -38,6 +38,7 @@ function Manga({
 
     editChapter,
     editManga,
+    isLoadingEditting,
 
     removeChapter
   
@@ -204,7 +205,7 @@ function Manga({
                                         <Button
                                             className="btn-modify"
                                             icon={isModify ? <CheckOutlined style={{ fontSize: "20px" }} /> : <EditOutlined style={{ fontSize: "20px" }} />}
-                                            loading={isLoadingFollow}
+                                            loading={isLoadingEditting}
                                             onClick={() =>
                                                 isModify === true
                                                     ? handleModify()

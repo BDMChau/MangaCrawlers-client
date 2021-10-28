@@ -33,6 +33,7 @@ function MangaService() {
     const [mangaName, setMangaName] = useState("");
     const [authorId, setAuthorId] = useState("");
     const [authorName, setAuthorName] = useState("");
+    const [isLoadingEditting, setIsLoadingEditting] = useState(false);
 
     // comments
     // const [fromRow, setFromRow] = useState(0);
@@ -276,6 +277,8 @@ function MangaService() {
 
 
     const editManga = async () => {
+        setIsLoadingEditting(true);
+
         const data = {
             manga_id: mangaId ? mangaId : 0,
             manga_name: mangaName,
@@ -289,6 +292,8 @@ function MangaService() {
                 setManga(response.content.manga);
                 notification_success("Updated!");
             }
+
+            setIsLoadingEditting(false);
         } catch (err) {
             console.log(err)
         }
@@ -397,6 +402,7 @@ function MangaService() {
 
                 editChapter={(chapterId, chapterName) => editChapter(chapterId, chapterName)}
                 editManga={() => editManga()}
+                isLoadingEditting={isLoadingEditting}
                 removeChapter={(chapterId) => removeChapter(chapterId)}
 
             // commentsProp={comments}
