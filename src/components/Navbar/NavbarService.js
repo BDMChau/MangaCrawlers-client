@@ -6,8 +6,6 @@ import { message_success } from '../alerts/message';
 import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
 import Cookies from 'universal-cookie';
 import { socketActions } from 'socket/socketClient';
-import userApi from 'api/apis/MainServer/userApi';
-import { format } from 'helpers/format';
 
 
 function NavbarService() {
@@ -17,24 +15,12 @@ function NavbarService() {
 
     const [genres, setGenres] = useState([])
 
-    const [notifications, setNotifications] = useState([])
-    const [fromRow, setFromRow] = useState(0);
-    const [isEnd, setIsEnd] = useState(false);
-
     const cookies = new Cookies();
-    const token = cookies.get("token")
 
 
     useEffect(() => {
         dispatch(GET_ALL_GENRES());
     }, [])
-
-
-    useEffect(() => {
-        if (userState[0]) {
-            getListNotifications();
-        }
-    }, [userState])
 
     useEffect(() => {
         if (genresState) setGenres(genresState);
@@ -61,47 +47,11 @@ function NavbarService() {
     }
 
 
-    const getListNotifications = async () => {
-        if (!isEnd) {
-            const data = {
-                from: fromRow
-            }
-
-            try {
-                const response = await userApi.getNotifications(token, data);
-
-                if (response.content.msg) {
-                    const notificationsList = response.content.notifications_list;
-                    notificationsList.forEach(item => {
-                        item.created_at = format.formatDate02(item.created_at);
-                    });
-
-                    if (notificationsList.length === 0 || notificationsList.length < 5) {
-                        setIsEnd(true);
-                        setNotifications(prev => [...prev, ...notificationsList]);
-                        return;
-                    }
-
-                    setFromRow(response.content.fromRow);
-                    setNotifications(prev => [...prev, ...notificationsList]);
-                }
-            } catch (err) {
-                console.log(err)
-            }
-        }
-    }
-
 
     return (
         <TopNav
             handleLogOut={handleLogOut}
             genres={genres}
-
-            getListNotifications={getListNotifications}
-            notifications={notifications}
-            setNotifications={setNotifications}
-            fromRow={fromRow}
-            isEnd={isEnd}
         />
     )
 }

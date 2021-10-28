@@ -23,7 +23,7 @@ const { SubMenu } = Menu;
 const { Header } = Layout;
 
 
-function TopNav({ handleLogOut, genres, getListNotifications, notifications, setNotifications, fromRow, isEnd }) {
+function TopNav({ handleLogOut, genres }) {
     const [isMobile, setIsMobile] = useState(false);
 
     const authState = useSelector((state) => state.authState);
@@ -162,14 +162,7 @@ function TopNav({ handleLogOut, genres, getListNotifications, notifications, set
 
     const renderAccountDropDown = (isMobile) => (
         <>
-            {isMobile ? <NotificationService
-                isMobile={isMobile}
-                getListNotifications={getListNotifications}
-                notifications={notifications}
-                setNotifications={setNotifications}
-                fromRow={fromRow}
-                isEnd={isEnd}
-            /> : ""}
+            {isMobile ? <NotificationService isMobile={isMobile} /> : ""}
             <Menu.Item key="profile" onClick={() => openProfileDrawer()} icon={<UserOutlined style={{ fontSize: "18px" }} />} title="Profile">
                 Profile
             </Menu.Item>
@@ -197,13 +190,7 @@ function TopNav({ handleLogOut, genres, getListNotifications, notifications, set
                         />
                     </>
                     : <>
-                        <NotificationService
-                            getListNotifications={getListNotifications}
-                            notifications={notifications}
-                            setNotifications={setNotifications}
-                            fromRow={fromRow}
-                            isEnd={isEnd}
-                        />
+                        <NotificationService />
                         <SubMenu
                             title="Account"
                             popupClassName="list-account-dropdown"

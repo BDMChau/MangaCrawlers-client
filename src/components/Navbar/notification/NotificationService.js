@@ -16,17 +16,17 @@ import EVENTS_NAME from 'socket/features/eventsName';
 import { message_error, message_success } from 'components/alerts/message';
 
 
-function NotificationService({ isMobile, getListNotifications, notifications, setNotifications, fromRow, isEnd }) {
+function NotificationService({ isMobile }) {
     const stuffSlice = useSelector((state) => state.stuffsState);
     const notificationIdToUpdate = stuffSlice[1] ? stuffSlice[1] : null;
 
     const dispatch = useDispatch();
 
-    // const [fromRow, setFromRow] = useState(0)
-    // const [notifications, setNotifications] = useState([])
+    const [fromRow, setFromRow] = useState(0)
+    const [notifications, setNotifications] = useState([])
     const [badgeCount, setBadgeCount] = useState()
 
-    // const [isEnd, setIsEnd] = useState(false)
+    const [isEnd, setIsEnd] = useState(false)
     const [visible, setVisible] = useState(false);
     const [isFirstRender, setIsFirstRender] = useState(true);
 
@@ -46,9 +46,10 @@ function NotificationService({ isMobile, getListNotifications, notifications, se
     }, []);
 
 
-    // useEffect(() => {
-    //     if (!notifications.length) getListNotifications();
-    // }, [])
+
+    useEffect(() => {
+        if (!notifications.length) getListNotifications();
+    }, [])
 
 
     // update interact in client
@@ -84,44 +85,44 @@ function NotificationService({ isMobile, getListNotifications, notifications, se
         setBadgeCount(notifications.filter(item => item.is_viewed === false).length)
     }
 
-
+    
     const unshiftItem = (item) => {
         setNotifications(prevState => [item, ...prevState]);
     }
 
 
     //////////////// services api ////////////////
-    // const getListNotifications = async () => {
-    //     if (!isEnd) {
-    //         const data = {
-    //             from: fromRow
-    //         }
+    const getListNotifications = async () => {
+        if (!isEnd) {
+            const data = {
+                from: fromRow
+            }
 
-    //         try {
-    //             const response = await userApi.getNotifications(token, data);
+            try {
+                const response = await userApi.getNotifications(token, data);
 
-    //             if (response.content.msg) {
-    //                 const notificationsList = response.content.notifications_list;
-    //                 notificationsList.forEach(item => {
-    //                     item.created_at = format.formatDate02(item.created_at);
-    //                 });
+                if (response.content.msg) {
+                    const notificationsList = response.content.notifications_list;
+                    notificationsList.forEach(item => {
+                        item.created_at = format.formatDate02(item.created_at);
+                    });
 
-    //                 if (notificationsList.length === 0 || notificationsList.length < 5) {
-    //                     setIsEnd(true);
-    //                     setNotifications(prev => [...prev, ...notificationsList]);
-    //                     return;
-    //                 }
+                    if (notificationsList.length === 0 || notificationsList.length < 5) {
+                        setIsEnd(true);
+                        setNotifications(prev => [...prev, ...notificationsList]);
+                        return;
+                    }
 
-    //                 setFromRow(response.content.fromRow);
-    //                 setNotifications(prev => [...prev, ...notificationsList]);
-    //             }
-    //         } catch (err) {
-    //             console.log(err)
-    //         }
-    //     }
-    // }
+                    setFromRow(response.content.fromRow);
+                    setNotifications(prev => [...prev, ...notificationsList]);
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
 
-
+    
     const readAll = async () => {
         const copy = [...notifications];
         notifications.forEach(item => {
@@ -173,7 +174,7 @@ function NotificationService({ isMobile, getListNotifications, notifications, se
 
                 dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
                 setBadgeCount(badgeCount - 1);
-
+                
                 message_success('Joined ^^!');
             }
 
