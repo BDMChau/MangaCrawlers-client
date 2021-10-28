@@ -75,9 +75,24 @@ export default function ChapterService() {
         setComments([]);
         setIsEndCmts(false);
 
-        getCmtsChapter(mangaId, chapterId);
+        // getCmtsChapter(mangaId, chapterId);
+        updateView(mangaId, chapterId);
     }, [manga_name_id_param, chapter_name_param])
 
+
+    const updateView = async (mangaId, chapterId) => {
+        const data = {
+            manga_id: mangaId,
+            chapter_id: chapterId
+        };
+
+        try {
+            const res = await mangaApi.updateViewManga(data);
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
 
 
 
@@ -152,7 +167,7 @@ export default function ChapterService() {
             }
         }
     }, [curChapter])
-    
+
     const handleNextChapter = () => {
         setCurChapter(curChapter + 1);
     }
@@ -359,15 +374,6 @@ export default function ChapterService() {
 
                 handleNextChapter={() => handleNextChapter()}
                 handlePrevChapter={() => handlePrevChapter()}
-
-                addCmt={(cmtContent) => addCmt(cmtContent)}
-                isAddedCmt={isAddedCmt}
-                setIsAddedCmt={setIsAddedCmt}
-                isAdding={isAdding}
-                comments={comments}
-                getCmtsChapter={() => getCmtsChapter()}
-                isEndCmts={isEndCmts}
-
             />
         </div>
     )

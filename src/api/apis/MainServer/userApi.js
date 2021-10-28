@@ -77,6 +77,15 @@ const userApi = {
             }
         });
     },
+    getTotalLikes: (token, data) => {
+        const uri = '/api/user/get_total_like';
+        return axiosClient.post(uri, data, {
+            headers: {
+                "Content-Type": 'multipart/form-data',
+                Authorization: token
+            }
+        });
+    },
     searchUsers: (token, data) => {
         const uri = '/api/user/searchusers';
         return axiosClient.post(uri, data, {

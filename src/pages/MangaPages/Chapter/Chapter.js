@@ -30,20 +30,11 @@ function Chapter({
     handleNextChapter,
     handlePrevChapter,
 
-    addCmt,
-    isAddedCmt,
-    setIsAddedCmt,
-    isAdding,
-    comments,
-    getCmtsChapter,
-    isEndCmts
+
 }) {
     const userState = useSelector((state) => state.userState);
     const stuffsState = useSelector(state => state.stuffsState); // stuffsState[0] is status to sticky menu chapters
     const [chapterName, setChapterName] = useState("");
-
-
-
 
     useEffect(() => {
         smoothscroll.polyfill();
@@ -53,9 +44,6 @@ function Chapter({
         });
 
     }, [imgs])
-
-
-
 
 
     const dropDownItems = (
@@ -145,7 +133,7 @@ function Chapter({
             <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
 
 
-            <Col span={22} xxl={16}>
+            {/* <Col span={22} xxl={16}>
                 <CommentContainter
                     setIsAddedCmt={setIsAddedCmt}
                     isAddedCmt={isAddedCmt}
@@ -156,7 +144,7 @@ function Chapter({
                     getCmtsChapter={getCmtsChapter}
                     comments={comments}
                 />
-            </Col>
+            </Col> */}
         </Row >
     )
 }

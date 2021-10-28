@@ -3,52 +3,54 @@ import "../CommentItems/CommentItems.css"
 
 import { Tooltip } from 'antd'
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
+import Cookies from 'universal-cookie';
+import userApi from 'api/apis/MainServer/userApi';
 
 
-export default function ButtonLike({comment}) {
+export default function ButtonLike({ comment }) {
     const [likes, setLikes] = useState(0);
     const [action, setAction] = useState("");
 
-    // 
+    const cookies = new Cookies();
+    const token = cookies.get("token");
 
     useEffect(() => {
+        getTotalLikes();
     }, [])
 
 
-    const getTotalLikes = () => {
-        const data = {
-            manga_comment_id:1,
-            user_id:2
-        };
+    const getTotalLikes = async () => {
+        const data = { manga_comment_id: comment.manga_comment_id };
 
-        try{
-            console.log("chou")
-         }catch(err){
-             console.log(err)
-         }
+        try {
+            const res = await userApi.getTotalLikes(token, data);
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const checkUserLiked = () => {
         const data = {
-            manga_comment_id:1,
-            user_id:2
+            manga_comment_id: 1,
+            user_id: 2
         };
 
-        try{
+        try {
             console.log("chou")
-         }catch(err){
-             console.log(err)
-         }
+        } catch (err) {
+            console.log(err)
+        }
     }
 
 
     const handleLikeCmt = () => {
         const data = {
-            manga_comment_id:1,
-            user_id:2
+            manga_comment_id: 1,
+            user_id: 2
         };
 
-        
+
         if (action === 'liked') {
             setLikes(likes - 1);
             setAction('dislike');
@@ -60,8 +62,8 @@ export default function ButtonLike({comment}) {
 
     const handleDislikeCmt = () => {
         const data = {
-            manga_comment_id:1,
-            user_id:2
+            manga_comment_id: 1,
+            user_id: 2
         };
 
 

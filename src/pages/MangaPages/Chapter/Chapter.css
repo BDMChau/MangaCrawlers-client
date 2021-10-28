@@ -130,10 +130,10 @@
 
 .chapter-pages .skeleton-img h3.ant-skeleton-title {
   margin: auto;
-  max-height: 500px;
-  max-width: 90vw;
-  width: 90% !important;
-  height: 500px;
+  min-height: 900px;
+  max-width: 80vw;
+  width: 100% !important;
+  height: 100%;
 }
 
 /* dropdown menu */
@@ -186,6 +186,14 @@ ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown
 
   ul.ant-dropdown-menu.ant-dropdown-menu-light.ant-dropdown-menu-root.ant-dropdown-menu-vertical {
     width: 90%;
+  }
+
+  .chapter-pages .skeleton-img h3.ant-skeleton-title {
+    margin: auto;
+    min-height: 600px;
+    max-width: 90vw;
+    width: 100% !important;
+    height: 100%;
   }
 }
 

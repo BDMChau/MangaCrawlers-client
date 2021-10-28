@@ -50,6 +50,10 @@ const mangaApi = {
         const uri = '/api/manga/advancedsearch';
         return axiosClient.post(uri, data);
     },
+    updateViewManga: (data) => {
+        const uri = '/api/manga/updateviewchapter';
+        return axiosClient.put(uri, data);
+    },
 
     ///////////// user part
     getHistoryManga: (token) => {

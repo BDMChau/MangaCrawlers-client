@@ -48,7 +48,7 @@ function ImgsChapter({ imgs, isFixedMenu, isLoading }) {
 
     return (
         <Col span={23} xxl={15} className="chapter-pages" style={{ margin: "20px" }}>
-            {isLoading
+            {!isLoading
                 ? renderSkeleton()
                 : imgs.map((img) => (
                     // <LazyLoad

@@ -64,7 +64,7 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
 
     return (
         <>
-            <ButtonLike />
+            <ButtonLike comment={comment} />
 
             <Button
                 className="reply"
