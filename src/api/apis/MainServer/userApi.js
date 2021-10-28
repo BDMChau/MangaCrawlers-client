@@ -68,7 +68,7 @@ const userApi = {
             }
         });
     },
-    updateCmt: (token, data) => {
+    updateCmt: (data) => {
         const uri = '/api/user/updatecomment';
         return axiosClient.post(uri, data, {
             headers: {
@@ -77,14 +77,9 @@ const userApi = {
             }
         });
     },
-    getTotalLikes: (token, data) => {
-        const uri = '/api/user/get_total_like';
-        return axiosClient.post(uri, data, {
-            headers: {
-                "Content-Type": 'multipart/form-data',
-                Authorization: token
-            }
-        });
+    getTotalLikes: (data) => {
+        const uri = '/api/user_unauth/get_total_like';
+        return axiosClient.post(uri, data);
     },
     searchUsers: (token, data) => {
         const uri = '/api/user/searchusers';

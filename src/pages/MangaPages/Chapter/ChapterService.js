@@ -75,7 +75,6 @@ export default function ChapterService() {
         setComments([]);
         setIsEndCmts(false);
 
-        // getCmtsChapter(mangaId, chapterId);
         updateView(mangaId, chapterId);
     }, [manga_name_id_param, chapter_name_param])
 
@@ -273,87 +272,7 @@ export default function ChapterService() {
         }
     }, [isErrorCmt])
 
-    const addCmt = async (cmtContent) => {
-        if (userState[0]) {
-            if (cmtContent) {
-                setIsAdding(true);
-
-                const newObjComment = {
-                    "chapter_id": chapterid,
-                    "chaptercmt_content": cmtContent,
-                    "chaptercmt_time": format.formatDate02(Date.now()),
-                    "chapter_name": chapterInfo.chapter_name,
-                    "user_avatar": userState[0].user_avatar,
-                    "user_email": userState[0].user_email,
-                    "user_id": userState[0].user_id,
-                    "user_name": userState[0].user_name,
-                    "is_error": false
-                }
-
-                setTimeWhenAddedCmt(format.formatDate02(Date.now()));
-                setComments(prevCmts => [newObjComment, ...prevCmts])
-                setIsAdding(false);
-                setIsAddedCmt(true)
-
-
-                const data = {
-                    chapter_id: chapterid,
-                    chaptercmt_content: cmtContent.trim()
-                }
-
-                try {
-                    const response = await userApi.addCmt(token, data);
-                    if (response.content.comment_info) {
-                        // added
-                        return;
-                    } else {
-                        setIsErrorCmt(true);
-                        return;
-                    }
-                } catch (ex) {
-                    console.log(ex)
-                }
-            }
-        } else {
-            message_error("You have to logged in to do this action");
-            return;
-        }
-    }
-
-    const getCmtsChapter = async (mangaId, chapterId) => {
-        const data = {
-            manga_id: mangaId,
-            chapter_id: chapterId,
-            from: fromRow,
-            amount: amountRows
-        }
-
-        try {
-            const response = await chapterApi.getComments(data);
-
-            if (response.content.msg === "No comments found!") {
-                setIsEndCmts(true);
-                return;
-            }
-
-            if (response.content.comments) {
-                const comments = response.content.comments;
-                comments.forEach(comment => {
-                    comment.chaptercmt_time = format.formatDate02(comment.chaptercmt_time);
-                });
-
-                setComments(prevCmts => [...prevCmts, ...comments])
-                setFromRow(fromRow + 11)
-                return
-            }
-
-            return;
-        } catch (ex) {
-            console.log(ex)
-        }
-
-
-    }
+ 
 
     return (
         <div>

@@ -154,7 +154,7 @@ function CommentItems({
                 const nextFromRow = response.content.from;
 
                 if (response.content.is_end) {
-                    if(!isEndCmtsChildId.includes(comment.parent_id)) setTimeout(() => setIsEndCmtsChildId(prev => [...prev, comment.parent_id]), 200);
+                    if(!isEndCmtsChildId.includes(comment.parent_id)) setTimeout(() => setIsEndCmtsChildId(prev => [...prev, comment.parent_id]), 100);
                 }
 
 

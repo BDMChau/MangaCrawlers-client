@@ -20,10 +20,10 @@ export default function ButtonLike({ comment }) {
 
 
     const getTotalLikes = async () => {
-        const data = { manga_comment_id: comment.manga_comment_id };
+        const data = { comment_id: comment.manga_comment_id.toString() };
 
         try {
-            const res = await userApi.getTotalLikes(token, data);
+            const res = await userApi.getTotalLikes(data);
             console.log(res)
         } catch (err) {
             console.log(err)
