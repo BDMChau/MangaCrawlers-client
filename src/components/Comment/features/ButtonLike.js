@@ -74,7 +74,7 @@ export default function ButtonLike({ comment }) {
 
         try {
             const res = await userApi.unlikeCmt(token, data)
-console.log(res)
+
             if (res.content.msg) {
                 setUserLiked(false);
                 setLikes(likes - 1);

@@ -6,7 +6,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { NavLink } from 'react-router-dom';
 import ImgsChapter from './ImgsChapter';
 import { message_error } from '../../../components/alerts/message';
-import { Button, Col, Dropdown, Menu, Row, Tooltip, Typography } from 'antd'
+import { Button, Col, Dropdown, Empty, Menu, Row, Tooltip, Typography } from 'antd'
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
 
@@ -84,7 +84,7 @@ function Chapter({
             <Col span={23} sm={18} md={17} xl={14} xxl={12} className={stuffsState[0] === true ? "dropdown-chapter sticky" : "dropdown-chapter"}>
                 <Tooltip title="Go back to manga page">
                     <Button className="btn-home">
-                        <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga.manga_id ,chapterInfo.manga.manga_name) : "#"}>
+                        <NavLink to={chapterInfo.manga ? redirectURI.mangaPage_uri(chapterInfo.manga.manga_id, chapterInfo.manga.manga_name) : "#"}>
                             <HomeOutlined style={{ fontSize: stuffsState[0] === true ? "22px" : "22px", transition: "0.5s" }} />
                         </NavLink>
                     </Button>
@@ -130,21 +130,15 @@ function Chapter({
 
             </Col>
 
-            <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
+            <Col span={23} xxl={15} className="chapter-pages" style={{ margin: "20px" }}>
+                {imgs.length
+                    ? <ImgsChapter imgs={imgs} isFixedMenu={stuffsState[0]} isLoading={isLoading} />
+                    : <div style={{ minHeight: "100vh", paddingTop:"150px" }}>
+                        <Empty description="" />
+                    </div>
+                }
+            </Col >
 
-
-            {/* <Col span={22} xxl={16}>
-                <CommentContainter
-                    setIsAddedCmt={setIsAddedCmt}
-                    isAddedCmt={isAddedCmt}
-                    addCmt={(cmtContent) => addCmt(cmtContent)}
-                    isAdding={isAdding}
-                    isEndCmts={isEndCmts}
-
-                    getCmtsChapter={getCmtsChapter}
-                    comments={comments}
-                />
-            </Col> */}
         </Row >
     )
 }
