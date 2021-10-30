@@ -9,7 +9,18 @@ import { useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 
-export default function UserProfile({ visible, closeProfileDrawer, removeAvatar, updateAvatar, isLoading }) {
+import updateIcon from "assets/img/updated.png"
+
+export default function UserProfile({
+    visible,
+    closeProfileDrawer,
+    removeAvatar,
+    updateAvatar,
+    isLoading,
+    userDesc,
+    setUserDesc,
+    updateDesc
+}) {
     const userState = useSelector((state) => state.userState);
     const [isVisibleDrawer, setIsVisibleDrawer] = useState(false);
     const [adminEmail] = useState("mangacrawlers123@gmail.com");
@@ -29,6 +40,7 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
     useEffect(() => {
         if (userState) {
             setProfile(userState[0])
+            setUserDesc(userState[0].user_desc)
         }
     }, [userState])
 
@@ -136,8 +148,20 @@ export default function UserProfile({ visible, closeProfileDrawer, removeAvatar,
                         maxLength={150}
                         addonBefore="Your status"
                         title="Your status"
-                        defaultValue={profile.user_desc}
+                        value={userDesc}
+                        onChange={(e) => setUserDesc(e.target.value)}
+                        defaultValue={userDesc}
                     />
+
+                    <Tooltip title="Update" >
+                        <Button
+                            className="btn-update"
+                            type="text"
+                            onClick={() => updateDesc()}
+                        >
+                            <img src={updateIcon} width="30" style={{ marginLeft: "-4px" }} alt="" />
+                        </Button>
+                    </Tooltip>
                 </div>
 
                 <div>

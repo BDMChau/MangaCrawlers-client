@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserProfile from './UserProfile';
 import Cookies from 'universal-cookie';
 import userApi from '../../../api/apis/MainServer/userApi';
 import { message_error, message_success } from '../../../components/alerts/message';
 import { useDispatch } from 'react-redux';
-import { UPDATE_AVATAR } from "../../../store/features/user/UserSlice";
+import { UPDATE_AVATAR, UPDATE_DESC } from "../../../store/features/user/UserSlice";
 
 
 export default function UserProfileService({ visible, closeProfileDrawer }) {
+    const [userDesc, setUserDesc] = useState("");
+
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const cookies = new Cookies();
@@ -19,7 +21,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
             setIsLoading(true);
 
             const response = await userApi.removeAvatar(token);
-     
+
             if (response.content.err) {
                 console.warn("removeAvatar error or Avatar has already default");
                 setIsLoading(false);
@@ -39,7 +41,8 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
         }
     };
 
-    const updateAvatar = async (file) => {        
+
+    const updateAvatar = async (file) => {
         // max is 10mb
         if (file.size <= 10000000) {
             setIsLoading(true);
@@ -48,7 +51,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
 
             try {
                 const response = await userApi.updateAvatar(token, formData);
-                if(response.content.err){
+                if (response.content.err) {
                     console.error("updateAvatar error");
                     setIsLoading(false);
                     return;
@@ -58,7 +61,7 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
                 const user = cookies.get("user");
                 cookies.set("user", { ...user, user_avatar: avatarUrl }, { path: '/' });
                 dispatch(UPDATE_AVATAR(avatarUrl));
-    
+
                 message_success("Your avatar has been updated!", 3);
                 setIsLoading(false);
                 return;
@@ -71,6 +74,30 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
         }
     };
 
+
+    const updateDesc = async () => {
+        const data = {
+            user_desc: userDesc.trim()
+        }
+
+        try {
+            const res = await userApi.updateDescription(token, data);
+
+            if (res.content.msg) {
+                const userDesc = res.content.user.user_desc;
+
+                const user = cookies.get("user");
+                cookies.set("user", { ...user, user_desc: userDesc }, { path: '/' });
+                dispatch(UPDATE_DESC(userDesc));
+
+                message_success("Updated!");
+            }
+        } catch (err) {
+            message_error("Error!")
+            console.log(err)
+        }
+    }
+
     return (
         <UserProfile
             visible={visible}
@@ -78,6 +105,10 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
             removeAvatar={() => removeAvatar()}
             updateAvatar={file => updateAvatar(file)}
             isLoading={isLoading}
+
+            userDesc={userDesc}
+            setUserDesc={setUserDesc}
+            updateDesc={updateDesc}
         />
     );
 }

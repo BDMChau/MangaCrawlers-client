@@ -19,6 +19,14 @@ const userApi = {
             }
         });
     },
+    updateDescription: (token, data) => {
+        const uri = '/api/user/update_description';
+        return axiosClient.put(uri, data,{
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     getFriendRequest: (token) => {
         const uri = `/api/user/get_friend_requests`;
         return axiosClient.get(uri,{

@@ -114,6 +114,16 @@
   display: flex;
 }
 
+.user-drawer .user button.btn-update {
+  padding:  5px;
+  width: 33px;
+  height: 33px;
+  border-radius: 50px !important;
+  margin-top: -5px !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+
 .user-drawer .user a {
   padding: 20px;
 }

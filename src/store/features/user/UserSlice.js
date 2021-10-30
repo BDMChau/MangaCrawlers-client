@@ -17,6 +17,9 @@ const UserSlice = createSlice({
         UPDATE_AVATAR: (state, action) => {
             state[0].user_avatar = action.payload;
         },
+        UPDATE_DESC: (state, action) => {
+            state[0].user_desc = action.payload;
+        },
         SET_TRANSGROUP_ID: (state, action) => {
             if (action.payload === null) {
                 delete state[0].user_transgroup_id
@@ -28,6 +31,6 @@ const UserSlice = createSlice({
 });
 
 const { actions, reducer } = UserSlice;
-export const { SIGNIN, LOGOUT, UPDATE_AVATAR, SET_TRANSGROUP_ID } = actions;
+export const { SIGNIN, LOGOUT, UPDATE_AVATAR, UPDATE_DESC, SET_TRANSGROUP_ID } = actions;
 
 export default reducer;
