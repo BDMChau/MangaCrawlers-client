@@ -26,7 +26,16 @@ const UserSlice = createSlice({
             } else {
                 state[0].user_transgroup_id = action.payload;
             }
-        }
+        },
+
+        /////////////// notifications >>> [1]: list, [2]: fromRow 
+        UPDATE_NOTI_LIST: (state, action) => {
+            state[1] = action.payload
+        },
+        SET_FROM_POSITION: (state, action) => {
+            state[2] = action.payload
+        },
+    
     }
 });
 
