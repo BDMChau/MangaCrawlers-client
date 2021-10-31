@@ -6,87 +6,13 @@ import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
 import FriendRequest from './components/FriendRequest';
 
-export default function Friends({ userId, listRequests, selectedKey, setSelectedKey }) {
+export default function Friends({ userId, listRequests, listFriends, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
-
-    const [friends, setFriends] = useState([
-        {
-            "user_id":555,
-            "user_name": "Minh Chau Minhhh Minhhh Minhhh MinhhhMinhhh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-        {
-            "user_name": "Minh Chau Minh",
-            "status": "Friend",
-            "user_avatar": "https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg"
-        },
-    ]);
 
     
 
     const AllFriends = () => (
-        friends.length
+        listFriends.length
             ? <>
                 <Typography.Text
                     style={{
@@ -98,7 +24,7 @@ export default function Friends({ userId, listRequests, selectedKey, setSelected
                     100 friends
                 </Typography.Text>
                 <div className="all-friends">
-                    {friends.map((item, i) => (
+                    {listFriends.map((item, i) => (
                         <Friend friend={item} i={i} />
                     ))}
 

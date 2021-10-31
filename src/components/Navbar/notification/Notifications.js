@@ -16,7 +16,9 @@ function Notifications({
     // funtions
     readAll,
     updateInteracted,
-    handleAcceptInvitation
+
+    handleAcceptInvitation,
+    handleAcceptFriendReq
 }) {
     const scrollRef = useRef(null);
 
@@ -79,7 +81,9 @@ function Notifications({
                                 key={i}
 
                                 updateInteracted={updateInteracted}
+
                                 handleAcceptInvitation={handleAcceptInvitation}
+                                handleAcceptFriendReq={handleAcceptFriendReq}
                             />
                         </>
                     ))}

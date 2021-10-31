@@ -51,7 +51,7 @@ export default function FriendsService() {
     const getAllFriends = async () => {
         const data = {
             from: fromRowFriends,
-            amount: 5
+            amount: 10
         }
 
         try {
@@ -75,6 +75,8 @@ export default function FriendsService() {
             userId={param_userId}
 
             listRequests={listRequests}
+
+            listFriends={listFriends}
 
             selectedKey={selectedKey}
             setSelectedKey={setSelectedKey}

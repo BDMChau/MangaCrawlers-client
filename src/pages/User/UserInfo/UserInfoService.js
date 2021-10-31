@@ -14,12 +14,17 @@ export default function UserInfoService() {
 
     const query = new URLSearchParams(useLocation().search);
     const [userInfo, setUserInfo] = useState({});
+    
+    const [status, setStatus] = useState("");
 
     const cookies = new Cookies();
     const token = cookies.get("token");
 
     useEffect(() => {
-        if (query.get("id")) getUserInfo(query.get("id"))
+        if (query.get("id")) {
+            getUserInfo(query.get("id"));
+            checkFriendStatus(query.get("id"));
+        }
     }, [query.get("id")])
 
 
@@ -43,7 +48,7 @@ export default function UserInfoService() {
 
     
     const checkFriendStatus = async (id) => {
-        if (!userState[0]) return message_error("You have to logged in to do this action!");
+        if (!userState[0]) return;;
         
         const data ={
             to_user_id: id
@@ -51,7 +56,11 @@ export default function UserInfoService() {
 
         try {
             const res = await userApi.checkReqStatus(token, data);
-            console.log(res)
+            const status = res.content.status;
+       
+setStatus(status);
+            
+
         } catch (err) {
             console.log(err)
         }
@@ -75,6 +84,8 @@ export default function UserInfoService() {
         }
      
         socketActions.sendMessageToServer(data);
+
+        checkFriendStatus(userInfo.user_id)
         message_success("Sent!");
     }
 
@@ -85,6 +96,7 @@ export default function UserInfoService() {
             userInfo={userInfo}
             queryId={query.get("id").toString()}
 
+            status={status}
             handleSendFriendRequest={handleSendFriendRequest}
         />
     )

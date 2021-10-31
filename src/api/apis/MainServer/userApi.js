@@ -231,6 +231,14 @@ const userApi = {
             }
         });
     },
+    acceptFriendReq: (token, data) => {
+        const uri = '/api/user/add_friend';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 
     ////////////////// unauth parts //////////////////
     getUserInfo: (data) => {

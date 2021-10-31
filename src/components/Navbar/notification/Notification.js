@@ -13,7 +13,9 @@ function Notification({
     key,
 
     updateInteracted,
-    handleAcceptInvitation
+
+    handleAcceptInvitation,
+    handleAcceptFriendReq
 }) {
     // const {
     //     created_at,
@@ -54,20 +56,25 @@ function Notification({
 
 
     const handleInteract = async (type) => {
+        let response;
+
         switch (type) {
             case listTypes[1]:
-                await updateInteracted(notification.notification_id);
+                await updateInteracted(notification.notification_id, 1);
                 setNotification({ ...notification, is_interacted: true, is_viewed:true });
 
                 break;
             case listTypes[2]:
-                const response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
+                response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
                 if (response) {
                     setNotification({ ...notification, is_interacted: true, is_viewed:true });
                 }
                 break;
             case listTypes[3]:
-                console.log("ok friend")
+                response = await handleAcceptFriendReq(notification.notification_id, notification.sender_id, notification.target_title);
+                if (response) {
+                    setNotification({ ...notification, is_interacted: true, is_viewed:true });
+                }
                 break;
 
             default:

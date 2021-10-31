@@ -85,7 +85,7 @@ function NotificationService({ isMobile }) {
         setBadgeCount(notifications.filter(item => item.is_viewed === false).length)
     }
 
-    
+
     const unshiftItem = (item) => {
         setNotifications(prevState => [item, ...prevState]);
     }
@@ -122,7 +122,7 @@ function NotificationService({ isMobile }) {
         }
     }
 
-    
+
     const readAll = async () => {
         const copy = [...notifications];
         notifications.forEach(item => {
@@ -140,10 +140,11 @@ function NotificationService({ isMobile }) {
     }
 
 
-    const updateInteracted = async (id) => {
+    const updateInteracted = async (id, action) => {
         try {
             const data = {
-                notification_id: id.toString()
+                notification_id: id.toString(),
+                action: action
             };
 
             await userApi.updateInteractedNotification(token, data);
@@ -174,14 +175,48 @@ function NotificationService({ isMobile }) {
 
                 dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
                 setBadgeCount(badgeCount - 1);
-                
+
                 message_success('Joined ^^!');
             }
 
-            await updateInteracted(notificationId);
+            await updateInteracted(notificationId, 2);
             return true;
+
         } catch (err) {
             console.log(err)
+            message_error("Failed!");
+            return false;
+        }
+    }
+
+    const handleAcceptFriendReq = async (notificationId, senderId, targetTitle) => {
+        setIsFirstRender(false);
+        // call to server
+        try {
+            if (targetTitle === 'user') {
+                const data = {
+                    to_user_id: senderId.toString()
+                };
+
+                const response = await userApi.acceptFriendReq(token, data);
+                if (response.content.err) {
+                    message_error("Failed!");
+                    return false;
+                }
+
+                dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
+                setBadgeCount(badgeCount - 1);
+
+                message_success('Success');
+            }
+
+            await updateInteracted(notificationId, 3);
+            return true;
+
+        } catch (err) {
+            console.log(err)
+            message_error("Failed!");
+            return false;
         }
     }
 
@@ -205,7 +240,9 @@ function NotificationService({ isMobile }) {
 
                     readAll={readAll}
                     updateInteracted={updateInteracted}
+
                     handleAcceptInvitation={handleAcceptInvitation}
+                    handleAcceptFriendReq={handleAcceptFriendReq}
                 />
             }
         >
