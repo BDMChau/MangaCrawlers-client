@@ -1,38 +1,100 @@
 import React, { useEffect, useState } from 'react'
 import "./UserInfo.css";
 
-import { Col, Image, Row, Typography, Button, Empty, Divider } from 'antd';
+import { Col, Image, Row, Typography, Button, Empty, Divider, Dropdown, Menu } from 'antd';
 import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
 import { NavLink, useHistory } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
-import { LeftOutlined } from "@ant-design/icons"
+
+import { LeftOutlined, FieldTimeOutlined } from "@ant-design/icons"
+
 import redirectURI from 'helpers/redirectURI';
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest }) {
+export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
-    const [visibleFriendsModal, setVisibleFriendsModal] = useState(false)
+
+    const [typeDropDown, setTypeDropDown] = useState("");
 
     const history = useHistory();
 
-    useEffect(() => {
-        console.log(userInfo)
-    }, [userInfo])
 
+
+    const dropDownItems = (
+        typeDropDown === "delete_request"
+            ? <Menu style={{ borderRadius: "10px" }}>
+                <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
+                    Cancle Request
+                </Menu.Item>
+            </Menu>
+            : <Menu style={{ borderRadius: "10px" }}>
+                <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
+                    Unfriend
+                </Menu.Item>
+            </Menu>
+    );
 
     const FriendStt = () => {
+        switch (status) {
+            case 0:
+                return (
+                    <Button
+                        style={{ marginTop: "20px", width: 'fit-content', height: "35px" }}
+                        type="primary"
+                        icon={<UserAddOutlined style={{ fontSize: "16px" }} />}
+                        onClick={() => handleInteraction(status)}
+                    >
+                        Add Friend
+                    </Button>
+                );
+            case 1:
+                return (
+                    <Dropdown overlay={dropDownItems} trigger={['click']}>
+                        <Button
+                            onClick={() => setTypeDropDown("delete_request")}
+                            icon={<FieldTimeOutlined style={{ fontSize: "16px" }} />}
+                            type="primary"
+                        >
+                            Pending
+                        </Button>
+                    </Dropdown>
+                )
+            case 2:
+                return (
+                    <Dropdown overlay={dropDownItems} trigger={['click']}>
+                        <Button
+                            onClick={() => setTypeDropDown("unfriend")}
+                            type="primary"
+                        >
+                            Friend
+                        </Button>
+                    </Dropdown>
+                )
+            case 3:
+                return (
+                    <div style={{ display: "flex" }}>
+                        <Button
+                            style={{ marginTop: "20px", width: 'fit-content', height: "32px", marginRight:"5px" }}
+                            type="danger"
+                            onClick={() => handleInteraction(status)}
+                        >
+                            Cancle
+                        </Button>
 
-        return(
-            <Button
-            style={{ marginTop: "20px", width: 'fit-content', height: "35px" }}
-            type="primary"
-            icon={<UserAddOutlined style={{ fontSize: "16px" }} />}
-            onClick={handleSendFriendRequest}
-        >
-            {status}
-        </Button>
+                        <Button
+                            style={{ marginTop: "20px", width: 'fit-content', height: "32px" }}
+                            type="primary"
+                            onClick={() => handleInteraction(status)}
+                        >
+                            Accept
+                        </Button>
+                    </div>
+                )
 
-        )
+            default:
+                return <></>
+        }
     }
+
 
 
     return (
@@ -71,7 +133,9 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
                                 {userLoggedState?.user_id.toString() === queryId
                                     ? ""
-                                    : FriendStt()
+                                    : <div style={{ marginTop: "10px" }}>
+                                        <FriendStt/>
+                                    </div>
                                 }
                             </div>
                         </div>

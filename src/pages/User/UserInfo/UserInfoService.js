@@ -14,7 +14,7 @@ export default function UserInfoService() {
 
     const query = new URLSearchParams(useLocation().search);
     const [userInfo, setUserInfo] = useState({});
-    
+
     const [status, setStatus] = useState("");
 
     const cookies = new Cookies();
@@ -46,23 +46,47 @@ export default function UserInfoService() {
         }
     }
 
-    
+
     const checkFriendStatus = async (id) => {
-        if (!userState[0]) return;;
-        
-        const data ={
+        if (!userState[0]) return;
+
+        const data = {
             to_user_id: id
         };
 
         try {
             const res = await userApi.checkReqStatus(token, data);
-            const status = res.content.status;
-       
-setStatus(status);
-            
 
+            // case 0 >> "Add Friend"
+            // case 1 >> "Cancle Request"
+            // case 2 >> "Friend"
+            // case 3 >> "Accept"
+            const status = res.content.status_number;
+
+            setStatus(status);
         } catch (err) {
             console.log(err)
+        }
+    }
+
+    const handleInteraction = (type) => {
+        console.log(type)
+        switch (type) {
+            case 0:
+                handleSendFriendRequest();
+                break;
+            case 1:
+                handleCancleRequest();
+                break;
+            case 2:
+                handleUnfriend();
+                break;
+            case 3:
+                handleAcceptFriendReq();
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -82,12 +106,21 @@ setStatus(status);
                 target_title: "user"
             }
         }
-     
+
         socketActions.sendMessageToServer(data);
 
         checkFriendStatus(userInfo.user_id)
         message_success("Sent!");
     }
+
+
+    const handleCancleRequest = () => {}
+
+
+    const handleUnfriend = () => {}
+
+
+    const handleAcceptFriendReq = () => {}
 
 
     return (
@@ -97,7 +130,9 @@ setStatus(status);
             queryId={query.get("id").toString()}
 
             status={status}
+            
             handleSendFriendRequest={handleSendFriendRequest}
+            handleInteraction={handleInteraction}
         />
     )
 }
