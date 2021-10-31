@@ -83,21 +83,21 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
             >
                 <Form.Item
                     name="Manga Name"
-                    rules={[{ required: true, message: 'Please fill the name of manga!' }]}
+                    rules={[{ required: true, message: 'Please fill in the name of manga!' }]}
                 >
                     <Input minLength={1} placeholder="Manga Name" allowClear onChange={(e) => setFieldsData({ ...fieldsData, mangaName: e.target.value })} />
                 </Form.Item>
 
                 <Form.Item
                     name="author"
-                    rules={[{ required: true, message: 'Please fill author field!' }]}
+                    rules={[{ required: true, message: 'Please fill in author field!' }]}
                 >
                     <Input placeholder="Author" allowClear onChange={(e) => setFieldsData({ ...fieldsData, author: e.target.value })} />
                 </Form.Item>
 
                 <Form.Item
                     name="genres"
-                    rules={[{ required: true, message: 'Please fill genres field!' }]}
+                    rules={[{ required: true, message: 'Please select genres!' }]}
                 >
                     <GenresTag
                         genres={genres}
@@ -107,7 +107,7 @@ export default function FormCreateProject({ genres, handleCreateNewProject, isLo
 
                 <Form.Item
                     name="status"
-                    rules={[{ required: true, message: 'Please fill status field!' }]}
+                    rules={[{ required: true, message: 'Please fill in status field!' }]}
                 >
                     <Select
                         showSearch

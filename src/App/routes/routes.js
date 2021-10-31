@@ -107,6 +107,11 @@ const routes = [
         exact: true
     },
     {
+        path: "/forum/post/:postid",
+        component: React.lazy(() => import('../../pages/Forum/PostDetail/PostDetailService')),
+        exact: true
+    },
+    {
         path: "/forum/newpost",
         component: React.lazy(() => import('../../pages/Forum/NewPost/NewPostService')),
         exact: true

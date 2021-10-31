@@ -5,7 +5,7 @@
 
 /******** markdown editor ********/
 .md-container {
-  padding: 20px 10px 30px 10px;
+  padding: 20px 10px 50px 10px;
 }
 
 .md-container button.btn-post {
@@ -15,11 +15,11 @@
 
 .title .link-instructions {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .md-editor-cont {
-  margin: 50px 0 20px 0;
+  margin: 50px 0 5px 0;
 }
 
 .md-editor-cont .ant-typography {
@@ -36,6 +36,16 @@
   font-size: 16px;
   font-weight: 500;
 }
+
+.md-editor-cont .category-selector {
+  width: 50%;
+  margin-bottom: 5px;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 
 .md-editor-cont .md-editor .w-md-editor-bar {
   /* height: 16px !important; */

@@ -1,13 +1,13 @@
-import MyMarkdown from 'components/Editor/MyMarkdown';
 import React from 'react';
 import "./NewPost.css";
 
+import FormCreatePost from 'components/Editor/FormCreatePost';
 
 
 export default function NewPost() {
     return (
         <div>
-            <MyMarkdown />
+            <FormCreatePost />
         </div>
     )
 }

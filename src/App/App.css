@@ -88,6 +88,13 @@ span.ant-tag {
   font-weight: 500;
 }
 
+input,
+textarea,
+.ant-select-selector,
+.ant-input {
+  border-radius: 5px !important;
+}
+
 /*
 .ant-pagination-item:focus-visible,
 .ant-pagination-item:hover,

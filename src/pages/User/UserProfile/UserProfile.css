@@ -159,3 +159,9 @@
     padding: 20px 10px;
   }
 }
+
+
+
+input{
+  border-radius: 0px !important;
+}
