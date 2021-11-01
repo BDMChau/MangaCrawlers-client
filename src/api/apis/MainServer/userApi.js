@@ -239,6 +239,14 @@ const userApi = {
             }
         });
     },
+    updateStatusFriendToFalse: (token, data) => {
+        const uri = '/api/friend_request/update_to_false';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 
     ////////////////// unauth parts //////////////////
     getUserInfo: (data) => {

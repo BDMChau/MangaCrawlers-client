@@ -114,7 +114,11 @@ export default function UserInfoService() {
     }
 
 
-    const handleCancleRequest = () => {}
+    // delete notification
+    const handleCancleRequest = () => {
+        
+
+    }
 
 
     const handleUnfriend = () => {}
