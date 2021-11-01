@@ -115,8 +115,19 @@ export default function UserInfoService() {
 
 
     // delete notification
-    const handleCancleRequest = () => {
-        
+    const handleCancleRequest = async () => {
+        const data ={
+            to_user_id: userInfo.user_id.toString(),
+            target_title:"user",
+            action: 1
+        };
+
+        try {
+            const res = await userApi.updateDeleteFrReq(token, data);
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
 
     }
 

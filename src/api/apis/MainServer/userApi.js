@@ -223,6 +223,22 @@ const userApi = {
             }
         });
     },
+    updateDeletedNotification: (token, data) => {
+        const uri = '/api/notification/update_deleted';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
+    updateDeleteFrReq: (token, data) => {
+        const uri = '/api/notification/update_delete_friend_req';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     acceptInvitationToJoinTem: (token, data) => {
         const uri = '/api/user/accept_to_join_team';
         return axiosClient.post(uri, data, {
