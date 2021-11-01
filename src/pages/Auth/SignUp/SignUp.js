@@ -29,7 +29,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal, msgFromS
         if (isCloseModal === true) {
             setIsModalVisible(false);
             setIsModalSignInVisible(true);
-            
+
             dispatch(CLOSE_SIGN_UP_FORM("closeSignUpAndRedirectToSignIn"))
         }
     }, [isCloseModal])
@@ -92,7 +92,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal, msgFromS
                                 message: 'Please fill in your nickname!',
                             }]}
                         >
-                            <Input minLength={1} maxLength={30} placeholder="Choose your nickname" onChange={(e) => setName(e.target.value.trim())} />
+                            <Input minLength={1} maxLength={30} placeholder="Nickname" onChange={(e) => setName(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -102,7 +102,7 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal, msgFromS
                                 message: 'Please fill in your email!',
                             }]}
                         >
-                            <Input maxLength={100} placeholder="Please fill in your email" onChange={(e) => setEmail(e.target.value.trim())} />
+                            <Input maxLength={100} placeholder="Email" onChange={(e) => setEmail(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
@@ -112,14 +112,15 @@ export default function SignUp({ isLoading, handleSignUp, isCloseModal, msgFromS
                                 message: 'Please fill in your password!',
                             }]}
                         >
-                            <Input.Password minLength={8} placeholder="Please fill in your password" onChange={(e) => setPassword(e.target.value.trim())} />
+                            <Input.Password minLength={8} placeholder="Password" onChange={(e) => setPassword(e.target.value.trim())} />
                         </Form.Item>
 
                         <Form.Item
+                            style={{ marginBottom: "20px" }}
                             name="Confirm password"
                             rules={[{
                                 required: true,
-                                message: 'Confirm your password!',
+                                message: 'Confirm password!',
                             }]}
                         >
                             <Input.Password minLength={8} placeholder="Confirm your password" onChange={(e) => setPasswordRepeat(e.target.value)} />

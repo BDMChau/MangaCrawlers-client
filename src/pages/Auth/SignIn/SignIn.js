@@ -103,6 +103,7 @@ export default function SignIn({ isLoading, handleSignIn, handleSignInWithGoogle
                         </Form.Item>
 
                         <Form.Item
+                            style={{ marginBottom: "20px" }}
                             name="password"
                             rules={[{
                                 required: true,
@@ -137,7 +138,7 @@ export default function SignIn({ isLoading, handleSignIn, handleSignInWithGoogle
                                 Cancel
                             </Button>
                         </Form.Item>
-           
+
                         <Form.Item>
                             <div className="footer-form" >
                                 <div className="signin-to-signup" onClick={() => redirectToSignUp()}>
@@ -149,9 +150,9 @@ export default function SignIn({ isLoading, handleSignIn, handleSignInWithGoogle
                             </div>
 
                             <Button
-                                style={{ borderRadius: "50px", color: "#4a8fce", height:"42px", width:"42px", float:"right", marginRight:"40px" }}
+                                style={{ borderRadius: "50px", color: "#4a8fce", height: "42px", width: "42px", float: "right", marginRight: "30px" }}
                                 onClick={() => handleSignInWithGoogle()}
-                                icon={<GoogleOutlined style={{ fontSize: "24px", marginTop:"4px" }} />}
+                                icon={<GoogleOutlined style={{ fontSize: "24px", marginTop: "4px" }} />}
                             />
                         </Form.Item>
                     </Form>

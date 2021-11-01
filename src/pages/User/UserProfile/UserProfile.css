@@ -66,6 +66,15 @@
   cursor: pointer;
 }
 
+.user-drawer .user .ant-input-wrapper,
+.user-drawer .user input.ant-input{
+  line-height: 25px;
+}
+
+.user-drawer .user .ant-input-group-addon{
+  border-right: none !important;
+}
+
 .user-drawer .user .contact-admin {
   text-align: left;
   margin: 50px 0 0 0;

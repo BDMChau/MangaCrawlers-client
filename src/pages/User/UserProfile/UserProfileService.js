@@ -76,6 +76,8 @@ export default function UserProfileService({ visible, closeProfileDrawer }) {
 
 
     const updateDesc = async () => {
+        if(!userDesc) return;
+        
         const data = {
             user_desc: userDesc.trim()
         }

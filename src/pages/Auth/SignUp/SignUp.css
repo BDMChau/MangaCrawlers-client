@@ -22,6 +22,19 @@
   margin: auto;
 }
 
+#form-sign-up input{
+  line-height: 30px !important;
+  font-size: 16px;
+}
+
+#form-sign-up .ant-input-password{
+  line-height: 30px !important;
+}
+
+.modal-signup .ant-form-item{
+  margin-bottom: 15px;
+}
+
 
 
 /* this rule is in SignIn.css */

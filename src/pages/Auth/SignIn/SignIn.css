@@ -22,6 +22,20 @@
   align-items: center;
 }
 
+#form-sign-in .ant-input-password,
+#form-sign-in #form-sign-in_email{
+  line-height: 30px;
+  font-size: 16px;
+}
+
+#form-sign-in .ant-input-affix-wrapper > input.ant-input{
+  font-size: 16px;
+}
+
+.modal-signin .ant-form-item{
+  margin-bottom: 15px;
+}
+
 .title-signin-text {
   position: absolute;
   margin: auto;

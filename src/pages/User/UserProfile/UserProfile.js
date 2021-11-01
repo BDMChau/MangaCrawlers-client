@@ -195,7 +195,7 @@ export default function UserProfile({
                         <NavLink className="following-btn" to="/user?v=following">
                             <UnorderedListOutlined style={{ fontSize: "18px" }} />
                             &#160;
-                            My Following
+                            My Library
                         </NavLink>
                     </Button>
 
