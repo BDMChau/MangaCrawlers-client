@@ -4,10 +4,11 @@ import "./UserInfo.css";
 import { useLocation } from 'react-router';
 import UserInfo from './UserInfo';
 import userApi from 'api/apis/MainServer/userApi';
-import { socketActions } from 'socket/socketClient';
+import { socket, socketActions } from 'socket/socketClient';
 import { message_error, message_success } from 'components/alerts/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
+import EVENTS_NAME from 'socket/features/eventsName';
 
 export default function UserInfoService() {
     const userState = useSelector((state) => state.userState);
@@ -51,7 +52,7 @@ export default function UserInfoService() {
         if (!userState[0]) return;
 
         const data = {
-            to_user_id: id
+            to_user_id: id.toString()
         };
 
         try {
@@ -69,8 +70,9 @@ export default function UserInfoService() {
         }
     }
 
+
+    // controller
     const handleInteraction = (type) => {
-        console.log(type)
         switch (type) {
             case 0:
                 handleSendFriendRequest();
@@ -84,14 +86,28 @@ export default function UserInfoService() {
             case 3:
                 handleAcceptFriendReq();
                 break;
+            case 100:
+                handleDeclineFriendReq();
+                break;
 
             default:
+                message_error("Error!")
                 break;
         }
     }
 
 
-    const handleSendFriendRequest = () => {
+    useEffect(() => {
+        socket.on(EVENTS_NAME.SEND_FAILED, (result) => {
+            message_error("Failed!");
+        });
+
+        socket.on(EVENTS_NAME.SEND_OK, (result) => {
+            message_success("sent!");
+        });
+    }, []);
+
+    const handleSendFriendRequest = async () => {
         if (!userState[0]) return message_error("You have to logged in to do this action!");
         if (userState[0].user_id.toString() === query.get("id").toString()) return message_error("You cannot send request to yourself!")
 
@@ -110,31 +126,107 @@ export default function UserInfoService() {
         socketActions.sendMessageToServer(data);
 
         checkFriendStatus(userInfo.user_id)
-        message_success("Sent!");
     }
 
 
     // delete notification
     const handleCancleRequest = async () => {
-        const data ={
-            to_user_id: userInfo.user_id.toString(),
-            target_title:"user",
-            action: 1
+        try {
+            const res = await updateInteracted(1, 1, 1);
+            if (!res) {
+                message_error("Failed!");
+                return;
+            }
+
+            checkFriendStatus(userInfo.user_id);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const handleUnfriend = async () => {
+        const data = {
+            to_user_id: userInfo.user_id.toString()
         };
 
         try {
-            const res = await userApi.updateDeleteFrReq(token, data);
-            console.log(res)
-        } catch (err) {
-            console.log(err)
-        }
+            const res = await userApi.unfriend(token, data);
+            if (res.content.err) {
+                message_error("Failed!");
+                return;
+            }
 
+            checkFriendStatus(userInfo.user_id);
+            return;
+        } catch (err) {
+            console.log(err);
+            message_error("Failed!");
+        }
     }
 
-    const handleUnfriend = () => {}
+
+    const handleAcceptFriendReq = async () => {
+        try {
+            const data = {
+                to_user_id: userInfo.user_id.toString()
+            };
+
+            const response = await userApi.acceptFriendReq(token, data);
+            if (response.content.err) {
+                message_error("Failed!");
+                return false;
+            }
+
+            message_success('Success');
 
 
-    const handleAcceptFriendReq = () => {}
+            await updateInteracted(3, 2, 2);
+            checkFriendStatus(userInfo.user_id)
+            return true;
+        } catch (err) {
+            console.log(err)
+            message_error("Failed!");
+            return false;
+        }
+    }
+
+    const handleDeclineFriendReq = async () => {
+        try {
+            const res = await updateInteracted(1, 2, 2);
+            if (!res) {
+                message_error("Failed!");
+                return;
+            }
+
+            checkFriendStatus(userInfo.user_id);
+        } catch (err) {
+            console.log(err);
+
+        }
+    }
+
+
+
+
+    // update interact notification
+    const updateInteracted = async (action, type, cmdFrom) => {
+        const data = {
+            to_user_id: userInfo.user_id.toString(),
+            target_title: "user",
+            action: action, // 1: delete, 2: accept join team, 3: accept friend
+            type: type, // 1: set delete true, 2: set interact true
+            cmd_from: cmdFrom // 1: sender update, 2: reciever update
+        };
+
+        try {
+            const res = await userApi.updateNotificationFrReq(token, data);
+            if (res.content.err) return false;
+
+            return true;
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 
     return (
@@ -144,7 +236,7 @@ export default function UserInfoService() {
             queryId={query.get("id").toString()}
 
             status={status}
-            
+
             handleSendFriendRequest={handleSendFriendRequest}
             handleInteraction={handleInteraction}
         />

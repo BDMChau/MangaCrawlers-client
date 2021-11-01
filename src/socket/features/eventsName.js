@@ -1,6 +1,10 @@
 const EVENTS_NAME = {
     UPDATE_SOCKETID: 'updateSocketId',
 
+
+    SEND_OK: "sendmessage_ok",
+    SEND_FAILED: "sendmessage_failed",
+
     // to server
     SPECIFIC_USERS: 'sendMessageToSpecificUsers_server',
     ALL_USERS: 'sendMessageToAllUsers_server',

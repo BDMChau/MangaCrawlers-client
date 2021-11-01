@@ -231,8 +231,8 @@ const userApi = {
             }
         });
     },
-    updateDeleteFrReq: (token, data) => {
-        const uri = '/api/notification/update_delete_friend_req';
+    updateNotificationFrReq: (token, data) => {
+        const uri = '/api/notification/update_notification_friend_req';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
@@ -249,6 +249,14 @@ const userApi = {
     },
     acceptFriendReq: (token, data) => {
         const uri = '/api/user/add_friend';
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
+    unfriend: (token, data) => {
+        const uri = '/api/user/unfriend';
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token

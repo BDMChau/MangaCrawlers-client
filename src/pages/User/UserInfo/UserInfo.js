@@ -13,24 +13,25 @@ import redirectURI from 'helpers/redirectURI';
 export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
 
-    const [typeDropDown, setTypeDropDown] = useState("");
 
     const history = useHistory();
 
 
 
-    const dropDownItems = (
-        typeDropDown === "delete_request"
-            ? <Menu style={{ borderRadius: "10px" }}>
-                <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
-                    Cancle Request
-                </Menu.Item>
-            </Menu>
-            : <Menu style={{ borderRadius: "10px" }}>
-                <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
-                    Unfriend
-                </Menu.Item>
-            </Menu>
+    const dropDownItem01 = (
+        <Menu style={{ borderRadius: "10px" }}>
+            <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
+                Cancle Request
+            </Menu.Item>
+        </Menu>
+    );
+
+    const dropDownItem02 = (
+        <Menu style={{ borderRadius: "10px" }}>
+            <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleInteraction(status)} >
+                Unfriend
+            </Menu.Item>
+        </Menu>
     );
 
     const FriendStt = () => {
@@ -48,9 +49,8 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 );
             case 1:
                 return (
-                    <Dropdown overlay={dropDownItems} trigger={['click']}>
+                    <Dropdown overlay={dropDownItem01} trigger={['click']}>
                         <Button
-                            onClick={() => setTypeDropDown("delete_request")}
                             icon={<FieldTimeOutlined style={{ fontSize: "16px" }} />}
                             type="primary"
                         >
@@ -60,9 +60,8 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 )
             case 2:
                 return (
-                    <Dropdown overlay={dropDownItems} trigger={['click']}>
+                    <Dropdown overlay={dropDownItem02} trigger={['click']}>
                         <Button
-                            onClick={() => setTypeDropDown("unfriend")}
                             type="primary"
                         >
                             Friend
@@ -73,9 +72,9 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 return (
                     <div style={{ display: "flex" }}>
                         <Button
-                            style={{ marginTop: "20px", width: 'fit-content', height: "32px", marginRight:"5px" }}
+                            style={{ marginTop: "20px", width: 'fit-content', height: "32px", marginRight: "5px" }}
                             type="danger"
-                            onClick={() => handleInteraction(status)}
+                            onClick={() => handleInteraction(100)}
                         >
                             Cancle
                         </Button>
@@ -134,7 +133,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                                 {userLoggedState?.user_id.toString() === queryId
                                     ? ""
                                     : <div style={{ marginTop: "10px" }}>
-                                        <FriendStt/>
+                                        <FriendStt />
                                     </div>
                                 }
                             </div>

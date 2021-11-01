@@ -91,8 +91,9 @@ span.ant-tag {
 input,
 textarea,
 .ant-select-selector,
+.ant-input-password,
 .ant-input {
-  border-radius: 5px !important;
+  border-radius: 3px !important;
 }
 
 /*

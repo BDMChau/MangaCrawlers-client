@@ -191,7 +191,7 @@ function NotificationService({ isMobile }) {
 
     const handleAcceptFriendReq = async (notificationId, senderId, targetTitle) => {
         setIsFirstRender(false);
-        // call to server
+        
         try {
             if (targetTitle === 'user') {
                 const data = {
@@ -204,15 +204,12 @@ function NotificationService({ isMobile }) {
                     return false;
                 }
 
-                dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
                 setBadgeCount(badgeCount - 1);
-
                 message_success('Success');
             }
 
             await updateInteracted(notificationId, 3);
             return true;
-
         } catch (err) {
             console.log(err)
             message_error("Failed!");
