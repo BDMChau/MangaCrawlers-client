@@ -1,4 +1,4 @@
-import { message_error } from "../../components/alerts/message";
+import { message_error } from "../../components/toast/message";
 
 export const errCodeResCheking = (errorResponse) => {
     switch (errorResponse.status) {

@@ -4,7 +4,7 @@ import SignUp from './SignUp'
 import authApi from '../../../api/apis/MainServer/authApi'
 import { errMsgResNotification } from '../../../api/checking/ErrResCheking';
 
-import { message_success, message_warning } from '../../../components/alerts/message';
+import { message_success, message_warning } from '../../../components/toast/message';
 
 export default function SignUpService() {
     const [isLoading, setIsLoading] = useState(false);

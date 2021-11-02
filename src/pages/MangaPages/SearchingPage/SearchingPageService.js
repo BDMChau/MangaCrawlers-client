@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
-import { message_error } from '../../../components/alerts/message';
+import { message_error } from '../../../components/toast/message';
 import SearchingPage from './SearchingPage';
 import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/features/manga/MangaSlice";
 

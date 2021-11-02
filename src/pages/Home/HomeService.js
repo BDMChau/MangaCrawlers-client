@@ -4,7 +4,7 @@ import Home from './Home'
 import debounce from 'lodash/debounce'
 import authApi from '../../api/apis/MainServer/authApi'
 import Cookies from 'universal-cookie';
-import { message_success } from '../../components/alerts/message'
+import { message_success } from '../../components/toast/message'
 import { SIGNIN } from '../../store/features/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'helpers/format'
@@ -108,8 +108,8 @@ function HomeService() {
     
     const getUserDataOAuthGoogle = async () => {
         try{
-            const response = await authApi.getAAA()
-            console.log(response)
+            const response = await authApi.getDataOathGoogle()
+            if(!response) return;
 
             const user = response.content.user;
             const token = response.content.token;
@@ -121,8 +121,8 @@ function HomeService() {
 
             message_success("Signed in!");
             return;
-        }catch(ex){
-            console.log(ex)
+        }catch(err){
+            console.log(err)
         }
     }
 

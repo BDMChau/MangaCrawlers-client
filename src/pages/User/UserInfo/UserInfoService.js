@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import UserInfo from './UserInfo';
 import userApi from 'api/apis/MainServer/userApi';
 import { socket, socketActions } from 'socket/socketClient';
-import { message_error, message_success } from 'components/alerts/message';
+import { message_error, message_success } from 'components/toast/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import EVENTS_NAME from 'socket/features/eventsName';

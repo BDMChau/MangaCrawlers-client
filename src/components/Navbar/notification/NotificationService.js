@@ -13,7 +13,7 @@ import { socket } from 'socket/socketClient';
 import userApi from 'api/apis/MainServer/userApi';
 import { format } from 'helpers/format';
 import EVENTS_NAME from 'socket/features/eventsName';
-import { message_error, message_success } from 'components/alerts/message';
+import { message_error, message_success } from 'components/toast/message';
 
 
 function NotificationService({ isMobile }) {

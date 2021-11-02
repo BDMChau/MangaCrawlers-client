@@ -1,12 +1,12 @@
 import { Col, Row, Typography } from 'antd'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import Category from './features/Category'
+import MyTag from './features/MyTag'
 import Post from './features/Post'
 import "./ForumHome.css"
 
 
-export default function ForumHome() {
+export default function ForumHome({categories}) {
     const genresState = useSelector(state => state.mangaState[2]);
 
     const [posts, setPosts] = useState([
@@ -149,8 +149,8 @@ export default function ForumHome() {
                 <Typography.Title level={3}>MangaCrawlers Community Forums</Typography.Title>
             </Col>
 
-            <Row justify="center" className="forum-home-body" >
-                <Col className="left" xs={24} md={13} xl={8}>
+            <Row justify="center" className="forum-home-body">
+                <Col className="left" xs={24} md={14} xl={9}>
                     {posts.length
                         ? posts.map((post, i) => (
                             <Post post={post} key={i} />
@@ -162,6 +162,7 @@ export default function ForumHome() {
                 <Col className="right" xs={24} md={11} xl={7} xxl={7}>
                     <div>
                         <div className="trending-posts">
+                            <Typography.Title level={4}>Trending</Typography.Title>
                             {posts.length
                                 ? posts.map((post, i) => (
                                     <Post post={post} key={i} smallSize={true} />
@@ -171,9 +172,9 @@ export default function ForumHome() {
                         </div>
 
                         <div className="categories-cont">
-                            {genresState.length
-                                ? genresState.map((item, i) => (
-                                    <Category category={item} key={i} />
+                            {categories.length
+                                ? categories.map((item, i) => (
+                                    <MyTag category={item} key={i} />
                                 ))
                                 : ""
 

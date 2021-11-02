@@ -5,7 +5,7 @@ import "./components/Charts/Chart.css"
 import { Layout, Drawer, Spin } from 'antd';
 
 import { useHistory } from 'react-router';
-import { message_error } from "../../../components/alerts/message";
+import { message_error } from "../../../components/toast/message";
 import { useSelector } from 'react-redux';
 import { enquireScreen, unenquireScreen } from 'enquire-js'
 

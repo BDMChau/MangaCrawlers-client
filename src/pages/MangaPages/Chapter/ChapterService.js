@@ -5,7 +5,7 @@ import initial from 'lodash/initial';
 
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from 'universal-cookie';
-import { message_error, message_success, message_warning } from '../../../components/alerts/message';
+import { message_error, message_success, message_warning } from '../../../components/toast/message';
 
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import userApi from '../../../api/apis/MainServer/userApi';

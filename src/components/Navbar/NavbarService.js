@@ -2,8 +2,9 @@ import React, { memo, useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import TopNav from './TopNav'
 import { LOGOUT } from "../../store/features/user/UserSlice";
-import { message_success } from '../alerts/message';
+import { message_success } from '../toast/message';
 import { GET_ALL_GENRES } from '../../store/features/manga/MangaSlice';
+import { GET_ALL_CATEGORIES } from '../../store/features/forum/ForumSlice';
 import Cookies from 'universal-cookie';
 import { socketActions } from 'socket/socketClient';
 
@@ -20,6 +21,7 @@ function NavbarService() {
 
     useEffect(() => {
         dispatch(GET_ALL_GENRES());
+        dispatch(GET_ALL_CATEGORIES());
     }, [])
 
     useEffect(() => {

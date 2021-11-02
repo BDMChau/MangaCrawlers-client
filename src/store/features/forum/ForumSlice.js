@@ -1,3 +1,5 @@
+import arrayMethods from "helpers/arrayMethods";
+
 const { createSlice } = require("@reduxjs/toolkit");
 
 
@@ -12,14 +14,12 @@ const ForumSlice = createSlice({
         GET_ALL_CATEGORIES_SUCCESS: (state, action) => {
             const response = action.payload;
             if (response.content.err) {
+                console.error(action.payload)
                 return;
             }
-            const genres = response.content.genres;
-            genres.forEach(genre => {
-                genre.isSelected = false;
-            });
+            const categories = arrayMethods.shuffle(response.content.categories);
 
-            state[0] = genres;
+            state[0] = categories;
         },
         GET_ALL_CATEGORIES_FAILED: (state, action) => {
             console.error(action.payload)

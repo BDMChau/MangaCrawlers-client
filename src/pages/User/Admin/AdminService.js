@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react'
 import Admin from './Admin'
 import Cookies from 'universal-cookie';
-import { message_success } from '../../../components/alerts/message';
+import { message_success } from '../../../components/toast/message';
 import arrayMethods from '../../../helpers/arrayMethods';
 import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';

@@ -10,7 +10,7 @@ const authApi = {
         const uri = '/api/auth/geturloauthgoogle';
         return axiosClient.get(uri);
     },
-    getAAA: () => {
+    getDataOathGoogle: () => {
         const uri = '/api/auth/getdataoauthgoogle';
         return axiosClient.get(uri);
     },

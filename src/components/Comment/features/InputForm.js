@@ -3,7 +3,7 @@ import "../CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, TagsOutlined } from '@ant-design/icons'
-import { message_error } from 'components/alerts/message'
+import { message_error } from 'components/toast/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
 import userApi from 'api/apis/MainServer/userApi'

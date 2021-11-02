@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined, CloudUploadOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
-import { message_error } from '../../../../components/alerts/message';
+import { message_error } from '../../../../components/toast/message';
 import Rating from '../../../../components/Rating/Rating';
 
 const { Dragger } = Upload;
