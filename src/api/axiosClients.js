@@ -8,7 +8,6 @@ import { errCodeResCheking, code2xxCheking } from './checking/ErrResCheking';
 const axiosClient = axios.create({
     baseURL: endPoint.local,
     headers: {
-
     },
     paramsSerializer: params => {
         queryString.stringify(params);
@@ -45,9 +44,6 @@ axiosClient.interceptors.response.use((res) => {
 const secondAxiosClient = axios.create({
     baseURL: endPoint.product02,
     headers: {
-        // "X-Frame-Options": "DENY",
-        // "X-Content-Type-Options": "nosniff",
-        // "Strict-Transport-Security": "max-age=31536000"
     },
     paramsSerializer: params => {
         queryString.stringify(params);
