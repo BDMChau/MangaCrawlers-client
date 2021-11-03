@@ -7,7 +7,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 import { RESET, CLOSE_SIGN_IN_FORM } from "../../store/features/auth/AuthSlice";
 
-import { Layout, Menu, Button, Drawer } from "antd";
+import { Layout, Menu, Button, Drawer, Input } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 
 import SignUpService from "../../pages/Auth/SignUp/SignUpService";
@@ -18,6 +18,8 @@ import { socketActions } from "socket/socketClient";
 import NotificationService from "./notification/NotificationService";
 
 import { enquireScreen, unenquireScreen } from 'enquire-js'
+import HomeNavbar from "components/HomeNavbar/HomeNavbar";
+import SearchNavBar from "./features/SearchNavBar";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -150,11 +152,20 @@ function TopNav({ handleLogOut, genres }) {
                 <Menu.Item key="Home" title="Home">
                     <NavLink to="">Home</NavLink>
                 </Menu.Item>
+
                 <SubMenu
                     title="Genres"
                     popupClassName="list-genres-dropdown"
                     children={renderGenresDropDown(isMobile)}
                 />
+
+                {isMobile
+                    ? ""
+                    : <Menu.Item style={{ top: "0" }}>
+                        <SearchNavBar />
+                    </Menu.Item>
+
+                }
             </Menu>
         );
     };

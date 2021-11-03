@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "components/Editor/styles/Editor.css"
 
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Input, Typography, Select, Form } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 export default function FormCreatePost({ createPost }) {
@@ -12,7 +13,7 @@ export default function FormCreatePost({ createPost }) {
     const [categoriesState, setCategoriesState] = useState(forumState[0]?.length ? forumState[0] : []);
 
     const [title, setTitle] = useState("");
-    const [categories, setAAA] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [markdown, setMarkdown] = useState("");
 
     const [isMissing, setIsMissing] = useState(false);
@@ -26,14 +27,14 @@ export default function FormCreatePost({ createPost }) {
                 size="medium"
                 showArrow
                 allowClear
-                placeholder={`Select ${title}...`}
-                onChange={(arrValue) => handleChange(arrValue)}
+                placeholder="Select Genres"
+                onChange={(arrValueue) => handleChange(arrValueue)}
                 style={{ width: '100%', borderRadius: "5px" }}
             >
                 {
                     data.length
                         ? data.map((item, i) => (
-                            <Select.Option key={item.post_category_id}>
+                            <Select.Option key={item.category_item}>
                                 <Typography.Text style={{ color: item.color }}>
                                     {item.name}
                                 </Typography.Text>
@@ -44,7 +45,7 @@ export default function FormCreatePost({ createPost }) {
             </Select>
         )
     }
-    
+
 
 
     const handleCreate = async () => {
@@ -59,13 +60,15 @@ export default function FormCreatePost({ createPost }) {
             categoriesId: categories,
             content: markdown
         };
+        console.log(data)
+        // await createPost(data);
 
-        await createPost(data);
+        localStorage.removeItem("categories_createpost");
         setIsLoading(false);
     }
 
-    const handleSelectCateTag = (a) => {
-        console.log(a)
+    const handleSelectCateTag = (arrValue) => {
+        setCategories(arrValue);
     }
 
 
@@ -101,7 +104,7 @@ export default function FormCreatePost({ createPost }) {
                             <MySelectTags
                                 data={categoriesState}
                                 title="categories"
-                                handleChange={(arrValue) => handleSelectCateTag(arrValue)}
+                                handleChange={handleSelectCateTag}
                             />
                         </div>
                     </Form.Item>
