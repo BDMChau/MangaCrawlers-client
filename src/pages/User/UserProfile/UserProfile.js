@@ -30,6 +30,9 @@ export default function UserProfile({
 
     const history = useHistory();
 
+    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg"]
+
+
     useEffect(() => {
         if (visible === true) {
             setIsVisibleDrawer(visible)
@@ -85,7 +88,19 @@ export default function UserProfile({
         headers: {
             authorization: 'authorization-text',
         },
-        beforeUpload: (file) => false,
+        beforeUpload: (file) => {
+            if (!listFileTypesAllowed.includes(file.type)) {
+                message_error("Please select jpeg, png files!")
+            }
+
+            const fileSz = file.size / 1024 / 1024;
+            if (fileSz > 5) {
+                message_error("An image must smaller than 5MB!")
+            }
+
+            const condition = listFileTypesAllowed.includes(file.type) && fileSz <= 5
+            return condition ? false : Upload.LIST_IGNORE
+        },
         onChange: (info) => setFile(info.file)
     };
 

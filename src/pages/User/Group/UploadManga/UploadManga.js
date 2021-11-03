@@ -62,7 +62,13 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                 message_error("Please select jpeg, png files!")
             }
 
-            return listFileTypesAllowed.includes(file.type) ? false : Upload.LIST_IGNORE
+            const fileSz = file.size / 1024 / 1024;
+            if (fileSz > 10) {
+                message_error("An image must smaller than 10MB!")
+            }
+
+            const condition = listFileTypesAllowed.includes(file.type) && fileSz <= 10
+            return condition ? false : Upload.LIST_IGNORE
         },
         onChange(info) {
             setListFileToUpload(info.fileList);

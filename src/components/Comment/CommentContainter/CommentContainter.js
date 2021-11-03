@@ -14,7 +14,7 @@ import mangaApi from 'api/apis/MainServer/mangaApi';
 
 
 
-function CommentContainter({ mangaId, chapterId }) {
+function CommentContainter({ mangaId, postId }) {
     const userState = useSelector((state) => state.userState);
 
     // comments
@@ -58,7 +58,7 @@ function CommentContainter({ mangaId, chapterId }) {
         if (fromRow === 0) {
             getCmts();
         }
-    }, [mangaId, chapterId])
+    }, [mangaId])
 
 
     // useEffect(() => {
@@ -70,7 +70,7 @@ function CommentContainter({ mangaId, chapterId }) {
     const getCmts = async () => {
         const data = {
             manga_id: mangaId ? mangaId : null,
-            chapter_id: chapterId ? chapterId : null,
+            chapter_id: null,
             from: fromRow,
             amount: 10
         }
@@ -98,7 +98,7 @@ function CommentContainter({ mangaId, chapterId }) {
         if (userState[0]) {
             const formData = new FormData();
             formData.append("manga_id", mangaId ? mangaId.toString() : "");
-            formData.append("chapter_id", chapterId ? chapterId.toString() : "");
+            formData.append("chapter_id", "");
             formData.append("manga_comment_content", dataInput.content);
             formData.append("image", dataInput.image);
             formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");

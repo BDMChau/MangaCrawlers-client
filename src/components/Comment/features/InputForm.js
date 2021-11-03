@@ -176,9 +176,18 @@ function InputForm({
         headers: {
             authorization: 'authorization-text',
         },
-        beforeUpload: file => {
-            if (!fileTypesAllowed.includes(file.type)) message_error(`Please select png, jpg, jpeg, GIF only!`);
-            return fileTypesAllowed.includes(file.type) ? true : Upload.LIST_IGNORE;
+        beforeUpload: (file) => {
+            if (!fileTypesAllowed.includes(file.type)) {
+                message_error("Please select jpeg, png files!")
+            }
+
+            const fileSz = file.size / 1024 / 1024;
+            if (fileSz > 10) {
+                message_error("An image must smaller than 10MB!")
+            }
+
+            const condition = fileTypesAllowed.includes(file.type) && fileSz <= 10
+            return condition ? false : Upload.LIST_IGNORE
         },
         onChange: (info) => onChangeFile(info)
     };
