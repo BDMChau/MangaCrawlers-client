@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import "./styles/Editor.css"
+import "components/Editor/styles/Editor.css"
 
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Input, Typography, Select, Form } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 
-export default function FormCreatePost() {
+export default function FormCreatePost({ createPost }) {
+    const forumState = useSelector((state) => state.forumState);
+    const [categoriesState, setCategoriesState] = useState(forumState[0]?.length ? forumState[0] : []);
+
     const [title, setTitle] = useState("");
-    const [categories, setCategories] = useState([]);
-    const [topics, setTopics] = useState([]);
+    const [categories, setAAA] = useState([]);
     const [markdown, setMarkdown] = useState("");
 
     const [isMissing, setIsMissing] = useState(false);
@@ -29,27 +32,40 @@ export default function FormCreatePost() {
             >
                 {
                     data.length
-                        ? data.map((data, i) => (
-                            <Select.Option key={i}>
-                                <Typography.Text style={{ color: data.color }}>
-                                    {data.name}
+                        ? data.map((item, i) => (
+                            <Select.Option key={item.post_category_id}>
+                                <Typography.Text style={{ color: item.color }}>
+                                    {item.name}
                                 </Typography.Text>
                             </Select.Option>
                         ))
-                        : " "
+                        : ""
                 }
             </Select>
         )
     }
+    
 
 
     const handleCreate = async () => {
-        if (!title || !categories.length || !topics.length || !markdown) {
+        if (!title || !categories.length || !markdown) {
             setIsMissing(true);
             return;
         }
-
         setIsLoading(true);
+
+        const data = {
+            title: title,
+            categoriesId: categories,
+            content: markdown
+        };
+
+        await createPost(data);
+        setIsLoading(false);
+    }
+
+    const handleSelectCateTag = (a) => {
+        console.log(a)
     }
 
 
@@ -82,32 +98,13 @@ export default function FormCreatePost() {
                         rules={[{ required: true, message: 'Please select categories!' }]}
                     >
                         <div className="category-selector">
-                            <MySelectTags data={[{
-                                name: "acasc",
-                                color: "blue"
-                            }]}
+                            <MySelectTags
+                                data={categoriesState}
                                 title="categories"
-                                handleChange={(arrValue) => setCategories(arrValue)}
+                                handleChange={(arrValue) => handleSelectCateTag(arrValue)}
                             />
                         </div>
                     </Form.Item>
-
-                    <Form.Item
-                        style={{ marginBottom: "0px" }}
-                        name="topics"
-                        rules={[{ required: true, message: 'Please select topics!' }]}
-                    >
-                        <div className="category-selector">
-                            <MySelectTags data={[{
-                                name: "acasc",
-                                color: "blue"
-                            }]}
-                                title="topics"
-                                handleChange={(arrValue) => setCategories(arrValue)}
-                            />
-                        </div>
-                    </Form.Item>
-
                 </Form>
 
 
@@ -131,13 +128,13 @@ export default function FormCreatePost() {
 
             <div style={{ marginTop: "10px" }} >
                 <Button
-                 className="btn-post" 
-                 type="primary"
-                  onClick={handleCreate}
-                  loading={isLoading}
-                  >
-                      Create Post
-                      </Button>
+                    className="btn-post"
+                    type="primary"
+                    onClick={handleCreate}
+                    loading={isLoading}
+                >
+                    Create Post
+                </Button>
             </div>
         </div>
     )

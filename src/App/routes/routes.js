@@ -113,7 +113,7 @@ const routes = [
     },
     {
         path: "/forum/newpost",
-        component: React.lazy(() => import('../../pages/Forum/NewPost/NewPostService')),
+        component: React.lazy(() => import('../../pages/Forum/CreatePost/CreatePostService')),
         exact: true
     },
     /////////////// not found 404

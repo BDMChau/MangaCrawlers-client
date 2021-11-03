@@ -67,11 +67,11 @@ secondAxiosClient.interceptors.response.use((res) => {
     return res;
 }, (error) => {
     console.error(error);
-    if (error.response || error.response.status) {
+    if (error.response || error.response?.status) {
         errCodeResCheking(error.response);
         return;
     }
-    return;
+    return error;
 });
 
 export { axiosClient, secondAxiosClient };

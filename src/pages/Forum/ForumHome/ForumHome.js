@@ -6,9 +6,7 @@ import Post from './features/Post'
 import "./ForumHome.css"
 
 
-export default function ForumHome({categories}) {
-    const genresState = useSelector(state => state.mangaState[2]);
-
+export default function ForumHome({ categories }) {
     const [posts, setPosts] = useState([
         {
             avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
