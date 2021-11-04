@@ -1,0 +1,26 @@
+.post-detail-page {
+    width: 70vw;
+    margin: auto;
+}
+
+.post-detail-page .row {
+    width: 100%;
+    background-color: #F0F2F5;
+}
+
+.post-detail-page .btn-back {
+  border-radius: 50px;
+  height: 42px;
+  width: 42px;
+}
+
+.post-detail-page .post-detail {
+  margin-top: 50px;
+  min-height: 50vh;
+}
+
+.post-detail-page .cmt-post-detail {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  min-height: 50vh;
+}
