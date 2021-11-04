@@ -5,7 +5,7 @@ import MDEditor from '@uiw/react-md-editor';
 import { Button, Input, Typography, Select, Form } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { MySelectTags } from './features/MySelectTags';
 
 
 export default function FormCreatePost({ createPost }) {
@@ -18,33 +18,6 @@ export default function FormCreatePost({ createPost }) {
 
     const [isMissing, setIsMissing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-
-
-    const MySelectTags = ({ data, title, handleChange }) => {
-        return (
-            <Select
-                mode="multiple"
-                size="medium"
-                showArrow
-                allowClear
-                placeholder="Select Genres"
-                onChange={(arrValueue) => handleChange(arrValueue)}
-                style={{ width: '100%', borderRadius: "5px" }}
-            >
-                {
-                    data.length
-                        ? data.map((item, i) => (
-                            <Select.Option key={item.category_item}>
-                                <Typography.Text style={{ color: item.color }}>
-                                    {item.name}
-                                </Typography.Text>
-                            </Select.Option>
-                        ))
-                        : ""
-                }
-            </Select>
-        )
-    }
 
 
 
@@ -61,14 +34,10 @@ export default function FormCreatePost({ createPost }) {
             content: markdown
         };
         console.log(data)
-        // await createPost(data);
+        const res = await createPost(data);
 
         localStorage.removeItem("categories_createpost");
         setIsLoading(false);
-    }
-
-    const handleSelectCateTag = (arrValue) => {
-        setCategories(arrValue);
     }
 
 
@@ -104,7 +73,7 @@ export default function FormCreatePost({ createPost }) {
                             <MySelectTags
                                 data={categoriesState}
                                 title="categories"
-                                handleChange={handleSelectCateTag}
+                                handleChange={(arrValue) => setCategories(arrValue)}
                             />
                         </div>
                     </Form.Item>

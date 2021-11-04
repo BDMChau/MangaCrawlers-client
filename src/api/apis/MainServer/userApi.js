@@ -21,7 +21,7 @@ const userApi = {
     },
     updateDescription: (token, data) => {
         const uri = '/api/user/update_description';
-        return axiosClient.put(uri, data,{
+        return axiosClient.put(uri, data, {
             headers: {
                 Authorization: token
             }
@@ -29,24 +29,24 @@ const userApi = {
     },
     getFriendRequest: (token) => {
         const uri = `/api/user/get_friend_requests`;
-        return axiosClient.get(uri,{
-            headers:{
+        return axiosClient.get(uri, {
+            headers: {
                 Authorization: token
             }
         });
     },
     getFriends: (token, data) => {
         const uri = `/api/user/get_list_friends?from=${data.from}&amount=${data.amount}`;
-        return axiosClient.get(uri,{
-            headers:{
+        return axiosClient.get(uri, {
+            headers: {
                 Authorization: token
             }
         });
     },
     checkReqStatus: (token, data) => {
         const uri = `/api/user/check_status`;
-        return axiosClient.post(uri,data,{
-            headers:{
+        return axiosClient.post(uri, data, {
+            headers: {
                 Authorization: token
             }
         });
@@ -76,7 +76,7 @@ const userApi = {
             }
         });
     },
-    updateCmt: (token,data) => {
+    updateCmt: (token, data) => {
         const uri = '/api/user/updatecomment';
         return axiosClient.post(uri, data, {
             headers: {
@@ -85,7 +85,7 @@ const userApi = {
             }
         });
     },
-    checkIsLiked: (token,data) => {
+    checkIsLiked: (token, data) => {
         const uri = '/api/user/check_user_like';
         return axiosClient.post(uri, data, {
             headers: {
@@ -93,7 +93,7 @@ const userApi = {
             }
         });
     },
-    likeCmt: (token,data) => {
+    likeCmt: (token, data) => {
         const uri = '/api/user/add_like';
         return axiosClient.post(uri, data, {
             headers: {
@@ -101,7 +101,7 @@ const userApi = {
             }
         });
     },
-    unlikeCmt: (token,data) => {
+    unlikeCmt: (token, data) => {
         const uri = '/api/user/unlike';
         return axiosClient.post(uri, data, {
             headers: {
@@ -274,8 +274,16 @@ const userApi = {
 
     ////////////////// unauth parts //////////////////
     getUserInfo: (data) => {
-        const uri = '/api/user_unauth/get_userinfo';
-        return axiosClient.post(uri, data);
+        const uri = `/api/user_unauth/get_userinfo?user_id=${data.user_id}`;
+        return axiosClient.get(uri);
+    },
+    getPostsOfUser: (data) => {
+        const uri = `/api/user_unauth/get_posts_of_user?user_id=${data.user_id}&from=${data.from}&amount${data.amount}`;
+        return axiosClient.get(uri);
+    },
+    getUserInfo: (data) => {
+        const uri = `/api/user_unauth/get_friends_of_user?user_id=${data.user_id}&from=${data.from}&amount${data.amount}`;
+        return axiosClient.get(uri);
     }
 };
 
