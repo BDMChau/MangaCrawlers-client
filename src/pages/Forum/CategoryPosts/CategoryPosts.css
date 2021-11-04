@@ -1,0 +1,18 @@
+.cate-posts {
+  margin-top: 20px;
+}
+
+.cate-posts .btn-back {
+  width: 40px !important;
+  height: 40px;
+}
+
+.cate-posts span.ant-divider-inner-text {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cate-posts .title-h5 {
+  margin-left: 10px;
+  margin-top: 5px;
+}

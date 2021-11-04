@@ -1,146 +1,13 @@
-import { Col, Row, Typography } from 'antd'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import MyTag from './features/MyTag'
-import Post from './features/Post'
 import "./ForumHome.css"
 
+import MyTag from '../features/MyTag'
+import Post from '../features/Post'
 
-export default function ForumHome({ categories }) {
-    const [posts, setPosts] = useState([
-        {
-            avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-            user_name: "Minh CHouuuuuu",
-            categories: [
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "2",
-                    cate_name: "recommnend",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "3",
-                    cate_name: "discussing",
-                    cate_color: "blue"
-                },
-            ],
-            title: "title post title post title post title post title post title post title post title pos post title post title post title post title post title post title post ",
-        },
-        {
-            avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-            user_name: "Minh CHouuuuuu",
-            categories: [
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "2",
-                    cate_name: "recommnend",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "3",
-                    cate_name: "discussing",
-                    cate_color: "blue"
-                },
-            ],
-            title: "title post title post title post title post title post ",
-        },
-        {
-            avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-            user_name: "Minh CHouuuuuu",
-            categories: [
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "2",
-                    cate_name: "recommnend",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "3",
-                    cate_name: "discussing",
-                    cate_color: "blue"
-                },
-            ],
-            title: "title post title post title post title post title post ",
-        },
-        {
-            avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-            user_name: "Minh CHouuuuuu",
-            categories: [
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "2",
-                    cate_name: "recommnend",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "3",
-                    cate_name: "discussing",
-                    cate_color: "blue"
-                },
-            ],
-            title: "title post title post title post title post title post ",
-        },
-        {
-            avatar: "https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png",
-            user_name: "Minh CHouuuuuu",
-            categories: [
-                {
-                    cate_id: "1",
-                    cate_name: "action",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "2",
-                    cate_name: "recommnend",
-                    cate_color: "blue"
-                },
-                {
-                    cate_id: "3",
-                    cate_name: "discussing",
-                    cate_color: "blue"
-                },
-            ],
-            title: "title post title post title post title post title post ",
-        },
-    ])
+import { Col, Row, Typography } from 'antd'
 
 
+export default function ForumHome({ categories, posts }) {
     return (
         <div className="forum-home" >
             <Col span={24} className="banner" >
@@ -149,6 +16,7 @@ export default function ForumHome({ categories }) {
 
             <Row justify="center" className="forum-home-body">
                 <Col className="left" xs={24} md={14} xl={9}>
+                    <Typography.Title level={3}>Newest</Typography.Title>
                     {posts.length
                         ? posts.map((post, i) => (
                             <Post post={post} key={i} />
@@ -157,10 +25,10 @@ export default function ForumHome({ categories }) {
                     }
                 </Col>
 
-                <Col className="right" xs={24} md={11} xl={7} xxl={7}>
+                <Col className="right" xs={24} md={14} xl={7}>
                     <div>
                         <div className="trending-posts">
-                            <Typography.Title level={4}>Trending</Typography.Title>
+                            <Typography.Title level={4} style={{ marginTop: "5px" }} >Trending</Typography.Title>
                             {posts.length
                                 ? posts.map((post, i) => (
                                     <Post post={post} key={i} smallSize={true} />

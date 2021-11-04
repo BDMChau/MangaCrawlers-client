@@ -20,6 +20,9 @@ const redirectURI = {
     friendPage_uri: (userId) => {
         return `/user/${userId}/friends/all_friends`;
     },
+    postPage_uri: (postId) => {
+        return `/forum/post/${postId}`;
+    },
 }
 
 export default redirectURI;

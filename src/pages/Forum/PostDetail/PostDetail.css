@@ -1,11 +1,11 @@
 .post-detail-page {
-    width: 70vw;
-    margin: auto;
+  width: 70vw;
+  margin: auto;
 }
 
 .post-detail-page .row {
-    width: 100%;
-    background-color: #F0F2F5;
+  width: 100%;
+  background-color: #f0f2f5;
 }
 
 .post-detail-page .btn-back {
@@ -15,7 +15,7 @@
 }
 
 .post-detail-page .post-detail {
-  margin-top: 50px;
+  margin-top: 30px;
   min-height: 50vh;
 }
 
@@ -23,4 +23,47 @@
   margin-top: 50px;
   margin-bottom: 30px;
   min-height: 50vh;
+}
+
+.post-detail-page .post-owner {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.post-owner .avatar {
+  width: 50px;
+  height: 50px;
+}
+
+.post-owner .owner-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 7px;
+}
+
+.post-owner .owner-info .date-created {
+  display: block;
+  font-style: italic;
+  color: #00000073;
+  margin-top: -10px;
+}
+
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .post-detail-page {
+    width: 90vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+  .post-detail-page {
+    width: 80vw;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 767px) {
+  .post-detail-page {
+    width: 100vw;
+  }
 }

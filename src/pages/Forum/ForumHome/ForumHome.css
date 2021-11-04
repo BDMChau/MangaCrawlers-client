@@ -1,8 +1,13 @@
-.forum-home{
-  
+.forum-home {
 }
 
-.forum-home-body{
+.forum-home .btn-back {
+  border-radius: 50px;
+  height: 42px;
+  width: 42px;
+}
+
+.forum-home-body {
   margin-top: 40px;
 }
 
@@ -11,7 +16,6 @@
   text-align: center;
   background-color: #e1eeff;
 }
-
 
 .left {
   padding: 0px 10px 20px 10px;
@@ -73,20 +77,26 @@
   width: 100%;
 }
 
+.post .post-content {
+  max-height: 45px;
+  overflow: hidden;
+  width: 100%;
+}
+
 .post .img {
   margin-right: 5px;
   width: fit-content;
 }
 
 .post .img .avatar {
-  margin-top: 5px;
-  width: 50px;
-  height: 50px;
+  margin-top: 0px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
 }
 
 .post .img .avatar-small {
-  margin-top: 5px;
+  margin-top: 0px;
   width: 35px;
   height: 35px;
   cursor: pointer;
