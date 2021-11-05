@@ -6,11 +6,10 @@ import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
 import FriendRequest from './components/FriendRequest';
 
-export default function Friends({ userId, listRequests, listFriends, selectedKey, setSelectedKey }) {
+export default function Friends({ userId, listRequests, totalFriends, listFriends, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
 
     
-
     const AllFriends = () => (
         listFriends.length
             ? <>
@@ -21,7 +20,7 @@ export default function Friends({ userId, listRequests, listFriends, selectedKey
                         margin: "0px 0 0px 6px"
                     }}
                 >
-                    100 friends
+                    {totalFriends} friends
                 </Typography.Text>
                 <div className="all-friends">
                     {listFriends.map((item, i) => (
@@ -37,7 +36,7 @@ export default function Friends({ userId, listRequests, listFriends, selectedKey
 
     const AllFriendRequests = () => (
         userState[0]
-            ? <>
+            ? <div>
                 <div className="all-friends">
                     {listRequests.length
                         ? listRequests.map((request, i) => (
@@ -48,7 +47,7 @@ export default function Friends({ userId, listRequests, listFriends, selectedKey
                     }
 
                 </div>
-            </>
+            </div>
             : <Empty description="" style={{ marginTop: "80px" }} />
 
     )

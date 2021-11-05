@@ -42,7 +42,7 @@ function Friend({ friend, i }) {
                     <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} title="Avatar" src={user.user_avatar} />
                 </NavLink>
 
-                <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "65%" }}>
+                <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "75%" }}>
                     <NavLink to={redirectURI.userPage_uri(user.user_id)} style={{ maxWidth: "100%", width: "fit-content" }} >
                         <Typography.Title level={5} className="user-name" title={user.user_name}>{user.user_name}</Typography.Title>
                     </NavLink>
@@ -54,12 +54,10 @@ function Friend({ friend, i }) {
             </div>
             <div className="text">
                 <div>
-                    {user.status === "Friend"
-                        ? <Button style={{ cursor: "default", marginTop: '20px' }}>
-                            {user.status}
-                        </Button>
-                        : ""
-                    }
+                    <Button style={{ cursor: "default", marginTop: '20px' }}>
+                        Friend
+                    </Button>
+
                 </div>
             </div>
         </div>

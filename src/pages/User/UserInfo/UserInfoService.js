@@ -9,12 +9,22 @@ import { message_error, message_success } from 'components/toast/message';
 import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import EVENTS_NAME from 'socket/features/eventsName';
+import { NavLink } from 'react-router-dom';
 
 export default function UserInfoService() {
     const userState = useSelector((state) => state.userState);
 
     const query = new URLSearchParams(useLocation().search);
+    const [userId, setUserId] = useState({});
+
     const [userInfo, setUserInfo] = useState({});
+    const [friends, setFriends] = useState([]);
+    const [posts, setPosts] = useState([]);
+
+    const [fromFr, setFromFr] = useState(10);
+    const [fromPost, setFromPost] = useState(0);
+    const [isEndFr, setIsEndFr] = useState(false);
+    const [isEndPost, setIsEndPost] = useState(false);
 
     const [status, setStatus] = useState("");
 
@@ -23,10 +33,23 @@ export default function UserInfoService() {
 
     useEffect(() => {
         if (query.get("id")) {
-            getUserInfo(query.get("id"));
-            checkFriendStatus(query.get("id"));
+            setFromFr(0);
+            setFromPost(0);
+            setIsEndFr(false);
+            setIsEndPost(false);
+
+            setUserId(query.get("id"));
         }
     }, [query.get("id")])
+
+    useEffect(() => {
+        if (userId && fromFr === 0 && fromPost === 0 && !isEndFr && !isEndPost) {
+            getUserInfo(userId);
+            getFriends(userId);
+            getPosts(userId);
+            checkFriendStatus(userId)
+        }
+    }, [fromFr, fromPost, userId, isEndFr, isEndPost])
 
 
     useEffect(() => {
@@ -42,6 +65,52 @@ export default function UserInfoService() {
             if (res.content.err) return;
 
             setUserInfo(res.content.user)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    const getFriends = async (id) => {
+        const data = {
+            user_id: id.toString(),
+            from: fromFr,
+            amount: 6
+        }
+
+        try {
+            const res = await userApi.getFriendsOfUser(data);
+            if (res.content.err) return;
+
+            if (res.content.posts.list_friends <= 6) {
+
+                return;
+            }
+
+            setFriends(res.content.list_friends)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const getPosts = async (id) => {
+        const data = {
+            user_id: id.toString(),
+            from: fromPost,
+            amount: 6
+        }
+
+        try {
+            const res = await userApi.getPostsOfUser(data);
+            if (res.content.err) return;
+
+            if (res.content.posts.length <= 6) {
+
+                return;
+            }
+
+            setPosts(res.content.posts);
+            setFromPost(res.content.from)
         } catch (err) {
             console.log(err);
         }
@@ -230,15 +299,18 @@ export default function UserInfoService() {
 
 
     return (
-        <UserInfo
-            userLoggedState={userState[0]}
-            userInfo={userInfo}
-            queryId={query.get("id").toString()}
+        <div>
+            <NavLink to="/user/id?id=15" >hj,k</NavLink>
+            <UserInfo
+                userLoggedState={userState[0]}
+                userInfo={userInfo}
+                queryId={query.get("id").toString()}
 
-            status={status}
+                status={status}
 
-            handleSendFriendRequest={handleSendFriendRequest}
-            handleInteraction={handleInteraction}
-        />
+                handleSendFriendRequest={handleSendFriendRequest}
+                handleInteraction={handleInteraction}
+            />
+        </div>
     )
 }

@@ -29,7 +29,6 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 10px;
-  min-height: 100vh;
 }
 
 .friends .friend {
@@ -55,7 +54,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  background-color: red;
   max-width: 100%;
   width: fit-content;
 }
@@ -107,10 +105,10 @@
 }
 
 .item {
-  width: 450px;
+  width: 550px;
 }
 
-@media only screen and (min-width: 375px) and (max-width: 767px) {
+@media only screen and (min-width: 375px) and (max-width: 414px) {
   .friends .friend {
     width: 100%;
   }
@@ -124,8 +122,26 @@
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 415px) and (max-width: 767px) {
   .friends .friend {
+    width: 100%;
+  }
+
+  .friends .request {
+    width: 100%;
+  }
+
+  .item {
+    width: 330px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .friends .friend {
+    width: 48%;
+  }
+
+  .friends .request {
     width: 48%;
   }
 
@@ -138,18 +154,22 @@
     margin-top: 5px !important;
   }
 
-  .friends .request {
-    width: 48%;
-  }
-
   .item {
-    width: 225px;
+    width: 220px;
   }
 }
 
-@media only screen and (min-width: 1025px) and (max-width: 1520px) {
+@media only screen and (min-width: 1024px) and (max-width: 1520px) {
   .item {
     width: 350px;
+  }
+
+  .friends .friend {
+    width: 48%;
+  }
+
+  .friends .request {
+    width: 48%;
   }
 }
 

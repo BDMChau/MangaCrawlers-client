@@ -12,6 +12,7 @@ export default function FriendsService() {
     const [selectedKey, setSelectedKey] = useState("");
     const [listRequests, setListRequests] = useState([]);
     const [listFriends, setListFriends] = useState([]);
+    const [totalFriends, setTotalFriends] = useState(0);
 
     const [fromRowFriends, setFromRowFriends] = useState(0);
     
@@ -33,6 +34,7 @@ export default function FriendsService() {
         if (userState[0]) {
             getAllFriendRequests();
             getAllFriends();
+            getNumberOfFriends();
         }
     }, [userState[0]])
 
@@ -68,7 +70,19 @@ export default function FriendsService() {
         }
     }
 
+    const getNumberOfFriends = async () => {
+        try {
+            const res = await userApi.getTotalFriends(token);
+            if (res.content.err) {
+                setTotalFriends(0);
+                return;
+            }
 
+            setTotalFriends(res.content.total_friends);
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     return (
         <Friends
@@ -77,6 +91,7 @@ export default function FriendsService() {
             listRequests={listRequests}
 
             listFriends={listFriends}
+            totalFriends={totalFriends}
 
             selectedKey={selectedKey}
             setSelectedKey={setSelectedKey}

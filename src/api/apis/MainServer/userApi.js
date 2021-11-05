@@ -43,6 +43,14 @@ const userApi = {
             }
         });
     },
+    getTotalFriends: (token) => {
+        const uri = `/api/user/get_total_friend`;
+        return axiosClient.get(uri, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
     checkReqStatus: (token, data) => {
         const uri = `/api/user/check_status`;
         return axiosClient.post(uri, data, {
@@ -278,11 +286,11 @@ const userApi = {
         return axiosClient.get(uri);
     },
     getPostsOfUser: (data) => {
-        const uri = `/api/user_unauth/get_posts_of_user?user_id=${data.user_id}&from=${data.from}&amount${data.amount}`;
+        const uri = `/api/user_unauth/get_posts_of_user?user_id=${data.user_id}&from=${data.from}&amount=${data.amount}`;
         return axiosClient.get(uri);
     },
-    getUserInfo: (data) => {
-        const uri = `/api/user_unauth/get_friends_of_user?user_id=${data.user_id}&from=${data.from}&amount${data.amount}`;
+    getFriendsOfUser: (data) => {
+        const uri = `/api/user_unauth/get_friends_of_user?user_id=${data.user_id}&from=${data.from}&amount=${data.amount}`;
         return axiosClient.get(uri);
     }
 };
