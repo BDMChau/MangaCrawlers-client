@@ -6,7 +6,7 @@ import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
 import FriendRequest from './components/FriendRequest';
 
-export default function Friends({ userId, listRequests, totalFriends, listFriends, selectedKey, setSelectedKey }) {
+export default function Friends({ listRequests, totalFriends, listFriends, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
 
     
@@ -63,9 +63,9 @@ export default function Friends({ userId, listRequests, totalFriends, listFriend
                     <Tabs className="friends-tabs" activeKey={selectedKey ? selectedKey : "all_friends"} setTabSelected={setSelectedKey}
                         onChange={(key) => {
                             if (key === "all_friends") {
-                                window.history.replaceState(null, null, `/user/${userId}/friends/${key}`)
+                                window.history.replaceState(null, null, `/user/friends/${key}`)
                             } else {
-                                window.history.replaceState(null, null, `/user/${userId}/friends/${key}`)
+                                window.history.replaceState(null, null, `/user/friends/${key}`)
                             }
 
                             setSelectedKey(key)

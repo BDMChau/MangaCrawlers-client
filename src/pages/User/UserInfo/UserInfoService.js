@@ -87,7 +87,8 @@ export default function UserInfoService() {
                 return;
             }
 
-            setFriends(res.content.list_friends)
+            setFriends(res.content.list_friends);
+            setFromFr(res.content.from);
         } catch (err) {
             console.log(err);
         }
@@ -110,7 +111,7 @@ export default function UserInfoService() {
             }
 
             setPosts(res.content.posts);
-            setFromPost(res.content.from)
+            setFromPost(res.content.from);
         } catch (err) {
             console.log(err);
         }

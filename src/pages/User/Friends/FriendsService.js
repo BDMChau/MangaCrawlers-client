@@ -16,8 +16,8 @@ export default function FriendsService() {
 
     const [fromRowFriends, setFromRowFriends] = useState(0);
     
+    const history = useHistory();
     const params = useParams();
-    const param_userId = params.id;
     const path = params.path;
 
     const cookies = new Cookies();
@@ -35,6 +35,8 @@ export default function FriendsService() {
             getAllFriendRequests();
             getAllFriends();
             getNumberOfFriends();
+        } else{
+            history.push("/")
         }
     }, [userState[0]])
 
@@ -86,7 +88,6 @@ export default function FriendsService() {
 
     return (
         <Friends
-            userId={param_userId}
 
             listRequests={listRequests}
 

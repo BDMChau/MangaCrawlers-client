@@ -21,18 +21,17 @@ function AdminService() {
 
     const [allReports, setAllReports] = useState([]);
 
-    const [tabSelected, setTabSelected] = useState("dashboard");
 
     const [isLoading, setIsLoading] = useState(false);
     const cookies = new Cookies();
     const token = cookies.get("token")
 
     const history = useHistory();
-
+    const query = new URLSearchParams(useLocation().search);
 
     useEffect(() => {
-        history.push(`/admin?v=${tabSelected}`)
-    }, [tabSelected])
+        if(!query.get('v')) history.push(`/admin?v=dashboard`);
+    }, [])
 
 
     useEffect(() => {
@@ -392,8 +391,7 @@ function AdminService() {
             handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
             isLoading={isLoading}
 
-            tabSelected={tabSelected}
-            setTabSelected={setTabSelected}
+            tabSelected={query.get('v')}
         />
     )
 }

@@ -12,8 +12,6 @@ import redirectURI from 'helpers/redirectURI';
 
 export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false)
-
-
     const history = useHistory();
 
 

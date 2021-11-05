@@ -36,8 +36,6 @@ function Admin({
     isLoading,
 
     tabSelected,
-    setTabSelected
-
 }) {
     const userState = useSelector((state) => state.userState);
     const [isGetDataDone, setIsGetDataDone] = useState(false)
@@ -163,7 +161,7 @@ function Admin({
                 </Layout>
             ) : (
                 <Layout>
-                    <SiderMenu collapsed={collapsed} setCollapsed={setCollapsed} tabSelected={tabSelected} setTabSelected={setTabSelected} ></SiderMenu>
+                    <SiderMenu collapsed={collapsed} setCollapsed={setCollapsed} tabSelected={tabSelected} ></SiderMenu>
 
                     {isGetDataDone
                         ? <SiteLayout isMobile={isMobile} />
