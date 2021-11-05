@@ -44,7 +44,7 @@ function CommentItems({
         if (isScrollBottom === true) {
             getCmts();
 
-            const timer = setTimeout(() => setIsScrollBottom(false), 600)
+            const timer = setTimeout(() => setIsScrollBottom(false), 300)
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])

@@ -62,11 +62,11 @@ function MangaService() {
 
 
     useEffect(() => {
-        // smoothscroll.polyfill();
-        // window.scroll({
-        //     top: 0,
-        //     behavior: "smooth"
-        // });
+        smoothscroll.polyfill();
+        window.scroll({
+            top: 0,
+            behavior: "smooth"
+        });
 
        if(id){
         getMangaData();

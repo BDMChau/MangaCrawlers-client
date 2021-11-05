@@ -159,6 +159,7 @@ export default function ChapterService() {
 
     //////// next, prev chapter
     useEffect(() => {
+        if(curChapter < 0) return;
         for (const [i, chapter] of chapters.entries()) {
             if (curChapter === i) {
                 history.push(`/chapter/${mangaName}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`)

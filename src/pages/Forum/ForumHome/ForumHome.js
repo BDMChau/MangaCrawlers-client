@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { v, useState } from 'react'
 import "./ForumHome.css"
 
 import MyTag from '../features/MyTag'
@@ -8,6 +8,34 @@ import { Col, Row, Typography } from 'antd'
 
 
 export default function ForumHome({ categories, posts }) {
+    const scrollRef = useRef();
+
+
+    ////////// scroll //////////
+    useEffect(() => {
+        if (isScrollBottom === true) {
+            getCmts();
+
+            const timer = setTimeout(() => setIsScrollBottom(false), 200)
+            return () => clearTimeout(timer);
+        }
+    }, [isScrollBottom])
+
+
+    const handleScroll = (e) => {
+        const scrollTop = e.target.scrollTop;
+        const clientHeight = e.target.clientHeight;
+        const scrollHeight = e.target.scrollHeight;
+
+        if (isEndCmts === false) {
+            if (scrollHeight - (scrollTop + clientHeight) <= 50) {
+                getCmts();
+            }
+        }
+    }
+
+
+
     return (
         <div className="forum-home" >
             <Col span={24} className="banner" >
@@ -18,9 +46,14 @@ export default function ForumHome({ categories, posts }) {
                 <Col className="left" xs={24} md={14} xl={9}>
                     <Typography.Title level={3}>Newest</Typography.Title>
                     {posts.length
-                        ? posts.map((post, i) => (
-                            <Post post={post} key={i} />
-                        ))
+                        ? <div onScroll={(e) => handleScroll(e)} >
+                            {
+                                posts.map((post, i) => (
+                                    <Post post={post} key={i} />
+
+                                ))
+                            }
+                        </div>
                         : ""
                     }
                 </Col>
