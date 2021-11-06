@@ -30,7 +30,7 @@ function HomeService() {
         getWeeklyTopMangas();
         getTredingDailyManga();
 
-        if(!userState[0]){
+        if (!userState[0]) {
             getUserDataOAuthGoogle();
         }
     }, [])
@@ -105,11 +105,11 @@ function HomeService() {
         }
     }
 
-    
+
     const getUserDataOAuthGoogle = async () => {
-        try{
+        try {
             const response = await authApi.getDataOathGoogle()
-            if(!response) return;
+            if (!response) return;
 
             const user = response.content.user;
             const token = response.content.token;
@@ -121,7 +121,7 @@ function HomeService() {
 
             message_success("Signed in!");
             return;
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
     }
@@ -160,19 +160,19 @@ function HomeService() {
 
 
     return (
-   <div>
+        <div>
             <Home
-            latestMangas={latestMangas}
-            topMangas={topMangas}
-            weeklyMangas={weeklyMangas}
-            dailyMangas={dailyMangas}
-            isLoading={isLoading}
-            
-            searchResults={searchResults}
-            onSearch={(val) => onSearch(val)}
-            isLoadingSearch={isLoadingSearch}
-        />
-   </div>
+                latestMangas={latestMangas}
+                topMangas={topMangas}
+                weeklyMangas={weeklyMangas}
+                dailyMangas={dailyMangas}
+                isLoading={isLoading}
+
+                searchResults={searchResults}
+                onSearch={(val) => onSearch(val)}
+                isLoadingSearch={isLoadingSearch}
+            />
+        </div>
     )
 }
 

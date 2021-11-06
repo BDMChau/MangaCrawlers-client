@@ -4,6 +4,7 @@
   text-align: left;
 }
 
+
 .list-genre-pagination ul.ant-list-items {
   margin-top: 10px;
   display: flex;
@@ -21,7 +22,7 @@
 }
 
 .list-genre-pagination .ant-spin-nested-loading {
-  height: fit-content;
+  height: 70vh;
 }
 
 

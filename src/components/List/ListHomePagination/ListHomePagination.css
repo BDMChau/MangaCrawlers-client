@@ -4,6 +4,10 @@
   margin: 30px 0 50px 0;
 }
 
+.list-home-pagination .ant-spin-nested-loading {
+ 
+}
+
 .list-home-pagination ul.ant-list-items {
   display: flex;
   flex-wrap: wrap;
@@ -121,6 +125,10 @@
     font-size: 11px;
     margin-top: -7px;
   }
+
+  .list-home-pagination .ant-list-pagination{
+    width: 105%;
+  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
@@ -141,6 +149,7 @@
     font-size: 11px;
     margin-top: -4px;
   }
+  
 }
 
 @media only screen and (min-width: 415px) and (max-width: 600px) {

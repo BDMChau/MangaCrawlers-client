@@ -18,7 +18,7 @@ import { message_error, message_success } from 'components/toast/message';
 
 function NotificationService({ isMobile }) {
     const stuffSlice = useSelector((state) => state.stuffsState);
-    const notificationIdToUpdate = stuffSlice[1] ? stuffSlice[1] : null;
+    const notificationIdToUpdate = stuffSlice[2] ? stuffSlice[2] : null;
 
     const dispatch = useDispatch();
 

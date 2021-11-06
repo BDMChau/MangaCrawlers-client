@@ -137,6 +137,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                             </div>
                         </div>
 
+                        <Col xs={24} sm={24} xl={24} className="col02">
                         <div className="posts-cont">
                             <Typography.Title level={4} style={{ margin: "0 0 10px 7px" }}>Recently  Posts</Typography.Title>
                             <div className="posts">
@@ -151,6 +152,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                                 <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
                             </div>
                         </div>
+                        </Col>
                     </>
                     : <Empty description="" style={{ paddingTop: "80px" }} />
                 }

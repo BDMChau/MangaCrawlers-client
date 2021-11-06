@@ -68,6 +68,7 @@ function FriendRequest({ requestProp, i }) {
                         type="primary"
                         style={{ marginTop: '20px', border: 'none' }}
                         disabled={isLoadingDel}
+                        loading={isLoadingConfirm}
                         onClick={() => handleConfirmReq()}
                     >
                         Accept
@@ -76,6 +77,7 @@ function FriendRequest({ requestProp, i }) {
                     <Button
                         style={{ marginTop: '20px' }}
                         disabled={isLoadingConfirm}
+                        loading={isLoadingDel}
                         onClick={() => handleDeleteReq(request.notification_id)}
                     >
                         Delete

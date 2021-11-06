@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import App from './App'
-import { SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE } from "../store/features/stuffs/StuffsSlice";
+import { SET_SCROLL_TOP, SET_SCROLL_BOTTOM } from "../store/features/stuffs/StuffsSlice";
 import { useDispatch } from 'react-redux';
 
 export default function AppService() {
@@ -13,17 +13,32 @@ export default function AppService() {
     }, [])
 
     const handleScroll = () => {
-        let currentPos = window.scrollY;
-        let temp = true;
+        const body = document.body;
+        const html = document.documentElement;
 
-        if (currentPos <= 100) {
-            temp = false;
-        }
+        const currentPos = window.scrollY;
+        const windowHeight = "innerHeight" in window ? window.innerHeight : html.offsetHeight;
+
+        const documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+        const windowBottom = windowHeight + window.scrollY;
+
+        
+        // scroll at bottom
+        let tempBottom = false;
+        if (windowBottom >= documentHeight) tempBottom = true;
 
         setTimeout(() => {
-            dispatch(SET_SCROLL_FIXED_DROPDOWN_CHAPTER_PAGE(temp));
+            dispatch(SET_SCROLL_BOTTOM(tempBottom));
+            tempBottom = false;
+        }, 200);
 
-            temp = true;
+
+        let tempTop = true;
+        if (currentPos <= 100) tempTop = false;
+
+        setTimeout(() => {
+            dispatch(SET_SCROLL_TOP(tempTop));
+            tempTop = true;
         }, 200);
     }
 
