@@ -8,6 +8,9 @@ export default function AppService() {
 
 
     useEffect(() => {
+        dispatch(SET_SCROLL_BOTTOM(false));
+        dispatch(SET_SCROLL_TOP(false));
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])

@@ -6,6 +6,7 @@ import { Button, Input, Typography, Select, Form } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { MySelectTags } from './features/MySelectTags';
+import { message_success } from 'components/toast/message';
 
 
 export default function FormCreatePost({ createPost }) {
@@ -33,10 +34,9 @@ export default function FormCreatePost({ createPost }) {
             categoriesId: categories,
             content: markdown
         };
-        console.log(data)
         const res = await createPost(data);
+        if(res === true) message_success("Created!")
 
-        localStorage.removeItem("categories_createpost");
         setIsLoading(false);
     }
 
@@ -88,7 +88,7 @@ export default function FormCreatePost({ createPost }) {
                     onChange={setMarkdown}
                 />
 
-                <MDEditor.Markdown source={markdown} />
+                {/* <MDEditor.Markdown source={markdown} /> */}
             </div>
 
             {isMissing

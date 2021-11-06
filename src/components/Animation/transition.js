@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 export default function TransitionAnimate({ renderPart, transitionTime, initOpacity, EndOpacity }) {
     return (
         <motion.div
-            className="block"
             animate={{
                 opacity: EndOpacity ? EndOpacity : 1,
             }}

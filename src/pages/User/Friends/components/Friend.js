@@ -7,7 +7,7 @@ import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
 
 
-function Friend({ friend, i }) {
+function Friend({ friend, i, isHidden }) {
     const [user, setUser] = useState({});
 
     const history = useHistory();
@@ -47,19 +47,33 @@ function Friend({ friend, i }) {
                         <Typography.Title level={5} className="user-name" title={user.user_name}>{user.user_name}</Typography.Title>
                     </NavLink>
 
-                    <Dropdown overlay={dropDownItems} trigger={['click']}>
-                        <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
-                    </Dropdown>
-                </div>
-            </div>
-            <div className="text">
-                <div>
-                    <Button style={{ cursor: "default", marginTop: '20px' }}>
-                        Friend
-                    </Button>
+                    {isHidden
+                        ? <Typography.Text
+                            style={{ color: "#00000094", fontStyle: "italic", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "200px" }}
+                            title={user.user_email}
+                        >
+                            {user.user_email}
+                        </Typography.Text>
 
+                        : <Dropdown overlay={dropDownItems} trigger={['click']}>
+                            <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
+                        </Dropdown>
+
+                    }
                 </div>
             </div>
+
+            {isHidden
+                ? ""
+                : <div className="text">
+                    <div>
+                        <Button style={{ cursor: "default", marginTop: '20px' }}>
+                            Friend
+                        </Button>
+
+                    </div>
+                </div>
+            }
         </div>
     )
 }

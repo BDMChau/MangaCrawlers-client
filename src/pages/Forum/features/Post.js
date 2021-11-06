@@ -5,9 +5,9 @@ import { Avatar, Typography, Tag } from 'antd'
 import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
 
-export default function Post({ post, key, smallSize, renderContent }) {
+export default function Post({ post, key, smallSize, renderContent, width }) {
     return (
-        <div className="post" key={key} >
+        <div className="post" key={key} style={{ width: width ? width : "" }} >
             <div className="img">
                 <NavLink to={redirectURI.postPage_uri(post.post_id)}>
                     <Avatar
@@ -40,7 +40,7 @@ export default function Post({ post, key, smallSize, renderContent }) {
                 }
 
                 <div className="categories">
-                    {post.categoryList.length
+                    {post.categoryList?.length
                         ? post.categoryList.map((item, i) => (
                             <div className="category" key={i}>
                                 <Tag color={item.color}>{item.name}</Tag>

@@ -1,19 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import "./UserInfo.css";
 
-import { Col, Image, Row, Typography, Button, Empty, Divider, Dropdown, Menu } from 'antd';
-import { UserAddOutlined, MinusOutlined } from '@ant-design/icons';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Col, Row, Typography, Button, Empty, Divider, Dropdown, Menu, Tabs } from 'antd';
+import { UserAddOutlined, } from '@ant-design/icons';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 
 import { LeftOutlined, FieldTimeOutlined } from "@ant-design/icons"
 
 import redirectURI from 'helpers/redirectURI';
+import Post from 'pages/Forum/features/Post';
+import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
+import Friend from '../Friends/components/Friend';
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction }) {
-    const [visibleMutualModal, setVisibleMutualModal] = useState(false)
+export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts }) {
+    const [visibleMutualModal, setVisibleMutualModal] = useState(false);
+    const [tabSelected, setTabSelected] = useState(null);
+
     const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+    const queryVal = query.get("v");
 
+
+    const [friends] = useState([
+
+        {
+            user_email: "BroadcastChannel.com",
+            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
+            user_name: "ACASCACWAVAV",
+            user_id: "asccacsc"
+        },
+        {
+            user_email: "BroadcastChannel.com",
+            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
+            user_name: "ACASCACWAVAV",
+            user_id: "asccacsc"
+        },
+        {
+            user_email: "BroadcastChannel.com",
+            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
+            user_name: "ACASCACWAVAV",
+            user_id: "asccacsc"
+        },
+    ])
 
 
     const dropDownItem01 = (
@@ -94,6 +123,35 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
 
 
+    const renderPosts = () => (
+        <div className="posts">
+            {posts.length
+                ? posts.map(post => (
+                    <Post post={post} width={"48%"} />
+                ))
+                : <>
+                    <SkeletonCustom paragraphRows={15} />
+                </>
+
+            }
+        </div>
+    )
+
+    const renderFriends = () => (
+        <div className="friends">
+            {friends.length
+                ? friends.map(fr => (
+                    <Friend friend={fr} isHidden={true} />
+                ))
+                : <>
+                    <SkeletonCustom paragraphRows={15} />
+                </>
+
+            }
+        </div>
+    )
+
+
     return (
         <Row justify="center" className="user-info-page">
             <Col xs={23} sm={18} md={18} xl={13} className="col01">
@@ -138,20 +196,32 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                         </div>
 
                         <Col xs={24} sm={24} xl={24} className="col02">
-                        <div className="posts-cont">
-                            <Typography.Title level={4} style={{ margin: "0 0 10px 7px" }}>Recently  Posts</Typography.Title>
-                            <div className="posts">
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                                <img src="https://internationalnewsagency.org/wp-content/uploads/2021/07/Tsuki-ga-Michibiku-Isekai-Douchuu-1200x675.jpg" alt="" />
-                            </div>
-                        </div>
+
+                            <Tabs activeKey={queryVal ? queryVal : "posts"} setTabSelected={setTabSelected}
+                                onChange={(key) => {
+                                    history.push(`${redirectURI.userPage_uri(userInfo.user_id)}&v=${key}`)
+                                    setTabSelected(key)
+                                }}
+                            >
+                                <Tabs.TabPane tab="Recently Posts" key="posts">
+                                    <div className="posts-cont">
+                                        {renderPosts()}
+                                    </div>
+                                </Tabs.TabPane>
+
+                                <Tabs.TabPane tab="Friends" key="friends">
+                                    <div className="friends-cont">
+                                        {renderFriends()}
+                                    </div>
+                                </Tabs.TabPane>
+
+                                <Tabs.TabPane tab="Mutual Friends" key="mutual_friends">
+                                    <div className="friends-cont">
+                                        {renderFriends()}
+                                    </div>
+                                </Tabs.TabPane>
+                            </Tabs>
+
                         </Col>
                     </>
                     : <Empty description="" style={{ paddingTop: "80px" }} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./UserInfo.css";
 
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import UserInfo from './UserInfo';
 import userApi from 'api/apis/MainServer/userApi';
 import { socket, socketActions } from 'socket/socketClient';
@@ -10,11 +10,17 @@ import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import EVENTS_NAME from 'socket/features/eventsName';
 import { NavLink } from 'react-router-dom';
+import redirectURI from 'helpers/redirectURI';
 
 export default function UserInfoService() {
     const userState = useSelector((state) => state.userState);
+    const stuffsState = useSelector((state) => state.stuffsState);
 
+    const history = useHistory();
     const query = new URLSearchParams(useLocation().search);
+    const queryVal = query.get("v");
+    const queryUserId = query.get("id");
+
     const [userId, setUserId] = useState({});
 
     const [userInfo, setUserInfo] = useState({});
@@ -32,15 +38,34 @@ export default function UserInfoService() {
     const token = cookies.get("token");
 
     useEffect(() => {
-        if (query.get("id")) {
+       if(!queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
+    }, [])
+
+    useEffect(() => {
+        if (queryUserId) {
             setFromFr(0);
             setFromPost(0);
             setIsEndFr(false);
             setIsEndPost(false);
 
-            setUserId(query.get("id"));
+            setUserId(queryUserId);
         }
-    }, [query.get("id")])
+    }, [queryUserId])
+
+
+    // get more data when user scroll at bottom page
+    useEffect(() => {
+        if(stuffsState[1] && stuffsState[0]){
+           if(queryVal === "posts"){
+            getPosts(queryUserId);
+           } else if(queryVal === "friends"){
+            getFriends(queryUserId);
+           }else if(queryVal === "mutual_friends"){
+               
+           }
+        }
+    }, [stuffsState])
+
 
     useEffect(() => {
         if (userId && fromFr === 0 && fromPost === 0 && !isEndFr && !isEndPost) {
@@ -53,7 +78,7 @@ export default function UserInfoService() {
 
 
     useEffect(() => {
-        if (userState[0]) checkFriendStatus(query.get("id"))
+        if (userState[0]) checkFriendStatus(queryUserId)
     }, [userState[0]])
 
 
@@ -72,6 +97,8 @@ export default function UserInfoService() {
 
 
     const getFriends = async (id) => {
+        if (isEndFr) return;
+
         const data = {
             user_id: id.toString(),
             from: fromFr,
@@ -82,9 +109,8 @@ export default function UserInfoService() {
             const res = await userApi.getFriendsOfUser(data);
             if (res.content.err) return;
 
-            if (res.content.posts.list_friends <= 6) {
-
-                return;
+            if (res.content.list_friends.length < 6) {
+                setIsEndFr(true);
             }
 
             setFriends(res.content.list_friends);
@@ -95,6 +121,8 @@ export default function UserInfoService() {
     }
 
     const getPosts = async (id) => {
+        if (isEndPost) return;
+
         const data = {
             user_id: id.toString(),
             from: fromPost,
@@ -105,12 +133,11 @@ export default function UserInfoService() {
             const res = await userApi.getPostsOfUser(data);
             if (res.content.err) return;
 
-            if (res.content.posts.length <= 6) {
-
-                return;
+            if (res.content.posts.length < 6) {
+                setIsEndPost(true);
             }
-
-            setPosts(res.content.posts);
+            
+            setPosts(prev => [...prev, ...res.content.posts]);
             setFromPost(res.content.from);
         } catch (err) {
             console.log(err);
@@ -118,6 +145,8 @@ export default function UserInfoService() {
     }
 
 
+
+    //////////////////////// services ////////////////////////
     const checkFriendStatus = async (id) => {
         if (!userState[0]) return;
 
@@ -179,7 +208,7 @@ export default function UserInfoService() {
 
     const handleSendFriendRequest = async () => {
         if (!userState[0]) return message_error("You have to logged in to do this action!");
-        if (userState[0].user_id.toString() === query.get("id").toString()) return message_error("You cannot send request to yourself!")
+        if (userState[0].user_id.toString() === queryUserId.toString()) return message_error("You cannot send request to yourself!")
 
         const data = {
             type: 2,
@@ -305,12 +334,14 @@ export default function UserInfoService() {
             <UserInfo
                 userLoggedState={userState[0]}
                 userInfo={userInfo}
-                queryId={query.get("id").toString()}
+                queryId={queryUserId.toString()}
 
                 status={status}
 
                 handleSendFriendRequest={handleSendFriendRequest}
                 handleInteraction={handleInteraction}
+
+                posts={posts}
             />
         </div>
     )

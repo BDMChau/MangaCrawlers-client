@@ -18,6 +18,14 @@ const forumApi = {
     getPostsWithCategory: (data) => {
         const uri = `/api/forum_unauth/post/getposts_bycategory?category_id=${data.category_id}`
         return axiosClient.get(uri);
+    },
+    createPost: (token, data) => {
+        const uri = `/api/forum/post/create`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
     }
 
 }
