@@ -253,7 +253,7 @@ function TopNav({ handleLogOut, genres }) {
     };
 
     return (
-        <Header className="header-nav">
+        <Header className="header-nav" id="header-nav">
             {renderMenu()}
             {isModalVisibleSignUp ? <SignUpService /> : ""}
             {isModalVisibleSignIn ? <SignInService /> : ""}

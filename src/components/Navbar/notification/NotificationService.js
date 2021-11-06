@@ -77,7 +77,7 @@ function NotificationService({ isMobile }) {
 
 
     useEffect(() => {
-        if (badgeCount < 0) setBadgeCount(0);
+        if (badgeCount <= 0) setBadgeCount(0);
     }, [badgeCount])
 
 
@@ -150,7 +150,7 @@ function NotificationService({ isMobile }) {
             await userApi.updateInteractedNotification(token, data);
 
             dispatch(SET_INTERACT_NOTIFICATION(id))
-            setBadgeCount(badgeCount - 1);
+            if(badgeCount > 0) setBadgeCount(badgeCount - 1);
             return;
         } catch (err) {
             console.log(err)
@@ -174,7 +174,7 @@ function NotificationService({ isMobile }) {
                 }
 
                 dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
-                setBadgeCount(badgeCount - 1);
+                if(badgeCount > 0) setBadgeCount(badgeCount - 1);
 
                 message_success('Joined ^^!');
             }
@@ -204,7 +204,7 @@ function NotificationService({ isMobile }) {
                     return false;
                 }
 
-                setBadgeCount(badgeCount - 1);
+                if(badgeCount > 0) setBadgeCount(badgeCount - 1);
                 message_success('Success');
             }
 

@@ -42,7 +42,7 @@ function HomeNavbar({ isScroll, searchResults, onSearch, isLoadingSearch }) {
                                             <img className="img" src={manga.thumbnail} alt="" />
                                             <div className="text">
                                                 <Typography.Text className="manga-name">{manga.manga_name}</Typography.Text>
-                                                <Typography.Text className="view">{manga.views ? manga.views : "0"} views</Typography.Text>
+                                                <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} className="view">{manga.views ? manga.views : "0"} views</Typography.Text>
                                             </div>
                                         </NavLink>
                                     </List.Item>
