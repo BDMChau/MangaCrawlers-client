@@ -12,7 +12,7 @@ export default function Friends({ listRequests, totalFriends, listFriends, selec
     
     const AllFriends = () => (
         listFriends.length
-            ? <>
+            ? <div>
                 <Typography.Text
                     style={{
                         fontWeight: "500",
@@ -28,7 +28,7 @@ export default function Friends({ listRequests, totalFriends, listFriends, selec
                     ))}
 
                 </div>
-            </>
+            </div>
             : <Empty description="" style={{ marginTop: "80px" }} />
     )
 

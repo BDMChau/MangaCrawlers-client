@@ -14,7 +14,10 @@ export default function FriendsService() {
     const [listFriends, setListFriends] = useState([]);
     const [totalFriends, setTotalFriends] = useState(0);
 
+    const [isEndFriends, setIsEndFriends] = useState(false);
+    const [isEndReq, setIsEndReq] = useState(false);
     const [fromRowFriends, setFromRowFriends] = useState(0);
+    const [fromRowReq, setFromRowReq] = useState(0);
     
     const history = useHistory();
     const params = useParams();
@@ -32,27 +35,38 @@ export default function FriendsService() {
 
     useEffect(() => {
         if (userState[0]) {
-            getAllFriendRequests();
-            getAllFriends();
+            getFriendRequests();
+            getFriends();
             getNumberOfFriends();
         } else{
             history.push("/")
         }
-    }, [userState[0]])
+    }, [userState])
 
 
-    const getAllFriendRequests = async () => {
+    const getFriendRequests = async () => {
+        const data = {
+            from: fromRowReq,
+            amount: 10
+        }
+
         try {
-            const res = await userApi.getFriendRequest(token);
-            if (res.content.msg) {
-                setListRequests(res.content.requests);
+            const res = await userApi.getFriendRequest(token, data);
+            if (res.content.err) {
+                setListRequests([]);
+                return;
             }
+
+            if(res.content.requests.length < 10) setIsEndReq(true);
+
+            setListRequests(res.content.requests);
+            setFromRowReq(res.content.from);
         } catch (err) {
             console.log(err)
         }
     }
 
-    const getAllFriends = async () => {
+    const getFriends = async () => {
         const data = {
             from: fromRowFriends,
             amount: 10
@@ -64,6 +78,8 @@ export default function FriendsService() {
                 setListFriends([]);
                 return;
             }
+
+            if(res.content.list_friends.length < 10) setIsEndFriends(true);
 
             setListFriends(res.content.list_friends);
             setFromRowFriends(res.content.from)

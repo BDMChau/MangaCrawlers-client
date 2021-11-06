@@ -169,9 +169,9 @@
 .home-menu .searching-item .text {
   font-size: 16px;
   text-align: left;
-  white-space: nowrap;
+   /* white-space: nowrap; */
   overflow: hidden;
-  text-overflow: ellipsis;
+  /* text-overflow: ellipsis;  */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

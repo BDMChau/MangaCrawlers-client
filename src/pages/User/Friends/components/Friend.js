@@ -5,10 +5,14 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
+import userApi from 'api/apis/MainServer/userApi';
+import { message_error, message_success } from 'components/toast/message';
+import Cookies from 'universal-cookie';
 
 
 function Friend({ friend, i, isHidden }) {
     const [user, setUser] = useState({});
+    const [isFriend, setIsFriend] = useState(true);
 
     const history = useHistory();
 
@@ -16,12 +20,30 @@ function Friend({ friend, i, isHidden }) {
         setUser(friend);
     }, [friend])
 
+    const cookies = new Cookies();
+    const token = cookies.get("token");
 
-
-    const handleUnfriend = (id) => {
+    const handleUnfriend = async (id) => {
         if (!id) return;
 
-        console.log(id)
+        const data = {
+            to_user_id: id.toString()
+        };
+
+        try {
+            const res = await userApi.unfriend(token, data);
+            if (res.content.err) {
+                message_error("Failed!");
+                return;
+            }
+
+            setIsFriend(false);
+            message_success("Success!");
+            return;
+        } catch (err) {
+            console.log(err);
+            message_error("Failed!");
+        }
 
     }
 
@@ -55,9 +77,11 @@ function Friend({ friend, i, isHidden }) {
                             {user.user_email}
                         </Typography.Text>
 
-                        : <Dropdown overlay={dropDownItems} trigger={['click']}>
-                            <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
-                        </Dropdown>
+                        : isFriend
+                            ? <Dropdown overlay={dropDownItems} trigger={['click']}>
+                                <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
+                            </Dropdown>
+                            : ""
 
                     }
                 </div>
@@ -68,7 +92,7 @@ function Friend({ friend, i, isHidden }) {
                 : <div className="text">
                     <div>
                         <Button style={{ cursor: "default", marginTop: '20px' }}>
-                            Friend
+                            {isFriend ? "Friend" : ""}
                         </Button>
 
                     </div>

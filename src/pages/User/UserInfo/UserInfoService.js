@@ -23,6 +23,8 @@ export default function UserInfoService() {
 
     const [userId, setUserId] = useState({});
 
+    const [sent, setSent] = useState(false);
+
     const [userInfo, setUserInfo] = useState({});
     const [friends, setFriends] = useState([]);
     const [posts, setPosts] = useState([]);
@@ -38,7 +40,7 @@ export default function UserInfoService() {
     const token = cookies.get("token");
 
     useEffect(() => {
-       if(!queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
+        if (!queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
     }, [])
 
     useEffect(() => {
@@ -57,14 +59,14 @@ export default function UserInfoService() {
 
     // get more data when user scroll at bottom page
     useEffect(() => {
-        if(stuffsState[1] && stuffsState[0]){
-           if(queryVal === "posts"){
-            getPosts(queryUserId);
-           } else if(queryVal === "friends"){
-            getFriends(queryUserId);
-           }else if(queryVal === "mutual_friends"){
-               
-           }
+        if (stuffsState[1] && stuffsState[0]) {
+            if (queryVal === "posts") {
+                getPosts(queryUserId);
+            } else if (queryVal === "friends") {
+                getFriends(queryUserId);
+            } else if (queryVal === "mutual_friends") {
+
+            }
         }
     }, [stuffsState])
 
@@ -199,16 +201,21 @@ export default function UserInfoService() {
 
 
     useEffect(() => {
-        socket.on(EVENTS_NAME.SEND_FAILED, (result) => {
-            message_error("Failed!");
-        });
-
         socket.on(EVENTS_NAME.SEND_OK, (result) => {
-            message_success("sent!");
+            setSent(true);
         });
     }, []);
 
-    const handleSendFriendRequest = async () => {
+    // when user sent a req successfully
+    useEffect(() => {
+        if (sent) {
+            checkFriendStatus(userInfo.user_id)
+            setSent(false);
+        }
+    }, [sent])
+
+
+    const handleSendFriendRequest = () => {
         if (!userState[0]) return message_error("You have to logged in to do this action!");
         if (userState[0].user_id.toString() === queryUserId.toString()) return message_error("You cannot send request to yourself!")
 
@@ -225,8 +232,6 @@ export default function UserInfoService() {
         }
 
         socketActions.sendMessageToServer(data);
-
-        checkFriendStatus(userInfo.user_id)
     }
 
 
