@@ -13,36 +13,13 @@ import Post from 'pages/Forum/features/Post';
 import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 import Friend from '../Friends/components/Friend';
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts }) {
+export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
     const [tabSelected, setTabSelected] = useState(null);
 
     const history = useHistory();
     const query = new URLSearchParams(useLocation().search);
     const queryVal = query.get("v");
-
-
-    const [friends] = useState([
-
-        {
-            user_email: "BroadcastChannel.com",
-            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
-            user_name: "ACASCACWAVAV",
-            user_id: "asccacsc"
-        },
-        {
-            user_email: "BroadcastChannel.com",
-            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
-            user_name: "ACASCACWAVAV",
-            user_id: "asccacsc"
-        },
-        {
-            user_email: "BroadcastChannel.com",
-            user_avatar: "https://anhdepfree.com/wp-content/uploads/2020/05/hinh-anh-bao-ve-moi-truong-y-nghia.jpg",
-            user_name: "ACASCACWAVAV",
-            user_id: "asccacsc"
-        },
-    ])
 
 
     const dropDownItem01 = (
@@ -129,9 +106,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 ? posts.map(post => (
                     <Post post={post} width={"48%"} />
                 ))
-                : <>
-                    <SkeletonCustom paragraphRows={15} />
-                </>
+                : <Empty description="" style={{margin:"50px auto 0 auto"}} />
 
             }
         </div>
@@ -143,9 +118,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 ? friends.map(fr => (
                     <Friend friend={fr} isHidden={true} />
                 ))
-                : <>
-                    <SkeletonCustom paragraphRows={15} />
-                </>
+                : <Empty description="" style={{margin:"50px auto 0 auto"}} />
 
             }
         </div>

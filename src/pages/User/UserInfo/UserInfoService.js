@@ -43,6 +43,8 @@ export default function UserInfoService() {
 
     useEffect(() => {
         if (queryUserId) {
+            setPosts([]);
+            setFriends([]);
             setFromFr(0);
             setFromPost(0);
             setIsEndFr(false);
@@ -113,7 +115,7 @@ export default function UserInfoService() {
                 setIsEndFr(true);
             }
 
-            setFriends(res.content.list_friends);
+            setFriends(prev => [...prev, ...res.content.list_friends]);
             setFromFr(res.content.from);
         } catch (err) {
             console.log(err);
@@ -136,7 +138,7 @@ export default function UserInfoService() {
             if (res.content.posts.length < 6) {
                 setIsEndPost(true);
             }
-            
+
             setPosts(prev => [...prev, ...res.content.posts]);
             setFromPost(res.content.from);
         } catch (err) {
@@ -342,6 +344,7 @@ export default function UserInfoService() {
                 handleInteraction={handleInteraction}
 
                 posts={posts}
+                friends={friends}
             />
         </div>
     )
