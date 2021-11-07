@@ -1,4 +1,4 @@
-import React, { v, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import "./ForumHome.css"
 
 import MyTag from '../features/MyTag'
@@ -12,26 +12,12 @@ export default function ForumHome({ categories, posts }) {
 
 
     ////////// scroll //////////
-    useEffect(() => {
-        if (isScrollBottom === true) {
-            getCmts();
-
-            const timer = setTimeout(() => setIsScrollBottom(false), 200)
-            return () => clearTimeout(timer);
-        }
-    }, [isScrollBottom])
-
-
     const handleScroll = (e) => {
         const scrollTop = e.target.scrollTop;
         const clientHeight = e.target.clientHeight;
         const scrollHeight = e.target.scrollHeight;
 
-        if (isEndCmts === false) {
-            if (scrollHeight - (scrollTop + clientHeight) <= 50) {
-                getCmts();
-            }
-        }
+    
     }
 
 

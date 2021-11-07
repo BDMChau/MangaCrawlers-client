@@ -10,6 +10,8 @@ import { NavLink, useHistory } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 
 import updateIcon from "assets/img/updated.png"
+import userApi from 'api/apis/MainServer/userApi';
+import Cookies from 'universal-cookie';
 
 export default function UserProfile({
     visible,
@@ -32,6 +34,9 @@ export default function UserProfile({
 
     const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg"]
 
+    const cookies = new Cookies();
+    const token = cookies.get("token");
+
 
     useEffect(() => {
         if (visible === true) {
@@ -41,8 +46,8 @@ export default function UserProfile({
 
 
     useEffect(() => {
-        if (userState) {
-            setProfile(userState[0])
+        if (userState[0]) {
+            getNumberOfFriends(userState[0]);
             setUserDesc(userState[0].user_desc)
         }
     }, [userState])
@@ -54,6 +59,22 @@ export default function UserProfile({
             setFile(null)
         }
     }, [file])
+
+
+    const getNumberOfFriends = async (userInfo) => {
+        try {
+            const res = await userApi.getTotalFriends(token);
+            if (res.content.err) {
+                setProfile({ ...userInfo, total_friends: 0 });
+                return;
+            }
+
+            setProfile({ ...userInfo, total_friends: res.content.total_friends });
+        } catch (err) {
+            setProfile({ ...userInfo, total_friends: 0 });
+            console.log(err)
+        }
+    }
 
 
     const handleOpenFormSignUpTransTeam = () => {
@@ -186,7 +207,7 @@ export default function UserProfile({
                             <p
                                 onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}
                             >
-                                100 friends
+                                {profile.total_friends} friends
                             </p>
                         </Tooltip>
                     </div>

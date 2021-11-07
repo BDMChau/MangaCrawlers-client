@@ -8,7 +8,7 @@ const forumApi = {
         return axiosClient.get(uri);
     },
     getAllPost: (data) => {
-        const uri = `/api/forum_unauth/post/getpostsb?from=${data.from}&amount=${data.amount}`
+        const uri = `/api/forum_unauth/post/getposts?from=${data.from}&amount=${data.amount}`
         return axiosClient.get(uri);
     },
     getPost: (data) => {
@@ -26,7 +26,15 @@ const forumApi = {
                 Authorization: token
             }
         })
-    }
+    },
+    searchPosts: (token, data) => {
+        const uri = `/api/forum/post/search`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 
 }
 
