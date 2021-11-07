@@ -1,16 +1,17 @@
 import { Tag } from 'antd'
+import { unset } from 'lodash'
 import React from 'react'
 
 
-export default function MyTag({ category, i }) {
+export default function MyTag({ category, key, padding }) {
 
     return (
         <Tag
             className="category-tag"
-            style={{ border: `1px solid ${category.color}` }}
+            style={{ padding: padding ? padding : unset }}
             color={category.color === "none" ? "" : category.color}
             title={category.name}
-            key={i}
+            key={key}
         >
             {category.name}
         </Tag>

@@ -3,11 +3,11 @@ import "components/Editor/styles/Editor.css"
 
 import MDEditor from '@uiw/react-md-editor';
 import { Button, Input, Typography, Select, Form } from 'antd';
-import { UpOutlined } from '@ant-design/icons';
+import { UpOutlined, LeftOutlined, PlusOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { MySelectTags } from './features/MySelectTags';
 import { message_success } from 'components/toast/message';
-
+import { useHistory } from 'react-router';
 
 export default function FormCreatePost({ createPost }) {
     const forumState = useSelector((state) => state.forumState);
@@ -19,6 +19,18 @@ export default function FormCreatePost({ createPost }) {
 
     const [isMissing, setIsMissing] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const history = useHistory();
+
+
+    useEffect(() => {
+        if (title || categories.length || markdown) {
+            window.addEventListener("beforeunload", (ev) => {
+                ev.preventDefault();
+                return ev.returnValue = '';
+            });
+        }
+    }, [title, categories.length, markdown])
 
 
 
@@ -35,7 +47,7 @@ export default function FormCreatePost({ createPost }) {
             content: markdown
         };
         const res = await createPost(data);
-        if(res === true) message_success("Created!")
+        if (res === true) message_success("Created!")
 
         setIsLoading(false);
     }
@@ -44,7 +56,16 @@ export default function FormCreatePost({ createPost }) {
     return (
         <div className="md-container">
             <div className="title">
-                <Typography.Title level={4}>Write your new post</Typography.Title>
+                <div style={{ display: "flex" }} >
+                    <Button
+                        title="Back"
+                        onClick={history.goBack}
+                        icon={<LeftOutlined style={{ fontSize: "18px" }} />}
+                        style={{ borderRadius: "50px", border: 'none', marginRight: "3px", marginTop: "-1px" }}
+                    />
+                    <Typography.Title level={4}>Create your new post</Typography.Title>
+                </div>
+
                 <Typography.Text>We use Markdown to create post. If you haven't known about the format of Markdown before, you can go <a className="link-instructions" href="https://www.markdownguide.org/basic-syntax/" target="_blank" >Here</a> for instructions ^^</Typography.Text>
             </div>
 
@@ -104,6 +125,7 @@ export default function FormCreatePost({ createPost }) {
                     type="primary"
                     onClick={handleCreate}
                     loading={isLoading}
+                    icon={<PlusOutlined style={{ fontSize: "16px" }} />}
                 >
                     Create Post
                 </Button>

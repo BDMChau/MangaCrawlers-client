@@ -123,7 +123,7 @@ function InputForm({
     }
 
 
-    const debounceSearchUsers = debounce(async (val) => {
+    const debounceSearchUsers = useRef(debounce(async (val) => {
         if (!val) {
             setUsersSearchResult([]);
             return;
@@ -150,7 +150,7 @@ function InputForm({
             console.log(error);
         }
 
-    }, 200)
+    }, 200))
 
 
     const handleRemoveImg = () => {
@@ -202,7 +202,7 @@ function InputForm({
                         sticker={sticker}
                         setSticker={setSticker}
 
-                        onSearchFunc={debounceSearchUsers}
+                        onSearchFunc={(val) => debounceSearchUsers.current(val)}
                         suggestionsProp={usersSearchResult}
 
                         content={cmtContent}

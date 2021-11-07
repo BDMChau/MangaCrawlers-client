@@ -19,6 +19,12 @@ const forumApi = {
         const uri = `/api/forum_unauth/post/getposts_bycategory?category_id=${data.category_id}`
         return axiosClient.get(uri);
     },
+    searchPosts: (data) => {
+        const uri = `/api/forum_unauth/post/search?value=${data.title}`
+        return axiosClient.get(uri)
+    },
+
+    ////////////// auth
     createPost: (token, data) => {
         const uri = `/api/forum/post/create`
         return axiosClient.post(uri, data, {
@@ -27,15 +33,6 @@ const forumApi = {
             }
         })
     },
-    searchPosts: (token, data) => {
-        const uri = `/api/forum/post/search`
-        return axiosClient.post(uri, data, {
-            headers: {
-                Authorization: token
-            }
-        })
-    },
-
 }
 
 export default forumApi;

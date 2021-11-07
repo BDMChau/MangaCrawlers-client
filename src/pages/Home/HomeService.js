@@ -21,7 +21,6 @@ function HomeService() {
     const [isLoading, setIsLoading] = useState(false)
 
     const [searchResults, setSearchResults] = useState([])
-    const typingRef = useRef(null);
 
 
     useEffect(() => {
@@ -127,7 +126,7 @@ function HomeService() {
     }
 
 
-    const debouceCallApiToSearch = debounce(async (val) => {
+    const debouceCallApiToSearch = useRef(debounce(async (val) => {
         try {
             setIsLoadingSearch(true);
             const data = {
@@ -150,11 +149,11 @@ function HomeService() {
         } catch (err) {
             console.log(err)
         }
-    }, 200)
+    }, 200))
 
     const onSearch = (val) => {
         if (val) {
-            typingRef.current = debouceCallApiToSearch(val);
+            debouceCallApiToSearch.current(val);
         }
     }
 

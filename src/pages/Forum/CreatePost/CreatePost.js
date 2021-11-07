@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./CreatePost.css";
 
 import FormCreatePost from "./FormCreatePost";
