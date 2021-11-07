@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 export default function FriendsService() {
     const userState = useSelector((state) => state.userState);
+    const stuffsState = useSelector((state) => state.stuffsState);
 
     const [selectedKey, setSelectedKey] = useState("");
     const [listRequests, setListRequests] = useState([]);
@@ -18,6 +19,8 @@ export default function FriendsService() {
     const [isEndReq, setIsEndReq] = useState(false);
     const [fromRowFriends, setFromRowFriends] = useState(0);
     const [fromRowReq, setFromRowReq] = useState(0);
+
+    const [isLoading, setIsLoading] = useState(false);
     
     const history = useHistory();
     const params = useParams();
@@ -41,48 +44,70 @@ export default function FriendsService() {
         } else{
             history.push("/")
         }
-    }, [userState])
+    }, [userState]);
+
+
+      // get more data when user scroll at bottom page
+      useEffect(() => {
+        if (stuffsState[1] && stuffsState[0]) {
+            if (path === "friend_requests") {
+                getFriendRequests();
+            } else if (queryVal === "all_friends") {
+                getFriends();
+            }
+        }
+    }, [stuffsState]);
 
 
     const getFriendRequests = async () => {
+        if(isEndReq) return;
+        setIsLoading(true);
+
         const data = {
             from: fromRowReq,
-            amount: 10
+            amount: 14
         }
 
         try {
             const res = await userApi.getFriendRequest(token, data);
             if (res.content.err) {
                 setListRequests([]);
+                setIsLoading(false);
                 return;
             }
 
-            if(res.content.requests.length < 10) setIsEndReq(true);
+            if(res.content.requests.length < 14) setIsEndReq(true);
 
-            setListRequests(res.content.requests);
+            setListRequests(prev => [...prev, ...res.content.requests]);
             setFromRowReq(res.content.from);
+            setIsLoading(false);
         } catch (err) {
-            console.log(err)
+            console.log(err);
         }
     }
 
     const getFriends = async () => {
+        if(isEndFriends) return;
+        setIsLoading(true);
+
         const data = {
             from: fromRowFriends,
-            amount: 10
+            amount: 14
         }
 
         try {
             const res = await userApi.getFriends(token, data);
             if (res.content.err) {
                 setListFriends([]);
+                setIsLoading(false);
                 return;
             }
 
-            if(res.content.list_friends.length < 10) setIsEndFriends(true);
+            if(res.content.list_friends.length < 14) setIsEndFriends(true);
 
-            setListFriends(res.content.list_friends);
-            setFromRowFriends(res.content.from)
+            setListFriends(prev => [...prev, ...res.content.list_friends]);
+            setFromRowFriends(res.content.from);
+            setIsLoading(false);
         } catch (err) {
             console.log(err)
         }
@@ -109,6 +134,8 @@ export default function FriendsService() {
 
             listFriends={listFriends}
             totalFriends={totalFriends}
+
+            isLoading={isLoading}
 
             selectedKey={selectedKey}
             setSelectedKey={setSelectedKey}

@@ -47,7 +47,10 @@ export default function FormCreatePost({ createPost }) {
             content: markdown
         };
         const res = await createPost(data);
-        if (res === true) message_success("Created!")
+        if (res === true) {
+            message_success("Created!");
+            setTimeout(() => history.push("/forum"), 300);
+        }
 
         setIsLoading(false);
     }

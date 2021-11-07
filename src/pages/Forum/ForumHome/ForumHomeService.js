@@ -14,11 +14,11 @@ export default function ForumHomeService() {
     const [isEnd, setIsEnd] = useState(false);
 
     useEffect(() => {
-        getAllPost();
+        getPosts();
     }, [])
 
 
-    const getAllPost = async () => {
+    const getPosts = async () => {
         if (isEnd) return;
 
         const data = {
@@ -34,7 +34,7 @@ export default function ForumHomeService() {
 
             if (posts.length >= from) setIsEnd(true);
 
-            setPosts(posts);
+            setPosts(prev => [...prev, ...posts]);
             setFrom(contFromPos);
         } catch (err) {
             console.log(err)

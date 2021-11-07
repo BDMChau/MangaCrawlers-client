@@ -10,7 +10,8 @@ import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 import ButtonLike from './ButtonLike';
 
-export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
+export default function InteractionForm({ comment, cmtId, userId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
+
     const [replying, setReplying] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -76,24 +77,30 @@ export default function InteractionForm({ comment, cmtId, deleteCmt, addCmt, isA
                 Reply
             </Button>
 
-            <Button
-                className="reply"
-                type="text"
-                disabled={replying}
-                onClick={() => handleEdit()}
-                style={{ borderRadius: "10px", padding: "0 2px" }}
-            >
-                Edit
-            </Button>
+            {/* owner */}
+            {comment.user_id === userId
+                ? <>
+                    <Button
+                        className="reply"
+                        type="text"
+                        disabled={replying}
+                        onClick={() => handleEdit()}
+                        style={{ borderRadius: "10px", padding: "0 2px" }}
+                    >
+                        Edit
+                    </Button>
 
-            <Button
-                className="btn-remove"
-                type="text"
-                onClick={() => setIsModalVisible(true)}
-                style={{ borderRadius: "10px", padding: "0 2px" }}
-            >
-                Delete
-            </Button>
+                    <Button
+                        className="btn-remove"
+                        type="text"
+                        onClick={() => setIsModalVisible(true)}
+                        style={{ borderRadius: "10px", padding: "0 2px" }}
+                    >
+                        Delete
+                    </Button>
+                </>
+                : ""
+            }
 
             {replying || isEditting
                 ? <div style={{ width: "100%", marginTop: "10px" }} >

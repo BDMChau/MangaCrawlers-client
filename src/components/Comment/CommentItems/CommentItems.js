@@ -102,6 +102,7 @@ function CommentItems({
                     <InteractionForm
                         comment={comment}
                         cmtId={comment.manga_comment_id}
+                        userId={userState[0].user_id}
 
                         deleteCmt={deleteCmt}
 

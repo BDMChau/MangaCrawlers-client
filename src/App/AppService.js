@@ -28,7 +28,7 @@ export default function AppService() {
         
         // scroll at bottom
         let tempBottom = false;
-        if (windowBottom >= documentHeight) tempBottom = true;
+        if (windowBottom >= (documentHeight - 150)) tempBottom = true;
 
         setTimeout(() => {
             dispatch(SET_SCROLL_BOTTOM(tempBottom));

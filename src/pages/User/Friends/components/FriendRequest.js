@@ -17,7 +17,6 @@ function FriendRequest({ requestProp, i }) {
     const token = cookies.get("token");
 
     useEffect(() => {
-        console.log(requestProp)
         setRequest(requestProp);
     }, [requestProp])
 

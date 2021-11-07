@@ -29,9 +29,8 @@
   justify-content: space-between;
   width: 100%;
   margin-top: 10px;
-  background-color: grey;
   overflow-y: auto;
-  max-height: 100px;
+  height: 100%;
 }
 
 .friends .friend {
@@ -79,7 +78,7 @@
   display: flex;
   justify-content: space-between;
   padding: 15px 10px;
-  margin: 0 5px 15px 5px;
+  margin: 5px 5px 10px 5px;
   width: 49%;
   border-radius: 10px;
   background-color: transparent;

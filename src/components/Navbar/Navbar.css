@@ -364,11 +364,16 @@
 
 #header-nav .ant-select-dropdown {
   position: fixed !important;
+  background-color: #ffffffe8 !important;
 }
 
 .search-menu-input {
   width: 310px !important;
   line-height: 25px;
+}
+
+.search-menu-input .ant-select-selector {
+  background-color: transparent !important;
 }
 
 .search-menu-item {

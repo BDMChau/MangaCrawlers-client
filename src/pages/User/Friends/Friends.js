@@ -5,11 +5,12 @@ import { Col, Empty, Row, Tabs, Typography } from 'antd'
 import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
 import FriendRequest from './components/FriendRequest';
+import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 
-export default function Friends({ listRequests, totalFriends, listFriends, selectedKey, setSelectedKey }) {
+export default function Friends({ listRequests, totalFriends, listFriends, isLoading, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
 
-    
+
     const AllFriends = () => (
         listFriends.length
             ? <div>
@@ -23,9 +24,20 @@ export default function Friends({ listRequests, totalFriends, listFriends, selec
                     {totalFriends} friends
                 </Typography.Text>
                 <div className="all-friends">
-                    {listFriends.map((item, i) => (
-                        <Friend friend={item} i={i} />
-                    ))}
+                    listRequests<>
+                        {listFriends.map((item, i) => (
+
+                            <Friend friend={item} i={i} />
+
+
+
+                        ))}
+
+                        {isLoading
+                            ? <SkeletonCustom paragraphRows={3} />
+                            : ""
+                        }
+                    </>
 
                 </div>
             </div>
@@ -39,11 +51,18 @@ export default function Friends({ listRequests, totalFriends, listFriends, selec
             ? <div>
                 <div className="all-friends">
                     {listRequests.length
-                        ? listRequests.map((request, i) => (
-                            <FriendRequest requestProp={request} i={i} />
-                        ))
+                        ? <>
+                            {listRequests.map((request, i) => (
+                                <FriendRequest requestProp={request} i={i} />
+                            ))}
 
-                        : <Empty description="" style={{ margin:"0 auto", marginTop: "80px" }} />
+                            {isLoading
+                                ? <SkeletonCustom paragraphRows={3} />
+                                : ""
+                            }
+                        </>
+
+                        : <Empty description="" style={{ margin: "0 auto", marginTop: "80px" }} />
                     }
 
                 </div>

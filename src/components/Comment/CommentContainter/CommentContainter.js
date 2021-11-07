@@ -159,7 +159,7 @@ function CommentContainter({ mangaId, postId }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
-                notification_error("Something wrong :(");
+                notification_error("Failed :(");
                 setTimeout(() => setComments([]), 200)
                 return;
             }
@@ -167,7 +167,7 @@ function CommentContainter({ mangaId, postId }) {
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
-            notification_error("Something wrong :(")
+            notification_error("Failed :(")
             console.log(err)
         }
     }
@@ -182,7 +182,7 @@ function CommentContainter({ mangaId, postId }) {
         try {
             const response = await userApi.updateCmt(token, formData);
             if (response.content.err) {
-                notification_error("Something wrong :(")
+                notification_error("Failed :(")
                 return;
             }
             const comment = response.content.comment_info;
@@ -195,14 +195,14 @@ function CommentContainter({ mangaId, postId }) {
 
             const response02 = await userApi.filter(token, data);
             if (response02.content.err) {
-                notification_error("Something wrong :(")
+                notification_error("Failed :(")
                 return;
             }
             const restCmts = response02.content.comments ? response02.content.comments : [];
 
             setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
-            notification_error("Something wrong :(")
+            notification_error("Failed :(")
             console.log(err)
         }
     }
