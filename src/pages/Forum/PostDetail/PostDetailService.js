@@ -33,6 +33,21 @@ export default function PostDetailService() {
         }
     }
 
+
+    const likePost = async () => {
+        
+    }
+
+
+    const unlikePost = async () => {
+
+    }
+
+    
+    const checkIsLiked = async () => {
+
+    }
+
     return (
         <PostDetail
             postInfo={postInfo}

@@ -4,7 +4,7 @@ import "./PostDetail.css"
 import MDEditor from '@uiw/react-md-editor';
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import { Avatar, Button, Col, Divider, Row, Typography } from 'antd';
-import { LeftOutlined } from "@ant-design/icons"
+import { LeftOutlined, LikeOutlined, DislikeOutlined   } from "@ant-design/icons"
 import { useHistory } from 'react-router';
 
 export default function PostDetail({ postInfo }) {
@@ -37,19 +37,27 @@ export default function PostDetail({ postInfo }) {
                     </Divider>
                 </Col>
 
-                <Col className="post-detail" xs={22} md={22} xl={22}>                    
-                    <div className="post-owner">
-                        <Avatar className="avatar" src={postInfo.user_avatar} title="Avatar" alt="" />
+                <Col className="post-detail" xs={22} md={22} xl={22}>
+                    <div style={{display:"flex", justifyContent:"space-between"}} >
+                        <div className="post-owner">
+                            <Avatar className="avatar" src={postInfo.user_avatar} title="Avatar" alt="" />
 
-                        <div className="owner-info">
-                            <Typography.Title level={5} title={postInfo.user_name}>{postInfo.user_name}</Typography.Title>
-                            <Typography.Text className="date-created" >{postInfo.created_at}</Typography.Text>
+                            <div className="owner-info">
+                                <Typography.Title level={5} title={postInfo.user_name}>{postInfo.user_name}</Typography.Title>
+                                <Typography.Text className="date-created" >{postInfo.created_at}</Typography.Text>
+                            </div>
+
                         </div>
 
+                        <div className="interact">
+                            <Button className="btn-like-dislike" icon={
+                                <LikeOutlined style={{fontSize:"22px"}} />
+                            } />
+                        </div>
                     </div>
-                    
+
                     <Typography.Title level={4}>{postInfo.title}</Typography.Title>
-                    <Divider orientation="left" style={{ margin: 0, marginBottom:"30px" }} />
+                    <Divider orientation="left" style={{ margin: 0, marginBottom: "30px" }} />
 
                     <MDEditor.Markdown
                         source={postInfo.content}
