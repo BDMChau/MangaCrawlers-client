@@ -2,77 +2,85 @@ import React, { useState, useEffect } from 'react'
 import "../../../Admin.css"
 import "../Tables.css"
 import "../../../components/Charts/Chart.css"
-import { DeleteOutlined } from '@ant-design/icons';
 
-import { Table, Col, Button, Input } from 'antd';
+import { Table, Col, Input, Button } from 'antd';
+import { Avatar } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
+import { DeleteOutlined, FieldTimeOutlined } from '@ant-design/icons';
 
-export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoading }) {
+
+export default function PostTable({ posts, handleDeprecatePost, isLoading }) {
     const [data, setData] = useState([])
 
+
     useEffect(() => {
-        if (transGrs.length) setData(transGrs);
-    }, [transGrs])
+        if (posts.length) setData(posts);
+    }, [posts])
+
 
     const onSearch = (val) => {
         setTimeout(() => {
             if (val) {
-                const result = transGrs.filter(item => item.transgroup_name.toLowerCase().includes(val.toLowerCase()))
+                const result = posts.filter(item => item.title.toLowerCase().includes(val.toLowerCase()))
 
                 setData(result)
             } else {
-                setData(transGrs)
+                setData(users)
             }
         }, 300);
     }
+
 
     const columns = [
         {
             width: '5%',
             fixed: 'left',
             title: 'ID',
-            dataIndex: 'transgroup_id',
-            key: 'transgroup_id',
+            dataIndex: 'post_id',
+            key: 'post_id',
         },
         {
-            title: 'TEAM NAME',
-            dataIndex: 'transgroup_name',
-            key: 'transgroup_name',
-            fixed: 'left',
-            width: "6%",
+            title: 'POST TITLE',
+            dataIndex: 'title',
+            key: 'title',
+        },
+        {
+            title: 'POST STATUS',
+            dataIndex: 'is_deprecated',
+            key: 'is_deprecated',
+            render: is_deprecated => !is_deprecated ? <p style={{ color: "grey" }} >Deprecated</p> : <p style={{ color: "#29c729" }} >Active</p>
+        },
+        {
+            title: 'NAME',
+            dataIndex: 'user_name',
+            key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            width:"8%",
-            title: 'TEAM EMAIL',
-            dataIndex: 'transgroup_email',
-            key: 'transgroup_email',
-            render: text => <p>{text}</p>,
+            title: 'EMAIL',
+            dataIndex: 'user_email',
+            key: 'user_email',
+            className: "email-col"
         },
-        // {
-        //     title: 'Members',
-        //     key: 'members',
-        //     dataIndex: 'members',
-        //     render: text => <a>{text} member(s)</a>
-        // },
         {
             title: 'OPERATION',
             key: 'operation',
             fixed: 'right',
             width: '8%',
-            render: (transgroup) => (
+            render: (post, record) => (
                 <DropOption
                     menuOptions={[
-                        { key: '2', name: `Delete`, icon: <DeleteOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleRemoveTransGroup(transgroup.transgroup_id) },
+                        { key: '1', name: `Deprecate`, icon: <FieldTimeOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleDeprecatePost(post.post_id) },
                     ]}
                 />
-            ),
+            )
         },
     ];
 
+
     return (
-        <Col xxl={14} xs={23} sm={20} className="table-trans-gr">
+        <Col xxl={14} xs={23} sm={20} className="table-user">
             <Input placeholder="Search..." onChange={(e) => onSearch(e.target.value)} style={{ width: 200, margin: '5px 11px' }} />
             <div style={{ display: "flex" }}>
                 {
@@ -81,17 +89,16 @@ export default function TransGrTable({ transGrs, handleRemoveTransGroup, isLoadi
                         : ""
                 }
             </div>
-
             <Table
-                className="trans-gr-table"
+                className="user-table"
                 columns={columns}
                 bordered
                 simple
                 dataSource={data}
                 pagination={{
-                    showTotal: () => `Total ${transGrs.length} Translation Teams`,
+                    showTotal: () => `Total ${posts.length} Posts`,
                 }}
-                rowKey={transgr => transgr.transgroup_id}
+                rowKey={user => user.manga_id}
             />
         </Col>
     )

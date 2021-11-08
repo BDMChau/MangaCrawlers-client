@@ -5,9 +5,11 @@ import { Tabs } from 'antd'
 import MangaTable from './components/MangaTable'
 import TransGrTable from './components/TransGrTable'
 import TableUser from './components/UserTable'
+import PostTable from './components/PostTable'
 
 function Tables({
     mangas,
+    posts,
     users,
     transGrs,
 
@@ -15,6 +17,7 @@ function Tables({
     handleDeprecateUser,
     handleRemoveUser,
     handleRemoveManga,
+    handleDeprecatePost,
     handleRemoveTransGroup,
     isLoading,
 
@@ -62,7 +65,11 @@ function Tables({
                 </Tabs.TabPane>
 
                 <Tabs.TabPane tab="Posts on Forum" key="4">
-                    Teams
+                    <PostTable
+                    posts={posts}
+                    handleDeprecatePost={handleDeprecatePost}
+                    isLoading={isLoading}
+                     />
                 </Tabs.TabPane>
             </Tabs>
         </div>

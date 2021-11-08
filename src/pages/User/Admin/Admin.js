@@ -19,6 +19,7 @@ function Admin({
     users,
     admins,
     mangas,
+    posts,
     transGrs,
 
     reportUsers,
@@ -32,6 +33,7 @@ function Admin({
     handleDeprecateUser,
     handleRemoveUser,
     handleRemoveManga,
+    handleDeprecatePost,
     handleRemoveTransGroup,
     isLoading,
 
@@ -56,10 +58,10 @@ function Admin({
 
 
     useEffect(() => {
-        if (users.length || mangas.length || transGrs.length) {
+        if (users.length || mangas.length || transGrs.length || posts.length) {
             setIsGetDataDone(true)
         }
-    }, [users, mangas, transGrs])
+    }, [users, mangas, transGrs, posts])
 
 
     useEffect(() => {
@@ -80,6 +82,7 @@ function Admin({
             ? <div style={{ padding: '0 10px' }}>
                 <Dashboard
                     mangas={mangas}
+                    posts={posts}
                     users={users}
                     admins={admins}
                     transGrs={transGrs}
@@ -95,6 +98,7 @@ function Admin({
                 ? <div>
                     <Tables
                         mangas={mangas}
+                        posts={posts}
                         users={users}
                         transGrs={transGrs}
 
@@ -102,6 +106,7 @@ function Admin({
                         handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
                         handleRemoveUser={(userId) => handleRemoveUser(userId)}
                         handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+                        handleDeprecatePost={handleDeprecatePost}
                         handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
                         isLoading={isLoading}
 

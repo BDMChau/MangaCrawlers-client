@@ -33,6 +33,13 @@ export default function MangaTable({ mangas, handleRemoveManga, isLoading }) {
 
     const columns = [
         {
+            width: '5%',
+            fixed: 'left',
+            title: 'ID',
+            dataIndex: 'manga_id',
+            key: 'manga_id',
+        },
+        {
             title: 'THUMBNAIL',
             dataIndex: 'thumbnail',
             key: 'thumbnail',

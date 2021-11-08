@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from '@ant-design/charts';
 
-const DashbroadChart02 = ({ mangas, users, transGrs }) => {
+const DashbroadChart02 = ({ mangas, posts, users, transGrs }) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const totalMangas = mangas.length;
         const totalUsers = users.length;
+        const totalPosts = posts.length;
         const totalTransGrs = transGrs.length;
 
         const newArr = [
@@ -24,7 +25,7 @@ const DashbroadChart02 = ({ mangas, users, transGrs }) => {
             },
             {
                 name: "Post on Forum",
-                value: totalUsers
+                value: totalPosts
             },
         ]
 

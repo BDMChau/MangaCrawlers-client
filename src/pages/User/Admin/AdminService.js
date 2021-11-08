@@ -11,6 +11,7 @@ function AdminService() {
     const [users, setUsers] = useState([]);
     const [admins, setAdmins] = useState([]);
     const [mangas, setMangas] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [transGrs, setTransGrs] = useState([]);
 
     const [reportUsers, setReportUsers] = useState([]);
@@ -30,13 +31,14 @@ function AdminService() {
     const query = new URLSearchParams(useLocation().search);
 
     useEffect(() => {
-        if(!query.get('v')) history.push(`/admin?v=dashboard`);
+        if (!query.get('v')) history.push(`/admin?v=dashboard`);
     }, [])
 
 
     useEffect(() => {
         getAllUsers();
         getAllMangas();
+        getAllPosts();
         getAllTransGroups();
 
         getReportUser();
@@ -82,8 +84,6 @@ function AdminService() {
                 return;
             }
 
-            console.log(response.content.msg)
-
             const allUsers = response.content.users;
             const sortedUsers = allUsers.sort(arrayMethods.dynamicSort("user_id"))
 
@@ -113,9 +113,6 @@ function AdminService() {
                 return;
             }
 
-            console.log("all mangas in admin ", response)
-
-
             const allMangas = response.content.mangas;
             const sortedMangas = allMangas.sort(arrayMethods.dynamicSort("manga_id"))
 
@@ -130,6 +127,26 @@ function AdminService() {
         }
     }
 
+
+    const getAllPosts = async () => {
+        try {
+            const response = await adminApi.getAllPosts(token);
+            if (response.content.err) {
+                console.error("getAllPosts error!")
+                return;
+            }
+
+            const allPosts = response.content.posts;
+            const sortedPosts = allPosts.sort(arrayMethods.dynamicSort("post_id"))
+
+            setPosts(sortedPosts)
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
+
     const getAllTransGroups = async () => {
         try {
             const response = await adminApi.getAllTransGroups(token);
@@ -138,17 +155,10 @@ function AdminService() {
                 return;
             }
 
-            console.log(response)
-            console.log(response.content.msg)
-
             const allTransGroups = response.content.list_transgroup;
             const sortedTransGroups = allTransGroups.sort(arrayMethods.dynamicSort("transgroup_id"))
 
             setTransGrs(sortedTransGroups)
-            // sortedTransGroups.forEach(transGr => {
-            //     setTransGrs(prev => [...prev, transGr]);
-            // });
-
             return;
         } catch (ex) {
             console.log(ex)
@@ -189,6 +199,7 @@ function AdminService() {
         }
     }
 
+
     const handleRemoveUser = async (userId) => {
         setIsLoading(true);
         const data = {
@@ -216,6 +227,7 @@ function AdminService() {
         }
     }
 
+
     const handleRemoveManga = async (mangaId) => {
         setIsLoading(true);
         const data = {
@@ -240,6 +252,11 @@ function AdminService() {
         } catch (ex) {
             console.log(ex)
         }
+    }
+
+
+    const handleDeprecatePost = async (postId) => {
+console.log(postId)
     }
 
 
@@ -375,6 +392,7 @@ function AdminService() {
             users={users}
             admins={admins}
             mangas={mangas}
+            posts={posts}
             transGrs={transGrs}
 
             reportUsers={reportUsers}
@@ -388,6 +406,7 @@ function AdminService() {
             handleDeprecateUser={(userId) => handleDeprecateUser(userId)}
             handleRemoveUser={(userId) => handleRemoveUser(userId)}
             handleRemoveManga={(mangaId) => handleRemoveManga(mangaId)}
+            handleDeprecatePost={handleDeprecatePost}
             handleRemoveTransGroup={(transGrId) => handleRemoveTransGroup(transGrId)}
             isLoading={isLoading}
 

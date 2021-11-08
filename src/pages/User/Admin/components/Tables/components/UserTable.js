@@ -33,6 +33,13 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
 
     const columns = [
         {
+            width: '5%',
+            fixed: 'left',
+            title: 'ID',
+            dataIndex: 'user_id',
+            key: 'user_id',
+        },
+        {
             title: 'AVATAR',
             dataIndex: 'user_avatar',
             key: 'user_avatar',
@@ -67,7 +74,7 @@ export default function TableUser({ users, handleDeprecateUser, handleRemoveUser
             render: (user, record) => (
                 <DropOption
                     menuOptions={[
-                        { key: '1', name: `Deprecated`, icon: <FieldTimeOutlined style={{fontSize:"20px"}} />, keyId: "delete", funcAction: () => handleDeprecateUser(user.user_id) },
+                        { key: '1', name: `Deprecate`, icon: <FieldTimeOutlined style={{fontSize:"20px"}} />, keyId: "delete", funcAction: () => handleDeprecateUser(user.user_id) },
                         { key: '2', name: `Delete`, icon: <DeleteOutlined style={{fontSize:"20px"}} />, keyId: "delete", funcAction: () => handleRemoveUser(user.user_id) },
                     ]}
                 />

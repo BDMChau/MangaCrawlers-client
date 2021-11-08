@@ -18,6 +18,14 @@ const adminApi = {
             }
         })
     },
+    getAllPosts: (token) => {
+        const uri = '/api/admin/getallposts'
+        return axiosClient.get(uri, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     getAllTransGroups: (token) => {
         const uri = '/api/admin/getalltransgroup'
         return axiosClient.get(uri, {

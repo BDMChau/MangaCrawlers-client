@@ -10,6 +10,13 @@ export default function AdminTable({ admins }) {
 
     const columns = [
         {
+            width: '5%',
+            fixed: 'left',
+            title: 'ID',
+            dataIndex: 'user_id',
+            key: 'user_id',
+        },
+        {
             width: '6%',
             fixed: 'left',
             title: 'AVATAR',

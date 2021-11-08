@@ -12,6 +12,7 @@ import AdminTable from '../Tables/components/AdminTable';
 
 function Dashboard({
     mangas,
+    posts,
     users,
     admins,
     transGrs,
@@ -45,7 +46,7 @@ function Dashboard({
             {
                 name: "Posts", // realtime
                 icon: postIcon,
-                quantity: transGrs.length
+                quantity: posts.length
             },
         ]
 
@@ -81,6 +82,7 @@ function Dashboard({
                 <div className="dash-section03">
                     <DashboardChart02
                         mangas={mangas}
+                        posts={posts}
                         users={users}
                         transGrs={transGrs}
                     />
