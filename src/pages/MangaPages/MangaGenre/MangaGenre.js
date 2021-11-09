@@ -19,10 +19,13 @@ export default function MangaGenres({ genre, mangas }) {
                         </Button>
                         <Typography.Title level={5} className="title-h5">
                             Genre:
-                             <div>
-                                <Tooltip title={genre.genre_desc} className="item-tag">
-                                    <Tag color={genre.genre_color}>{genre.genre_name}</Tag>
-                                </Tooltip>
+                            <div>
+                                {Object.keys(genre).length
+                                    ? <Tooltip title={genre.genre_desc} className="item-tag">
+                                        <Tag color={genre.genre_color}>{genre.genre_name}</Tag>
+                                    </Tooltip>
+                                    : ""
+                                }
                             </div>
                         </Typography.Title>
                     </Divider>

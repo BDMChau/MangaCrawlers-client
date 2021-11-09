@@ -19,7 +19,7 @@ import Entry from './features/Entry';
 import { Tooltip } from 'antd';
 
 
-export default function MyTextArea({ 
+export default function InputCmt({ 
   isAddedCmt, 
 
   onSearchFunc, 

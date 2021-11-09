@@ -7,7 +7,7 @@ import { message_error } from 'components/toast/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
 import userApi from 'api/apis/MainServer/userApi'
-import MyTextArea from 'components/Editor/MyTextArea'
+import InputCmt from 'components/Editor/InputCmt'
 
 import imgDefault from "assets/8031DF085D7DBABC0F4B3651081CE70ED84622AE9305200F2FC1D789C95CF06F.svg"
 
@@ -196,7 +196,7 @@ function InputForm({
         <Form className="form-input">
             <Form.Item style={{ marginBottom: "10px" }}>
                 <div>
-                    <MyTextArea
+                    <InputCmt
                         isAddedCmt={isAddedCmt}
 
                         sticker={sticker}

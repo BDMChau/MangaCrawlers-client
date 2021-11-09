@@ -13,10 +13,12 @@
 
 .manga-genre .title .title-h5 {
   display: flex;
+  margin-bottom: 0 !important;
+  align-items: center;
 }
 
 .manga-genre .title .title-h5 .item-tag {
-  margin: 0 5px 5px 5px;
+  margin: 0 5px 0px 5px;
   width: auto;
 }
 
@@ -37,10 +39,11 @@
 }
 
 .manga-genre span.ant-divider-inner-text .btn-left {
-  margin: -5px 8px 0 0;
+  margin: 0px 8px 0 0;
   background: transparent;
   border-radius: 50%;
-  height: 40px;
+  border: none;
+  height: 45px;
   width: 40px;
   box-shadow: none;
 }

@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/toast/message';
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
-import { EditOutlined, CheckOutlined } from '@ant-design/icons';
+import { EditOutlined, CheckOutlined, EyeOutlined } from '@ant-design/icons';
 
 
 function Manga({
@@ -41,7 +41,7 @@ function Manga({
     isLoadingEditting,
 
     removeChapter
-  
+
 }) {
     const userState = useSelector((state) => state.userState);
     const history = useHistory();
@@ -103,7 +103,7 @@ function Manga({
                 <Col span={24} sm={22} xxl={19} className="manga-body">
                     <Row justify={"center"} className="header">
                         <Col span={24} className="thumbnail">
-                            <Image preview={false} className="thumbnail-img" src={manga.thumbnail} alt="" />
+                            <Image preview={true} className="thumbnail-img" src={manga.thumbnail} alt="" />
                         </Col>
                         <Col md={13} lg={12} sm={12} xs={20} xxl={15} className="title">
                             <div className="name">
@@ -167,22 +167,10 @@ function Manga({
                             </div>
 
                             <div className="manga-views">
-                                <Typography.Text>{manga.views} views </Typography.Text>
+                                <Typography.Text> <EyeOutlined style={{ fontSize: "20px" }} /> {manga.views} </Typography.Text>
                             </div>
 
                             <div className="interact">
-                                <Button className="btn-read-now" title="Start Reading">
-                                    <NavLink to={
-                                        Object.keys(manga).length !== 0
-                                            ? redirectURI.chapterPage_uri(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
-                                            : ""
-                                    }
-                                        style={{ marginLeft: 0 }}
-                                    >
-                                        Start Reading
-                                    </NavLink>
-                                </Button>
-
                                 <Button
                                     type="primary"
                                     className="btn-add-favorite"
@@ -198,6 +186,18 @@ function Manga({
 
                                 >
                                     {isFollowed ? "Remove from Library" : "Add to Library"}
+                                </Button>
+
+                                <Button className="btn-read-now" title="Start Reading">
+                                    <NavLink to={
+                                        Object.keys(manga).length !== 0
+                                            ? redirectURI.chapterPage_uri(manga.manga_id, manga.manga_name, chapterId01, chapterName01)
+                                            : ""
+                                    }
+                                        style={{ marginLeft: 0 }}
+                                    >
+                                        Start Reading
+                                    </NavLink>
                                 </Button>
 
                                 {userState[0]?.user_isAdmin ?

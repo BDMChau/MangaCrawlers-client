@@ -82,9 +82,10 @@ button {
 }
 
 span.ant-tag {
+  font-size: 14px;
   border-radius: 5px;
   padding: 5px 10px;
-  border: none;
+  /* border: none; */
   font-weight: 500;
 }
 

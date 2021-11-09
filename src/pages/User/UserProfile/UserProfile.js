@@ -47,10 +47,12 @@ export default function UserProfile({
 
     useEffect(() => {
         if (userState[0]) {
+            setProfile(userState[0]);
+
             getNumberOfFriends(userState[0]);
             setUserDesc(userState[0].user_desc)
         }
-    }, [userState])
+    }, [userState[0]])
 
 
     useEffect(() => {
@@ -207,7 +209,7 @@ export default function UserProfile({
                             <p
                                 onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}
                             >
-                                {profile.total_friends} friends
+                                {profile.total_friends ? profile.total_friends : 0} friends
                             </p>
                         </Tooltip>
                     </div>

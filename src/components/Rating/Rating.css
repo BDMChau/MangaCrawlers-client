@@ -2,17 +2,20 @@
   display: flex;
 }
 
+.manga-rating .rating .ant-rate-star {
+  padding-right: 5px;
+}
 .manga-rating .rating .ant-rate-star.ant-rate-star-zero .ant-rate-star-second {
   color: rgba(128, 128, 128, 0.336);
-  transform: scale(1.1);
+  transform: scale(1.4);
 }
 
 .manga-rating .rating .ant-rate-star.ant-rate-star-full {
   color: #fadb14;
-  transform: scale(1.1);
+  transform: scale(1.4);
 }
 
 .manga-rating .rating .ant-rate-star.ant-rate-star-full:hover {
   color: #fadb14;
-  transform: scale(1.1);
+  transform: scale(1.4);
 }

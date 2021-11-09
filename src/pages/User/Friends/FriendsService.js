@@ -52,7 +52,7 @@ export default function FriendsService() {
         if (stuffsState[1] && stuffsState[0]) {
             if (path === "friend_requests") {
                 getFriendRequests();
-            } else if (queryVal === "all_friends") {
+            } else if (path === "all_friends") {
                 getFriends();
             }
         }

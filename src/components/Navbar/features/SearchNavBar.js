@@ -113,6 +113,7 @@ export default function SearchNavBar() {
             suffixIcon={<SearchOutlined />}
             defaultActiveFirstOption
             placeholder="Search..."
+            allowClear
         >
             {isInForum
                 ? searchResults.map((item, i) => (

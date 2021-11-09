@@ -164,21 +164,18 @@ function MangaService() {
         try {
             const response = await mangaApi.addToFollowing(data, token);
 
-            if (JSON.parse(localStorage.getItem("code_400"))) {
-                setIsLoading(false);
-                localStorage.removeItem("code_400")
-                return;
-            } else if (response.content.err) {
-                setIsLoading(false);
-                localStorage.removeItem("code_400")
+            if(response.content.err){
+                message_error("Failed!", 4);
+                setIsLoadingFollow(false);
                 return;
             }
-
+            
             message_success("Added to your library", 4)
             setIsFollowed(true);
             setIsLoadingFollow(false);
             return;
         } catch (error) {
+            setIsLoadingFollow(false);
             console.log(error);
         }
     }
