@@ -24,6 +24,7 @@ function Admin({
 
     reportUsers,
     reportManga,
+    reportPosts,
     reportTransGr,
 
     allReports,
@@ -77,25 +78,42 @@ function Admin({
     }, [userState[0]])
 
 
-    const renderBodySiteLayout = (isMobile) => (
-        tabSelected === "dashboard"
-            ? <div style={{ padding: '0 10px' }}>
-                <Dashboard
-                    mangas={mangas}
-                    posts={posts}
-                    users={users}
-                    admins={admins}
-                    transGrs={transGrs}
 
-                    allReports={allReports}
+    const renderBodySiteLayout = () => {
+        switch (tabSelected) {
+            case "dashboard":
+                return <div style={{ padding: '0 10px' }}>
+                    <Dashboard
+                        mangas={mangas}
+                        posts={posts}
+                        users={users}
+                        admins={admins}
+                        transGrs={transGrs}
 
-                    weatherStatus={weatherStatus}
+                        allReports={allReports}
 
-                    isMobile={isMobile}
-                />
-            </div>
-            : tabSelected === "tables"
-                ? <div>
+                        weatherStatus={weatherStatus}
+
+                        isMobile={isMobile}
+                    />
+                </div>;
+
+            case "charts":
+                return <div>
+                    <Charts
+                        reportUsers={reportUsers}
+                        reportManga={reportManga}
+                        reportPosts={reportPosts}
+                        reportTransGr={reportTransGr}
+
+                        allReports={allReports}
+
+                        isMobile={isMobile}
+                    />
+                </div>;
+
+            case "tables":
+                return <div>
                     <Tables
                         mangas={mangas}
                         posts={posts}
@@ -112,22 +130,18 @@ function Admin({
 
                         isMobile={isMobile}
                     />
-                </div>
+                </div>;
+                ;
 
-                : tabSelected === "charts"
-                    ? <div>
-                        <Charts
-                           reportUsers={reportUsers}
-                           reportManga={reportManga}
-                           reportTransGr={reportTransGr}
+            case "tickets":
+                return <div>
+                    ticketssss
+                </div>;
 
-                            allReports={allReports}
-
-                            isMobile={isMobile}
-                        />
-                    </div>
-                    : ""
-    )
+            default:
+                return <h4>Nothing here</h4>;
+        }
+    }
 
     const SiteLayout = ({ isMobile }) => (
         <Layout className="site-layout">

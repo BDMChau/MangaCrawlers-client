@@ -110,6 +110,14 @@ const adminApi = {
             }
         })
     },
+    getReportPosts: (token) => {
+        const uri = '/api/admin/reportposts'
+        return axiosClient.get(uri, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     getReportTransGr: (token) => {
         const uri = '/api/admin/reporttransgroup'
         return axiosClient.get(uri, {

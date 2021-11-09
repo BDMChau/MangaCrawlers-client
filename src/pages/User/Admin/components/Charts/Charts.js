@@ -6,10 +6,12 @@ import { Tabs } from 'antd'
 import TransGrChart from './components/TransGrChart'
 import MangaChart from './components/MangaChart'
 import UserChart from './components/UserChart'
+import PostsChart from './components/PostsChart'
 
 function Charts({
     reportUsers,
     reportManga,
+    reportPosts,
     reportTransGr,
 
     allReports,
@@ -46,7 +48,7 @@ function Charts({
                 </Tabs.TabPane>
 
                 <Tabs.TabPane tab="Posts on Forum" key="4">
-                    Teams
+                    <PostsChart reportPosts={reportPosts} />
                 </Tabs.TabPane>
             </Tabs>
         </div>

@@ -35,6 +35,10 @@ export default function Contact() {
         <div style={{ padding: "10px" }}>
             <Typography.Title level={3}>Contact us</Typography.Title>
 
+            <Typography.Title level={5} style={{ color: "#FF6740" }}>
+                This website is just my project for learning - bugs are to be expected
+            </Typography.Title>
+
             <div>
                 For advertising & cooperation, please send email to us:
                 <a href="mailto:mangacrawlers123@gmail.com"> mangacrawlers123@gmail.com</a>
@@ -51,6 +55,10 @@ export default function Contact() {
             <Typography.Title level={3}>Terms of Service</Typography.Title>
 
             <div>
+                <Typography.Title level={5} style={{ color: "#FF6740" }}>
+                    This website is just my project for learning - bugs are to be expected
+                </Typography.Title>
+
                 <Typography.Title level={5}>1. Comments and Forums</Typography.Title>
                 <div>
                     Disagreements can and will happen. However, we ask all users avoid the following:
@@ -113,9 +121,9 @@ export default function Contact() {
             <Typography.Title level={3}>Privacy Policy</Typography.Title>
 
             <div>
-                <p>
-                    Welcome to use MangaClawers. The Platform is provided by MangaClawers HK Limited, and we promise to respect and protect your privacy.
-                </p>
+                <Typography.Title level={5} style={{ color: "#FF6740" }} >
+                    This website is just my project for learning - bugs are to be expected
+                </Typography.Title>
 
                 <p>
                     This Privacy Policy will list all personal information that we collect, process or are provided by you. Before accessing or using our website, service and application, you must ensure that you have read and fully understand this Privacy Policy to your personal information and how we will collect, use and process your personal information.

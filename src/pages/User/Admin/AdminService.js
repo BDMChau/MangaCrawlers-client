@@ -16,6 +16,7 @@ function AdminService() {
 
     const [reportUsers, setReportUsers] = useState([]);
     const [reportManga, setReportManga] = useState([]);
+    const [reportPosts, setReportPosts] = useState([]);
     const [reportTransGr, setReportTransGr] = useState([]);
 
     const [weatherStatus, setWeatherStatus] = useState({});
@@ -43,6 +44,7 @@ function AdminService() {
 
         getReportUser();
         getReportManga();
+        getReportPosts();
         getReportTransGr();
 
         getPosition();
@@ -256,7 +258,7 @@ function AdminService() {
 
 
     const handleDeprecatePost = async (postId) => {
-console.log(postId)
+        console.log(postId)
     }
 
 
@@ -353,6 +355,39 @@ console.log(postId)
         }
     }
 
+    const getReportPosts = async () => {
+        try {
+            const response = await adminApi.getReportPosts(token);
+            if (response.content.err) {
+                console.error("getReportPosts error!")
+                return;
+            }
+
+            const reports = response.content.posts_report;
+            reports.forEach(report => {
+                if (report.hasOwnProperty("values")) {
+                    report.Quantity = report.values;
+                    report.name = "Posts"
+                }
+
+                if (report.month <= 9) {
+                    report.month = "0" + report.month.toString();
+                } else {
+                    report.month = report.month.toString();
+                }
+            })
+
+            setReportPosts(reports)
+            setAllReports(prev => [...prev, ...reports]);
+
+            console.log("Get report posts OK!");
+            return;
+
+        } catch (ex) {
+            console.log(ex)
+        }
+    }
+
     const getReportTransGr = async () => {
         try {
             const response = await adminApi.getReportTransGr(token);
@@ -397,6 +432,7 @@ console.log(postId)
 
             reportUsers={reportUsers}
             reportManga={reportManga}
+            reportPosts={reportPosts}
             reportTransGr={reportTransGr}
 
             allReports={allReports}

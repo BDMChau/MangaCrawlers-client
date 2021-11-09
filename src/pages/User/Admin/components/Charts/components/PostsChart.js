@@ -7,15 +7,15 @@ import { Button, Col, Dropdown, Menu, Tooltip, Typography } from 'antd';
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
 
 
-export default function UserChart({ reportUsers }) {
+export default function PostsChart({ reportPosts }) {
     const chartRef = useRef();
 
 
     const config = {
-        data: reportUsers,
+        data: reportPosts,
         height: 300,
         xField: 'month', // must be string
-        yField: 'Users',
+        yField: 'Quantity',
         point: {
             size: 4,
             shape: 'circle',
@@ -49,7 +49,7 @@ export default function UserChart({ reportUsers }) {
             </Button>
 
             <div className="text01">
-                <Tooltip title="Registered Users">
+                <Tooltip title="Posts">
                     <UserOutlined style={{ fontSize: "22px", color: "#635f5fdb" }} />
                 </Tooltip>
             </div>

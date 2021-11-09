@@ -3,7 +3,8 @@ import { Layout, Menu } from 'antd';
 import {
     BarChartOutlined,
     TableOutlined,
-    DashboardOutlined
+    DashboardOutlined,
+    ContainerOutlined
 } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 
@@ -17,8 +18,9 @@ export default function SiderMenu({ collapsed, setCollapsed, tabSelected, setTab
 
 
     useEffect(() => {
-        if (tabSelected === "charts") setKeySelected("3");
+        if (tabSelected === "tickets") setKeySelected("4");
         else if (tabSelected === "tables") setKeySelected("2");
+        else if (tabSelected === "charts") setKeySelected("3");
         else setKeySelected("1");
     }, [tabSelected])
 
@@ -36,6 +38,10 @@ export default function SiderMenu({ collapsed, setCollapsed, tabSelected, setTab
 
                 <Menu.Item key="3" icon={<BarChartOutlined style={{ fontSize: "20px" }} />} onClick={() => history.push("admin?v=charts")} >
                     Charts
+                </Menu.Item>
+
+                <Menu.Item key="4" icon={<ContainerOutlined style={{ fontSize: "20px" }} />} onClick={() => history.push("admin?v=tickets")} >
+                    Tickets
                 </Menu.Item>
             </Menu>
         </Sider>
