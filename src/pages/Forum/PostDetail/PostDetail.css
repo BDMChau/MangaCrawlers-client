@@ -10,7 +10,7 @@
 
 .post-detail-page .btn-back {
   border-radius: 50px;
-  border:none;
+  border: none;
   background: transparent;
   height: 42px;
   width: 42px;
@@ -32,12 +32,25 @@
   margin-bottom: 50px;
 }
 
-.post-detail .interact button{
+.post-detail .interact {
+  display: flex;
+}
+
+.post-detail .interact .ant-typography {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 8px;
+  height: fit-content;
+  text-align: center;
+}
+
+.post-detail .interact button {
   width: 45px;
   height: 45px;
   border-radius: 50%;
   border: none;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
+  margin-right: 10px;
 }
 
 .post-owner .avatar {
@@ -45,7 +58,7 @@
   height: 50px;
 }
 
-.post-owner .owner-info{
+.post-owner .owner-info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -58,7 +71,6 @@
   color: #00000073;
   margin-top: -10px;
 }
-
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .post-detail-page {

@@ -1,7 +1,7 @@
 import React from 'react'
 import "../ForumHome/ForumHome.css"
 
-import { Avatar, Typography, Tag } from 'antd'
+import { Avatar, Typography, Tag, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
 
@@ -27,7 +27,9 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                     </NavLink>
 
                     {smallSize
-                        ? <span className="comments-count" title="This topic has 100 comments" >100</span>
+                        ? <Tooltip title={`this topic has ${post.comment_count} comments`} >
+                            <span className="comments-count">{post.comment_count}</span>
+                        </Tooltip>
                         : ""
                     }
                 </div>
@@ -54,7 +56,10 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                     ? ""
                     : <div className="info">
                         <span className="time" >May 10, 2021</span>
-                        <span className="comments-count" title="this topic has 100 comments" >100</span>
+
+                        <Tooltip title={`this topic has ${post.comment_count} comments`} >
+                            <span className="comments-count">{post.comment_count}</span>
+                        </Tooltip>
                     </div>
 
                 }

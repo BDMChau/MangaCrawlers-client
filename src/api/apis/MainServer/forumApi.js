@@ -33,6 +33,30 @@ const forumApi = {
             }
         })
     },
+    likePost: (token, data) => {
+        const uri = `/api/forum/post/add_like`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    unlikePost: (token, data) => {
+        const uri = `/api/forum/post/unlike`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    checkIsLiked: (token, data) => {
+        const uri = `/api/forum/post/check_user_like`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default forumApi;

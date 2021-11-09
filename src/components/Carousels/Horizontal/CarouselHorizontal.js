@@ -41,14 +41,14 @@ function CarouselHorizontal({
     const arrResponsive = [{
         breakpoint: 1400,
         settings: {
-            slidesToShow: itemsShow ? itemsShow : 4,
+            slidesToShow: itemsShow ? itemsShow : 5,
             slidesToScroll: 1,
         }
     },
     {
         breakpoint: 768,
         settings: {
-            slidesToShow: itemsShow ? itemsShow : 3,
+            slidesToShow: itemsShow ? itemsShow : 4,
             slidesToScroll: 1,
         }
     },

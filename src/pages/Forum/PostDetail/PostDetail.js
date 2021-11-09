@@ -3,11 +3,11 @@ import "./PostDetail.css"
 
 import MDEditor from '@uiw/react-md-editor';
 import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
-import { Avatar, Button, Col, Divider, Row, Typography } from 'antd';
-import { LeftOutlined, LikeOutlined, DislikeOutlined   } from "@ant-design/icons"
+import { Avatar, Button, Col, Divider, Row, Typography, Tooltip } from 'antd';
+import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
 
-export default function PostDetail({ postInfo }) {
+export default function PostDetail({ postInfo, isLiked, likePost, unlikePost }) {
     const history = useHistory();
     // post: {post_id: 7, title: "title of post 01",…}
     // categoryList: [{category_id: 1, name: "cate 1↵", description: "aaa", color: "yellow"},…]
@@ -38,7 +38,7 @@ export default function PostDetail({ postInfo }) {
                 </Col>
 
                 <Col className="post-detail" xs={22} md={22} xl={22}>
-                    <div style={{display:"flex", justifyContent:"space-between"}} >
+                    <div style={{ display: "flex", justifyContent: "space-between" }} >
                         <div className="post-owner">
                             <Avatar className="avatar" src={postInfo.user_avatar} title="Avatar" alt="" />
 
@@ -50,9 +50,14 @@ export default function PostDetail({ postInfo }) {
                         </div>
 
                         <div className="interact">
-                            <Button className="btn-like-dislike" icon={
-                                <LikeOutlined style={{fontSize:"22px"}} />
-                            } />
+                            <Tooltip title={isLiked ? "Unlike post" : "Give a like"} >
+                                <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
+                                    icon={
+                                        <LikeOutlined style={{ fontSize: "24px", color: isLiked ? "#1890FF" : "unset" }} />
+                                    }
+                                />
+                            </Tooltip>
+                            <Typography.Text>{postInfo.likes}</Typography.Text>
                         </div>
                     </div>
 

@@ -8,10 +8,23 @@ import { Button, Col, Row, Typography } from 'antd'
 
 import { PlusOutlined } from "@ant-design/icons"
 import { NavLink } from 'react-router-dom'
+import { enquireScreen, unenquireScreen } from 'enquire-js'
 
 
 export default function ForumHome({ categories, posts }) {
+    const [isMobile, setIsMobile] = useState(false);
+
     const scrollRef = useRef();
+
+    // check mobile device
+    useEffect(() => {
+        const enquireHandler = enquireScreen(mobile => {
+            if (mobile === true) setIsMobile(mobile);
+            else setIsMobile(false)
+        }, "only screen and (min-width: 300px) and (max-width: 1190px)")
+
+        return () => unenquireScreen(enquireHandler);
+    }, [])
 
 
     ////////// scroll //////////
@@ -23,6 +36,47 @@ export default function ForumHome({ categories, posts }) {
 
     }
 
+
+    const renderRight = () => (
+        <div>
+            <div className="trending-posts">
+                <Typography.Title level={4} style={{ marginTop: "5px" }} >Trending</Typography.Title>
+                {posts.length
+                    ? posts.map((post, i) => (
+                        <Post post={post} key={i} smallSize={true} />
+                    ))
+                    : ""
+                }
+            </div>
+
+            <div className="categories-cont">
+                {categories.length
+                    ? categories.map((item, i) => (
+                        <MyTag category={item} key={i} />
+                    ))
+                    : ""
+
+                }
+            </div>
+        </div>
+    )
+
+    const renderLeft = () => (
+        <>
+            <Typography.Title level={3}>Newest</Typography.Title>
+            {posts.length
+                ? <div onScroll={(e) => handleScroll(e)} >
+                    {
+                        posts.map((post, i) => (
+                            <Post post={post} key={i} />
+
+                        ))
+                    }
+                </div>
+                : ""
+            }
+        </>
+    )
 
 
     return (
@@ -42,43 +96,12 @@ export default function ForumHome({ categories, posts }) {
             </Col>
 
             <Row justify="center" className="forum-home-body">
-                <Col className="left" xs={24} md={14} xl={9}>
-                    <Typography.Title level={3}>Newest</Typography.Title>
-                    {posts.length
-                        ? <div onScroll={(e) => handleScroll(e)} >
-                            {
-                                posts.map((post, i) => (
-                                    <Post post={post} key={i} />
-
-                                ))
-                            }
-                        </div>
-                        : ""
-                    }
+                <Col className="left" xs={24} md={18} xl={9}>
+                    {isMobile ? renderRight() : renderLeft()}
                 </Col>
 
-                <Col className="right" xs={24} md={14} xl={7}>
-                    <div>
-                        <div className="trending-posts">
-                            <Typography.Title level={4} style={{ marginTop: "5px" }} >Trending</Typography.Title>
-                            {posts.length
-                                ? posts.map((post, i) => (
-                                    <Post post={post} key={i} smallSize={true} />
-                                ))
-                                : ""
-                            }
-                        </div>
-
-                        <div className="categories-cont">
-                            {categories.length
-                                ? categories.map((item, i) => (
-                                    <MyTag category={item} key={i} />
-                                ))
-                                : ""
-
-                            }
-                        </div>
-                    </div>
+                <Col className="right" xs={24} md={18} xl={7}>
+                {isMobile ? renderLeft() : renderRight()}
                 </Col>
             </Row>
         </div>

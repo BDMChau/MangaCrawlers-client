@@ -250,7 +250,7 @@ function Manga({
 
 
 
-                        <Col span={24} md={22} lg={23} xxl={16} className="manga-comments">
+                        <Col span={24} md={22} lg={23} xl={15} className="manga-comments">
                             <Spacing />
                             <div className="comments">
                                 <h2>MangaClawers Comments</h2>
@@ -263,17 +263,17 @@ function Manga({
                             </div>
                         </Col>
 
-                        <Col span={24} md={22} lg={23} xxl={6} className="rank-list">
+                        <Col span={24} md={22} lg={23} xl={7} className="rank-list">
                             <div className="top-week-rank">
                                 <h3>Weekly Manga Ranking</h3>
 
-                                <ListSide mangas={weeklyMangas} height={"415px"} isLoading={isLoading} />
+                                <ListSide mangas={weeklyMangas} height={"470px"} isLoading={isLoading} />
 
                             </div>
                             <div className="favorite-suggest">
                                 <h3>You may also like</h3>
 
-                                <ListSide mangas={suggestionList} height={"415px"} isLoading={isLoading} />
+                                <ListSide mangas={suggestionList} height={"470px"} isLoading={isLoading} />
                             </div>
                         </Col>
 

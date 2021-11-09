@@ -39,7 +39,7 @@ export default function Home({
                         isLoadingSearch={isLoadingSearch}
                     />
 
-                    <Col span={24} md={21} xl={17} xxl={21} className="trending">
+                    <Col span={24} md={21} xl={21} className="trending">
                         <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
                             <h2>Seasonal</h2>
                         </Divider>
@@ -54,12 +54,12 @@ export default function Home({
                         />
                     </Col>
 
-                    <Col span={23} md={20} xl={17} xxl={21} className="home-spacing-top">
+                    <Col span={23} md={20} xl={17} xl={21} className="home-spacing-top">
                         <Spacing />
                     </Col>
 
                     <Row justify={"center"} className="home-middle">
-                        <Col span={18} md={11} xl={10} xxl={14} xs={16} className="lastest">
+                        <Col md={11} xl={14} xs={16} className="lastest">
                             <h2>Recently Added</h2>
 
                             <ListHomePagination mangas={latestMangas} />
@@ -68,11 +68,11 @@ export default function Home({
                         <Col span={16} md={10} xl={7} xxl={7} className="home-side">
                             <div className="weekly-manga">
                                 <h2>Weekly Ranking</h2>
-                                <ListSide mangas={weeklyMangas} height={"415px"} isLoading={isLoading} />
+                                <ListSide mangas={weeklyMangas} height={"470px"} isLoading={isLoading} />
                             </div>
                             <div className="top-manga">
                                 <h2>Top Views</h2>
-                                <ListSide mangas={topMangas} height={"415px"} isLoading={isLoading} />
+                                <ListSide mangas={topMangas} height={"470px"} isLoading={isLoading} />
                             </div>
                         </Col>
 
