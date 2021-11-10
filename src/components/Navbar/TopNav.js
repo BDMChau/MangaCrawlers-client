@@ -20,6 +20,7 @@ import NotificationService from "./notification/NotificationService";
 import { enquireScreen, unenquireScreen } from 'enquire-js'
 import HomeNavbar from "components/HomeNavbar/HomeNavbar";
 import SearchNavBar from "./features/SearchNavBar";
+import redirectURI from "helpers/redirectURI";
 
 const { SubMenu } = Menu;
 const { Header } = Layout;
@@ -140,7 +141,7 @@ function TopNav({ handleLogOut, genres }) {
                         width: window.innerWidth >= 375 && window.innerWidth <= 414 ? "100%" : "170px",
                         borderRadius: "3px"
                     }} >
-                    <NavLink to={`/manga/genre/tag?v=${genre.genre_id}`} style={{ color: genre.genre_color }}>{genre.genre_name}</NavLink>
+                    <NavLink to={redirectURI.mangaWithGenre_uri(genre.genre_id)} style={{ color: genre.genre_color }}>{genre.genre_name}</NavLink>
                 </Menu.Item>
             ))
             : ""

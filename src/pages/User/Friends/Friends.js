@@ -6,6 +6,8 @@ import Friend from './components/Friend';
 import { useSelector } from 'react-redux';
 import FriendRequest from './components/FriendRequest';
 import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
+import { socket } from 'socket/socketClient';
+import EVENTS_NAME from 'socket/features/eventsName';
 
 export default function Friends({ listRequests, totalFriends, listFriends, isLoading, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
@@ -24,13 +26,9 @@ export default function Friends({ listRequests, totalFriends, listFriends, isLoa
                     {totalFriends} friends
                 </Typography.Text>
                 <div className="all-friends">
-                    listRequests<>
+                    <>
                         {listFriends.map((item, i) => (
-
                             <Friend friend={item} i={i} />
-
-
-
                         ))}
 
                         {isLoading

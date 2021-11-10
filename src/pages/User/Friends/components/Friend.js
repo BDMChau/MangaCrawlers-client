@@ -9,6 +9,11 @@ import userApi from 'api/apis/MainServer/userApi';
 import { message_error, message_success } from 'components/toast/message';
 import Cookies from 'universal-cookie';
 
+import onlineIcon from "assets/img/online.png"
+import offlineIcon from "assets/img/offline.png"
+import { socket } from 'socket/socketClient';
+import EVENTS_NAME from 'socket/features/eventsName';
+
 
 function Friend({ friend, i, isHidden }) {
     const [user, setUser] = useState({});
@@ -17,8 +22,24 @@ function Friend({ friend, i, isHidden }) {
     const history = useHistory();
 
     useEffect(() => {
-        setUser(friend);
+        if(Object.keys(friend).length){
+            setUser(friend);
+
+          
+        }
     }, [friend])
+
+    useEffect(() => {
+        socket.on(EVENTS_NAME.NOTIFY_ONLINE, (result) => {
+            console.log(result)
+            console.log(user.user_id)
+
+            if(user.user_id === result.sender_id){
+                if(result.status_number === 1) setUser({...user, is_online: true});
+                    else setUser({...user, is_online: false});
+            }
+        });
+    }, [])
 
     const cookies = new Cookies();
     const token = cookies.get("token");
@@ -62,6 +83,8 @@ function Friend({ friend, i, isHidden }) {
             <div style={{ padding: "0 7px 0 0", display: "flex" }} className="item">
                 <NavLink to={redirectURI.userPage_uri(user.user_id)} >
                     <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} title="Avatar" src={user.user_avatar} />
+
+                    <img src={user.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="" />
                 </NavLink>
 
                 <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "75%" }}>

@@ -60,6 +60,11 @@
   width: fit-content;
 }
 
+.friends .friend img.stt-online {
+  width: 20px;
+  height: 20px;
+}
+
 .friends .friend button {
   border: none;
   border-radius: 50px;

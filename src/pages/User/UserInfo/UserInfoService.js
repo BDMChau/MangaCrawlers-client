@@ -39,9 +39,23 @@ export default function UserInfoService() {
     const cookies = new Cookies();
     const token = cookies.get("token");
 
+
     useEffect(() => {
         if (!queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
     }, [])
+
+
+    useEffect(() => {
+        if(Object.keys(userInfo).length){
+            socket.on(EVENTS_NAME.NOTIFY_ONLINE, (result) => {
+                if(userInfo.user_id === result.sender_id){
+                    if(result.status_number === 1) setUserInfo({...userInfo, is_online: true});
+                    else setUserInfo({...userInfo, is_online: false});
+                }
+            });
+        }
+    }, [userInfo])
+
 
     useEffect(() => {
         if (queryUserId) {

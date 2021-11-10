@@ -1,5 +1,6 @@
 const EVENTS_NAME = {
     UPDATE_SOCKETID: 'updateSocketId',
+    NOTIFY_ONLINE: 'notifyonline',
 
 
     SEND_OK: "sendmessage_ok",

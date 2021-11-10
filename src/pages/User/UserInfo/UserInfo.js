@@ -6,12 +6,15 @@ import { UserAddOutlined, } from '@ant-design/icons';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 
-import { LeftOutlined, FieldTimeOutlined } from "@ant-design/icons"
+import { LeftOutlined, FieldTimeOutlined, CheckCircleFilled  } from "@ant-design/icons"
 
 import redirectURI from 'helpers/redirectURI';
 import Post from 'pages/Forum/features/Post';
-import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 import Friend from '../Friends/components/Friend';
+
+import onlineIcon from "assets/img/online.png"
+import offlineIcon from "assets/img/offline.png"
+
 
 export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
@@ -138,8 +141,13 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 {Object.keys(userInfo).length > 0
                     ? <>
                         <div className="info-cont">
+                            
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
-
+                            {status === 2
+                                ? <img src={userInfo.is_online ? onlineIcon : offlineIcon} className="stt-online"  alt="status" />
+                                :""
+                            }
+                            
                             <div className="info">
                                 <Typography.Title level={3} style={{ margin: 0 }}>{userInfo.user_name}</Typography.Title>
                                 <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>{userInfo.user_email}</Typography.Text>
