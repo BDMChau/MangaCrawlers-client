@@ -21,14 +21,22 @@ export default function SearchNavBar() {
     const pathName = useLocation().pathname;
 
     useEffect(() => {
-        if (pathName.includes("forum")) setIsInForum(true);
-        else setIsInForum(false);
+        if (pathName.includes("forum")) {
+            setInputVal("");
+            setIsInForum(true);
+        }
+        else {
+            setInputVal("");
+            setIsInForum(false);
+        }
     }, [pathName])
 
 
     useEffect(() => {
         if (inputVal) {
-            if (isInForum) debouceToSearchPosts.current(inputVal);
+            if (isInForum) {
+                debouceToSearchPosts.current(inputVal);
+            }
             else debouceToSearchManga.current(inputVal);
         }
         else setSearchResults([]);

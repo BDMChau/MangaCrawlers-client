@@ -45,7 +45,7 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                     {post.categoryList?.length
                         ? post.categoryList.map((item, i) => (
                             <div className="category" key={i}>
-                                <Tag color={item.color}>{item.name}</Tag>
+                                <Tag color={item.color} style={{ border: "none" }} >{item.name}</Tag>
                             </div>
                         ))
                         : ""

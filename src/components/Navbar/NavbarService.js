@@ -26,7 +26,7 @@ function NavbarService() {
         });
 
         socket.on(EVENTS_NAME.SEND_OK, (result) => {
-            message_success("sent!");
+            message_success("Sent!");
         });
     }, []);
 
