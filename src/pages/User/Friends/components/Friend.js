@@ -16,30 +16,30 @@ import EVENTS_NAME from 'socket/features/eventsName';
 
 
 function Friend({ friend, i, isHidden }) {
+    const [isFirstTime, setIsFirstTime] = useState(false);
     const [user, setUser] = useState({});
     const [isFriend, setIsFriend] = useState(true);
 
     const history = useHistory();
 
     useEffect(() => {
-        if(Object.keys(friend).length){
+        if (Object.keys(friend).length) {
             setUser(friend);
-
-          
+            setIsFirstTime(true);
         }
     }, [friend])
 
     useEffect(() => {
-        socket.on(EVENTS_NAME.NOTIFY_ONLINE, (result) => {
-            console.log(result)
-            console.log(user.user_id)
-
-            if(user.user_id === result.sender_id){
-                if(result.status_number === 1) setUser({...user, is_online: true});
-                    else setUser({...user, is_online: false});
-            }
-        });
-    }, [])
+        if (isFirstTime) {
+            socket.on(EVENTS_NAME.NOTIFY_ONLINE, (result) => {
+                if (user.user_id === result.sender_id) {
+                    if (result.status_number === 1) setUser({ ...user, is_online: true });
+                    else setUser({ ...user, is_online: false });
+                }
+                setIsFirstTime(false);
+            });
+        }
+    }, [isFirstTime])
 
     const cookies = new Cookies();
     const token = cookies.get("token");
