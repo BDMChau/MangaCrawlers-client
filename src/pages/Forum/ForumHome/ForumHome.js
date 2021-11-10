@@ -49,6 +49,16 @@ export default function ForumHome({ categories, posts }) {
                 }
             </div>
 
+            <div className="trending-posts">
+                <Typography.Title level={4} style={{ marginTop: "5px" }} >Suggestion</Typography.Title>
+                {posts.length
+                    ? posts.map((post, i) => (
+                        <Post post={post} key={i} smallSize={true} />
+                    ))
+                    : ""
+                }
+            </div>
+
             <div className="categories-cont">
                 {categories.length
                     ? categories.map((item, i) => (

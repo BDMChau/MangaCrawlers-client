@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router'
 import Cookies from 'universal-cookie';
 import PostDetail from './PostDetail'
+import smoothscroll from 'smoothscroll-polyfill';
 
 
 export default function PostDetailService() {
@@ -14,6 +15,7 @@ export default function PostDetailService() {
     const { postid } = useParams();
 
     const [postInfo, setPostInfo] = useState({});
+    const [posts, setPosts] = useState([]);
 
     const [isLiked, setIsLiked] = useState(false);
 
@@ -24,12 +26,37 @@ export default function PostDetailService() {
     useEffect(() => {
         if (postid) {
             getPost(postid);
+
+            smoothscroll.polyfill();
+            window.scroll({
+                top: 0,
+                behavior: "smooth"
+            });
         }
 
+        getPosts();
         if (userState[0] && postid) checkIsLiked(postid);
     }, [postid, userState])
 
+    const getPosts = async () => {
 
+        const data = {
+            from: 0,
+            amount: 6
+        }
+
+        try {
+            const res = await forumApi.getAllPost(data);
+
+            const posts = res.content.posts
+            const contFromPos = res.content.from;
+
+
+            setPosts(posts);
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     const getPost = async (postId) => {
         const data = {
@@ -49,6 +76,7 @@ export default function PostDetailService() {
 
 
     const likePost = async () => {
+        if(!userState[0]) return message_error("You have to logged in to do this action");
         if(!Object.keys(postInfo).length) return;
 
         const data = {
@@ -71,6 +99,7 @@ export default function PostDetailService() {
 
 
     const unlikePost = async () => {
+        if(!userState[0]) return message_error("You have to logged in to do this action");
         if(!Object.keys(postInfo).length) return;
 
         const data = {
@@ -122,6 +151,8 @@ export default function PostDetailService() {
             isLiked={isLiked}
             likePost={likePost}
             unlikePost={unlikePost}
+
+            posts={posts}
         />
     )
 }

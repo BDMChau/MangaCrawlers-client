@@ -6,8 +6,10 @@ import CommentContainter from 'components/Comment/CommentContainter/CommentConta
 import { Avatar, Button, Col, Divider, Row, Typography, Tooltip } from 'antd';
 import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
+import Post from '../features/Post';
+import Post02 from '../features/Post02';
 
-export default function PostDetail({ postInfo, isLiked, likePost, unlikePost }) {
+export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, posts }) {
     const history = useHistory();
     // post: {post_id: 7, title: "title of post 01",…}
     // categoryList: [{category_id: 1, name: "cate 1↵", description: "aaa", color: "yellow"},…]
@@ -50,14 +52,27 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost }) 
                         </div>
 
                         <div className="interact">
-                            <Tooltip title={isLiked ? "Unlike post" : "Give a like"} >
-                                <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
-                                    icon={
-                                        <LikeOutlined style={{ fontSize: "24px", color: isLiked ? "#1890FF" : "unset" }} />
-                                    }
-                                />
-                            </Tooltip>
-                            <Typography.Text>{postInfo.likes}</Typography.Text>
+                            <div style={{ marginRight: "15px" }} >
+                                <Tooltip title={isLiked ? "" : "Give a like"} >
+                                    <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
+                                        icon={
+                                            <LikeOutlined style={{ fontSize: "20px", color: isLiked ? "#1890FF" : "unset" }} />
+                                        }
+                                    />
+                                </Tooltip>
+                                <Typography.Text>{postInfo.likes}</Typography.Text>
+                            </div>
+
+                            <div>
+                                <Tooltip title={isLiked ? "" : "Dislike post"} >
+                                    <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
+                                        icon={
+                                            <DislikeOutlined style={{ fontSize: "20px", color: isLiked ? "grey" : "unset" }} />
+                                        }
+                                    />
+                                </Tooltip>
+                                <Typography.Text>{postInfo.likes}</Typography.Text>
+                            </div>
                         </div>
                     </div>
 
@@ -73,6 +88,20 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost }) 
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "30px" }} />
 
                     <CommentContainter />
+                </Col>
+
+                <Col className="more-posts" xs={22} md={11} xl={11}>
+                    <Typography.Title level={5} style={{ padding: "0 5px" }} >Hot Topics</Typography.Title>
+                    {posts.map(post => (
+                        <Post02 post={post} />
+                    ))}
+                </Col>
+
+                <Col className="more-posts" xs={22} md={11} xl={11}>
+                    <Typography.Title level={5} style={{ padding: "0 5px" }} >Down Votes</Typography.Title>
+                    {posts.map(post => (
+                        <Post02 post={post} />
+                    ))}
                 </Col>
             </Row>
         </div>

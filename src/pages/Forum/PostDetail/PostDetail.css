@@ -23,8 +23,12 @@
 
 .post-detail-page .cmt-post-detail {
   margin-top: 50px;
-  margin-bottom: 30px;
-  min-height: 50vh;
+  margin-bottom: 0;
+}
+
+.post-detail-page .more-posts {
+  margin-top: 20px;
+  margin-bottom: 3rem;
 }
 
 .post-detail-page .post-owner {
@@ -37,7 +41,7 @@
 }
 
 .post-detail .interact .ant-typography {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
   margin-top: 8px;
   height: fit-content;
@@ -45,8 +49,8 @@
 }
 
 .post-detail .interact button {
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: none;
   background-color: #f0f2f5;

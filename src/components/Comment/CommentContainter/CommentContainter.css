@@ -1,5 +1,5 @@
 .comments-form {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   max-height: 800px;
 }
 
@@ -111,6 +111,8 @@
   overflow-y: auto;
   overflow-x: hidden;
   max-height: 650px;
+  min-height: 300px;
+  background-color: grey;
 }
 
 .comments-form .ant-comments-inner {

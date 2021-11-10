@@ -7,8 +7,7 @@ export default function MyTag({ category, key, padding }) {
 
     return (
         <Tag
-            className="category-tag"
-            style={{ padding: padding ? padding : unset,border: "none" }}
+            style={{ padding: padding ? padding : unset, border: "none", fontSize:"13px" }}
             color={category.color === "none" ? "" : category.color}
             title={category.name}
             key={key}
