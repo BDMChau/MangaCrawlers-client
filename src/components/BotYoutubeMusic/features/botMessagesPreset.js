@@ -4,9 +4,19 @@ const botMessagesPreset = {
             'Hello'
         ]
     ),
-    help: ({ }) => (
+    help: ({ icon}) => (
         [
-            `Help`
+            `Hiiii, I am Meee <img style="width: 40px; height: 40px; border-radius: 50px" src=${icon} alt="" />
+            <br/> You can play music by giving me a url from <a href="https://www.youtube.com/" target="blank_" >Youtube</a> or typing anything you like. <br/>
+            Below is a list of available commands, hope you enjoy!
+            <b>/play</b>: Play a song on youtube <br/>
+            <b>/stop</b>: Stop current song <br/>
+            <b>/pause</b>: Pause current song <br/>
+            <b>/unpause</b>: Unpause current song <br/>
+            <b>/jump</b>: Jump to a song <br/>
+            <b>/queue</b>: List all songs in queue <br/>
+            <b>/clear</b>: Clear the queue <br/>
+            `
         ]
     ),
     play: ({ url, id, title, userName, icon }) => (

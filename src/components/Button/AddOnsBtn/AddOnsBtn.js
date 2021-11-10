@@ -52,7 +52,7 @@ export default function AddOnsBtn() {
             {/* ///////////////////// */}
             <Modal
                 className="bot-modal"
-                title="Bot Music"
+                title="Meee"
                 visible={isVisibleModal}
                 onCancel={() => setIsVisibleModal(false)}
                 width={700}

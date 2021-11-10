@@ -20,7 +20,7 @@
 .messages-cont .message-item .message-bot {
   display: flex;
   float: left;
-  width: 420px;
+  width: 70%;
   margin: 5px 0px;
 }
 
@@ -28,8 +28,9 @@
   font-weight: 500;
   padding: 10px;
   background-color: #ababca45;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
+  width: 100%;
 }
 
 .messages-cont .message-item .message-bot .bot-text .vid-title {
@@ -51,7 +52,7 @@
   display: flex;
   padding: 10px;
   background-color: #ababca45;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .messages-cont .message-item .message-user .user-cmd {
@@ -81,6 +82,7 @@
 .messages-cont .message-item .message-bot .bot-avatar img,
 .messages-cont .message-item .message-user .user-avatar img {
   border-radius: 50px;
+  width: 100%;
 }
 
 /* ///////////////////// input part */

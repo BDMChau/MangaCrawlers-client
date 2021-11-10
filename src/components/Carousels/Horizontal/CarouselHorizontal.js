@@ -88,7 +88,7 @@ function CarouselHorizontal({
         <div className="slider-horizontal">
             {isLoading
                 ? <div className="items-loading">
-                    <LoadingDots />
+                    <LoadingDots width={"60px"} height={"60px"} />
                 </div>
                 : <Slider {...settings}>
                     {data.length

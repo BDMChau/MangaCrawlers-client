@@ -16,6 +16,7 @@ import botMessagesPreset from "./features/botMessagesPreset";
 
 import kannapalm from '../../assets/img/kannafacepalm.png';
 import kannaconfuse from '../../assets/img/kannawhat.png';
+import LoadingDots from "components/Loading/LoadingDots/LoadingDots";
 
 
 function BotYoutubeMusic({
@@ -397,7 +398,9 @@ function BotYoutubeMusic({
 
 
             {isLoading
-                ? <p style={{ margin: "0" }}>Sending...</p>
+                ? <p style={{ marginLeft: "10px", marginBottom:"3px" }}> 
+                    <LoadingDots width={"15px"} height={"15px"} />
+                </p>
                 : ""
             }
 

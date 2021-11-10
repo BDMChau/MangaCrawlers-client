@@ -14,6 +14,7 @@ import kannabored from '../../assets/img/kannabored.gif';
 import kannawhat from '../../assets/img/kannawhat.png';
 import kannaaddok from '../../assets/img/Kannaaddokgif.gif';
 import kanndsleep from '../../assets/img/kannasleep.png';
+import kannawow from '../../assets/img/kannawow.gif';
 
 
 
@@ -37,7 +38,7 @@ function BotYoutubeMusicService() {
     const [apiKey, setApiKey] = useState("");
 
     // **IMPORTANT: visible the <YouTube/>, have to reset when interact
-    const [isVisible, setIsVisible] = useState(false); 
+    const [isVisible, setIsVisible] = useState(false);
 
     const [itemId, setItemId] = useState("");
     const [itemInfo, setItemInfo] = useState({});
@@ -241,11 +242,11 @@ function BotYoutubeMusicService() {
 
                 opts.id = itemToJump.video_id;
                 opts.title = itemToJump.video_title;
-                
+
                 setTimeout(() => {
                     setIsJumpTo(false);
                     setIsVisible(true);
-                }, 300);       
+                }, 300);
             }
 
             if (nonInteractiveCmds.includes(rawCommand)) {
@@ -596,6 +597,9 @@ function BotYoutubeMusicService() {
 
     const chooseIcon = (cmd) => {
         switch (cmd) {
+            case "/help ":
+                return kannawow;
+
             case "/play ":
                 return kannaaddok;
 

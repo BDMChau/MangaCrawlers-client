@@ -14,8 +14,6 @@
   height: 100%;
 }
 .loading .loading__pill {
-  width: 60px;
-  height: 60px;
   background-color: #c1c1c1;
   border-radius: 50%;
   animation: anim-loading-pill 1s ease-in alternate infinite;
@@ -30,5 +28,5 @@
   animation-delay: -1s;
 }
 .loading .loading__pill:not(:last-child) {
-  margin-right: 25px;
+  margin-right: 15px;
 }
