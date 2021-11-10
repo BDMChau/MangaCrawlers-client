@@ -83,8 +83,6 @@ function Friend({ friend, i, isHidden }) {
             <div style={{ padding: "0 7px 0 0", display: "flex" }} className="item">
                 <NavLink to={redirectURI.userPage_uri(user.user_id)} >
                     <Avatar shape="square" style={{ width: 70, height: 70, cursor: "pointer", borderRadius: "10px" }} title="Avatar" src={user.user_avatar} />
-
-                    <img src={user.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="" />
                 </NavLink>
 
                 <div style={{ display: "flex", flexDirection: "column", marginLeft: "6px", marginTop: '12px', width: "75%" }}>
@@ -101,9 +99,14 @@ function Friend({ friend, i, isHidden }) {
                         </Typography.Text>
 
                         : isFriend
-                            ? <Dropdown overlay={dropDownItems} trigger={['click']}>
-                                <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
-                            </Dropdown>
+                            ? <>
+                                <Dropdown overlay={dropDownItems} trigger={['click']}>
+                                    <Button icon={<EllipsisOutlined style={{ fontSize: "23px", paddingTop: "2px" }} />} />
+                                </Dropdown>
+                                
+                                <img src={user.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="" />
+
+                            </>
                             : ""
 
                     }
