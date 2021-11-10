@@ -9,29 +9,29 @@ const { Meta } = Card;
 
 function ListGenrePagination({ mangas }) {
     const [isLoading] = useState(false)
-    const [, setPageSize] = useState(9)
+    const [pageSize, setPageSize] = useState(9)
 
     // responsive items quantity
     useEffect(() => {
         if (window.innerWidth >= 375 && window.innerWidth < 768) {
             setPageSize(6)
         } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
-            setPageSize(12)
-        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1200) {
-            setPageSize(12)
-        } else if (window.innerWidth >= 1200 && window.innerWidth <= 1600) {
             setPageSize(9)
+        } else if (window.innerWidth >= 1024 && window.innerWidth <= 1200) {
+            setPageSize(20)
+        } else if (window.innerWidth >= 1200 && window.innerWidth <= 1600) {
+            setPageSize(25)
         } else {
-            setPageSize(10)
+            setPageSize(21)
         }
     })
 
     const renderCardDesc = (name, time) => {
         return (
-        <div className="desc" >
-            <span className="desc-1" > {name} </span>
-            <span className="desc-2" > {time} </span>
-        </div >
+            <div className="desc" >
+                <span className="desc-1" > {name} </span>
+                <span className="desc-2" > {time} </span>
+            </div >
         )
     }
 
@@ -46,10 +46,10 @@ function ListGenrePagination({ mangas }) {
                     onChange: () => {
                         console.log("page");
                     },
-                    pageSize: 12,
+                    pageSize: pageSize,
                     defaultCurrent: 1,
-                    total: 10,
-                    // total: listChapters.length,
+                    total: mangas.length,
+                    showQuickJumper: true
                 }}
                 dataSource={mangas}
                 footer={false}

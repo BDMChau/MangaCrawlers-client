@@ -1,7 +1,6 @@
 
 .list-genre-pagination .ant-list-pagination {
-  width: 85%;
-  text-align: left;
+  text-align: center;
 }
 
 
@@ -21,9 +20,7 @@
   flex-direction: column;
 }
 
-.list-genre-pagination .ant-spin-nested-loading {
-  height: 70vh;
-}
+
 
 
 .list-genre-pagination ul.ant-pagination {
@@ -36,6 +33,10 @@
 .list-genre-pagination .ant-list-vertical {
   width: 100%;
   background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .manga-genre-cards .manga-img {
