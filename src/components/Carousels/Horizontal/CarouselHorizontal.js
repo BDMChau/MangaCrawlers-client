@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import LoadingDots from "../../Loading/LoadingDots/LoadingDots";
+import redirectURI from "helpers/redirectURI";
 
 
 function CarouselHorizontal({
@@ -16,7 +17,8 @@ function CarouselHorizontal({
     isCenter,
     arrows,
     autoplaySpeed,
-    isPadding
+    isPadding,
+    isFade
 }) {
 
     const staticImgs = [
@@ -71,7 +73,7 @@ function CarouselHorizontal({
         dots: false,
         arrows: arrows,
         draggable: true,
-        fade: false,
+        fade: isFade ? isFade : false,
         infinite: true,
         speed: 500,
         autoplay: true,
@@ -95,7 +97,7 @@ function CarouselHorizontal({
                         ? data.map((item, i) => (
                             <NavLink
                                 title={item.manga_name}
-                                to={`/manga/${item.manga_id}`}
+                                to={redirectURI.mangaPage_uri(item.manga_id, item.manga_name)}
                                 key={i}
                                 className={isPadding ? "slider-item" : "slider-item item2"}
                             >

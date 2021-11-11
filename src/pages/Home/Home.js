@@ -28,7 +28,7 @@ export default function Home({
                 <div className="home-bg-img"
                 //  style={{ backgroundImage: `url("../../assets/img/wallpaper.jpg")` }}
                 >
-                    <CarouselHorizontal data={[]} itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} />
+                    <CarouselHorizontal data={[]} itemsShow={1} isCenter={false} arrows={false} autoplaySpeed={4000} isPadding={false} isFade />
                 </div>
             </div>
             <div className="home-middle-wrap">
@@ -41,9 +41,9 @@ export default function Home({
 
                     <Col span={24} md={21} xl={21} className="trending">
                         <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
-                            <h2>Seasonal</h2>
+                            <h2>Daily Manga</h2>
                         </Divider>
-                        
+
                         <CarouselHorizontal
                             data={dailyMangas}
                             isLoading={isLoading}
@@ -61,18 +61,18 @@ export default function Home({
                     <Row justify={"center"} className="home-middle">
                         <Col md={11} xl={14} xs={16} className="lastest">
                             <h2>Recently Added</h2>
-
                             <ListHomePagination mangas={latestMangas} />
                         </Col>
 
                         <Col span={16} md={10} xl={7} xxl={7} className="home-side">
+                            <div className="top-manga">
+                                <h2>Popular</h2>
+                                <ListSide mangas={topMangas} height={"470px"} isLoading={isLoading} />
+                            </div>
+
                             <div className="weekly-manga">
                                 <h2>Weekly Ranking</h2>
                                 <ListSide mangas={weeklyMangas} height={"470px"} isLoading={isLoading} />
-                            </div>
-                            <div className="top-manga">
-                                <h2>Top Views</h2>
-                                <ListSide mangas={topMangas} height={"470px"} isLoading={isLoading} />
                             </div>
                         </Col>
 

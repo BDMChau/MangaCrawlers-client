@@ -30,8 +30,8 @@ const mangaApi = {
         const uri = '/api/manga/getdaily';
         return axiosClient.get(uri);
     },
-    getSuggestionList: () => {
-        const uri = '/api/manga/getsuggestion';
+    getSuggestionList: (quantity) => {
+        const uri = `/api/manga/getsuggestion?quantity=${quantity}`;
         return axiosClient.get(uri);
     },
     search: (data) => {

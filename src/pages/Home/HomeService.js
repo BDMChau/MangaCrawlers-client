@@ -75,8 +75,10 @@ function HomeService() {
 
     const getWeeklyTopMangas = async () => {
         try {
-            const response = await mangaApi.getWeekly();
+            let response = await mangaApi.getWeekly();
             if (response.content.err) {
+                response = await mangaApi.getSuggestionList(5)
+                setWeeklyMangas(response.content.suggestion_list)
                 return;
             }
 
@@ -90,8 +92,10 @@ function HomeService() {
     const getTredingDailyManga = async () => {
         setIsLoading(true);
         try {
-            const response = await mangaApi.getTredingDaily();
+            let response = await mangaApi.getTredingDaily();
             if (response.content.err) {
+                response = await mangaApi.getSuggestionList(15)
+                setDailyMangas(response.content.suggestion_list)
                 setIsLoading(false)
                 return;
             }

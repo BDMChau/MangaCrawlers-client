@@ -17,6 +17,7 @@ import { message_error, message_success } from 'components/toast/message';
 
 
 function NotificationService({ isMobile }) {
+    const userState = useSelector((state) => state.userState);
     const stuffSlice = useSelector((state) => state.stuffsState);
     const notificationIdToUpdate = stuffSlice[2] ? stuffSlice[2] : null;
 
@@ -48,8 +49,8 @@ function NotificationService({ isMobile }) {
 
 
     useEffect(() => {
-        if (!notifications.length) getListNotifications();
-    }, [])
+        if (!notifications.length && userState[0]) getListNotifications();
+    }, [userState])
 
 
     // update interact in client

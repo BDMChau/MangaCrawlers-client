@@ -126,8 +126,11 @@ function MangaService() {
         setIsLoading(true);
 
         try {
-            const response = await mangaApi.getWeekly();
+            let response = await mangaApi.getWeekly();
             if (response.content.err) {
+                response = await mangaApi.getSuggestionList(5)
+                setWeeklyMangas(response.content.suggestion_list)
+                setIsLoading(false);
                 return;
             }
 
@@ -143,7 +146,7 @@ function MangaService() {
         setIsLoading(true);
 
         try {
-            const response = await mangaApi.getSuggestionList();
+            const response = await mangaApi.getSuggestionList(5);
             if (response.content.err) {
                 return;
             }
