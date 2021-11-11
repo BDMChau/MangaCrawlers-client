@@ -6,7 +6,7 @@ import { UserAddOutlined, } from '@ant-design/icons';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 
-import { LeftOutlined, FieldTimeOutlined, CheckCircleFilled  } from "@ant-design/icons"
+import { LeftOutlined, FieldTimeOutlined, CheckCircleFilled } from "@ant-design/icons"
 
 import redirectURI from 'helpers/redirectURI';
 import Post from 'pages/Forum/features/Post';
@@ -16,7 +16,7 @@ import onlineIcon from "assets/img/online.png"
 import offlineIcon from "assets/img/offline.png"
 
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends }) {
+export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends, mutualFriends }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
     const [tabSelected, setTabSelected] = useState(null);
 
@@ -104,27 +104,53 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
 
     const renderPosts = () => (
-        <div className="posts">
-            {posts.length
-                ? posts.map(post => (
-                    <Post post={post} width={"48%"} />
-                ))
-                : <Empty description="" style={{margin:"50px auto 0 auto"}} />
+        <>
+            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{posts.length} posts</Typography.Title>
 
-            }
-        </div>
+            <div className="posts">
+                {posts.length
+                    ? posts.map(post => (
+                        <Post post={post} width={"48%"} />
+                    ))
+                    : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
+
+                }
+            </div>
+        </>
     )
 
-    const renderFriends = () => (
-        <div className="friends">
-            {friends.length
-                ? friends.map(fr => (
-                    <Friend friend={fr} isHidden={true} />
-                ))
-                : <Empty description="" style={{margin:"50px auto 0 auto"}} />
 
-            }
-        </div>
+    const renderFriends = () => (
+        <>
+            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{friends.length} friends</Typography.Title>
+
+            <div className="friends">
+                {friends.length
+                    ? friends.map(fr => (
+                        <Friend friend={fr} isHidden={true} />
+                    ))
+                    : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
+
+                }
+            </div>
+        </>
+    )
+
+
+    const renderMutualFriends = () => (
+        <>
+            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{mutualFriends.length} mutual friends</Typography.Title>
+
+            <div className="friends">
+                {mutualFriends.length
+                    ? mutualFriends.map(fr => (
+                        <Friend friend={fr} isHidden={true} />
+                    ))
+                    : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
+
+                }
+            </div>
+        </>
     )
 
 
@@ -141,13 +167,13 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                 {Object.keys(userInfo).length > 0
                     ? <>
                         <div className="info-cont">
-                            
+
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
-                            {status === 2
-                                ? <img src={userInfo.is_online ? onlineIcon : offlineIcon} className="stt-online"  alt="status" />
-                                :""
+                            {status === 2 || userInfo.user_id === userLoggedState.user_id
+                                ? <img src={userInfo.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="status" />
+                                : ""
                             }
-                            
+
                             <div className="info">
                                 <Typography.Title level={3} style={{ margin: 0 }}>{userInfo.user_name}</Typography.Title>
                                 <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>{userInfo.user_email}</Typography.Text>
@@ -198,7 +224,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
                                 <Tabs.TabPane tab="Mutual Friends" key="mutual_friends">
                                     <div className="friends-cont">
-                                        {renderFriends()}
+                                        {renderMutualFriends()}
                                     </div>
                                 </Tabs.TabPane>
                             </Tabs>

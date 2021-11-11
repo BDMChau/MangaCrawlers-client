@@ -9,12 +9,6 @@
   margin-top: -4px;
 }
 
-.item {
-  border-left: 0px solid #afafaf85;
-  border-radius: 0;
-  margin-top: 5px;
-}
-
 .comment-items::-webkit-scrollbar-track {
   background: transparent;
 }
@@ -36,6 +30,13 @@
   border-radius: 5px;
   padding: 0px;
 }
+
+.comment .item {
+  border-left: 0px solid #afafaf85;
+  border-radius: 0;
+  margin-top: 5px;
+}
+
 
 .comment-item .ant-comment-content {
   padding: 5px;

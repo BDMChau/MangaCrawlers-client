@@ -279,6 +279,14 @@ const userApi = {
             }
         });
     },
+    getMutualFriends: (token, data) => {
+        const uri = `/api/user/get_mutual_friends?to_user_id=${data.user_id}`;
+        return axiosClient.get(uri, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 
     ////////////////// unauth parts //////////////////
     getUserInfo: (data) => {
@@ -292,7 +300,7 @@ const userApi = {
     getFriendsOfUser: (data) => {
         const uri = `/api/user_unauth/get_friends_of_user?user_id=${data.user_id}&from=${data.from}&amount=${data.amount}`;
         return axiosClient.get(uri);
-    }
+    },
 };
 
 export default userApi;

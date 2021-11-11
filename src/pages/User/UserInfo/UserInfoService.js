@@ -27,6 +27,7 @@ export default function UserInfoService() {
 
     const [userInfo, setUserInfo] = useState({});
     const [friends, setFriends] = useState([]);
+    const [mutualFriends, setMutualFriends] = useState([]);
     const [posts, setPosts] = useState([]);
 
     const [fromFr, setFromFr] = useState(10);
@@ -41,16 +42,16 @@ export default function UserInfoService() {
 
 
     useEffect(() => {
-        if (!queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
-    }, [])
+        if (queryUserId && !queryVal) history.push(`${redirectURI.userPage_uri(queryUserId)}&v=posts`)
+    }, [queryUserId])
 
 
     useEffect(() => {
-        if(Object.keys(userInfo).length){
+        if (Object.keys(userInfo).length) {
             socket.on(EVENTS_NAME.NOTIFY_ONLINE, (result) => {
-                if(userInfo.user_id === result.sender_id){
-                    if(result.status_number === 1) setUserInfo({...userInfo, is_online: true});
-                    else setUserInfo({...userInfo, is_online: false});
+                if (userInfo.user_id === result.sender_id) {
+                    if (result.status_number === 1) setUserInfo({ ...userInfo, is_online: true });
+                    else setUserInfo({ ...userInfo, is_online: false });
                 }
             });
         }
@@ -79,7 +80,7 @@ export default function UserInfoService() {
             } else if (queryVal === "friends") {
                 getFriends(queryUserId);
             } else if (queryVal === "mutual_friends") {
-
+                // get all
             }
         }
     }, [stuffsState])
@@ -87,6 +88,7 @@ export default function UserInfoService() {
 
     useEffect(() => {
         if (userId && fromFr === 0 && fromPost === 0 && !isEndFr && !isEndPost) {
+            getMuTualFriends(userId);
             getUserInfo(userId);
             getFriends(userId);
             getPosts(userId);
@@ -133,6 +135,21 @@ export default function UserInfoService() {
 
             setFriends(prev => [...prev, ...res.content.list_friends]);
             setFromFr(res.content.from);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const getMuTualFriends = async (id) => {
+        if(!token || !userState[0]) return;
+
+        const data = { user_id: id.toString() }
+
+        try {
+            const res = await userApi.getMutualFriends(token, data);
+            if (res.content.err) return;
+
+            setMutualFriends(res.content.list_mutual);
         } catch (err) {
             console.log(err);
         }
@@ -351,7 +368,6 @@ export default function UserInfoService() {
 
     return (
         <div>
-            <NavLink to="/user/id?id=15" >hj,k</NavLink>
             <UserInfo
                 userLoggedState={userState[0]}
                 userInfo={userInfo}
@@ -364,6 +380,7 @@ export default function UserInfoService() {
 
                 posts={posts}
                 friends={friends}
+                mutualFriends={mutualFriends}
             />
         </div>
     )
