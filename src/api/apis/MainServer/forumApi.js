@@ -23,6 +23,10 @@ const forumApi = {
         const uri = `/api/forum_unauth/post/search?value=${data.title}`
         return axiosClient.get(uri)
     },
+    getCmtsPost: (data) => {
+        const uri = `/api/forum_unauth/post/getcommentspost`
+        return axiosClient.post(uri, data)
+    },
 
     ////////////// auth
     createPost: (token, data) => {

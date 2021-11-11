@@ -11,6 +11,7 @@ import Cookies from 'universal-cookie';
 import { Typography } from 'antd';
 import TransitionAnimate from 'components/Animation/transition';
 import mangaApi from 'api/apis/MainServer/mangaApi';
+import forumApi from 'api/apis/MainServer/forumApi';
 
 
 
@@ -52,31 +53,32 @@ function CommentContainter({ mangaId, postId }) {
     useEffect(() => {
         setIsEndCmts(false);
         setComments([]);
-        setFromRow(0);
+        setFromRow(0);    
 
+        // if (fromRow === 0) getCmts()
+    }, [mangaId, postId])
+
+
+    useEffect(() => {
         // if fromRow is 0, run getCmts() below
-        if (fromRow === 0) {
-            getCmts();
-        }
-    }, [mangaId])
-
-
-    // useEffect(() => {
-    //     // if fromRow is 0, this effect won't be invoked
-    //     if (fromRow) getCmts()
-    // }, [fromRow])
+        if (fromRow === 0) getCmts()
+    }, [mangaId, postId, fromRow])
 
 
     const getCmts = async () => {
         const data = {
             manga_id: mangaId ? mangaId : null,
+            post_id: postId ? postId : null,
             chapter_id: null,
             from: fromRow,
             amount: 10
         }
 
         try {
-            const response = await mangaApi.getCommentsManga(data);
+            let response;
+            if(mangaId) response = await mangaApi.getCommentsManga(data);
+            else if(postId) response = await forumApi.getCmtsPost(data);
+
             const comments = response.content.comments ? response.content.comments : [];
 
             if (comments.length < 10 && response.content.msg === "No comments found!") {
@@ -98,6 +100,7 @@ function CommentContainter({ mangaId, postId }) {
         if (userState[0]) {
             const formData = new FormData();
             formData.append("manga_id", mangaId ? mangaId.toString() : "");
+            formData.append("post_id", postId ? postId.toString() : "");
             formData.append("chapter_id", "");
             formData.append("manga_comment_content", dataInput.content);
             formData.append("image", dataInput.image);

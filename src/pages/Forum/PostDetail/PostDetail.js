@@ -87,7 +87,9 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, po
                 <Col className="cmt-post-detail" xs={22} md={22} xl={22}>
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "30px" }} />
 
-                    <CommentContainter />
+                    <CommentContainter
+                        postId={postInfo.post_id}
+                    />
                 </Col>
 
                 <Col className="more-posts" xs={22} md={11} xl={11}>

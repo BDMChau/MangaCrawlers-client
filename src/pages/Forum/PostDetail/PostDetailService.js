@@ -135,7 +135,6 @@ export default function PostDetailService() {
             }
 
             const status = res.content.status_number;
-            console.log(status)
             if(status === 1) setIsLiked(true);
             else setIsLiked(false)
 
