@@ -9,25 +9,21 @@ import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
 
-export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, topLikePosts, topDislikePosts }) {
+export default function PostDetail({
+    postInfo,
+    sttLike,
+
+    likePost,
+    unlikePost,
+
+    dislikePost,
+    unDislikePost,
+
+    topLikePosts,
+    topDislikePosts
+}) {
     const history = useHistory();
-    // post: {post_id: 7, title: "title of post 01",…}
-    // categoryList: [{category_id: 1, name: "cate 1↵", description: "aaa", color: "yellow"},…]
-    // 0: {category_id: 1, name: "cate 1↵", description: "aaa", color: "yellow"}
-    // category_id: 1
-    // color: "yellow"
-    // description: "aaa"
-    // name: "cate 1\n"
-    // 1: {category_id: 3, name: "cate 3", description: "ccc", color: "red"}
-    // content: "\n[![OpenStore](https://open-store.io/badges/en_US.png)](https://open-store.io/app/me.lduboeuf.stellarium)\n\n[Stellarium](https://stellarium.org) on Mobile.\n\nThis is an adaptation of Cheng Xinlun's Stellarium app for Android/Ios : https://github.com/chengxinlun/Stellarium-android ,\n\nRe-used compressed assets from initial work: https://noctua-software.com/stellarium-mobile 1.29 version\n\n## Build for Ubuntu Touch\n\n`clickable -c ubuntu_touch/clickable.json`\n\n\n## Translate\nhttps://hosted.weblate.org/projects/stellarium-mobile/app/ for stellarium core translations\n\nSky cultures translation is not available there due to the one \"pot\" file limitation, see `po/stellarium-skycultures` and `mobileData/skycultures`\n\n\n### Update translation\n\n- Translations `.pot` files are updated with command `make translate_core` and `make translate_skyculture` ( project need to be build first with qmake)\n- To merge `po` files in `qm` files use the script `translation_generator.sh`\n\n\n\n\n## Copyrights:\n    Original Stellarium dev team\n    Noctua-Software"
-    // created_at: 1636011970638
-    // post_id: 7
-    // title: "title of post 01"
-    // user_avatar: "https://res.cloudinary.com/mangacrawlers/image/upload/v1635050756/users_avatar/file_gkyiph.png"
-    // user_email: "bdmchau105@gmail.com"
-    // user_id: 9
-    // user_isAdmin: true
-    // user_name: "Chou"
+
     return (
         <div className="post-detail-page">
             <Row justify={"center"} className="row" >
@@ -53,10 +49,10 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, to
 
                         <div className="interact">
                             <div style={{ marginRight: "15px" }} >
-                                <Tooltip title={isLiked ? "" : "Give a like"} >
-                                    <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
+                                <Tooltip title={sttLike !== 1 ? "I like this" : ""} >
+                                    <Button className="btn-like-dislike" onClick={() => sttLike === 1 ? unlikePost() : likePost()}
                                         icon={
-                                            <LikeOutlined style={{ fontSize: "20px", color: isLiked ? "#1890FF" : "unset" }} />
+                                            <LikeOutlined style={{ fontSize: "20px", color: sttLike === 1 ? "#1890FF" : "unset" }} />
                                         }
                                     />
                                 </Tooltip>
@@ -64,14 +60,14 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, to
                             </div>
 
                             <div>
-                                <Tooltip title={isLiked ? "" : "Dislike post"} >
-                                    <Button className="btn-like-dislike" onClick={() => isLiked ? unlikePost() : likePost()}
+                                <Tooltip title={sttLike !== 2 ? "I dislike this" : ""} >
+                                    <Button className="btn-like-dislike" onClick={() => sttLike === 2 ? unDislikePost() : dislikePost()}
                                         icon={
-                                            <DislikeOutlined style={{ fontSize: "20px", color: isLiked ? "grey" : "unset" }} />
+                                            <DislikeOutlined style={{ fontSize: "20px", color: sttLike === 2 ? "#80808080" : "unset" }} />
                                         }
                                     />
                                 </Tooltip>
-                                <Typography.Text>{postInfo.likes}</Typography.Text>
+                                <Typography.Text>{postInfo.dislikes}</Typography.Text>
                             </div>
                         </div>
                     </div>

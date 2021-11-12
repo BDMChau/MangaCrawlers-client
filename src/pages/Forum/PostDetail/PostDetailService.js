@@ -18,7 +18,8 @@ export default function PostDetailService() {
     const [topLikePosts, setTopLikePosts] = useState([]);
     const [topDislikePosts, setTopDislikePosts] = useState([]);
 
-    const [isLiked, setIsLiked] = useState(false);
+    // 0: nothing, 1: like, 2: dislike
+    const [sttLike, setSttLike] = useState(0);
 
     const cookies = new Cookies();
     const token = cookies.get("token");
@@ -45,7 +46,7 @@ export default function PostDetailService() {
     const getTopLikesPost = async () => {
         try {
             let res = await forumApi.getTopPostsLike(6);
-            if(res.content.err){
+            if (res.content.err) {
                 res = await forumApi.getRandomPosts(6);
                 setTopLikePosts(res.content.suggestion_list);
                 return;
@@ -61,7 +62,7 @@ export default function PostDetailService() {
     const getTopDislikesPost = async () => {
         try {
             let res = await forumApi.getTopPostsLike(6);
-            if(res.content.err){
+            if (res.content.err) {
                 res = await forumApi.getRandomPosts(6);
                 setTopDislikePosts(res.content.suggestion_list);
                 return;
@@ -93,8 +94,8 @@ export default function PostDetailService() {
 
 
     const likePost = async () => {
-        if(!userState[0]) return message_error("You have to logged in to do this action");
-        if(!Object.keys(postInfo).length) return;
+        if (!userState[0]) return message_error("You have to logged in to do this action");
+        if (!Object.keys(postInfo).length) return;
 
         const data = {
             post_id: postInfo.post_id
@@ -102,13 +103,17 @@ export default function PostDetailService() {
 
         try {
             const res = await forumApi.likePost(token, data);
-            if(res.content.err){
+            if (res.content.err) {
                 message_error("Failed!");
                 return;
             }
 
-            setIsLiked(true);
-            setPostInfo({...postInfo, likes: res.content.likes});
+            setSttLike(1)
+            setPostInfo({
+                ...postInfo,
+                likes: res.content.likes,
+                dislikes: res.content.dislikes
+            });
         } catch (err) {
             console.log(err)
         }
@@ -116,8 +121,8 @@ export default function PostDetailService() {
 
 
     const unlikePost = async () => {
-        if(!userState[0]) return message_error("You have to logged in to do this action");
-        if(!Object.keys(postInfo).length) return;
+        if (!userState[0]) return message_error("You have to logged in to do this action");
+        if (!Object.keys(postInfo).length) return;
 
         const data = {
             post_id: postInfo.post_id
@@ -125,38 +130,94 @@ export default function PostDetailService() {
 
         try {
             const res = await forumApi.unlikePost(token, data);
-            if(res.content.err){
+            if (res.content.err) {
                 message_error("Failed!");
                 return;
             }
 
-            setIsLiked(false);
-            setPostInfo({...postInfo, likes: res.content.likes});
+            setSttLike(0);
+            setPostInfo({
+                ...postInfo,
+                likes: res.content.likes,
+                dislikes: res.content.dislikes
+            });
         } catch (err) {
             console.log(err)
         }
     }
 
-    
-    const checkIsLiked = async (postId) => {
+
+
+    const dislikePost = async () => {
+        if (!userState[0]) return message_error("You have to logged in to do this action");
+        if (!Object.keys(postInfo).length) return;
+
         const data = {
-            post_id: postId
+            post_id: postInfo.post_id
         };
 
         try {
-            const res = await forumApi.checkIsLiked(token, data);
-            if(res.content.err){
-                setIsLiked(false);
+            const res = await forumApi.dislikePost(token, data);
+            if (res.content.err) {
                 message_error("Failed!");
                 return;
             }
 
+            setSttLike(2)
+            setPostInfo({
+                ...postInfo,
+                likes: res.content.likes,
+                dislikes: res.content.dislikes
+            });
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    const unDislikePost = async () => {
+        if (!userState[0]) return message_error("You have to logged in to do this action");
+        if (!Object.keys(postInfo).length) return;
+
+        const data = {
+            post_id: postInfo.post_id
+        };
+
+        try {
+            const res = await forumApi.unDislikePost(token, data);
+            if (res.content.err) {
+                message_error("Failed!");
+                return;
+            }
+
+            setSttLike(0);
+            setPostInfo({
+                ...postInfo,
+                likes: res.content.likes,
+                dislikes: res.content.dislikes
+            });
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+
+    const checkIsLiked = async (postId) => {
+        const data = { post_id: postId };
+
+        try {
+            const res = await forumApi.checkIsLiked(token, data);
+
             const status = res.content.status_number;
-            if(status === 1) setIsLiked(true);
-            else setIsLiked(false)
+
+            // 0: nothing, 1: like, 2: dislike
+            if (status === 1) setSttLike(1);
+            else if (status === 2) setSttLike(2);
+            else setSttLike(0);
 
         } catch (err) {
-            setIsLiked(false)
+            setSttLike(0);
             console.log(err)
         }
     }
@@ -165,9 +226,12 @@ export default function PostDetailService() {
         <PostDetail
             postInfo={postInfo}
 
-            isLiked={isLiked}
+            sttLike={sttLike}
             likePost={likePost}
             unlikePost={unlikePost}
+
+            dislikePost={dislikePost}
+            unDislikePost={unDislikePost}
 
             topLikePosts={topLikePosts}
             topDislikePosts={topDislikePosts}

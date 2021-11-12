@@ -24,7 +24,7 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
             <div className="post-title">
                 <div style={{ display: "flex", justifyContent: "space-between" }} >
                     <NavLink to={redirectURI.postPage_uri(post.post_id)}>
-                        <Typography.Title className={smallSize ? "title-small" : "title"} level={5}>{post.title}</Typography.Title>
+                        <Typography.Title className={smallSize ? "title-small" : "title"} level={5} style={{ fontWeight: "500" }} >{post.title}</Typography.Title>
                     </NavLink>
 
                     {smallSize

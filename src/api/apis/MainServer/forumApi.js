@@ -57,8 +57,24 @@ const forumApi = {
             }
         })
     },
+    dislikePost: (token, data) => {
+        const uri = `/api/forum/post/add_dislike`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     unlikePost: (token, data) => {
         const uri = `/api/forum/post/unlike`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
+    unDislikePost: (token, data) => {
+        const uri = `/api/forum/post/un_dislike`
         return axiosClient.post(uri, data, {
             headers: {
                 Authorization: token
