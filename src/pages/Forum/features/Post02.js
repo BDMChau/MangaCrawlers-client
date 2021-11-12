@@ -52,7 +52,7 @@ export default function Post02({ post, key, smallSize, renderContent, width, stt
                             </span>
 
                             <span className="likes-dislikes" style={{}}>
-                                {sttLike ? post.likes : <DislikeOutlined style={{ fontSize: "16px" }} />}
+                                {sttLike ? post.likes : post.dislikes}
                             </span>
                         </div>
                     </div>

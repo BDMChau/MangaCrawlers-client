@@ -61,7 +61,7 @@ export default function PostDetailService() {
 
     const getTopDislikesPost = async () => {
         try {
-            let res = await forumApi.getTopPostsLike(6);
+            let res = await forumApi.getTopPostsdDislike(6);
             if (res.content.err) {
                 res = await forumApi.getRandomPosts(6);
                 setTopDislikePosts(res.content.suggestion_list);
@@ -93,6 +93,8 @@ export default function PostDetailService() {
     }
 
 
+
+    ////////////// interaction
     const likePost = async () => {
         if (!userState[0]) return message_error("You have to logged in to do this action");
         if (!Object.keys(postInfo).length) return;

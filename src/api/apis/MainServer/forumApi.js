@@ -23,6 +23,10 @@ const forumApi = {
         const uri = `/api/forum_unauth/post/get_top_post_like?quantity=${quantity}`
         return axiosClient.get(uri);
     },
+    getTopPostsdDislike: (quantity) => {
+        const uri = `/api/forum_unauth/post/get_top_post_dislike?quantity=${quantity}`
+        return axiosClient.get(uri);
+    },
     getRandomPosts: (quantity) => {
         const uri = `/api/forum_unauth/post/getsuggestion?quantity=${quantity}`
         return axiosClient.get(uri);
