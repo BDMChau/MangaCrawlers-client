@@ -15,6 +15,18 @@ const forumApi = {
         const uri = `/api/forum_unauth/post/getpost?post_id=${data.post_id}`
         return axiosClient.get(uri);
     },
+    getTopPostCmts: (quantity) => {
+        const uri = `/api/forum_unauth/post/get_top_post_cmts?quantity=${quantity}`
+        return axiosClient.get(uri);
+    },
+    getTopPostsLike: (quantity) => {
+        const uri = `/api/forum_unauth/post/get_top_post_like?quantity=${quantity}`
+        return axiosClient.get(uri);
+    },
+    getRandomPosts: (quantity) => {
+        const uri = `/api/forum_unauth/post/getsuggestion?quantity=${quantity}`
+        return axiosClient.get(uri);
+    },
     getPostsWithCategory: (data) => {
         const uri = `/api/forum_unauth/post/getposts_bycategory?category_id=${data.category_id}`
         return axiosClient.get(uri);

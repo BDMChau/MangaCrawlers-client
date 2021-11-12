@@ -5,6 +5,7 @@ import { Button, Typography, Tag, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
 import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
+import MyTag from './MyTag'
 
 
 export default function Post02({ post, key, smallSize, renderContent, width, sttLike }) {
@@ -33,7 +34,7 @@ export default function Post02({ post, key, smallSize, renderContent, width, stt
                     {post.categoryList?.length
                         ? post.categoryList.map((item, i) => (
                             <div className="category" key={i}>
-                                <Tag color={item.color} style={{ border: "none" }} >{item.name}</Tag>
+                                <MyTag category={item} key={i} />
                             </div>
                         ))
                         : ""
@@ -47,11 +48,11 @@ export default function Post02({ post, key, smallSize, renderContent, width, stt
 
                         <div>
                             <span className="icon-likes-dislikes" >
-                                {!sttLike ? <LikeOutlined style={{ fontSize: "16px" }} /> : <DislikeOutlined style={{ fontSize: "16px" }} />}
+                                {sttLike ? <LikeOutlined style={{ fontSize: "16px" }} /> : <DislikeOutlined style={{ fontSize: "16px" }} />}
                             </span>
 
                             <span className="likes-dislikes" style={{}}>
-                                13456
+                                {sttLike ? post.likes : <DislikeOutlined style={{ fontSize: "16px" }} />}
                             </span>
                         </div>
                     </div>

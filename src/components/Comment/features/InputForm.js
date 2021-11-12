@@ -162,10 +162,13 @@ function InputForm({
 
 
     const onChangeFile = (info) => {
-        setImg(info.file.originFileObj)
-        if (objEdit) objEdit.image = info.file.originFileObj;
+        const originFile = info.file.originFileObj;
+        const file = originFile ? originFile : info.file;
 
-        handleFile.getBase64Img(info.file.originFileObj, (file) => {
+        setImg(file)
+        if (objEdit) objEdit.image = file;
+
+        handleFile.getBase64Img(file, (file) => {
             setImgDemo(file)
         });
     }

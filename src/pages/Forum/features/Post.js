@@ -4,6 +4,7 @@ import "../ForumHome/ForumHome.css"
 import { Avatar, Typography, Tag, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
+import MyTag from './MyTag'
 
 export default function Post({ post, key, smallSize, renderContent, width }) {
     return (
@@ -45,7 +46,7 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                     {post.categoryList?.length
                         ? post.categoryList.map((item, i) => (
                             <div className="category" key={i}>
-                                <Tag color={item.color} style={{ border: "none" }} >{item.name}</Tag>
+                                <MyTag category={item} key={i} />
                             </div>
                         ))
                         : ""

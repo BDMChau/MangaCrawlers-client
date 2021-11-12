@@ -9,9 +9,10 @@ import { Button, Col, Row, Typography } from 'antd'
 import { PlusOutlined } from "@ant-design/icons"
 import { NavLink } from 'react-router-dom'
 import { enquireScreen, unenquireScreen } from 'enquire-js'
+import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom'
 
 
-export default function ForumHome({ categories, posts }) {
+export default function ForumHome({ categories, posts, isLoading, postsTopCmts, postsRandom }) {
     const [isMobile, setIsMobile] = useState(false);
 
     const scrollRef = useRef();
@@ -27,22 +28,13 @@ export default function ForumHome({ categories, posts }) {
     }, [])
 
 
-    ////////// scroll //////////
-    const handleScroll = (e) => {
-        const scrollTop = e.target.scrollTop;
-        const clientHeight = e.target.clientHeight;
-        const scrollHeight = e.target.scrollHeight;
-
-
-    }
-
 
     const renderRight = () => (
         <div>
-            <div className="trending-posts">
-                <Typography.Title level={4} style={{ marginTop: "5px" }} >Trending</Typography.Title>
-                {posts.length
-                    ? posts.map((post, i) => (
+            <div className="trending-posts" style={{ marginBottom: "2.7rem" }} >
+                <Typography.Title level={5} style={{ marginTop: "10px" }} >Trending</Typography.Title>
+                {postsTopCmts.length
+                    ? postsTopCmts.map((post, i) => (
                         <Post post={post} key={i} smallSize={true} />
                     ))
                     : ""
@@ -50,9 +42,9 @@ export default function ForumHome({ categories, posts }) {
             </div>
 
             <div className="trending-posts">
-                <Typography.Title level={4} style={{ marginTop: "5px" }} >Suggestion</Typography.Title>
-                {posts.length
-                    ? posts.map((post, i) => (
+                <Typography.Title level={5} style={{ marginTop: "5px" }} >Maybe you like</Typography.Title>
+                {postsRandom.length
+                    ? postsRandom.map((post, i) => (
                         <Post post={post} key={i} smallSize={true} />
                     ))
                     : ""
@@ -76,12 +68,18 @@ export default function ForumHome({ categories, posts }) {
             <Typography.Title level={3}>Newest</Typography.Title>
             {posts.length
                 ? <div onScroll={(e) => handleScroll(e)} >
-                    {
-                        posts.map((post, i) => (
+                    <>
+                        {posts.map((post, i) => (
                             <Post post={post} key={i} />
 
-                        ))
-                    }
+                        ))}
+
+                        {isLoading
+                            ? <SkeletonCustom paragraphRows={5} />
+                            : ""
+                        }
+                    </>
+
                 </div>
                 : ""
             }
@@ -111,7 +109,7 @@ export default function ForumHome({ categories, posts }) {
                 </Col>
 
                 <Col className="right" xs={24} md={18} xl={7}>
-                {isMobile ? renderLeft() : renderRight()}
+                    {isMobile ? renderLeft() : renderRight()}
                 </Col>
             </Row>
         </div>

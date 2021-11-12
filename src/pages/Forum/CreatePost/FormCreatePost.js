@@ -8,8 +8,10 @@ import { useSelector } from 'react-redux';
 import { MySelectTags } from './features/MySelectTags';
 import { message_success } from 'components/toast/message';
 import { useHistory } from 'react-router';
+import { notification_error } from 'components/toast/notification';
 
 export default function FormCreatePost({ createPost }) {
+    const userState = useSelector((state) => state.userState);
     const forumState = useSelector((state) => state.forumState);
     const [categoriesState, setCategoriesState] = useState(forumState[0]?.length ? forumState[0] : []);
 
@@ -35,6 +37,7 @@ export default function FormCreatePost({ createPost }) {
 
 
     const handleCreate = async () => {
+        if (!userState[0]) return notification_error("Please login!")
         if (!title || !categories.length || !markdown) {
             setIsMissing(true);
             return;
@@ -49,7 +52,7 @@ export default function FormCreatePost({ createPost }) {
         const res = await createPost(data);
         if (res === true) {
             message_success("Created!");
-            setTimeout(() => history.push("/forum"), 300);
+            // setTimeout(() => history.push("/forum"), 500);
         }
 
         setIsLoading(false);

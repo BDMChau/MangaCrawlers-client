@@ -11,8 +11,6 @@ export default function CreatePostService() {
     const token = cookies.get("token");
 
     const createPost = async (data) => {
-        const { title, categoriesId, content } = data;
-
         try {
             const res = await forumApi.createPost(token, data)
             if(res.content.msg) return true;

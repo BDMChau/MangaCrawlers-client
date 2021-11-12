@@ -15,7 +15,8 @@ export default function PostDetailService() {
     const { postid } = useParams();
 
     const [postInfo, setPostInfo] = useState({});
-    const [posts, setPosts] = useState([]);
+    const [topLikePosts, setTopLikePosts] = useState([]);
+    const [topDislikePosts, setTopDislikePosts] = useState([]);
 
     const [isLiked, setIsLiked] = useState(false);
 
@@ -34,29 +35,45 @@ export default function PostDetailService() {
             });
         }
 
-        getPosts();
-        if (userState[0] && postid) checkIsLiked(postid);
+        getTopLikesPost();
+        getTopDislikesPost();
+
+        if (postid) checkIsLiked(postid);
     }, [postid, userState])
 
-    const getPosts = async () => {
 
-        const data = {
-            from: 0,
-            amount: 6
-        }
-
+    const getTopLikesPost = async () => {
         try {
-            const res = await forumApi.getAllPost(data);
+            let res = await forumApi.getTopPostsLike(6);
+            if(res.content.err){
+                res = await forumApi.getRandomPosts(6);
+                setTopLikePosts(res.content.suggestion_list);
+                return;
+            }
 
-            const posts = res.content.posts
-            const contFromPos = res.content.from;
-
-
-            setPosts(posts);
+            setTopLikePosts(res.content.posts);
         } catch (err) {
             console.log(err)
         }
     }
+
+
+    const getTopDislikesPost = async () => {
+        try {
+            let res = await forumApi.getTopPostsLike(6);
+            if(res.content.err){
+                res = await forumApi.getRandomPosts(6);
+                setTopDislikePosts(res.content.suggestion_list);
+                return;
+            }
+
+            setTopDislikePosts(res.content.posts);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
 
     const getPost = async (postId) => {
         const data = {
@@ -139,6 +156,7 @@ export default function PostDetailService() {
             else setIsLiked(false)
 
         } catch (err) {
+            setIsLiked(false)
             console.log(err)
         }
     }
@@ -151,7 +169,8 @@ export default function PostDetailService() {
             likePost={likePost}
             unlikePost={unlikePost}
 
-            posts={posts}
+            topLikePosts={topLikePosts}
+            topDislikePosts={topDislikePosts}
         />
     )
 }

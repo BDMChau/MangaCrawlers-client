@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
 
-export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, posts }) {
+export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, topLikePosts, topDislikePosts }) {
     const history = useHistory();
     // post: {post_id: 7, title: "title of post 01",…}
     // categoryList: [{category_id: 1, name: "cate 1↵", description: "aaa", color: "yellow"},…]
@@ -94,15 +94,15 @@ export default function PostDetail({ postInfo, isLiked, likePost, unlikePost, po
 
                 <Col className="more-posts" xs={22} md={11} xl={11}>
                     <Typography.Title level={5} style={{ padding: "0 5px" }} >Hot Topics</Typography.Title>
-                    {posts.map(post => (
-                        <Post02 post={post} />
+                    {topLikePosts.map(post => (
+                        <Post02 post={post} sttLike={true} />
                     ))}
                 </Col>
 
                 <Col className="more-posts" xs={22} md={11} xl={11}>
                     <Typography.Title level={5} style={{ padding: "0 5px" }} >Down Votes</Typography.Title>
-                    {posts.map(post => (
-                        <Post02 post={post} />
+                    {topDislikePosts.map(post => (
+                        <Post02 post={post} sttLike={false} />
                     ))}
                 </Col>
             </Row>
