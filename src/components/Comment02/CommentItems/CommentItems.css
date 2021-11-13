@@ -1,0 +1,240 @@
+.comment-items::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.cmt-body {
+  border-radius: 15px;
+  padding: 7px 10px;
+  margin-top: -4px;
+}
+
+.comment-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.comment-items::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.comment-items::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
+}
+
+.comment-items .comment-item {
+  padding: 0 10px 0 0;
+}
+
+.comment {
+  border-radius: 5px;
+  padding: 0px;
+}
+
+.comment .item {
+  border-left: 0px solid #afafaf85;
+  border-radius: 0;
+  margin-top: 5px;
+}
+
+
+.comment-item .ant-comment-content {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.comment .cmt-bottom {
+  margin-top: 10px;
+}
+
+.comment .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.comment .cmt-bottom .interact {
+  margin-top: 3px;
+}
+
+.comment .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.comment .cmt-bottom .interact .reply:hover {
+  color: #5c5d5e;
+  margin-left: 10px;
+}
+
+.comment .cmt-bottom .interact .btn-remove {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.comment .cmt-bottom .interact .btn-remove:hover {
+  color: #5c5d5e;
+  margin-left: 10px;
+}
+
+.comment .cmt-bottom .interact .ant-image-img {
+  margin: auto;
+}
+
+.comment .cmt-avatar {
+  margin-left: 5px;
+}
+
+.ant-comment-inner {
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* ///////////////////////////////// */
+.cmt-children {
+  border-radius: 5px;
+  margin-left: 0;
+  padding: 0px;
+}
+
+.comment-item01 .ant-comment-content {
+  padding: 0px;
+  border-radius: 5px;
+}
+
+.cmt-children .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmt-children .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cmt-children .cmt-bottom .interact .reply:hover {
+  color: #848587;
+  margin-left: 10px;
+}
+
+/* //////////////////////////////////// */
+.cmt-children02 {
+  border-radius: 5px;
+  margin-left: 0;
+  padding: 5px;
+}
+
+.comment-item02 .ant-comment-content {
+  padding: 0px;
+  border-radius: 5px;
+}
+
+.cmt-children02 .cmt-bottom .chapter-name {
+  margin-right: 10px;
+  float: right;
+  font-style: italic;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmt-children02 .cmt-bottom .interact .reply {
+  color: #a4a5a6;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cmt-children02 .cmt-bottom .interact .reply:hover {
+  color: #848587;
+  margin-left: 10px;
+}
+
+/* //////////////////// */
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+  .comments-form .text {
+    max-height: 350px;
+  }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 550px) {
+  .comment .cmt-bottom .chapter-name {
+    width: 160px;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+  .comments-form .text {
+    max-height: 450px;
+  }
+
+  .comment .cmt-bottom .chapter-name {
+    width: 130px;
+  }
+
+  .modal-del-cmt {
+    margin-top: 300px !important;
+  }
+
+  .modal-del-cmt .ant-modal-content {
+    padding: 15px 10px !important;
+  }
+
+  .modal-del-cmt .ant-modal-body .ant-typography {
+    font-size: 14px !important;
+  }
+
+  .modal-del-cmt .ant-modal-body button {
+    margin-top: 20px !important;
+  }
+}
+
+.modal-del-cmt {
+  margin-top: 350px;
+}
+
+.modal-del-cmt .ant-modal-content {
+  padding: 20px;
+  height: 100px;
+  border-radius: 12px;
+}
+
+.modal-del-cmt .ant-modal-body .ant-typography {
+  font-size: 15px;
+}
+
+.modal-del-cmt .ant-modal-body button {
+  margin-left: 5px;
+  margin-top: 10px;
+  float: right;
+  border-radius: 3px;
+}
+

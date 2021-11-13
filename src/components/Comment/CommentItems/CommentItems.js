@@ -4,9 +4,9 @@ import { NavLink, useHistory } from 'react-router-dom';
 
 import { Comment, Avatar, Empty, Typography, Tooltip, Button } from 'antd';
 
-import ButtonLike from '../features/ButtonLike';
+import ButtonLike from '../../Comment/features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import InteractionForm from '../features/InteractionForm';
+import InteractionForm from '../../Comment/features/InteractionForm';
 import { format } from 'helpers/format';
 import { useSelector } from 'react-redux';
 import redirectURI from 'helpers/redirectURI';

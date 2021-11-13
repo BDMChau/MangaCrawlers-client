@@ -9,7 +9,7 @@ import FadingText from '../../../components/FadingText/FadingText';
 import Spacing from '../../../components/Spacing/Spacing'
 import { useSelector } from 'react-redux';
 import { message_error } from '../../../components/toast/message';
-import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
+import CommentContainter from 'components/Comment02/CommentContainter/CommentContainter';
 import redirectURI from 'helpers/redirectURI';
 import { EditOutlined, CheckOutlined, EyeOutlined } from '@ant-design/icons';
 

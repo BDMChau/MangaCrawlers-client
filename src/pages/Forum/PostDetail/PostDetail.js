@@ -2,7 +2,7 @@ import React from 'react'
 import "./PostDetail.css"
 
 import MDEditor from '@uiw/react-md-editor';
-import CommentContainter from 'components/Comment/CommentContainter/CommentContainter';
+import CommentContainter from 'components/Comment02/CommentContainter/CommentContainter';
 import { Avatar, Button, Col, Divider, Row, Typography, Tooltip } from 'antd';
 import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
