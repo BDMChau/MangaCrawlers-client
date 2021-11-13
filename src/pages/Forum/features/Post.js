@@ -5,6 +5,7 @@ import { Avatar, Typography, Tag, Tooltip } from 'antd'
 import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
 import MyTag from './MyTag'
+import { format } from 'helpers/format'
 
 export default function Post({ post, key, smallSize, renderContent, width }) {
     return (
@@ -56,7 +57,7 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                 {smallSize
                     ? ""
                     : <div className="info">
-                        <span className="time" >May 10, 2021</span>
+                        <span className="time" >{format.formatDate02(post.created_at)}</span>
 
                         <Tooltip title={`this topic has ${post.comment_count} comments`} >
                             <span className="comments-count">{post.comment_count}</span>

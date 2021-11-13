@@ -33,7 +33,8 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
             const obj = {
                 cmt_id: cmtId,
                 content: comment.manga_comment_content,
-                image: comment.image_url ? comment.image_url : ""
+                image: comment.image_url ? comment.image_url : "",
+                to_users: comment.to_users ? comment.to_users : []
             };
 
             setObjEdit(obj);

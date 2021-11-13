@@ -27,14 +27,16 @@ export default function PostDetailService() {
 
     useEffect(() => {
         if (postid) {
-            getPost(postid);
-
             smoothscroll.polyfill();
             window.scroll({
                 top: 0,
                 behavior: "smooth"
             });
         }
+    }, [postid])
+
+    useEffect(() => {
+        if (postid)  getPost(postid);
 
         getTopLikesPost();
         getTopDislikesPost();

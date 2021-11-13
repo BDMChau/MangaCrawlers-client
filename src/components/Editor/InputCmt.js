@@ -19,21 +19,21 @@ import Entry from './features/Entry';
 import { Tooltip } from 'antd';
 
 
-export default function InputCmt({ 
-  isAddedCmt, 
+export default function InputCmt({
+  isAddedCmt,
 
-  onSearchFunc, 
-  suggestionsProp, 
+  onSearchFunc,
+  suggestionsProp,
 
-  setContent, 
+  setContent,
   setToUsersId,
 
-   isEditting,
-     objEdit,
+  isEditting,
+  objEdit,
 
-      replying
-     }) {
-      const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  replying
+}) {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [suggestions, setSuggestions] = useState([]);
 
   const [open, setOpen] = useState(false);
@@ -66,9 +66,12 @@ export default function InputCmt({
 
   useEffect(() => {
     if (objEdit && Object.keys(objEdit).length > 0) {
+      console.log(objEdit)
       setEditorState(EditorState.createWithContent(
         ContentState.createFromText(objEdit.content)
       ))
+
+      // setSuggestions(objEdit.toUsersId)
     }
   }, [objEdit])
 
@@ -113,6 +116,7 @@ export default function InputCmt({
   }
 
 
+
   const onExtractData = () => {
     const contentState = editorState.getCurrentContent();
     const raw = convertToRaw(contentState);
@@ -120,12 +124,31 @@ export default function InputCmt({
     let inputContent = ""
     raw.blocks.forEach(block => inputContent = inputContent + block.text.trim());
 
-    if (objEdit) objEdit.content = inputContent;
+    
+    if (objEdit) {
+      objEdit.content = inputContent;
+
+      if (objEdit.to_users?.length) {
+        objEdit.to_users.forEach((item, i) => {
+          const obj = {
+            type: "mention",
+            mutability: "IMMUTABLE",
+            data: {}
+          }
+          obj.data.mention = Object.assign({}, item);
+
+          raw.entityMap[i] = obj;
+        })
+      }
+
+    }
+
     onSetUsersMention(raw.entityMap);
     setContent(inputContent);
   };
 
 
+  // mention users
   const onSetUsersMention = (objEntityMap) => {
     const mentionedUsers = [];
     for (let key in objEntityMap) {
@@ -134,6 +157,8 @@ export default function InputCmt({
     }
 
     setToUsersId(mentionedUsers);
+
+    if (objEdit) objEdit.toUsersId = mentionedUsers;
     setSuggestions([]);
   };
 

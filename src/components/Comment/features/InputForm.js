@@ -255,7 +255,7 @@ function InputForm({
                                 </Upload>
                             </Tooltip>
 
-                            <Tooltip title="Comment with a Sticker">
+                            {/* <Tooltip title="Comment with a Sticker">
                                 <Popover
                                     trigger="click"
                                     visible={visible}
@@ -280,7 +280,7 @@ function InputForm({
                                 >
                                     <Button icon={<TagsOutlined style={{ fontSize: "16px" }} />} />
                                 </Popover>
-                            </Tooltip>
+                            </Tooltip> */}
 
                         </div>
                     </div>

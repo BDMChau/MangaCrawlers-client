@@ -149,15 +149,10 @@ function CommentContainter({ mangaId, postId }) {
     const deleteCmt = async (id) => {
         if (!userState[0]) return message_error("You have to logged in to do this action");
 
-        const data = mangaId
-            ? {
-                manga_comment_id: id,
-                comments: comments
-            }
-            : {
-                chapter_comment_id: id,
-                comments: comments
-            }
+        const data = {
+            manga_comment_id: id,
+            comments: comments
+        }
 
         try {
             const response = await userApi.deleteCmt(token, data);
@@ -177,9 +172,11 @@ function CommentContainter({ mangaId, postId }) {
 
 
     const editCmt = async (editObj) => {
+        console.log(editObj)
         const formData = new FormData();
         formData.append("manga_comment_id", editObj.cmt_id);
         formData.append("manga_comment_content", editObj.content);
+        formData.append("to_users_id", editObj.toUsersId);
         formData.append("image", editObj.image);
 
         try {
