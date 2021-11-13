@@ -122,7 +122,7 @@ function CommentContainter({ mangaId, postId }) {
                             key: 3
                         };
 
-                        const response02 = await userApi.filter(token, data);
+                        const response02 = await userApi.filterCmts(token, data);
                         if (response02.content.msg) {
                             setComments(response02.content.comments ? response02.content.comments : [])
                         }
@@ -192,7 +192,7 @@ function CommentContainter({ mangaId, postId }) {
                 key: 2
             };
 
-            const response02 = await userApi.filter(token, data);
+            const response02 = await userApi.filterCmts(token, data);
             if (response02.content.err) {
                 notification_error("Failed :(")
                 return;

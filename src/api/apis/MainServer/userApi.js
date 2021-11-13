@@ -68,7 +68,7 @@ const userApi = {
             }
         });
     },
-    filter: (token, data) => {
+    filterCmts: (token, data) => {
         const uri = '/api/user/filter_comments';
         return axiosClient.post(uri, data, {
             headers: {
