@@ -172,7 +172,6 @@ function CommentContainter({ mangaId, postId }) {
 
 
     const editCmt = async (editObj) => {
-        console.log(editObj)
         const formData = new FormData();
         formData.append("manga_comment_id", editObj.cmt_id);
         formData.append("manga_comment_content", editObj.content);

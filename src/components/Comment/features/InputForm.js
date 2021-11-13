@@ -55,6 +55,8 @@ function InputForm({
     const [imgDemo, setImgDemo] = useState("")
     const [isAdding, setIsAdding] = useState(false);
 
+    const [isLoadingEdit, setIsLoadingEdit] = useState(false);
+
     // render vars
     const [visible, setVisible] = useState(false);
     const [visiblePopoverUsers, setVisiblePopoverUsers] = useState(false);
@@ -116,10 +118,12 @@ function InputForm({
         }
     }
 
-    const prepareToEditCmt = () => {
+    const prepareToEditCmt = async () => {
         if (!objEdit.image) objEdit.image = fileDefault;
-
-        editCmt(objEdit)
+        
+        setIsLoadingEdit(true);
+        await editCmt(objEdit);
+        setIsLoadingEdit(false);
     }
 
 
