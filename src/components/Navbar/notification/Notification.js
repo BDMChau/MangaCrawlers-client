@@ -106,7 +106,7 @@ function Notification({
     const Invitation = () => (
         <div style={{ display: 'flex' }} >
             <div>
-                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+                <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </div>
 
             <div className='content'>
@@ -138,7 +138,7 @@ function Notification({
     const FriendRequest = ({ }) => (
         <div style={{ display: 'flex' }} >
             <div>
-                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+                <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </div>
 
             <div className='content'>
@@ -170,7 +170,7 @@ function Notification({
     const NewPost = ({ }) => (
         <NavLink to={redirectURI.postPage_uri(notification.target_id)} style={{ display: 'flex' }} >
             <div>
-                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+                <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </div>
 
             <div className='content'>

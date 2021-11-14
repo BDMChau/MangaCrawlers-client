@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 
-import { Input, AutoComplete, Typography } from 'antd'
+import { Input, AutoComplete, Typography, Avatar } from 'antd'
 import { ReadOutlined, TeamOutlined, ProfileOutlined } from "@ant-design/icons";
 
 import mangaApi from 'api/apis/MainServer/mangaApi';
@@ -27,8 +27,10 @@ export default function SearchNavBar() {
             setMangas([]);
             setPosts([]);
             setUsers([]);
+
             return;
         };
+
 
         try {
             setIsLoading(true);
@@ -167,14 +169,22 @@ export default function SearchNavBar() {
         label:
             <div key={i}>
                 <NavLink to={redirectURI.userPage_uri(item.user_id)} className="search-menu-item" >
-                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
-                        <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} >{item.user_name}</Typography.Text>
-                        <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} >{item.user_email}</Typography.Text>
+                    <div style={{ display: "flex", alignItems: "center" }} >
+                        <Avatar
+                            src={item.user_avatar}
+                            style={{ borderRadius: "50px", width: "38px", height: "38px", marginRight: "5px" }}
+                        />
+
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} >{item.user_name}</Typography.Text>
+                            <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} >{item.user_email}</Typography.Text>
+                        </div>
                     </div>
                 </NavLink>
             </div>
 
     })
+
 
     const options = [
         {
@@ -213,7 +223,6 @@ export default function SearchNavBar() {
             placeholder="Search..."
             allowClear
             options={options}
-            open
         >
         </AutoComplete>
     )
