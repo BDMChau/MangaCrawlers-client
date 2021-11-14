@@ -11,7 +11,6 @@ import { format } from 'helpers/format';
 import { notification_error, notification_success } from 'components/toast/notification';
 import { socketActions } from 'socket/socketClient';
 import { Upload } from 'antd';
-import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi';
 
 export default function TransGroupService() {
     const userState = useSelector((state) => state.userState);

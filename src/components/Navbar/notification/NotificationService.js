@@ -40,6 +40,7 @@ function NotificationService({ isMobile }) {
     useEffect(() => {
         socket.on(EVENTS_NAME.FROM_SERVER_TO_SPECIFIC_USERS, (result) => {
             result.created_at = format.formatDate02(result.created_at);
+            console.log(result)
             unshiftItem(result)
         });
 

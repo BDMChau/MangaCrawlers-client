@@ -4,6 +4,8 @@ import "../Navbar.css"
 import { Typography, Button, Avatar } from 'antd';
 
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import redirectURI from 'helpers/redirectURI';
 
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
@@ -61,19 +63,19 @@ function Notification({
         switch (type) {
             case listTypes[1]:
                 await updateInteracted(notification.notification_id, 1);
-                setNotification({ ...notification, is_interacted: true, is_viewed:true });
+                setNotification({ ...notification, is_interacted: true, is_viewed: true });
 
                 break;
             case listTypes[2]:
                 response = await handleAcceptInvitation(notification.notification_id, notification.target_id, notification.target_title);
                 if (response) {
-                    setNotification({ ...notification, is_interacted: true, is_viewed:true });
+                    setNotification({ ...notification, is_interacted: true, is_viewed: true });
                 }
                 break;
             case listTypes[3]:
                 response = await handleAcceptFriendReq(notification.notification_id, notification.sender_id, notification.target_title);
                 if (response) {
-                    setNotification({ ...notification, is_interacted: true, is_viewed:true });
+                    setNotification({ ...notification, is_interacted: true, is_viewed: true });
                 }
                 break;
 
@@ -92,7 +94,8 @@ function Notification({
                 return <Invitation />
             case 2:
                 return <FriendRequest />
-
+            case 3:
+                return <NewPost />
             default:
                 break;
         }
@@ -161,6 +164,21 @@ function Notification({
                 </div>
             </div>
         </div >
+    )
+
+
+    const NewPost = ({ }) => (
+        <NavLink to={redirectURI.postPage_uri(notification.target_id)} style={{ display: 'flex' }} >
+            <div>
+                <Avatar className='image' src={notification.image_url ? notification.image_url : imgDefault} alt="" />
+            </div>
+
+            <div className='content'>
+                <Typography.Text>
+                    <div title={notification.notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification.notification_content }}></div>
+                </Typography.Text>
+            </div>
+        </NavLink >
     )
 
 
