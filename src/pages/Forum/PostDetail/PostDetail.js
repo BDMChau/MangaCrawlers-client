@@ -8,6 +8,7 @@ import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
+import { format } from 'helpers/format';
 
 export default function PostDetail({
     postInfo,
@@ -42,7 +43,7 @@ export default function PostDetail({
 
                             <div className="owner-info">
                                 <Typography.Title level={5} title={postInfo.user_name}>{postInfo.user_name}</Typography.Title>
-                                <Typography.Text className="date-created" >{postInfo.created_at}</Typography.Text>
+                                <Typography.Text className="date-created" title={postInfo.created_at} >{format.relativeTime(postInfo.created_at)}</Typography.Text>
                             </div>
 
                         </div>

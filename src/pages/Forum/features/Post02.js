@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom'
 import redirectURI from 'helpers/redirectURI'
 import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import MyTag from './MyTag'
+import { format } from 'helpers/format'
 
 
 export default function Post02({ post, key, smallSize, renderContent, width, sttLike }) {
@@ -44,7 +45,9 @@ export default function Post02({ post, key, smallSize, renderContent, width, stt
                 {smallSize
                     ? ""
                     : <div className="info">
-                        <span className="time" >May 10, 2021</span>
+                        <span className="time" title={format.formatDate02(post.created_at)}>
+                            {format.relativeTime(post.created_at)}
+                        </span>
 
                         <div>
                             <span className="icon-likes-dislikes" >

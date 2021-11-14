@@ -60,7 +60,7 @@ function Chapter({
                                 onClick={() => addReadingHistory(chapterInfo.manga.manga_id, chapter.chapter_id)}
                             >
                                 <Typography.Text className="title-name">{chapter.chapter_name}</Typography.Text>
-                                <Typography.Text className="title-time">{chapter.createdAt}</Typography.Text>
+                                <Typography.Text className="title-time">{chapter.created_at}</Typography.Text>
                             </NavLink>
                         </Menu.Item>
                     ))

@@ -5,6 +5,7 @@ import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import { message_error } from '../../../components/toast/message';
 import SearchingPage from './SearchingPage';
 import { SET_MANGA_SEARCHED_BY_GENRES } from "../../../store/features/manga/MangaSlice";
+import { format } from 'helpers/format';
 
 export default function SearchingPageService() {
     const dispatch = useDispatch()
@@ -69,8 +70,13 @@ export default function SearchingPageService() {
                 if (response.content.err === "Manga not found") {
                     message_error("No manga with these genres :(", 4)
                 } else {
+                    const mangas = response.content.mangas;
+                    mangas.forEach(manga => {
+                        manga.created_at = format.relativeTime(manga.created_at)
+                    })
+
                     const arrData = [];
-                    arrData.push(response.content.mangas)
+                    arrData.push(mangas)
                     arrData.push(response.content.genres)
 
                     dispatch(SET_MANGA_SEARCHED_BY_GENRES(arrData));

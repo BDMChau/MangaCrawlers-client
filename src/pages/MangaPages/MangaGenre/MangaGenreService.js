@@ -44,11 +44,11 @@ export default function MangaGenreService() {
             }
             setGenre(genre)
 
-            const shuffledManga = arraysMethods.shuffle(response.content.data);
-            shuffledManga.forEach(manga => {
-                manga.created_at = format.formatDate01(manga.created_at)
+            const mangas = response.content.data;
+            mangas.forEach(manga => {
+                manga.created_at = format.relativeTime(manga.created_at)
             })
-            setMangas(shuffledManga);
+            setMangas(mangas);
 
             return;
         } catch (error) {

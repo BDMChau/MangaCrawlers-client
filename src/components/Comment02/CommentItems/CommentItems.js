@@ -93,8 +93,8 @@ function CommentItems({
 
     const CmtBottom = ({ comment }) => (
         <div className="cmt-bottom">
-            <Typography.Text style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
-                {format.formatDate02(comment.manga_comment_time)}
+            <Typography.Text title={format.formatDate02(comment.manga_comment_time)} style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
+                {format.relativeTime(comment.manga_comment_time)}
             </Typography.Text>
 
             {userState[0]

@@ -129,7 +129,8 @@ export default function ChapterService() {
 
             const chapters = response.content.listChapter;
             chapters.forEach((chapter, i) => {
-                chapter.createdAt = format.formatDate01(chapter.createdAt);
+                console.log(chapter)
+                chapter.created_at = format.relativeTime(chapter.created_at);
 
                 if (chapter.chapter_id == chapterId) {
                     setCurChapter(i)

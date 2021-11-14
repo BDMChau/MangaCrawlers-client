@@ -4,6 +4,7 @@ import { useLocation } from 'react-router'
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import { message_error } from '../../../components/toast/message';
 import { useSelector } from 'react-redux';
+import { format } from 'helpers/format';
 
 
 export default function MangaGenresService() {
@@ -43,7 +44,12 @@ export default function MangaGenresService() {
                 return;
             }
 
-            setMangas(response.content.mangas)
+            const mangas = response.content.mangas;
+            mangas.forEach(manga => {
+                manga.created_at = format.relativeTime(manga.created_at)
+            })
+
+            setMangas(mangas)
             setGenres(response.content.genres)
         } catch (ex) {
             console.log(ex)

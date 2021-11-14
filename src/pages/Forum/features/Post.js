@@ -57,14 +57,16 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                 {smallSize
                     ? ""
                     : <div className="info">
-                        <span className="time" >{format.formatDate02(post.created_at)}</span>
+                        <span className="time" title={format.formatDate02(post.created_at)}>
+                            {format.relativeTime(post.created_at)}
+                            </span>
 
                         <Tooltip title={`this topic has ${post.comment_count} comments`} >
                             <span className="comments-count">{post.comment_count}</span>
                         </Tooltip>
                     </div>
-
                 }
+                
             </div>
         </div>
     )
