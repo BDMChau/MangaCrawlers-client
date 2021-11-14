@@ -117,18 +117,6 @@ const userApi = {
             }
         });
     },
-    getTotalLikes: (data) => {
-        const uri = '/api/user_unauth/get_total_like';
-        return axiosClient.post(uri, data);
-    },
-    searchUsers: (token, data) => {
-        const uri = '/api/user/searchusers';
-        return axiosClient.post(uri, data, {
-            headers: {
-                Authorization: token
-            }
-        });
-    },
     ////////////////// translation group
     registerTranslationGroup: (token, data) => {
         const uri = '/api/user/signuptransgroup';
@@ -289,6 +277,14 @@ const userApi = {
     },
 
     ////////////////// unauth parts //////////////////
+    getTotalLikes: (data) => {
+        const uri = '/api/user_unauth/get_total_like';
+        return axiosClient.post(uri, data);
+    },
+    searchUsers: (data) => {
+        const uri = '/api/user_unauth/searchusers';
+        return axiosClient.post(uri, data);
+    },
     getUserInfo: (data) => {
         const uri = `/api/user_unauth/get_userinfo?user_id=${data.user_id}`;
         return axiosClient.get(uri);

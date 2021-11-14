@@ -206,7 +206,7 @@ export default function TransGroupService() {
         }
 
         try {
-            const response = await userApi.searchUsers(token, data);
+            const response = await userApi.searchUsers(data);
             if (response.content.err) {
                 setUsersSearchResult([]);
                 return;

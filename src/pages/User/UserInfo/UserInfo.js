@@ -169,7 +169,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
                         <div className="info-cont">
 
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
-                            {status === 2 || userInfo.user_id === userLoggedState.user_id
+                            {status === 2 || userInfo.user_id === userLoggedState?.user_id
                                 ? <img src={userInfo.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="status" />
                                 : ""
                             }

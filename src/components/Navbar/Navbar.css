@@ -381,7 +381,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #d7d6d6;
-  padding: 5px 0;
+  padding: 3px 0;
 }
 
 .search-menu-item img.img {
@@ -389,6 +389,18 @@
   height: 55px;
   border-radius: 5px;
   margin-right: 5px;
+}
+
+#header-nav .ant-select-dropdown .ant-select-item {
+  padding-left: 12px !important;
+}
+
+#header-nav .ant-select-dropdown .ant-select-item.ant-select-item-group {
+  font-weight: 600;
+  font-size: 15px;
+  color: #3f3f44;
+  margin-top: 10px;
+  margin-bottom: -5px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {

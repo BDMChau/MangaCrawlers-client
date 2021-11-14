@@ -45,6 +45,10 @@
   color: #383737;
 }
 
+.user-info-page .ant-tabs-nav-wrap {
+  border-top: 1px solid #DBDBDB;
+}
+
 .user-info-page .friends-text {
   color: #747373;
   transition: 0.3s;

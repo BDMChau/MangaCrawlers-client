@@ -140,7 +140,7 @@ function InputForm({
                 key: 2 // search with: 1: email, 2: name
             }
 
-            const response = await userApi.searchUsers(token, data);
+            const response = await userApi.searchUsers(data);
             if (response.content.err) {
                 setUsersSearchResult([]);
                 setIsLoadingSearch(false);
