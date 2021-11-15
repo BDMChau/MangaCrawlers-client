@@ -22,6 +22,7 @@ export default function SearchPage() {
     const history = useHistory();
 
     const { path_param } = params;
+    const [path, setPath] = useState(path_param ? path_param : "manga")
     const [value, setValue] = useState(query.get("v") ? query.get("v") : "")
     const [mangas, setMangas] = useState([]);
     const [posts, setPosts] = useState([]);
@@ -45,19 +46,27 @@ export default function SearchPage() {
         if (!path_param) {
             history.push(`/search/manga/?v=${searchState[0]}`)
         }
-        else if (path_param) {
-            setTabSelected(path_param);
-            dispatch(SET_PATH(path_param));
-        }
+
         else if (path_param && value) history.push(`/search/${path_param}/?v=${value}`);
 
     }, [path_param, value])
 
 
     useEffect(() => {
-        return () => dispatch(SET_IS_SEARCHED(null));
+        if(path_param) {
+            dispatch(SET_PATH(path_param));
+            setTabSelected(path_param);
+        }
+
+        return () => {
+            dispatch(SET_PATH(null));
+            dispatch(SET_IS_SEARCHED(null));
+        }
     }, [])
 
+    useEffect(() => {
+        if(tabSelected) dispatch(SET_PATH(tabSelected));
+    }, [tabSelected])
 
 
     useEffect(() => {

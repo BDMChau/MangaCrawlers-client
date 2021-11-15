@@ -14,6 +14,7 @@ import redirectURI from 'helpers/redirectURI';
 
 import { SET_VALUE, SET_MANGA, SET_POSTS, SET_USERS, SET_IS_SEARCHED } from "store/features/search/searchSlice";
 import { useDispatch, useSelector } from 'react-redux';
+import mangaSaga from 'store/features/manga/MangaSaga';
 
 
 export default function SearchNavBar() {
@@ -31,20 +32,25 @@ export default function SearchNavBar() {
 
 
     const redirectToSearchPage = () => {
-        dispatch(SET_VALUE(inputVal));
-        dispatch(SET_MANGA(mangas));
-        dispatch(SET_POSTS(posts));
-        dispatch(SET_USERS(users));
-
+        dispatch(SET_VALUE(inputVal))
+        // setInputVal("");
+        
         if (searchState[4]) history.push(`/search/${searchState[4]}/?v=${inputVal}`);
         else history.push("/search");
     }
+
+    useEffect(() => {
+        dispatch(SET_MANGA(mangas));
+        dispatch(SET_POSTS(posts));
+        dispatch(SET_USERS(users));
+    }, [mangaSaga, posts, users])
 
 
     const debouceToSearch = useRef(debounce(async (val) => {
         dispatch(SET_IS_SEARCHED(true));
 
         if (!val) {
+            setInputVal("");
             setMangas([]);
             setPosts([]);
             setUsers([]);
@@ -240,6 +246,7 @@ export default function SearchNavBar() {
             getPopupContainer={() => document.getElementById('header-nav')}
             className="search-menu-input"
             onChange={(value) => { debouceToSearch.current(value); setInputVal(value) }}
+            value={inputVal}
             onKeyUp={(e) => { e.key === "Enter" ? redirectToSearchPage() : "" }}
             defaultActiveFirstOption
             placeholder="Search..."
