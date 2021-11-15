@@ -30,6 +30,7 @@ export default function UserInfoService() {
     const [mutualFriends, setMutualFriends] = useState([]);
     const [posts, setPosts] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
     const [fromFr, setFromFr] = useState(10);
     const [fromPost, setFromPost] = useState(0);
     const [isEndFr, setIsEndFr] = useState(false);
@@ -118,6 +119,7 @@ export default function UserInfoService() {
 
     const getFriends = async (id) => {
         if (isEndFr) return;
+        setIsLoading(true);
 
         const data = {
             user_id: id.toString(),
@@ -135,13 +137,16 @@ export default function UserInfoService() {
 
             setFriends(prev => [...prev, ...res.content.list_friends]);
             setFromFr(res.content.from);
+            setIsLoading(false);
         } catch (err) {
+            setIsLoading(false);
             console.log(err);
         }
     }
 
     const getMuTualFriends = async (id) => {
-        if(!token || !userState[0]) return;
+        if (!token || !userState[0]) return;
+        setIsLoading(true);
 
         const data = { user_id: id.toString() }
 
@@ -150,13 +155,16 @@ export default function UserInfoService() {
             if (res.content.err) return;
 
             setMutualFriends(res.content.list_mutual);
+            setIsLoading(false);
         } catch (err) {
+            setIsLoading(false);
             console.log(err);
         }
     }
 
     const getPosts = async (id) => {
         if (isEndPost) return;
+        setIsLoading(true);
 
         const data = {
             user_id: id.toString(),
@@ -174,7 +182,9 @@ export default function UserInfoService() {
 
             setPosts(prev => [...prev, ...res.content.posts]);
             setFromPost(res.content.from);
+            setIsLoading(false);
         } catch (err) {
+            setIsLoading(false);
             console.log(err);
         }
     }
@@ -381,6 +391,8 @@ export default function UserInfoService() {
                 posts={posts}
                 friends={friends}
                 mutualFriends={mutualFriends}
+
+                isLoading={isLoading}
             />
         </div>
     )

@@ -28,12 +28,12 @@ export default function AppService() {
         
         // scroll at bottom
         let tempBottom = false;
-        if (windowBottom >= (documentHeight - 150)) tempBottom = true;
+        if (windowBottom >= (documentHeight - 50)) tempBottom = true;
 
         setTimeout(() => {
             dispatch(SET_SCROLL_BOTTOM(tempBottom));
             tempBottom = false;
-        }, 200);
+        }, 100);
 
 
         let tempTop = true;
@@ -42,7 +42,7 @@ export default function AppService() {
         setTimeout(() => {
             dispatch(SET_SCROLL_TOP(tempTop));
             tempTop = true;
-        }, 200);
+        }, 100);
     }
 
 

@@ -14,9 +14,10 @@ import Friend from '../Friends/components/Friend';
 
 import onlineIcon from "assets/img/online.png"
 import offlineIcon from "assets/img/offline.png"
+import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends, mutualFriends }) {
+export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends, mutualFriends, isLoading }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
     const [tabSelected, setTabSelected] = useState(null);
 
@@ -109,9 +110,17 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
             <div className="posts">
                 {posts.length
-                    ? posts.map(post => (
-                        <Post post={post} width={"48%"} />
-                    ))
+                    ? <>
+                        {posts.map(post => (
+                            <Post post={post} width={"48%"} />
+
+                        ))}
+
+                        {isLoading
+                            ? <SkeletonCustom paragraphRows={3} />
+                            : ""
+                        }
+                    </>
                     : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
 
                 }
@@ -126,9 +135,16 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
             <div className="friends">
                 {friends.length
-                    ? friends.map(fr => (
-                        <Friend friend={fr} isHidden={true} />
-                    ))
+                    ? <>
+                        {friends.map(fr => (
+                            <Friend friend={fr} isHidden={true} />
+                        ))}
+
+                        {isLoading
+                            ? <SkeletonCustom paragraphRows={3} />
+                            : ""
+                        }
+                    </>
                     : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
 
                 }
@@ -143,9 +159,16 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
             <div className="friends">
                 {mutualFriends.length
-                    ? mutualFriends.map(fr => (
-                        <Friend friend={fr} isHidden={true} />
-                    ))
+                    ? <>
+                        {mutualFriends.map(fr => (
+                            <Friend friend={fr} isHidden={true} />
+                        ))}
+
+                        {isLoading
+                            ? <SkeletonCustom paragraphRows={3} />
+                            : ""
+                        }
+                    </>
                     : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
 
                 }
@@ -170,7 +193,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
                             <div className="avatar" style={{ backgroundImage: `url(${userInfo.user_avatar})` }} ></div>
                             {status === 2 || userInfo.user_id === userLoggedState?.user_id
-                                ? <img src={userInfo.is_online ? onlineIcon : offlineIcon} className="stt-online" alt="status" />
+                                ? <img src={userInfo.is_online || userInfo.user_id === userLoggedState?.user_id ? onlineIcon : offlineIcon} className="stt-online" alt="status" />
                                 : ""
                             }
 
