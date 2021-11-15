@@ -42,7 +42,7 @@ const routes = [
 
     ////////////// Manga pages
     {
-        path: "/search",
+        path: "/search_with_genres",
         component: React.lazy(() => import('../../pages/MangaPages/SearchingPage/SearchingPageService')),
         exact: true
     },
@@ -123,7 +123,12 @@ const routes = [
     },
     /////////////// others
     {
-        path: "/search/:path/", // query
+        path: "/search/:path_param/", // query
+        component: React.lazy(() => import('../../pages/SearchPage/SearchPage')),
+        exact: false
+    },
+    {
+        path: "/search",
         component: React.lazy(() => import('../../pages/SearchPage/SearchPage')),
         exact: false
     },

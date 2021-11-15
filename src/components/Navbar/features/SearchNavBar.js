@@ -9,20 +9,41 @@ import { debounce } from 'lodash';
 import forumApi from 'api/apis/MainServer/forumApi';
 import { format } from 'helpers/format';
 import MyTag from 'pages/Forum/features/MyTag';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 
+import { SET_VALUE, SET_MANGA, SET_POSTS, SET_USERS, SET_IS_SEARCHED } from "store/features/search/searchSlice";
+import { useDispatch, useSelector } from 'react-redux';
+
+
 export default function SearchNavBar() {
+    const dispatch = useDispatch();
+    const searchState = useSelector(state => state.searchState)
+
+    const history = useHistory();
+
     const [isLoading, setIsLoading] = useState(false);
+    const [inputVal, setInputVal] = useState("");
 
     const [mangas, setMangas] = useState([]);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
 
 
+    const redirectToSearchPage = () => {
+        dispatch(SET_VALUE(inputVal));
+        dispatch(SET_MANGA(mangas));
+        dispatch(SET_POSTS(posts));
+        dispatch(SET_USERS(users));
+
+        if (searchState[4]) history.push(`/search/${searchState[4]}/?v=${inputVal}`);
+        else history.push("/search");
+    }
 
 
     const debouceToSearch = useRef(debounce(async (val) => {
+        dispatch(SET_IS_SEARCHED(true));
+
         if (!val) {
             setMangas([]);
             setPosts([]);
@@ -45,8 +66,6 @@ export default function SearchNavBar() {
             console.log(err)
         }
     }, 200))
-
-
 
 
     const searchManga = async (val) => {
@@ -91,7 +110,7 @@ export default function SearchNavBar() {
                 }
 
                 const posts = response.content.posts;
-                posts.forEach(post => post.created_at = format.formatDate01(post.created_at))
+                posts.forEach(post => post.created_at = format.relativeTime(post.created_at))
 
                 setPosts(posts)
                 return;
@@ -129,6 +148,8 @@ export default function SearchNavBar() {
     }
 
 
+
+    ///////////////////////// render /////////////////////////
     const renderManga = (item, i) => ({
         label:
             <div key={i}>
@@ -218,7 +239,8 @@ export default function SearchNavBar() {
         <AutoComplete
             getPopupContainer={() => document.getElementById('header-nav')}
             className="search-menu-input"
-            onChange={(value) => { debouceToSearch.current(value) }}
+            onChange={(value) => { debouceToSearch.current(value); setInputVal(value) }}
+            onKeyUp={(e) => { e.key === "Enter" ? redirectToSearchPage() : "" }}
             defaultActiveFirstOption
             placeholder="Search..."
             allowClear

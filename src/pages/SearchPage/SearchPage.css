@@ -1,0 +1,78 @@
+.search-page .col01 {
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.search-page .col01 .tabs {
+  text-align: left;
+  width: 100%;
+}
+
+.search-page .col01 .search-menu-item {
+  width: 600px;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: none !important;
+  box-shadow: 0px 0px 5px 0 #e3e4e6;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 8px;
+}
+
+.search-page .col01 .search-menu-item:hover {
+  box-shadow: 0px 0px 5px 0 #d3d3d3;
+}
+
+.search-page .col01 .ant-tabs-nav-list {
+  margin-bottom: 3rem;
+  margin-right: 10rem;
+}
+
+.search-page .col01 .ant-tabs-tabpane {
+  width: fit-content;
+}
+
+.search-page .col01 .tabs .ant-empty {
+  text-align: left;
+}
+
+.search-page .col01 .tabs .ant-tabs-content-holder {
+  justify-content: start;
+}
+
+.search-page .col01 .tabs .ant-tabs-tab {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 25px 12px 0 !important;
+}
+
+.search-page .col01 .tabs .ant-tabs-content-holder {
+  border-left: none;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1600px) {
+  .search-page .col01 .ant-tabs-nav-list {
+    margin-right: 5rem;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .search-page .col01 .search-menu-item {
+    width: 400px;
+  }
+
+  .search-page .col01 .ant-tabs-nav-list {
+    margin-right: 3rem;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 767px) {
+  .search-page .col01 .search-menu-item {
+    width: 340px;
+  }
+
+  .search-page .col01 .tabs {
+    display: flex;
+    justify-content: center;
+  }
+}

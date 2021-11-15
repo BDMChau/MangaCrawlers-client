@@ -14,7 +14,7 @@ export default function MangaGenres({ genre, mangas }) {
             <Col sm={24} md={21} xl={17} xxl={21} className="manga-list" >
                 <div className="title">
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
-                        <Button title="Back to search with genres" className="btn-left" onClick={() => history.push("/search")}>
+                        <Button title="Back to search with genres" className="btn-left" onClick={() => history.push("/search_with_genres")}>
                             <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                         </Button>
                         <Typography.Title level={5} className="title-h5">

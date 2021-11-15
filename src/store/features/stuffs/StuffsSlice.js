@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const StuffsSlice = createSlice({
-    name: "StuffSlice",
+    name: "StuffsSlice",
     initialState: [],
     reducers: {
         SET_SCROLL_TOP: (state, action) => {
