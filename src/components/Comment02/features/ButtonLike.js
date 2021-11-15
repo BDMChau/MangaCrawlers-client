@@ -18,28 +18,16 @@ export default function ButtonLike({ comment }) {
     const token = cookies.get("token");
 
     useEffect(() => {
-        getTotalLikes();
+        setLikes(5);
     }, [])
 
 
     useEffect(() => {
-        if (userState[0]) checkUserLiked()
+        if (userState[0] && Object.keys(comment).length) checkUserLiked()
     }, [userState])
 
 
-    const getTotalLikes = async () => {
-        const data = { comment_id: comment.manga_comment_id.toString() };
-
-        try {
-            const res = await userApi.getTotalLikes(data);
-            const totalLikes = res.content.total_like;
-
-            setLikes(totalLikes);
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
+  
     const checkUserLiked = async () => {
         const data = { comment_id: comment.manga_comment_id.toString() };
 

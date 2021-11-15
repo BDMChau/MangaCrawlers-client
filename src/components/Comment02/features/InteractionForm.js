@@ -10,8 +10,8 @@ import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 import ButtonLike from './ButtonLike';
 
-export default function InteractionForm({ comment, cmtId, userId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
 
+export default function InteractionForm({ comment, cmtId, userId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
     const [replying, setReplying] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,7 +26,7 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
     const cookies = new Cookies();
     const token = cookies.get("token");
 
-    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg", "image/gif"]
+    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg", "image/gif"];
 
     useEffect(() => {
         if (isEditting) {
@@ -46,10 +46,12 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
     }
 
 
-    const handleDelete = () => {
+    // prop from <CmtBottom />
+    const handleDel = () => {
         deleteCmt(cmtId);
         setIsModalVisible(false);
     }
+
 
     const modalDeleteCmt = () => (
         <Modal wrapClassName="modal-del-cmt" closeIcon={undefined} visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null}>
@@ -57,7 +59,7 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
 
 
             <div>
-                <Button onClick={() => handleDelete()} type="primary" >Delete</Button>
+                <Button onClick={() => handleDel()} type="primary" >Delete</Button>
                 <Button onClick={() => setIsModalVisible(false)} type="text">Cancle</Button>
             </div>
         </Modal>

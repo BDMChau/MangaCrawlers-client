@@ -117,9 +117,11 @@ function CommentContainter({ mangaId, postId }) {
 
 
             try {
-                const response = await userApi.addCmt(token, formData);
-                
-                return;
+                const res = await userApi.addCmt(token, formData);
+                if(res.content.msg) {
+                    const newComment = res.content.comment;
+                    setComments(prev => [newComment, ...prev])
+                }
             } catch (ex) {
                 console.log(ex);
                 setIsAddedCmt(true);
@@ -143,15 +145,14 @@ function CommentContainter({ mangaId, postId }) {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
                 notification_error("Failed :(");
-                setTimeout(() => setComments([]), 200)
                 return;
             }
-            const restCmts = response.content.comments;
-
-            setTimeout(() => setComments(restCmts), 200)
+            // lấy ra id cmt vừa xóa, filter
+            return;
         } catch (err) {
             notification_error("Failed :(")
-            console.log(err)
+            console.log(err);
+            return;
         }
     }
 

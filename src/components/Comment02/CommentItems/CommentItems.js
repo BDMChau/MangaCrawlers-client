@@ -11,6 +11,7 @@ import { format } from 'helpers/format';
 import { useSelector } from 'react-redux';
 import redirectURI from 'helpers/redirectURI';
 import mangaApi from 'api/apis/MainServer/mangaApi';
+import CmtBody from './components/CmtBody';
 
 
 function CommentItems({
@@ -77,69 +78,14 @@ function CommentItems({
 
 
 
-    const CmtBody = ({ comment, background }) => (
-        <div className="cmt-body" key={comment.manga_comment_id} style={{ background: background }} >
-            <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.manga_comment_content }} />
-            {comment.image_url ? <img src={comment.image_url} alt="" style={{ height: "110px", width: "fit-content", borderRadius: "8px", marginTop: "5px" }} /> : ""}
-
-            <CmtBottom comment={comment} />
-
-            <Typography.Text style={{ color: "#FF4D4F" }}>
-                {comment.is_error ? "Error, cannot add this comment!" : ""}
-            </Typography.Text>
-        </div>
-    )
-
-
-    const CmtBottom = ({ comment }) => (
-        <div className="cmt-bottom">
-            <Typography.Text title={format.formatDate02(comment.manga_comment_time)} style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
-                {format.relativeTime(comment.manga_comment_time)}
-            </Typography.Text>
-
-            {userState[0]
-                ? <div className="interact">
-                    <InteractionForm
-                        comment={comment}
-                        cmtId={comment.manga_comment_id}
-                        userId={userState[0].user_id}
-
-                        deleteCmt={deleteCmt}
-
-                        addCmt={(dataInput) => addCmt(dataInput)}
-                        isAddedCmt={isAddedCmt}
-                        setIsAddedCmt={setIsAddedCmt}
-
-                        editCmt={editCmt}
-                    />
-                </div>
-                : ""
-            }
-
-
-            <NavLink to={mangaId ? `/chapter/${mangaId}/${comment.chapter_id}` : "#"}>
-                <Tooltip title={comment.chapter_name}>
-                    <Typography.Text
-                        className="chapter-name"
-                        style={{
-                            color: comment.is_error ? "#D7D8DB" : "#848587",
-                        }}
-                    >
-                        {comment.chapter_name}
-                    </Typography.Text>
-                </Tooltip>
-            </NavLink>
-        </div>
-    )
-
-
     ////////////////////////////// handle children //////////////////////////////
-    const BtnSeeMore = ({ comment, setComments }) => {
+    const BtnSeeMore = ({ comment }) => {
         const [fromRowsChild, setFromRowsChild] = useState(2);
         const [cmtsChildren, setCmtsChildren] = useState([]);
         const [isEnd, setIsEnd] = useState(false);
+        const [isAddedCmt, setIsAddedCmt] = useState(false);
 
-        const getCmtsChildBtnSeeMore = async () => {
+        const getCmtChildren = async () => {
             if (isEndCmtsChildId.includes(comment.parent_id)) return;
 
             const data = {
@@ -164,7 +110,100 @@ function CommentItems({
             } catch (ex) {
                 console.log(ex)
             }
+        };
+
+        const addCmt = async (dataInput) => {
+            if (userState[0]) {
+                const formData = new FormData();
+                // formData.append("manga_id", mangaId ? mangaId.toString() : "");
+                // formData.append("post_id", postId ? postId.toString() : "");
+                // formData.append("chapter_id", "");
+                if (postId) {
+                    formData.append("target_title", "post");
+                    formData.append("target_id", postId.toString());
+                } else if (mangaId) {
+                    formData.append("target_title", "manga");
+                    formData.append("target_id", mangaId.toString());
+                }
+                formData.append("manga_comment_content", dataInput.content);
+                formData.append("image", dataInput.image);
+                formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
+                formData.append("parent_id", dataInput.parent_id);
+                formData.append("to_users_id", dataInput.to_users_id);
+
+
+                try {
+                    const response = await userApi.addCmt(token, formData);
+
+                    return;
+                } catch (ex) {
+                    console.log(ex);
+                    setIsAddedCmt(true);
+                }
+            } else {
+                message_error("You have to logged in to do this action");
+                return;
+            }
         }
+
+        const deleteCmt = async (id) => {
+            if (!userState[0]) return message_error("You have to logged in to do this action");
+
+            const data = {
+                manga_comment_id: id,
+                comments: comments
+            }
+
+            try {
+                const response = await userApi.deleteCmt(token, data);
+                if (response.content.err) {
+                    notification_error("Failed :(");
+                    return;
+                }
+                // lấy ra id cmt vừa xóa, filter
+                return;
+            } catch (err) {
+                notification_error("Failed :(")
+                console.log(err);
+                return;
+            }
+        }
+
+        const editCmt = async (editObj) => {
+            const formData = new FormData();
+            formData.append("manga_comment_id", editObj.cmt_id);
+            formData.append("manga_comment_content", editObj.content);
+            formData.append("to_users_id", editObj.toUsersId);
+            formData.append("image", editObj.image);
+
+            try {
+                const response = await userApi.updateCmt(token, formData);
+                if (response.content.err) {
+                    notification_error("Failed :(")
+                    return;
+                }
+                const comment = response.content.comment_info;
+
+                const data = {
+                    comments: comments,
+                    manga_comment_id: comment.manga_comment_id,
+                    key: 2
+                };
+
+                const response02 = await userApi.filterCmts(token, data);
+                if (response02.content.err) {
+                    notification_error("Failed :(")
+                    return;
+                }
+                const restCmts = response02.content.comments ? response02.content.comments : [];
+
+                setTimeout(() => setCmtsChildren(restCmts), 200)
+            } catch (err) {
+                notification_error("Failed :(")
+                console.log(err)
+            }
+        }
+
 
         return (
             <div className="children-cmts">
@@ -180,24 +219,31 @@ function CommentItems({
                             color: "#40A9FF",
                             fontWeight: 500
                         }}
-                        onClick={() => getCmtsChildBtnSeeMore()}
+                        onClick={() => getCmtChildren()}
                     >
                         <CaretDownOutlined style={{ fontSize: "13px" }} />
                         View replies
                     </Button>
                 }
 
-                <CmtsChildren comments={cmtsChildren} />
+                <CmtChildren
+                    comments={cmtsChildren}
+
+                    addCmt={addCmt}
+                    deleteCmt={deleteCmt}
+                    editCmt={editCmt}
+                />
             </div>
         )
     }
 
-    const CmtsChildren = ({ comments }) => {
+
+    const CmtChildren = ({ comments, addCmt, deleteCmt, editCmt }) => {
         return (
             comments.map((cmt, i) => (
                 <Comment
                     className="comment-item"
-                    key={cmt.manga_comment_id}
+                    key={i}
                     author={<CmtTitle comment={cmt} />}
                     avatar={
                         <NavLink to={redirectURI.userPage_uri(cmt.user_id)}>
@@ -212,8 +258,17 @@ function CommentItems({
                     }
                     content={
                         <div className="comment">
-                            <CmtBody comment={cmt} background={"white"} />
+                            <CmtBody
+                                comment={cmt}
+                                background={"white"}
 
+                                deleteCmt={deleteCmt}
+                                editCmt={editCmt}
+
+                                addCmt={(dataInput) => addCmt(dataInput)}
+                                isAddedCmt={isAddedCmt}
+                                setIsAddedCmt={setIsAddedCmt}
+                            />
                         </div>
                     }
                 >
@@ -222,16 +277,17 @@ function CommentItems({
             ))
         );
     }
+    ////////////////////////////// handle children //////////////////////////////
 
 
 
     return (
         <div className="comment-items" onScroll={(e) => handleScroll(e)} >
             {comments.length
-                ? comments.map((cmt) => (
+                ? comments.map((cmt, i) => (
                     <Comment
                         className="comment-item"
-                        key={cmt.manga_comment_id}
+                        key={i}
                         author={<CmtTitle comment={cmt} />}
                         avatar={
                             <NavLink to={redirectURI.userPage_uri(cmt.user_id)}>
@@ -246,7 +302,17 @@ function CommentItems({
                         }
                         content={
                             <div className="comment">
-                                <CmtBody comment={cmt} background={"white"} />
+                                <CmtBody
+                                    comment={cmt}
+                                    background={"white"}
+
+                                    deleteCmt={deleteCmt}
+                                    editCmt={editCmt}
+
+                                    addCmt={(dataInput) => addCmt(dataInput)}
+                                    isAddedCmt={isAddedCmt}
+                                    setIsAddedCmt={setIsAddedCmt}
+                                />
 
                                 <BtnSeeMore comment={cmt} />
                             </div>

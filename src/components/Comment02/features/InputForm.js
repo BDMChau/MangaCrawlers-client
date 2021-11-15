@@ -241,7 +241,7 @@ function InputForm({
                                 className="btn-submit"
                                 style={{ marginTop: "10px", height: "40px", borderRadius: "3px", width: "fit-content" }}
                                 type="primary"
-                                loading={isAdding}
+                                loading={isAdding || isLoadingEdit}
                                 icon={<CommentOutlined style={{ fontSize: "18px" }} />}
                                 onClick={() => isEditting ? prepareToEditCmt() : prepareToAddCmt()}
                             >
