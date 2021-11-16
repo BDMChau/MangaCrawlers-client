@@ -7,13 +7,13 @@ const redirectURI = {
         const chapterNumber = spittedStr[0];
 
         return `/chapter/${mangaName?.replaceAll(regex.special_char, "-")}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapterId}`;
-       
+
     },
     mangaPage_uri: (mangaId, mangaName) => {
-            return `/manga/${mangaName?.replaceAll(regex.special_char, "-")}-${mangaId}`;
+        return `/manga/${mangaName?.replaceAll(regex.special_char, "-")}-${mangaId}`;
     },
     mangaWithGenre_uri: (genreId) => {
-            return `/manga/genre/tag?v=${genreId}`;
+        return `/manga/genre/tag?v=${genreId}`;
     },
     projectMangaPage_uri: (mangaId) => {
         return `/user/projects/upload?v=${mangaId}`;
@@ -25,7 +25,10 @@ const redirectURI = {
         return `/user/friends/all_friends`;
     },
     postPage_uri: (postId) => {
-        return `/forum/post/${postId}`;
+        return `/forums/post/${postId}`;
+    },
+    postPageWithCate_uri: (cateId) => {
+        return `/forums/posts/category?v=${cateId}`;
     },
 }
 

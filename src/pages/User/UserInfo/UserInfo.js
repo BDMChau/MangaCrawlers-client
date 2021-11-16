@@ -6,7 +6,7 @@ import { UserAddOutlined, } from '@ant-design/icons';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import FriendsModal from '../Friends/components/FriendsModal';
 
-import { LeftOutlined, FieldTimeOutlined, CheckCircleFilled } from "@ant-design/icons"
+import { ArrowLeftOutlined, FieldTimeOutlined, CheckCircleFilled } from "@ant-design/icons"
 
 import redirectURI from 'helpers/redirectURI';
 import Post from 'pages/Forum/features/Post';
@@ -201,7 +201,7 @@ export default function UserInfo({
             <Col xs={23} sm={18} md={18} xl={13} className="col01">
                 <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
                     <Button title="Back to home page" className="btn-left" onClick={() => history.push("/")} >
-                        <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
+                        <ArrowLeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                     </Button>
                 </Divider>
 

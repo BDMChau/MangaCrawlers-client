@@ -136,8 +136,6 @@
   font-weight: 600;
 }
 
-
-
 .post02 {
   display: flex;
   margin: 10px 5px;
@@ -168,7 +166,7 @@
   cursor: pointer;
   font-weight: 500;
   word-break: break-word;
-  margin-bottom:0.1em !important
+  margin-bottom: 0.1em !important;
 }
 
 .post02 .title:hover,
@@ -181,7 +179,7 @@
 }
 
 .post .post-content {
-  max-height: 45px;
+  max-height: 65px;
   overflow: hidden;
   width: 100%;
 }
@@ -219,19 +217,16 @@
   margin-right: 10px;
 }
 
-
 .categories-cont {
   padding: 10px;
   border-radius: 3px;
   background-color: #f0f2f5;
 }
 
-
-.category .ant-tag{
+.category .ant-tag {
   font-size: 12px !important;
   padding: 3px 5px;
 }
-
 
 @media only screen and (min-width: 1401px) and (max-width: 1750px) {
   .post .title-small {

@@ -57,6 +57,12 @@
   margin-right: 10px;
 }
 
+.post-detail .cates-cont {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 7px;
+}
+
 .post-detail .interact button:focus {
   color: unset;
 }

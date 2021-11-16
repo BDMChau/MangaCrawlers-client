@@ -2,9 +2,21 @@
   margin-top: 20px;
 }
 
+.cate-posts .ant-skeleton-title {
+  width: 100% !important;
+  height: 80px;
+}
+
+.cate-posts .ant-skeleton-title,
+.cate-posts .ant-skeleton-paragraph {
+  margin: 0 !important;
+  margin-bottom: 12px !important;
+}
+
 .cate-posts .btn-back {
   width: 40px !important;
   height: 40px;
+  border: none;
 }
 
 .cate-posts span.ant-divider-inner-text {

@@ -52,7 +52,7 @@ export default function FormCreatePost({ createPost }) {
         const res = await createPost(data);
         if (res === true) {
             message_success("Created!");
-            // setTimeout(() => history.push("/forum"), 500);
+            setTimeout(() => history.push("/forums"), 500);
         }
 
         setIsLoading(false);

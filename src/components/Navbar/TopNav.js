@@ -150,8 +150,8 @@ function TopNav({ handleLogOut, genres }) {
     const RenderLeft = ({ isMobile }) => {
         return (
             <Menu mode={isMobile ? "vertical" : "horizontal"} triggerSubMenuAction={isMobile ? 'click' : 'hover'} className="menu-left" style={{ background: "transparent" }}>
-                <Menu.Item key="Home" title="Home">
-                    <NavLink to="">Home</NavLink>
+                <Menu.Item key="Forums" title="Forums">
+                    <NavLink to="/forums">Forums</NavLink>
                 </Menu.Item>
 
                 <SubMenu
@@ -225,7 +225,7 @@ function TopNav({ handleLogOut, genres }) {
     const renderMenu = () => {
         return (
             <nav className="menuBar">
-                <NavLink to="/" >
+                <NavLink to="/" title="Home" >
                 <img className="logo" src={logoText} alt="" style={{ cursor: "pointer" }} />
                 </NavLink>
                 <div className="menuCon">

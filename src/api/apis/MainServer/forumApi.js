@@ -32,7 +32,7 @@ const forumApi = {
         return axiosClient.get(uri);
     },
     getPostsWithCategory: (data) => {
-        const uri = `/api/forum_unauth/post/getposts_bycategory?category_id=${data.category_id}`
+        const uri = `/api/forum_unauth/post/getposts_bycategory?category_id=${data.category_id}&from=${data.from}&amount=${data.amount}`
         return axiosClient.get(uri);
     },
     searchPosts: (data) => {

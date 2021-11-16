@@ -4,13 +4,14 @@ import "./PostDetail.css"
 import MDEditor from '@uiw/react-md-editor';
 import CommentContainter from 'components/Comment02/CommentContainter/CommentContainter';
 import { Avatar, Button, Col, Divider, Row, Typography, Tooltip } from 'antd';
-import { LeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
+import { ArrowLeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
 import { format } from 'helpers/format';
 import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
+import MyTag from "../features/MyTag";
 
 export default function PostDetail({
     postInfo,
@@ -32,8 +33,8 @@ export default function PostDetail({
             <Row justify={"center"} className="row" >
                 <Col xs={23} md={23} xl={23} >
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
-                        <Button title="Back to forum page" className="btn-back" onClick={() => history.push("/forum")}>
-                            <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
+                        <Button title="Back to forum page" className="btn-back" onClick={() => history.push("/forums")}>
+                            <ArrowLeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                         </Button>
                     </Divider>
                 </Col>
@@ -41,12 +42,12 @@ export default function PostDetail({
                 <Col className="post-detail" xs={22} md={22} xl={22}>
                     <div style={{ display: "flex", justifyContent: "space-between" }} >
                         <NavLink to={redirectURI.userPage_uri(postInfo.user_id)} className="post-owner">
-                            <Avatar 
-                            className="avatar" 
-                            src={postInfo.user_avatar} 
-                            title="Avatar" 
-                            alt="" 
-                            style={{cursor:"pointer"}}
+                            <Avatar
+                                className="avatar"
+                                src={postInfo.user_avatar}
+                                title="Avatar"
+                                alt=""
+                                style={{ cursor: "pointer" }}
                             />
 
                             <div className="owner-info">
@@ -83,6 +84,18 @@ export default function PostDetail({
                     </div>
 
                     <Typography.Title level={4}>{postInfo.title}</Typography.Title>
+
+                    <div className="cates-cont">
+                        {postInfo.categoryList?.length
+                            ? postInfo.categoryList.map((item, i) => (
+                                <div className="category" key={i}>
+                                    <MyTag category={item} key={i} />
+                                </div>
+                            ))
+                            : ""
+                        }
+                    </div>
+
                     <Divider orientation="left" style={{ margin: 0, marginBottom: "30px" }} />
 
                     <MDEditor.Markdown

@@ -89,10 +89,10 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
 
     return (
         <div className="forum-home" >
-            <Col span={24} className="banner" >
+            <div className="banner" >
                 <Typography.Title level={3}>MangaCrawlers Community Forums</Typography.Title>
 
-                <NavLink to="/forum/newpost" title="New Post" >
+                <NavLink to="/forums/newpost" title="New Post" >
                     <Button
                         style={{ borderRadius: "8px", height: "35px" }}
                         type="primary"
@@ -101,7 +101,7 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
                         New Post
                     </Button>
                 </NavLink>
-            </Col>
+            </div>
 
             <Row justify="center" className="forum-home-body">
                 <Col className="left" xs={24} md={18} xl={9}>

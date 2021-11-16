@@ -102,22 +102,22 @@ const routes = [
     },
     ////////////// Forum
     {
-        path: "/forum",
+        path: "/forums",
         component: React.lazy(() => import('../../pages/Forum/ForumHome/ForumHomeService')),
         exact: true
     },
     {
-        path: "/forum/post/:postid",
+        path: "/forums/post/:postid",
         component: React.lazy(() => import('../../pages/Forum/PostDetail/PostDetailService')),
         exact: true
     },
     {
-        path: "/forum/newpost",
+        path: "/forums/newpost",
         component: React.lazy(() => import('../../pages/Forum/CreatePost/CreatePostService')),
         exact: true
     },
     {
-        path: "/forum/posts/category", // query param
+        path: "/forums/posts/category", // query param
         component: React.lazy(() => import('../../pages/Forum/CategoryPosts/CategoryPostsService')),
         exact: true
     },

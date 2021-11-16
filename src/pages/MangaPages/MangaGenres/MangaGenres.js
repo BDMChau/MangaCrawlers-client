@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./MangaGenres.css"
 import { Col, Row, Typography, Divider, Popover, Tag, Tooltip, Button } from 'antd'
 import ListGenrePagination from '../../../components/List/ListGenrePagination/ListGenrePagination'
-import { LeftOutlined } from "@ant-design/icons"
+import { ArrowLeftOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 
 export default function MangaGenres({ mangas, genres }) {
@@ -24,7 +24,7 @@ export default function MangaGenres({ mangas, genres }) {
                 <div className="title">
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2" }}>
                         <Button title="Back to search with genres" className="btn-left" onClick={() => history.push("/search")}>
-                            <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
+                            <ArrowLeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                         </Button>
                         <Typography.Title level={5} className="title-h5" style={{ flexWrap: isFlexWrap ? "wrap" : "unset" }}>
                             Genre(s):
