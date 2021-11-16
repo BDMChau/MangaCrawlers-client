@@ -37,7 +37,7 @@ export default function ForumHomeService() {
 
         const data = {
             from: from,
-            amount: 6
+            amount: 8
         }
 
         try {
@@ -46,7 +46,7 @@ export default function ForumHomeService() {
             const posts = res.content.posts
             const contFromPos = res.content.from;
 
-            if (posts.length < 6) setIsEnd(true);
+            if (posts.length < 8) setIsEnd(true);
 
             setPosts(prev => [...prev, ...posts]);
             setFrom(contFromPos);

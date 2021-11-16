@@ -14,7 +14,7 @@ export default function Post02({ post, key, smallSize, renderContent, width, stt
         <NavLink to={redirectURI.postPage_uri(post.post_id)} className="post02" key={key} style={{ width: width ? width : "" }} >
             <div className="post-title">
                 <div style={{ display: "flex", justifyContent: "space-between" }} >
-                    <Typography.Title className="title" level={5} style={{ fontWeight: "500" }} >{post.title}</Typography.Title>
+                    <Typography.Title className="title" level={5} style={{ fontWeight: "500", fontSize: "15px" }} >{post.title}</Typography.Title>
 
                     {smallSize
                         ? <Tooltip title={`this topic has ${post.comment_count} comments`} >

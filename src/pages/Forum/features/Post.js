@@ -25,7 +25,7 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
             <div className="post-title">
                 <div style={{ display: "flex", justifyContent: "space-between" }} >
                     <NavLink to={redirectURI.postPage_uri(post.post_id)}>
-                        <Typography.Title className={smallSize ? "title-small" : "title"} level={5} style={{ fontWeight: "500" }} >{post.title}</Typography.Title>
+                        <Typography.Title className={smallSize ? "title-small" : "title"} level={5} style={{ fontWeight: "500", fontSize: "15px" }} >{post.title}</Typography.Title>
                     </NavLink>
 
                     {smallSize
@@ -59,14 +59,14 @@ export default function Post({ post, key, smallSize, renderContent, width }) {
                     : <div className="info">
                         <span className="time" title={format.formatDate02(post.created_at)}>
                             {format.relativeTime(post.created_at)}
-                            </span>
+                        </span>
 
                         <Tooltip title={`this topic has ${post.comment_count} comments`} >
                             <span className="comments-count">{post.comment_count}</span>
                         </Tooltip>
                     </div>
                 }
-                
+
             </div>
         </div>
     )

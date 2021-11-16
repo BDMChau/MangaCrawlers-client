@@ -181,7 +181,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
         <Row justify="center" className="user-info-page">
             <Col xs={23} sm={18} md={18} xl={13} className="col01">
                 <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
-                    <Button title="Go Back" className="btn-left" onClick={history.goBack} >
+                    <Button title="Back to home page" className="btn-left" onClick={() => history.push("/")} >
                         <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                     </Button>
                 </Divider>

@@ -77,6 +77,14 @@ const adminApi = {
             }
         })
     },
+    deprecatePost: (token, data) => {
+        const uri = '/api/admin/deprecate_post'
+        return axiosClient.put(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
     editChapter: (token, data) => {
         const uri = '/api/admin/editchapter'
         return axiosClient.put(uri, data, {

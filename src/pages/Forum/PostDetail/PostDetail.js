@@ -9,6 +9,8 @@ import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
 import { format } from 'helpers/format';
+import redirectURI from 'helpers/redirectURI';
+import { NavLink } from 'react-router-dom';
 
 export default function PostDetail({
     postInfo,
@@ -30,7 +32,7 @@ export default function PostDetail({
             <Row justify={"center"} className="row" >
                 <Col xs={23} md={23} xl={23} >
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0 }}>
-                        <Button title="Back" className="btn-back" onClick={() => history.goBack()}>
+                        <Button title="Back to forum page" className="btn-back" onClick={() => history.push("/forum")}>
                             <LeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                         </Button>
                     </Divider>
@@ -38,15 +40,22 @@ export default function PostDetail({
 
                 <Col className="post-detail" xs={22} md={22} xl={22}>
                     <div style={{ display: "flex", justifyContent: "space-between" }} >
-                        <div className="post-owner">
-                            <Avatar className="avatar" src={postInfo.user_avatar} title="Avatar" alt="" />
+                        <NavLink to={redirectURI.userPage_uri(postInfo.user_id)} className="post-owner">
+                            <Avatar 
+                            className="avatar" 
+                            src={postInfo.user_avatar} 
+                            title="Avatar" 
+                            alt="" 
+                            style={{cursor:"pointer"}}
+                            />
 
                             <div className="owner-info">
                                 <Typography.Title level={5} title={postInfo.user_name}>{postInfo.user_name}</Typography.Title>
+
                                 <Typography.Text className="date-created" title={postInfo.created_at} >{format.relativeTime(postInfo.created_at)}</Typography.Text>
                             </div>
 
-                        </div>
+                        </NavLink>
 
                         <div className="interact">
                             <div style={{ marginRight: "15px" }} >

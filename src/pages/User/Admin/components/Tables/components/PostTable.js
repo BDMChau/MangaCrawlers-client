@@ -25,7 +25,7 @@ export default function PostTable({ posts, handleDeprecatePost, isLoading }) {
 
                 setData(result)
             } else {
-                setData(users)
+                setData(posts)
             }
         }, 300);
     }
@@ -40,25 +40,25 @@ export default function PostTable({ posts, handleDeprecatePost, isLoading }) {
             key: 'post_id',
         },
         {
-            title: 'POST TITLE',
+            title: 'TITLE',
             dataIndex: 'title',
             key: 'title',
         },
         {
-            title: 'POST STATUS',
+            title: 'STATUS',
             dataIndex: 'is_deprecated',
             key: 'is_deprecated',
-            render: is_deprecated => !is_deprecated ? <p style={{ color: "grey" }} >Deprecated</p> : <p style={{ color: "#29c729" }} >Active</p>
+            render: is_deprecated => is_deprecated ? <p style={{ color: "grey" }} >Deprecated</p> : <p style={{ color: "#29c729" }} >Active</p>
         },
         {
-            title: 'NAME',
+            title: 'USER NAME',
             dataIndex: 'user_name',
             key: 'user_name',
             className: "name-col",
             render: text => <p>{text}</p>,
         },
         {
-            title: 'EMAIL',
+            title: 'USER EMAIL',
             dataIndex: 'user_email',
             key: 'user_email',
             className: "email-col"

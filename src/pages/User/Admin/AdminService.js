@@ -258,7 +258,35 @@ function AdminService() {
 
 
     const handleDeprecatePost = async (postId) => {
-        console.log(postId)
+        setIsLoading(true);
+        const data = {
+            post_id: postId
+        }
+
+        try {
+            const response = await adminApi.deprecatePost(token, data);
+            if (response.content.err) {
+                console.error("handleDeprecatePost error!")
+                setIsLoading(false);
+                return;
+            }
+
+            const post = response.content.post;
+            const copied = [...posts]
+            for (let i = 0; i < posts.length; i++) {
+                if(copied[i].post_id === post.post_id){
+                    copied[i].is_deprecated = true;
+                    break;
+                }
+            }
+
+            setPosts(copied);
+            message_success("Deprecated this post!", 3);
+            setIsLoading(false);
+            return;
+        } catch (ex) {
+            console.log(ex)
+        }
     }
 
 

@@ -225,7 +225,9 @@ function TopNav({ handleLogOut, genres }) {
     const renderMenu = () => {
         return (
             <nav className="menuBar">
-                <img className="logo" src={logoText} alt="" onClick={() => history.push("/")} style={{ cursor: "pointer" }} />
+                <NavLink to="/" >
+                <img className="logo" src={logoText} alt="" style={{ cursor: "pointer" }} />
+                </NavLink>
                 <div className="menuCon">
                     <Button className="barsMenu" onClick={showDrawer}>
                         <span className="barsBtn"></span>
