@@ -26,9 +26,14 @@ export default function UserInfoService() {
     const [sent, setSent] = useState(false);
 
     const [userInfo, setUserInfo] = useState({});
+
     const [friends, setFriends] = useState([]);
+    const [totalFriends, setTotalFriends] = useState(0);
+
     const [mutualFriends, setMutualFriends] = useState([]);
+
     const [posts, setPosts] = useState([]);
+    const [totalPosts, setTotalPost] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
     const [fromFr, setFromFr] = useState(10);
@@ -137,6 +142,7 @@ export default function UserInfoService() {
 
             setFriends(prev => [...prev, ...res.content.list_friends]);
             setFromFr(res.content.from);
+            setTotalFriends(res.content.total_friends)
             setIsLoading(false);
         } catch (err) {
             setIsLoading(false);
@@ -181,6 +187,7 @@ export default function UserInfoService() {
             }
 
             setPosts(prev => [...prev, ...res.content.posts]);
+            setTotalPost(res.content.total);
             setFromPost(res.content.from);
             setIsLoading(false);
         } catch (err) {
@@ -389,7 +396,11 @@ export default function UserInfoService() {
                 handleInteraction={handleInteraction}
 
                 posts={posts}
+                totalPosts={totalPosts}
+
                 friends={friends}
+                totalFriends={totalFriends}
+
                 mutualFriends={mutualFriends}
 
                 isLoading={isLoading}

@@ -17,7 +17,25 @@ import offlineIcon from "assets/img/offline.png"
 import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 
 
-export default function UserInfo({ userLoggedState, userInfo, queryId, status, handleSendFriendRequest, handleInteraction, posts, friends, mutualFriends, isLoading }) {
+export default function UserInfo({
+    userLoggedState,
+    userInfo,
+    queryId,
+
+    status,
+    handleSendFriendRequest,
+    handleInteraction,
+
+    posts,
+    totalPosts,
+
+    friends,
+    totalFriends,
+
+    mutualFriends,
+    
+    isLoading
+}) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
     const [tabSelected, setTabSelected] = useState(null);
 
@@ -106,14 +124,15 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
     const renderPosts = () => (
         <>
-            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{posts.length} posts</Typography.Title>
+            <Typography.Title style={{ marginLeft: "6px" }} level={5}>
+                {totalPosts} posts
+            </Typography.Title>
 
             <div className="posts">
                 {posts.length
                     ? <>
                         {posts.map(post => (
                             <Post post={post} width={"48%"} />
-
                         ))}
 
                         {isLoading
@@ -131,7 +150,7 @@ export default function UserInfo({ userLoggedState, userInfo, queryId, status, h
 
     const renderFriends = () => (
         <>
-            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{friends.length} friends</Typography.Title>
+            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{totalFriends} friends</Typography.Title>
 
             <div className="friends">
                 {friends.length
