@@ -1,10 +1,63 @@
-import React, { memo } from 'react'
-import "./Chapter.css"
+import React, { memo, useEffect, useState } from 'react'
+import "../Chapter.css"
 
 import { Col, Image, Skeleton } from 'antd';
 import LazyLoad from 'react-lazyload';
+import chapterApi from 'api/apis/MainServer/chapterApi';
+import smoothscroll from 'smoothscroll-polyfill';
 
-function ImgsChapter({ imgs, isLoading }) {
+
+function ImgsChapter({ mangaId, chapterId, chapterName }) {
+    const [isLoading, setIsLoading] = useState(false)
+    const [imgs, setImgs] = useState([])
+
+
+    useEffect(() => {
+        smoothscroll.polyfill();
+        window.scroll({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [imgs])
+
+
+    useEffect(() => {
+        if (chapterId && mangaId) {
+            console.log("acac")
+            getImgsChapter(mangaId, chapterId);
+        }
+    }, [chapterId, mangaId])
+
+
+    const getImgsChapter = async (mangaId, chapterId) => {
+        setIsLoading(true);
+        const data = {
+            manga_id: mangaId,
+            chapter_id: chapterId
+        }
+
+        try {
+            const response = await chapterApi.getChapterImgs(data)
+            if (response.content.err) {
+                setImgs([]);
+                setChapters([]);
+
+
+                message_warning("No chapter to present!", 3)
+                setIsLoading(false)
+                return;
+            }
+            const chapterInfo = response.content.chapterInfo;
+            const imgs = response.content.listImg;
+
+            setImgs(imgs)
+            setIsLoading(false)
+            return;
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
     const Loading = () => (
         <div className="spinner-lazyloading" style={{ height: "100" }}>

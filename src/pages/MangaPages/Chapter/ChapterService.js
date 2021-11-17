@@ -12,6 +12,7 @@ import userApi from '../../../api/apis/MainServer/userApi';
 import chapterApi from "../../../api/apis/MainServer/chapterApi"
 import { regex } from 'helpers/regex';
 import { format } from 'helpers/format';
+import redirectURI from 'helpers/redirectURI';
 
 
 export default function ChapterService() {
@@ -20,18 +21,14 @@ export default function ChapterService() {
     const [imgs, setImgs] = useState([]);
     const [chapters, setChapters] = useState([]);
     const [chapterInfo, setChapterInfo] = useState({});
+    const [mangaInfo, setMangaInfo] = useState({});
+
+    const [totalChapters, setTotalChapters] = useState(0);
+
     const [isLoading, setIsLoading] = useState(true);
     const [isLoadingAddFollow, setIsLoadingAddFollow] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
-
-    const [isAddedCmt, setIsAddedCmt] = useState(false);
-    const [isAdding, setIsAdding] = useState(false);
-    const [comments, setComments] = useState([]);
-    const [fromRow, setFromRow] = useState(0);
-    const [amountRows] = useState(10);
-    const [isEndCmts, setIsEndCmts] = useState(false);
-    const [isErrorCmt, setIsErrorCmt] = useState(false);
-    const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
+ 
     const [curChapter, setCurChapter] = useState(0);
 
     const cookies = new Cookies();
@@ -40,8 +37,19 @@ export default function ChapterService() {
     const { manga_name_id_param, chapter_name_param } = useParams();
     const [mangaId, setMangaId] = useState("");
     const [mangaName, setMangaName] = useState("");
+
     const [chapterId, setChapterId] = useState("");
+    const [chapterName, setChapterName] = useState("");
     const [chapterNumber, setChapterNumber] = useState("");
+
+
+    // useEffect(() => {
+    //     const splittedManga = manga_name_id_param.split("-");
+    //     const mangaId = splittedManga[splittedManga.length - 1];
+
+    //     getTotalChaptersOfManga(mangaId);
+    // }, [manga_name_id_param])
+
 
 
     useEffect(() => {
@@ -59,24 +67,24 @@ export default function ChapterService() {
         let chapterId;
         const splittedManga = manga_name_id_param.split("-");
         const splittedChapter = chapter_name_param.split("_");
+        console.log(splittedChapter)
 
         mangaId = splittedManga[splittedManga.length - 1];
         chapterId = splittedChapter[1];
 
-        setMangaId(mangaId);
-        setMangaName(initial(splittedManga).toString().replaceAll(",", "-"));
-        setChapterNumber(splittedChapter[0]);
+        // setMangaId(mangaId);
+        // setMangaName(initial(splittedManga).toString().replaceAll(",", "-"));
+        // setChapterNumber(splittedChapter[0]);
         setChapterId(chapterId);
+        setChapterName(initial(splittedChapter).toString().replaceAll(regex.special_char, " "));
 
-        getDataChapter(mangaId, chapterId);
         addReadingHistory(mangaId, chapterId);
 
-        setFromRow(0);
-        setComments([]);
-        setIsEndCmts(false);
-
+        getTotalChaptersOfManga(mangaId);
         updateView(mangaId, chapterId);
     }, [manga_name_id_param, chapter_name_param])
+
+
 
 
     const updateView = async (mangaId, chapterId) => {
@@ -94,88 +102,36 @@ export default function ChapterService() {
     }
 
 
-
-    const getDataChapter = async (mangaId, chapterId) => {
-        setIsLoading(true);
-        const data = {
-            manga_id: mangaId,
-            chapter_id: chapterId
-        }
+    const getTotalChaptersOfManga = async (mangaId) => {
+        const data = { manga_id: mangaId };
 
         try {
-            const response = await chapterApi.getChapterImgs(data)
+            const res = await chapterApi.getTotalChapters(data);
+            if(res.content.err) return;
 
-            if (!response.content.chapterInfo || response.content.err) {
-                setImgs([]);
-                setChapters([]);
-                setChapterInfo({
-                    chapter_id: "",
-                    chapter_number: "",
-                    chapter_name: "",
-                    views: "",
-                    createdAt: ""
-                })
-
-                message_warning("No chapter to present!", 5)
-                setIsLoading(false)
-                return;
-            }
-
-            if (response.content.err) {
-                return;
-            }
-            const chapterInfo = response.content.chapterInfo;
-            const imgs = response.content.listImg;
-
-            const chapters = response.content.listChapter;
-            chapters.forEach((chapter, i) => {
-                console.log(chapter)
-                chapter.created_at = format.relativeTime(chapter.created_at);
-
-                if (chapter.chapter_id == chapterId) {
-                    setCurChapter(i)
-                }
-            })
-
-            setChapters(chapters)
-            setImgs(imgs)
+            const total = res.content.total;
+            const manga = res.content.manga;
+            const chapters = res.content.chapters;
+    
+            setTotalChapters(total);
+            setChapters(chapters);
+            setMangaInfo(manga);
 
             if (userState[0]) {
                 const followingMangas = await getFollowingMangas();
                 followingMangas.forEach(folllowingManga => {
-                    if (folllowingManga.manga_id === chapterInfo.manga.manga_id) {
+                    if (folllowingManga.manga_id === res.content.manga.manga.manga_id) {
                         setIsFollowed(true);
                     }
                 })
             }
-
-            setChapterInfo(chapterInfo)
-            setIsLoading(false)
-            return;
         } catch (err) {
             console.log(err)
         }
     }
 
 
-    //////// next, prev chapter
-    useEffect(() => {
-        if(curChapter < 0) return;
-        for (const [i, chapter] of chapters.entries()) {
-            if (curChapter === i) {
-                history.push(`/chapter/${mangaName}-${mangaId}/${chapterNumber.trim().replaceAll(regex.special_char, "-")}_${chapter.chapter_id}`)
-                break;
-            }
-        }
-    }, [curChapter])
 
-    const handleNextChapter = () => {
-        setCurChapter(curChapter + 1);
-    }
-
-    const handlePrevChapter = () => {
-        setCurChapter(curChapter - 1);
-    }
 
 
 
@@ -260,30 +216,17 @@ export default function ChapterService() {
     }
 
 
-    // Check error when add a cmt
-    useEffect(() => {
-        if (isErrorCmt === true) {
-            for (const comment of comments) {
-                if (comment.chaptercmt_time === timeWhenAddedCmt) {
-                    comment.is_error = true;
-                    break;
-                }
-            }
-
-            setComments(comments);
-        }
-    }, [isErrorCmt])
-
- 
 
     return (
         <div>
             <Chapter
                 imgs={imgs}
                 chapters={chapters}
-                chapterInfo={chapterInfo}
-                mangaName={mangaName}
-                mangaId={mangaId}
+
+                chapterId={chapterId}
+                chapterNameProp={chapterName}
+                
+                mangaInfo={mangaInfo}
 
                 isLoading={isLoading}
 
@@ -293,8 +236,7 @@ export default function ChapterService() {
                 isFollowed={isFollowed}
                 addReadingHistory={(mangaId, chapterId) => addReadingHistory(mangaId, chapterId)}
 
-                handleNextChapter={() => handleNextChapter()}
-                handlePrevChapter={() => handlePrevChapter()}
+                totalChapters={totalChapters}
             />
         </div>
     )
