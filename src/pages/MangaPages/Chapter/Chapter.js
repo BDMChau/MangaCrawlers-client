@@ -57,7 +57,6 @@ function Chapter({
 
 
     useEffect(() => {
-        console.log(curChapter)
         if (curChapter < 0 || curChapter > totalChapters) return;
 
         for (const [i, chapter] of chapters.entries()) {
@@ -66,7 +65,7 @@ function Chapter({
                 break;
             }
         }
-    }, [curChapter, chapters, totalChapters])
+    }, [curChapter])
 
     const handleNextChapter = () => {
         if (curChapter >= totalChapters - 1) {

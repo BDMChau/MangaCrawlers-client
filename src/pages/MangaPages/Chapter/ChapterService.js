@@ -67,7 +67,6 @@ export default function ChapterService() {
         let chapterId;
         const splittedManga = manga_name_id_param.split("-");
         const splittedChapter = chapter_name_param.split("_");
-        console.log(splittedChapter)
 
         mangaId = splittedManga[splittedManga.length - 1];
         chapterId = splittedChapter[1];

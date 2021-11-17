@@ -23,7 +23,6 @@ function ImgsChapter({ mangaId, chapterId, chapterName }) {
 
     useEffect(() => {
         if (chapterId && mangaId) {
-            console.log("acac")
             getImgsChapter(mangaId, chapterId);
         }
     }, [chapterId, mangaId])
@@ -32,8 +31,8 @@ function ImgsChapter({ mangaId, chapterId, chapterName }) {
     const getImgsChapter = async (mangaId, chapterId) => {
         setIsLoading(true);
         const data = {
-            manga_id: mangaId,
-            chapter_id: chapterId
+            manga_id: mangaId.toString(),
+            chapter_id: chapterId.toString()
         }
 
         try {
