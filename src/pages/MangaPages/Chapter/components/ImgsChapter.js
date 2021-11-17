@@ -1,13 +1,13 @@
 import React, { memo, useEffect, useState } from 'react'
 import "../Chapter.css"
 
-import { Col, Image, Skeleton } from 'antd';
+import { Image, Skeleton } from 'antd';
 import LazyLoad from 'react-lazyload';
 import chapterApi from 'api/apis/MainServer/chapterApi';
 import smoothscroll from 'smoothscroll-polyfill';
 
 
-function ImgsChapter({ mangaId, chapterId, chapterName }) {
+function ImgsChapter({ mangaId, chapterId }) {
     const [isLoading, setIsLoading] = useState(false)
     const [imgs, setImgs] = useState([])
 
