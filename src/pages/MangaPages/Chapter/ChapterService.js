@@ -71,9 +71,8 @@ export default function ChapterService() {
         mangaId = splittedManga[splittedManga.length - 1];
         chapterId = splittedChapter[1];
 
-        // setMangaId(mangaId);
-        // setMangaName(initial(splittedManga).toString().replaceAll(",", "-"));
-        // setChapterNumber(splittedChapter[0]);
+        setMangaId(mangaId);
+        setMangaName(initial(splittedManga).toString().replaceAll(",", "-"));
         setChapterId(chapterId);
         setChapterName(initial(splittedChapter).toString().replaceAll(regex.special_char, " "));
 
@@ -93,14 +92,13 @@ export default function ChapterService() {
         };
 
         try {
-            const res = await mangaApi.updateViewManga(data);
+            await mangaApi.updateViewManga(data);
         } catch (err) {
             console.log(err)
         }
-
     }
 
-
+    // included mangaInfo, listChapter
     const getTotalChaptersOfManga = async (mangaId) => {
         const data = { manga_id: mangaId };
 
@@ -186,15 +184,13 @@ export default function ChapterService() {
     const getFollowingMangas = async () => {
         let followingMangas = [];
         try {
-            const responseFollowing = await mangaApi.getFollowingManga(token)
+            const response = await mangaApi.getFollowingManga(token)
 
-            if (responseFollowing) {
-                followingMangas = responseFollowing.content.mangas;
-            }
-
+            if (response.content.msg) followingMangas = responseFollowing.content.mangas;v
         } catch (ex) {
             console.log(ex)
         }
+
         return followingMangas;
     }
 
@@ -207,7 +203,6 @@ export default function ChapterService() {
             try {
                 const response = await mangaApi.updateReadingHistory(data, token)
 
-                console.log("History:", response)
             } catch (ex) {
                 console.log(ex)
             }
@@ -223,9 +218,10 @@ export default function ChapterService() {
                 chapters={chapters}
 
                 chapterId={chapterId}
-                chapterNameProp={chapterName}
+                chapterName={chapterName}
                 
                 mangaInfo={mangaInfo}
+                mangaId={mangaInfo}
 
                 isLoading={isLoading}
 

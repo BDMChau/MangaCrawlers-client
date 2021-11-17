@@ -93,10 +93,6 @@ function MangaService() {
                 return;
             }
 
-            chapters.forEach(chapter => {
-                chapter.created_at = format.relativeTime(chapter.created_at);
-            });
-
             if (userState[0]) {
                 const followingMangas = await getFollowingMangas();
                 for (let i = 0; i < followingMangas.length; i++) {

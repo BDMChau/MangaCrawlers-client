@@ -14,7 +14,7 @@ import { format } from 'helpers/format';
 function Chapter({
     chapters,
     chapterId,
-    chapterNameProp,
+    chapterName,
 
     mangaInfo,
 
@@ -33,13 +33,7 @@ function Chapter({
 
     const userState = useSelector((state) => state.userState);
     const stuffsState = useSelector(state => state.stuffsState); // stuffsState[0] is status to sticky menu chapters
-    const [chapterName, setChapterName] = useState("");
     const [curChapter, setCurChapter] = useState(0);
-
-
-    useEffect(() => {
-        setChapterName(chapterNameProp);
-    }, [chapterNameProp])
 
 
 

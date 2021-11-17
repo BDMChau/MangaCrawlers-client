@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Input, Typography, Dropdown, Menu, Popconfirm } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import { format } from 'helpers/format';
 
 
 
@@ -69,7 +70,10 @@ export default function Item({
                     <Typography.Text style={{ width: "65%", overflow: "hidden", textOverflow: "ellipsis" }}>{chapter.chapter_name}</Typography.Text>
 
                     <div>
-                        <Typography.Text>{chapter.created_at}</Typography.Text>
+                        <Typography.Text title={format.formatDate02(chapter.created_at)} >
+                            {format.relativeTime(chapter.created_at)}
+                        </Typography.Text>
+
                         {userState[0]?.user_isAdmin
                             ? allowToModify
                                 ? <Dropdown
