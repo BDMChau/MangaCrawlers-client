@@ -82,7 +82,7 @@ function CommentService({ targetTitle, targetId }) {
             target_title: targetTitle,
             target_id: targetId,
             from: fromRow,
-            amount: 8,
+            amount: 10,
             user_id: userId ? userId : ""
         }
 
@@ -91,7 +91,7 @@ function CommentService({ targetTitle, targetId }) {
             if (res.content.err) return;
 
             const comments = res.content.comments;
-            if (comments.length < 8) setIsEndCmts(true);
+            if (comments.length < 10) setIsEndCmts(true);
 
             setFromRow(res.content.from);
             setTimeout(() => setComments(prev => [...prev, ...comments]), 300)

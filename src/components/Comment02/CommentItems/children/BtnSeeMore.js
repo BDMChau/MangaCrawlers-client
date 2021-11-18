@@ -39,11 +39,11 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
     useEffect(() => {
         if (stuffsState[3]) {
             const newComment = stuffsState[3];
-   
+
             if (comment.comment_id === newComment.parent_id) {
                 setCmtsChildren(prev => [...prev, newComment]);
 
-                setCmt({...cmt, count_comments_child: cmt.count_comments_child + 1})
+                setCmt({ ...cmt, count_comments_child: cmt.count_comments_child + 1 })
                 dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(null));
             }
         }
@@ -67,7 +67,7 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
         const data = {
             comment_id: comment.comment_id,
             from: fromRowsChild,
-            amount: 5,
+            amount: 15,
             user_id: userState[0] ? userState[0].user_id : ""
         }
 
@@ -130,7 +130,7 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
                 return { code: false };
             }
             const comment = response.content.comment;
-            
+
             notification_success("Comment deleted!")
             return {
                 code: true,
@@ -170,42 +170,43 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
 
 
     return (
-       <div className="btn-more-cont">
-                {isEnd || isChild || !cmt.count_comments_child
-                    ? ""
-                    : <Button
-                        type="text"
-                        style={{
-                            padding: "2px",
-                            margin: "3px 0 0 0",
-                            borderRadius: "10px",
-                            fontSize: "13px",
-                            color: "#40A9FF",
-                            fontWeight: 500
-                        }}
-                        onClick={() => getCmtChildren()}
-                    >
-                        <CaretDownOutlined style={{ fontSize: "13px" }} />
+        <div className="btn-more-cont">
+            <ChildCmts
+                comments={cmtsChildren}
 
-                        {cmt.count_comments_child > 1
-                            ? `View ${cmt.count_comments_child} replies`
-                            : "View reply"
-                        }
-                    </Button>
-                }
+                addCmt={addCmt}
+                deleteCmt={deleteCmt}
+                editCmt={editCmt}
 
-                <ChildCmts
-                    comments={cmtsChildren}
+                isAddedCmt={isAddedCmt}
+                setIsAddedCmt={setIsAddedCmt}
+            />
 
-                    addCmt={addCmt}
-                    deleteCmt={deleteCmt}
-                    editCmt={editCmt}
+            {isEnd || isChild || !cmt.count_comments_child
+                ? ""
+                : <Button
+                    type="text"
+                    style={{
+                        padding: "2px",
+                        margin: "3px 0 0 0",
+                        borderRadius: "10px",
+                        fontSize: "13px",
+                        color: "#40A9FF",
+                        fontWeight: 500
+                    }}
+                    onClick={() => getCmtChildren()}
+                >
+                    <CaretDownOutlined style={{ fontSize: "13px" }} />
 
-                    isAddedCmt={isAddedCmt}
-                    setIsAddedCmt={setIsAddedCmt}
-                />
-            </div>
-           
+                    {cmt.count_comments_child > 1
+                        ? `View ${cmt.count_comments_child - cmtsChildren.length} replies`
+                        : "View reply"
+                    }
+                </Button>
+            }
+
+        </div>
+
     )
 }
 
