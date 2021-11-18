@@ -18,18 +18,18 @@ export default function ButtonLike({ comment }) {
     const token = cookies.get("token");
 
     useEffect(() => {
-        setLikes(5);
-    }, [])
+        setLikes(comment.count_like);
+    }, [comment])
 
 
-    useEffect(() => {
-        if (userState[0] && Object.keys(comment).length) checkUserLiked()
-    }, [userState])
+    // useEffect(() => {
+    //     if (userState[0] && Object.keys(comment).length) checkUserLiked()
+    // }, [userState])
 
 
   
     const checkUserLiked = async () => {
-        const data = { comment_id: comment.manga_comment_id.toString() };
+        const data = { comment_id: comment.comment_id.toString() };
 
         try {
             const res = await userApi.checkIsLiked(token, data)
@@ -43,7 +43,7 @@ export default function ButtonLike({ comment }) {
 
 
     const handleLikeCmt = async () => {
-        const data = { comment_id: comment.manga_comment_id.toString() };
+        const data = { comment_id: comment.comment_id.toString() };
 
         try {
             const res = await userApi.likeCmt(token, data)
@@ -58,7 +58,7 @@ export default function ButtonLike({ comment }) {
     };
 
     const handleDislikeCmt = async () => {
-        const data = { comment_id: comment.manga_comment_id.toString() };
+        const data = { comment_id: comment.comment_id.toString() };
 
         try {
             const res = await userApi.unlikeCmt(token, data)

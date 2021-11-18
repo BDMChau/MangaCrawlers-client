@@ -14,6 +14,7 @@ import mangaApi from 'api/apis/MainServer/mangaApi';
 import CmtBody from './components/CmtBody';
 import CmtTitle from './components/CmtTitle';
 import BtnSeeMore from './children/BtnSeeMore';
+import CmtItem from './components/CmtItem';
 
 
 function CommentItems({
@@ -24,7 +25,6 @@ function CommentItems({
 
     isEndCmts,
 
-    mangaId,
 
     deleteCmt,
 
@@ -43,7 +43,7 @@ function CommentItems({
         if (isScrollBottom === true) {
             getCmts();
 
-            const timer = setTimeout(() => setIsScrollBottom(false), 300)
+            const timer = setTimeout(() => setIsScrollBottom(false), 200)
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
@@ -61,48 +61,25 @@ function CommentItems({
         }
     }
 
-   
+
 
 
     return (
         <div className="comment-items" onScroll={(e) => handleScroll(e)} >
             {comments.length
                 ? comments.map((cmt, i) => (
-                    <Comment
-                        className="comment-item"
+                    <CmtItem
                         key={i}
-                        author={<CmtTitle comment={cmt} />}
-                        avatar={
-                            <NavLink to={redirectURI.userPage_uri(cmt.user_id)}>
-                                <Avatar
-                                    className="cmt-avatar"
-                                    title={cmt.user_name}
-                                    style={{ cursor: "pointer" }}
-                                    src={cmt.user_avatar}
-                                    alt="Avatar"
-                                />
-                            </NavLink>
-                        }
-                        content={
-                            <div className="comment">
-                                <CmtBody
-                                    comment={cmt}
-                                    background={"white"}
+                        comment={cmt}
+                        addCmt={addCmt}
+                        deleteCmt={deleteCmt}
+                        editCmt={editCmt}
 
-                                    deleteCmt={deleteCmt}
-                                    editCmt={editCmt}
+                        isAddedCmt={isAddedCmt}
+                        setIsAddedCmt={setIsAddedCmt}
 
-                                    addCmt={(dataInput) => addCmt(dataInput)}
-                                    isAddedCmt={isAddedCmt}
-                                    setIsAddedCmt={setIsAddedCmt}
-                                />
-
-                                <BtnSeeMore comment={cmt} />
-                            </div>
-                        }
-                    >
-                        {/* {children} */}
-                    </Comment>
+                        isShowReplyBtn={true}
+                    />
                 ))
 
                 : <div style={{ height: "unset" }} >

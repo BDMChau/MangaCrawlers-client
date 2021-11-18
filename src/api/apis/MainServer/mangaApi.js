@@ -39,8 +39,10 @@ const mangaApi = {
         return axiosClient.post(uri, data);
     },
     getCommentsManga: (data) => {
-        const uri = '/api/manga/getcommentsmanga';
-        return axiosClient.post(uri, data);
+        const {target_title, target_id, from, amount, user_id} = data;
+
+        const uri = `/api/manga/get_comments?target_title=${target_title}&target_id=${target_id}&from=${from}&amount=${amount}&user_id=${user_id}`;
+        return axiosClient.get(uri);
     },
     getCommentsChild: (data) => {
         const uri = '/api/manga/getchildcomments';

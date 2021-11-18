@@ -253,10 +253,11 @@ function Manga({
                         <Col span={24} md={22} lg={23} xl={15} className="manga-comments">
                             <Spacing />
                             <div className="comments">
-                                <h2>MangaClawers Comments</h2>
+                                <Typography.Title level={4}>MangaCrawlers Comments</Typography.Title>
                                 <div className="comments-body">
                                     <CommentContainter
-                                        mangaId={manga.manga_id}
+                                        targetTitle={"manga"}
+                                        targetId={manga.manga_id}
                                     />
                                 </div>
 

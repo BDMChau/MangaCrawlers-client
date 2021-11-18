@@ -9,9 +9,23 @@ import InputForm from './features/InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 import ButtonLike from './features/ButtonLike';
+import { notification_error } from 'components/toast/notification';
 
 
-export default function InteractionForm({ comment, cmtId, userId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {
+export default function InteractionForm({
+    comment,
+
+    userId,
+    deleteCmt,
+    addCmt,
+
+    isAddedCmt,
+    setIsAddedCmt,
+    editCmt,
+
+    recieveEditedCmt,
+    recieveDeletedCmt
+}) {
     const [replying, setReplying] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -31,8 +45,8 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
     useEffect(() => {
         if (isEditting) {
             const obj = {
-                cmt_id: cmtId,
-                content: comment.manga_comment_content,
+                cmt_id: comment.comment_id,
+                content: comment.comment_content,
                 image: comment.image_url ? comment.image_url : "",
                 to_users: comment.to_users ? comment.to_users : []
             };
@@ -41,14 +55,21 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
         } else setObjEdit({});
     }, [isEditting])
 
+
     const handleEdit = () => {
         setIsEditting(!isEditting);
     }
 
 
-    // prop from <CmtBottom />
-    const handleDel = () => {
-        deleteCmt(cmtId);
+    // function deleteCmt() from <CommentContainer />
+    const handleDel = async () => {
+        const result = await deleteCmt(comment.comment_id);
+        if (result.code === false) {
+            notification_error("Failed!");
+            return;
+        }
+
+        recieveDeletedCmt(result.cmtDeleted);
         setIsModalVisible(false);
     }
 
@@ -123,6 +144,8 @@ export default function InteractionForm({ comment, cmtId, userId, deleteCmt, add
 
                                 replying={replying}
                                 replyingUserId={comment.user_id}
+
+                                recieveEditedCmt={recieveEditedCmt}
                             />
                         }
                         transitionTime={0.1}

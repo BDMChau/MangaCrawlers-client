@@ -107,7 +107,8 @@ export default function PostDetail({
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "30px" }} />
 
                     <CommentContainter
-                        postId={postInfo.post_id}
+                        targetTitle={"post"}
+                        targetId={postInfo.post_id}
                     />
                 </Col>
 

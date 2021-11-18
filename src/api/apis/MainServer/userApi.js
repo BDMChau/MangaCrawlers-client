@@ -59,8 +59,18 @@ const userApi = {
             }
         });
     },
+    getCommentsManga: (data) => {
+        const { target_title, target_id, from, amount, user_id } = data;
+
+        const uri = `/api/user_unauth/get_comments?target_title=${target_title}&target_id=${target_id}&from=${from}&amount=${amount}&user_id=${user_id}`;
+        return axiosClient.get(uri);
+    },
+    getCommentsChild: (data) => {
+        const uri = '/api/manga/getchildcomments';
+        return axiosClient.post(uri, data);
+    },
     addCmt: (token, data) => {
-        const uri = '/api/user/addcommentmanga';
+        const uri = '/api/user/add_comment';
         return axiosClient.post(uri, data, {
             headers: {
                 "Content-Type": 'multipart/form-data',
@@ -77,16 +87,17 @@ const userApi = {
         });
     },
     deleteCmt: (token, data) => {
-        const uri = '/api/user/deletecomment';
-        return axiosClient.post(uri, data, {
+        const uri = '/api/user/delete_comment';
+        return axiosClient.delete(uri, {
             headers: {
                 Authorization: token
-            }
+            },
+            data
         });
     },
     updateCmt: (token, data) => {
-        const uri = '/api/user/updatecomment';
-        return axiosClient.post(uri, data, {
+        const uri = '/api/user/update_comment';
+        return axiosClient.put(uri, data, {
             headers: {
                 "Content-Type": 'multipart/form-data',
                 Authorization: token

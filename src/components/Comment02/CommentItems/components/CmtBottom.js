@@ -7,26 +7,32 @@ import { format } from 'helpers/format';
 import { NavLink } from 'react-router-dom';
 
 
-export default function CmtBottom({ comment, deleteCmt, editCmt, addCmt, isAddedCmt, setIsAddedCmt }) {
+export default function CmtBottom({
+    comment,
+
+    deleteCmt,
+    editCmt,
+    addCmt,
+
+    isAddedCmt,
+    setIsAddedCmt,
+
+    recieveEditedCmt,
+    recieveDeletedCmt
+}) {
     const userState = useSelector(state => state.userState);
-    const [cmt, setCmt] = useState({})
 
-    useEffect(() => {
-        setCmt(comment);
-    }, [comment])
-
-  
     return (
         <div className="cmt-bottom">
-            <Typography.Text title={format.formatDate02(cmt.manga_comment_time)} style={{ color: cmt.is_error ? "#D7D8DB" : "#848587" }}>
-                {format.relativeTime(cmt.manga_comment_time)}
+            <Typography.Text title={format.formatDate02(comment.comment_time)} style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
+                {format.relativeTime(comment.comment_time)}
             </Typography.Text>
 
             {userState[0]
                 ? <div className="interact">
                     <InteractionForm
-                        comment={cmt}
-                        cmtId={cmt.manga_comment_time}
+                        comment={comment}
+
                         userId={userState[0].user_id}
 
                         deleteCmt={deleteCmt}
@@ -36,6 +42,9 @@ export default function CmtBottom({ comment, deleteCmt, editCmt, addCmt, isAdded
                         setIsAddedCmt={setIsAddedCmt}
 
                         editCmt={editCmt}
+
+                        recieveEditedCmt={recieveEditedCmt}
+                        recieveDeletedCmt={recieveDeletedCmt}
                     />
                 </div>
                 : ""

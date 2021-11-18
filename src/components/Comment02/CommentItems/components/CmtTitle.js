@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Typography } from 'antd'
+import redirectURI from 'helpers/redirectURI'
 
 
 export default function CmtTitle({ comment }) {

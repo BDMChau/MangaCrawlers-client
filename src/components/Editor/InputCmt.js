@@ -66,7 +66,6 @@ export default function InputCmt({
 
   useEffect(() => {
     if (objEdit && Object.keys(objEdit).length > 0) {
-      console.log(objEdit)
       setEditorState(EditorState.createWithContent(
         ContentState.createFromText(objEdit.content)
       ))

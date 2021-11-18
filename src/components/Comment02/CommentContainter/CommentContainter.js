@@ -10,12 +10,12 @@ import { useSelector } from 'react-redux';
 import Cookies from 'universal-cookie';
 import { Typography } from 'antd';
 import TransitionAnimate from 'components/Animation/transition';
-import mangaApi from 'api/apis/MainServer/mangaApi';
 import forumApi from 'api/apis/MainServer/forumApi';
+import { filter } from 'lodash';
 
 
-
-function CommentContainter({ mangaId, postId }) {
+// targetTitle can be "post" or "manga"
+function CommentContainter({ targetTitle, targetId }) {
     const userState = useSelector((state) => state.userState);
 
     // comments
@@ -51,45 +51,51 @@ function CommentContainter({ mangaId, postId }) {
 
     // get comments
     useEffect(() => {
-        setIsEndCmts(false);
-        setComments([]);
-        setFromRow(0);    
+        if (targetId && targetTitle) {
+            setIsEndCmts(false);
+            setComments([]);
+            setFromRow(0);
+        }
 
         // if (fromRow === 0) getCmts()
-    }, [mangaId, postId])
+    }, [targetId, targetTitle])
 
 
     useEffect(() => {
         // if fromRow is 0, run getCmts() below
-        if (fromRow === 0) getCmts()
-    }, [mangaId, postId, fromRow])
+        if (fromRow === 0) {
+            if (targetId && targetTitle) {
+                if (userState[0]) getCmts(userState[0].user_id);
+                else getCmts()
+            }
+        }
+
+    }, [targetId, targetTitle, fromRow, userState])
 
 
-    const getCmts = async () => {
+    const getCmts = async (userId) => {
+        if (isEndCmts) return;
+
         const data = {
-            manga_id: mangaId ? mangaId : null,
-            post_id: postId ? postId : null,
-            chapter_id: null,
+            target_title: targetTitle,
+            target_id: targetId,
             from: fromRow,
-            amount: 10
+            amount: 10,
+            user_id: userId ? userId : ""
         }
 
         try {
-            let response;
-            if(mangaId) response = await mangaApi.getCommentsManga(data);
-            else if(postId) response = await forumApi.getCmtsPost(data);
+            let res = await userApi.getCommentsManga(data);
+            if (res.content.err) return;
 
-            const comments = response.content.comments ? response.content.comments : [];
+            const comments = res.content.comments;
+            if (comments.length < 10) setIsEndCmts(true);
 
-            if (comments.length < 10 && response.content.msg === "No comments found!") {
-                setIsEndCmts(true);
-                return;
-            }
-
-            setFromRow(fromRow + 11)
+            console.log(comments)
+            setFromRow(res.content.from);
             setTimeout(() => setComments(prev => [...prev, ...comments]), 300)
-        } catch (ex) {
-            console.log(ex)
+        } catch (err) {
+            console.log(err)
         }
 
     }
@@ -97,38 +103,49 @@ function CommentContainter({ mangaId, postId }) {
 
 
     const addCmt = async (dataInput) => {
-        if (userState[0]) {
+        if (userState[0] && targetId && targetTitle) {
             const formData = new FormData();
+            formData.append("target_id", targetId);
+            formData.append("target_title", targetTitle);
+            formData.append("comment_content", dataInput.content);
+            formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
+            formData.append("image", dataInput.image);
+            formData.append("image", dataInput.image);
+            formData.append("parent_id", dataInput.parent_id);
+            formData.append("to_users_id", dataInput.to_users_id);
+
             // formData.append("manga_id", mangaId ? mangaId.toString() : "");
             // formData.append("post_id", postId ? postId.toString() : "");
             // formData.append("chapter_id", "");
-            if(postId){
-                formData.append("target_title", "post");
-                formData.append("target_id", postId.toString());
-            } else if(mangaId){
-                formData.append("target_title", "manga");
-                formData.append("target_id", mangaId.toString());
-            }
-            formData.append("manga_comment_content", dataInput.content);
-            formData.append("image", dataInput.image);
-            formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
-            formData.append("parent_id", dataInput.parent_id);
-            formData.append("to_users_id", dataInput.to_users_id);
+            // if (postId) {
+            //     formData.append("target_title", "post");
+            //     formData.append("target_id", postId.toString());
+            // } else if (mangaId) {
+            //     formData.append("target_title", "manga");
+            //     formData.append("target_id", mangaId.toString());
+            // }
+            // formData.append("manga_comment_content", dataInput.content);
+            // formData.append("image", dataInput.image);
+            // formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
+            // formData.append("parent_id", dataInput.parent_id);
+            // formData.append("to_users_id", dataInput.to_users_id);
 
 
             try {
                 const res = await userApi.addCmt(token, formData);
-                if(res.content.msg) {
-                    const newComment = res.content.comment;
-                    setComments(prev => [newComment, ...prev])
-                }
-            } catch (ex) {
-                console.log(ex);
+                if (res.content.msg) {
+                    const newComment = res.content.comment_info;
+
+                    setComments(prev => [newComment, ...prev]);
+                    setIsAddedCmt(true);
+
+                } else setIsErrorCmt(true);
+            } catch (err) {
+                console.log(err);
                 setIsAddedCmt(true);
             }
         } else {
             message_error("You have to logged in to do this action");
-            return;
         }
     }
 
@@ -136,59 +153,48 @@ function CommentContainter({ mangaId, postId }) {
     const deleteCmt = async (id) => {
         if (!userState[0]) return message_error("You have to logged in to do this action");
 
-        const data = {
-            manga_comment_id: id,
-            comments: comments
-        }
+        const data = { comment_id: id.toString() }
 
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
-                notification_error("Failed :(");
-                return;
+                return { code: false };
             }
-            // lấy ra id cmt vừa xóa, filter
-            return;
+            const comment = response.content.comment;
+
+            return {
+                code: true,
+                cmtDeleted: comment
+            };
         } catch (err) {
-            notification_error("Failed :(")
             console.log(err);
-            return;
+            return false;
         }
     }
 
 
     const editCmt = async (editObj) => {
         const formData = new FormData();
-        formData.append("manga_comment_id", editObj.cmt_id);
-        formData.append("manga_comment_content", editObj.content);
+        formData.append("comment_id", editObj.cmt_id);
+        formData.append("comment_content", editObj.content);
         formData.append("to_users_id", editObj.toUsersId);
         formData.append("image", editObj.image);
+        formData.append("sticker_url", "");
 
         try {
             const response = await userApi.updateCmt(token, formData);
             if (response.content.err) {
-                notification_error("Failed :(")
-                return;
+                return { code: false };
             }
             const comment = response.content.comment_info;
 
-            const data = {
-                comments: comments,
-                manga_comment_id: comment.manga_comment_id,
-                key: 2
+            return {
+                code: true,
+                cmtEdited: comment
             };
-
-            const response02 = await userApi.filterCmts(token, data);
-            if (response02.content.err) {
-                notification_error("Failed :(")
-                return;
-            }
-            const restCmts = response02.content.comments ? response02.content.comments : [];
-
-            setTimeout(() => setComments(restCmts), 200)
         } catch (err) {
-            notification_error("Failed :(")
-            console.log(err)
+            console.log(err);
+            return { code: false };
         }
     }
 
@@ -215,11 +221,10 @@ function CommentContainter({ mangaId, postId }) {
                 comments={comments}
                 setComments={setComments}
 
-                getCmts={() => getCmts()}
+                getCmts={getCmts}
 
                 isEndCmts={isEndCmts}
 
-                mangaId={mangaId}
 
                 deleteCmt={deleteCmt}
 

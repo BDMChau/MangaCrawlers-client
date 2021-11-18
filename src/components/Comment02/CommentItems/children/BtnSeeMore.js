@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Button } from 'antd';
 import { CaretDownOutlined } from "@ant-design/icons";
 
 import mangaApi from 'api/apis/MainServer/mangaApi';
+import ChildCmts from './ChildCmts';
 
 
 export default function BtnSeeMore({ comment }) {
@@ -156,7 +157,7 @@ export default function BtnSeeMore({ comment }) {
                 </Button>
             }
 
-            <CmtChildren
+            <ChildCmts
                 comments={cmtsChildren}
 
                 addCmt={addCmt}

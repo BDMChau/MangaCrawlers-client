@@ -185,7 +185,6 @@ function MangaService() {
             const responseFollowing = await mangaApi.getFollowingManga(token)
 
             if (responseFollowing) {
-                console.log(responseFollowing)
                 followingMangas = responseFollowing.content.mangas;
             }
 

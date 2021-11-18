@@ -10,6 +10,7 @@ import userApi from 'api/apis/MainServer/userApi'
 import InputCmt from 'components/Editor/InputCmt'
 
 import imgDefault from "assets/8031DF085D7DBABC0F4B3651081CE70ED84622AE9305200F2FC1D789C95CF06F.svg"
+import { notification_error } from 'components/toast/notification'
 
 const fileDefault = new File(["foo"], imgDefault, {
     type: "text/plain",
@@ -37,7 +38,9 @@ function InputForm({
     isEditting,
 
     replying,
-    replyingUserId
+    replyingUserId,
+
+    recieveEditedCmt
 }) {
     const sticker_collection01 = require("utils/sticker.json").stickers_collection01
     const [stickers, setStickers] = useState(sticker_collection01);
@@ -88,6 +91,7 @@ function InputForm({
     }, [usersSearchResult])
 
 
+    // function addCmt() is from <CommentContainer />
     const prepareToAddCmt = async (sticker) => {
         if (sticker) {
             const dataInput = {
@@ -118,11 +122,16 @@ function InputForm({
         }
     }
 
+    // function editCmt() is from <CommentContainer />
     const prepareToEditCmt = async () => {
         if (!objEdit.image) objEdit.image = fileDefault;
-        
+
         setIsLoadingEdit(true);
-        await editCmt(objEdit);
+
+        const result = await editCmt(objEdit);
+        if (result.code === false) notification_error("Failed!");
+        else recieveEditedCmt(result.cmtEdited);
+
         setIsLoadingEdit(false);
     }
 
@@ -206,8 +215,6 @@ function InputForm({
                     <InputCmt
                         isAddedCmt={isAddedCmt}
 
-                        sticker={sticker}
-                        setSticker={setSticker}
 
                         onSearchFunc={(val) => debounceSearchUsers.current(val)}
                         suggestionsProp={usersSearchResult}
