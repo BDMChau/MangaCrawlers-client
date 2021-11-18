@@ -1,14 +1,15 @@
 import React, { useEffect, memo, useState } from 'react'
-import "./CommentItems.css"
+import "./CommentUI.css"
 import { NavLink, useHistory } from 'react-router-dom';
 
 import { Comment, Avatar, Empty, Typography, Tooltip, Button } from 'antd';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
 import { useSelector } from 'react-redux';
 import CmtItem from './components/CmtItem';
+import CmtItems from './components/CmtItems';
 
 
-function CommentItems({
+function CommentUI({
     targetId,
     targetTitle,
 
@@ -40,7 +41,7 @@ function CommentItems({
             }
             getMoreCmts()
 
-            const timer = setTimeout(() => setIsScrollBottom(false), 100)
+            const timer = setTimeout(() => setIsScrollBottom(false), 200)
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
@@ -63,32 +64,20 @@ function CommentItems({
 
     return (
         <div className="comment-items" onScroll={(e) => handleScroll(e)} >
-            {comments.length
-                ? comments.map((cmt, i) => (
-                    <CmtItem
-                        targetId={targetId}
-                        targetTitle={targetTitle}
+            <CmtItems
+                targetId={targetId}
+                targetTitle={targetTitle}
 
-                        key={i}
-                        comment={cmt}
-                        addCmt={addCmt}
-                        deleteCmt={deleteCmt}
-                        editCmt={editCmt}
+                comments={comments}
+                addCmt={addCmt}
+                deleteCmt={deleteCmt}
+                editCmt={editCmt}
 
-                        isAddedCmt={isAddedCmt}
-                        setIsAddedCmt={setIsAddedCmt}
+                isAddedCmt={isAddedCmt}
+                setIsAddedCmt={setIsAddedCmt}
 
-                        isShowReplyBtn={true}
-                    />
-                ))
-
-                : <div style={{ height: "unset" }} >
-                    <Empty
-                        style={{ marginTop: "40px", color: "#8a8d92" }}
-                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                        description="No comments to present :("
-                    />
-                </div>}
+                isShowReplyBtn={true}
+            />
 
             {isScrollBottom
                 ? <div className="loading-more" >
@@ -100,4 +89,4 @@ function CommentItems({
     )
 }
 
-export default memo(CommentItems)
+export default memo(CommentUI)

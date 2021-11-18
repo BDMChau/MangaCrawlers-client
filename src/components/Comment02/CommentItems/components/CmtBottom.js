@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "../CommentItems.css"
+import "../CommentUI.css"
 import { Typography, Tooltip } from 'antd'
 import { useSelector } from 'react-redux'
 import InteractionForm from 'components/Comment02/CommentItems/components/InteractionForm';

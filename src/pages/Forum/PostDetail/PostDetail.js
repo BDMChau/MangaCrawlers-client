@@ -2,7 +2,6 @@ import React from 'react'
 import "./PostDetail.css"
 
 import MDEditor from '@uiw/react-md-editor';
-import CommentContainter from 'components/Comment02/CommentContainter/CommentContainter';
 import { Avatar, Button, Col, Divider, Row, Typography, Tooltip } from 'antd';
 import { ArrowLeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
@@ -12,6 +11,7 @@ import { format } from 'helpers/format';
 import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
 import MyTag from "../features/MyTag";
+import CommentService from 'components/Comment02/CommentService/CommentService';
 
 export default function PostDetail({
     postInfo,
@@ -106,7 +106,7 @@ export default function PostDetail({
                 <Col className="cmt-post-detail" xs={22} md={22} xl={22}>
                     <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "30px" }} />
 
-                    <CommentContainter
+                    <CommentService
                         targetTitle={"post"}
                         targetId={postInfo.post_id}
                     />

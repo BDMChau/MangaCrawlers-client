@@ -1,9 +1,7 @@
 import React from 'react';
-import "../CommentItems.css";
+import "../CommentUI.css";
 
-import CmtTitle from '../components/CmtTitle';
-import CmtBody from '../components/CmtBody';
-import { NavLink } from 'react-router-dom';
+
 import CmtItem from '../components/CmtItem';
 
 
@@ -22,7 +20,7 @@ export default function ChildCmts({ comments, addCmt, deleteCmt, editCmt, isAdde
                     isAddedCmt={isAddedCmt}
                     setIsAddedCmt ={setIsAddedCmt }
 
-                    isShowReplyBtn={false}
+                    isChild={true}
                 />
             ))}
         </div>

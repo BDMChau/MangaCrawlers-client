@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, memo } from 'react'
-import "components/Comment02/CommentContainter/CommentContainter.css"
+import "components/Comment02/CommentService/CommentService.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, TagsOutlined } from '@ant-design/icons'
@@ -10,7 +10,7 @@ import userApi from 'api/apis/MainServer/userApi'
 import InputCmt from 'components/Editor/InputCmt'
 
 import imgDefault from "assets/8031DF085D7DBABC0F4B3651081CE70ED84622AE9305200F2FC1D789C95CF06F.svg"
-import { notification_error } from 'components/toast/notification'
+import { notification_error, notification_success } from 'components/toast/notification'
 
 const fileDefault = new File(["foo"], imgDefault, {
     type: "text/plain",
@@ -84,7 +84,7 @@ function InputForm({
 
     useEffect(() => {
         console.log(toUsersId)
-    }, [setToUsersId])
+    }, [toUsersId])
 
 
     useEffect(() => {
@@ -93,7 +93,7 @@ function InputForm({
     }, [usersSearchResult])
 
 
-    // function addCmt() is from <CommentContainer />
+    // function addCmt() is from <CommentService />
     const prepareToAddCmt = async (sticker) => {
         if (sticker) {
             const dataInput = {
@@ -125,7 +125,7 @@ function InputForm({
         }
     }
 
-    // function editCmt() is from <CommentContainer />
+    // function editCmt() is from <CommentService />
     const prepareToEditCmt = async () => {
         if (!objEdit.image) objEdit.image = fileDefault;
 
@@ -133,7 +133,10 @@ function InputForm({
 
         const result = await editCmt(objEdit);
         if (result.code === false) notification_error("Failed!");
-        else recieveEditedCmt(result.cmtEdited);
+        else {
+            recieveEditedCmt(result.cmtEdited);
+            notification_success("Comment edited!");
+        }
 
         setIsLoadingEdit(false);
         setIsEditting(false);

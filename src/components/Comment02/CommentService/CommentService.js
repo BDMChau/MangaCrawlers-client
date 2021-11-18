@@ -1,10 +1,9 @@
 import React, { useState, useEffect, memo } from 'react';
-import "./CommentContainter.css";
+import "./CommentService.css";
 
-import CommentItems from '../CommentItems/CommentItems';
 import InputForm from '../CommentItems/components/features/InputForm';
 import userApi from 'api/apis/MainServer/userApi';
-import { notification_error } from 'components/toast/notification';
+import { notification_error, notification_success } from 'components/toast/notification';
 import { message_error } from 'components/toast/message';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_REPLY_COMMENT_FROM_COMMENT_LV00 } from "store/features/stuffs/StuffsSlice"
@@ -13,10 +12,11 @@ import { Typography } from 'antd';
 import TransitionAnimate from 'components/Animation/transition';
 import forumApi from 'api/apis/MainServer/forumApi';
 import { filter } from 'lodash';
+import CommentUI from '../CommentItems/CommentUI';
 
 
 // targetTitle can be "post" or "manga"
-function CommentContainter({ targetTitle, targetId }) {
+function CommentService({ targetTitle, targetId }) {
     const userState = useSelector((state) => state.userState);
     const dispatch = useDispatch();
 
@@ -93,7 +93,6 @@ function CommentContainter({ targetTitle, targetId }) {
             const comments = res.content.comments;
             if (comments.length < 8) setIsEndCmts(true);
 
-            console.log(comments)
             setFromRow(res.content.from);
             setTimeout(() => setComments(prev => [...prev, ...comments]), 300)
         } catch (err) {
@@ -144,16 +143,19 @@ function CommentContainter({ targetTitle, targetId }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
+                notification_error("Failed");
                 return { code: false };
             }
             const comment = response.content.comment;
+            // const filtered = comments.filter(cmt => cmt.comment_id !== comment.comment_id)
 
+            // setComments(filtered);
             return {
                 code: true,
                 cmtDeleted: comment
             };
         } catch (err) {
-            console.log(err);
+            notification_error("Failed")
             return false;
         }
     }
@@ -173,6 +175,7 @@ function CommentContainter({ targetTitle, targetId }) {
                 return { code: false };
             }
             const comment = response.content.comment_info;
+
 
             return {
                 code: true,
@@ -203,7 +206,7 @@ function CommentContainter({ targetTitle, targetId }) {
             }
 
             {/* render cmts */}
-            <CommentItems
+            <CommentUI
                 targetId={targetId}
                 targetTitle={targetTitle}
 
@@ -227,4 +230,4 @@ function CommentContainter({ targetTitle, targetId }) {
     )
 }
 
-export default memo(CommentContainter);
+export default memo(CommentService);

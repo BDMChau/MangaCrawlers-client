@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "components/Comment02/CommentContainter/CommentContainter.css"
-
+import "components/Comment02/CommentService/CommentService.css"
 import { Button, Input, Modal, Typography, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css';
@@ -9,7 +8,7 @@ import InputForm from './features/InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
 import ButtonLike from './features/ButtonLike';
-import { notification_error } from 'components/toast/notification';
+import { notification_error, notification_success } from 'components/toast/notification';
 
 
 export default function InteractionForm({
@@ -60,7 +59,7 @@ export default function InteractionForm({
     }
 
 
-    // function deleteCmt() from <CommentContainer />
+    // function deleteCmt() from <CommentService />
     const handleDel = async () => {
         const result = await deleteCmt(comment.comment_id);
         if (result.code === false) {
@@ -69,6 +68,7 @@ export default function InteractionForm({
         }
 
         recieveDeletedCmt(result.cmtDeleted);
+        notification_success("Comment deleted!");
         setIsModalVisible(false);
     }
 

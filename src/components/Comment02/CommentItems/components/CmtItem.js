@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "../CommentItems.css";
+import "../CommentUI.css";
 
 import { Comment, Avatar } from 'antd';
 import CmtBody from './CmtBody';
@@ -22,7 +22,7 @@ export default function CmtItem({
     isAddedCmt,
     setIsAddedCmt,
 
-    isShowReplyBtn
+    isChild
 }) {
     const [cmt, setCmt] = useState({})
 
@@ -75,14 +75,13 @@ export default function CmtItem({
                         recieveDeletedCmt={recieveDeletedCmt}
                     />
 
-                    {isShowReplyBtn && cmt?.count_comments_child
-                        ? <BtnSeeMore
-                            comment={cmt}
-                            targetId={targetId}
-                            targetTitle={targetTitle}
-                        />
-                        : ""
-                    }
+                    <BtnSeeMore
+                        comment={cmt}
+                        targetId={targetId}
+                        targetTitle={targetTitle}
+
+                        isChild={isChild}
+                    />
                 </div>
             }
         />

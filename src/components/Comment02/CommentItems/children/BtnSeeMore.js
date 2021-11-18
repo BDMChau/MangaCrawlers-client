@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import { Button } from 'antd';
 import { CaretDownOutlined } from "@ant-design/icons";
@@ -11,12 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SET_REPLY_COMMENT_FROM_COMMENT_LV00 } from "store/features/stuffs/StuffsSlice"
 
 import Cookies from 'universal-cookie';
+import { notification_error, notification_success } from 'components/toast/notification';
 
 
-export default function BtnSeeMore({ comment, targetId, targetTitle }) {
+function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
     const userState = useSelector((state) => state.userState);
     const stuffsState = useSelector((state) => state.stuffsState); // stuffsState[3] is the comment when reply on comment lv00
     const dispatch = useDispatch();
+
+    const [cmt, setCmt] = useState({});
 
     const [fromRowsChild, setFromRowsChild] = useState(0);
     const [cmtsChildren, setCmtsChildren] = useState([]);
@@ -28,13 +31,21 @@ export default function BtnSeeMore({ comment, targetId, targetTitle }) {
     const cookies = new Cookies();
     const token = cookies.get("token");
 
+    useEffect(() => {
+        setCmt(comment);
+    }, [comment])
+
 
     useEffect(() => {
         if (stuffsState[3]) {
             const newComment = stuffsState[3];
+   
+            if (comment.comment_id === newComment.parent_id) {
+                setCmtsChildren(prev => [...prev, newComment]);
 
-            if (comment.comment_id === newComment.parent_id) setCmtsChildren(prev => [...prev, newComment]);
-            dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(null));
+                setCmt({...cmt, count_comments_child: cmt.count_comments_child + 1})
+                dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(null));
+            }
         }
     }, [stuffsState])
 
@@ -115,16 +126,19 @@ export default function BtnSeeMore({ comment, targetId, targetTitle }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
+                notification_error("Failed")
                 return { code: false };
             }
             const comment = response.content.comment;
-
+            
+            notification_success("Comment deleted!")
             return {
                 code: true,
                 cmtDeleted: comment
             };
         } catch (err) {
             console.log(err);
+            notification_error("Failed");
             return false;
         }
     }
@@ -156,40 +170,43 @@ export default function BtnSeeMore({ comment, targetId, targetTitle }) {
 
 
     return (
-        <div className="btn-more-cont">
-            {isEnd
-                ? ""
-                : <Button
-                    type="text"
-                    style={{
-                        padding: "2px",
-                        margin: "3px 0 0 0",
-                        borderRadius: "10px",
-                        fontSize: "13px",
-                        color: "#40A9FF",
-                        fontWeight: 500
-                    }}
-                    onClick={() => getCmtChildren()}
-                >
-                    <CaretDownOutlined style={{ fontSize: "13px" }} />
+       <div className="btn-more-cont">
+                {isEnd || isChild || !cmt.count_comments_child
+                    ? ""
+                    : <Button
+                        type="text"
+                        style={{
+                            padding: "2px",
+                            margin: "3px 0 0 0",
+                            borderRadius: "10px",
+                            fontSize: "13px",
+                            color: "#40A9FF",
+                            fontWeight: 500
+                        }}
+                        onClick={() => getCmtChildren()}
+                    >
+                        <CaretDownOutlined style={{ fontSize: "13px" }} />
 
-                    {comment.count_comments_child > 1
-                        ? `View ${comment.count_comments_child} replies`
-                        : "View reply"
-                    }
-                </Button>
-            }
+                        {cmt.count_comments_child > 1
+                            ? `View ${cmt.count_comments_child} replies`
+                            : "View reply"
+                        }
+                    </Button>
+                }
 
-            <ChildCmts
-                comments={cmtsChildren}
+                <ChildCmts
+                    comments={cmtsChildren}
 
-                addCmt={addCmt}
-                deleteCmt={deleteCmt}
-                editCmt={editCmt}
+                    addCmt={addCmt}
+                    deleteCmt={deleteCmt}
+                    editCmt={editCmt}
 
-                isAddedCmt={isAddedCmt}
-                setIsAddedCmt={setIsAddedCmt}
-            />
-        </div>
+                    isAddedCmt={isAddedCmt}
+                    setIsAddedCmt={setIsAddedCmt}
+                />
+            </div>
+           
     )
 }
+
+export default memo(BtnSeeMore);

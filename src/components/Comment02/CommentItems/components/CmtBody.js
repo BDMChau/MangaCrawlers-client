@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "../CommentItems.css"
+import "../CommentUI.css"
 import { Typography } from 'antd'
 import CmtBottom from './CmtBottom'
 
