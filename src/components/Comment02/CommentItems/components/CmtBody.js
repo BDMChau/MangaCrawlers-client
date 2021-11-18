@@ -23,6 +23,7 @@ export default function CmtBody({
     return (
         <div className="cmt-body" key={cmt.manga_comment_id} style={{ background: background }} >
             <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: cmt.manga_comment_content }} />
+            
             {cmt.image_url ? <img src={cmt.image_url} alt="" style={{ height: "110px", width: "fit-content", borderRadius: "8px", marginTop: "5px" }} /> : ""}
 
             <CmtBottom
