@@ -22,9 +22,9 @@ export default function ButtonLike({ comment }) {
     }, [comment])
 
 
-    // useEffect(() => {
-    //     if (userState[0] && Object.keys(comment).length) checkUserLiked()
-    // }, [userState])
+    useEffect(() => {
+        if (userState[0] && Object.keys(comment).length) checkUserLiked()
+    }, [userState])
 
 
   
