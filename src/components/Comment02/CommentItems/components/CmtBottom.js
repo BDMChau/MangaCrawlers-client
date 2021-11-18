@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "../CommentItems.css"
 import { Typography, Tooltip } from 'antd'
 import { useSelector } from 'react-redux'
-import InteractionForm from 'components/Comment02/features/InteractionForm';
+import InteractionForm from 'components/Comment02/CommentItems/components/InteractionForm';
 import { format } from 'helpers/format';
 import { NavLink } from 'react-router-dom';
 

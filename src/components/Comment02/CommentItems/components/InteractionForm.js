@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import "../CommentContainter/CommentContainter.css"
+import "components/Comment02/CommentContainter/CommentContainter.css"
 
 import { Button, Input, Modal, Typography, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined } from '@ant-design/icons'
 import 'antd/dist/antd.css';
 
-import InputForm from './InputForm'
+import InputForm from './features/InputForm'
 import TransitionAnimate from 'components/Animation/transition';
 import Cookies from 'universal-cookie';
-import ButtonLike from './ButtonLike';
+import ButtonLike from './features/ButtonLike';
 
 
 export default function InteractionForm({ comment, cmtId, userId, deleteCmt, addCmt, isAddedCmt, setIsAddedCmt, editCmt }) {

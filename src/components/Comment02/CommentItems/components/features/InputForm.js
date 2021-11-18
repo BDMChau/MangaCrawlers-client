@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, memo } from 'react'
-import "../CommentContainter/CommentContainter.css"
+import "components/Comment02/CommentContainter/CommentContainter.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
 import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, TagsOutlined } from '@ant-design/icons'

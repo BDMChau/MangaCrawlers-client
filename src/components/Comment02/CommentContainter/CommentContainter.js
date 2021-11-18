@@ -2,7 +2,7 @@ import React, { useState, useEffect, memo } from 'react';
 import "./CommentContainter.css";
 
 import CommentItems from '../CommentItems/CommentItems';
-import InputForm from '../features/InputForm';
+import InputForm from '../CommentItems/components/features/InputForm';
 import userApi from 'api/apis/MainServer/userApi';
 import { notification_error } from 'components/toast/notification';
 import { message_error } from 'components/toast/message';

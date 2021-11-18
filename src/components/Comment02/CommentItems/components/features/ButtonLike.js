@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import "../../Comment02/CommentItems/CommentItems.css"
+import "../../CommentItems.css"
 
 import { Tooltip } from 'antd'
 import { LikeOutlined, LikeFilled } from '@ant-design/icons';
