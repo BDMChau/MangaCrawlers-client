@@ -8,7 +8,7 @@ import CmtItem from '../components/CmtItem';
 
 
 
-export default function ChildCmts({ comments, addCmt, deleteCmt, editCmt }) {
+export default function ChildCmts({ comments, addCmt, deleteCmt, editCmt, isAddedCmt, setIsAddedCmt  }) {
     return (
         <div className="child-cmts-cont">
             {comments.map((cmt, i) => (
@@ -18,6 +18,9 @@ export default function ChildCmts({ comments, addCmt, deleteCmt, editCmt }) {
                     addCmt={addCmt}
                     deleteCmt={deleteCmt}
                     editCmt={editCmt}
+
+                    isAddedCmt={isAddedCmt}
+                    setIsAddedCmt ={setIsAddedCmt }
 
                     isShowReplyBtn={false}
                 />

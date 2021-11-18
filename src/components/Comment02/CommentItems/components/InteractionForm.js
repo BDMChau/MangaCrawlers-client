@@ -27,14 +27,12 @@ export default function InteractionForm({
     recieveDeletedCmt
 }) {
     const [replying, setReplying] = useState(false);
+    const [isEditting, setIsEditting] = useState(false);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalEditVisible, setIsModalEditVisible] = useState(false);
 
-    const [isEditting, setIsEditting] = useState(false);
-    const [imgEditting, setImgEditting] = useState("");
-    const [imgDemo, setImgDemo] = useState("");
-    const [contentEditting, setContentEditting] = useState(comment.manga_comment_content ? comment.manga_comment_content : "");
+
     const [objEdit, setObjEdit] = useState({});
 
     const cookies = new Cookies();
@@ -54,6 +52,7 @@ export default function InteractionForm({
             setObjEdit(obj);
         } else setObjEdit({});
     }, [isEditting])
+
 
 
     const handleEdit = () => {
@@ -141,8 +140,10 @@ export default function InteractionForm({
                                 editCmt={editCmt}
                                 objEdit={objEdit}
                                 isEditting={isEditting}
+                                setIsEditting={setIsEditting}
 
                                 replying={replying}
+                                setReplying={setReplying}
                                 replyingUserId={comment.user_id}
 
                                 recieveEditedCmt={recieveEditedCmt}

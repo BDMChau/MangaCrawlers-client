@@ -5,7 +5,7 @@
 
 .cmt-body {
   border-radius: 15px;
-  padding: 7px 10px;
+  padding: 5px 10px;
   margin-top: -4px;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .comment .cmt-bottom {
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .comment .cmt-bottom .chapter-name {
@@ -61,8 +61,9 @@
   text-overflow: ellipsis;
 }
 
-.comment .cmt-bottom .interact {
-  margin-top: 3px;
+
+.comment .cmt-bottom .interact button {
+  font-size: 12px;
 }
 
 .comment .cmt-bottom .interact .reply {

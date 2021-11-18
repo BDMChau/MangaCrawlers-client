@@ -6,7 +6,8 @@ import InputForm from '../CommentItems/components/features/InputForm';
 import userApi from 'api/apis/MainServer/userApi';
 import { notification_error } from 'components/toast/notification';
 import { message_error } from 'components/toast/message';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_REPLY_COMMENT_FROM_COMMENT_LV00 } from "store/features/stuffs/StuffsSlice"
 import Cookies from 'universal-cookie';
 import { Typography } from 'antd';
 import TransitionAnimate from 'components/Animation/transition';
@@ -17,6 +18,7 @@ import { filter } from 'lodash';
 // targetTitle can be "post" or "manga"
 function CommentContainter({ targetTitle, targetId }) {
     const userState = useSelector((state) => state.userState);
+    const dispatch = useDispatch();
 
     // comments
     const [fromRow, setFromRow] = useState(0);
@@ -80,7 +82,7 @@ function CommentContainter({ targetTitle, targetId }) {
             target_title: targetTitle,
             target_id: targetId,
             from: fromRow,
-            amount: 10,
+            amount: 8,
             user_id: userId ? userId : ""
         }
 
@@ -89,7 +91,7 @@ function CommentContainter({ targetTitle, targetId }) {
             if (res.content.err) return;
 
             const comments = res.content.comments;
-            if (comments.length < 10) setIsEndCmts(true);
+            if (comments.length < 8) setIsEndCmts(true);
 
             console.log(comments)
             setFromRow(res.content.from);
@@ -114,31 +116,15 @@ function CommentContainter({ targetTitle, targetId }) {
             formData.append("parent_id", dataInput.parent_id);
             formData.append("to_users_id", dataInput.to_users_id);
 
-            // formData.append("manga_id", mangaId ? mangaId.toString() : "");
-            // formData.append("post_id", postId ? postId.toString() : "");
-            // formData.append("chapter_id", "");
-            // if (postId) {
-            //     formData.append("target_title", "post");
-            //     formData.append("target_id", postId.toString());
-            // } else if (mangaId) {
-            //     formData.append("target_title", "manga");
-            //     formData.append("target_id", mangaId.toString());
-            // }
-            // formData.append("manga_comment_content", dataInput.content);
-            // formData.append("image", dataInput.image);
-            // formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
-            // formData.append("parent_id", dataInput.parent_id);
-            // formData.append("to_users_id", dataInput.to_users_id);
-
-
             try {
                 const res = await userApi.addCmt(token, formData);
                 if (res.content.msg) {
                     const newComment = res.content.comment_info;
 
-                    setComments(prev => [newComment, ...prev]);
-                    setIsAddedCmt(true);
+                    if (dataInput.parent_id) dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(newComment)) // for reply
+                    else setComments(prev => [newComment, ...prev]);
 
+                    setIsAddedCmt(true);
                 } else setIsErrorCmt(true);
             } catch (err) {
                 console.log(err);
@@ -218,6 +204,9 @@ function CommentContainter({ targetTitle, targetId }) {
 
             {/* render cmts */}
             <CommentItems
+                targetId={targetId}
+                targetTitle={targetTitle}
+
                 comments={comments}
                 setComments={setComments}
 

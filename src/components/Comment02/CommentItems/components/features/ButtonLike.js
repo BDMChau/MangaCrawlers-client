@@ -78,8 +78,8 @@ export default function ButtonLike({ comment }) {
                 onClick={() => userLiked ? handleDislikeCmt() : handleLikeCmt()}
             >
                 {userLiked
-                    ? <LikeFilled style={{ fontSize: "18px", color: "#1890FF", cursor: "pointer" }} />
-                    : <LikeOutlined style={{ fontSize: "18px", color: "#C1C1C1", cursor: "pointer" }} />
+                    ? <LikeFilled style={{ fontSize: "16px", color: "#1890FF", cursor: "pointer" }} />
+                    : <LikeOutlined style={{ fontSize: "16px", color: "#C1C1C1", cursor: "pointer" }} />
                 }
 
                 <span

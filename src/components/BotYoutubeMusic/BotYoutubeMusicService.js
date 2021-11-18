@@ -352,7 +352,7 @@ function BotYoutubeMusicService() {
                     video_title: response.items[0].snippet.title,
                     playing: true
                 };
-
+                console.log(itemsInQueue)
                 if (itemsInQueue.length === 0) {
                     setItemId(firstItemId);
                     setItemInfo(firstItemInfo);
@@ -504,7 +504,8 @@ function BotYoutubeMusicService() {
 
             const response = await botMusicApi.getQueue(data);
             if (response.content) {
-                setItemsInQueue(response.content.videos_id_queue)
+                const queue_ids = response.content.videos_id_queue.length ? response.content.videos_id_queue : []; 
+                setItemsInQueue(queue_ids)
             }
 
         } catch (e) {

@@ -36,8 +36,10 @@ function InputForm({
     editCmt,
     objEdit,
     isEditting,
+    setIsEditting,
 
     replying,
+    setReplying,
     replyingUserId,
 
     recieveEditedCmt
@@ -119,6 +121,7 @@ function InputForm({
             setIsAdding(true);
             await addCmt(dataInput);
             setIsAdding(false);
+            if(setReplying) setReplying(false);
         }
     }
 
@@ -133,6 +136,7 @@ function InputForm({
         else recieveEditedCmt(result.cmtEdited);
 
         setIsLoadingEdit(false);
+        setIsEditting(false);
     }
 
 

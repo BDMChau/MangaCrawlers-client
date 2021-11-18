@@ -66,8 +66,10 @@ const userApi = {
         return axiosClient.get(uri);
     },
     getCommentsChild: (data) => {
-        const uri = '/api/manga/getchildcomments';
-        return axiosClient.post(uri, data);
+        const {comment_id, from, amount, user_id} = data;
+
+        const uri = `/api/user_unauth/get_comments_child?comment_id=${comment_id}&from=${from}&amount=${amount}&user_id=${user_id}`;
+        return axiosClient.get(uri);
     },
     addCmt: (token, data) => {
         const uri = '/api/user/add_comment';

@@ -3,21 +3,15 @@ import "./CommentItems.css"
 import { NavLink, useHistory } from 'react-router-dom';
 
 import { Comment, Avatar, Empty, Typography, Tooltip, Button } from 'antd';
-import { CaretDownOutlined } from "@ant-design/icons";
-import ButtonLike from '../../Comment/features/ButtonLike';
 import SkeletonCustom from '../../SkeletonCustom/SkeletonCustom';
-import InteractionForm from '../../Comment/features/InteractionForm';
-import { format } from 'helpers/format';
 import { useSelector } from 'react-redux';
-import redirectURI from 'helpers/redirectURI';
-import mangaApi from 'api/apis/MainServer/mangaApi';
-import CmtBody from './components/CmtBody';
-import CmtTitle from './components/CmtTitle';
-import BtnSeeMore from './children/BtnSeeMore';
 import CmtItem from './components/CmtItem';
 
 
 function CommentItems({
+    targetId,
+    targetTitle,
+
     comments,
     setComments,
 
@@ -41,9 +35,12 @@ function CommentItems({
 
     useEffect(() => {
         if (isScrollBottom === true) {
-            getCmts();
+            async function getMoreCmts() {
+                await getCmts();
+            }
+            getMoreCmts()
 
-            const timer = setTimeout(() => setIsScrollBottom(false), 200)
+            const timer = setTimeout(() => setIsScrollBottom(false), 100)
             return () => clearTimeout(timer);
         }
     }, [isScrollBottom])
@@ -55,7 +52,7 @@ function CommentItems({
         const scrollHeight = e.target.scrollHeight;
 
         if (isEndCmts === false) {
-            if (scrollHeight - (scrollTop + clientHeight) <= 50) {
+            if (scrollHeight - (scrollTop + clientHeight) <= 100) {
                 setIsScrollBottom(true);
             }
         }
@@ -69,6 +66,9 @@ function CommentItems({
             {comments.length
                 ? comments.map((cmt, i) => (
                     <CmtItem
+                        targetId={targetId}
+                        targetTitle={targetTitle}
+
                         key={i}
                         comment={cmt}
                         addCmt={addCmt}

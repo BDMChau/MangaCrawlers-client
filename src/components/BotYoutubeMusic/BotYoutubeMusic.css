@@ -34,9 +34,9 @@
 }
 
 .messages-cont .message-item .message-bot .bot-text .vid-title {
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 }
 
 .messages-cont .message-item .message-user {

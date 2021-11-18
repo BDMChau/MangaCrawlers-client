@@ -10,6 +10,9 @@ import BtnSeeMore from '../children/BtnSeeMore';
 
 
 export default function CmtItem({
+    targetId,
+    targetTitle,
+
     key,
     comment,
     addCmt,
@@ -28,10 +31,6 @@ export default function CmtItem({
         setCmt(comment);
     }, [comment])
 
-    useEffect(() => {
-       console.log("???")
-    }, [])
-
 
     const recieveEditedCmt = (comment) => {
         setCmt(comment);
@@ -45,16 +44,16 @@ export default function CmtItem({
 
     return (
         <Comment
-            className={cmt.is_deprecated ? "comment-item deleted" : "comment-item"}
+            className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
             key={key}
             author={<CmtTitle comment={cmt} />}
             avatar={
-                <NavLink to={redirectURI.userPage_uri(cmt.user_id)}>
+                <NavLink to={redirectURI.userPage_uri(cmt?.user_id)}>
                     <Avatar
                         className="cmt-avatar"
-                        title={cmt.user_name}
+                        title={cmt?.user_name}
                         style={{ cursor: "pointer" }}
-                        src={cmt.user_avatar}
+                        src={cmt?.user_avatar}
                         alt="Avatar"
                     />
                 </NavLink>
@@ -68,7 +67,7 @@ export default function CmtItem({
                         deleteCmt={deleteCmt}
                         editCmt={editCmt}
 
-                        addCmt={(dataInput) => addCmt(dataInput)}
+                        addCmt={addCmt}
                         isAddedCmt={isAddedCmt}
                         setIsAddedCmt={setIsAddedCmt}
 
@@ -76,7 +75,14 @@ export default function CmtItem({
                         recieveDeletedCmt={recieveDeletedCmt}
                     />
 
-                    {isShowReplyBtn ?  <BtnSeeMore comment={cmt} /> : ""}
+                    {isShowReplyBtn && cmt?.count_comments_child
+                        ? <BtnSeeMore
+                            comment={cmt}
+                            targetId={targetId}
+                            targetTitle={targetTitle}
+                        />
+                        : ""
+                    }
                 </div>
             }
         />

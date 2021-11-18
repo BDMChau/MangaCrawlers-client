@@ -24,10 +24,6 @@ export default function CmtBottom({
 
     return (
         <div className="cmt-bottom">
-            <Typography.Text title={format.formatDate02(comment.comment_time)} style={{ color: comment.is_error ? "#D7D8DB" : "#848587" }}>
-                {format.relativeTime(comment.comment_time)}
-            </Typography.Text>
-
             {userState[0]
                 ? <div className="interact">
                     <InteractionForm

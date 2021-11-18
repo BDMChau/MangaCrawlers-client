@@ -29,7 +29,7 @@ export default function CmtBody({
                 deleteCmt={deleteCmt}
                 editCmt={editCmt}
 
-                addCmt={(dataInput) => addCmt(dataInput)}
+                addCmt={addCmt}
                 isAddedCmt={isAddedCmt}
                 setIsAddedCmt={setIsAddedCmt}
                 
