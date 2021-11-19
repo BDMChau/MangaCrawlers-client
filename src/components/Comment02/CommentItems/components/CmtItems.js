@@ -1,8 +1,8 @@
 import { Empty } from 'antd'
-import React from 'react'
+import React, { memo } from 'react'
 import CmtItem from './CmtItem'
 
-export default function CmtItems({
+function CmtItems({
     targetId,
     targetTitle,
 
@@ -47,3 +47,5 @@ export default function CmtItems({
         </>
     )
 }
+
+export default memo(CmtItems);

@@ -174,7 +174,6 @@
 .manga-comments .comments {
   padding: 0px;
   background: transparent;
-  height: 850px;
   margin-bottom: 40px;
 }
 
@@ -236,9 +235,7 @@
     width: 100%;
   }
 
-  .manga-comments .comments-body {
-    max-height: 600px;
-  }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -265,9 +262,9 @@
     width: 100%;
   }
 
-  .manga-comments .comments-body {
+  /* .manga-comments .comments-body {
     max-height: 600px;
-  }
+  } */
 }
 
 @media only screen and (min-width: 416px) and (max-width: 767px) {
@@ -315,10 +312,10 @@
   .manga-comments .comments-body {
     width: 100%;
   }
-
+/* 
   .manga-comments .comments-body {
     max-height: 600px;
-  }
+  } */
 
   .manga .title .interact .btn-add-favorite,
   .manga .title .interact .btn-read-now {

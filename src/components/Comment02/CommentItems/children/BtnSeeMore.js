@@ -49,6 +49,10 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
         }
     }, [stuffsState])
 
+    useEffect(() => {
+     console.log("cmt chilren",cmtsChildren)
+    }, [cmtsChildren])
+
 
     // remove duplicate items
     useEffect(() => {
@@ -96,7 +100,6 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
             formData.append("comment_content", dataInput.content);
             formData.append("sticker_url", dataInput.sticker_url ? dataInput.sticker_url : "");
             formData.append("image", dataInput.image);
-            formData.append("image", dataInput.image);
             formData.append("parent_id", dataInput.parent_id);
             formData.append("to_users_id", dataInput.to_users_id);
 
@@ -106,7 +109,6 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
                     const newComment = res.content.comment_info;
 
                     setCmtsChildren(prev => [...prev, newComment]);
-
                     setIsAddedCmt(true);
                 } else setIsErrorCmt(true);
             } catch (err) {
@@ -126,19 +128,22 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
         try {
             const response = await userApi.deleteCmt(token, data);
             if (response.content.err) {
-                notification_error("Failed")
                 return { code: false };
             }
             const comment = response.content.comment;
 
-            notification_success("Comment deleted!")
+            // just want to update cmtsChildren in this comp, not copy (child-comp will be re-render)
+            // let copy =  cmtsChildren.map(cmt => ({ ...cmt }));
+            const index = cmtsChildren.findIndex(cmt => cmt.comment_id === comment.comment_id);
+            cmtsChildren.splice(index, 1);
+
+            setCmtsChildren(cmtsChildren);
             return {
                 code: true,
                 cmtDeleted: comment
             };
         } catch (err) {
             console.log(err);
-            notification_error("Failed");
             return false;
         }
     }
@@ -158,6 +163,11 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
             }
             const comment = response.content.comment_info;
 
+            let copy = cmtsChildren;
+            const index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
+            if (copy[index]) copy[index] = comment;
+
+            setCmtsChildren(copy);
             return {
                 code: true,
                 cmtEdited: comment
@@ -173,6 +183,7 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
         <div className="btn-more-cont">
             <ChildCmts
                 comments={cmtsChildren}
+                cmtId={comment.comment_id}
 
                 addCmt={addCmt}
                 deleteCmt={deleteCmt}

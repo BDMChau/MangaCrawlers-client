@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import "../CommentUI.css";
 
 import { Comment, Avatar } from 'antd';
@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 import BtnSeeMore from '../children/BtnSeeMore';
 
 
-export default function CmtItem({
+function CmtItem({
     targetId,
     targetTitle,
 
@@ -28,7 +28,7 @@ export default function CmtItem({
 
 
     useEffect(() => {
-        setCmt(comment);
+       setCmt(comment);
     }, [comment])
 
 
@@ -39,51 +39,55 @@ export default function CmtItem({
 
     // display: none
     const recieveDeletedCmt = (comment) => {
-        setCmt(comment);
+        setCmt({});
     }
 
     return (
-        <Comment
-            className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
-            key={key}
-            author={<CmtTitle comment={cmt} />}
-            avatar={
-                <NavLink to={redirectURI.userPage_uri(cmt?.user_id)}>
-                    <Avatar
-                        className="cmt-avatar"
-                        title={cmt?.user_name}
-                        style={{ cursor: "pointer" }}
-                        src={cmt?.user_avatar}
-                        alt="Avatar"
-                    />
-                </NavLink>
-            }
-            content={
-                <div className="comment">
-                    <CmtBody
-                        comment={cmt}
-                        background={"white"}
+        Object.keys(cmt).length
+            ? <Comment
+                className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
+                key={key}
+                author={<CmtTitle comment={cmt} />}
+                avatar={
+                    <NavLink to={redirectURI.userPage_uri(cmt?.user_id)}>
+                        <Avatar
+                            className="cmt-avatar"
+                            title={cmt?.user_name}
+                            style={{ cursor: "pointer" }}
+                            src={cmt?.user_avatar}
+                            alt="Avatar"
+                        />
+                    </NavLink>
+                }
+                content={
+                    <div className="comment">
+                        <CmtBody
+                            comment={cmt}
+                            background={"white"}
 
-                        deleteCmt={deleteCmt}
-                        editCmt={editCmt}
+                            deleteCmt={deleteCmt}
+                            editCmt={editCmt}
 
-                        addCmt={addCmt}
-                        isAddedCmt={isAddedCmt}
-                        setIsAddedCmt={setIsAddedCmt}
+                            addCmt={addCmt}
+                            isAddedCmt={isAddedCmt}
+                            setIsAddedCmt={setIsAddedCmt}
 
-                        recieveEditedCmt={recieveEditedCmt}
-                        recieveDeletedCmt={recieveDeletedCmt}
-                    />
+                            recieveEditedCmt={recieveEditedCmt}
+                            recieveDeletedCmt={recieveDeletedCmt}
+                        />
 
-                    <BtnSeeMore
-                        comment={cmt}
-                        targetId={targetId}
-                        targetTitle={targetTitle}
+                        <BtnSeeMore
+                            comment={cmt}
+                            targetId={targetId}
+                            targetTitle={targetTitle}
 
-                        isChild={isChild}
-                    />
-                </div>
-            }
-        />
+                            isChild={isChild}
+                        />
+                    </div>
+                }
+            />
+            : ""
     )
 }
+
+export default memo(CmtItem);

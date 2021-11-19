@@ -1,6 +1,5 @@
 .comments-form {
   margin-bottom: 30px;
-  max-height: 800px;
 }
 
 .comments-form .form-input .input {
@@ -110,8 +109,7 @@
 .comments-form .comment-items {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 650px;
-  min-height: 300px;
+  height: 800px;
 }
 
 .comments-form .ant-comments-inner {

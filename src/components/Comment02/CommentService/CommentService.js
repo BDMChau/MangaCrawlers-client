@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import "./CommentService.css";
 
 import InputForm from '../CommentItems/components/features/InputForm';
@@ -67,15 +67,14 @@ function CommentService({ targetTitle, targetId }) {
         // if fromRow is 0, run getCmts() below
         if (fromRow === 0) {
             if (targetId && targetTitle) {
-                if (userState[0]) getCmts(userState[0].user_id);
-                else getCmts()
+                getCmts()
             }
         }
 
     }, [targetId, targetTitle, fromRow, userState])
 
 
-    const getCmts = async (userId) => {
+    const getCmts = async () => {
         if (isEndCmts) return;
 
         const data = {
@@ -83,7 +82,7 @@ function CommentService({ targetTitle, targetId }) {
             target_id: targetId,
             from: fromRow,
             amount: 10,
-            user_id: userId ? userId : ""
+            user_id: ""
         }
 
         try {
@@ -136,28 +135,30 @@ function CommentService({ targetTitle, targetId }) {
 
 
     const deleteCmt = async (id) => {
-        if (!userState[0]) return message_error("You have to logged in to do this action");
+            if (!userState[0]) return message_error("You have to logged in to do this action");
+    
+            const data = { comment_id: id.toString() }
+    
+            try {
+                const response = await userApi.deleteCmt(token, data);
+                if (response.content.err) {
+                    return { code: false };
+                }
+                const comment = response.content.comment;
 
-        const data = { comment_id: id.toString() }
+                // just want to update comments in this comp, not copy (child-comp will be re-render)
+                // let copy = comments.map(cmt => ({ ...cmt }));
+                const index = comments.findIndex(cmt => cmt.comment_id === comment.comment_id);
+                comments.splice(index, 1);
 
-        try {
-            const response = await userApi.deleteCmt(token, data);
-            if (response.content.err) {
-                notification_error("Failed");
-                return { code: false };
+                setComments(comments);
+                return {
+                    code: true,
+                    cmtDeleted: comment
+                };
+            } catch (err) {
+                return false;
             }
-            const comment = response.content.comment;
-            // const filtered = comments.filter(cmt => cmt.comment_id !== comment.comment_id)
-
-            // setComments(filtered);
-            return {
-                code: true,
-                cmtDeleted: comment
-            };
-        } catch (err) {
-            notification_error("Failed")
-            return false;
-        }
     }
 
 
@@ -176,7 +177,11 @@ function CommentService({ targetTitle, targetId }) {
             }
             const comment = response.content.comment_info;
 
+            let copy = comments;
+            const index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
+            if (copy[index]) copy[index] = comment;
 
+            setComments(copy);
             return {
                 code: true,
                 cmtEdited: comment

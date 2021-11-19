@@ -21,6 +21,7 @@ export default function CmtBody({
     return (
         <div className="cmt-body" key={comment.comment_id} style={{ background: background }} >
             <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.comment_content }} />
+            <div style={{ fontSize: "16px" }} dangerouslySetInnerHTML={{ __html: comment.comment_id }} />
             
             {comment.image_url ? <img src={comment.image_url} alt="" style={{ height: "110px", width: "fit-content", borderRadius: "8px", marginTop: "5px" }} /> : ""}
 

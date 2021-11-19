@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import "../CommentUI.css";
 
 
@@ -6,23 +6,37 @@ import CmtItem from '../components/CmtItem';
 
 
 
-export default function ChildCmts({ comments, addCmt, deleteCmt, editCmt, isAddedCmt, setIsAddedCmt  }) {
+function ChildCmts({
+    comments,
+    cmtId,
+
+    addCmt,
+    deleteCmt,
+    editCmt,
+
+    isAddedCmt,
+    setIsAddedCmt 
+}) {
     return (
         <div className="child-cmts-cont">
             {comments.map((cmt, i) => (
-                <CmtItem
-                    key={i}
-                    comment={cmt}
-                    addCmt={addCmt}
-                    deleteCmt={deleteCmt}
-                    editCmt={editCmt}
+                cmt.parent_id === cmtId
+                    ? <CmtItem
+                        key={i}
+                        comment={cmt}
+                        addCmt={addCmt}
+                        deleteCmt={deleteCmt}
+                        editCmt={editCmt}
 
-                    isAddedCmt={isAddedCmt}
-                    setIsAddedCmt ={setIsAddedCmt }
+                        isAddedCmt={isAddedCmt}
+                        setIsAddedCmt={setIsAddedCmt}
 
-                    isChild={true}
-                />
+                        isChild={true}
+                    />
+                    : ""
             ))}
         </div>
     );
 }
+
+export default ChildCmts;

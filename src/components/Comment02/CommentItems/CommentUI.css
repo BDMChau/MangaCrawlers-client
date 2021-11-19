@@ -61,16 +61,12 @@
   text-overflow: ellipsis;
 }
 
-
-.comment .cmt-bottom .interact button {
-  font-size: 12px;
-}
-
 .comment .cmt-bottom .interact .reply {
   color: #a4a5a6;
   margin-left: 10px;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 12px;
 }
 
 .comment .cmt-bottom .interact .reply:hover {
@@ -83,6 +79,7 @@
   margin-left: 10px;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 12px;
 }
 
 .comment .cmt-bottom .interact .btn-remove:hover {
