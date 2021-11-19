@@ -78,6 +78,8 @@ function CmtItem({
 
                         <BtnSeeMore
                             comment={cmt}
+                            setCmtParent={setCmt}                            
+
                             targetId={targetId}
                             targetTitle={targetTitle}
 

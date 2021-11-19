@@ -14,7 +14,7 @@ import Cookies from 'universal-cookie';
 import { notification_error, notification_success } from 'components/toast/notification';
 
 
-function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
+function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
     const userState = useSelector((state) => state.userState);
     const stuffsState = useSelector((state) => state.stuffsState); // stuffsState[3] is the comment when reply on comment lv00
     const dispatch = useDispatch();
@@ -31,9 +31,9 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
     const cookies = new Cookies();
     const token = cookies.get("token");
 
-    useEffect(() => {
-        setCmt(comment);
-    }, [comment])
+    // useEffect(() => {
+    //     setCmt(comment);
+    // }, [comment])
 
 
     useEffect(() => {
@@ -43,15 +43,11 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
             if (comment.comment_id === newComment.parent_id) {
                 setCmtsChildren(prev => [...prev, newComment]);
 
-                setCmt({ ...cmt, count_comments_child: cmt.count_comments_child + 1 })
+                setCmtParent({ ...comment, count_comments_child: comment.count_comments_child + 1 })
                 dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(null));
             }
         }
     }, [stuffsState])
-
-    useEffect(() => {
-     console.log("cmt chilren",cmtsChildren)
-    }, [cmtsChildren])
 
 
     // remove duplicate items
@@ -193,7 +189,7 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
                 setIsAddedCmt={setIsAddedCmt}
             />
 
-            {isEnd || isChild || !cmt.count_comments_child
+            {isEnd || isChild || !comment.count_comments_child
                 ? ""
                 : <Button
                     type="text"
@@ -209,8 +205,8 @@ function BtnSeeMore({ comment, targetId, targetTitle, isChild }) {
                 >
                     <CaretDownOutlined style={{ fontSize: "13px" }} />
 
-                    {cmt.count_comments_child > 1
-                        ? `View ${cmt.count_comments_child - cmtsChildren.length} replies`
+                    {comment.count_comments_child > 1
+                        ? `View ${comment.count_comments_child - cmtsChildren.length} replies`
                         : "View reply"
                     }
                 </Button>
