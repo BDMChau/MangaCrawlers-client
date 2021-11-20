@@ -51,7 +51,8 @@ export default function UploadMangaService() {
 
             setIsLoading(false);
         } catch (ex) {
-            console.log(ex)
+            console.log(ex);
+            setIsLoading(false);
         }
     }
 

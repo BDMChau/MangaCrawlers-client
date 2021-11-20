@@ -159,7 +159,7 @@
 }
 
 
-.chapter-item-upload-page{
+.chapter-item-upload-page .ant-dropdown-menu-title-content{
   display: flex;
   justify-content: space-between;
 }
