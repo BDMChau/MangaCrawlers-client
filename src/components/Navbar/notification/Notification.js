@@ -6,6 +6,9 @@ import { Typography, Button, Avatar } from 'antd';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
+import { format } from 'helpers/format';
+import mangaApi from 'api/apis/MainServer/mangaApi';
+import { checkedListCommand } from '@uiw/react-md-editor';
 
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
@@ -47,7 +50,6 @@ function Notification({
         2: "confirm_toJoinTeam",
         3: "accept_friend"
     }
-    const dispatch = useDispatch();
 
     const [notification, setNotification] = useState({});
 
@@ -96,6 +98,8 @@ function Notification({
                 return <FriendRequest />
             case 3:
                 return <NewPost />
+            case 4:
+                return <CommentTagged />
             default:
                 break;
         }
@@ -181,11 +185,86 @@ function Notification({
         </NavLink >
     )
 
+    const CommentTagged = () => {
+        const [uri, setUri] = useState("");
+
+        const targetTitle = notification.target_title;
+        
+
+        useEffect(() => handleUri(), [])
+
+        // target_id là comment_id
+        const handleUri = async () => {
+            const cmt = await getCommentById(notification.target_id);
+            if(!cmt) return;
+
+            if (targetTitle === "comment_post") {
+                uri(redirectURI.postPage_uri(notification.target_id));
+
+            } else if (targetTitle === "comment_manga") {
+                const manga = await getMangaById(notification.target_id);
+                if (manga) setUri(redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name));
+            }
+        }
+
+
+        const getCommentById = async (id) => {
+            const data = { comment_id: id}
+    
+            try {
+                const res = await mangaApi.getComment(data);
+    
+                return res;
+            } catch (err) {
+                console.log(err);
+                return false;
+            }
+        }
+
+        const getMangaById = async (id) => {
+            const params = {
+                manga_id: id,
+            }
+    
+            try {
+                const res = await mangaApi.getManga(params);
+    
+                return res;
+            } catch (err) {
+                console.log(err);
+                return false;
+            }
+        }
+
+
+        return (
+            <NavLink to={uri ? uri : "#"} style={{ display: 'flex' }} >
+                <div>
+                    <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
+                </div>
+
+                <div className='content'>
+                    <Typography.Text>
+                        <div title={notification.notification_content} style={{ display: 'unset' }} dangerouslySetInnerHTML={{ __html: notification.notification_content }}></div>
+                    </Typography.Text>
+                </div>
+            </NavLink >
+        )
+    }
+
+
+
 
     return (
         <div className="notification-item" key={key} style={{ background: notification.is_viewed || notification.is_interacted ? '#fff' : '#daf1f985', cursor: "default" }} >
             {handleRender()}
-            <div style={{ color: "#8f8f8f", fontSize: '13px', marginTop: "5px" }} >{notification.created_at}</div>
+
+            <div
+                style={{ color: "#8f8f8f", fontSize: '13px', marginTop: "5px" }}
+                title={format.formatDate02(notification.created_at)}
+            >
+                {format.relativeTime(notification.created_at)}
+            </div>
         </div>
     )
 }

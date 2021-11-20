@@ -13,6 +13,8 @@ import TransitionAnimate from 'components/Animation/transition';
 import forumApi from 'api/apis/MainServer/forumApi';
 import { filter } from 'lodash';
 import CommentUI from '../CommentItems/CommentUI';
+import { socketActions } from 'socket/socketClient';
+import { socketService } from 'socket/sockerService';
 
 
 // targetTitle can be "post" or "manga"
@@ -122,7 +124,9 @@ function CommentService({ targetTitle, targetId }) {
                     if (dataInput.parent_id) dispatch(SET_REPLY_COMMENT_FROM_COMMENT_LV00(newComment)) // for reply
                     else setComments(prev => [newComment, ...prev]);
 
+                    if(dataInput.to_users_id.length) socketService.notifyTaggedUsers(userState[0], dataInput.to_users_id, targetTitle, newComment.comment_id);
                     setIsAddedCmt(true);
+
                 } else setIsErrorCmt(true);
             } catch (err) {
                 console.log(err);
@@ -188,6 +192,8 @@ function CommentService({ targetTitle, targetId }) {
             }
 
             setComments(copy);
+
+            if(dataInput.to_users_id.length) socketService.notifyTaggedUsers(userState[0], dataInput.to_users_id, targetTitle, comment.comment_id);
             return {
                 code: true,
                 cmtEdited: comment

@@ -105,10 +105,7 @@ function NotificationService({ isMobile }) {
 
                 if (response.content.msg) {
                     const notificationsList = response.content.notifications_list;
-                    notificationsList.forEach(item => {
-                        item.created_at = format.formatDate02(item.created_at);
-                    });
-
+              
                     if (notificationsList.length === 0 || notificationsList.length < 5) {
                         setIsEnd(true);
                         setNotifications(prev => [...prev, ...notificationsList]);
