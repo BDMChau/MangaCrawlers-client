@@ -69,9 +69,6 @@ export default function ChapterService() {
 
 
 
-
-
-
     const addToFollowingManga = async (mangaId) => {
         setIsLoadingAddFollow(true)
         const data = {
@@ -95,6 +92,7 @@ export default function ChapterService() {
             setIsLoadingAddFollow(false);
             return;
         } catch (error) {
+            message_error("Failed!");
             console.log(error);
         }
     }
@@ -117,6 +115,7 @@ export default function ChapterService() {
             setIsLoadingAddFollow(false);
             return;
         } catch (ex) {
+            message_error("Failed!");
             console.log(ex)
         }
     }

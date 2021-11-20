@@ -7,6 +7,7 @@ import CmtTitle from './CmtTitle';
 import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
 import BtnSeeMore from '../children/BtnSeeMore';
+import TransitionAnimate from 'components/Animation/transition';
 
 
 function CmtItem({
@@ -33,7 +34,8 @@ function CmtItem({
 
 
     const recieveEditedCmt = (comment) => {
-        setCmt(comment);
+        if(Object.keys(comment).length) setCmt(comment);
+        else setCmt({});
     }
 
 
@@ -44,7 +46,9 @@ function CmtItem({
 
     return (
         Object.keys(cmt).length
-            ? <Comment
+            ? <TransitionAnimate 
+            renderPart={
+                <Comment
                 className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
                 key={key}
                 author={<CmtTitle comment={cmt} />}
@@ -87,6 +91,8 @@ function CmtItem({
                         />
                     </div>
                 }
+            />
+            }
             />
             : ""
     )

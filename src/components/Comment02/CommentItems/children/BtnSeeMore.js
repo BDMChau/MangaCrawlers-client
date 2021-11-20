@@ -160,8 +160,14 @@ function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
             const comment = response.content.comment_info;
 
             let copy = cmtsChildren;
-            const index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
-            if (copy[index]) copy[index] = comment;
+            let index;
+            if(Object.keys(comment).length){
+                index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
+                copy[index] = comment;
+            } else {
+                index = copy.findIndex(cmt => cmt.comment_id === editObj.cmt_id);
+                copy[index] = {};
+            }
 
             setCmtsChildren(copy);
             return {

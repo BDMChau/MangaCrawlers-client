@@ -175,11 +175,17 @@ function CommentService({ targetTitle, targetId }) {
             if (response.content.err) {
                 return { code: false };
             }
-            const comment = response.content.comment_info;
+            const comment = response.content.comment_info ? response.content.comment_info : {};
 
             let copy = comments;
-            const index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
-            if (copy[index]) copy[index] = comment;
+            let index;
+            if(Object.keys(comment).length){
+                index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
+                copy[index] = comment;
+            } else {
+                index = copy.findIndex(cmt => cmt.comment_id === editObj.cmt_id);
+                copy[index] = {};
+            }
 
             setComments(copy);
             return {

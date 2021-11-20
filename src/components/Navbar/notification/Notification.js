@@ -137,9 +137,9 @@ function Notification({
 
     const FriendRequest = ({ }) => (
         <div style={{ display: 'flex' }} >
-            <div>
+            <NavLink to={redirectURI.userPage_uri(notification.sender_id)} title="View profile" >
                 <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
-            </div>
+            </NavLink>
 
             <div className='content'>
                 <Typography.Text >

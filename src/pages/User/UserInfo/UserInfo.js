@@ -33,7 +33,7 @@ export default function UserInfo({
     totalFriends,
 
     mutualFriends,
-    
+
     isLoading
 }) {
     const [visibleMutualModal, setVisibleMutualModal] = useState(false);
@@ -150,48 +150,58 @@ export default function UserInfo({
 
     const renderFriends = () => (
         <>
-            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{totalFriends} friends</Typography.Title>
+            {status !== 2
+                ? <Empty description="Have to be friend to view this content" style={{ margin: "50px auto 0 auto", color: "#8a8d92" }} />
+                : <>
+                    <Typography.Title style={{ marginLeft: "6px" }} level={5}>{totalFriends} friends</Typography.Title>
 
-            <div className="friends">
-                {friends.length
-                    ? <>
-                        {friends.map(fr => (
-                            <Friend friend={fr} isHidden={true} />
-                        ))}
+                    <div className="friends">
+                        {friends.length
+                            ? <>
+                                {friends.map(fr => (
+                                    <Friend friend={fr} isHidden={true} />
+                                ))}
 
-                        {isLoading
-                            ? <SkeletonCustom paragraphRows={3} />
-                            : ""
+                                {isLoading
+                                    ? <SkeletonCustom paragraphRows={3} />
+                                    : ""
+                                }
+                            </>
+                            : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
                         }
-                    </>
-                    : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
+                    </div>
+                </>
 
-                }
-            </div>
+            }
         </>
     )
 
 
     const renderMutualFriends = () => (
         <>
-            <Typography.Title style={{ marginLeft: "6px" }} level={5}>{mutualFriends.length} mutual friends</Typography.Title>
+            {status !== 2
+                ? <Empty description="Have to be friend to view this content" style={{ margin: "50px auto 0 auto", color: "#8a8d92" }} />
+                : <>
+                    <Typography.Title style={{ marginLeft: "6px" }} level={5}>{mutualFriends.length} mutual friends</Typography.Title>
 
-            <div className="friends">
-                {mutualFriends.length
-                    ? <>
-                        {mutualFriends.map(fr => (
-                            <Friend friend={fr} isHidden={true} />
-                        ))}
+                    <div className="friends">
+                        {mutualFriends.length
+                            ? <>
+                                {mutualFriends.map(fr => (
+                                    <Friend friend={fr} isHidden={true} />
+                                ))}
 
-                        {isLoading
-                            ? <SkeletonCustom paragraphRows={3} />
-                            : ""
+                                {isLoading
+                                    ? <SkeletonCustom paragraphRows={3} />
+                                    : ""
+                                }
+                            </>
+                            : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
                         }
-                    </>
-                    : <Empty description="" style={{ margin: "50px auto 0 auto" }} />
+                    </div>
+                </>
 
-                }
-            </div>
+            }
         </>
     )
 

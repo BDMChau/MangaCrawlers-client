@@ -70,8 +70,7 @@ function InputForm({
     useEffect(() => {
         if (isAddedCmt === true) {
             setCmtContent("");
-            setImg("");
-            setImgDemo("");
+            handleRemoveImg();
             setIsAddedCmt(false);
         }
     }, [isAddedCmt])

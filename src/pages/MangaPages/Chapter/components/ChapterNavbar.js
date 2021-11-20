@@ -99,7 +99,7 @@ export default function ChapterNavbar({
     }
 
 
-    // included mangaInfo, listChapter
+    // include mangaInfo, listChapter
     const getTotalChaptersOfManga = async (mangaId) => {
         const data = { manga_id: mangaId };
 
