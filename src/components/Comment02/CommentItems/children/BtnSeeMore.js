@@ -12,6 +12,7 @@ import { SET_REPLY_COMMENT_FROM_COMMENT_LV00 } from "store/features/stuffs/Stuff
 
 import Cookies from 'universal-cookie';
 import { notification_error, notification_success } from 'components/toast/notification';
+import { socketService } from 'socket/sockerService';
 
 
 function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
@@ -105,6 +106,8 @@ function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
                     const newComment = res.content.comment_info;
 
                     setCmtsChildren(prev => [...prev, newComment]);
+
+                    if (dataInput.to_users_id.length) socketService.notifyTaggedUsers(userState[0], dataInput.to_users_id, targetTitle, newComment.comment_id);
                     setIsAddedCmt(true);
                 } else setIsErrorCmt(true);
             } catch (err) {
@@ -161,7 +164,7 @@ function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
 
             let copy = cmtsChildren;
             let index;
-            if(Object.keys(comment).length){
+            if (Object.keys(comment).length) {
                 index = copy.findIndex(cmt => cmt.comment_id === comment.comment_id);
                 copy[index] = comment;
             } else {
@@ -170,6 +173,8 @@ function BtnSeeMore({ comment, setCmtParent, targetId, targetTitle, isChild }) {
             }
 
             setCmtsChildren(copy);
+
+            if (editObj.toUsersId.length) socketService.notifyTaggedUsers(userState[0], editObj.toUsersId, targetTitle, comment.comment_id);
             return {
                 code: true,
                 cmtEdited: comment

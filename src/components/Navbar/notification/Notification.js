@@ -9,6 +9,8 @@ import redirectURI from 'helpers/redirectURI';
 import { format } from 'helpers/format';
 import mangaApi from 'api/apis/MainServer/mangaApi';
 import { checkedListCommand } from '@uiw/react-md-editor';
+import forumApi from 'api/apis/MainServer/forumApi';
+import userApi from 'api/apis/MainServer/userApi';
 
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
@@ -189,32 +191,35 @@ function Notification({
         const [uri, setUri] = useState("");
 
         const targetTitle = notification.target_title;
-        
+
 
         useEffect(() => handleUri(), [])
 
         // target_id là comment_id
         const handleUri = async () => {
             const cmt = await getCommentById(notification.target_id);
-            if(!cmt) return;
+            if (!cmt) return;
 
             if (targetTitle === "comment_post") {
-                uri(redirectURI.postPage_uri(notification.target_id));
+                const post = await getPostById(cmt.post_id);
+
+                if (post) setUri(redirectURI.postPage_uri(post.post_id));
 
             } else if (targetTitle === "comment_manga") {
-                const manga = await getMangaById(notification.target_id);
+                const manga = await getMangaById(cmt.manga_id);
+
                 if (manga) setUri(redirectURI.mangaPage_uri(manga.manga_id, manga.manga_name));
             }
         }
 
-
         const getCommentById = async (id) => {
-            const data = { comment_id: id}
-    
+            const data = { comment_id: id }
+
             try {
-                const res = await mangaApi.getComment(data);
-    
-                return res;
+                const res = await userApi.getComment(data);
+                if(res.content.err) return false;
+
+                return res.content.comment;
             } catch (err) {
                 console.log(err);
                 return false;
@@ -222,14 +227,35 @@ function Notification({
         }
 
         const getMangaById = async (id) => {
+            if (!id) return;
+
             const params = {
                 manga_id: id,
             }
-    
+
             try {
                 const res = await mangaApi.getManga(params);
-    
-                return res;
+                if(res.content.err) return false;
+
+                return res.content.manga;
+            } catch (err) {
+                console.log(err);
+                return false;
+            }
+        }
+
+        const getPostById = async (id) => {
+            if (!id) return;
+
+            const data = {
+                post_id: id,
+            }
+
+            try {
+                const res = await forumApi.getPost(data);
+                if(res.content.err) return false;
+
+                return res.content.post;
             } catch (err) {
                 console.log(err);
                 return false;

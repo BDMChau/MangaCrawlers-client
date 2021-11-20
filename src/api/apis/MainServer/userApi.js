@@ -310,6 +310,10 @@ const userApi = {
         const uri = `/api/user_unauth/get_friends_of_user?user_id=${data.user_id}&from=${data.from}&amount=${data.amount}`;
         return axiosClient.get(uri);
     },
+    getComment: (data) => {
+        const uri = `/api/user_unauth/get_comment?comment_id=${data.comment_id}`;
+        return axiosClient.get(uri);
+    },
 };
 
 export default userApi;

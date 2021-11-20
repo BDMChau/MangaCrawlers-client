@@ -28,10 +28,6 @@ function CommentService({ targetTitle, targetId }) {
     const [comments, setComments] = useState([])
     const [isAddedCmt, setIsAddedCmt] = useState(false);
 
-    // child cmts
-    const [fromRowsChild, setFromRowsChild] = useState(2);
-    const [isEndCmtsChild, setIsEndCmtsChild] = useState(false);
-
     const [isErrorCmt, setIsErrorCmt] = useState(false);
     const [timeWhenAddedCmt, setTimeWhenAddedCmt] = useState();
 
@@ -126,7 +122,6 @@ function CommentService({ targetTitle, targetId }) {
 
                     if(dataInput.to_users_id.length) socketService.notifyTaggedUsers(userState[0], dataInput.to_users_id, targetTitle, newComment.comment_id);
                     setIsAddedCmt(true);
-
                 } else setIsErrorCmt(true);
             } catch (err) {
                 console.log(err);
@@ -193,7 +188,7 @@ function CommentService({ targetTitle, targetId }) {
 
             setComments(copy);
 
-            if(dataInput.to_users_id.length) socketService.notifyTaggedUsers(userState[0], dataInput.to_users_id, targetTitle, comment.comment_id);
+            if(editObj.toUsersId.length) socketService.notifyTaggedUsers(userState[0], editObj.toUsersId, targetTitle, comment.comment_id);
             return {
                 code: true,
                 cmtEdited: comment
