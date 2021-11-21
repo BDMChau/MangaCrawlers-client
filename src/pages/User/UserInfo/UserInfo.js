@@ -231,7 +231,7 @@ export default function UserInfo({
                                 <Typography.Text style={{ color: "#747373", fontSize: "16px" }}>{userInfo.user_email}</Typography.Text>
 
                                 <NavLink to="#" className="mutual-text" onClick={() => setVisibleMutualModal(true)} >
-                                    100 mutual friends
+                                    {/* 100 mutual friends */}
                                 </NavLink>
 
                                 <Typography.Text style={{ color: "#747373" }}>
