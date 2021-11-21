@@ -388,7 +388,7 @@ export default function UserInfoService() {
             <UserInfo
                 userLoggedState={userState[0]}
                 userInfo={userInfo}
-                queryId={queryUserId.toString()}
+                queryId={queryUserId?.toString()}
 
                 status={status}
 
