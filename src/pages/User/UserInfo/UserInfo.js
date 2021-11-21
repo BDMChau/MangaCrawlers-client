@@ -150,7 +150,7 @@ export default function UserInfo({
 
     const renderFriends = () => (
         <>
-            {status !== 2
+            {status !== 2 && userLoggedState?.user_id.toString() !== queryId
                 ? <Empty description="Have to be friend to view this content" style={{ margin: "50px auto 0 auto", color: "#8a8d92" }} />
                 : <>
                     <Typography.Title style={{ marginLeft: "6px" }} level={5}>{totalFriends} friends</Typography.Title>
@@ -179,7 +179,7 @@ export default function UserInfo({
 
     const renderMutualFriends = () => (
         <>
-            {status !== 2
+            {status !== 2 && userLoggedState?.user_id.toString() !== queryId
                 ? <Empty description="Have to be friend to view this content" style={{ margin: "50px auto 0 auto", color: "#8a8d92" }} />
                 : <>
                     <Typography.Title style={{ marginLeft: "6px" }} level={5}>{mutualFriends.length} mutual friends</Typography.Title>
