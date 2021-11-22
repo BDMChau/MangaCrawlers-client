@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./UserProfile.css"
 import { Button, Drawer, Dropdown, Input, Menu, Typography, Upload, Tooltip } from 'antd';
-import { SettingOutlined, UserOutlined, HistoryOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
+import { SettingOutlined, UserOutlined, HistoryOutlined, MoreOutlined, UnorderedListOutlined, CopyOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
 import Avatar from 'antd/lib/avatar/avatar';
 import { message_success } from '../../../components/toast/message';
 import SignUpTransGroupService from "../../Auth/SignUpTransGroup/SignUpTransGroup";
@@ -202,19 +202,6 @@ export default function UserProfile({
                     </Tooltip>
                 </div>
 
-                <div>
-                    <div className="friends">
-                        Friends:
-                        <Tooltip title="See all friends">
-                            <p
-                                onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}
-                            >
-                                {profile.total_friends ? profile.total_friends : 0} friends
-                            </p>
-                        </Tooltip>
-                    </div>
-                </div>
-
                 <div className="interact">
                     <Button
                         type="primary"
@@ -275,6 +262,12 @@ export default function UserProfile({
                         <p>Create your own organization?</p>
                     </div>
                 }
+
+                <div className="more">
+                    <p title="More" onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}>
+                        <MoreOutlined style={{ fontSize: "18px" }} />More
+                    </p>
+                </div>
 
                 <div className="contact-admin">
                     <p>Contact us via email if you have any questions ^^</p>
