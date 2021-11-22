@@ -16,9 +16,10 @@ function Notifications({
     // funtions
     readAll,
     updateInteracted,
+    handleUpdateViewed,
 
     handleAcceptInvitation,
-    handleAcceptFriendReq
+    handleAcceptFriendReq,
 }) {
     const scrollRef = useRef(null);
 
@@ -34,13 +35,13 @@ function Notifications({
         }
 
     })
-    
+
 
 
     const getMoreHistoryNotifications = async (e) => {
         const bottom = e.target.scrollHeight - e.target.clientHeight;
 
-        if (e.target.scrollTop >= bottom - 20) {
+        if (e.target.scrollTop >= bottom - 150) {
             let myRef = scrollRef.current;
 
             await getListNotifications();
@@ -81,6 +82,7 @@ function Notifications({
                                 key={i}
 
                                 updateInteracted={updateInteracted}
+                                handleUpdateViewed={handleUpdateViewed}
 
                                 handleAcceptInvitation={handleAcceptInvitation}
                                 handleAcceptFriendReq={handleAcceptFriendReq}

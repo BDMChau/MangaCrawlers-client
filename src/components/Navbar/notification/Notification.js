@@ -3,7 +3,7 @@ import "../Navbar.css"
 
 import { Typography, Button, Avatar } from 'antd';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import redirectURI from 'helpers/redirectURI';
 import { format } from 'helpers/format';
@@ -11,6 +11,7 @@ import mangaApi from 'api/apis/MainServer/mangaApi';
 import { checkedListCommand } from '@uiw/react-md-editor';
 import forumApi from 'api/apis/MainServer/forumApi';
 import userApi from 'api/apis/MainServer/userApi';
+import Cookies from 'universal-cookie';
 
 
 const imgDefault = 'https://res.cloudinary.com/mangacrawlers/image/upload/v1632847306/notification_imgs/default/notification.svg';
@@ -20,27 +21,15 @@ function Notification({
     key,
 
     updateInteracted,
+    handleUpdateViewed,
 
     handleAcceptInvitation,
-    handleAcceptFriendReq
+    handleAcceptFriendReq,
+
 }) {
-    // const {
-    //     created_at,
-    //     image_url,
-    //     is_interacted,
-    //     is_viewed,
-    //     notification_id,
-    //     notification_content,
-    //     notification_type,
-    //     notification_type_id,
-    //     receiver_id,
-    //     receiver_name,
-    //     receiver_socket_id,
-    //     sender_id,
-    //     sender_name,
-    //     target_id,
-    //     target_title,
-    // } = item;
+    const cookies = new Cookies();
+    const token = cookies.get("token")
+
 
     /**
      * @param: 1: delete 
@@ -59,6 +48,12 @@ function Notification({
     useEffect(() => {
         setNotification(item);
     }, [item])
+
+    const handleViewed = async (id) => {
+        const res = await handleUpdateViewed(id);
+
+        if (res) setNotification({ ...notification, is_viewed: true });
+    }
 
 
     const handleInteract = async (type) => {
@@ -91,7 +86,6 @@ function Notification({
     }
 
 
-
     const handleRender = () => {
         switch (notification.notification_type) {
             case 1:
@@ -110,7 +104,7 @@ function Notification({
 
     /////////////////////////// components ///////////////////////////
     const Invitation = () => (
-        <div style={{ display: 'flex' }} >
+        <div style={{ display: 'flex' }}>
             <div>
                 <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </div>
@@ -142,7 +136,7 @@ function Notification({
 
 
     const FriendRequest = ({ }) => (
-        <div style={{ display: 'flex' }} >
+        <div style={{ display: 'flex' }}>
             <NavLink to={redirectURI.userPage_uri(notification.sender_id)} title="View profile" >
                 <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </NavLink>
@@ -174,7 +168,7 @@ function Notification({
 
 
     const NewPost = ({ }) => (
-        <NavLink to={redirectURI.postPage_uri(notification.target_id)} style={{ display: 'flex' }} >
+        <NavLink to={redirectURI.postPage_uri(notification.target_id)} style={{ display: 'flex' }} onClick={() => handleViewed(notification.notification_id)}>
             <div>
                 <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
             </div>
@@ -217,7 +211,7 @@ function Notification({
 
             try {
                 const res = await userApi.getComment(data);
-                if(res.content.err) return false;
+                if (res.content.err) return false;
 
                 return res.content.comment;
             } catch (err) {
@@ -235,7 +229,7 @@ function Notification({
 
             try {
                 const res = await mangaApi.getManga(params);
-                if(res.content.err) return false;
+                if (res.content.err) return false;
 
                 return res.content.manga;
             } catch (err) {
@@ -253,7 +247,7 @@ function Notification({
 
             try {
                 const res = await forumApi.getPost(data);
-                if(res.content.err) return false;
+                if (res.content.err) return false;
 
                 return res.content.post;
             } catch (err) {
@@ -264,7 +258,7 @@ function Notification({
 
 
         return (
-            <NavLink to={uri ? uri : "#"} style={{ display: 'flex' }} >
+            <NavLink to={uri ? uri : "#"} style={{ display: 'flex' }} onClick={() => handleViewed(notification.notification_id)}>
                 <div>
                     <Avatar className='image' src={notification.image_url} style={{ borderRadius: notification.image_url === imgDefault ? "0px" : "50px" }} alt="" />
                 </div>

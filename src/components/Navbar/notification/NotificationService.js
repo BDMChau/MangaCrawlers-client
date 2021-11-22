@@ -25,7 +25,7 @@ function NotificationService({ isMobile }) {
 
     const [fromRow, setFromRow] = useState(0)
     const [notifications, setNotifications] = useState([])
-    const [badgeCount, setBadgeCount] = useState()
+    const [badgeCount, setBadgeCount] = useState(0)
 
     const [isEnd, setIsEnd] = useState(false)
     const [visible, setVisible] = useState(false);
@@ -40,7 +40,6 @@ function NotificationService({ isMobile }) {
     useEffect(() => {
         socket.on(EVENTS_NAME.FROM_SERVER_TO_SPECIFIC_USERS, (result) => {
             result.created_at = format.formatDate02(result.created_at);
-            console.log(result)
             unshiftItem(result)
         });
 
@@ -54,43 +53,20 @@ function NotificationService({ isMobile }) {
     }, [userState])
 
 
-    // update interact in client
-    useEffect(() => {
-        if (notificationIdToUpdate) {
-            const copy = notifications.map(item => ({ ...item }));
-            for (let i = 0; i < copy.length; i++) {
-                if (copy[i].notification_id === notificationIdToUpdate) {
-                    copy[i].is_viewed = true;
-                    copy[i].is_interacted = true;
-                    break;
-                }
-
-            }
-
-            setNotifications(copy);
-            dispatch(SET_INTERACT_NOTIFICATION(null))
-        }
-    }, [notificationIdToUpdate])
-
-
     useEffect(() => {
         countUnreadNotifications();
     }, [notifications])
 
 
     useEffect(() => {
-        if (badgeCount <= 0) setBadgeCount(0);
+        if (badgeCount < 0) setBadgeCount(0);
     }, [badgeCount])
 
 
-    const countUnreadNotifications = () => {
-        setBadgeCount(notifications.filter(item => item.is_viewed === false).length)
-    }
+    const countUnreadNotifications = () => setBadgeCount(notifications.filter(item => item.is_viewed === false).length);
 
 
-    const unshiftItem = (item) => {
-        setNotifications(prevState => [item, ...prevState]);
-    }
+    const unshiftItem = (item) => setNotifications(prevState => [item, ...prevState]);
 
 
     //////////////// services api ////////////////
@@ -105,7 +81,7 @@ function NotificationService({ isMobile }) {
 
                 if (response.content.msg) {
                     const notificationsList = response.content.notifications_list;
-              
+
                     if (notificationsList.length === 0 || notificationsList.length < 5) {
                         setIsEnd(true);
                         setNotifications(prev => [...prev, ...notificationsList]);
@@ -146,13 +122,51 @@ function NotificationService({ isMobile }) {
                 action: action
             };
 
-            await userApi.updateInteractedNotification(token, data);
+            const res = await userApi.updateInteractedNotification(token, data);
+            if (res.content.msg) {
 
-            dispatch(SET_INTERACT_NOTIFICATION(id))
-            if(badgeCount > 0) setBadgeCount(badgeCount - 1);
+                const copy = notifications.map(item => ({ ...item }));
+                for (let i = 0; i < copy.length; i++) {
+                    if (copy[i].notification_id === id) {
+                        copy[i].is_viewed = true;
+                        copy[i].is_interacted = true;
+                        break;
+                    }
+
+                }
+
+                setNotifications(copy);
+            }
+
             return;
         } catch (err) {
-            console.log(err)
+            console.log(err);
+        }
+    }
+
+
+    const handleUpdateViewed = async (id) => {
+        const data = { notification_id: id.toString() };
+
+        try {
+            const res = await userApi.updateViewedNotification(token, data);
+            if (res.content.msg) {
+
+                const copy = notifications.map(item => ({ ...item }));
+                for (let i = 0; i < copy.length; i++) {
+                    if (copy[i].notification_id === id) {
+                        copy[i].is_viewed = true;
+                        break;
+                    }
+                }
+
+                setNotifications(copy);
+                return true;
+            }
+
+        } catch (err) {
+            console.log(err);
+            return false;
         }
     }
 
@@ -173,7 +187,7 @@ function NotificationService({ isMobile }) {
                 }
 
                 dispatch(SET_TRANSGROUP_ID(response.content.transgroup_id));
-                if(badgeCount > 0) setBadgeCount(badgeCount - 1);
+                if (badgeCount > 0) setBadgeCount(badgeCount - 1);
 
                 message_success('Joined ^^!');
             }
@@ -190,7 +204,7 @@ function NotificationService({ isMobile }) {
 
     const handleAcceptFriendReq = async (notificationId, senderId, targetTitle) => {
         setIsFirstRender(false);
-        
+
         try {
             if (targetTitle === 'user') {
                 const data = {
@@ -203,7 +217,7 @@ function NotificationService({ isMobile }) {
                     return false;
                 }
 
-                if(badgeCount > 0) setBadgeCount(badgeCount - 1);
+                if (badgeCount > 0) setBadgeCount(badgeCount - 1);
                 message_success('Success');
             }
 
@@ -236,6 +250,7 @@ function NotificationService({ isMobile }) {
 
                     readAll={readAll}
                     updateInteracted={updateInteracted}
+                    handleUpdateViewed={handleUpdateViewed}
 
                     handleAcceptInvitation={handleAcceptInvitation}
                     handleAcceptFriendReq={handleAcceptFriendReq}
