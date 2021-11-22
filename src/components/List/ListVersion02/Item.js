@@ -7,9 +7,10 @@ import { NavLink } from 'react-router-dom'
 import { DeleteOutlined } from "@ant-design/icons"
 import redirectURI from 'helpers/redirectURI'
 import TransitionAnimate from 'components/Animation/transition'
+import { format } from 'helpers/format'
 
 
-export default function Item({ item, handleDeleteManga, IsLoadingDelete, disableActions }) {
+export default function Item({ item, handleDeleteManga, IsLoadingDelete, disableActions, type }) {
     const [manga, setManga] = useState({})
 
 
@@ -51,8 +52,16 @@ export default function Item({ item, handleDeleteManga, IsLoadingDelete, disable
                             </div>
 
                             <div className="item-chapter">
-                                <Typography.Text className="chapter-name">{manga.chapter_name ? manga.chapter_name : ""}</Typography.Text>
-                                <Typography.Text style={{ fontStyle: "italic" }} className="created-at" >{manga.createdAt ? manga.createdAt : ""}</Typography.Text>
+                                <Typography.Text className="chapter-name" title={manga.chapter_name}> {manga.chapter_name ? manga.chapter_name : ""}</Typography.Text>
+
+                                <Typography.Text
+                                    style={{ fontStyle: "italic" }}
+                                    className="created-at"
+                                    title={type === 1 ? format.formatDate02(manga.manga_created_at) : format.formatDate02(manga.reading_History_time)}
+                                >
+                                    {type === 1 ? format.relativeTime(manga.manga_created_at) : format.relativeTime(manga.reading_History_time)}
+                                </Typography.Text>
+
 
                                 {disableActions
                                     ? ""

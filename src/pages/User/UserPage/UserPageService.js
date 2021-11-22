@@ -4,7 +4,6 @@ import UserPage from './UserPage'
 import Cookies from 'universal-cookie';
 import mangaApi from '../../../api/apis/MainServer/mangaApi';
 import { useHistory } from 'react-router-dom';
-import { format } from 'helpers/format';
 import userApi from 'api/apis/MainServer/userApi';
 
 export default function UserPageService() {
@@ -35,20 +34,14 @@ export default function UserPageService() {
         try {
             if (tabSelected === "history" || tabSelected === null) {
                 const responseHistory = await mangaApi.getHistoryManga(token)
-                console.log(responseHistory)
                 if (responseHistory) {
-                    responseHistory.content.mangas.forEach(manga => {
-                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
-                    })
 
                     setHistoryMangas(responseHistory.content.mangas)
                 }
 
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
-                    responseFollowing.content.mangas.forEach(manga => {
-                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
-                    })
+
 
                     setFollowingMangas(responseFollowing.content.mangas)
                 }
@@ -56,19 +49,12 @@ export default function UserPageService() {
             } else if (tabSelected === "following") {
                 const responseFollowing = await mangaApi.getFollowingManga(token)
                 if (responseFollowing) {
-                    responseFollowing.content.mangas.forEach(manga => {
-                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
-                    })
 
                     setFollowingMangas(responseFollowing.content.mangas)
                 }
 
                 const responseHistory = await mangaApi.getHistoryManga(token)
                 if (responseHistory) {
-                    responseHistory.content.mangas.forEach(manga => {
-                        manga.createdAt = format.formatDate01(manga.createdAt); //createdAt is milisecond;
-                    })
-
                     setHistoryMangas(responseHistory.content.mangas)
                 }
             }
@@ -82,19 +68,19 @@ export default function UserPageService() {
     // remove history
     const handleDeleteManga = async (id) => {
         console.log(id)
-        if(!token) return;
-            const data = { manga_id: id.toString() };
-    
-            try {
-                const res = await userApi.removeHistoryManga(token, data);
-                if (res.content.err) return false;
+        if (!token) return;
+        const data = { manga_id: id.toString() };
 
-                return true;
-            } catch (err) {
-                console.log(err);
-                return false;
-            }
-    
+        try {
+            const res = await userApi.removeHistoryManga(token, data);
+            if (res.content.err) return false;
+
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+
     }
 
     return (

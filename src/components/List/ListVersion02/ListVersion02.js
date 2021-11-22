@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import Item from './Item'
 
 
-export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDelete, disableActions }) {
+export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDelete, disableActions, type }) {
     // const [pageSize, setPageSize] = useState(9)
 
     useEffect(() => {
@@ -35,6 +35,8 @@ export default function ListVersion02({ mangas, handleDeleteManga, IsLoadingDele
                         handleDeleteManga={handleDeleteManga}
                         IsLoadingDelete={IsLoadingDelete}
                         disableActions={disableActions}
+
+                        type={type}
                     />
                 )}
             />

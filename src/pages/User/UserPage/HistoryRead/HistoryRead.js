@@ -12,6 +12,8 @@ export default function HistoryRead({ historyMangas, handleDeleteManga }) {
                 mangas={historyMangas}
                 handleDeleteManga={handleDeleteManga}
                 disableActions={false}
+
+                type={2}
             />
         </Row>
     )

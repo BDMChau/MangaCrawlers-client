@@ -11,6 +11,8 @@ export default function FollowingManga({ followingMangas }) {
             <ListVersion02
                 mangas={followingMangas}
                 disableActions={true}
+
+                type={1}
             />
         </Row>
     )
