@@ -70,7 +70,7 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
                 ? <div onScroll={(e) => handleScroll(e)} >
                     <>
                         {posts.map((post, i) => (
-                            <Post post={post} key={i} />
+                            <Post post={post} key={i} renderContent={true} />
 
                         ))}
 

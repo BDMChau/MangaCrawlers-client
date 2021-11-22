@@ -5,6 +5,7 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import userApi from 'api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
 import { useSelector } from 'react-redux';
+import forumApi from 'api/apis/MainServer/forumApi';
 
 export default function FriendsService() {
     const userState = useSelector((state) => state.userState);
@@ -14,14 +15,19 @@ export default function FriendsService() {
     const [listRequests, setListRequests] = useState([]);
     const [listFriends, setListFriends] = useState([]);
     const [totalFriends, setTotalFriends] = useState(0);
+    const [posts, setposts] = useState([]);
 
     const [isEndFriends, setIsEndFriends] = useState(false);
     const [isEndReq, setIsEndReq] = useState(false);
+    const [isEndPosts, setIsEndPosts] = useState(false);
+
     const [fromRowFriends, setFromRowFriends] = useState(0);
     const [fromRowReq, setFromRowReq] = useState(0);
+    const [fromRowPosts, setFromRowPosts] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
-    
+    const [isFirstTime, setIsFirstTime] = useState(true);
+
     const history = useHistory();
     const params = useParams();
     const path = params.path;
@@ -41,15 +47,15 @@ export default function FriendsService() {
             getFriendRequests();
             getFriends();
             getNumberOfFriends();
-        } else{
+        } else {
             history.push("/")
         }
     }, [userState]);
 
 
-      // get more data when user scroll at bottom page
-      useEffect(() => {
-        if (stuffsState[1] && stuffsState[0]) {
+    // get more data when user scroll at bottom page
+    useEffect(() => {
+        if (stuffsState[1] && stuffsState[0] && !isFirstTime) {
             if (path === "friend_requests") {
                 getFriendRequests();
             } else if (path === "all_friends") {
@@ -60,7 +66,8 @@ export default function FriendsService() {
 
 
     const getFriendRequests = async () => {
-        if(isEndReq) return;
+        console.log("ascascac")
+        if (isEndReq) return;
         setIsLoading(true);
 
         const data = {
@@ -73,21 +80,26 @@ export default function FriendsService() {
             if (res.content.err) {
                 setListRequests([]);
                 setIsLoading(false);
+                setIsFirstTime(false);
                 return;
             }
 
-            if(res.content.requests.length < 14) setIsEndReq(true);
+            if (res.content.requests.length < 14) setIsEndReq(true);
 
             setListRequests(prev => [...prev, ...res.content.requests]);
             setFromRowReq(res.content.from);
+
             setIsLoading(false);
+            setIsFirstTime(false);
         } catch (err) {
             console.log(err);
+            setIsLoading(false);
+            setIsFirstTime(false);
         }
     }
 
     const getFriends = async () => {
-        if(isEndFriends) return;
+        if (isEndFriends) return;
         setIsLoading(true);
 
         const data = {
@@ -100,16 +112,21 @@ export default function FriendsService() {
             if (res.content.err) {
                 setListFriends([]);
                 setIsLoading(false);
+                setIsFirstTime(false);
                 return;
             }
 
-            if(res.content.list_friends.length < 14) setIsEndFriends(true);
+            if (res.content.list_friends.length < 14) setIsEndFriends(true);
 
             setListFriends(prev => [...prev, ...res.content.list_friends]);
             setFromRowFriends(res.content.from);
+
             setIsLoading(false);
+            setIsFirstTime(false);
         } catch (err) {
             console.log(err)
+            setIsLoading(false);
+            setIsFirstTime(false);
         }
     }
 
@@ -124,6 +141,40 @@ export default function FriendsService() {
             setTotalFriends(res.content.total_friends);
         } catch (err) {
             console.log(err)
+        }
+    }
+
+
+    const getPosts = async () => {
+        if (isEndPosts || !userState[0]) return;
+        setIsLoading(true);
+
+        const data = {
+            user_id: userState[0].user_id,
+            from: fromRowPosts,
+            amount: 14
+        }
+
+        try {
+            const res = await userApi.getPostsOfUser(data);
+            if (res.content.err) {
+                setposts([]);
+                setIsLoading(false);
+                setIsFirstTime(false);
+                return;
+            }
+
+            if (res.content.posts.length < 14) setIsEndFriends(true);
+
+            setposts(prev => [...prev, ...res.content.posts]);
+            fromRowPosts(res.content.from);
+
+            setIsLoading(false);
+            setIsFirstTime(false);
+        } catch (err) {
+            console.log(err)
+            setIsLoading(false);
+            setIsFirstTime(false);
         }
     }
 

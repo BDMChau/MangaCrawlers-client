@@ -29,12 +29,12 @@ function CmtItem({
 
 
     useEffect(() => {
-       setCmt(comment);
+        setCmt(comment);
     }, [comment])
 
 
     const recieveEditedCmt = (comment) => {
-        if(Object.keys(comment).length) setCmt(comment);
+        if (Object.keys(comment).length) setCmt(comment);
         else setCmt({});
     }
 
@@ -46,53 +46,54 @@ function CmtItem({
 
     return (
         Object.keys(cmt).length
-            ? <TransitionAnimate 
-            renderPart={
-                <Comment
-                className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
-                key={key}
-                author={<CmtTitle comment={cmt} />}
-                avatar={
-                    <NavLink to={redirectURI.userPage_uri(cmt?.user_id)}>
-                        <Avatar
-                            className="cmt-avatar"
-                            title={cmt?.user_name}
-                            style={{ cursor: "pointer" }}
-                            src={cmt?.user_avatar}
-                            alt="Avatar"
-                        />
-                    </NavLink>
+            ? <TransitionAnimate
+                transitionTime={0.1}
+                renderPart={
+                    <Comment
+                        className={cmt?.is_deprecated ? "comment-item deleted" : "comment-item"}
+                        key={key}
+                        author={<CmtTitle comment={cmt} />}
+                        avatar={
+                            <NavLink to={redirectURI.userPage_uri(cmt?.user_id)}>
+                                <Avatar
+                                    className="cmt-avatar"
+                                    title={cmt?.user_name}
+                                    style={{ cursor: "pointer" }}
+                                    src={cmt?.user_avatar}
+                                    alt="Avatar"
+                                />
+                            </NavLink>
+                        }
+                        content={
+                            <div className="comment">
+                                <CmtBody
+                                    comment={cmt}
+                                    background={"white"}
+
+                                    deleteCmt={deleteCmt}
+                                    editCmt={editCmt}
+
+                                    addCmt={addCmt}
+                                    isAddedCmt={isAddedCmt}
+                                    setIsAddedCmt={setIsAddedCmt}
+
+                                    recieveEditedCmt={recieveEditedCmt}
+                                    recieveDeletedCmt={recieveDeletedCmt}
+                                />
+
+                                <BtnSeeMore
+                                    comment={cmt}
+                                    setCmtParent={setCmt}
+
+                                    targetId={targetId}
+                                    targetTitle={targetTitle}
+
+                                    isChild={isChild}
+                                />
+                            </div>
+                        }
+                    />
                 }
-                content={
-                    <div className="comment">
-                        <CmtBody
-                            comment={cmt}
-                            background={"white"}
-
-                            deleteCmt={deleteCmt}
-                            editCmt={editCmt}
-
-                            addCmt={addCmt}
-                            isAddedCmt={isAddedCmt}
-                            setIsAddedCmt={setIsAddedCmt}
-
-                            recieveEditedCmt={recieveEditedCmt}
-                            recieveDeletedCmt={recieveDeletedCmt}
-                        />
-
-                        <BtnSeeMore
-                            comment={cmt}
-                            setCmtParent={setCmt}                            
-
-                            targetId={targetId}
-                            targetTitle={targetTitle}
-
-                            isChild={isChild}
-                        />
-                    </div>
-                }
-            />
-            }
             />
             : ""
     )

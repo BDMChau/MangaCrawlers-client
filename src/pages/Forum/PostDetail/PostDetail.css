@@ -6,6 +6,7 @@
 .post-detail-page .row {
   width: 100%;
   background-color: #f0f2f5;
+  min-height: 100vh;
 }
 
 .post-detail-page .btn-back {

@@ -128,6 +128,11 @@ export default function PostDetail({
                     </Col>
                 </Row>
             </div>
-            : <Empty description="Not found :(" style={{ marginTop: "12rem", color: "#8a8d92" }} />
+            : <div className="post-detail-page">
+                <Row justify={"center"} className="row" >
+                    <Empty description="Not found :(" style={{ marginTop: "12rem", color: "#8a8d92" }} />
+                </Row>
+            </div>
+
     )
 }

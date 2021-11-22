@@ -45,6 +45,11 @@ export default function ForumHomeService() {
 
             const posts = res.content.posts
             const contFromPos = res.content.from;
+            
+            posts.forEach((post) => {
+                const shortContent = post.content.match(/.{1,200}/g);
+                post.content = shortContent[0];
+            })
 
             if (posts.length < 8) setIsEnd(true);
 
