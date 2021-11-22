@@ -288,6 +288,14 @@ const userApi = {
             }
         });
     },
+    checkIsFollowingManga: (token, data) => {
+        const uri = `/api/user/check_following_manga`;
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 
     ////////////////// unauth parts //////////////////
     getTotalLikes: (data) => {

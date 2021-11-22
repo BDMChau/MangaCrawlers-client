@@ -46,10 +46,17 @@ export default function ChapterService() {
         setChapterId(chapterId);
         setChapterName(initial(splittedChapter).toString().replaceAll(regex.special_char, " "));
 
-
         addReadingHistory(mangaId, chapterId);
         updateView(mangaId, chapterId);
     }, [manga_name_id_param, chapter_name_param])
+
+    
+    useEffect(() => {
+        const splittedManga = manga_name_id_param.split("-");
+        const mangaId = splittedManga[splittedManga.length - 1];
+
+        if(mangaId && userState[0]) checkIsFollowing(mangaId);
+    }, [manga_name_id_param, userState])
 
 
 
@@ -77,19 +84,11 @@ export default function ChapterService() {
         try {
             const response = await mangaApi.addToFollowing(data, token);
 
-            if (JSON.parse(localStorage.getItem("code_400"))) {
-                setIsLoadingAddFollow(false);
-                localStorage.removeItem("code_400")
-                return;
-            } else if (response.content.err) {
-                setIsLoadingAddFollow(false);
-                localStorage.removeItem("code_400")
-                return;
-            }
 
-            message_success("Added to your library", 4)
             setIsFollowed(true);
             setIsLoadingAddFollow(false);
+
+            message_success("Added to your library", 3)
             return;
         } catch (error) {
             message_error("Failed!");
@@ -110,9 +109,10 @@ export default function ChapterService() {
                 return
             }
 
-            message_success("Removed from your library!", 3)
             setIsFollowed(false);
             setIsLoadingAddFollow(false);
+
+            message_success("Removed from your library!", 3)
             return;
         } catch (ex) {
             message_error("Failed!");
@@ -136,6 +136,19 @@ export default function ChapterService() {
         }
     }
 
+    const checkIsFollowing = async (id) => {
+        const data = { manga_id: id.toString() };
+
+        try {
+            const res = await userApi.checkIsFollowingManga(token, data);
+
+            if (res.content.is_following === true) setIsFollowed(true);
+            else setIsFollowed(false);
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 
     return (

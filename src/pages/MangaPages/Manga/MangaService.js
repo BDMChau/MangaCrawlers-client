@@ -12,6 +12,7 @@ import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/MainServer/adminApi';
 import { notification_success } from 'components/toast/notification';
 import { format } from 'helpers/format';
+import userApi from 'api/apis/MainServer/userApi';
 
 function MangaService() {
     const userState = useSelector((state) => state.userState);
@@ -68,11 +69,15 @@ function MangaService() {
             behavior: "smooth"
         });
 
-       if(id){
-        getMangaData();
-        getSuggestionList();
-       }
+        if (id) {
+            getMangaData();
+            getSuggestionList();
+        }
     }, [id])
+
+    useEffect(() => {
+        if (id && userState[0]) checkIsFollowing();
+    }, [id, userState])
 
 
 
@@ -87,32 +92,20 @@ function MangaService() {
                 return;
             }
             const chapters = response.content.chapters;
+            const genres = response.content.genres;
             const mangaObj = response.content.manga;
 
-            if (mangaObj.manga_name.replaceAll(regex.special_char, "") !== mangaNameParam) {
-                return;
-            }
-
-            if (userState[0]) {
-                const followingMangas = await getFollowingMangas();
-                for (let i = 0; i < followingMangas.length; i++) {
-                    if (followingMangas[i].manga_id === mangaObj.manga_id) {
-                        setIsFollowed(true);
-                        break;
-                    }
-                }
-            }
+            if (mangaObj.manga_name.replaceAll(regex.special_char, "") !== mangaNameParam) return;
 
             setManga(mangaObj)
             setTimeout(() => {
                 setMangaStars(mangaObj.stars)
-                setGenres(response.content.genres)
+                setGenres(genres)
             }, 100)
             setTimeout(() => {
-                setChapters(response.content.chapters)
+                setChapters(chapters)
             }, 300)
 
-            return;
         } catch (error) {
             console.log(error);
         }
@@ -163,12 +156,12 @@ function MangaService() {
         try {
             const response = await mangaApi.addToFollowing(data, token);
 
-            if(response.content.err){
+            if (response.content.err) {
                 message_error("Failed!", 4);
                 setIsLoadingFollow(false);
                 return;
             }
-            
+
             message_success("Added to your library", 4)
             setIsFollowed(true);
             setIsLoadingFollow(false);
@@ -177,21 +170,6 @@ function MangaService() {
             setIsLoadingFollow(false);
             console.log(error);
         }
-    }
-
-    const getFollowingMangas = async () => {
-        let followingMangas = [];
-        try {
-            const responseFollowing = await mangaApi.getFollowingManga(token)
-
-            if (responseFollowing) {
-                followingMangas = responseFollowing.content.mangas;
-            }
-
-        } catch (ex) {
-            console.log(ex)
-        }
-        return followingMangas;
     }
 
     const removeFollowingManga = async (mangaId) => {
@@ -238,7 +216,19 @@ function MangaService() {
 
     }
 
+    const checkIsFollowing = async () => {
+        const data = { manga_id: id.toString() };
 
+        try {
+            const res = await userApi.checkIsFollowingManga(token, data);
+
+            if (res.content.is_following === true) setIsFollowed(true);
+            else setIsFollowed(false);
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
 
     /////////// admin actions ///////////
@@ -317,57 +307,6 @@ function MangaService() {
     }
 
 
-    // // get comments
-    // useEffect(() => {
-    //     setIsEndCmts(false);
-    //     setComments([]);
-    //     setFromRow(0);
-
-    //     // if fromRow is 0, run getCmts() below
-    //     if (fromRow === 0) {
-    //         getCmts();
-    //     }
-    // }, [id])
-
-
-    // // useEffect(() => {
-    // //     // if fromRow is 0, this effect won't be invoked
-    // //     if (fromRow) getCmts()
-    // // }, [fromRow])
-
-
-    // const getCmts = async () => {
-    //     if (id) {
-    //         const data = {
-    //             manga_id: id ? id : null,
-    //             chapter_id: null,
-    //             from: fromRow,
-    //             amount: 100
-    //         }
-
-    //         try {
-    //             const response = await mangaApi.getCommentsManga(data);
-
-    //             if (JSON.parse(localStorage.getItem("code_400"))) {
-    //                 // message_error("No manga to present!")
-    //                 localStorage.removeItem("code_400")
-    //                 return;
-    //             }
-    //             else if (response.content.msg === "No comments found!") {
-    //                 setIsEndCmts(true);
-    //                 return;
-    //             }
-
-    //             const comments = response.content.comments;
-
-    //             setComments(comments)
-    //             setFromRow(fromRow + 11)
-    //             return;
-    //         } catch (ex) {
-    //             console.log(ex)
-    //         }
-    //     }
-    // }
 
 
 
