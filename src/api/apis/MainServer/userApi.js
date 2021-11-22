@@ -296,6 +296,14 @@ const userApi = {
             }
         });
     },
+    removeHistoryManga: (token, data) => {
+        const uri = `/api/user/remove_history_manga`;
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        });
+    },
 
     ////////////////// unauth parts //////////////////
     getTotalLikes: (data) => {

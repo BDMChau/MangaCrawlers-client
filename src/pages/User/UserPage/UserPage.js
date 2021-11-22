@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 
-export default function UserPage({ tabSelected, historyMangas, followingMangas }) {
+export default function UserPage({ tabSelected, historyMangas, followingMangas, handleDeleteManga }) {
     const history = useHistory()
 
     return (
@@ -20,7 +20,7 @@ export default function UserPage({ tabSelected, historyMangas, followingMangas }
                 </TabPane>
 
                 <TabPane tab="History" key="history">
-                    <HistoryRead historyMangas={historyMangas} />
+                    <HistoryRead historyMangas={historyMangas} handleDeleteManga={handleDeleteManga} />
                 </TabPane>
             </Tabs>
 
