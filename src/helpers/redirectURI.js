@@ -21,8 +21,8 @@ const redirectURI = {
     userPage_uri: (userId) => {
         return `/user/id?id=${userId}`;
     },
-    friendPage_uri: (userId) => {
-        return `/user/friends/all_friends`;
+    userOwnPage_uri: (userId) => {
+        return `/user/own/all_friends`;
     },
     postPage_uri: (postId) => {
         return `/forums/post/${postId}`;

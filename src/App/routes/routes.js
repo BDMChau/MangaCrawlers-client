@@ -84,7 +84,7 @@ const routes = [
         exact: true
     },
     {
-        path: "/user/friends/:path",
+        path: "/user/own/:path",
         component: React.lazy(() => import('../../pages/User/Friends/FriendsService')),
         exact: true
     },

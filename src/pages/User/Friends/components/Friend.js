@@ -71,7 +71,7 @@ function Friend({ friend, i, isHidden }) {
 
     const dropDownItems = (
         <Menu style={{ borderRadius: "10px" }}>
-            <Menu.Item key="0" style={{ borderRadius: "8px" }} onClick={() => handleUnfriend(user.user_id)} >
+            <Menu.Item key="0" style={{ borderRadius: "8px", fontWeight:"500" }} onClick={() => handleUnfriend(user.user_id)} >
                 Unfriend
             </Menu.Item>
         </Menu>

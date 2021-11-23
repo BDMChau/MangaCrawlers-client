@@ -73,7 +73,7 @@ export default function CategoryPosts({ posts, total, isLoading, categories, cat
                             </>
                             : posts.length
                                 ? posts.map((post, i) => (
-                                    <Post post={post} key={i} renderContent={true} />
+                                    <Post postProp={post} key={i} renderContent={true} />
                                 ))
                                 : <Empty description="No posts!" image={Empty.PRESENTED_IMAGE_SIMPLE} style={{ marginTop: "8rem", color: "#8a8d92" }} />
 

@@ -93,6 +93,14 @@ const forumApi = {
             }
         })
     },
+    deletePost: (token, data) => {
+        const uri = `/api/forum/post/remove`
+        return axiosClient.post(uri, data, {
+            headers: {
+                Authorization: token
+            }
+        })
+    },
 }
 
 export default forumApi;

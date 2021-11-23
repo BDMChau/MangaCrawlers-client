@@ -5,7 +5,7 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import userApi from 'api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
 import { useSelector } from 'react-redux';
-import forumApi from 'api/apis/MainServer/forumApi';
+
 
 export default function FriendsService() {
     const userState = useSelector((state) => state.userState);
@@ -44,6 +44,7 @@ export default function FriendsService() {
 
     useEffect(() => {
         if (userState[0]) {
+            getPosts();
             getFriendRequests();
             getFriends();
             getNumberOfFriends();
@@ -56,11 +57,11 @@ export default function FriendsService() {
     // get more data when user scroll at bottom page
     useEffect(() => {
         if (stuffsState[1] && stuffsState[0] && !isFirstTime) {
-            if (path === "friend_requests") {
-                getFriendRequests();
-            } else if (path === "all_friends") {
-                getFriends();
-            }
+            if (path === "posts") getPosts();
+
+            else if (path === "all_friends") getFriends();
+
+            else getFriendRequests();
         }
     }, [stuffsState]);
 
@@ -164,7 +165,7 @@ export default function FriendsService() {
                 return;
             }
 
-            if (res.content.posts.length < 14) setIsEndFriends(true);
+            if (res.content.posts.length < 14) setIsEndPosts(true);
 
             setposts(prev => [...prev, ...res.content.posts]);
             fromRowPosts(res.content.from);
@@ -180,8 +181,8 @@ export default function FriendsService() {
 
     return (
         <Friends
-
             listRequests={listRequests}
+            posts={posts}
 
             listFriends={listFriends}
             totalFriends={totalFriends}

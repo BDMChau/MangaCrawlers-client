@@ -35,7 +35,7 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
                 <Typography.Title level={5} style={{ marginTop: "10px" }} >Trending</Typography.Title>
                 {postsTopCmts.length
                     ? postsTopCmts.map((post, i) => (
-                        <Post post={post} key={i} smallSize={true} />
+                        <Post postProp={post} key={i} smallSize={true} />
                     ))
                     : ""
                 }
@@ -45,7 +45,7 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
                 <Typography.Title level={5} style={{ marginTop: "5px" }} >Maybe you like</Typography.Title>
                 {postsRandom.length
                     ? postsRandom.map((post, i) => (
-                        <Post post={post} key={i} smallSize={true} />
+                        <Post postProp={post} key={i} smallSize={true} />
                     ))
                     : ""
                 }
@@ -70,8 +70,7 @@ export default function ForumHome({ categories, posts, isLoading, postsTopCmts, 
                 ? <div onScroll={(e) => handleScroll(e)} >
                     <>
                         {posts.map((post, i) => (
-                            <Post post={post} key={i} renderContent={true} />
-
+                            <Post postProp={post} key={i} renderContent={true} />
                         ))}
 
                         {isLoading

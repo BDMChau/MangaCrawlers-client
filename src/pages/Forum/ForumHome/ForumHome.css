@@ -39,7 +39,7 @@
 
 .post {
   display: flex;
-  margin: 10px 5px;
+  margin: 10px 0px;
   padding: 7.5px 10px 7.5px 10px;
   justify-content: left;
   border-radius: 5px;
@@ -85,8 +85,10 @@
 }
 
 .post .img {
-  margin-right: 5px;
+  margin-right: 8px;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .post .img .avatar {
@@ -256,10 +258,18 @@
   .post .title-small {
     width: 350px;
   }
+
+  .post{
+    width: 100% !important;
+  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 414px) {
   .post .title-small {
     width: 230px;
+  }
+
+  .post{
+    width: 100% !important;
   }
 }

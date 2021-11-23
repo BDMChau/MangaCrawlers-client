@@ -23,7 +23,7 @@
   border: none !important;
 }
 
-.friends .all-friends {
+.friends .items-cont {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

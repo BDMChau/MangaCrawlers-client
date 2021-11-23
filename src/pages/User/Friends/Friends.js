@@ -8,9 +8,35 @@ import FriendRequest from './components/FriendRequest';
 import SkeletonCustom from 'components/SkeletonCustom/SkeletonCustom';
 import { socket } from 'socket/socketClient';
 import EVENTS_NAME from 'socket/features/eventsName';
+import Post from 'pages/Forum/features/Post';
 
-export default function Friends({ listRequests, totalFriends, listFriends, isLoading, selectedKey, setSelectedKey }) {
+export default function Friends({ listRequests, posts, totalFriends, listFriends, isLoading, selectedKey, setSelectedKey }) {
     const userState = useSelector((state) => state.userState);
+
+
+    const AllPosts = () => (
+        userState[0]
+            ? <div>
+                <div className="items-cont">
+                    {posts.length
+                        ? <>
+                            {posts.map((post, i) => (
+                                <Post postProp={post} key={i} width={"49%"} action={true} />
+                            ))}
+
+                            {isLoading
+                                ? <SkeletonCustom paragraphRows={3} />
+                                : ""
+                            }
+                        </>
+
+                        : <Empty description="" style={{ margin: "0 auto", marginTop: "80px" }} />
+                    }
+
+                </div>
+            </div>
+            : <Empty description="" style={{ marginTop: "80px" }} />
+    )
 
 
     const AllFriends = () => (
@@ -25,7 +51,7 @@ export default function Friends({ listRequests, totalFriends, listFriends, isLoa
                 >
                     {totalFriends} friends
                 </Typography.Text>
-                <div className="all-friends">
+                <div className="items-cont">
                     <>
                         {listFriends.map((item, i) => (
                             <Friend friend={item} i={i} />
@@ -43,11 +69,10 @@ export default function Friends({ listRequests, totalFriends, listFriends, isLoa
     )
 
 
-
     const AllFriendRequests = () => (
         userState[0]
             ? <div>
-                <div className="all-friends">
+                <div className="items-cont">
                     {listRequests.length
                         ? <>
                             {listRequests.map((request, i) => (
@@ -80,13 +105,17 @@ export default function Friends({ listRequests, totalFriends, listFriends, isLoa
                     <Tabs className="friends-tabs" activeKey={selectedKey ? selectedKey : "all_friends"} setTabSelected={setSelectedKey}
                         onChange={(key) => {
                             if (key === "all_friends") {
-                                window.history.replaceState(null, null, `/user/friends/${key}`)
-                            } else {
-                                window.history.replaceState(null, null, `/user/friends/${key}`)
+                                window.history.replaceState(null, null, `/user/own/${key}`)
+                            } else if (key === "posts") {
+                                window.history.replaceState(null, null, `/user/own/${key}`)
                             }
 
                             setSelectedKey(key)
                         }}>
+                        <Tabs.TabPane tab="Your Posts" key="posts">
+                            <AllPosts />
+                        </Tabs.TabPane>
+
                         <Tabs.TabPane tab="All Friends" key="all_friends">
                             <AllFriends />
                         </Tabs.TabPane>

@@ -162,7 +162,7 @@ function TopNav({ handleLogOut, genres }) {
 
                 {isMobile
                     ? ""
-                    : <Menu.Item style={{ top: "0" }}>
+                    : <Menu.Item style={{ top: "0", cursor: "default" }}>
                         <SearchNavBar />
                     </Menu.Item>
 
@@ -226,7 +226,7 @@ function TopNav({ handleLogOut, genres }) {
         return (
             <nav className="menuBar">
                 <NavLink to="/" title="Home" >
-                <img className="logo" src={logoText} alt="" style={{ cursor: "pointer" }} />
+                    <img className="logo" src={logoText} alt="" style={{ cursor: "pointer" }} />
                 </NavLink>
                 <div className="menuCon">
                     <Button className="barsMenu" onClick={showDrawer}>

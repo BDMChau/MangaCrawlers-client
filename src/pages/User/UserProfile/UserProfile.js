@@ -264,7 +264,7 @@ export default function UserProfile({
                 }
 
                 <div className="more">
-                    <p title="More" onClick={() => history.push(redirectURI.friendPage_uri(profile.user_id))}>
+                    <p title="More" onClick={() => history.push(redirectURI.userOwnPage_uri(profile.user_id))}>
                         <MoreOutlined style={{ fontSize: "18px" }} />More
                     </p>
                 </div>

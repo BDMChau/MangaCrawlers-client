@@ -132,7 +132,7 @@ export default function UserInfo({
                 {posts.length
                     ? <>
                         {posts.map(post => (
-                            <Post post={post} width={"48%"} />
+                            <Post postProp={post} width={"48%"} />
                         ))}
 
                         {isLoading
