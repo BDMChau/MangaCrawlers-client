@@ -63,24 +63,24 @@ export default function Contact() {
                 <div>
                     Disagreements can and will happen. However, we ask all users avoid the following:
                     <p>
-                        <b>1.1</b> Racism: With the exception of a serious historical discussion, there is never a context in which racist language is acceptable on MangaDex. This extends to profile biographies, user names, group banners, and user avatars.
+                        <b>1.1</b> Racism: With the exception of a serious historical discussion, there is never a context in which racist language is acceptable on MangaCrawlers. This extends to profile biographies, user names, group banners, and user avatars.
                     </p>
 
                     <p>
-                        <b>1.2</b> Sexism: One gender is not inherently superior to another. Harassing someone solely on the basis of gender is not acceptable on MangaDex. This extends to profile biographies, user names, group banners, and user avatars.
+                        <b>1.2</b> Sexism: One gender is not inherently superior to another. Harassing someone solely on the basis of gender is not acceptable on MangaCrawlers. This extends to profile biographies, user names, group banners, and user avatars.
                     </p>
 
                     <p>
-                        <b>1.3</b> Religious Discrimination: All members of all religions are equally deserving of respect. Insulting someone solely on the basis of their religion or slandering a specific religion is not acceptable on MangaDex. This extends to profile biographies, usernames, group banners, and user avatars.
+                        <b>1.3</b> Religious Discrimination: All members of all religions are equally deserving of respect. Insulting someone solely on the basis of their religion or slandering a specific religion is not acceptable on MangaCrawlers. This extends to profile biographies, usernames, group banners, and user avatars.
                         Other Terminology: This category includes everything else that does not neatly fit under the above categories. It includes, but is not limited to, rape jokes, homophobia, transphobia, and direct personal attacks.
                     </p>
 
                     <p>
-                        <b>1.4</b> Direct Personal Attacks: We encourage intelligent, thoughtful discussion on MangaDex. We encourage users to criticize the content of a post and not the poster themselves. This particular violation will be taken on a case by case basis since context and severity of the violation is important when a mod is considering taking action. For example, calling someone an idiot and offering evidence why they're an idiot will most likely not result in moderator action. Calling someone an idiot and doing nothing else will result in moderator action, not because you called someone an idiot, but because it was the sole content of your post. Note that especially egregious foul language may or may not result in moderator action.
+                        <b>1.4</b> Direct Personal Attacks: We encourage intelligent, thoughtful discussion on MangaCrawlers. We encourage users to criticize the content of a post and not the poster themselves. This particular violation will be taken on a case by case basis since context and severity of the violation is important when a mod is considering taking action. For example, calling someone an idiot and offering evidence why they're an idiot will most likely not result in moderator action. Calling someone an idiot and doing nothing else will result in moderator action, not because you called someone an idiot, but because it was the sole content of your post. Note that especially egregious foul language may or may not result in moderator action.
                     </p>
 
                     <p>
-                        <b>1.5</b> If you must disagree with someone, we prefer that you take your arguments into a private conversation so as not to derail a thread. If you cannot argue amicably, consider using the Block function, which can be found on every user's profile page. Blocking someone prevents you from seeing all of their messages on MangaDex.
+                        <b>1.5</b> If you must disagree with someone, we prefer that you take your arguments into a private conversation so as not to derail a thread. If you cannot argue amicably, consider using the Block function, which can be found on every user's profile page. Blocking someone prevents you from seeing all of their messages on MangaCrawlers.
                     </p>
                 </div>
 

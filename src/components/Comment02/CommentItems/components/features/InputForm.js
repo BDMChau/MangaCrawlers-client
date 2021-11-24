@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, memo } from 'react'
 import "components/Comment02/CommentService/CommentService.css"
 
 import { Avatar, Button, Form, Image, Popover, Tooltip, Upload } from 'antd'
-import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, TagsOutlined } from '@ant-design/icons'
+import { CloseOutlined, CameraOutlined, SmileOutlined, CommentOutlined, EditOutlined } from '@ant-design/icons'
 import { message_error } from 'components/toast/message'
 import handleFile from 'helpers/handleFile'
 import { debounce } from 'lodash'
@@ -255,10 +255,10 @@ function InputForm({
                                 style={{ marginTop: "10px", height: "40px", borderRadius: "3px", width: "fit-content" }}
                                 type="primary"
                                 loading={isAdding || isLoadingEdit}
-                                icon={<CommentOutlined style={{ fontSize: "18px" }} />}
+                                icon={ isEditting ? <EditOutlined style={{ fontSize: "18px" }} /> : <CommentOutlined style={{ fontSize: "18px" }} />}
                                 onClick={() => isEditting ? prepareToEditCmt() : prepareToAddCmt()}
                             >
-                                {isEditting ? "Submit Edit" : "Add Comment"}
+                                {isEditting ? "EDIT" : "COMMENT"}
                             </Button>
                         </div>
 

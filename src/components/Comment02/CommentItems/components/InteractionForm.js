@@ -97,7 +97,7 @@ export default function InteractionForm({
                 onClick={() => setReplying(!replying)}
                 style={{ borderRadius: "10px", padding: "0 2px" }}
             >
-                Reply
+                REPLY
             </Button>
 
             {/* owner */}
@@ -110,7 +110,7 @@ export default function InteractionForm({
                         onClick={() => handleEdit()}
                         style={{ borderRadius: "10px", padding: "0 2px" }}
                     >
-                        Edit
+                        EDIT
                     </Button>
 
                     <Button
@@ -119,7 +119,7 @@ export default function InteractionForm({
                         onClick={() => setIsModalVisible(true)}
                         style={{ borderRadius: "10px", padding: "0 2px" }}
                     >
-                        Delete
+                        DELETE
                     </Button>
                 </>
                 : ""

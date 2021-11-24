@@ -21,10 +21,15 @@ const StuffsSlice = createSlice({
         SET_REPLY_COMMENT_FROM_COMMENT_LV00: (state, action) => {
             state[3] = action.payload;
         },
+
+        // post
+        SET_QUOTED_POST: (state, action) => {
+            state[4] = action.payload;
+        },
     }
 });
 
 const { actions, reducer } = StuffsSlice;
-export const { SET_SCROLL_TOP, SET_SCROLL_BOTTOM, SET_INTERACT_NOTIFICATION, SET_REPLY_COMMENT_FROM_COMMENT_LV00 } = actions;
+export const { SET_SCROLL_TOP, SET_SCROLL_BOTTOM, SET_INTERACT_NOTIFICATION, SET_REPLY_COMMENT_FROM_COMMENT_LV00, SET_QUOTED_POST } = actions;
 
 export default reducer;

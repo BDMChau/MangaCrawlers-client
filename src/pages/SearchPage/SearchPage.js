@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import "./SearchPage.css"
 
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_PATH, SET_IS_SEARCHED } from "store/features/search/searchSlice"
+import { SET_PATH, SET_VALUE, SET_MANGA, SET_POSTS, SET_USERS, SET_IS_SEARCHED } from "store/features/search/searchSlice"
+
 import { useHistory, useLocation, useParams, NavLink } from 'react-router-dom'
 import { Avatar, Col, Empty, Row, Tabs, Typography } from 'antd';
 import redirectURI from 'helpers/redirectURI';
@@ -22,11 +23,12 @@ export default function SearchPage() {
     const history = useHistory();
 
     const { path_param } = params;
-    const [path, setPath] = useState(path_param ? path_param : "manga")
     const [value, setValue] = useState(query.get("v") ? query.get("v") : "")
     const [mangas, setMangas] = useState([]);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState([]);
+
+    const [isSearched, setIsSearched] = useState(false);
 
     const [isMobile, setIsMobile] = useState(false);
     const [tabSelected, setTabSelected] = useState("");
@@ -43,17 +45,13 @@ export default function SearchPage() {
 
     // init uri
     useEffect(() => {
-        if (!path_param) {
-            history.push(`/search/manga/?v=${searchState[0]}`)
-        }
-
-        else if (path_param && value) history.push(`/search/${path_param}/?v=${value}`);
-
+        if (!path_param) history.push(`/search/manga/?v=${searchState[0]}`)
     }, [path_param, value])
 
 
+
     useEffect(() => {
-        if(path_param) {
+        if (path_param) {
             dispatch(SET_PATH(path_param));
             setTabSelected(path_param);
         }
@@ -65,19 +63,21 @@ export default function SearchPage() {
     }, [])
 
     useEffect(() => {
-        if(tabSelected) dispatch(SET_PATH(tabSelected));
+        if (tabSelected) dispatch(SET_PATH(tabSelected));
     }, [tabSelected])
 
 
     useEffect(() => {
-        // if user go direct by url >> execute handleSearch()
-        if (!searchState[5]) handleSearch();
-
         if (searchState[0]) setValue(searchState[0]);
         if (searchState[1]) setMangas(searchState[1]);
         if (searchState[2]) setPosts(searchState[2]);
         if (searchState[3]) setUsers(searchState[3]);
     }, [searchState])
+
+    useEffect(() => {
+        // if user go direct by url >> execute handleSearch()
+        if (!searchState[5] && !isSearched) handleSearch();
+    }, [searchState[5]])
 
 
 
@@ -86,24 +86,25 @@ export default function SearchPage() {
             setMangas([]);
             setPosts([]);
             setUsers([]);
-
             return;
         };
 
 
         try {
-            await searchManga(value);
-            await searchPosts(value);
-            await searchUsers(value);
+            await searchManga();
+            await searchPosts();
+            await searchUsers();
+
+            setIsSearched(true);
         } catch (err) {
             console.log(err)
         }
     }
 
 
-    const searchManga = async (val) => {
+    const searchManga = async () => {
         const data = {
-            "manga_name": val
+            "manga_name": value
         }
 
         try {
@@ -111,23 +112,23 @@ export default function SearchPage() {
 
             if (response) {
                 if (response.content.err) {
-                    setMangas([])
+                    dispatch(SET_MANGA([]));
                     return;
                 }
 
                 const mangas = response.content.data;
-                setMangas(mangas)
+                dispatch(SET_MANGA(mangas));
                 return;
             }
         } catch (err) {
-            setMangas([])
+            dispatch(SET_MANGA([]));
             console.log(err)
         }
     }
 
-    const searchPosts = async (val) => {
+    const searchPosts = async () => {
         const data = {
-            "title": val
+            "title": value
         }
 
         try {
@@ -135,41 +136,41 @@ export default function SearchPage() {
 
             if (response) {
                 if (response.content.err) {
-                    setPosts([])
+                    dispatch(SET_POSTS([]));
                     return;
                 }
 
                 const posts = response.content.posts;
                 posts.forEach(post => post.created_at = format.relativeTime(post.created_at))
 
-                setPosts(posts)
+                dispatch(SET_POSTS(posts));
                 return;
             }
         } catch (err) {
-            setPosts([])
+            dispatch(SET_POSTS([]));
             console.log(err)
         }
     }
 
-    const searchUsers = async (val) => {
+    const searchUsers = async () => {
         const data = {
-            value: val,
+            value: value,
             key: 2 // search with: 1: email, 2: name
         }
 
         try {
             const response = await userApi.searchUsers(data);
             if (response.content.err) {
-                setUsers([]);
+                dispatch(SET_USERS([]));
                 return;
             }
 
             const users = response.content.data;
 
-            setUsers(users)
+            dispatch(SET_USERS(users));
             return;
         } catch (err) {
-            setUsers([]);
+            dispatch(SET_USERS([]));
             console.log(err)
         }
     }
@@ -234,19 +235,19 @@ export default function SearchPage() {
     return (
         <Row justify="center" className="search-page">
             <Col xs={24} md={20} xl={18} style={{ padding: "15px" }} className="col01">
-                <div style={{padding:"10px", margin:"3rem 10px 3rem 10px"}}>
+                <div style={{ padding: "10px", margin: "1rem 10px 3rem 10px" }}>
                     <Typography.Title level={3}>Search results</Typography.Title>
                     <Typography.Text>{value}</Typography.Text>
 
                     <div className="tabs">
                         <Tabs
-                            style={{ marginTop: "50px" }}
+                            style={{ marginTop: "20px" }}
                             activeKey={tabSelected}
                             tabPosition={isMobile ? "top" : "left"}
                             setTabSelected={setTabSelected}
                             className="contact-tabs"
                             onChange={(key) => {
-                                window.history.replaceState(null, null, `/search/${key}/?v=${value}`)
+                                history.replace({ pathname: `/search/${key}/?v=${value}` })
                                 setTabSelected(key)
                             }}
                         >

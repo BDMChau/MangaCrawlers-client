@@ -11,7 +11,7 @@
 .search-page .col01 .search-menu-item {
   width: 600px;
   padding: 10px 10px;
-  margin: 10px 0;
+  margin: 10px 5px 10px 0;
   border: none !important;
   box-shadow: 0px 0px 5px 0 #e3e4e6;
   background-color: white;
@@ -30,6 +30,26 @@
 
 .search-page .col01 .ant-tabs-tabpane {
   width: fit-content;
+  overflow-y: auto;
+  max-height: 700px;
+}
+
+.search-page .col01 .ant-tabs-tabpane::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.search-page .col01 .ant-tabs-tabpane::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-page .col01 .ant-tabs-tabpane::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: RGB(175, 175, 175);
+}
+
+.search-page .col01 .ant-tabs-tabpane::-webkit-scrollbar-thumb:hover {
+  background: RGB(150, 150, 150);
 }
 
 .search-page .col01 .tabs .ant-empty {
@@ -47,7 +67,7 @@
 }
 
 .search-page .col01 .tabs .ant-tabs-content-holder {
-  border-left: none;
+  /* border-left: none; */
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1600px) {
