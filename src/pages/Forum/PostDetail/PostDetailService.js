@@ -15,6 +15,8 @@ export default function PostDetailService() {
     const { postid } = useParams();
 
     const [postInfo, setPostInfo] = useState({});
+    const [quotedPost, setQuotedPost] = useState({});
+
     const [topLikePosts, setTopLikePosts] = useState([]);
     const [topDislikePosts, setTopDislikePosts] = useState([]);
 
@@ -27,6 +29,8 @@ export default function PostDetailService() {
 
     useEffect(() => {
         if (postid) {
+            setQuotedPost({});
+            
             smoothscroll.polyfill();
             window.scroll({
                 top: 0,
@@ -36,7 +40,7 @@ export default function PostDetailService() {
     }, [postid])
 
     useEffect(() => {
-        if (postid)  getPost(postid);
+        if (postid) getPost(postid);
 
         getTopLikesPost();
         getTopDislikesPost();
@@ -86,8 +90,20 @@ export default function PostDetailService() {
         try {
             const res = await forumApi.getPost(data);
             if (res.content.msg) {
-                res.content.post.created_at = format.formatDate02(res.content.post.created_at);
+                const post = res.content.post;
                 setPostInfo(res.content.post);
+
+                if (post.parent_id) {
+                    const data = { post_id: post.parent_id };
+
+                    const res = await forumApi.getPost(data);
+                    if (res.content.msg) {
+                        const quotedPost = res.content.post;
+                        // quotedPost.content = quotedPost.content.match(/.{1,200}/g)[0];
+
+                        setQuotedPost(quotedPost);
+                    }
+                }
             }
         } catch (err) {
             console.log(err)
@@ -208,6 +224,8 @@ export default function PostDetailService() {
 
 
     const checkIsLiked = async (postId) => {
+        if (!userState[0]) return;
+
         const data = { post_id: postId };
 
         try {
@@ -229,6 +247,7 @@ export default function PostDetailService() {
     return (
         <PostDetail
             postInfo={postInfo}
+            quotedPost={quotedPost}
 
             sttLike={sttLike}
             likePost={likePost}

@@ -86,6 +86,7 @@ export default function Post({ postProp, key, smallSize, renderContent, width, a
                         <NavLink to={redirectURI.postPage_uri(post.post_id)}>
                             <Typography.Title className={smallSize ? "title-small" : "title"} level={5} style={{ fontWeight: "500", fontSize: "15px" }} >{post.title}</Typography.Title>
                         </NavLink>
+                    
 
                         {smallSize
                             ? <Tooltip title={`this topic has ${post.comment_count} comments`} >

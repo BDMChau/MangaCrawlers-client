@@ -67,8 +67,10 @@ export default function FormCreatePost({ createPost }) {
         const data = {
             title: title,
             categoriesId: categories,
-            content: markdown
+            content: markdown,
+            parent_id: Object.keys(quotedPost).length ? quotedPost.post_id : null
         };
+
         const res = await createPost(data);
         if (res === true) {
             message_success("Created!");
@@ -146,13 +148,13 @@ export default function FormCreatePost({ createPost }) {
 
             {Object.keys(quotedPost).length
                 ? <>
-                    <Typography.Title level={5}>Quoted Post</Typography.Title>
+                    <Typography.Title style={{ marginTop: "1.5rem" }} level={5}>Quoted Post</Typography.Title>
                     <Post postProp={quotedPost} key={0} renderContent={true} width={"60%"} />
                 </>
                 : ""
             }
 
-            <div style={{ marginTop: "10px" }} >
+            <div style={{ marginTop: "1.5rem" }} >
                 <Button
                     className="btn-post"
                     type="primary"

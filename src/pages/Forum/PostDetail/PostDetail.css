@@ -37,11 +37,13 @@
   margin-bottom: 50px;
 }
 
-.post-detail .interact {
+.cmt-post-detail .interact {
   display: flex;
+  width: fit-content;
+  margin-top: 10px;
 }
 
-.post-detail .interact .ant-typography {
+.cmt-post-detail .interact .ant-typography {
   font-size: 18px;
   font-weight: 500;
   margin-top: 8px;
@@ -49,7 +51,7 @@
   text-align: center;
 }
 
-.post-detail .interact button {
+.cmt-post-detail .interact button {
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -62,6 +64,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 7px;
+  margin-top: 7px;
 }
 
 .post-detail .interact button:focus {
