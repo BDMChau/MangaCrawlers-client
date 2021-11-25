@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import "components/Editor/styles/Editor.css"
 
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor, { quote } from '@uiw/react-md-editor';
 import { Button, Input, Typography, Select, Form } from 'antd';
 import { UpOutlined, LeftOutlined, PlusOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
 import { MySelectTags } from './features/MySelectTags';
 import { message_success } from 'components/toast/message';
 import { useHistory } from 'react-router';
 import { notification_error } from 'components/toast/notification';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { SET_QUOTED_POST } from 'store/features/forum/ForumSlice';
+import Post from '../features/Post';
+
 export default function FormCreatePost({ createPost }) {
+    const dispatch = useDispatch();
+
     const userState = useSelector((state) => state.userState);
     const forumState = useSelector((state) => state.forumState);
+
     const [categoriesState, setCategoriesState] = useState(forumState[0]?.length ? forumState[0] : []);
+    const [quotedPost, setQuotedPost] = useState({});
 
     const [title, setTitle] = useState("");
     const [categories, setCategories] = useState([]);
@@ -26,13 +33,26 @@ export default function FormCreatePost({ createPost }) {
 
 
     useEffect(() => {
-        if (title || categories.length || markdown) {
+        if (title || categories.length || markdown || forumState[2]) {
             window.addEventListener("beforeunload", (ev) => {
                 ev.preventDefault();
                 return ev.returnValue = '';
             });
         }
-    }, [title, categories.length, markdown])
+    }, [title, categories.length, markdown, forumState[2]])
+
+
+    // forumState[2] is quoted post
+    useEffect(() => {
+        if (forumState[2]) {
+            setQuotedPost({ ...forumState[2], content: forumState[2].content.match(/.{1,200}/g)[0] });
+        }
+        else setQuotedPost({});
+
+        return () => {
+            if (forumState[2]) dispatch(SET_QUOTED_POST(null));
+        }
+    }, [forumState[2]])
 
 
 
@@ -76,7 +96,6 @@ export default function FormCreatePost({ createPost }) {
             </div>
 
             <div className="md-editor-cont">
-
                 <Form
                     className=""
                     name="basic"
@@ -122,6 +141,14 @@ export default function FormCreatePost({ createPost }) {
                 ? <Typography.Text style={{ color: "#f5212d" }}>
                     <UpOutlined /> <UpOutlined /> All fields above are require!!! <UpOutlined /> <UpOutlined />
                 </Typography.Text>
+                : ""
+            }
+
+            {Object.keys(quotedPost).length
+                ? <>
+                    <Typography.Title level={5}>Quoted Post</Typography.Title>
+                    <Post postProp={quotedPost} key={0} renderContent={true} width={"60%"} />
+                </>
                 : ""
             }
 

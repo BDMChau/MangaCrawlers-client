@@ -45,9 +45,14 @@ const ForumSlice = createSlice({
             console.error(action.payload)
         },
 
+        // post
+        SET_QUOTED_POST: (state, action) => {
+            state[2] = action.payload;
+        },
+
     }
 });
 
 const { actions, reducer } = ForumSlice;
-export const { GET_ALL_CATEGORIES, GET_ALL_CATEGORIES_SUCCESS, GET_ALL_CATEGORIES_FAILED, GET_ALL_TOPICS, GET_ALL_TOPICS_SUCCESS, GET_ALL_TOPICS_FAILED } = actions;
+export const { GET_ALL_CATEGORIES, GET_ALL_CATEGORIES_SUCCESS, GET_ALL_CATEGORIES_FAILED, GET_ALL_TOPICS, GET_ALL_TOPICS_SUCCESS, GET_ALL_TOPICS_FAILED, SET_QUOTED_POST } = actions;
 export default reducer;

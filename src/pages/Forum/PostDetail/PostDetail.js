@@ -3,7 +3,7 @@ import "./PostDetail.css"
 
 import MDEditor from '@uiw/react-md-editor';
 import { Avatar, Button, Col, Divider, Row, Typography, Tooltip, Empty } from 'antd';
-import { ArrowLeftOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons"
+import { ArrowLeftOutlined, LikeOutlined, DislikeOutlined, PlusOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router';
 import Post from '../features/Post';
 import Post02 from '../features/Post02';
@@ -12,6 +12,10 @@ import redirectURI from 'helpers/redirectURI';
 import { NavLink } from 'react-router-dom';
 import MyTag from "../features/MyTag";
 import CommentService from 'components/Comment02/CommentService/CommentService';
+
+import { useDispatch } from 'react-redux';
+import { SET_QUOTED_POST } from 'store/features/forum/ForumSlice';
+
 
 export default function PostDetail({
     postInfo,
@@ -26,7 +30,15 @@ export default function PostDetail({
     topLikePosts,
     topDislikePosts
 }) {
+    const dispatch = useDispatch();
     const history = useHistory();
+
+
+    const handleRedirectToCreateNewPost = () => {
+        dispatch(SET_QUOTED_POST(postInfo));
+
+        history.push("/forums/newpost");
+    }
 
     return (
         Object.keys(postInfo).length
@@ -105,7 +117,15 @@ export default function PostDetail({
                     </Col>
 
                     <Col className="cmt-post-detail" xs={22} md={22} xl={22}>
-                        <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "30px" }} />
+                        <div>
+                            <Button type="primary" style={{ float: "right", margin: "10px 0" }}
+                            onClick={handleRedirectToCreateNewPost}
+                            >
+                                <PlusOutlined style={{ fontSize: "16px", marginBottom: "0px" }} />   Quote
+                            </Button>
+                        </div>
+
+                        <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: "20px", marginTop: "10px" }} />
 
                         <CommentService
                             targetTitle={"post"}

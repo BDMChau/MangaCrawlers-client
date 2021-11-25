@@ -68,7 +68,7 @@ function CmtItem({
                             <div className="comment">
                                 <CmtBody
                                     comment={cmt}
-                                    background={"white"}
+                                    // background={"white"}
 
                                     deleteCmt={deleteCmt}
                                     editCmt={editCmt}
