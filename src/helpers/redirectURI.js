@@ -22,7 +22,7 @@ const redirectURI = {
         return `/user/id?id=${userId}`;
     },
     userOwnPage_uri: (userId) => {
-        return `/user/own/all_friends`;
+        return `/user/own/posts`;
     },
     postPage_uri: (postId) => {
         return `/forums/post/${postId}`;
