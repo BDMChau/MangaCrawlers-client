@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 import { regex } from 'helpers/regex';
 import adminApi from 'api/apis/MainServer/adminApi';
 import { notification_success } from 'components/toast/notification';
-import { format } from 'helpers/format';
 import userApi from 'api/apis/MainServer/userApi';
 
 function MangaService() {
@@ -70,6 +69,11 @@ function MangaService() {
         });
 
         if (id) {
+            setManga({});
+            setMangaStars(0);
+            setGenres([]);
+            setChapters([]);
+
             getMangaData();
             getSuggestionList();
         }
