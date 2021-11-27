@@ -69,11 +69,6 @@ function MangaService() {
         });
 
         if (id) {
-            setManga({});
-            setMangaStars(0);
-            setGenres([]);
-            setChapters([]);
-
             getMangaData();
             getSuggestionList();
         }
