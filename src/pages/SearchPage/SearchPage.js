@@ -20,7 +20,6 @@ export default function SearchPage() {
     const searchState = useSelector(state => state.searchState)
     const query = new URLSearchParams(useLocation().search);
     const params = useParams();
-    const history = useHistory();
 
     const { path_param } = params;
     const [value, setValue] = useState(query.get("v") ? query.get("v") : "")
@@ -45,9 +44,9 @@ export default function SearchPage() {
 
     // init uri
     useEffect(() => {
-        if (!path_param) history.push(`/search/manga/?v=${searchState[0]}`)
-    }, [path_param, value])
-
+        if (!path_param) window.history.replaceState(null, null, `/search/manga/?v=${searchState[0]}`)
+        else window.history.replaceState(null, null, `/search/${path_param}/?v=${searchState[0]}`)
+    }, [path_param, searchState[0]])
 
 
     useEffect(() => {
@@ -68,7 +67,8 @@ export default function SearchPage() {
 
 
     useEffect(() => {
-        if (searchState[0]) setValue(searchState[0]);
+        setValue(searchState[0]);
+
         if (searchState[1]) setMangas(searchState[1]);
         if (searchState[2]) setPosts(searchState[2]);
         if (searchState[3]) setUsers(searchState[3]);
@@ -247,7 +247,6 @@ export default function SearchPage() {
                             setTabSelected={setTabSelected}
                             className="contact-tabs"
                             onChange={(key) => {
-                                history.replace({ pathname: `/search/${key}/?v=${value}` })
                                 setTabSelected(key)
                             }}
                         >

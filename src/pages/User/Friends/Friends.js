@@ -100,7 +100,7 @@ export default function Friends({ listRequests, posts, totalFriends, listFriends
         <Row justify="center" className="friends" >
             <Col xs={23} sm={22} xl={18} className="friends-body" >
                 <div className="title">
-                    <Typography.Title level={4}>Friends</Typography.Title>
+                    <Typography.Title level={4}>Your Activity</Typography.Title>
 
                     <Tabs className="friends-tabs" activeKey={selectedKey ? selectedKey : "all_friends"} setTabSelected={setSelectedKey}
                         onChange={(key) => {
