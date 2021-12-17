@@ -6,7 +6,8 @@ import "../../../components/Charts/Chart.css"
 import { Table, Col, Input, Button } from 'antd';
 import { Avatar } from 'antd';
 import DropOption from 'components/DropOption/DropOption';
-import { DeleteOutlined, FieldTimeOutlined } from '@ant-design/icons';
+import { EyeOutlined, FieldTimeOutlined } from '@ant-design/icons';
+import redirectURI from 'helpers/redirectURI';
 
 
 export default function PostTable({ posts, handleDeprecatePost, isLoading }) {
@@ -71,7 +72,8 @@ export default function PostTable({ posts, handleDeprecatePost, isLoading }) {
             render: (post, record) => (
                 <DropOption
                     menuOptions={[
-                        { key: '1', name: `Deprecate`, icon: <FieldTimeOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleDeprecatePost(post.post_id) },
+                        { key: '1', name: `Preview`, icon: <EyeOutlined style={{ fontSize: "20px" }} />, path: redirectURI.postPage_uri(post.post_id) },
+                        { key: '2', name: `Deprecate`, icon: <FieldTimeOutlined style={{ fontSize: "20px" }} />, keyId: "delete", funcAction: () => handleDeprecatePost(post.post_id) },
                     ]}
                 />
             )

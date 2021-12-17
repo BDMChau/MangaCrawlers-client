@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./SearchPage.css"
 
 import { useDispatch, useSelector } from 'react-redux';
-import { SET_PATH, SET_VALUE, SET_MANGA, SET_POSTS, SET_USERS, SET_IS_SEARCHED } from "store/features/search/searchSlice"
+import { SET_PATH, SET_MANGA, SET_POSTS, SET_USERS, SET_IS_SEARCHED } from "store/features/search/searchSlice"
 
 import { useHistory, useLocation, useParams, NavLink } from 'react-router-dom'
 import { Avatar, Col, Empty, Row, Tabs, Typography } from 'antd';
@@ -42,11 +42,15 @@ export default function SearchPage() {
         return () => unenquireScreen(enquireHandler);
     }, [])
 
+
     // init uri
     useEffect(() => {
-        if (!path_param) window.history.replaceState(null, null, `/search/manga/?v=${searchState[0]}`)
-        else window.history.replaceState(null, null, `/search/${path_param}/?v=${searchState[0]}`)
-    }, [path_param, searchState[0]])
+        if (!searchState[4]) {
+            window.history.replaceState(null, null, `/search/manga/?v=${searchState[0]}`);
+            setTabSelected("manga");
+        }
+        else window.history.replaceState(null, null, `/search/${searchState[4]}/?v=${searchState[0]}`)
+    }, [searchState[0], searchState[4]])
 
 
     useEffect(() => {
