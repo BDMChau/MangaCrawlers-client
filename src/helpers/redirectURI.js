@@ -30,6 +30,9 @@ const redirectURI = {
     postPageWithCate_uri: (cateId) => {
         return `/forums/posts/category?v=${cateId}`;
     },
+    editChapterUploadedPage_uri: (mangaId, chapterId) => {
+        return `/user/projects/${mangaId}/${chapterId}`;
+    },
 }
 
 export default redirectURI;

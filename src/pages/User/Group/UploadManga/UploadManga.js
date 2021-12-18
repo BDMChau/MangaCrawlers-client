@@ -4,12 +4,11 @@ import "./UploadManga.css"
 import { LeftOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 import { Menu, Dropdown } from 'antd';
-import { DownOutlined, CloudUploadOutlined } from '@ant-design/icons';
-import { Upload } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import { message_error } from '../../../../components/toast/message';
 import Rating from '../../../../components/Rating/Rating';
+import MyDragger from 'components/input/MyDragger'
 
-const { Dragger } = Upload;
 
 export default function UploadManga({ handleUploadImgs, isLoading, manga, chapters }) {
     const [listFileToUpload, setListFileToUpload] = useState([]);
@@ -133,15 +132,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                         </Tooltip>
                     </div>
 
-                    <Dragger {...propsUploader}>
-                        <div className="upload-drag-icon">
-                            <CloudUploadOutlined style={{ fontSize: "32px" }} />
-                        </div>
-                        <Typography.Title level={5} className="upload-text">Click or drag file here</Typography.Title>
-                        <Typography.Text className="upload-hint">
-                            Support for a single or bulk upload.
-                        </Typography.Text>
-                    </Dragger>
+                    <MyDragger propsUploader={propsUploader} />
 
                     <div className="uploader-submit">
                         <Button onClick={() => handleSubmit()} loading={isLoading} >Submit Upload</Button>

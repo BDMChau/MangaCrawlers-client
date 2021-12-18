@@ -100,6 +100,11 @@ const routes = [
         component: React.lazy(() => import('../../pages/User/Group/UploadManga/UploadMangaService')),
         exact: true
     },
+    {
+        path: "/user/projects/:mangaid_param/:chapterid_param",
+        component: React.lazy(() => import('../../pages/User/Group/EditChapter/EditChapterService')),
+        exact: true
+    },
     ////////////// Forum
     {
         path: "/forums",
