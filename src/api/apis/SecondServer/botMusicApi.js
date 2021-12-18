@@ -7,11 +7,11 @@ const botMusicApi = {
         return axiosClient.get(uri);
     },
     getListVideosFromYoutubeApi: (data, quantity) => {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${quantity}&q=${data.keyword}&type=video&key=AIzaSyBnVH9dCDYhkbwUDp3QVX41kB6DGD2jcws`;
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${quantity}&q=${data.keyword}&type=video&key=${data.apiKey}`;
         return secondAxiosClient.get(url);
     },
     getVideoFromYoutubeApi: (data) => {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=${data.videoId}&key=AIzaSyBnVH9dCDYhkbwUDp3QVX41kB6DGD2jcws`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id=${data.videoId}&key=${data.apiKey}`;
         return secondAxiosClient.get(url);
     },
 

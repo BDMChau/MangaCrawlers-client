@@ -110,7 +110,6 @@ function Manga({
                                 {isModify
                                     ? <Input className="input-modify" defaultValue={manga.manga_name} onChange={(e) => setMangaName(e.target.value)} />
                                     : <Typography.Title level={3}>{manga.manga_name}</Typography.Title>
-
                                 }
                             </div>
 
