@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd';
 import ImgDragging from './components/ImgDragging';
+import { arrayMoveImmutable } from 'array-move';
+
 import "./EditChapter.css"
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { Col, Image, Row } from 'antd';
+
 
 export default function EditChapter({ imgs, setImgs, chapterInfo, setImgsModified }) {
-    const [imgsUrl, setImgsUrl] = useState([]);
 
     const [width, setWidth] = useState(200);
 
 
 
-    useEffect(() => {
-        if (imgs.length) {
-            const urls = imgs.map((img, i) => img.img_url)
-            setImgsUrl(urls)
-        }
-    }, [imgs])
 
+    const SortableItem = SortableElement(({ img }) => (
+        <>
+        <img className="item-img" src={img.img_url} />
+        </>
+    ));
 
+    const SortableList = SortableContainer(({ imgs }) => (
+        <div className='list-imgs'>
+            {imgs.map((img, i) => (
+                <SortableItem key={img.img_id} index={i} img={img} />
+            ))}
+        </div>
 
-    const onDragEnd = (result) => {
-        const { destination, source, draggableId } = result;
+    ));
 
-        if (!destination) return;
-        if (destination.draggableId === source.draggableId && destination.index === source.index) return;
-
-        const copiedImgs = Array.from(imgs);
-        const imgDragging = copiedImgs[source.index];
-
-        copiedImgs.splice(source.index, 1);
-        copiedImgs.splice(destination.index, 0, imgDragging); // insert new
-
-console.log(copiedImgs)
-        setImgs(copiedImgs);
+    const onSortEnd = ({ newIndex, oldIndex }) => {
+        setImgs(arrayMoveImmutable(imgs, oldIndex, newIndex));
     }
 
-
     return (
-        <div className="editchapter-cont">
-            <DragDropContext onDragEnd={onDragEnd}>
-                <ImgDragging imgs={imgs} />
-            </DragDropContext>
-        </div >
+        <Row justify="center" className="editchapter-cont">
+            <Col md={20} xl={20} xs={23} className='chapter-info'>
+             
+            </Col>
+
+            <Col md={20} xl={20} xs={23} >
+                <SortableList imgs={imgs} onSortEnd={onSortEnd} axis="xy" />
+            </Col>
+        </Row >
     )
 }
