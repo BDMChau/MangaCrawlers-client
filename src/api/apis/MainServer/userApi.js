@@ -208,6 +208,16 @@ const userApi = {
             data
         });
     },
+    updateMangaInfo: (token, data) => {
+        const uri = '/api/group/update_manga';
+        return axiosClient.delete(uri, {
+            headers: {
+                Authorization: token
+            },
+            data
+        });
+    },
+    ///////////////////////
     getNotifications: (token, data) => {
         const uri = '/api/notification/get_list_notification';
         return axiosClient.post(uri, data, {

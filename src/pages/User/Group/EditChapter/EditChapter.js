@@ -5,19 +5,24 @@ import { arrayMoveImmutable } from 'array-move';
 
 import "./EditChapter.css"
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { Col, Image, Row } from 'antd';
+import { Button, Col, Image, Row } from 'antd';
+import { ToolOutlined } from "@ant-design/icons"
 
-
-export default function EditChapter({ imgs, setImgs, chapterInfo, setImgsModified }) {
+export default function EditChapter({ imgs, setImgs, chapterInfo, manga, handleEdit }) {
 
     const [width, setWidth] = useState(200);
 
 
 
+    const handleSubmitChange = () => {
+        handleEdit(chapterInfo, imgs);
+    }
 
+
+    ////////////////////// render //////////////////////
     const SortableItem = SortableElement(({ img }) => (
         <>
-        <img className="item-img" src={img.img_url} />
+            <img className="item-img" src={img.img_url} />
         </>
     ));
 
@@ -36,13 +41,19 @@ export default function EditChapter({ imgs, setImgs, chapterInfo, setImgsModifie
 
     return (
         <Row justify="center" className="editchapter-cont">
+            <Col md={20} xl={20} xs={23} className='manga-info'>
+
+            </Col>
+
             <Col md={20} xl={20} xs={23} className='chapter-info'>
-             
+
             </Col>
 
             <Col md={20} xl={20} xs={23} >
                 <SortableList imgs={imgs} onSortEnd={onSortEnd} axis="xy" />
             </Col>
+
+            <Button icon={<ToolOutlined />} onClick={handleSubmitChange} >Submit Change</Button>
         </Row >
     )
 }

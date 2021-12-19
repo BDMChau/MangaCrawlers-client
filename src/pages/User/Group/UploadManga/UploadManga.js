@@ -1,16 +1,18 @@
-import { Button, Col, Divider, Empty, Image, Input, message, Row, Skeleton, Tooltip, Typography } from 'antd'
+import { Button, Col, Divider, Empty, Image, Input, message, Row, Select, Skeleton, Tooltip, Typography, Upload } from 'antd'
 import React, { useState } from 'react'
 import "./UploadManga.css"
-import { LeftOutlined } from "@ant-design/icons"
+import { LeftOutlined, UploadOutlined, EditOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { message_error } from '../../../../components/toast/message';
 import Rating from '../../../../components/Rating/Rating';
 import MyDragger from 'components/input/MyDragger'
+import handleFile from 'helpers/handleFile'
+import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi'
 
 
-export default function UploadManga({ handleUploadImgs, isLoading, manga, chapters }) {
+export default function UploadManga({ handleUploadImgs, isLoading, manga, setManga, chapters, editMangaInfo }) {
     const [listFileToUpload, setListFileToUpload] = useState([]);
     const [chapterName, setChapterName] = useState("");
     const history = useHistory();
@@ -75,6 +77,26 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
     };
 
 
+    const propsUpload = {
+        name: 'file',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        showUploadList: false,
+        maxCount: 1,
+        beforeUpload: (file) => false,
+        onChange: (info) => onChangeFile(info)
+    };
+
+    const onChangeFile = async (info) => {
+        const file = info.file;
+
+        const res = await cloudinaryApi.uploadFile(file, "manga_thumbnails/updated");
+        const url = res.data.secure_url;
+
+        setManga({...manga, thumbnail: url})
+    }
+
     return (
         <Row justify={"center"}>
             <Col sm={24} md={21} xl={21} xxl={21} className="divider-upload-page" >
@@ -88,18 +110,67 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
             <Col sm={23} md={21} xl={21} xxl={21} className="title-upload-page" >
                 <div className="thumb-img">
                     <Image className="img" src={manga ? manga.thumbnail : ""} alt="" ></Image>
+                    <Upload {...propsUpload} >
+                        <Button icon={<UploadOutlined />} title="Upload new thumbnail" style={{ width: "150px" }}></Button>
+                    </Upload>
                 </div>
 
                 <div className="text">
-                    <Typography.Title level={3} >{manga ? manga.manga_name : ""}</Typography.Title>
-                    <Typography.Text >Author: {manga ? manga.manga_authorName : ""}</Typography.Text>
-                    <Typography.Text>{manga ? manga.status : ""}</Typography.Text>
+                    <Input
+                        addonBefore={"Manga Name"}
+                        title="Name"
+                        value={manga ? manga.manga_name : ""}
+                        onChange={(e) => setManga({ ...manga, manga_name: e.target.value })}
+
+                    />
+
+                    <Input
+                        addonBefore={"Author"}
+                        title="Author"
+                        value={manga ? manga.manga_authorName : ""}
+                        onChange={(e) => setManga({ ...manga, manga_authorName: e.target.value })}
+                    />
+
+                    <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Select Status"
+                        allowClear
+                        value={manga ? manga.status : ""}
+                        onChange={(value) => setManga({ ...manga, status: value })}
+                    >
+                        <Select.Option value="Ongoing">Ongoing</Select.Option>
+                        <Select.Option value="Completed">Completed</Select.Option>
+                    </Select>
+
+
+                    <Input.TextArea
+                        style={{ margin: "5px 0", height: "100px" }}
+                        title="Author"
+                        placeholder='Description'
+                        value={manga ? manga.description : ""}
+                        onChange={(e) => setManga({ ...manga, description: e.target.value })}
+                    />
+
                     <Typography.Text>{manga ? manga.views : ""} view(s)</Typography.Text>
                     <div style={{ pointerEvents: "none" }} >
                         <Rating stars={manga ? manga.stars : ""} />
                     </div>
+
+                    <Button
+                        type='primary'
+                        icon={<EditOutlined style={{ fontSize: "18px" }} />}
+                        style={{ borderRadius: "3px" }}
+                        onClick={() => editMangaInfo(manga)}
+                    >
+                        Submit Change
+                    </Button>
                 </div>
             </Col>
+
+
+
+
 
             <Col sm={23} md={21} xl={21} xxl={21} className="upload-form" >
                 <div className="chapter-dropdown">
@@ -135,7 +206,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, chapte
                     <MyDragger propsUploader={propsUploader} />
 
                     <div className="uploader-submit">
-                        <Button onClick={() => handleSubmit()} loading={isLoading} >Submit Upload</Button>
+                        <Button type="primary" onClick={() => handleSubmit()} loading={isLoading} >Upload Images</Button>
                     </div>
                 </div>
             </Col>

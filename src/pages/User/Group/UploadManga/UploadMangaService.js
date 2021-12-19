@@ -16,6 +16,7 @@ export default function UploadMangaService() {
 
     const history = useHistory();
     const query = new URLSearchParams(useLocation().search);
+
     const cookies = new Cookies();
     const token = cookies.get("token")
 
@@ -82,12 +83,30 @@ export default function UploadMangaService() {
         }
     }
 
+
+    const editMangaInfo = async (mangaInfo) => {
+        console.log(mangaInfo)
+        const data = {
+            manga_info: mangaInfo
+        };
+
+        try {
+            const res = await userApi.updateMangaInfo(token, data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
     return (
         <UploadManga
             handleUploadImgs={(listFile, chapterName) => handleUploadImgs(listFile, chapterName)}
             isLoading={isLoading}
             manga={manga}
+            setManga={setManga}
             chapters={chapters}
+
+            editMangaInfo={editMangaInfo}
         />
     )
 }

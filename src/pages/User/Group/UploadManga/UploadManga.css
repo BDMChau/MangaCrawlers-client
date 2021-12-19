@@ -37,19 +37,23 @@
   width: 300px;
 }
 
+.title-upload-page .text span.ant-input-group-wrapper{
+  margin: 5px 0;
+}
+
 /* // */
 .upload-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 5rem;
   height: fit-content;
 }
 
 .upload-form .uploader {
   width: 70%;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 /* uploader container */

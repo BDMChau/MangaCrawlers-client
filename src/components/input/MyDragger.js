@@ -1,7 +1,7 @@
 import React from 'react';
 import "pages/User/Group/UploadManga/UploadManga.css"
 import { CloudUploadOutlined } from '@ant-design/icons';
-import { Typoraphy, Upload } from 'antd'
+import { Typography, Upload } from 'antd'
 
 const { Dragger } = Upload;
 
