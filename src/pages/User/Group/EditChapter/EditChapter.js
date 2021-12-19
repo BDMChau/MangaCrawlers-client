@@ -3,11 +3,11 @@ import { arrayMoveImmutable } from 'array-move';
 
 import "./EditChapter.css"
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { Button, Col, Input, Row, Typography } from 'antd';
-import { ToolOutlined, SearchOutlined, ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons"
+import { Button, Col, Divider, Empty, Input, Row, Spin, Typography } from 'antd';
+import { ToolOutlined, ArrowLeftOutlined, ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons"
 
 
-export default function EditChapter({ imgs, setImgs, chapterInfo, setChapterInfo, manga, handleEdit }) {
+export default function EditChapter({ isLoading, imgs, setImgs, chapterInfo, setChapterInfo, manga, handleEdit }) {
     const [width, setWidth] = useState(200);
 
 
@@ -31,9 +31,14 @@ export default function EditChapter({ imgs, setImgs, chapterInfo, setChapterInfo
 
     const SortableList = SortableContainer(({ imgs }) => (
         <div className='list-imgs'>
-            {imgs.map((img, i) => (
-                <SortableItem key={img.img_id} index={i} img={img} />
-            ))}
+            {isLoading
+                ? <Spin style={{ margin: "20px auto" }} />
+                : imgs.length
+                    ? imgs.map((img, i) => (
+                        <SortableItem key={img.img_id} index={i} img={img} />
+                    ))
+                    : <Empty description="No images" style={{ margin: "20px auto" }} image={Empty.PRESENTED_IMAGE_SIMPLE} />
+            }
         </div>
 
     ));
@@ -44,14 +49,27 @@ export default function EditChapter({ imgs, setImgs, chapterInfo, setChapterInfo
 
     return (
         <Row justify="center" className="editchapter-cont">
-            <Col md={20} xl={20} xs={23} className='manga-info'>
-                <img src={manga.thumbnail} style={{ width: "180px" }} />
+            <Col md={20} xl={20} xs={23} >
+                <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0, width: "100%" }}>
+                    <Button title="Back" style={{ border: "none", padding: "0" }} onClick={() => history.back()}>
+                        <ArrowLeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
+                    </Button>
+                </Divider>
+            </Col>
 
-                <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }}>
-                    <Typography.Title level={3} >{manga.manga_name}</Typography.Title>
-                    <Typography.Title level={5}>Author: {manga.manga_authorName}</Typography.Title>
-                    <Typography.Title level={5}>{manga.status}</Typography.Title>
-                </div>
+            <Col md={20} xl={20} xs={23} className='manga-info'>
+                {Object.keys(manga).length
+                    ? <>
+                        <img src={manga.thumbnail} style={{ width: "180px" }} />
+
+                        <div style={{ display: "flex", flexDirection: "column", marginLeft: "10px" }}>
+                            <Typography.Title level={3} >{manga.manga_name}</Typography.Title>
+                            <Typography.Title level={5}>Author: {manga.manga_authorName}</Typography.Title>
+                            <Typography.Title level={5}>{manga.status}</Typography.Title>
+                        </div>
+                    </>
+                    : <Typography.Text>No manga found!</Typography.Text>
+                }
             </Col>
 
             <Col md={20} xl={20} xs={23} className='chapter-info' style={{ margin: "50px 0 0 0" }}>
@@ -62,12 +80,13 @@ export default function EditChapter({ imgs, setImgs, chapterInfo, setChapterInfo
                     onChange={(e) => setChapterInfo({ ...chapterInfo, chapter_name: e.target.value })}
                 />
 
-                <Input
+                {/* <Input
                     addonBefore={"Chapter Number"}
+                    type="number"
                     title="Chapter Number"
                     value={chapterInfo ? chapterInfo.chapter_number : ""}
                     onChange={(e) => setChapterInfo({ ...chapterInfo, chapter_number: e.target.value })}
-                />
+                /> */}
 
             </Col>
 
@@ -76,7 +95,13 @@ export default function EditChapter({ imgs, setImgs, chapterInfo, setChapterInfo
             </Col>
 
             <Col md={20} xl={20} xs={23} style={{ margin: "20px 0 0 0" }} >
-                <Button type='primary' icon={<ToolOutlined />} onClick={handleSubmitChange} >Submit Change</Button>
+                <Button
+                    type='primary'
+                    icon={<ToolOutlined />}
+                    onClick={handleSubmitChange}
+                    disabled={!Object.keys(chapterInfo).length || !imgs.length}
+                >Submit Change
+                </Button>
             </Col>
 
             <div className='btn-zoom'>

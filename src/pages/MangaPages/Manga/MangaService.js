@@ -80,7 +80,7 @@ function MangaService() {
 
 
 
-    const getMangaData = async () => {
+    const getMangaData = async () => { 
         try {
             const params = {
                 manga_id: id,

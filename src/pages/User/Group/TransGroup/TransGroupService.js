@@ -23,21 +23,15 @@ export default function TransGroupService() {
     const [isLoading, setIsLoading] = useState(false);
     const [IsLoadingDelete, setIsLoadingDelete] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
+    const [img, setImg] = useState('');
 
-    const [valToSearch, setValToSearch] = useState("");
-    const [usersSearchResult, setUsersSearchResult] = useState([]);
 
     const history = useHistory();
 
 
     const cookies = new Cookies();
     const token = cookies.get("token");
-    const [img, setImg] = useState('');
 
-    // if (transGrInfo.transgroup_email === userState[0].user_email) {
-    //     message_error("You cannot delete yourself ~.~");
-    //     return;
-    // }
 
     useEffect(() => {
         if (!userState[0] || !userState[0].user_transgroup_id) {
@@ -193,54 +187,6 @@ export default function TransGroupService() {
     }
 
 
-    useEffect(() => {
-        if (valToSearch) searchUsers()
-        else setUsersSearchResult([]);
-    }, [valToSearch])
-
-
-    const searchUsers = async () => {
-        const data = {
-            value: valToSearch,
-            key: 1
-        }
-
-        try {
-            const response = await userApi.searchUsers(data);
-            if (response.content.err) {
-                setUsersSearchResult([]);
-                return;
-            }
-
-            setUsersSearchResult(response.content.data);
-            return;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
-    const inviteUser = (val, transGr) => {
-        const user_email = val;
-
-        const data = {
-            type: 1,
-            message: `Want to join our team <b>${transGrInfo.transgroup_name}</b>`,
-            image_url: "",
-            user_id: userState[0].user_id,
-            list_to: user_email ? [user_email] : [],
-            obj_data: {
-                target_id: transGr.transgroup_id.toString(),
-                target_title: "transgroup"
-            }
-        }
-
-        socketActions.sendMessageToServer(data);
-
-        setValToSearch("");
-    }
-
-
     const handleRemoveUser = async (userId) => {
         const data = {
             member_id: userId
@@ -312,13 +258,7 @@ export default function TransGroupService() {
                 handleDeleteManga={(mangaId) => handleDeleteManga(mangaId)}
                 IsLoadingDelete={IsLoadingDelete}
 
-                setValToSearch={setValToSearch}
-                valToSearch={valToSearch}
-                setUsersSearchResult={setUsersSearchResult}
-                usersSearchResult={usersSearchResult}
                 handleRemoveUser={handleRemoveUser}
-
-                inviteUser={(val, transGr) => inviteUser(val, transGr)}
             />
         </>
     )

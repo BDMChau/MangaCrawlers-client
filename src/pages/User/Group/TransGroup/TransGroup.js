@@ -5,6 +5,7 @@ import FormCreateProject from '../../../../components/Form/FormCreateProject/For
 import ListVersion02 from '../../../../components/List/ListVersion02/ListVersion02';
 import { useSelector } from 'react-redux';
 import tableColumns from './ColumnsTableMembers';
+import InviteUserInput from './components/InviteUserInput';
 
 
 const { TabPane } = Tabs;
@@ -24,13 +25,7 @@ export default function TransGroup({
     handleDeleteManga,
     IsLoadingDelete,
 
-    valToSearch,
-    setValToSearch,
-    setUsersSearchResult,
-    usersSearchResult,
     handleRemoveUser,
-
-    inviteUser
 }) {
     const userState = useSelector((state) => state.userState);
 
@@ -76,43 +71,7 @@ export default function TransGroup({
                                     <Typography.Title level={4} >Members</Typography.Title>
 
                                     {userState[0]?.user_email === transGrInfo.transgroup_email
-                                        ? <>
-                                            <AutoComplete
-                                                className="invite-user"
-                                                onSearch={(value) => setValToSearch(value)}
-                                                onSelect={(value) => { setUsersSearchResult([]); setValToSearch(value) }}
-                                                value={valToSearch}
-                                                type="tag"
-                                                defaultActiveFirstOption
-                                                placeholder="Invite a collaborator..."
-                                                title="Search by email"
-                                            >
-                                                {usersSearchResult.length
-                                                    ? usersSearchResult.map((user, i) => (
-                                                        <AutoComplete.Option key={user.user_email}>
-                                                            <Avatar src={user.user_avatar} style={{ cursor: "default" }} alt="Avatar" />
-                                                            <Typography.Text style={{ fontSize: "15px" }}>{user.user_name}</Typography.Text>
-                                                            <div>
-                                                                <Typography.Text style={{ fontSize: "13px", color: "#646464c9", fontStyle: "italic" }}>{user.user_email}</Typography.Text>
-                                                            </div>
-                                                        </AutoComplete.Option>
-                                                    ))
-                                                    : ""
-                                                }
-                                            </AutoComplete>
-
-                                            <Button
-                                                style={{
-                                                    marginLeft: "3px",
-                                                    opacity: valToSearch ? '1' : '0',
-                                                    visibility: valToSearch ? 'visible' : 'hidden',
-                                                    transition: "0.3s"
-                                                }}
-                                                onClick={() => { inviteUser(valToSearch, transGrInfo); }}
-                                            >
-                                                Invite
-                                            </Button>
-                                        </>
+                                        ? <InviteUserInput transGrInfo={transGrInfo} />
                                         : ""
                                     }
                                 </div>

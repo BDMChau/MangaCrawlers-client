@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import EditChapter from './EditChapter'
-import { useParams, useHistory,  } from 'react-router';
+import { useParams, useHistory, } from 'react-router';
 import chapterApi from 'api/apis/MainServer/chapterApi';
 import Cookies from 'universal-cookie';
 import userApi from 'api/apis/MainServer/userApi';
@@ -26,7 +26,7 @@ export default function EditChapterService() {
 
 
     useEffect(() => {
-        if(!userState[0]) {
+        if (!userState[0]) {
             message_error("Please login!")
             history.push("/");
         }
@@ -47,11 +47,11 @@ export default function EditChapterService() {
             manga_id: mangaId
         }
 
-        try{
+        try {
             const response = await userApi.getMangaInfo(token, data);
 
-            if(response.content.msg) setManga({...response.content.manga, manga_authorName: response.content.author_name})
-        }catch(ex){
+            if (response.content.msg) setManga({ ...response.content.manga, manga_authorName: response.content.author_name })
+        } catch (ex) {
             console.log(ex)
         }
     }
@@ -81,25 +81,33 @@ export default function EditChapterService() {
             return;
         } catch (err) {
             setImgs([]);
+            setIsLoading(false)
             console.log(err)
         }
     }
 
 
     const handleEdit = (chapter, listImg) => {
+        const data = {
+            chapter: chapter,
+            list_img: listImg
+        };
 
+        console.log(data)
     }
 
 
     return (
         <EditChapter
+            isLoading={isLoading}
             imgs={imgs}
             setImgs={setImgs}
+
             chapterInfo={chapterInfo}
             setChapterInfo={setChapterInfo}
 
             manga={manga}
-            
+
             handleEdit={handleEdit}
         />
     )

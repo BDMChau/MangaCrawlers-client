@@ -1,7 +1,7 @@
 import { Button, Col, Divider, Empty, Image, Input, message, Row, Select, Skeleton, Tooltip, Typography, Upload } from 'antd'
 import React, { useState } from 'react'
 import "./UploadManga.css"
-import { LeftOutlined, UploadOutlined, EditOutlined } from "@ant-design/icons"
+import { ArrowLeftOutlined, UploadOutlined, EditOutlined } from "@ant-design/icons"
 import { useHistory } from 'react-router'
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
@@ -10,6 +10,9 @@ import Rating from '../../../../components/Rating/Rating';
 import MyDragger from 'components/input/MyDragger'
 import handleFile from 'helpers/handleFile'
 import cloudinaryApi from 'api/apis/Cloudinary/cloudinaryApi'
+import { NavLink } from 'react-router-dom'
+import redirectURI from 'helpers/redirectURI'
+import { format } from 'helpers/format'
 
 
 export default function UploadManga({ handleUploadImgs, isLoading, manga, setManga, chapters, editMangaInfo }) {
@@ -24,9 +27,11 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, setMan
             ? <Menu>
                 {
                     chapters.map((chapter, i) => (
-                        <Menu.Item key={i} className="chapter-item-upload-page">
-                            <Typography.Text className="name">{chapter.chapter_name}</Typography.Text>
-                            <Typography.Text className="time">{chapter.createdAt}</Typography.Text>
+                        <Menu.Item key={i}>
+                            <NavLink to={redirectURI.editChapterUploadedPage_uri(manga.manga_id, chapter.chapter_id)} className="chapter-item-upload-page">
+                                <Typography.Text className="name">{chapter.chapter_name}</Typography.Text>
+                                <Typography.Text className="time" title={format.formatDate02(chapter.created_at)} >{format.relativeTime(chapter.created_at)}</Typography.Text>
+                            </NavLink>
                         </Menu.Item>
                     ))
                 }
@@ -99,7 +104,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, setMan
             <Col sm={24} md={21} xl={21} xxl={21} className="divider-upload-page" >
                 <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", marginBottom: 0, width: "100%" }}>
                     <Button title="Back to projects page" className="btn-back-to-projects" onClick={() => history.push("/user/projects")}>
-                        <LeftOutlined style={{ fontSize: "18px", margin: "4px 0px 0px -5px" }} />
+                        <ArrowLeftOutlined style={{ fontSize: "20px", margin: "4px 0px 0px -6px" }} />
                     </Button>
                 </Divider>
             </Col>
@@ -178,7 +183,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, setMan
                     </Dropdown>
 
                     <div className="uploader-note">
-                        <Typography.Title level={5} style={{ color: "#ff4d4f" }} >Notice*: Sort the file(s) in your folder in ascending order before upload!</Typography.Title>
+                        <Typography.Title level={5} style={{ color: "#ff4d4f", textAlign:"center" }} >Notice*: Sort the file(s) in your folder in ascending order before upload!</Typography.Title>
                         {/* <Typography.Text style={{ color: "#ff4d4f" }}>Sort the files in ascending order</Typography.Text> */}
                         {/* <div className="note-example">
                             <Typography.Text>Example:</Typography.Text>

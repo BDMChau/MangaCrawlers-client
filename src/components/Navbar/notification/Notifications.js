@@ -37,7 +37,6 @@ function Notifications({
     })
 
 
-
     const getMoreHistoryNotifications = async (e) => {
         const bottom = e.target.scrollHeight - e.target.clientHeight;
 
@@ -51,8 +50,6 @@ function Notifications({
             }
         }
     }
-
-
 
 
     return (

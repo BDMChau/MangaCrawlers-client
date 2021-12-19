@@ -3,12 +3,13 @@
 }
 
 .divider-upload-page .btn-back-to-projects {
-  margin: -5px 5px 0 4px;
+  margin: 0;
   background-color: transparent;
   border-radius: 50%;
   height: 40px;
   width: 40px;
   box-shadow: none;
+  border: none;
 }
 
 .divider-upload-page .ant-divider-inner-text {
@@ -34,10 +35,10 @@
 .title-upload-page .text {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 500px;
 }
 
-.title-upload-page .text span.ant-input-group-wrapper{
+.title-upload-page .text span.ant-input-group-wrapper {
   margin: 5px 0;
 }
 
@@ -51,7 +52,7 @@
 }
 
 .upload-form .uploader {
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
   margin-top: 30px;
 }
@@ -74,7 +75,6 @@
   margin: 0 auto;
 }
 
-
 .upload-form .ant-upload-list.ant-upload-list-picture::-webkit-scrollbar {
   width: 5px;
 }
@@ -96,11 +96,10 @@
   background: #777777a9;
 }
 
-
 /* uploader item */
 .upload-form .ant-upload-list-picture-container {
   width: 220px;
-  padding:  0px 2px 8px 4px;
+  padding: 0px 2px 8px 4px;
 }
 .upload-form
   .ant-upload-list-item.ant-upload-list-item-error.ant-upload-list-item-list-type-picture {
@@ -129,7 +128,7 @@
 }
 
 .uploader-note .ant-typography {
-  margin: 0 ;
+  margin: 0;
 }
 
 .uploader-note .note-example {
@@ -138,44 +137,41 @@
   flex-direction: column;
 }
 
-.uploader .uploader-submit{
+.uploader .uploader-submit {
   width: 50%;
   margin: auto;
   margin-bottom: 5px;
 }
 
-.uploader .uploader-submit button{
+.uploader .uploader-submit button {
   width: 100%;
   height: 40px;
   margin-bottom: 40px;
   margin-top: 10px;
 }
 
-.uploader .input-chapter-name{
+.uploader .input-chapter-name {
   width: 50%;
   margin: auto;
   margin-bottom: 5px;
 }
 
-.uploader .input-chapter-name input{
+.uploader .input-chapter-name input {
   width: 100%;
   height: 30px;
 }
 
-
-.chapter-item-upload-page .ant-dropdown-menu-title-content{
+.chapter-item-upload-page {
   display: flex;
   justify-content: space-between;
 }
 
-.chapter-item-upload-page .name{
+.chapter-item-upload-page .name {
   max-width: 450px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-
 
 /* //////// */
 @media only screen and (min-width: 375px) and (max-width: 414px) {
@@ -198,23 +194,23 @@
   .uploader .ant-upload.ant-upload-drag {
     width: 100%;
   }
-  .uploader .uploader-submit{
+  .uploader .uploader-submit {
     width: 100%;
   }
 
-  .uploader .input-chapter-name{
+  .uploader .input-chapter-name {
     width: 100%;
   }
 
   .upload-form .chapter-dropdown {
-    width: 250px;
+    width: 90%;
   }
 
   .upload-form .uploader {
-    width: 250px;
+    width: 90%;
   }
 
-  .chapter-item-upload-page .name{
+  .chapter-item-upload-page .name {
     max-width: 135px;
   }
 }
@@ -225,25 +221,69 @@
     width: 296px;
   }
 
-  .chapter-item-upload-page .name{
+  .chapter-item-upload-page .name {
     max-width: 250px;
+  }
+
+  .uploader .ant-upload.ant-upload-drag {
+    width: 90%;
+  }
+
+  .uploader .uploader-submit {
+    width: 90%;
+  }
+
+  .uploader .input-chapter-name {
+    width: 90%;
+  }
+
+  .upload-form .chapter-dropdown {
+    width: 90%;
   }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .uploader .ant-upload.ant-upload-drag {
-    width: 70%;
+    width: 90%;
   }
 
-  .uploader .uploader-submit{
-    width: 70%;
+  .uploader .uploader-submit {
+    width: 90%;
   }
 
-  .uploader .input-chapter-name{
-    width: 70%;
+  .uploader .input-chapter-name {
+    width: 90%;
   }
 
-  .chapter-item-upload-page .name{
+  .chapter-item-upload-page .name {
     max-width: 200px;
+  }
+
+  .upload-form .chapter-dropdown {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 766px) {
+  .title-upload-page .text {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+  }
+
+  .uploader .ant-upload.ant-upload-drag {
+    width: 90%;
+  }
+
+  .uploader .uploader-submit {
+    width: 90%;
+  }
+
+  .uploader .input-chapter-name {
+    width: 90%;
+  }
+
+  .upload-form .chapter-dropdown {
+    width: 90%;
   }
 }

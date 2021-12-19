@@ -38,18 +38,13 @@ export default function UploadMangaService() {
         let formData = new FormData();
         formData.append("manga_id", query.get("v"));
         formData.append("chapter_name", chapterName);
-        listFile.forEach(file => {
-            formData.append("files", file.originFileObj)
-        })
+        formData.append("is_create", true);
+        listFile.forEach(file =>  formData.append("files", file.originFileObj))
 
         try {
             const response = await userApi.uploadImagesChapter(token, formData);
-            console.log(response)
             
-            if(response.content.msg){
-                message_success("Upload successfully!")
-            }     
-
+            if(response.content.msg) message_success("Upload successfully!")
             setIsLoading(false);
         } catch (ex) {
             console.log(ex);
