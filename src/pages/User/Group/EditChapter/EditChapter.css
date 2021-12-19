@@ -1,4 +1,4 @@
-.editchapter-cont{
+.editchapter-cont {
   margin: 40px 0;
 }
 
@@ -14,7 +14,7 @@
 
 .editchapter-cont .item-img {
   cursor: pointer;
-  width: 200px;
+  /* width: 200px; */
   margin: 5px;
   background: #f0f2f5;
   box-shadow: 1px 1px 5px 0 #b3b3b4;
@@ -28,4 +28,46 @@
 
 .editchapter-cont .item-img img {
   width: 100%;
+}
+
+.manga-info {
+  display: flex;
+}
+
+.manga-info .ant-typography {
+  margin-top: 0 !important;
+  margin: 5px 0;
+}
+
+.chapter-info .ant-input-group-wrapper {
+  margin: 5px 0 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-zoom {
+  display: flex;
+  right: 4%;
+  position: fixed;
+}
+
+.btn-zoom button {
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.747);
+  border: none;
+  transition: 0.3s;
+  border-radius: 50%;
+  z-index: 999;
+  margin-left: 5px;
+}
+
+.btn-zoom button:hover {
+  background: #fff;
+}
+
+.btn-zoom button:active {
+  background: #fff;
+  box-shadow: 0px 0px 10px 0 inset #4ca2f33a !important;
 }

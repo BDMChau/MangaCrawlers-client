@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import EditChapter from './EditChapter'
-import { useParams } from 'react-router';
+import { useParams, useHistory,  } from 'react-router';
 import chapterApi from 'api/apis/MainServer/chapterApi';
 import Cookies from 'universal-cookie';
+import userApi from 'api/apis/MainServer/userApi';
+import { useSelector } from 'react-redux';
+import { message_error } from 'components/toast/message';
 
 
 export default function EditChapterService() {
+    const userState = useSelector((state) => state.userState);
+
     const params = useParams();
     const { mangaid_param, chapterid_param } = params;
 
@@ -14,8 +19,18 @@ export default function EditChapterService() {
     const [chapterInfo, setChapterInfo] = useState({});
     const [imgs, setImgs] = useState([]);
 
+    const history = useHistory();
+
     const cookies = new Cookies();
-    const token = cookies.get("token")
+    const token = cookies.get("token");
+
+
+    useEffect(() => {
+        if(!userState[0]) {
+            message_error("Please login!")
+            history.push("/");
+        }
+    }, [userState])
 
 
     useEffect(() => {
@@ -81,6 +96,8 @@ export default function EditChapterService() {
             imgs={imgs}
             setImgs={setImgs}
             chapterInfo={chapterInfo}
+            setChapterInfo={setChapterInfo}
+
             manga={manga}
             
             handleEdit={handleEdit}

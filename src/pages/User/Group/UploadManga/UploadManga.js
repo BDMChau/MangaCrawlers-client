@@ -85,17 +85,14 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, setMan
         showUploadList: false,
         maxCount: 1,
         beforeUpload: (file) => false,
-        onChange: (info) => onChangeFile(info)
+        onChange: async (info) => {
+            const file = info.file;
+            const res = await cloudinaryApi.uploadFile(file, "manga_thumbnails/updated");
+            const url = res.data.secure_url;
+
+            setManga({ ...manga, thumbnail: url })
+        }
     };
-
-    const onChangeFile = async (info) => {
-        const file = info.file;
-
-        const res = await cloudinaryApi.uploadFile(file, "manga_thumbnails/updated");
-        const url = res.data.secure_url;
-
-        setManga({...manga, thumbnail: url})
-    }
 
     return (
         <Row justify={"center"}>
