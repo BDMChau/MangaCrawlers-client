@@ -21,8 +21,8 @@ export default function EditChapter({
     loadingEdit,
 
     handleRemoveImg
- }) {
-    const [width, setWidth] = useState(200);
+}) {
+    const [width, setWidth] = useState(100);
 
 
     const handleSubmitChange = () => {
