@@ -5,7 +5,7 @@ import chapterApi from 'api/apis/MainServer/chapterApi';
 import Cookies from 'universal-cookie';
 import userApi from 'api/apis/MainServer/userApi';
 import { useSelector } from 'react-redux';
-import { message_error } from 'components/toast/message';
+import { message_error, message_success } from 'components/toast/message';
 import { notification_success } from 'components/toast/notification';
 
 
@@ -17,6 +17,11 @@ export default function EditChapterService() {
 
     const [isLoading, setIsLoading] = useState(false);
     const [loadingEdit, setLoadingEdit] = useState(false);
+    const [isLoadingUpload, setIsLoadingUpload] = useState(false);
+
+    const [isUpdateListImgs, setIsUpdateListImgs] = useState(false);
+
+
     const [manga, setManga] = useState({});
     const [chapterInfo, setChapterInfo] = useState({});
     const [imgs, setImgs] = useState([]);
@@ -36,8 +41,12 @@ export default function EditChapterService() {
 
 
     useEffect(() => {
-        if (mangaid_param && chapterid_param) getImgsChapter(mangaid_param, chapterid_param);
-    }, [mangaid_param, chapterid_param])
+        if ((mangaid_param && chapterid_param) || isUpdateListImgs) {
+            getImgsChapter(mangaid_param, chapterid_param);
+
+            setIsUpdateListImgs(false);
+        }
+    }, [mangaid_param, chapterid_param, isUpdateListImgs])
 
     useEffect(() => {
         if (mangaid_param) getMangaInfo(mangaid_param);
@@ -116,21 +125,58 @@ export default function EditChapterService() {
 
 
     const handleRemoveImg = async (id) => {
-        try {
-            console.log("ascacac")
+        const data = {
+            manga_id: mangaid_param,
+            chapter_id: chapterid_param,
+            imgchapter_id: id
+        };
 
-            setImgs(imgs.filter(img => img.img_id !== id));
+        try {
+            const res = await userApi.removeImgChapter(token, data);
+            if (res.content.msg) {
+                setImgs(imgs.filter(img => img.img_id !== res.content.img_id));
+                notification_success("Success!");
+            }
         } catch (err) {
-            console.log(err)
+            console.log(err);
+            notification_success("Error!")
         }
     }
 
+
+    const handleUploadImgs = async (listFile) => {
+        if (!Object.keys(chapterInfo).length) return;
+
+        setIsLoadingUpload(true);
+        console.log(listFile)
+
+        let formData = new FormData();
+        formData.append("manga_id", mangaid_param);
+        formData.append("chapter_id", chapterInfo.chapter_id);
+        formData.append("chapter_name", chapterInfo.chapter_name);
+        formData.append("is_create", false);
+        listFile.forEach(file => formData.append("files", file.originFileObj))
+
+        try {
+            const response = await userApi.uploadImagesChapter(token, formData);
+            if (response.content.msg) {
+                notification_success("Upload successfully!");
+                setIsUpdateListImgs(true);
+                setIsLoadingUpload(false);
+                return true;
+            }
+        } catch (ex) {
+            console.log(ex);
+            setIsLoadingUpload(false);
+            return false;
+        }
+    }
 
 
     return (
         <EditChapter
             isLoading={isLoading}
-            
+
             imgs={imgs}
             setImgs={setImgs}
 
@@ -143,6 +189,9 @@ export default function EditChapterService() {
             loadingEdit={loadingEdit}
 
             handleRemoveImg={handleRemoveImg}
+
+            handleUploadImgs={handleUploadImgs}
+            isLoadingUpload={isLoadingUpload}
         />
     )
 }

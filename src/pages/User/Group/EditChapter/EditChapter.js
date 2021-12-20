@@ -4,7 +4,9 @@ import { arrayMoveImmutable } from 'array-move';
 import "./EditChapter.css"
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Button, Col, Divider, Dropdown, Empty, Input, Menu, Row, Spin, Typography } from 'antd';
-import { ToolOutlined, ArrowLeftOutlined, ZoomInOutlined, ZoomOutOutlined, CloseOutlined, EllipsisOutlined } from "@ant-design/icons"
+import { CheckOutlined, ArrowLeftOutlined, ZoomInOutlined, ZoomOutOutlined, CloseOutlined, EllipsisOutlined } from "@ant-design/icons"
+import MyDragger from 'components/input/MyDragger';
+import UploadForm01 from 'components/input/UploadForm/UploadForm01';
 
 
 export default function EditChapter({
@@ -20,14 +22,16 @@ export default function EditChapter({
     handleEdit,
     loadingEdit,
 
-    handleRemoveImg
+    handleRemoveImg,
+
+    handleUploadImgs,
+    isLoadingUpload
 }) {
     const [width, setWidth] = useState(100);
+    const [listFileToUpload, setListFileToUpload] = useState([]);
 
+    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg"];
 
-    const handleSubmitChange = () => {
-        handleEdit(chapterInfo, manga, imgs);
-    }
 
     useEffect(() => {
         if (width <= 100) setWidth(100);
@@ -35,6 +39,19 @@ export default function EditChapter({
     }, [width])
 
 
+    const handleSubmitChange = () => {
+        handleEdit(chapterInfo, manga, imgs);
+    }
+
+    const handleSubmitUpload = async () => {
+        if (!listFileToUpload.length) {
+            message_error("Nothing to upload!", 3);
+            return;
+        }
+
+        const sttUpload = await handleUploadImgs(listFileToUpload);
+        if(sttUpload === true) {}
+    }
 
     ////////////////////// render //////////////////////
     const SortableItem = SortableElement(({ img }) => (
@@ -49,7 +66,7 @@ export default function EditChapter({
                             icon={<CloseOutlined />}
                             onClick={() => handleRemoveImg(img.img_id)}
                         >
-                            Delete
+                            Remove
                         </Button>
                     </Menu>
                 }>
@@ -84,6 +101,32 @@ export default function EditChapter({
         setImgs(arrayMoveImmutable(imgs, oldIndex, newIndex));
     }
 
+
+
+
+    const propsUploader = {
+        name: 'file',
+        multiple: true,
+        listType: "picture",
+        beforeUpload: (file) => {
+            if (!listFileTypesAllowed.includes(file.type)) {
+                message_error("Please select jpeg, png files!")
+            }
+
+            const fileSz = file.size / 1024 / 1024;
+            if (fileSz > 10) {
+                message_error("An image must smaller than 10MB!")
+            }
+
+            const condition = listFileTypesAllowed.includes(file.type) && fileSz <= 10
+            return condition ? false : Upload.LIST_IGNORE
+        },
+        onChange(info) {
+            setListFileToUpload(info.fileList);
+        },
+    };
+
+
     return (
         <Row justify="center" className="editchapter-cont">
             <Col md={20} xl={20} xs={23} >
@@ -109,37 +152,54 @@ export default function EditChapter({
                 }
             </Col>
 
-            <Col md={20} xl={20} xs={23} className='chapter-info' style={{ margin: "50px 0 0 0" }}>
+            <Col md={20} xl={20} xs={23} style={{ margin: "20px 0" }} >
+                <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", margin: 0 }}></Divider>
+            </Col>
+
+            <Col md={20} xl={20} xs={23} className='chapter-info' style={{ margin: "20px 0 0 0" }}>
                 <Input
                     addonBefore={"Chapter Name"}
                     title="Chapter Name"
                     value={chapterInfo ? chapterInfo.chapter_name : ""}
                     onChange={(e) => setChapterInfo({ ...chapterInfo, chapter_name: e.target.value })}
                 />
-
-                {/* <Input
-                    addonBefore={"Chapter Number"}
-                    type="number"
-                    title="Chapter Number"
-                    value={chapterInfo ? chapterInfo.chapter_number : ""}
-                    onChange={(e) => setChapterInfo({ ...chapterInfo, chapter_number: e.target.value })}
-                /> */}
-
             </Col>
 
             <Col md={20} xl={20} xs={23} style={{ margin: "10px 0 0 0" }}>
                 <SortableList imgs={imgs} onSortEnd={onSortEnd} axis="xy" />
             </Col>
 
-            <Col md={20} xl={20} xs={23} style={{ margin: "20px 0 0 0" }} >
+            <Col md={20} xl={20} xs={23} style={{ margin: "10px 0 0 0" }} >
                 <Button
                     type='primary'
-                    icon={<ToolOutlined />}
+                    icon={<CheckOutlined style={{ fontSize: "17px" }} />}
                     onClick={handleSubmitChange}
                     disabled={!Object.keys(chapterInfo).length || !imgs.length}
-                >Submit Change
+                    loading={loadingEdit}
+                >
+                    Submit Change
                 </Button>
             </Col>
+
+            <Col md={20} xl={20} xs={23} style={{ margin: "20px 0" }} >
+                <Divider orientation="left" style={{ borderTopColor: "#a2a2a2", margin: 0 }}></Divider>
+            </Col>
+
+            <Col md={20} xl={20} xs={23} style={{ margin: "20px 0 0 0" }} >
+                <UploadForm01 propsUploader={propsUploader} />
+
+                <Button
+                    style={{ margin: "10px 0 0 0" }}
+                    type='primary'
+                    icon={<CheckOutlined style={{ fontSize: "17px" }} />}
+                    onClick={handleSubmitUpload}
+                    disabled={!listFileToUpload.length}
+                    loading={isLoadingUpload}
+                >
+                    Upload
+                </Button>
+            </Col>
+
 
             <div className='btn-zoom'>
                 <Button

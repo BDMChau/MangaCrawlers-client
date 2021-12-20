@@ -208,6 +208,15 @@ const userApi = {
             data
         });
     },
+    removeImgChapter: (token, data) => {
+        const uri = '/api/user/trans_group/delete_image';
+        return axiosClient.delete(uri, {
+            headers: {
+                Authorization: token
+            },
+            data
+        });
+    },
     updateMangaInfo: (token, data) => {
         const uri = '/api/user/trans_group/update_manga';
         return axiosClient.put(uri, data, {

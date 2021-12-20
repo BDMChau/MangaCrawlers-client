@@ -1,0 +1,24 @@
+
+.ant-upload-list.ant-upload-list-picture {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-top: 10px;
+    margin-left: 0px;
+    max-height: 350px;
+    overflow-y: auto;
+    box-shadow: 0 0 3px 0 #616060d6;
+  }
+
+.ant-upload-list-picture-container {
+    padding: 0;
+    margin: 5px 3px;
+    width: 220px;
+  }
+  
+  @media only screen and (min-width: 992px) and (max-width: 1400px) {
+      .ant-upload-list-picture-container {
+      width: 296px;
+    }
+  }

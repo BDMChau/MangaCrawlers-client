@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+import "./UploadForm01.css";
 
-export default function UploadForm01() {
+import { Button, Upload } from 'antd'
+import { UploadOutlined } from "@ant-design/icons"
+
+export default function UploadForm01({ propsUploader }) {
     return (
-        <div>
-            
-        </div>
+        <Upload {...propsUploader}>
+            <Button icon={<UploadOutlined />}>Upload more images</Button>
+        </Upload>
     )
 }

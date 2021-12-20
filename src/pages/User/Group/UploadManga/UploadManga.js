@@ -20,7 +20,7 @@ export default function UploadManga({ handleUploadImgs, isLoading, manga, setMan
     const [chapterName, setChapterName] = useState("");
     const history = useHistory();
 
-    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg"]
+    const listFileTypesAllowed = ["image/png", "image/jpeg", "image/jpg"];
 
     const dropDownChapters = (
         chapters.length
