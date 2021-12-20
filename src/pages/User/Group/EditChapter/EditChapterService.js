@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import userApi from 'api/apis/MainServer/userApi';
 import { useSelector } from 'react-redux';
 import { message_error, message_success } from 'components/toast/message';
-import { notification_success } from 'components/toast/notification';
+import { notification_error, notification_success } from 'components/toast/notification';
 
 
 export default function EditChapterService() {
@@ -118,7 +118,7 @@ export default function EditChapterService() {
             setLoadingEdit(false);
         } catch (err) {
             console.log(err);
-            notification_success("Error!")
+            notification_error("Error!")
             setLoadingEdit(false);
         }
     }
@@ -139,7 +139,7 @@ export default function EditChapterService() {
             }
         } catch (err) {
             console.log(err);
-            notification_success("Error!")
+            notification_error("Error!")
         }
     }
 

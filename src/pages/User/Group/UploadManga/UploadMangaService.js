@@ -6,6 +6,7 @@ import { message_success, message_warning } from '../../../../components/toast/m
 import userApi from '../../../../api/apis/MainServer/userApi';
 import Cookies from 'universal-cookie';
 import { format } from 'helpers/format';
+import { notification_error, notification_success } from 'components/toast/notification';
 
 
 export default function UploadMangaService() {
@@ -79,14 +80,23 @@ export default function UploadMangaService() {
 
 
     const editMangaInfo = async (mangaInfo) => {
-        const data = mangaInfo;
+        const data = {
+            manga_id: mangaInfo.manga_id.toString(),
+            manga_name: mangaInfo.manga_name,
+            description: mangaInfo.description,
+            thumbnail: mangaInfo.thumbnail,
+            author: mangaInfo.author,
+            manga_authorName: mangaInfo.manga_authorName,
+            status: mangaInfo.status,
+            transgroup: mangaInfo.transgroup
+        };
 
         try {
             const res = await userApi.updateMangaInfo(token, data);
-
-            console.log(res)
+            if(res.content.msg) notification_success("Success!");
         } catch (err) {
             console.log(err)
+            notification_error("Failed!")
         }
     }
 
