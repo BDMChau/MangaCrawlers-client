@@ -59,7 +59,6 @@ export default function UploadMangaService() {
 
         try{
             const response = await userApi.getMangaInfo(token, data);
-            console.log(response)
 
             if(response.content.msg){
                 setManga({...response.content.manga, manga_authorName: response.content.author_name})
@@ -80,13 +79,12 @@ export default function UploadMangaService() {
 
 
     const editMangaInfo = async (mangaInfo) => {
-        console.log(mangaInfo)
-        const data = {
-            manga_info: mangaInfo
-        };
+        const data = mangaInfo;
 
         try {
-            const res = await userApi.updateMangaInfo(token, data)
+            const res = await userApi.updateMangaInfo(token, data);
+
+            console.log(res)
         } catch (err) {
             console.log(err)
         }

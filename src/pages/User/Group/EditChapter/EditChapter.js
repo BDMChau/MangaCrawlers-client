@@ -3,16 +3,30 @@ import { arrayMoveImmutable } from 'array-move';
 
 import "./EditChapter.css"
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
-import { Button, Col, Divider, Empty, Input, Row, Spin, Typography } from 'antd';
-import { ToolOutlined, ArrowLeftOutlined, ZoomInOutlined, ZoomOutOutlined } from "@ant-design/icons"
+import { Button, Col, Divider, Dropdown, Empty, Input, Menu, Row, Spin, Typography } from 'antd';
+import { ToolOutlined, ArrowLeftOutlined, ZoomInOutlined, ZoomOutOutlined, CloseOutlined, EllipsisOutlined } from "@ant-design/icons"
 
 
-export default function EditChapter({ isLoading, imgs, setImgs, chapterInfo, setChapterInfo, manga, handleEdit }) {
+export default function EditChapter({
+    isLoading,
+    imgs,
+    setImgs,
+
+    chapterInfo,
+    setChapterInfo,
+
+    manga,
+
+    handleEdit,
+    loadingEdit,
+
+    handleRemoveImg
+ }) {
     const [width, setWidth] = useState(200);
 
 
     const handleSubmitChange = () => {
-        handleEdit(chapterInfo, imgs);
+        handleEdit(chapterInfo, manga, imgs);
     }
 
     useEffect(() => {
@@ -24,10 +38,33 @@ export default function EditChapter({ isLoading, imgs, setImgs, chapterInfo, set
 
     ////////////////////// render //////////////////////
     const SortableItem = SortableElement(({ img }) => (
-        <>
-            <img className="item-img" src={img.img_url} style={{ width: width }} />
-        </>
+        <div style={{ display: "flex", flexDirection: "column" }} className="item-img">
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 5px" }}>
+                <b>ID: {img.img_id}</b>
+
+                <Dropdown overlay={
+                    <Menu>
+                        <Button
+                            style={{ border: "none", background: "transparent" }}
+                            icon={<CloseOutlined />}
+                            onClick={() => handleRemoveImg(img.img_id)}
+                        >
+                            Delete
+                        </Button>
+                    </Menu>
+                }>
+                    <Button
+                        style={{ border: "none", borderRadius: "50%", background: "transparent" }}
+                        icon={<EllipsisOutlined />}
+                    />
+                </Dropdown>
+
+            </div>
+
+            <img src={img.img_url} style={{ width: width, padding: "5px", borderRadius: "5px" }} />
+        </div>
     ));
+
 
     const SortableList = SortableContainer(({ imgs }) => (
         <div className='list-imgs'>
@@ -35,7 +72,7 @@ export default function EditChapter({ isLoading, imgs, setImgs, chapterInfo, set
                 ? <Spin style={{ margin: "20px auto" }} />
                 : imgs.length
                     ? imgs.map((img, i) => (
-                        <SortableItem key={img.img_id} index={i} img={img} />
+                        <SortableItem key={img.img_id} index={i} img={img} disabled={loadingEdit} />
                     ))
                     : <Empty description="No images" style={{ margin: "20px auto" }} image={Empty.PRESENTED_IMAGE_SIMPLE} />
             }

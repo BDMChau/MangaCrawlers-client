@@ -66,7 +66,7 @@ const userApi = {
         return axiosClient.get(uri);
     },
     getCommentsChild: (data) => {
-        const {comment_id, from, amount, user_id} = data;
+        const { comment_id, from, amount, user_id } = data;
 
         const uri = `/api/user_unauth/get_comments_child?comment_id=${comment_id}&from=${from}&amount=${amount}&user_id=${user_id}`;
         return axiosClient.get(uri);
@@ -209,12 +209,19 @@ const userApi = {
         });
     },
     updateMangaInfo: (token, data) => {
-        const uri = '/api/group/update_manga';
-        return axiosClient.delete(uri, {
+        const uri = '/api/user/trans_group/update_manga';
+        return axiosClient.put(uri, data, {
             headers: {
                 Authorization: token
-            },
-            data
+            }
+        });
+    },
+    updateChapter: (token, data) => { // include imgs and chapter info
+        const uri = '/api/user/trans_group/update_chapter';
+        return axiosClient.put(uri, data, {
+            headers: {
+                Authorization: token
+            }
         });
     },
     ///////////////////////

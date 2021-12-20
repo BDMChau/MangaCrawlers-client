@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 import userApi from 'api/apis/MainServer/userApi';
 import { useSelector } from 'react-redux';
 import { message_error } from 'components/toast/message';
+import { notification_success } from 'components/toast/notification';
 
 
 export default function EditChapterService() {
@@ -15,6 +16,7 @@ export default function EditChapterService() {
     const { mangaid_param, chapterid_param } = params;
 
     const [isLoading, setIsLoading] = useState(false);
+    const [loadingEdit, setLoadingEdit] = useState(false);
     const [manga, setManga] = useState({});
     const [chapterInfo, setChapterInfo] = useState({});
     const [imgs, setImgs] = useState([]);
@@ -87,19 +89,48 @@ export default function EditChapterService() {
     }
 
 
-    const handleEdit = (chapter, listImg) => {
+    const handleEdit = async (chapter, manga, listImg) => {
+        setLoadingEdit(true);
         const data = {
-            chapter: chapter,
+            chapter: {
+                chapter_id: chapter.chapter_id.toString(),
+                chapter_name: chapter.chapter_name
+            },
+            manga_id: manga.manga_id.toString(),
             list_img: listImg
         };
 
-        console.log(data)
+        try {
+            const res = await userApi.updateChapter(token, data);
+
+            const imgs = res.content.list_img;
+            setImgs(imgs);
+            notification_success("Success!");
+            setLoadingEdit(false);
+        } catch (err) {
+            console.log(err);
+            notification_success("Error!")
+            setLoadingEdit(false);
+        }
     }
+
+
+    const handleRemoveImg = async (id) => {
+        try {
+            console.log("ascacac")
+
+            setImgs(imgs.filter(img => img.img_id !== id));
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
 
     return (
         <EditChapter
             isLoading={isLoading}
+            
             imgs={imgs}
             setImgs={setImgs}
 
@@ -109,6 +140,9 @@ export default function EditChapterService() {
             manga={manga}
 
             handleEdit={handleEdit}
+            loadingEdit={loadingEdit}
+
+            handleRemoveImg={handleRemoveImg}
         />
     )
 }
