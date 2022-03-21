@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import endPoint from '../config/endPoint';
 import EVENTS_NAME from './features/eventsName';
 
-const socket = io(endPoint.socket_local);
+const socket = io(endPoint.socket_product);
 
 const socketActions = {
     updateSocketId: (userId, isDisconnect) => {
