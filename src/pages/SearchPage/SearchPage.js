@@ -185,11 +185,11 @@ export default function SearchPage() {
     const renderManga = (item, i) => (
         <div key={i}>
             <NavLink to={redirectURI.mangaPage_uri(item.manga_id, item.manga_name)} className="search-menu-item" >
-                <img className="img" src={item.thumbnail} alt="" />
+                <img className="img" src={item.thumbnail} alt="" title={item.manga_name} />
 
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
-                    <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} >{item.manga_name}</Typography.Text>
-                    <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} >{item.views} views</Typography.Text>
+                    <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} title={item.manga_name} >{item.manga_name}</Typography.Text>
+                    <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} title={item.views} >{item.views} views</Typography.Text>
                 </div>
             </NavLink>
         </div>
@@ -199,7 +199,7 @@ export default function SearchPage() {
         <div key={i}>
             <NavLink to={redirectURI.postPage_uri(item.post_id)} className="search-menu-item" >
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
-                    <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} >{item.title}</Typography.Text>
+                    <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} title={item.title} >{item.title}</Typography.Text>
 
                     {item.categoryList.length
                         ? <div style={{ display: "flex", flexWrap: "wrap" }} >
@@ -223,11 +223,12 @@ export default function SearchPage() {
                     <Avatar
                         src={item.user_avatar}
                         style={{ borderRadius: "50px", width: "38px", height: "38px", marginRight: "5px" }}
+                        title={item.user_name}
                     />
 
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                        <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} >{item.user_name}</Typography.Text>
-                        <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} >{item.user_email}</Typography.Text>
+                        <Typography.Text style={{ whiteSpace: "pre-wrap", fontWeight: 500, fontSize: "14px" }} title={item.user_name} >{item.user_name}</Typography.Text>
+                        <Typography.Text style={{ color: "#7e7e7e", fontStyle: "italic" }} title={item.user_email} >{item.user_email}</Typography.Text>
                     </div>
                 </div>
             </NavLink>
